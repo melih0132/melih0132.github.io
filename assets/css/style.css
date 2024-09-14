@@ -236,7 +236,7 @@ textarea {
 }
 
 .home-hero {
-    background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg);
+    background: linear-gradient(to right, rgba(245,245,245,0.5), rgba(245,245,245,0.5)),url(../../assets/svg/common-bg.svg);
     background-position: center;
     height: 100vh;
     min-height: 80rem;
@@ -462,7 +462,7 @@ textarea {
 }
 
 .contact {
-    background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg);
+    background: linear-gradient(to right, rgba(245,245,245,0.5), rgba(245,245,245,0.5)),url(../../assets/svg/common-bg.svg);
     background-size: cover;
     background-position: center
 }
@@ -581,7 +581,7 @@ textarea {
 
 .project-cs-hero {
     color: #fff;
-    background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg);
+    background: linear-gradient(to right, rgba(245,245,245,0.5), rgba(245,245,245,0.5)),url(../../assets/svg/common-bg.svg);
     background-size: cover;
     background-position: center;
     position: relative
@@ -1037,14 +1037,14 @@ textarea {
     }
 
     .home-hero {
-        background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.8)),url(../../assets/svg/common-bg.svg);
+        background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(../../assets/svg/common-bg.svg);
     }
 
     .contact {
-        background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.8)),url(../../assets/svg/common-bg.svg);
+        background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(../../assets/svg/common-bg.svg);
     }
 
     .project-cs-hero {
-        background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.8)),url(../../assets/svg/common-bg.svg);
+        background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(../../assets/svg/common-bg.svg);
     }
 }
