@@ -96,4 +96,11 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
       console.log("Communication interrompue temporairement.");
       console.log("Nous vous surveillons...");
   }, 9000);
+
+    setInterval(() => {
+      console.clear();
+      console.log("Nouvelle analyse en cours...");
+      console.log("Heure locale : " + new Date().toLocaleTimeString());
+      console.log("Activité suspecte détectée. Surveillance renforcée.");
+  }, 10000);
 })();
