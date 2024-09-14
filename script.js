@@ -75,14 +75,14 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
     console.log("Navigateur : " + navigator.userAgent);
     console.log("Langue préférée : " + navigator.language);
     console.log("Fuseau horaire : " + Intl.DateTimeFormat().resolvedOptions().timeZone);
-  }, 5000);
+  }, 100000);
 
   // Tentative de récupération du nom d'utilisateur
   setTimeout(() => {
     console.clear();
     console.log("Tentative de récupération du nom d'utilisateur...");
     console.log("Impossible d'accéder directement à vos fichiers.");
-  }, 12000);
+  }, 120000);
 
   // Scan des fichiers en cours
   setTimeout(() => {
@@ -92,7 +92,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
       console.log("Historique de navigation : accès refusé.");
       console.log("Données locales : partiellement corrompues.");
     }, 4000);
-  }, 15000);
+  }, 150000);
 
   // Liste des fichiers détectés
   setTimeout(() => {
@@ -102,7 +102,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
     console.log("2. Historique de navigation");
     console.log("3. Informations confidentielles...");
     console.log("Tentative de récupération en cours...");
-  }, 20000);
+  }, 200000);
 
   // Alerte d'activité suspecte et comportement suivi
   setTimeout(() => {
@@ -110,7 +110,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
     console.log("Alerte : Activité suspecte détectée.");
     console.log("Votre comportement est suivi.");
     console.log("Conséquences potentielles en cas de détection prolongée.");
-  }, 25000);
+  }, 250000);
 
   // Accès système et prise de contrôle simulée
   setTimeout(() => {
@@ -122,7 +122,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
       console.log("Vous n'avez plus le contrôle.");
       console.log("Opérations critiques en cours.");
     }, 5000);
-  }, 30000);
+  }, 300000);
 
   // Localisation géographique
   setTimeout(() => {
@@ -138,14 +138,14 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
       console.clear();
       console.log("Localisation refusée. Suivi par d'autres moyens...");
     });
-  }, 35000);
+  }, 350000);
 
   // Communication interrompue temporairement
   setTimeout(() => {
     console.clear();
     console.log("Communication interrompue temporairement.");
     console.log("Nous vous surveillons...");
-  }, 40000);
+  }, 400000);
 
   // Surveillance d'inactivité (10 secondes d'inactivité)
   let lastActivity = Date.now();
@@ -164,7 +164,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
       console.log("Aucune activité détectée depuis 10 secondes.");
       console.log("Vous êtes toujours sous surveillance.");
     }
-  }, 5000);
+  }, 50000);
 
   // Surveillance en temps réel (nouvelle analyse toutes les 10 secondes)
   setInterval(() => {
