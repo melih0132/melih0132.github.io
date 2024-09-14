@@ -65,8 +65,8 @@ textarea {
     text-transform: uppercase;
     letter-spacing: 3px;
     text-align: center;
-/*     color: #111;
- */    font-weight: 800
+    color: #111;
+    font-weight: 800
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -104,12 +104,12 @@ textarea {
     text-align: center;
     margin-bottom: 3.5rem;
     position: relative;
-/*     color: #111
- */}
+    color: #111
+}
 
 .heading-sec__main--lt {
-/*     color: #111;
- */    font-weight: 800
+    color: #111;
+    font-weight: 800
 }
 
 .heading-sec__main--lt::after {
@@ -138,8 +138,8 @@ textarea {
 .heading-sec__sub {
     display: block;
     text-align: center;
-/*     color: #555;
- */    font-size: 2rem;
+    color: #555;
+    font-size: 2rem;
     font-weight: 500;
     max-width: 80rem;
     margin: auto;
@@ -152,9 +152,9 @@ textarea {
     }
 }
 
-/* .heading-sec__sub--lt {
+.heading-sec__sub--lt {
     color: #333
-} */
+}
 
 .heading-sm {
     font-size: 2.2rem;
