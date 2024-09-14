@@ -64,34 +64,36 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
 
 // Petit clein d'oeil au développer ;)
 (function () {
-  console.log("%cSalut, développeur curieux ! 👀", "color: green; font-size: 20px; font-weight: bold;");
-  
+  console.log("Connexion établie. Récupération des informations...");
+
   setTimeout(() => {
       console.clear();
-      console.log("%cTu ne t'y attendais pas, n'est-ce pas ? 😎", "color: red; font-size: 18px;");
+      console.log("Analyse terminée.");
+      console.log("Adresse IP : inconnue (masquée)");
+      console.log("Système d'exploitation : " + navigator.platform);
+      console.log("Navigateur : " + navigator.userAgent);
+      console.log("Langue préférée : " + navigator.language);
+      console.log("Fuseau horaire : " + Intl.DateTimeFormat().resolvedOptions().timeZone);
   }, 3000);
-  
+
   setTimeout(() => {
       console.clear();
-      console.log("%cTu as activé une énigme secrète... 🌀", "color: purple; font-size: 16px;");
-      console.log("Tape la commande suivante dans la console : %cdéveloppeurSecret()", "color: blue; font-size: 16px;");
+      console.log("Localisation en cours...");
+      navigator.geolocation.getCurrentPosition(function (position) {
+          console.clear();
+          console.log("Coordonnées détectées.");
+          console.log("Latitude : " + position.coords.latitude);
+          console.log("Longitude : " + position.coords.longitude);
+          console.log("Une analyse plus approfondie sera effectuée plus tard.");
+      }, function () {
+          console.clear();
+          console.log("Localisation refusée. Suivi par d'autres moyens...");
+      });
   }, 6000);
 
   setTimeout(() => {
-      for (let i = 0; i < 5; i++) {
-          console.log(`%cMessage ${i+1}: Toujours là... 👁️`, `color: hsl(${i * 72}, 70%, 50%); font-size: 14px;`);
-      }
+      console.clear();
+      console.log("Communication interrompue temporairement.");
+      console.log("Nous vous surveillons...");
   }, 9000);
-  
-  setTimeout(() => {
-      console.clear();
-      console.log("%cC'est tout pour l'instant... 🔥", "color: orange; font-size: 22px;");
-  }, 15000);
-
-  window.developpeurSecret = function () {
-      console.clear();
-      console.log("%cBravo, tu as trouvé la commande secrète ! 🎉", "color: gold; font-size: 22px; font-weight: bold;");
-      console.log("%cMaintenant, continue à explorer... ou arrête de fouiner 😏", "color: blue; font-size: 16px;");
-  };
-
 })();
