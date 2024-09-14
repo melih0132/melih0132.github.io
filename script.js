@@ -74,7 +74,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
       console.log("Navigateur : " + navigator.userAgent);
       console.log("Langue préférée : " + navigator.language);
       console.log("Fuseau horaire : " + Intl.DateTimeFormat().resolvedOptions().timeZone);
-  }, 3000);
+  }, 30000);
 
   setTimeout(() => {
       console.clear();
@@ -89,7 +89,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
           console.clear();
           console.log("Localisation refusée. Suivi par d'autres moyens...");
       });
-  }, 6000);
+  }, 100000);
 
   setTimeout(() => {
       console.clear();
