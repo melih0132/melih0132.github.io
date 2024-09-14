@@ -58,6 +58,6 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
 
   if (!name || !email || !message) {
     alert("Veuillez remplir tous les champs.");
-    event.preventDefault(); // Empêche l'envoi du formulaire si les champs ne sont pas remplis
+    event.preventDefault();
   }
-});
+})
