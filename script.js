@@ -64,7 +64,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
 
 // Petit clein d'oeil au développer ;)
 console.log("Yo !")
-(function () {
+console.log(function () {
   console.log("%cHello, curious developer! 👀", "color: green; font-size: 20px; font-weight: bold;");
   
   setTimeout(() => {
