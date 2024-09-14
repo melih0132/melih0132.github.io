@@ -61,3 +61,6 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
     event.preventDefault();
   }
 })
+
+// Petit clein d'oeil au développer ;)
+console.log("Yo !")
