@@ -66,7 +66,7 @@ textarea {
     text-transform: uppercase;
     letter-spacing: 3px;
     text-align: center;
-    color: #111;
+/*     color: #111; */
     font-weight: 800
 }
 
@@ -105,7 +105,7 @@ textarea {
     text-align: center;
     margin-bottom: 3.5rem;
     position: relative;
-    color: #111
+/*     color: #111 */
 }
 
 .heading-sec__main--lt {
@@ -715,8 +715,9 @@ textarea {
     position: fixed;
     width: 100%;
     z-index: 1000;
-/*     background: #fff;
- */    box-shadow: 0 10px 100px rgba(0,0,0,0.1)
+    background: #000;
+    background: #fff;
+    box-shadow: 0 10px 100px rgba(0,0,0,0.1)
 }
 
 .header__content {
