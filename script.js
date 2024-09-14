@@ -43,10 +43,10 @@ function openW(url) {
 }
 
 function closeW() {
-  if (window.opener) {
+  if (window.opener && !window.opener.closed) {
     window.close();
   } else {
-    window.history.back();
+    window.location.href = "https://melih0132.github.io/";
   }
 }
 
