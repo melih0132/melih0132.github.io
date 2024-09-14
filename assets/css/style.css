@@ -29,8 +29,6 @@ html {
 }
 
 body {
-    background: white;
-    color: #000;
     box-sizing: border-box;
     position: relative;
     line-height: 1.5;
