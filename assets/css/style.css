@@ -1028,6 +1028,10 @@ textarea {
     }
 
     .header {
-        background: #000;
+        background: #00000036;
+    }
+
+    .home-hero {
+        background: linear-gradient(to right, rgb(0 0 0 / 80%), rgb(0 0 0 / 80%)), url(../../assets/svg/common-bg.svg);
     }
 }
