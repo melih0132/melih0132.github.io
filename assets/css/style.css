@@ -257,6 +257,7 @@ textarea {
     transform: translateY(-50%);
 /*  background: #fff; */
     box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+    border-radius: 15px;
     padding: .5rem
 }
 
@@ -580,8 +581,8 @@ textarea {
 
 .project-cs-hero {
     color: #fff;
-/*     background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg);
- */    background-size: cover;
+/*  background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg); */
+    background-size: cover;
     background-position: center;
     position: relative
 }
@@ -736,7 +737,7 @@ textarea {
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: #333;
+/*     color: #333; */
     transition: color .3s
 }
 
@@ -1024,11 +1025,11 @@ textarea {
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #181a1b;
-        color: #ffffff;
+        color: white;
     }
 
     .header {
-        background: #00000036;
+        background: #121212;
     }
 
     .home-hero {
