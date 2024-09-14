@@ -63,28 +63,35 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
 })
 
 // Petit clein d'oeil au développer ;)
-console.log("Yo !")
-console.log(function () {
-  console.log("%cHello, curious developer! 👀", "color: green; font-size: 20px; font-weight: bold;");
+(function () {
+  console.log("%cSalut, développeur curieux ! 👀", "color: green; font-size: 20px; font-weight: bold;");
   
   setTimeout(() => {
       console.clear();
-      console.log("%cDid you expect that? 😎", "color: red; font-size: 18px;");
+      console.log("%cTu ne t'y attendais pas, n'est-ce pas ? 😎", "color: red; font-size: 18px;");
   }, 3000);
   
   setTimeout(() => {
       console.clear();
-      console.log("%cYou're in too deep now... 🌀", "color: purple; font-size: 16px;");
+      console.log("%cTu as activé une énigme secrète... 🌀", "color: purple; font-size: 16px;");
+      console.log("Tape la commande suivante dans la console : %cdéveloppeurSecret()", "color: blue; font-size: 16px;");
   }, 6000);
-  
+
   setTimeout(() => {
       for (let i = 0; i < 5; i++) {
-          console.log(`%cMessage ${i+1}: Still watching... 👁️`, `color: hsl(${i * 72}, 70%, 50%); font-size: 14px;`);
+          console.log(`%cMessage ${i+1}: Toujours là... 👁️`, `color: hsl(${i * 72}, 70%, 50%); font-size: 14px;`);
       }
   }, 9000);
   
   setTimeout(() => {
       console.clear();
-      console.log("%cGoodbye! 🔥", "color: orange; font-size: 22px;");
+      console.log("%cC'est tout pour l'instant... 🔥", "color: orange; font-size: 22px;");
   }, 15000);
+
+  window.developpeurSecret = function () {
+      console.clear();
+      console.log("%cBravo, tu as trouvé la commande secrète ! 🎉", "color: gold; font-size: 22px; font-weight: bold;");
+      console.log("%cMaintenant, continue à explorer... ou arrête de fouiner 😏", "color: blue; font-size: 16px;");
+  };
+
 })();
