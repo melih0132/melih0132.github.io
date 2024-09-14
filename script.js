@@ -64,3 +64,27 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
 
 // Petit clein d'oeil au développer ;)
 console.log("Yo !")
+(function () {
+  console.log("%cHello, curious developer! 👀", "color: green; font-size: 20px; font-weight: bold;");
+  
+  setTimeout(() => {
+      console.clear();
+      console.log("%cDid you expect that? 😎", "color: red; font-size: 18px;");
+  }, 3000);
+  
+  setTimeout(() => {
+      console.clear();
+      console.log("%cYou're in too deep now... 🌀", "color: purple; font-size: 16px;");
+  }, 6000);
+  
+  setTimeout(() => {
+      for (let i = 0; i < 5; i++) {
+          console.log(`%cMessage ${i+1}: Still watching... 👁️`, `color: hsl(${i * 72}, 70%, 50%); font-size: 14px;`);
+      }
+  }, 9000);
+  
+  setTimeout(() => {
+      console.clear();
+      console.log("%cGoodbye! 🔥", "color: orange; font-size: 22px;");
+  }, 15000);
+})();
