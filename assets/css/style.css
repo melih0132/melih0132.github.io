@@ -65,8 +65,8 @@ textarea {
     text-transform: uppercase;
     letter-spacing: 3px;
     text-align: center;
-    color: #111;
-    font-weight: 800
+/*     color: #111;
+ */    font-weight: 800
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -104,12 +104,12 @@ textarea {
     text-align: center;
     margin-bottom: 3.5rem;
     position: relative;
-    color: #111
-}
+/*     color: #111
+ */}
 
 .heading-sec__main--lt {
-    color: #111;
-    font-weight: 800
+/*     color: #111;
+ */    font-weight: 800
 }
 
 .heading-sec__main--lt::after {
@@ -138,8 +138,8 @@ textarea {
 .heading-sec__sub {
     display: block;
     text-align: center;
-    color: #555;
-    font-size: 2rem;
+/*     color: #555;
+ */    font-size: 2rem;
     font-weight: 500;
     max-width: 80rem;
     margin: auto;
@@ -153,8 +153,8 @@ textarea {
 }
 
 .heading-sec__sub--lt {
-    color: #333
-}
+/*     color: #333
+ */}
 
 .heading-sm {
     font-size: 2.2rem;
@@ -200,8 +200,8 @@ textarea {
 }
 
 .btn--theme-inv {
-    color: #111;
-    background: #fff;
+/*     color: #111;
+ */    background: #fff;
     border: 2px solid #7843E9;
     box-shadow: none;
     padding: calc(1.5rem - 2px) calc(5rem - 2px)
@@ -218,8 +218,8 @@ textarea {
 }
 
 .text-primary {
-    color: #333;
-    font-size: 2.2rem;
+/*     color: #333;
+ */    font-size: 2.2rem;
     text-align: center;
     width: 100%;
     line-height: 1.6
@@ -333,8 +333,8 @@ textarea {
 }
 
 .about {
-    background: #fafafa
-}
+/*     background: #fafafa
+ */}
 
 .about__content {
     display: grid;
@@ -462,15 +462,15 @@ textarea {
 }
 
 .contact {
-    background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg);
-    background-size: cover;
+/*     background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg);
+ */    background-size: cover;
     background-position: center
 }
 
 .contact__form-container {
     box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
-    background: white;
-    padding: 4rem;
+/*     background: white;
+ */    padding: 4rem;
     margin-top: 6rem;
     max-width: 80rem;
     text-align: right;
@@ -581,8 +581,8 @@ textarea {
 
 .project-cs-hero {
     color: #fff;
-    background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg);
-    background-size: cover;
+/*     background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg);
+ */    background-size: cover;
     background-position: center;
     position: relative
 }
@@ -715,9 +715,8 @@ textarea {
     position: fixed;
     width: 100%;
     z-index: 1000;
-    background: #000;
-    background: #fff;
-    box-shadow: 0 10px 100px rgba(0,0,0,0.1)
+/*     background: #fff;
+ */    box-shadow: 0 10px 100px rgba(0,0,0,0.1)
 }
 
 .header__content {
@@ -832,8 +831,8 @@ textarea {
 }
 
 .header__sm-menu {
-    background: #fff;
-    position: absolute;
+/*     background: #fff;
+ */    position: absolute;
     width: 100%;
     top: 100%;
     visibility: hidden;
