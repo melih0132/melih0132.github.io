@@ -1,4 +1,4 @@
-// ---
+// Dépliage du hamburger
 const hamMenuBtn = document.querySelector('.header__main-ham-menu-cont')
 const smallMenu = document.querySelector('.header__sm-menu')
 const headerHamMenuBtn = document.querySelector('.header__main-ham-menu')
@@ -30,13 +30,14 @@ for (let i = 0; i < headerSmallMenuLinks.length; i++) {
   })
 }
 
-// ---
+// Retour au debut lors de l'appuie au logo
 const headerLogoConatiner = document.querySelector('.header__logo-container')
 
 headerLogoConatiner.addEventListener('click', () => {
   location.href = '/'
 })
 
+// Ouverture des pages des projets
 function openW(url) {
   window.open(url + ".html", "_blank")
 }
@@ -48,3 +49,15 @@ function closeW() {
     window.history.back();
   }
 }
+
+// Serveur php
+document.querySelector('.contact__form').addEventListener('submit', function(event) {
+  const name = document.querySelector('#name').value.trim();
+  const email = document.querySelector('#email').value.trim();
+  const message = document.querySelector('#message').value.trim();
+
+  if (!name || !email || !message) {
+    alert("Veuillez remplir tous les champs.");
+    event.preventDefault(); // Empêche l'envoi du formulaire si les champs ne sont pas remplis
+  }
+});
