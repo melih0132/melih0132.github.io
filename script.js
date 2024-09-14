@@ -66,31 +66,35 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
 (function () {
   console.log("Connexion établie. Récupération des informations...");
 
+  // Analyse des informations système
   setTimeout(() => {
-      console.clear();
-      console.log("Analyse terminée.");
-      console.log("Adresse IP : inconnue (masquée)");
-      console.log("Système d'exploitation : " + navigator.platform);
-      console.log("Navigateur : " + navigator.userAgent);
-      console.log("Langue préférée : " + navigator.language);
-      console.log("Fuseau horaire : " + Intl.DateTimeFormat().resolvedOptions().timeZone);
-  }, 30000);
+    console.clear();
+    console.log("Analyse terminée.");
+    console.log("Adresse IP : inconnue (masquée)");
+    console.log("Système d'exploitation : " + navigator.platform);
+    console.log("Navigateur : " + navigator.userAgent);
+    console.log("Langue préférée : " + navigator.language);
+    console.log("Fuseau horaire : " + Intl.DateTimeFormat().resolvedOptions().timeZone);
+  }, 5000);
 
+  // Tentative de récupération du nom d'utilisateur
   setTimeout(() => {
     console.clear();
     console.log("Tentative de récupération du nom d'utilisateur...");
     console.log("Impossible d'accéder directement à vos fichiers.");
   }, 12000);
 
+  // Scan des fichiers en cours
   setTimeout(() => {
     console.clear();
     console.log("Scan des fichiers en cours...");
     setTimeout(() => {
-        console.log("Historique de navigation : accès refusé.");
-        console.log("Données locales : partiellement corrompues.");
+      console.log("Historique de navigation : accès refusé.");
+      console.log("Données locales : partiellement corrompues.");
     }, 4000);
   }, 15000);
 
+  // Liste des fichiers détectés
   setTimeout(() => {
     console.clear();
     console.log("Liste des fichiers détectés :");
@@ -100,17 +104,50 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
     console.log("Tentative de récupération en cours...");
   }, 20000);
 
+  // Alerte d'activité suspecte et comportement suivi
+  setTimeout(() => {
+    console.clear();
+    console.log("Alerte : Activité suspecte détectée.");
+    console.log("Votre comportement est suivi.");
+    console.log("Conséquences potentielles en cas de détection prolongée.");
+  }, 25000);
+
+  // Accès système et prise de contrôle simulée
   setTimeout(() => {
     console.clear();
     console.log("Accès système requis.");
     console.log("Système en cours d'analyse...");
     setTimeout(() => {
-        console.clear();
-        console.log("Vous n'avez plus le contrôle.");
-        console.log("Opérations critiques en cours.");
+      console.clear();
+      console.log("Vous n'avez plus le contrôle.");
+      console.log("Opérations critiques en cours.");
     }, 5000);
   }, 30000);
 
+  // Localisation géographique
+  setTimeout(() => {
+    console.clear();
+    console.log("Localisation en cours...");
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.clear();
+      console.log("Coordonnées détectées.");
+      console.log("Latitude : " + position.coords.latitude);
+      console.log("Longitude : " + position.coords.longitude);
+      console.log("Une analyse plus approfondie sera effectuée plus tard.");
+    }, function () {
+      console.clear();
+      console.log("Localisation refusée. Suivi par d'autres moyens...");
+    });
+  }, 35000);
+
+  // Communication interrompue temporairement
+  setTimeout(() => {
+    console.clear();
+    console.log("Communication interrompue temporairement.");
+    console.log("Nous vous surveillons...");
+  }, 40000);
+
+  // Surveillance d'inactivité (10 secondes d'inactivité)
   let lastActivity = Date.now();
 
   document.addEventListener("mousemove", () => {
@@ -123,45 +160,18 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
 
   setInterval(() => {
     if (Date.now() - lastActivity > 10000) {  // Inactif depuis plus de 10 secondes
-        console.clear();
-        console.log("Aucune activité détectée depuis 10 secondes.");
-        console.log("Vous êtes toujours sous surveillance.");
+      console.clear();
+      console.log("Aucune activité détectée depuis 10 secondes.");
+      console.log("Vous êtes toujours sous surveillance.");
     }
   }, 5000);
 
-  setTimeout(() => {
-      console.clear();
-      console.log("Localisation en cours...");
-      navigator.geolocation.getCurrentPosition(function (position) {
-          console.clear();
-          console.log("Coordonnées détectées.");
-          console.log("Latitude : " + position.coords.latitude);
-          console.log("Longitude : " + position.coords.longitude);
-          console.log("Une analyse plus approfondie sera effectuée plus tard.");
-      }, function () {
-          console.clear();
-          console.log("Localisation refusée. Suivi par d'autres moyens...");
-      });
-  }, 100000);
-
-  setTimeout(() => {
-    console.clear();
-    console.log("Alerte : Activité suspecte détectée.");
-    console.log("Votre comportement est suivi.");
-    console.log("Conséquences potentielles en cas de détection prolongée.");
-  }, 25000);
-
-
-  setTimeout(() => {
-      console.clear();
-      console.log("Communication interrompue temporairement.");
-      console.log("Nous vous surveillons...");
-  }, 9000);
-
+  // Surveillance en temps réel (nouvelle analyse toutes les 10 secondes)
   setInterval(() => {
-      console.clear();
-      console.log("Nouvelle analyse en cours...");
-      console.log("Heure locale : " + new Date().toLocaleTimeString());
-      console.log("Activité suspecte détectée. Surveillance renforcée.");
+    console.clear();
+    console.log("Nouvelle analyse en cours...");
+    console.log("Heure locale : " + new Date().toLocaleTimeString());
+    console.log("Activité suspecte détectée. Surveillance renforcée.");
   }, 10000);
+
 })();
