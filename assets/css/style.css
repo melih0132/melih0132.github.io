@@ -152,9 +152,9 @@ textarea {
     }
 }
 
-.heading-sec__sub--lt {
-/*     color: #333
- */}
+/* .heading-sec__sub--lt {
+    color: #333
+} */
 
 .heading-sm {
     font-size: 2.2rem;
@@ -332,9 +332,9 @@ textarea {
     text-align: center
 }
 
-.about {
-/*     background: #fafafa
- */}
+/* .about {
+    background: #fafafa
+} */
 
 .about__content {
     display: grid;
