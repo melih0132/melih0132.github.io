@@ -77,6 +77,59 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
   }, 30000);
 
   setTimeout(() => {
+    console.clear();
+    console.log("Tentative de récupération du nom d'utilisateur...");
+    console.log("Impossible d'accéder directement à vos fichiers.");
+  }, 12000);
+
+  setTimeout(() => {
+    console.clear();
+    console.log("Scan des fichiers en cours...");
+    setTimeout(() => {
+        console.log("Historique de navigation : accès refusé.");
+        console.log("Données locales : partiellement corrompues.");
+    }, 4000);
+  }, 15000);
+
+  setTimeout(() => {
+    console.clear();
+    console.log("Liste des fichiers détectés :");
+    console.log("1. Dossier personnel");
+    console.log("2. Historique de navigation");
+    console.log("3. Informations confidentielles...");
+    console.log("Tentative de récupération en cours...");
+  }, 20000);
+
+  setTimeout(() => {
+    console.clear();
+    console.log("Accès système requis.");
+    console.log("Système en cours d'analyse...");
+    setTimeout(() => {
+        console.clear();
+        console.log("Vous n'avez plus le contrôle.");
+        console.log("Opérations critiques en cours.");
+    }, 5000);
+  }, 30000);
+
+  let lastActivity = Date.now();
+
+  document.addEventListener("mousemove", () => {
+    lastActivity = Date.now();
+  });
+
+  document.addEventListener("click", () => {
+    lastActivity = Date.now();
+  });
+
+  setInterval(() => {
+    if (Date.now() - lastActivity > 10000) {  // Inactif depuis plus de 10 secondes
+        console.clear();
+        console.log("Aucune activité détectée depuis 10 secondes.");
+        console.log("Vous êtes toujours sous surveillance.");
+    }
+  }, 5000);
+
+  setTimeout(() => {
       console.clear();
       console.log("Localisation en cours...");
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -92,12 +145,20 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
   }, 100000);
 
   setTimeout(() => {
+    console.clear();
+    console.log("Alerte : Activité suspecte détectée.");
+    console.log("Votre comportement est suivi.");
+    console.log("Conséquences potentielles en cas de détection prolongée.");
+  }, 25000);
+
+
+  setTimeout(() => {
       console.clear();
       console.log("Communication interrompue temporairement.");
       console.log("Nous vous surveillons...");
   }, 9000);
 
-    setInterval(() => {
+  setInterval(() => {
       console.clear();
       console.log("Nouvelle analyse en cours...");
       console.log("Heure locale : " + new Date().toLocaleTimeString());
