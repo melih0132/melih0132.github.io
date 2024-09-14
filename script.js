@@ -4,7 +4,7 @@ const smallMenu = document.querySelector('.header__sm-menu')
 const headerHamMenuBtn = document.querySelector('.header__main-ham-menu')
 const headerHamMenuCloseBtn = document.querySelector(
   '.header__main-ham-menu-close'
-)
+);
 const headerSmallMenuLinks = document.querySelectorAll('.header__sm-menu-link')
 
 hamMenuBtn.addEventListener('click', () => {
@@ -20,7 +20,7 @@ hamMenuBtn.addEventListener('click', () => {
     headerHamMenuBtn.classList.add('d-none')
     headerHamMenuCloseBtn.classList.remove('d-none')
   }
-})
+});
 
 for (let i = 0; i < headerSmallMenuLinks.length; i++) {
   headerSmallMenuLinks[i].addEventListener('click', () => {
@@ -28,19 +28,19 @@ for (let i = 0; i < headerSmallMenuLinks.length; i++) {
     headerHamMenuBtn.classList.remove('d-none')
     headerHamMenuCloseBtn.classList.add('d-none')
   })
-}
+};
 
 // Retour au debut lors de l'appuie au logo
 const headerLogoConatiner = document.querySelector('.header__logo-container')
 
 headerLogoConatiner.addEventListener('click', () => {
   location.href = '/'
-})
+});
 
 // Ouverture des pages des projets
 function openW(url) {
   window.open(url + ".html", "_blank")
-}
+};
 
 function closeW() {
   if (window.opener && !window.opener.closed) {
@@ -48,7 +48,7 @@ function closeW() {
   } else {
     window.location.href = "https://melih0132.github.io/";
   }
-}
+};
 
 // Serveur php
 document.querySelector('.contact__form').addEventListener('submit', function(event) {
@@ -60,7 +60,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
     alert("Veuillez remplir tous les champs.");
     event.preventDefault();
   }
-})
+});
 
 // Petit clein d'oeil au développer ;)
 (function () {
