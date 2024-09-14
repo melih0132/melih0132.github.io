@@ -236,8 +236,8 @@ textarea {
 }
 
 .home-hero {
-/*     background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg);
- */    background-position: center;
+    background: linear-gradient(to right, rgba(245,245,245,0.8), rgba(245,245,245,0.8)),url(../../assets/svg/common-bg.svg);
+    background-position: center;
     height: 100vh;
     min-height: 80rem;
     max-height: 120rem;
