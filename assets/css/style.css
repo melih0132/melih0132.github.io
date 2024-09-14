@@ -29,6 +29,8 @@ html {
 }
 
 body {
+    background: white;
+    color: #000;
     box-sizing: border-box;
     position: relative;
     line-height: 1.5;
@@ -1019,5 +1021,12 @@ textarea {
     to {
         opacity: 0;
         top: 27px
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #181a1b;
+        color: #ffffff;
     }
 }
