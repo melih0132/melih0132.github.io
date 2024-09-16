@@ -580,7 +580,7 @@ textarea {
 }
 
 .project-cs-hero {
-    color: #fff;
+/*     color: #fff; */
     background: linear-gradient(to right, rgba(245,245,245,0.5), rgba(245,245,245,0.5)),url(../../assets/svg/common-bg.svg);
     background-size: cover;
     background-position: center;

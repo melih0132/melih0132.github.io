@@ -63,7 +63,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
 });
 
 // Petit clein d'oeil au développer ;)
-(function () {
+/* (function () {
   console.log("Connexion établie. Récupération des informations...");
 
   // Analyse des informations système
@@ -174,4 +174,4 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
       console.log("Activité suspecte détectée. Surveillance renforcée.");
     }, 60000);
   }, 100000);
-})();
+})(); */
