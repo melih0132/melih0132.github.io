@@ -62,7 +62,7 @@ document.querySelector('.contact__form').addEventListener('submit', function(eve
   }
 });
 
-// Petit clein d'oeil au développer ;)
+// Petit clein d'oeil au développer
 /* (function () {
   console.log("Connexion établie. Récupération des informations...");
 
