@@ -30,11 +30,11 @@ for (let i = 0; i < headerSmallMenuLinks.length; i++) {
   })
 };
 
-// Retour au debut lors de l'appuie au logo
-const headerLogoConatiner = document.querySelector('.header__logo-container')
+// Retour au début lors de l'appuie sur le logo
+const headerLogoContainer = document.querySelector('.header__logo-container');
 
-headerLogoConatiner.addEventListener('click', () => {
-  location.href = '../'
+headerLogoContainer.addEventListener('click', () => {
+  location.href = '../';
 });
 
 // Serveur php
