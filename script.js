@@ -34,21 +34,8 @@ for (let i = 0; i < headerSmallMenuLinks.length; i++) {
 const headerLogoConatiner = document.querySelector('.header__logo-container')
 
 headerLogoConatiner.addEventListener('click', () => {
-  location.href = '/'
+  location.href = '../'
 });
-
-// Ouverture des pages des projets
-function openW(url) {
-  window.open(url + ".html", "_blank")
-};
-
-function closeW() {
-  if (window.opener && !window.opener.closed) {
-    window.close();
-  } else {
-    window.location.href = "https://melih0132.github.io/";
-  }
-};
 
 // Serveur php
 document.querySelector('.contact__form').addEventListener('submit', function(event) {
