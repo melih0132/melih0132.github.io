@@ -76,6 +76,19 @@ textarea {
     font-weight: 800;
 }
 
+#dynamic-lang {
+    transition: opacity 0.5s ease-in-out;
+    display: inline-block;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
 @media only screen and (max-width: 37.5em) {
     .heading-primary {
         font-size: 4.5rem

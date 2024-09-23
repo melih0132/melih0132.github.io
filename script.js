@@ -39,25 +39,32 @@ headerLogoContainer.addEventListener('click', () => {
 
 //Bonjour en differentes langues
 const translations = [
-  "ようこそ",
-  "Welcome",
-  "Bienvenue",
-  "Willkommen",
-  "Bienvenido",
-  "Benvenuto",
-  "Hoşgeldiniz",
-  "Добро пожаловать",
-  "مرحبا",
-  "환영합니다",
+  "Yo",
+  "Hola",
+  "Ciao",
+  "Hallo",
+  "Merhaba",
+  "Привет",
+  "こんにちは",
+  "안녕하세요",
   "欢迎",
+  "Olá",
 ];
+
 
 let currentIndex = 0;
 
 function changeLanguage() {
   const langElement = document.getElementById('dynamic-lang');
-  langElement.textContent = translations[currentIndex];
-  currentIndex = (currentIndex + 1) % translations.length;
+  langElement.classList.remove('fade-in');
+  langElement.classList.add('fade-out');
+
+  setTimeout(() => {
+      langElement.textContent = translations[currentIndex];
+      currentIndex = (currentIndex + 1) % translations.length;
+      langElement.classList.remove('fade-out');
+      langElement.classList.add('fade-in');
+  }, 500);
 }
 
 setInterval(changeLanguage, 2000);
