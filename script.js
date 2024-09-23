@@ -37,6 +37,31 @@ headerLogoContainer.addEventListener('click', () => {
   location.href = '../';
 });
 
+//Bonjour en differentes langues
+const translations = [
+  "ようこそ",
+  "Welcome",
+  "Bienvenue",
+  "Willkommen",
+  "Bienvenido",
+  "Benvenuto",
+  "Hoşgeldiniz",
+  "Добро пожаловать",
+  "مرحبا",
+  "환영합니다",
+  "欢迎",
+];
+
+let currentIndex = 0;
+
+function changeLanguage() {
+  const langElement = document.getElementById('dynamic-lang');
+  langElement.textContent = translations[currentIndex];
+  currentIndex = (currentIndex + 1) % translations.length;
+}
+
+setInterval(changeLanguage, 2000);
+
 // Serveur php
 document.querySelector('.contact__form').addEventListener('submit', function(event) {
   const name = document.querySelector('#name').value.trim();

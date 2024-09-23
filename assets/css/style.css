@@ -4,12 +4,14 @@
     margin: 0;
     padding: 0;
     box-sizing: inherit;
-    font-family: inherit
+    font-family: inherit;
+    transition: all 0.3s ease-in-out;
 }
 
 html {
     font-size: 62.5%;
-    scroll-behavior: smooth
+    scroll-behavior: smooth;
+    transition: font-size 0.3s ease-in-out;
 }
 
 @media only screen and (max-width: 75em) {
@@ -37,7 +39,8 @@ body {
     font-family: sans-serif;
     overflow-x: hidden;
     overflow-y: scroll;
-    font-family: 'Source Sans Pro', sans-serif
+    font-family: 'Source Sans Pro', sans-serif;
+    transition: all 0.3s ease-in-out;
 }
 
 a {
@@ -70,8 +73,7 @@ textarea {
     text-transform: uppercase;
     letter-spacing: 3px;
     text-align: center;
-    /*     color: #111; */
-    font-weight: 800
+    font-weight: 800;
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -175,11 +177,12 @@ textarea {
     font-weight: 700;
     border-radius: 5px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
-    transition: transform .3s
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .btn:hover {
-    transform: translateY(-3px)
+    transform: translateY(-3px);
+    background: #6741c1;
 }
 
 .btn--bg {
@@ -746,7 +749,8 @@ textarea {
 }
 
 .header__logo-container:hover {
-    color: #7843E9
+    color: #7843E9;
+    transition: color 0.3s ease;
 }
 
 .header__logo-img-cont {
@@ -800,7 +804,7 @@ textarea {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
-    transition: color .3s
+    transition: color .3s ease;
 }
 
 .header__link:hover {
