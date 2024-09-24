@@ -60,17 +60,17 @@ function changeLanguage() {
   langElement.classList.add('fade-out');
 
   setTimeout(() => {
-      langElement.textContent = translations[currentIndex];
-      currentIndex = (currentIndex + 1) % translations.length;
-      langElement.classList.remove('fade-out');
-      langElement.classList.add('fade-in');
+    langElement.textContent = translations[currentIndex];
+    currentIndex = (currentIndex + 1) % translations.length;
+    langElement.classList.remove('fade-out');
+    langElement.classList.add('fade-in');
   }, 500);
 }
 
 setInterval(changeLanguage, 2000);
 
 // Serveur php
-document.querySelector('.contact__form').addEventListener('submit', function(event) {
+document.querySelector('.contact__form').addEventListener('submit', function (event) {
   const name = document.querySelector('#name').value.trim();
   const email = document.querySelector('#email').value.trim();
   const message = document.querySelector('#message').value.trim();
