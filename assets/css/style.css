@@ -376,7 +376,17 @@ textarea {
 @media only screen and (max-width: 56.25em) {
     .about__content {
         grid-template-columns: 1fr;
-        grid-gap: 8rem
+        grid-gap: 8rem;
+        text-align: center;
+        align-items: center;
+        justify-content: center
+    }
+
+    .about__content-details {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
     }
 }
 
@@ -1011,6 +1021,19 @@ textarea {
 .skills {
     display: flex;
     flex-wrap: wrap
+}
+
+@media only screen and (max-width: 56.25em) {
+    .skills {
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .skills {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .skills__skill {
