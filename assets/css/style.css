@@ -1034,6 +1034,10 @@ textarea {
         display: flex;
         flex-direction: column;
     }
+
+    .skills__skill {
+        width: 100%;
+    }
 }
 
 .skills__skill {
