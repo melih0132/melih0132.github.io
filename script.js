@@ -37,7 +37,7 @@ headerLogoContainer.addEventListener('click', () => {
   location.href = '../';
 });
 
-//Bonjour en differentes langues
+// Bonjour en différentes langues
 const translations = [
   "Yo",
   "Hola",
@@ -51,19 +51,17 @@ const translations = [
   "Olá",
 ];
 
-
 let currentIndex = 0;
 
 function changeLanguage() {
   const langElement = document.getElementById('dynamic-lang');
-  langElement.classList.remove('fade-in');
-  langElement.classList.add('fade-out');
+  langElement.classList.add('slide-out'); // Changer fade-out en slide-out
 
   setTimeout(() => {
     langElement.textContent = translations[currentIndex];
     currentIndex = (currentIndex + 1) % translations.length;
-    langElement.classList.remove('fade-out');
-    langElement.classList.add('fade-in');
+
+    langElement.classList.remove('slide-out'); // Enlever slide-out
   }, 500);
 }
 
