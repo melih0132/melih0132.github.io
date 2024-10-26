@@ -149,7 +149,7 @@ textarea {
 
 .heading-sec__main--lt::after {
     content: '';
-    background: #7843E9 !important
+    background: #1ABC9C !important
 }
 
 .heading-sec__main::after {
@@ -158,7 +158,7 @@ textarea {
     top: calc(100% + 1.5rem);
     height: 5px;
     width: 3rem;
-    background: #7843E9;
+    background: #1ABC9C;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 5px
@@ -199,20 +199,19 @@ textarea {
 }
 
 .btn {
-    background: #7843E9;
-    color: #fff;
+    background: #1ABC9C;
+    color: whitesmoke;
     text-transform: uppercase;
     letter-spacing: 1px;
     display: inline-block;
     font-weight: 700;
     border-radius: 5px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .btn:hover {
-    transform: translateY(-3px);
-    background: #6741c1;
+    background: #16a084c1;
+    color: white;
 }
 
 .btn--bg {
@@ -226,12 +225,12 @@ textarea {
 }
 
 .btn--theme {
-    background: #7843E9;
+    background: #1ABC9C;
     color: #fff
 }
 
 .btn--theme-inv {
-    border: 2px solid #7843E9;
+    border: 2px solid #1ABC9C;
     box-shadow: none;
     padding: calc(1.5rem - 2px) calc(5rem - 2px)
 }
@@ -413,7 +412,7 @@ textarea {
 .about__content-details-para a {
     text-decoration: underline;
     font-weight: 700;
-    color: #7843E9;
+    color: #1ABC9C;
     margin: 0 3px
 }
 
@@ -502,28 +501,28 @@ textarea {
 .contact__form-container {
     box-shadow: rgba(100, 100, 100, 0.2) 0px 7px 29px 0px;
     background: white;
-    padding: 4rem;
-    margin-top: 6rem;
-    max-width: 80rem;
+    padding: 3.2rem;
+    margin-top: 4.8rem;
+    max-width: 64rem;
     text-align: right;
-    width: 95%;
+    width: 76%;
     border-radius: 5px;
-    margin: 5rem auto 0 auto
+    margin: 4rem auto 0 auto;
 }
 
 @media only screen and (max-width: 37.5em) {
     .contact__form-container {
-        padding: 3rem
+        padding: 2.4rem;
     }
 }
 
 .contact__form-field {
-    margin-bottom: 4rem
+    margin-bottom: 2.4rem;
 }
 
 @media only screen and (max-width: 37.5em) {
     .contact__form-field {
-        margin-bottom: 3rem
+        margin-bottom: 1.6rem;
     }
 }
 
@@ -534,75 +533,74 @@ textarea {
     font-weight: 700;
     margin-bottom: 1rem;
     display: block;
-    text-align: left
+    text-align: left;
 }
 
 .contact__form-input {
     color: #333;
-    padding: 2rem;
+    padding: 1.6rem;
     width: 100%;
     border: 1px solid #ebebeb;
-    font-size: 1.6rem;
+    font-size: 1.28rem;
     letter-spacing: 0px;
-    /*     background: #f0f0f0; */
     border-radius: 5px;
-    font-weight: 600
+    font-weight: 600;
 }
 
 .contact__form-input::-moz-placeholder {
     color: #999;
     font-weight: 600;
-    font-size: 1.6rem
+    font-size: 1.28rem;
 }
 
 .contact__form-input:-ms-input-placeholder {
     color: #999;
     font-weight: 600;
-    font-size: 1.6rem
+    font-size: 1.28rem;
 }
 
 .contact__form-input::placeholder {
     color: #999;
     font-weight: 600;
-    font-size: 1.6rem
+    font-size: 1.28rem;
 }
 
 .contact__form-input::-webkit-input-placeholder {
     color: #999;
     font-weight: 600;
-    font-size: 1.6rem
+    font-size: 1.28rem;
 }
 
 .contact__form-input:-ms-input-placeholder {
     color: #999;
     font-weight: 600;
-    font-size: 1.6rem
+    font-size: 1.28rem;
 }
 
 .contact__form-input::-ms-input-placeholder {
     color: #999;
     font-weight: 600;
-    font-size: 1.6rem
+    font-size: 1.28rem;
 }
 
 .contact__form-input:-moz-placeholder {
     opacity: 1;
     color: #999;
     font-weight: 600;
-    font-size: 1.6rem
+    font-size: 1.28rem;
 }
 
 .contact__form-input::-moz-placeholder {
     opacity: 1;
     color: #999;
     font-weight: 600;
-    font-size: 1.6rem
+    font-size: 1.28rem;
 }
 
 .contact__btn {
-    width: 30%;
-    padding: 2rem 4rem;
-    font-size: 1.6rem
+    width: 24%;
+    padding: 1.6rem 3.2rem;
+    font-size: 1.28rem;
 }
 
 .main-footer__link {
@@ -614,7 +612,7 @@ textarea {
 }
 
 .main-footer__link:hover {
-    color: #7843E9
+    color: #1ABC9C
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -783,7 +781,7 @@ textarea {
 }
 
 .header__logo-container:hover {
-    color: #7843E9;
+    color: #1ABC9C;
     transition: color 0.3s ease;
 }
 
@@ -793,7 +791,7 @@ textarea {
     border-radius: 50px;
     overflow: hidden;
     margin-right: 1.5rem;
-    background: #7843E9
+    background: #1ABC9C
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -842,7 +840,7 @@ textarea {
 }
 
 .header__link:hover {
-    color: #7843E9
+    color: #1ABC9C
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -912,7 +910,7 @@ textarea {
 }
 
 .header__sm-menu-link a:hover {
-    color: #7843E9
+    color: #1ABC9C
 }
 
 .header__sm-menu-link:first-child a {
@@ -1024,6 +1022,11 @@ textarea {
     font-weight: 600;
     color: #666;
     cursor: pointer;
+}
+
+.skills__skill:hover {
+    background-color: #454545;
+    color: white;
 }
 
 .mouse {
