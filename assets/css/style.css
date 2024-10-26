@@ -1022,7 +1022,8 @@ textarea {
     background: rgba(153, 153, 153, 0.2);
     border-radius: 5px;
     font-weight: 600;
-    color: #666
+    color: #666;
+    cursor: pointer;
 }
 
 .mouse {
