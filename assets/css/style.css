@@ -220,13 +220,17 @@ textarea {
 }
 
 .sec-pad {
-    padding: 12rem 0 0 0
+    padding: 12rem 0
 }
 
 @media only screen and (max-width: 56.25em) {
     .sec-pad {
-        padding: 8rem 0 0 0
+        padding: 8rem 0
     }
+}
+
+#about {
+    padding-bottom: 0
 }
 
 .text-primary {
