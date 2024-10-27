@@ -1047,10 +1047,19 @@ textarea {
     .skills {
         justify-content: center;
     }
+
+    .skills__projects {
+        justify-content: center;
+    }
 }
 
 @media only screen and (max-width: 37.5em) {
     .skills {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .skills__projects {
         display: flex;
         flex-direction: column;
     }
