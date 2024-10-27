@@ -245,10 +245,6 @@ textarea {
     }
 }
 
-#about {
-    padding-bottom: 0
-}
-
 .text-primary {
     font-size: 2.2rem;
     text-align: center;
@@ -438,6 +434,10 @@ textarea {
     font-weight: 700;
     color: #1ABC9C;
     margin: 0 3px
+}
+
+#projects {
+    background: #1d1d1d;
 }
 
 .projects__row {
