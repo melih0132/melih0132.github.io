@@ -1038,6 +1038,11 @@ textarea {
     justify-content: right;
 }
 
+.skills__projects {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 @media only screen and (max-width: 56.25em) {
     .skills {
         justify-content: center;
