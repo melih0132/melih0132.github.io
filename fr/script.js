@@ -1,3 +1,14 @@
+// Détéction langage utilisateur
+const userLanguage = navigator.language || navigator.userLanguage;
+
+if (userLanguage.startsWith('fr')) {
+  window.location.href = '/fr';
+} else if (userLanguage.startsWith('en')) {
+  window.location.href = '/en';
+} else {
+  window.location.href = '/fr';
+}
+
 // Dépliage du hamburger
 const hamMenuBtn = document.querySelector('.header__main-ham-menu-cont')
 const smallMenu = document.querySelector('.header__sm-menu')
