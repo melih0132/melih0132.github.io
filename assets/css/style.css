@@ -290,13 +290,15 @@ textarea {
 
 /* * Home Hero Socials */
 .home-hero__socials {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: #fff;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 0px 15px 15px 0px;
-    padding: 0.5rem
+    padding: 0.5rem;
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -306,19 +308,20 @@ textarea {
 }
 
 .home-hero__social {
+    margin: 2px;
     width: 5rem
 }
 
 .home-hero__social-icon-link {
     width: 100%;
     display: block;
-    padding: 1rem;
+    padding: 1rem 1rem 0.5rem 1rem;
     transition: background .3s;
-    border-radius: 5px
+    border-radius: 10px
 }
 
 .home-hero__social-icon-link:hover {
-    background: rgba(120, 67, 233, 0.2)
+    background: rgba(127, 255, 212, 0.2);
 }
 
 .home-hero__social-icon-link--bd-none {
@@ -326,7 +329,7 @@ textarea {
 }
 
 .home-hero__social-icon {
-    width: 100%
+    width: 100%;
 }
 
 /* * Home Hero Mouse Scroll */
