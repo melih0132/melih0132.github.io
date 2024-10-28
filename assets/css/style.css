@@ -98,8 +98,8 @@ textarea {
 
 /* * Button */
 .btn {
-    background: #1ABC9C;
-    color: whitesmoke;
+    background: #16B364;
+    color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
     display: inline-block;
@@ -109,8 +109,7 @@ textarea {
 }
 
 .btn:hover {
-    background: #16a084c1;
-    color: white;
+    background: #16b365ba;
 }
 
 .btn--bg {
@@ -124,12 +123,12 @@ textarea {
 }
 
 .btn--theme {
-    background: #1ABC9C;
-    color: #fff
+    background: #16B364;
+    color: white
 }
 
 .btn--theme-inv {
-    border: 2px solid #1ABC9C;
+    border: 2px solid #16B364;
     box-shadow: none;
     padding: calc(1.5rem - 2px) calc(5rem - 2px)
 }
@@ -189,7 +188,7 @@ textarea {
 }
 
 .header__logo-container:hover {
-    color: #1ABC9C;
+    color: #16B364;
     transition: color 0.3s ease;
 }
 
@@ -199,7 +198,7 @@ textarea {
     border-radius: 50px;
     overflow: hidden;
     margin-right: 1.5rem;
-    background: #1ABC9C
+    background: #16B364
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -248,7 +247,7 @@ textarea {
 }
 
 .header__link:hover {
-    color: #1ABC9C
+    color: #16B364
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -318,7 +317,7 @@ textarea {
 }
 
 .header__sm-menu-link a:hover {
-    color: #1ABC9C
+    color: #16B364
 }
 
 .header__sm-menu-link:first-child a {
@@ -381,7 +380,7 @@ textarea {
 
 .heading-sec__main--lt::after {
     content: '';
-    background: #1ABC9C !important
+    background: #16B364 !important
 }
 
 .heading-sec__main::after {
@@ -390,7 +389,7 @@ textarea {
     top: calc(100% + 1.5rem);
     height: 5px;
     width: 3rem;
-    background: #1ABC9C;
+    background: #16B364;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 5px
@@ -646,7 +645,7 @@ textarea {
 .about__content-details-para a {
     text-decoration: underline;
     font-weight: 700;
-    color: #1ABC9C;
+    color: #16B364;
     margin: 0 3px
 }
 
@@ -796,7 +795,7 @@ textarea {
 
 .contact__form-container {
     box-shadow: rgba(100, 100, 100, 0.2) 0px 7px 29px 0px;
-    background: white;
+    background: rgba(255, 255, 255, 0.7);
     padding: 3.2rem;
     margin-top: 4.8rem;
     max-width: 64rem;
@@ -909,7 +908,7 @@ textarea {
 }
 
 .main-footer__link:hover {
-    color: #1ABC9C
+    color: #16B364
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -1149,7 +1148,7 @@ textarea {
     }
 
     .home-hero__socials {
-        background: #1d1d1d;
+        background: #1a1a1a;
     }
 
     .home-hero {
