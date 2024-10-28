@@ -1,4 +1,4 @@
-# Portfolio - Melih0132
+# Portfolio - Melih Cetinkaya
 
 Bienvenue sur mon portfolio GitHub ! Ce site présente mes projets, compétences, et expériences en développement. Vous pouvez découvrir mes réalisations et voir le code source de chacun de mes projets.
 
@@ -9,29 +9,29 @@ Bienvenue sur mon portfolio GitHub ! Ce site présente mes projets, compétences
 Voici les principales technologies et outils que j'utilise :
 
 - **Langages :** HTML, CSS, JavaScript, Python, etc.
-- **Frameworks :** React, Vue.js, Node.js, etc.
 - **Outils :** Git, GitHub, VS Code, etc.
 
 ## 📂 Projets
 
 Vous trouverez sur mon portfolio plusieurs projets, avec des détails et des démonstrations pour chaque :
 
-- **[Nom du projet 1](lien-vers-le-projet)** : Description du projet.
-- **[Nom du projet 2](lien-vers-le-projet)** : Description du projet.
-- **[Nom du projet 3](lien-vers-le-projet)** : Description du projet.
+- **[Evit'Shuriken](https://github.com/melih0132/PROJETS/tree/main/EVIT_SHURIKEN)** : Evit'Shuriken est jeu WPF que j'ai créé, il combine des connaissances en C#, mais aussi en XAML. Ce projet a été réalisé durant ma première année en BUT Informatique.
+- **[DortanApp](https://github.com/melih0132/PROJETS/tree/main/DORTANAPP)** : DortanApp est un logiciel réalisé en WPF avec une Base de Données destinée à la réservation d'activités d'une mairie. Le personnel de la mairie choisit une activité ou peut la créer, puis il saisit la date de la réservation...
+- **[Kube](https://github.com/melih0132/PROJETS/tree/main/KUBE)** : Kube est un jeu réalisé via Unity en C#... Cela m'a permis de faire connaissance avec un logiciel destinée à aider les développeurs de jeux.
+- **[JEU FOOT 2D](https://github.com/melih0132/PROJETS/tree/main/JEU_FOOT_2D)** : Un jeu de foot en ligne developpé en HTML, CSS et JavaScript avec le framework Phaser.
 
 ## 🌱 Ce que j'apprends actuellement
 
 Je travaille actuellement sur les technologies suivantes pour continuer d'améliorer mes compétences :
 
-- [Langage/technologie en cours d'apprentissage]
-- [Langage/technologie en cours d'apprentissage]
+- [React/technologie en cours d'apprentissage]
+- [Next JS/technologie en cours d'apprentissage]
 
 ## 🚀 Contact
 
 N'hésitez pas à me contacter pour toute question, collaboration ou opportunité professionnelle !
 
-- **Email :** [tonemail@example.com](mailto:tonemail@example.com)
-- **LinkedIn :** [linkedin.com/in/tonprofil](https://www.linkedin.com/in/tonprofil)
+- **Email :** [melih.cetinkaya.32@gmail.com](melih.cetinkaya.32@gmail.com)
+- **LinkedIn :** [linkedin.com/in/melih-ctk](https://www.linkedin.com/in/melih-ctk/)
 
 Merci de visiter mon portfolio !
