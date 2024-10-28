@@ -319,6 +319,31 @@ textarea {
     }
 }
 
+.arrow {
+    position: relative;
+    top: -70px;
+    width: 20px;
+    height: 20px;
+    border-top: 4px solid black;
+    border-right: 4px solid black;
+    transform: rotate(135deg);
+    animation: bounce-down 1s infinite;
+}
+
+@keyframes bounce-down {
+    0% {
+        transform: translateY(0) rotate(135deg);
+    }
+
+    50% {
+        transform: translateY(10px) rotate(135deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(135deg);
+    }
+}
+
 .home-hero__social {
     width: 5rem
 }
@@ -1098,44 +1123,6 @@ textarea {
 .skills__skill:hover {
     background-color: #454545;
     color: white;
-}
-
-.mouse {
-    width: 25px;
-    height: 40px;
-    border: 2px solid black;
-    border-radius: 60px;
-    position: relative;
-    overflow: hidden
-}
-
-.mouse::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    position: absolute;
-    top: 7px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: black;
-    border-radius: 50%;
-    opacity: 1;
-    animation: wheel 1.3s infinite;
-    -webkit-animation: wheel 1.3s infinite
-}
-
-@keyframes wheel {
-    to {
-        opacity: 0;
-        top: 27px
-    }
-}
-
-@-webkit-keyframes wheel {
-    to {
-        opacity: 0;
-        top: 27px
-    }
 }
 
 @media (prefers-color-scheme: dark) {

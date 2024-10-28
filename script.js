@@ -39,7 +39,7 @@ headerLogoContainer.addEventListener('click', () => {
 
 // Bonjour en différentes langues
 const translations = [
-  "Yo",
+  "Bonjour",
   "Hola",
   "Ciao",
   "Hallo",
