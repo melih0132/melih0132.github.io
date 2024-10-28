@@ -396,6 +396,10 @@ textarea {
 }
 
 @media only screen and (max-width: 37.5em) {
+    .heading-sec__main {
+        font-size: 3rem;
+    }
+
     .heading-sec__main::after {
         top: calc(100% + 1.2rem)
     }
@@ -816,12 +820,6 @@ textarea {
     margin-bottom: 2.4rem;
 }
 
-@media only screen and (max-width: 37.5em) {
-    .contact__form-field {
-        margin-bottom: 1.6rem;
-    }
-}
-
 .contact__form-label {
     color: #666;
     font-size: 1.4rem;
@@ -897,18 +895,6 @@ textarea {
     width: 24%;
     padding: 1.6rem 3.2rem;
     font-size: 1.28rem;
-}
-
-.main-footer__link {
-    display: inline-block;
-    font-size: 1.4rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    transition: color .3s
-}
-
-.main-footer__link:hover {
-    color: #16B364
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -1095,6 +1081,18 @@ textarea {
     }
 }
 
+.main-footer__link {
+    display: inline-block;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color .3s
+}
+
+.main-footer__link:hover {
+    color: #16B364
+}
+
 .main-footer__short-desc {
     margin-top: 2rem;
     color: #eee;
@@ -1153,6 +1151,7 @@ textarea {
 
     .home-hero {
         background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/svg/common-bg.svg);
+        background-size: cover;
     }
 
     #projects {
@@ -1161,6 +1160,7 @@ textarea {
 
     .contact {
         background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/svg/common-bg.svg);
+        background-size: cover;
     }
 
     .contact__form-container {
