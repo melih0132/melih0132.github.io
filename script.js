@@ -67,6 +67,42 @@ function changeLanguage() {
 
 setInterval(changeLanguage, 2000);
 
+// Coulzurs des compétences
+const skillColors = {
+  "HTML": "#E34C26",
+  "CSS": "#1572B6",
+  "JavaScript": "#F7DF1E",
+  "PHP": "#777BB4",
+  "Python": "#306998",
+  "C#": "#9B4F96",
+  "PGSQL": "#336791",
+  "GIT": "#F05032",
+  "GitHub": "#181717",
+  "Visual Studio 2022": "#5C2D91",
+  "Visual Studio Code": "#007ACC",
+  "Unity": "#222C37",
+  "WPF": "#512BD4",
+  "Units Tests": "#55606E",
+  "Phaser": "#00BCB4",
+  "Terminal": "#000000",
+  "Bash": "#4EAA25",
+  "Powershell": "#012456",
+  "Microsoft Teams": "#6264A7",
+  "Trello": "#0079BF",
+  "Figma": "#F24E1E",
+  "WordPress": "#21759B",
+  "Power BI": "#F2C811",
+  "Excel": "#217346"
+};
+
+document.querySelectorAll(".skills__skill").forEach(skill => {
+  const skillName = skill.textContent;
+  const color = skillColors[skillName];
+  if (color) {
+    skill.style.backgroundColor = color;
+  }
+});
+
 // Formulaire
 const form = document.querySelector('.contact__form');
 form.addEventListener('submit', function (event) {

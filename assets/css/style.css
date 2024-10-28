@@ -696,16 +696,14 @@ textarea {
     margin-bottom: 1.5rem;
     margin-right: 1.5rem;
     font-size: 1.6rem;
-    background: rgba(153, 153, 153, 0.2);
     border-radius: 5px;
     font-weight: 600;
-    color: #666;
+    color: white;
     cursor: pointer;
 }
 
 .skills__skill:hover {
-    background-color: #454545;
-    color: white;
+    border: #121212 1px solid;
 }
 
 /* ! Projects */
