@@ -1,3 +1,4 @@
+/* * Reset */
 *,
 *::after,
 *::before {
@@ -14,6 +15,7 @@ html {
     transition: font-size 0.3s ease-in-out;
 }
 
+/* * Scrollbar CSS */
 ::-webkit-scrollbar {
     width: 1.5rem;
     height: 1.5rem;
@@ -31,6 +33,7 @@ html {
     background-color: rgba(85, 85, 85, 0.8);
 }
 
+/* * Font Size */
 @media only screen and (max-width: 75em) {
     html {
         font-size: 59%
@@ -49,6 +52,7 @@ html {
     }
 }
 
+/* * Body */
 body {
     box-sizing: border-box;
     position: relative;
@@ -93,6 +97,7 @@ textarea {
     font-weight: 800;
 }
 
+/* * Dynamic Language */
 #dynamic-lang {
     display: inline-block;
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -106,6 +111,7 @@ textarea {
     -webkit-transform: translateY(20px);
 }
 
+/* * Heading */
 @media only screen and (max-width: 37.5em) {
     .heading-primary {
         font-size: 4.5rem
@@ -192,12 +198,14 @@ textarea {
     letter-spacing: 1px
 }
 
+/* * Container */
 .main-container {
     max-width: 120rem;
     margin: auto;
     width: 92%
 }
 
+/* * Button */
 .btn {
     background: #1ABC9C;
     color: whitesmoke;
@@ -235,6 +243,7 @@ textarea {
     padding: calc(1.5rem - 2px) calc(5rem - 2px)
 }
 
+/* * Section Padding */
 .sec-pad {
     padding: 12rem 0
 }
@@ -245,6 +254,7 @@ textarea {
     }
 }
 
+/* * Text */
 .text-primary {
     font-size: 2.2rem;
     text-align: center;
@@ -263,7 +273,7 @@ textarea {
 }
 
 .home-hero {
-    background: linear-gradient(to right, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5)), url(../../assets/svg/common-bg.svg);
+    background: linear-gradient(to right, rgba(245, 245, 245, 0.3), rgba(245, 245, 245, 0.5)), url(../../assets/svg/common-bg.svg);
     background-position: center;
     height: 100vh;
     min-height: 80rem;
@@ -278,6 +288,7 @@ textarea {
     }
 }
 
+/* * Home Hero Socials */
 .home-hero__socials {
     position: absolute;
     top: 50%;
@@ -285,7 +296,7 @@ textarea {
     background: #fff;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 0px 15px 15px 0px;
-    padding: .5rem
+    padding: 0.5rem
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -294,6 +305,7 @@ textarea {
     }
 }
 
+/* * Home Hero Mouse Scroll */
 .home-hero__mouse-scroll-cont {
     position: absolute;
     bottom: 3%;
@@ -340,6 +352,12 @@ textarea {
     width: 92%
 }
 
+@media only screen and (max-width: 75em) {
+    .home-hero__content {
+        max-width: 80rem;
+    }
+}
+
 @media only screen and (max-width: 37.5em) {
     .home-hero__content {
         padding: 19rem 0 13rem 0;
@@ -358,10 +376,6 @@ textarea {
     margin-top: 5rem;
     text-align: center
 }
-
-/* .about {
-    background: #fafafa
-} */
 
 .about__content {
     display: grid;
