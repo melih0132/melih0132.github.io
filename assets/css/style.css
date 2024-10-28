@@ -1038,8 +1038,8 @@ textarea {
 
 /* ! Footer */
 .main-footer {
-    background: black;
-    color: white
+    background: rgb(213, 213, 213);
+    color: black
 }
 
 .main-footer__upper {
@@ -1056,7 +1056,8 @@ textarea {
 
 @media only screen and (max-width: 37.5em) {
     .main-footer__upper {
-        display: block
+        flex-direction: column;
+        gap: 3rem;
     }
 }
 
@@ -1096,7 +1097,7 @@ textarea {
 
 .main-footer__short-desc {
     margin-top: 2rem;
-    color: #eee;
+    color: black;
     font-size: 1.5rem;
     line-height: 1.7
 }
@@ -1117,7 +1118,7 @@ textarea {
 .main-footer__lower {
     padding: 4rem 0;
     border-top: 1px solid #444;
-    color: #eee;
+    color: black;
     font-size: 1.2rem;
     text-align: left;
     text-align: center
@@ -1133,6 +1134,16 @@ textarea {
     .main-footer__lower {
         padding: 3.5rem 0
     }
+}
+
+.logo#Linkedin {
+    content: url('/assets/png/linkedin-ico-dark.png');
+}
+.logo#Github {
+    content: url('/assets/png/github-ico-dark.png');
+}
+.logo#Instagram {
+    content: url('/assets/png/insta-ico-dark.png');
 }
 
 /* ! Dark Mode */
@@ -1179,7 +1190,27 @@ textarea {
     }
 
     .main-footer {
-        background: rgb(245, 245, 247);
-        color: black
+        background: black;
+        color: white
+    }
+
+    .main-footer__short-desc {
+        color: #eee
+    }
+
+    .main-footer__lower {
+        color: #eee
+    }
+
+    .logo#Linkedin {
+        content: url('/assets/png/linkedin-ico.png');
+        max-width: 30px;
+    }
+    .logo#Github {
+        content: url('/assets/png/github-ico.png');
+    }
+    .logo#Instagram {
+        content: url('/assets/png/insta-ico.png');
+        max-width: 30px;
     }
 }

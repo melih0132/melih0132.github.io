@@ -55,19 +55,19 @@ let currentIndex = 0;
 
 function changeLanguage() {
   const langElement = document.getElementById('dynamic-lang');
-  langElement.classList.add('slide-out'); // Changer fade-out en slide-out
+  langElement.classList.add('slide-out');
 
   setTimeout(() => {
     langElement.textContent = translations[currentIndex];
     currentIndex = (currentIndex + 1) % translations.length;
 
-    langElement.classList.remove('slide-out'); // Enlever slide-out
+    langElement.classList.remove('slide-out');
   }, 500);
 }
 
 setInterval(changeLanguage, 2000);
 
-// Serveur php
+// Formulaire
 const form = document.querySelector('.contact__form');
 form.addEventListener('submit', function (event) {
   event.preventDefault();
