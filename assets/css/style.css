@@ -89,14 +89,14 @@ textarea {
     resize: none
 }
 
-/* * Container */
+/* * Containers */
 .main-container {
     max-width: 120rem;
     margin: auto;
     width: 92%
 }
 
-/* * Button */
+/* * Buttons */
 .btn {
     background: #16B364;
     color: white;
