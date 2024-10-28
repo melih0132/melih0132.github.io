@@ -703,7 +703,8 @@ textarea {
 }
 
 .skills__skill:hover {
-    border: #121212 1px solid;
+    box-shadow: rgba(50, 50, 50, 0.5) 0px 7px 29px 0px;
+    transition: color 0.3s ease;
 }
 
 /* ! Projects */
@@ -1169,6 +1170,10 @@ textarea {
         background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/svg/common-bg.svg);
         background-size: cover;
         background-position: center;
+    }
+
+    .skills__skill:hover {
+        box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
     }
 
     #projects {
