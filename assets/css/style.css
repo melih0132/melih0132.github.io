@@ -1152,12 +1152,14 @@ textarea {
     .home-hero {
         background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/svg/common-bg.svg);
         background-size: cover;
+        background-position: center;
     }
 
     #projects {
         background: #1d1d1d;
     }
 
+    /* * Background pas centré */
     .contact {
         background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/svg/common-bg.svg);
         background-size: cover;
