@@ -711,6 +711,7 @@ textarea {
 }
 
 .skills__skill {
+    background: rgba(0, 0, 0, 0.2);
     padding: 1rem 2rem;
     margin-bottom: 1.5rem;
     margin-right: 1.5rem;
@@ -962,6 +963,10 @@ textarea {
     text-align: center
 }
 
+.project-details {
+    background-color: #f0f0f0;
+}
+
 .project-details__content {
     padding: 8rem 0;
     max-width: 90rem;
@@ -1198,6 +1203,10 @@ textarea {
     #projects {
         background: #1d1d1d;
     }
+
+    .project-details {
+        background-color:rgba(0, 0, 0, 0.1)
+    }    
 
     /* * Background pas centré */
     .contact {
