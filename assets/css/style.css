@@ -764,9 +764,10 @@ textarea {
 
 .projects__row-img {
     width: 100%;
+    height: auto;
+    max-height: 400px;
     display: block;
-    -o-object-fit: cover;
-    object-fit: cover
+    object-fit: contain;
 }
 
 .projects__row-content {
