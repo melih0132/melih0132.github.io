@@ -1,4 +1,4 @@
-# Portfolio - Melih Cetinkaya
+# Portfolio - Melih CETINKAYA
 
 Bienvenue sur mon portfolio GitHub ! Ce site présente mes projets, compétences, et expériences en développement. Vous pouvez découvrir mes réalisations et voir le code source de chacun de mes projets.
 
@@ -8,7 +8,7 @@ Bienvenue sur mon portfolio GitHub ! Ce site présente mes projets, compétences
 
 Voici les principales technologies et outils que j'utilise :
 
-- **Langages :** HTML, CSS, JavaScript, Python, etc.
+- **Langages :** C#, HTML, CSS, JavaScript, etc.
 - **Outils :** Git, GitHub, VS Code, etc.
 
 ## 📂 Projets
@@ -31,7 +31,7 @@ Je travaille actuellement sur les technologies suivantes pour continuer d'améli
 
 N'hésitez pas à me contacter pour toute question, collaboration ou opportunité professionnelle !
 
-- **Email :** [melih.cetinkaya.32@gmail.com](melih.cetinkaya.32@gmail.com)
+- **Email :** melih.cetinkaya.32@gmail.com
 - **LinkedIn :** [linkedin.com/in/melih-ctk](https://www.linkedin.com/in/melih-ctk/)
 
 Merci de visiter mon portfolio !
