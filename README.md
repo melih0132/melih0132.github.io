@@ -31,7 +31,7 @@ Je travaille actuellement sur les technologies suivantes pour continuer d'améli
 
 N'hésitez pas à me contacter pour toute question, collaboration ou opportunité professionnelle !
 
-- **Email :** [melih.cetinkaya.32@gmail.com](melih.cetinkaya.32@gmail.com)
+- **Email :** melih.cetinkaya.32@gmail.com
 - **LinkedIn :** [linkedin.com/in/melih-ctk](https://www.linkedin.com/in/melih-ctk/)
 
 Merci de visiter mon portfolio !
