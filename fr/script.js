@@ -126,7 +126,7 @@ function showMessage(message, type) {
   const messageElement = document.createElement('div');
   messageElement.className = `contact__message ${type}`;
   messageElement.textContent = message;
-  
+
   document.body.appendChild(messageElement);
 
   setTimeout(() => {
