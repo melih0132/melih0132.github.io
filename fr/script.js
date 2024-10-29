@@ -105,18 +105,31 @@ document.querySelectorAll(".skills__skill").forEach(skill => {
 const form = document.querySelector('.contact__form');
 form.addEventListener('submit', function (event) {
   event.preventDefault();
+
   fetch(form.action, {
     method: form.method,
     body: new FormData(form),
     headers: { 'Accept': 'application/json' }
   }).then(response => {
     if (response.ok) {
-      alert("Merci ! Votre message a été envoyé.");
+      showMessage("Merci ! Votre message a été envoyé.", "success");
       form.reset();
     } else {
-      alert("Une erreur est survenue. Veuillez réessayer.");
+      showMessage("Une erreur est survenue. Veuillez réessayer.", "error");
     }
   }).catch(error => {
-    alert("Une erreur est survenue. Veuillez réessayer.");
+    showMessage("Une erreur est survenue. Veuillez réessayer.", "error");
   });
 });
+
+function showMessage(message, type) {
+  const messageElement = document.createElement('div');
+  messageElement.className = `contact__message ${type}`;
+  messageElement.textContent = message;
+  
+  document.body.appendChild(messageElement);
+
+  setTimeout(() => {
+    messageElement.remove();
+  }, 3000);
+}

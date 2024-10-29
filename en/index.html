@@ -235,22 +235,36 @@
       <div class="contact__form-container">
         <form action="https://formspree.io/f/xzzbdgkb" method="POST" class="contact__form">
           <div class="contact__form-field">
-            <label class="contact__form-label" for="name">Name</label>
-            <input required placeholder="Enter your name" type="text" class="contact__form-input" name="name"
+            <label class="contact__form-label" for="name">What's your name?</label>
+            <input required placeholder="E.g., Will Smith" type="text" class="contact__form-input" name="name"
               id="name" />
           </div>
+
           <div class="contact__form-field">
-            <label class="contact__form-label" for="email">Email</label>
-            <input required placeholder="Enter your email" type="email" class="contact__form-input" name="email"
+            <label class="contact__form-label" for="email">Your Email</label>
+            <input required placeholder="name@example.com" type="email" class="contact__form-input" name="email"
               id="email" />
           </div>
+
           <div class="contact__form-field">
-            <label class="contact__form-label" for="message">Message</label>
-            <textarea required cols="30" rows="10" class="contact__form-input" placeholder="Your message" name="message"
-              id="message"></textarea>
+            <label class="contact__form-label" for="reason">How can I help you?</label>
+            <select required name="reason" id="reason" class="contact__form-select">
+              <option value="" disabled selected>Select an option</option>
+              <option value="project_inquiry">Project Inquiry</option>
+              <option value="collaboration">Collaboration Opportunity</option>
+              <option value="technical_assistance">Technical Assistance</option>
+              <option value="other">Other</option>
+            </select>
           </div>
+
+          <div class="contact__form-field">
+            <label class="contact__form-label" for="message">Tell me more</label>
+            <textarea required cols="30" rows="8" class="contact__form-input"
+              placeholder="Describe your idea or need in detail..." name="message" id="message"></textarea>
+          </div>
+
           <button type="submit" class="btn btn--theme contact__btn">
-            Send
+            <span>Send</span>
           </button>
         </form>
       </div>
