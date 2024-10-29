@@ -277,10 +277,10 @@ textarea {
 }
 
 .header__sm-menu {
-    background: #fff;
     position: absolute;
     width: 100%;
     top: 100%;
+    background: white;
     visibility: hidden;
     opacity: 0;
     transition: all .3s;
@@ -1184,6 +1184,20 @@ textarea {
 
     .header {
         background: #121212;
+    }
+
+    .header__sm-menu {
+        background: #121212;
+        color: white;
+    }
+
+    .header__sm-menu-link a {
+        color: white;
+        border-bottom: 1px solid #666;
+    }
+    
+    .header__sm-menu-link:first-child a {
+        border-top: 1px solid white
     }
 
     .home-hero__socials {
