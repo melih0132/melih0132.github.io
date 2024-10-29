@@ -132,4 +132,4 @@ function showMessage(message, type) {
   setTimeout(() => {
     messageElement.remove();
   }, 3000);
-}
+};
