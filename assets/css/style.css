@@ -225,6 +225,7 @@ textarea {
     letter-spacing: 1px
 }
 
+/* * Header Links */
 .header__links {
     display: flex
 }
