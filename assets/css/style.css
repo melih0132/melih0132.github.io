@@ -527,7 +527,7 @@ textarea {
     border-top: 4px solid black;
     border-right: 4px solid black;
     transform: rotate(135deg);
-    animation: bounce-down 1s infinite;
+    animation: bounce-down 2s infinite;
 }
 
 @keyframes bounce-down {
