@@ -742,22 +742,17 @@ textarea {
     margin-bottom: 11rem
 }
 
-@media only screen and (max-width: 56.25em) {
+@media only screen and (max-width: 62.5em) {
     .projects__row {
-        grid-template-columns: 1fr;
-        grid-gap: 2rem;
-        margin-bottom: 8rem
+        grid-gap: 1rem;
     }
 }
 
 @media only screen and (max-width: 56.25em) {
     .projects__row {
-        text-align: center
+        text-align: center;
+        justify-content: center;
     }
-}
-
-.project__row-title {
-    text-align: left;
 }
 
 .projects__row-content-main-title {
@@ -769,6 +764,19 @@ textarea {
 .project__row-desc {
     display: flex;
     gap: 5rem;
+}
+
+@media only screen and (max-width: 62.5em) {
+    .project__row-desc {
+        flex-direction: row-reverse;
+        gap: 2rem;
+    }
+}
+
+@media only screen and (max-width: 56.25em) {
+    .project__row-desc {
+        flex-direction: column
+    }
 }
 
 .projects__row:last-child {
@@ -788,6 +796,19 @@ textarea {
     border-radius: 15px;
 }
 
+@media only screen and (max-width: 62.5em) {
+    .projects__row-img {
+        width: 100%;
+        max-height: 300px;
+    }
+}
+
+@media only screen and (max-width: 56.25em) {   
+    .projects__row-img {
+        width: 100%;
+    }
+}
+
 .projects__row-content {
     padding: 2rem 0;
     display: flex;
@@ -796,9 +817,10 @@ textarea {
     justify-content: center
 }
 
-@media only screen and (max-width: 56.25em) {
+@media only screen and (max-width: 56.25em) {   
     .projects__row-content {
-        align-items: center
+        place-items: center;
+        padding: 0 0 2rem 0;
     }
 }
 
