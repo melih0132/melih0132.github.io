@@ -68,7 +68,6 @@ function changeLanguage() {
 setInterval(changeLanguage, 2000);
 
 // Coulzurs des compétences
-// Couleurs des compétences
 const skillColors = {
   "HTML": "#E34C26",
   "CSS": "#1572B6",
