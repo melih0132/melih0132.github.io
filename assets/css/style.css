@@ -803,7 +803,7 @@ textarea {
     }
 }
 
-@media only screen and (max-width: 56.25em) {   
+@media only screen and (max-width: 56.25em) {
     .projects__row-img {
         width: 100%;
     }
@@ -817,7 +817,7 @@ textarea {
     justify-content: center
 }
 
-@media only screen and (max-width: 56.25em) {   
+@media only screen and (max-width: 56.25em) {
     .projects__row-content {
         place-items: center;
         padding: 0 0 2rem 0;
@@ -1271,6 +1271,27 @@ textarea {
     max-width: 25px;
 }
 
+.switch-language {
+    margin-top: 0.5rem;
+}
+
+#selectLang {
+    background-color: transparent;
+    color: black;
+}
+
+#selectLang {
+    cursor: pointer;
+    border: none;
+    padding: 5px 10px;
+    font-weight: 600;
+}
+
+.selectLang-option {
+    cursor: pointer;
+    outline: none;
+}
+
 /* ! Dark Mode */
 @media (prefers-color-scheme: dark) {
     body {
@@ -1366,5 +1387,13 @@ textarea {
     .logo#Instagram {
         content: url('/assets/png/insta-ico.png');
         max-width: 25px;
+    }
+
+    #selectLang {
+        color: white;
+    }
+
+    .selectLang-option {
+        color: black;
     }
 }
