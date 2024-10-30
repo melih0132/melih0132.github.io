@@ -137,3 +137,14 @@ function showMessage(message, type) {
     messageElement.remove();
   }, 3000);
 }
+
+// Changement de language
+document.getElementById('selectLang').addEventListener('change', function() {
+  const selectedLang = this.value;
+  
+  if (selectedLang === 'fr') {
+    location.href = '/fr/#home';
+  } else if (selectedLang === 'en') {
+    location.href = '/en/#home';
+  }
+});
