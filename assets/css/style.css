@@ -735,9 +735,10 @@ textarea {
 
 /* * Projects Row */
 .projects__row {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     grid-template-columns: 1.5fr 1fr;
-    grid-gap: 5rem;
+    gap: 3rem;
     margin-bottom: 11rem
 }
 
@@ -755,6 +756,21 @@ textarea {
     }
 }
 
+.project__row-title {
+    text-align: left;
+}
+
+.projects__row-content-main-title {
+    font-weight: 700;
+    font-size: 3.4rem;
+    margin-bottom: 2rem
+}
+
+.project__row-desc {
+    display: flex;
+    gap: 5rem;
+}
+
 .projects__row:last-child {
     margin-bottom: 0
 }
@@ -769,14 +785,15 @@ textarea {
     max-height: 400px;
     display: block;
     object-fit: contain;
+    border-radius: 15px;
 }
 
 .projects__row-content {
     padding: 2rem 0;
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    align-items: flex-start
+    align-items: flex-start;
+    justify-content: center
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -786,7 +803,7 @@ textarea {
 }
 
 .projects__row-content-title {
-    font-weight: 700;
+    font-weight: 400;
     font-size: 2.8rem;
     margin-bottom: 2rem
 }
@@ -798,6 +815,7 @@ textarea {
 }
 
 .projects__row-content-desc {
+    justify-self: left;
     font-size: 1.8rem;
     color: #666;
     max-width: 60rem;
