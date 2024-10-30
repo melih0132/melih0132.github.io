@@ -68,6 +68,7 @@ function changeLanguage() {
 setInterval(changeLanguage, 2000);
 
 // Coulzurs des compétences
+// Couleurs des compétences
 const skillColors = {
   "HTML": "#E34C26",
   "CSS": "#1572B6",
@@ -76,11 +77,12 @@ const skillColors = {
   "Python": "#306998",
   "C#": "#9B4F96",
   "PGSQL": "#336791",
-  "GIT": "#F05032",
+  "Git": "#F05032",
   "GitHub": "#181717",
   "Unity": "#222C37",
   "WPF": "#512BD4",
   "Units Tests": "#55606E",
+  "UML": "#007ACC",
   "Phaser": "#00BCB4",
   "Terminal": "#111111",
   "Bash": "#4EAA25",
@@ -90,7 +92,10 @@ const skillColors = {
   "Figma": "#F24E1E",
   "WordPress": "#21759B",
   "Power BI": "#F2C811",
-  "Excel": "#217346"
+  "Excel": "#217346",
+  "Nodemon": "#76D04B",
+  "Express": "#4B8BBE",
+  "Socket.io": "#24c29f"
 };
 
 document.querySelectorAll(".skills__skill").forEach(skill => {

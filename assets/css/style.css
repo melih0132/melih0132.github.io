@@ -720,7 +720,7 @@ textarea {
     border-radius: 5px;
     font-weight: 600;
     color: white;
-    cursor: cell
+    cursor: pointer
 }
 
 .skills__skill:hover {
