@@ -36,11 +36,11 @@ html {
 /* ! Body */
 body {
     box-sizing: border-box;
+    letter-spacing: 0.5px;
     position: relative;
-    line-height: 1.5;
     overflow-x: hidden;
     overflow-y: scroll;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Oswald", sans-serif;
     transition: all 0.3s ease-in-out;
 }
 
