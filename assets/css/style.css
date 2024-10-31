@@ -97,7 +97,7 @@ textarea {
 
 /* * Buttons */
 .btn {
-    background: #16B364;
+    background: #16b365ba;
     color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -107,13 +107,16 @@ textarea {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
-.btn:hover {
-    background: #16b365ba;
-}
-
 .btn--bg {
     padding: 1.5rem 8rem;
-    font-size: 2rem
+    font-size: 2rem;
+    transition: transform  0.5s ease;
+}
+
+.btn--bg:hover {
+    padding: 1.5rem 8rem;
+    font-size: 2rem;
+    transform: scale(1.02);
 }
 
 .btn--med {
@@ -121,12 +124,13 @@ textarea {
     font-size: 1.6rem
 }
 
-.btn--theme {
+.btn--theme:hover {
     background: #16B364;
-    color: white
 }
 
 .btn--theme-inv {
+    background-color: #66fcf1;
+    color: #181a1b;
     border: 2px solid #16B364;
     box-shadow: none;
     padding: calc(1.5rem - 2px) calc(5rem - 2px)
