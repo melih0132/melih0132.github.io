@@ -1363,6 +1363,12 @@ textarea {
     cursor: pointer;
 }
 
+@media only screen and (max-width: 37.5em) {
+    .scrollButton {
+        display: none;
+    }
+}
+
 /* ! Dark Mode */
 @media (prefers-color-scheme: dark) {
     body {
