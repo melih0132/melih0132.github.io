@@ -18,7 +18,6 @@ Vous trouverez sur mon portfolio plusieurs projets, avec des détails et des dé
 - **[Evit'Shuriken](https://github.com/melih0132/PROJETS/tree/main/EVIT_SHURIKEN)** : Evit'Shuriken est jeu WPF que j'ai créé, il combine des connaissances en C#, mais aussi en XAML. Ce projet a été réalisé durant ma première année en BUT Informatique.
 - **[DortanApp](https://github.com/melih0132/PROJETS/tree/main/DORTANAPP)** : DortanApp est un logiciel réalisé en WPF avec une Base de Données destinée à la réservation d'activités d'une mairie. Le personnel de la mairie choisit une activité ou peut la créer, puis il saisit la date de la réservation...
 - **[Kube](https://github.com/melih0132/PROJETS/tree/main/KUBE)** : Kube est un jeu réalisé via Unity en C#... Cela m'a permis de faire connaissance avec un logiciel destinée à aider les développeurs de jeux.
-- **[JEU FOOT 2D](https://github.com/melih0132/PROJETS/tree/main/JEU_FOOT_2D)** : Un jeu de foot en ligne developpé en HTML, CSS et JavaScript avec le framework Phaser.
 
 ## 🌱 Ce que j'apprends actuellement
 
