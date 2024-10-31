@@ -110,7 +110,7 @@ textarea {
 .btn--bg {
     padding: 1.5rem 8rem;
     font-size: 2rem;
-    transition: transform  0.5s ease;
+    transition: transform 0.5s ease;
 }
 
 .btn--bg:hover {
@@ -759,9 +759,7 @@ textarea {
 }
 
 @media only screen and (max-width: 56.25em) {
-
-    .skills,
-    .skills__projects {
+    .skills {
         justify-content: center;
     }
 
@@ -1442,7 +1440,7 @@ textarea {
     #projects {
         background: #1d1d1d;
     }
-    
+
     .project-cs-hero {
         background: #1d1d1d
     }
