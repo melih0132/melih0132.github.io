@@ -100,7 +100,10 @@ const skillColors = {
   "Socket.io": "#24c29f",
   "Node.js": "#3C873A",
   "VS Code": "#007ACC",
-  "Linux": "#FCC624"
+  "Linux": "#FCC624",
+  "XAML": "#0C54C2",
+  "SQL": "#CC2927",
+  "3D Modeling": "#FF5733"
 };
 
 document.querySelectorAll(".skills__skill").forEach(skill => {

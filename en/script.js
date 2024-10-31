@@ -90,7 +90,7 @@ const skillColors = {
   "Powershell": "#012456",
   "Microsoft Teams": "#6264A7",
   "Trello": "#0079BF",
-  "Figma": "#F24E1E",
+  "Figma": "#42498c",
   "Adobe Illustrator": "#FF9A00",
   "WordPress": "#21759B",
   "Power BI": "#F2C811",
@@ -100,7 +100,10 @@ const skillColors = {
   "Socket.io": "#24c29f",
   "Node.js": "#3C873A",
   "VS Code": "#007ACC",
-  "Linux": "#FCC624"
+  "Linux": "#ffc200",
+  "XAML": "#0C54C2",
+  "SQL": "#CC2927",
+  "3D Modeling": "#FF5733"
 };
 
 document.querySelectorAll(".skills__skill").forEach(skill => {
