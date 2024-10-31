@@ -76,11 +76,13 @@ const skillColors = {
   "Python": "#306998",
   "C#": "#9B4F96",
   "PGSQL": "#336791",
+  "PostgreSQL": "#336791",
+  "MySQL": "#00758F",
   "Git": "#F05032",
   "GitHub": "#181717",
   "Unity": "#222C37",
   "WPF": "#512BD4",
-  "Units Tests": "#55606E",
+  "Unit Tests": "#55606E",
   "UML": "#007ACC",
   "Phaser": "#00BCB4",
   "Terminal": "#111111",
@@ -89,19 +91,24 @@ const skillColors = {
   "Microsoft Teams": "#6264A7",
   "Trello": "#0079BF",
   "Figma": "#F24E1E",
+  "Adobe Illustrator": "#FF9A00",
   "WordPress": "#21759B",
   "Power BI": "#F2C811",
   "Excel": "#217346",
   "Nodemon": "#76D04B",
   "Express": "#4B8BBE",
-  "Socket.io": "#24c29f"
+  "Socket.io": "#24c29f",
+  "Node.js": "#3C873A",
+  "VS Code": "#007ACC",
+  "Linux": "#FCC624"
 };
 
 document.querySelectorAll(".skills__skill").forEach(skill => {
-  const skillName = skill.textContent;
+  const skillName = skill.textContent.trim();
   const color = skillColors[skillName];
   if (color) {
     skill.style.backgroundColor = color;
+    skill.style.color = '#ffffff';
   }
 });
 
