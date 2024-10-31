@@ -149,12 +149,55 @@ function showMessage(message, type) {
 }
 
 // Changement de language
-document.getElementById('selectLang').addEventListener('change', function() {
+document.getElementById('selectLang').addEventListener('change', function () {
   const selectedLang = this.value;
-  
+
   if (selectedLang === 'fr') {
     location.href = '/fr/#home';
   } else if (selectedLang === 'en') {
     location.href = '/en/#home';
   }
 });
+
+// Scroll Button
+const scrollButton = document.getElementById('scrollButton');
+let scrollInterval;
+
+function updateButtonText() {
+  if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+    scrollButton.textContent = 'Scroll Up';
+  } else {
+    scrollButton.textContent = 'Scroll Down';
+  }
+}
+
+function slowScrollTo(position) {
+  const step = 10;
+  const delay = 15;
+
+  clearInterval(scrollInterval);
+
+  scrollInterval = setInterval(() => {
+    const currentPosition = window.scrollY;
+    const distance = position - currentPosition;
+
+    if (Math.abs(distance) <= step) {
+      window.scrollTo(0, position);
+      clearInterval(scrollInterval);
+    } else {
+      window.scrollBy(0, distance > 0 ? step : -step);
+    }
+  }, delay);
+}
+
+scrollButton.addEventListener('click', () => {
+  if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+    slowScrollTo(0);
+  } else {
+    slowScrollTo(document.body.scrollHeight);
+  }
+});
+
+
+window.addEventListener('scroll', updateButtonText);
+updateButtonText();
