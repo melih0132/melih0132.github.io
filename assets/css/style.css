@@ -1350,6 +1350,19 @@ textarea {
     outline: none;
 }
 
+/* scroll Button */
+#scrollButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 /* ! Dark Mode */
 @media (prefers-color-scheme: dark) {
     body {
@@ -1401,9 +1414,15 @@ textarea {
     #projects {
         background: #1d1d1d;
     }
+    
+    .project-cs-hero {
+        background: #1d1d1d
+    }
 
     .project-details {
-        background-color: #181a1b
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/svg/common-bg.svg);
+        background-size: cover;
+        background-position: center;
     }
 
     /* * Background pas centré */
@@ -1418,10 +1437,6 @@ textarea {
 
     .contact__form-label {
         color: #dbdbdb;
-    }
-
-    .project-cs-hero {
-        background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/svg/common-bg.svg);
     }
 
     .main-footer {
