@@ -1083,7 +1083,7 @@ textarea {
 }
 
 .project-cs-hero__content {
-    padding: 25rem 0 17rem 0;
+    padding: 25rem 0;
     max-width: 90rem;
     width: 92%;
     margin: auto
@@ -1115,7 +1115,7 @@ textarea {
 .project-details__content {
     padding: 8rem 0;
     max-width: 90rem;
-    margin: auto
+    margin: auto;
 }
 
 .project-details__content-title {
@@ -1132,11 +1132,24 @@ textarea {
 
 .project-details__showcase-img-cont {
     width: 100%;
-    margin-bottom: 6rem
+    margin-bottom: 6rem;
+}
+
+.project-details__content-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.project-details__main-content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5rem;
 }
 
 .project-details__showcase-img {
-    width: 100%
+    width: 100%;
 }
 
 .project-details__content-main {
