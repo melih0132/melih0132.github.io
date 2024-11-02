@@ -1069,7 +1069,7 @@ textarea {
 
 /* ! Project CS */
 .project-cs-hero {
-    background: linear-gradient(to right, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.3)), url(../../assets/svg/common-bg.svg);
+    background: url(../../assets/svg/common-bg.svg);
     background-size: cover;
     background-position: center;
     position: relative
