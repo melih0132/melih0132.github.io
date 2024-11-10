@@ -792,6 +792,10 @@ textarea {
 }
 
 /* * Projects Row */
+#projects {
+    background: #c4c4c4
+}
+
 .projects__row {
     display: flex;
     flex-direction: column;
@@ -891,7 +895,7 @@ textarea {
 .projects__row-content-desc {
     justify-self: left;
     font-size: 1.8rem;
-    color: #666;
+    color: #444;
     max-width: 60rem;
     line-height: 1.7;
     margin-bottom: 3rem
