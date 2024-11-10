@@ -136,6 +136,10 @@ textarea {
     padding: calc(1.5rem - 2px) calc(5rem - 2px)
 }
 
+.btn--theme-inv:hover {
+    background: #fff
+}
+
 /* * Section Padding */
 .sec-pad {
     padding: 12rem 0
@@ -725,8 +729,7 @@ textarea {
 
 @media only screen and (max-width: 56.25em) {
     .skills__skill-row {
-        display: flex;
-        justify-content: center;
+        justify-content: start;
         gap: 1.5rem;
     }
 }
@@ -759,17 +762,10 @@ textarea {
 }
 
 @media only screen and (max-width: 56.25em) {
-
-    .skills,
-    .skills__projects {
-        justify-content: center;
-    }
-
     .skills__category {
         flex-basis: 100%;
-        text-align: center;
         max-width: 60rem;
-        align-items: center;
+        align-items: start;
     }
 }
 
@@ -838,6 +834,11 @@ textarea {
 }
 
 @media only screen and (max-width: 56.25em) {
+    .projects__row-content-main-title {
+        margin-bottom: 2rem;
+        border-left: none;
+    }
+
     .project__row-desc {
         flex-direction: column
     }
@@ -1114,8 +1115,10 @@ textarea {
 }
 
 .project-details__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 8rem 0;
-    max-width: 90rem;
     margin: auto;
 }
 
@@ -1132,14 +1135,12 @@ textarea {
 }
 
 .project-details__showcase-img-cont {
+    max-width: 70rem;
     width: 100%;
     margin-bottom: 6rem;
 }
 
 .project-details__content-img {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     gap: 4rem;
 }
 
