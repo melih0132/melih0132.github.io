@@ -37,34 +37,6 @@ headerLogoContainer.addEventListener('click', () => {
   location.href = '/fr/#home';
 });
 
-// Scroll to top
-const scrollButton = document.getElementById('scrollButton');
-
-function updateButtonText() {
-    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-        scrollButton.textContent = 'Dérouler vers le haut';
-    } else {
-        scrollButton.textContent = 'Dérouler vers le bas';
-    }
-}
-
-scrollButton.addEventListener('click', () => {
-    if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    } else {
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-        });
-    }
-});
-
-window.addEventListener('scroll', updateButtonText);
-updateButtonText();
-
 // Coulzurs des compétences
 const skillColors = {
     "HTML": "#E34C26",
