@@ -1138,6 +1138,7 @@ textarea {
 }
 
 .project-details__showcase-img {
+    border-radius: 5px;
     width: 100%;
 }
 
