@@ -42,7 +42,7 @@ const scrollButton = document.getElementById('scrollButton');
 
 function updateButtonText() {
     if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-        scrollButton.textContent = 'Monter vers le haut';
+        scrollButton.textContent = 'Dérouler vers le haut';
     } else {
         scrollButton.textContent = 'Dérouler vers le bas';
     }
