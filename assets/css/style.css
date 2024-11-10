@@ -800,12 +800,6 @@ textarea {
     margin-bottom: 11rem
 }
 
-@media only screen and (max-width: 62.5em) {
-    .projects__row {
-        grid-gap: 1rem;
-    }
-}
-
 @media only screen and (max-width: 56.25em) {
     .projects__row {
         text-align: center;
@@ -824,13 +818,6 @@ textarea {
 .project__row-desc {
     display: flex;
     gap: 5rem;
-}
-
-@media only screen and (max-width: 62.5em) {
-    .project__row-desc {
-        flex-direction: row-reverse;
-        gap: 2rem;
-    }
 }
 
 @media only screen and (max-width: 56.25em) {
