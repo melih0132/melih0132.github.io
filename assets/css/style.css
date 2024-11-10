@@ -589,6 +589,10 @@ textarea {
 }
 
 /* ! About */
+#about {
+    background: #66fcf1;
+}
+
 .main-container-about {
     display: grid;
     max-width: 120rem;
@@ -910,8 +914,7 @@ textarea {
 /* ! Contact */
 .contact {
     background: linear-gradient(to right, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5)), url(../../assets/svg/common-bg.svg);
-    background-size: cover;
-    background-position: center
+    background-size: cover
 }
 
 .contact__form-container {
@@ -1416,6 +1419,10 @@ textarea {
         background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/svg/common-bg.svg);
         background-size: cover;
         background-position: center;
+    }
+
+    #about {
+        background: #181a1b;
     }
 
     .skills__category-title {
