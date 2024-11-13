@@ -953,18 +953,6 @@ textarea {
     transform-origin: center;
 }
 
-.projects__row-content-desc-bold-csharp {
-    color: #9B4F96
-}
-
-.projects__row-content-desc-bold-wpf {
-    color: #512BD4;
-}
-
-.projects__row-content-desc-bold-unity {
-    color: #222C37;
-}
-
 /* ! Contact */
 .contact {
     background: linear-gradient(to right, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5)), url(../../assets/svg/common-bg.svg);

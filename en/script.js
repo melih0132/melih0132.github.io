@@ -260,6 +260,31 @@ class SkillsManager {
   }
 }
 
+class Projects {
+  constructor() {
+    this.paragraphs = document.querySelectorAll('.projects__row-content-desc');
+    this.init();
+  }
+
+  init() {
+    this.applySkillColors();
+  }
+
+  applySkillColors() {
+    this.paragraphs.forEach(paragraph => {
+      const spans = paragraph.querySelectorAll('span');
+
+      spans.forEach(span => {
+        const skillText = span.textContent.trim();
+
+        if (CONFIG.skillColors.hasOwnProperty(skillText)) {
+          span.style.color = CONFIG.skillColors[skillText];
+        }
+      });
+    });
+  }
+}
+
 class ContactForm {
   constructor() {
     this.form = document.querySelector('.contact__form');
@@ -371,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new HeaderNav();
   new MultilingualGreeting();
   new SkillsManager();
+  new Projects();
   new ContactForm();
   new LanguageSelector();
 });

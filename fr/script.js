@@ -54,7 +54,7 @@ class HamburgerMenu {
     this.menuIcon = document.querySelector('.header__main-ham-menu');
     this.closeIcon = document.querySelector('.header__main-ham-menu-close');
     this.menuLinks = document.querySelectorAll('.header__sm-menu-link');
-    
+
     this.init();
   }
 
@@ -82,7 +82,7 @@ class Header {
   constructor() {
     this.header = document.querySelector('.header');
     this.logoContainer = document.querySelector('.header__logo-container');
-    
+
     this.init();
   }
 
@@ -109,7 +109,7 @@ class HeaderNav {
   constructor() {
     this.navLinks = document.querySelectorAll('.header__link');
     this.sections = document.querySelectorAll('section[id]');
-    
+
     this.init();
   }
 
@@ -117,7 +117,7 @@ class HeaderNav {
     window.addEventListener('scroll', () => this.updateActiveSection());
     // Mise à jour initiale
     this.updateActiveSection();
-    
+
     // Ajouter les événements de clic pour un défilement fluide
     this.navLinks.forEach(link => {
       link.addEventListener('click', (e) => this.handleNavClick(e));
@@ -126,21 +126,21 @@ class HeaderNav {
 
   updateActiveSection() {
     const scrollY = window.pageYOffset;
-    
+
     this.sections.forEach(section => {
       const sectionHeight = section.offsetHeight;
       const sectionTop = section.offsetTop - 100;
       const sectionId = section.getAttribute('id');
-      
-      if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
         // Retirer la classe active de tous les liens
         this.navLinks.forEach(link => {
           link.classList.remove('active');
         });
-        
+
         // Ajouter la classe active au lien correspondant
         const activeLink = document.querySelector(`.header__link[href="./#${sectionId}"]`);
-        if(activeLink) {
+        if (activeLink) {
           activeLink.classList.add('active');
         }
       }
@@ -151,8 +151,8 @@ class HeaderNav {
     e.preventDefault();
     const targetId = e.currentTarget.getAttribute('href').replace('./#', '');
     const targetSection = document.getElementById(targetId);
-    
-    if(targetSection) {
+
+    if (targetSection) {
       targetSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
@@ -162,7 +162,7 @@ class MultilingualGreeting {
   constructor() {
     this.currentIndex = 0;
     this.langElement = document.getElementById('dynamic-lang');
-    
+
     this.startRotation();
   }
 
@@ -195,6 +195,31 @@ class Skills {
         skill.style.backgroundColor = color;
         skill.style.color = '#ffffff';
       }
+    });
+  }
+}
+
+class Projects {
+  constructor() {
+    this.paragraphs = document.querySelectorAll('.projects__row-content-desc');
+    this.init();
+  }
+
+  init() {
+    this.applySkillColors();
+  }
+
+  applySkillColors() {
+    this.paragraphs.forEach(paragraph => {
+      const spans = paragraph.querySelectorAll('span');
+
+      spans.forEach(span => {
+        const skillText = span.textContent.trim();
+
+        if (CONFIG.skillColors.hasOwnProperty(skillText)) {
+          span.style.color = CONFIG.skillColors[skillText];
+        }
+      });
     });
   }
 }
@@ -265,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new HeaderNav();
   new MultilingualGreeting();
   new Skills();
+  new Projects();
   new ContactForm();
   new LanguageSelector();
 });
