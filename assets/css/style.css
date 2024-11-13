@@ -211,7 +211,6 @@ textarea {
     border-radius: 50px;
     overflow: hidden;
     margin-right: 1.5rem;
-    background: #16B364
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -270,6 +269,10 @@ textarea {
 .header__link:hover {
     color: #16B364
 }
+
+.header__link.active {
+    color: #16B364
+  }
 
 @media only screen and (max-width: 56.25em) {
     .header__link {

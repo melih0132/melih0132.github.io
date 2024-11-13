@@ -166,6 +166,59 @@ class HeaderLogo {
   }
 }
 
+class HeaderNav {
+  constructor() {
+    this.navLinks = document.querySelectorAll('.header__link');
+    this.sections = document.querySelectorAll('section[id]');
+    
+    this.init();
+  }
+
+  init() {
+    window.addEventListener('scroll', () => this.updateActiveSection());
+    // Mise à jour initiale
+    this.updateActiveSection();
+    
+    // Ajouter les événements de clic pour un défilement fluide
+    this.navLinks.forEach(link => {
+      link.addEventListener('click', (e) => this.handleNavClick(e));
+    });
+  }
+
+  updateActiveSection() {
+    const scrollY = window.pageYOffset;
+    
+    this.sections.forEach(section => {
+      const sectionHeight = section.offsetHeight;
+      const sectionTop = section.offsetTop - 100;
+      const sectionId = section.getAttribute('id');
+      
+      if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        // Retirer la classe active de tous les liens
+        this.navLinks.forEach(link => {
+          link.classList.remove('active');
+        });
+        
+        // Ajouter la classe active au lien correspondant
+        const activeLink = document.querySelector(`.header__link[href="./#${sectionId}"]`);
+        if(activeLink) {
+          activeLink.classList.add('active');
+        }
+      }
+    });
+  }
+
+  handleNavClick(e) {
+    e.preventDefault();
+    const targetId = e.currentTarget.getAttribute('href').replace('./#', '');
+    const targetSection = document.getElementById(targetId);
+    
+    if(targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
+
 class MultilingualGreeting {
   constructor() {
     this.currentIndex = 0;
@@ -315,6 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new HamburgerMenu();
   new Navigation();
   new HeaderLogo();
+  new HeaderNav();
   new MultilingualGreeting();
   new SkillsManager();
   new ContactForm();
