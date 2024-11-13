@@ -110,7 +110,7 @@ textarea {
 .btn--bg {
     padding: 1.5rem 8rem;
     font-size: 2rem;
-    transition: transform  0.5s ease;
+    transition: transform 0.5s ease;
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -213,7 +213,7 @@ textarea {
 .header__logo-img-cont {
     width: 5rem;
     height: 5rem;
-    border-radius: 15px 0 15px 0;
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
     overflow: hidden;
     margin-right: 1.5rem;
 }
@@ -277,7 +277,7 @@ textarea {
 
 .header__link.active {
     color: #16B364
-  }
+}
 
 @media only screen and (max-width: 56.25em) {
     .header__link {
@@ -1497,7 +1497,7 @@ textarea {
     #projects {
         background: #1d1d1d;
     }
-    
+
     .project-cs-hero {
         background: #1d1d1d
     }
