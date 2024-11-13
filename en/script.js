@@ -388,7 +388,6 @@ class LanguageSelector {
   }
 }
 
-// Initialisation de toutes les fonctionnalités
 document.addEventListener('DOMContentLoaded', () => {
   new HamburgerMenu();
   new Navigation();
