@@ -915,7 +915,7 @@ textarea {
 .projects__row-content-desc {
     justify-self: left;
     font-size: 1.8rem;
-    color: #444;
+    color: #666;
     max-width: 60rem;
     line-height: 1.7;
     margin-bottom: 3rem
@@ -925,6 +925,44 @@ textarea {
     .projects__row-content-desc {
         font-size: 1.7rem
     }
+}
+
+.projects__row-content-desc span {
+    position: relative;
+    font-weight: 700;
+    margin: 0 3px;
+    text-decoration: none;
+    cursor: pointer
+}
+
+.projects__row-content-desc span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #16B364;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.projects__row-content-desc span:hover::after {
+    transform: scaleX(1);
+    transform-origin: center;
+}
+
+.projects__row-content-desc-bold-csharp {
+    color: #9B4F96
+}
+
+.projects__row-content-desc-bold-wpf {
+    color: #512BD4;
+}
+
+.projects__row-content-desc-bold-unity {
+    color: #222C37;
 }
 
 /* ! Contact */
