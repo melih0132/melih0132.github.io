@@ -1028,56 +1028,6 @@ textarea {
     }
 }
 
-.contact__form-input::-moz-placeholder {
-    color: #999;
-    font-weight: 600;
-    font-size: 1.28rem;
-}
-
-.contact__form-input:-ms-input-placeholder {
-    color: #999;
-    font-weight: 600;
-    font-size: 1.28rem;
-}
-
-.contact__form-input::placeholder {
-    color: #999;
-    font-weight: 600;
-    font-size: 1.28rem;
-}
-
-.contact__form-input::-webkit-input-placeholder {
-    color: #999;
-    font-weight: 600;
-    font-size: 1.28rem;
-}
-
-.contact__form-input:-ms-input-placeholder {
-    color: #999;
-    font-weight: 600;
-    font-size: 1.28rem;
-}
-
-.contact__form-input::-ms-input-placeholder {
-    color: #999;
-    font-weight: 600;
-    font-size: 1.28rem;
-}
-
-.contact__form-input:-moz-placeholder {
-    opacity: 1;
-    color: #999;
-    font-weight: 600;
-    font-size: 1.28rem;
-}
-
-.contact__form-input::-moz-placeholder {
-    opacity: 1;
-    color: #999;
-    font-weight: 600;
-    font-size: 1.28rem;
-}
-
 .contact__btn {
     width: 24%;
     padding: 1.6rem 3.2rem;
