@@ -1,9 +1,9 @@
 const CONFIG = {
-  languageChangeInterval: 2000,
-  slideOutDuration: 500,
+  scrollThreshold: 50,
   messageDisplayTime: 3000,
+  languageChangeInterval: 2000,
   translations: [
-    "Bonjour", "Hola", "Ciao", "Hallo", "Merhaba",
+    "Hello", "Hola", "Ciao", "Hallo", "Merhaba",
     "Привет", "こんにちは", "안녕하세요", "欢迎", "Olá"
   ],
   skillColors: {
@@ -44,30 +44,25 @@ const CONFIG = {
     "Scrum": "#FF7043",
     "Terminal": "#111111",
     "Powershell": "#012456"
-  },
-  navigation: {
-    sections: ['home', 'about', 'projects', 'contact'],
-    defaultLang: 'en'
   }
 };
 
 class HamburgerMenu {
   constructor() {
-    this.menuContainer = document.querySelector('.header__main-ham-menu-cont');
+    this.menuBtn = document.querySelector('.header__main-ham-menu-cont');
     this.smallMenu = document.querySelector('.header__sm-menu');
     this.menuIcon = document.querySelector('.header__main-ham-menu');
     this.closeIcon = document.querySelector('.header__main-ham-menu-close');
-    this.smallMenuLinks = document.querySelectorAll('.header__sm-menu-link a');
-    
-    this.initialize();
+    this.menuLinks = document.querySelectorAll('.header__sm-menu-link');
+
+    this.init();
   }
 
-  initialize() {
-    this.menuContainer.addEventListener('click', () => this.toggleMenu());
-    this.smallMenuLinks.forEach(link => {
-      link.addEventListener('click', (e) => this.handleLinkClick(e));
+  init() {
+    this.menuBtn?.addEventListener('click', () => this.toggleMenu());
+    this.menuLinks.forEach(link => {
+      link.addEventListener('click', () => this.closeMenu());
     });
-    this.setupOutsideClickListener();
   }
 
   toggleMenu() {
@@ -76,92 +71,82 @@ class HamburgerMenu {
     this.closeIcon.classList.toggle('d-none');
   }
 
-  handleLinkClick(e) {
-    const href = e.currentTarget.getAttribute('href');
-    if (href.includes('#')) {
-      e.preventDefault();
-      const targetId = href.split('#')[1];
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-        this.closeMenu();
-      }
-    }
-  }
-
   closeMenu() {
     this.smallMenu.classList.remove('header__sm-menu--active');
     this.menuIcon.classList.remove('d-none');
     this.closeIcon.classList.add('d-none');
   }
-
-  setupOutsideClickListener() {
-    document.addEventListener('click', (e) => {
-      if (!this.menuContainer.contains(e.target) && 
-          !this.smallMenu.contains(e.target) &&
-          this.smallMenu.classList.contains('header__sm-menu--active')) {
-        this.closeMenu();
-      }
-    });
-  }
 }
 
-class Navigation {
+class Header {
   constructor() {
     this.header = document.querySelector('.header');
     this.logoContainer = document.querySelector('.header__logo-container');
-    this.mainLinks = document.querySelectorAll('.header__link');
-    
-    this.initialize();
+    this.sections = document.querySelectorAll('section[id]');
+
+    this.defaultBackgroundColor = window.getComputedStyle(this.header).backgroundColor;
+
+    this.lightBackgroundColor = '#fff';
+    this.darkBackgroundColor = '#121212';
+
+    this.init();
   }
 
-  initialize() {
+  init() {
+    window.addEventListener('scroll', () => this.handleScroll());
     this.logoContainer.addEventListener('click', () => this.handleLogoClick());
-    this.mainLinks.forEach(link => {
-      link.addEventListener('click', (e) => this.handleLinkClick(e));
-    });
-    this.setupScrollListener();
+    this.handleScroll();
   }
 
-  handleLogoClick() {
-    window.location.href = './#home';
-  }
+  handleScroll() {
+    this.updateHeaderBackground();
+    if (window.scrollY > CONFIG.scrollThreshold) {
+      this.header.classList.add('header--scrolled');
+    } else {
+      this.header.classList.remove('header--scrolled');
+    }
 
-  handleLinkClick(e) {
-    const href = e.currentTarget.getAttribute('href');
-    if (href.includes('#')) {
-      e.preventDefault();
-      const targetId = href.split('#')[1];
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth' });
+    if (window.scrollY === 0) {
+      this.header.style.backgroundColor = 'transparent';
+      this.header.style.boxShadow = 'none';
+    }
+    else if (window.scrollY > 0 && window.scrollY < CONFIG.scrollThreshold) {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        this.header.style.backgroundColor = this.darkBackgroundColor;
+      } else {
+        this.header.style.backgroundColor = this.lightBackgroundColor;
       }
     }
   }
 
-  setupScrollListener() {
-    window.addEventListener('scroll', () => {
-      const scrollPosition = window.scrollY;
-      if (scrollPosition > 50) {
-        this.header.classList.add('header--scrolled');
-      } else {
-        this.header.classList.remove('header--scrolled');
+  updateHeaderBackground() {
+    let currentSection = null;
+    let closestDistance = Infinity;
+
+    this.sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
+      const sectionBottom = sectionTop + sectionHeight;
+      const distance = Math.abs(window.scrollY - sectionTop);
+
+      if (section.id === 'home' || section.id === 'contact') {
+        return;
+      }
+
+      if (distance < closestDistance && window.scrollY >= sectionTop && window.scrollY <= sectionBottom) {
+        currentSection = section;
+        closestDistance = distance;
       }
     });
-  }
-}
 
-class HeaderLogo {
-  constructor() {
-    this.logoContainer = document.querySelector('.header__logo-container');
-    this.initialize();
-  }
-
-  initialize() {
-    this.logoContainer.addEventListener('click', () => this.handleClick());
+    if (currentSection) {
+      const backgroundColor = window.getComputedStyle(currentSection).backgroundColor;
+      this.header.style.backgroundColor = backgroundColor;
+      this.header.style.boxShadow = `0 0 0 0`;
+    }
   }
 
-  handleClick() {
+  handleLogoClick() {
     location.href = '/en/#home';
   }
 }
@@ -170,16 +155,16 @@ class HeaderNav {
   constructor() {
     this.navLinks = document.querySelectorAll('.header__link');
     this.sections = document.querySelectorAll('section[id]');
-    
+
     this.init();
   }
 
   init() {
     window.addEventListener('scroll', () => this.updateActiveSection());
-    // Mise à jour initiale
+    // Initial update
     this.updateActiveSection();
-    
-    // Ajouter les événements de clic pour un défilement fluide
+
+    // Add click events for smooth scrolling
     this.navLinks.forEach(link => {
       link.addEventListener('click', (e) => this.handleNavClick(e));
     });
@@ -187,21 +172,21 @@ class HeaderNav {
 
   updateActiveSection() {
     const scrollY = window.pageYOffset;
-    
+
     this.sections.forEach(section => {
       const sectionHeight = section.offsetHeight;
       const sectionTop = section.offsetTop - 100;
       const sectionId = section.getAttribute('id');
-      
-      if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        // Retirer la classe active de tous les liens
+
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        // Remove active class from all links
         this.navLinks.forEach(link => {
           link.classList.remove('active');
         });
-        
-        // Ajouter la classe active au lien correspondant
+
+        // Add active class to corresponding link
         const activeLink = document.querySelector(`.header__link[href="./#${sectionId}"]`);
-        if(activeLink) {
+        if (activeLink) {
           activeLink.classList.add('active');
         }
       }
@@ -212,8 +197,8 @@ class HeaderNav {
     e.preventDefault();
     const targetId = e.currentTarget.getAttribute('href').replace('./#', '');
     const targetSection = document.getElementById(targetId);
-    
-    if(targetSection) {
+
+    if (targetSection) {
       targetSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
@@ -223,6 +208,7 @@ class MultilingualGreeting {
   constructor() {
     this.currentIndex = 0;
     this.langElement = document.getElementById('dynamic-lang');
+
     this.startRotation();
   }
 
@@ -233,7 +219,7 @@ class MultilingualGreeting {
       this.langElement.textContent = CONFIG.translations[this.currentIndex];
       this.currentIndex = (this.currentIndex + 1) % CONFIG.translations.length;
       this.langElement.classList.remove('slide-out');
-    }, CONFIG.slideOutDuration);
+    }, 500);
   }
 
   startRotation() {
@@ -241,17 +227,16 @@ class MultilingualGreeting {
   }
 }
 
-class SkillsManager {
+class Skills {
   constructor() {
-    this.skillElements = document.querySelectorAll('.skills__skill');
+    this.skills = document.querySelectorAll('.skills__skill');
     this.applyColors();
   }
 
   applyColors() {
-    this.skillElements.forEach(skill => {
+    this.skills.forEach(skill => {
       const skillName = skill.textContent.trim();
       const color = CONFIG.skillColors[skillName];
-      
       if (color) {
         skill.style.backgroundColor = color;
         skill.style.color = '#ffffff';
@@ -288,56 +273,15 @@ class Projects {
 class ContactForm {
   constructor() {
     this.form = document.querySelector('.contact__form');
-    if (this.form) {
-      this.initialize();
-    }
+    this.init();
   }
 
-  initialize() {
+  init() {
     this.form.addEventListener('submit', (event) => this.handleSubmit(event));
-    this.setupFormValidation();
-  }
-
-  setupFormValidation() {
-    const inputs = this.form.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-      input.addEventListener('blur', () => this.validateField(input));
-    });
-  }
-
-  validateField(field) {
-    if (field.hasAttribute('required') && !field.value.trim()) {
-      field.classList.add('error');
-      return false;
-    }
-    if (field.type === 'email' && !this.validateEmail(field.value)) {
-      field.classList.add('error');
-      return false;
-    }
-    field.classList.remove('error');
-    return true;
-  }
-
-  validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   async handleSubmit(event) {
     event.preventDefault();
-    
-    const inputs = this.form.querySelectorAll('input, textarea');
-    let isValid = true;
-    
-    inputs.forEach(input => {
-      if (!this.validateField(input)) {
-        isValid = false;
-      }
-    });
-
-    if (!isValid) {
-      this.showMessage("Please fill in all required fields correctly.", "error");
-      return;
-    }
 
     try {
       const response = await fetch(this.form.action, {
@@ -350,10 +294,10 @@ class ContactForm {
         this.showMessage("Thank you! Your message has been sent.", "success");
         this.form.reset();
       } else {
-        throw new Error("Server error");
+        this.showMessage("An error occurred. Please try again.", "error");
       }
     } catch (error) {
-      this.showMessage("An error occurred. Please try again later.", "error");
+      this.showMessage("An error occurred. Please try again.", "error");
     }
   }
 
@@ -361,28 +305,26 @@ class ContactForm {
     const messageElement = document.createElement('div');
     messageElement.className = `contact__message ${type}`;
     messageElement.textContent = message;
-    
-    const existingMessage = document.querySelector('.contact__message');
-    if (existingMessage) {
-      existingMessage.remove();
-    }
 
     document.body.appendChild(messageElement);
-    setTimeout(() => messageElement.remove(), CONFIG.messageDisplayTime);
+
+    setTimeout(() => {
+      messageElement.remove();
+    }, CONFIG.messageDisplayTime);
   }
 }
 
 class LanguageSelector {
   constructor() {
     this.selector = document.getElementById('selectLang');
-    this.initialize();
+    this.init();
   }
 
-  initialize() {
-    this.selector.addEventListener('change', () => this.handleChange());
+  init() {
+    this.selector.addEventListener('change', () => this.handleLanguageChange());
   }
 
-  handleChange() {
+  handleLanguageChange() {
     const selectedLang = this.selector.value;
     location.href = `/${selectedLang}/#home`;
   }
@@ -390,11 +332,10 @@ class LanguageSelector {
 
 document.addEventListener('DOMContentLoaded', () => {
   new HamburgerMenu();
-  new Navigation();
-  new HeaderLogo();
+  new Header();
   new HeaderNav();
   new MultilingualGreeting();
-  new SkillsManager();
+  new Skills();
   new Projects();
   new ContactForm();
   new LanguageSelector();

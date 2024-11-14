@@ -82,6 +82,12 @@ class Header {
   constructor() {
     this.header = document.querySelector('.header');
     this.logoContainer = document.querySelector('.header__logo-container');
+    this.sections = document.querySelectorAll('section[id]');
+
+    this.defaultBackgroundColor = window.getComputedStyle(this.header).backgroundColor;
+
+    this.lightBackgroundColor = '#fff';
+    this.darkBackgroundColor = '#121212';
 
     this.init();
   }
@@ -93,10 +99,50 @@ class Header {
   }
 
   handleScroll() {
+    this.updateHeaderBackground();
     if (window.scrollY > CONFIG.scrollThreshold) {
       this.header.classList.add('header--scrolled');
     } else {
       this.header.classList.remove('header--scrolled');
+    }
+
+    if (window.scrollY === 0) {
+      this.header.style.backgroundColor = 'transparent';
+      this.header.style.boxShadow = 'none';
+    }
+    else if (window.scrollY > 0 && window.scrollY < CONFIG.scrollThreshold) {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        this.header.style.backgroundColor = this.darkBackgroundColor;
+      } else {
+        this.header.style.backgroundColor = this.lightBackgroundColor;
+      }
+    }
+  }
+
+  updateHeaderBackground() {
+    let currentSection = null;
+    let closestDistance = Infinity;
+
+    this.sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
+      const sectionBottom = sectionTop + sectionHeight;
+      const distance = Math.abs(window.scrollY - sectionTop);
+
+      if (section.id === 'home' || section.id === 'contact') {
+        return;
+      }
+
+      if (distance < closestDistance && window.scrollY >= sectionTop && window.scrollY <= sectionBottom) {
+        currentSection = section;
+        closestDistance = distance;
+      }
+    });
+
+    if (currentSection) {
+      const backgroundColor = window.getComputedStyle(currentSection).backgroundColor;
+      this.header.style.backgroundColor = backgroundColor;
+      this.header.style.boxShadow = `0 0 0 0`;
     }
   }
 
