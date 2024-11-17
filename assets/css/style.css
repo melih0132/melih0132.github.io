@@ -955,9 +955,44 @@ textarea {
 }
 
 @media only screen and (max-width: 37.5em) {
-    .btn-container {
+    .projects__links-btn {
         margin-top: 6rem;
     }
+}
+
+.projects_link {
+    font-size: 1.8rem;
+    padding: 1.5rem 5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid #24292e;
+    border-radius: 5px;
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    transition: transform 0.5s ease;
+}
+
+.projects_link:hover {
+    color: white;
+    background: #24292e;
+    transform: scale(1.2);
+}
+
+.projects_link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: #16B364;
+    transition: width 0.4s ease-out;
+}
+
+.projects_link:hover::after {
+    width: 100%;
 }
 
 /* ! Contact */
