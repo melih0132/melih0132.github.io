@@ -33,6 +33,12 @@ html {
     background-color: rgba(85, 85, 85, 0.8);
 }
 
+/* * Selection */
+::selection {
+    background: #16B364;
+    color: white;
+}
+
 /* ! Body */
 body {
     box-sizing: border-box;
