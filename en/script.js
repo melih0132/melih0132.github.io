@@ -3,7 +3,7 @@ const CONFIG = {
   messageDisplayTime: 3000,
   languageChangeInterval: 2000,
   translations: [
-    "Hello", "Hola", "Ciao", "Hallo", "Merhaba",
+    "Bonjour", "Hola", "Ciao", "Hallo", "Merhaba",
     "Привет", "こんにちは", "안녕하세요", "欢迎", "Olá"
   ],
   skillColors: {
@@ -20,6 +20,8 @@ const CONFIG = {
     "PostgreSQL": "#336791",
     "MongoDB": "#47A248",
     "pgAdmin4": "#326690",
+    "Visual Paradigm": "#cc3433",
+    "PowerAMC": "#F08080",
     "Node.js": "#3C873A",
     "Express": "#4B8BBE",
     "Socket.io": "#24c29f",

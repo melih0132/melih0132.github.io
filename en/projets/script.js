@@ -54,6 +54,8 @@ const skillColors = {
   "PGSQL": "#336791",
   "PostgreSQL": "#336791",
   "pgAdmin4": "#326690",
+  "Visual Paradigm": "#cc3433",
+  "PowerAMC": "#F08080",
   "Git": "#F05032",
   "GitHub": "#181717",
   "Unity": "#222C37",

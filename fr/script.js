@@ -20,6 +20,8 @@ const CONFIG = {
     "PostgreSQL": "#336791",
     "MongoDB": "#47A248",
     "pgAdmin4": "#326690",
+    "Visual Paradigm": "#cc3433",
+    "PowerAMC": "#F08080",
     "Node.js": "#3C873A",
     "Express": "#4B8BBE",
     "Socket.io": "#24c29f",
