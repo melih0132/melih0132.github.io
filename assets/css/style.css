@@ -108,15 +108,15 @@ textarea {
 }
 
 .btn--bg {
-    padding: 1.5rem 8rem;
+    padding: 1.7rem 8rem;
     font-size: 2rem;
     transition: transform 0.5s ease;
 }
 
 @media only screen and (max-width: 37.5em) {
     .btn--bg {
-        padding: 1.5rem 4rem;
-        font-size: 1.5rem;
+        padding: 2rem 5rem;
+        font-size: 1.6rem;
     }
 }
 
@@ -836,6 +836,12 @@ textarea {
     }
 }
 
+@media only screen and (max-width: 37.5em) {
+    .projects__row {
+        margin-bottom: 7rem;
+    }
+}
+
 .projects__row-content-main-title {
     font-size: 3.4rem;
     text-transform: uppercase;
@@ -869,25 +875,9 @@ textarea {
 }
 
 .projects__row-img {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    display: block;
-    object-fit: contain;
+    max-width: 100%;
+    max-height: 40em;
     border-radius: 10px;
-}
-
-@media only screen and (max-width: 62.5em) {
-    .projects__row-img {
-        width: 100%;
-        max-height: 300px;
-    }
-}
-
-@media only screen and (max-width: 56.25em) {
-    .projects__row-img {
-        width: 100%;
-    }
 }
 
 .projects__row-content {
@@ -956,6 +946,18 @@ textarea {
 .projects__row-content-desc span:hover::after {
     transform: scaleX(1);
     transform-origin: center;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 12rem;
+}
+
+@media only screen and (max-width: 37.5em) {
+    .btn-container {
+        margin-top: 6rem;
+    }
 }
 
 /* ! Contact */
