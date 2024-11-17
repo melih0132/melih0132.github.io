@@ -156,6 +156,12 @@ textarea {
     }
 }
 
+@media only screen and (max-width: 37.5em) {
+    .sec-pad {
+        padding: 6rem 0
+    }
+}
+
 /* * Dynamic Language */
 #dynamic-lang {
     display: inline-block;
@@ -1179,7 +1185,7 @@ textarea {
 .project-details__showcase-img-cont {
     max-width: 70rem;
     width: 100%;
-    margin-bottom: 6rem;
+    margin: 3rem 0;
 }
 
 .project-details__content-img {
@@ -1204,7 +1210,7 @@ textarea {
 }
 
 .project-details__desc {
-    margin: 0 0 7rem 0
+    margin: 3rem 0
 }
 
 .project-details__desc-para {
