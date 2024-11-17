@@ -948,7 +948,7 @@ textarea {
     transform-origin: center;
 }
 
-.btn-container {
+.projects__links-btn {
     display: flex;
     justify-content: center;
     margin-top: 12rem;
