@@ -3,9 +3,11 @@ const CONFIG = {
   messageDisplayTime: 3000,
   languageChangeInterval: 2000,
   translations: [
-    "Bonjour", "Hola", "Ciao", "Hallo", "Merhaba",
-    "Привет", "こんにちは", "안녕하세요", "欢迎", "Olá"
-  ],
+    "Hi", "Ola", "Ciao", "Hoi", "Yo",
+    "ハイ", "サン", "안녕", "嘿", "Прив",
+    "Bon", "Hai", "Hej", "ねえ", "Ви",
+    "Oi", "よ", "嗨", "เฮ", "नम"
+  ],  
   skillColors: {
     "HTML": "#E34C26",
     "CSS": "#1572B6",
