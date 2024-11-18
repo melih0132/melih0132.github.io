@@ -838,7 +838,13 @@ textarea {
     flex-direction: column;
     grid-template-columns: 1.5fr 1fr;
     gap: 3rem;
-    margin-bottom: 11rem
+    border-radius: 15px 0 15px 0;
+    padding: 5rem;
+}
+
+.projects__row:hover {
+    transform: scale(1.05);
+    box-shadow: 1px 1px 10px #24292e;
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -979,12 +985,10 @@ textarea {
     font-weight: 700;
     text-align: center;
     text-transform: uppercase;
-    text-decoration: none;
     border: 2px solid #24292e;
     border-radius: 15px 0 15px 0;
-    display: inline-block;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    transition: transform 0.5s ease;
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -995,24 +999,25 @@ textarea {
 }
 
 .projects_link:hover {
-    color: white;
+    color: #16B364;
     background: #24292e;
-    transform: scale(1.02);
+    transform: translateY(-5px);
 }
 
 .projects_link::after {
     content: "";
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
     height: 3px;
     width: 0;
     background: #16B364;
-    transition: width 0.4s ease-out;
+    transition: width 0.3s ease-in-out;
 }
 
 .projects_link:hover::after {
-    width: 100%;
+    width: 80%;
 }
 
 /* ! Contact */
