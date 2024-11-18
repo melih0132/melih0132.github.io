@@ -842,11 +842,6 @@ textarea {
     padding: 5rem;
 }
 
-.projects__row:hover {
-    transform: scale(1.05);
-    box-shadow: 1px 1px 10px #24292e;
-}
-
 @media only screen and (max-width: 56.25em) {
     .projects__row {
         text-align: center;
@@ -854,9 +849,14 @@ textarea {
     }
 }
 
+.projects__row:hover {
+    transform: scale(1.05);
+    box-shadow: 1px 1px 10px #24292e;
+}
+
 @media only screen and (max-width: 37.5em) {
-    .projects__row {
-        margin-bottom: 7rem;
+    .projects__row:hover {
+        transform: none;
     }
 }
 
@@ -1150,7 +1150,7 @@ textarea {
 
 @media only screen and (max-width: 37.5em) {
     .project-cs-hero__content {
-        padding: 19rem 0 13rem 0;
+        padding: 19rem 0;
         margin: auto;
         position: static;
         transform: translate(0, 0)
