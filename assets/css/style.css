@@ -834,16 +834,27 @@ textarea {
 
 /* * Projects Row */
 #projects {
-    background: #c4c4c4
+    background: #c4c4c4;
 }
 
 .projects__row {
     display: flex;
     flex-direction: column;
+    text-align: center;
+    align-items: center;
     gap: 3rem;
     border-radius: 15px;
     padding: 5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 1s ease, box-shadow 0.3s ease, filter 0.5 ease;
+    position: relative;
+    overflow: hidden;
+    filter: brightness(0.7);
+}
+
+@media only screen and (max-width: 62.5em) {
+    .projects__row {
+        filter: none
+    }
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -853,14 +864,40 @@ textarea {
     }
 }
 
-.projects__row:hover {
-    transform: scale(1.05);
-    box-shadow: 1px 1px 10px rgba(36, 41, 46, 0.5);
+@media only screen and (max-width: 42.5em) {
+    .projects__row {
+        border-radius: 0;
+        padding: 4rem 0;
+        text-align: left;
+    }
 }
 
-@media only screen and (max-width: 37.5em) {
+.projects__row:hover {
+    transform: scale(1.09);
+    box-shadow: 1px 1px 15px rgba(36, 41, 46, 0.5);
+    filter: brightness(0.95);
+}
+
+@media only screen and (max-width: 62.5em) {
     .projects__row:hover {
         transform: none;
+        box-shadow: none;
+        filter: none;
+    }
+}
+
+.project__row-title {
+    padding-bottom: 1rem;
+    border-bottom: 6px solid #16B364;
+    width: 50%;
+}
+
+@media only screen and (max-width: 42.5em) {
+    .project__row-title {
+        padding-bottom: 0;
+        width: 100%;
+        border-bottom: none;
+        border-left: 6px solid #16B364;
     }
 }
 
@@ -868,8 +905,19 @@ textarea {
     font-size: 3.4rem;
     text-transform: uppercase;
     letter-spacing: 0.7px;
-    border-left: 6px solid #16B364;
     padding-left: 0.7rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .projects__row-content-main-title {
+        font-size: 2.8rem;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .projects__row-content-main-title {
+        font-size: 2.2rem;
+    }
 }
 
 .project__row-desc {
@@ -879,11 +927,6 @@ textarea {
 }
 
 @media only screen and (max-width: 56.25em) {
-    .projects__row-content-main-title {
-        margin-bottom: 2rem;
-        border-left: none;
-    }
-
     .project__row-desc {
         flex-direction: column
     }
