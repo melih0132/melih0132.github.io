@@ -870,6 +870,7 @@ textarea {
 
 .project__row-desc {
     display: flex;
+    align-items: center;
     gap: 5rem;
 }
 
