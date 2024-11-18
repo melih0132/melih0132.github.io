@@ -756,12 +756,6 @@ textarea {
     padding-left: 0.5rem;
 }
 
-@media only screen and (max-width: 56.25em) {
-    .skills__category-title {
-        border-left: none;
-    }
-}
-
 .skills__skill-row {
     display: flex;
     flex-wrap: wrap;
@@ -837,6 +831,16 @@ textarea {
     background: #c4c4c4;
 }
 
+.projects__content {
+    margin: 2.5rem;
+}
+
+@media only screen and (max-width: 42.5em) {
+    .projects__content {
+        margin: 0
+    }
+}
+
 .projects__row {
     display: flex;
     flex-direction: column;
@@ -866,6 +870,7 @@ textarea {
 
 @media only screen and (max-width: 42.5em) {
     .projects__row {
+        gap: 2.5rem;
         border-radius: 0;
         padding: 4rem 0;
         text-align: left;
@@ -1550,7 +1555,6 @@ textarea {
     }
 
     .skills__category-title {
-        border-left: 4px solid #16B364;
         color: white;
     }
 
