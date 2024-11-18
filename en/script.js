@@ -59,6 +59,7 @@ class HamburgerMenu {
     this.menuIcon = document.querySelector('.header__main-ham-menu');
     this.closeIcon = document.querySelector('.header__main-ham-menu-close');
     this.menuLinks = document.querySelectorAll('.header__sm-menu-link');
+    this.header = document.querySelector('.header');
 
     this.init();
   }
@@ -71,15 +72,29 @@ class HamburgerMenu {
   }
 
   toggleMenu() {
-    this.smallMenu.classList.toggle('header__sm-menu--active');
+    const isActive = this.smallMenu.classList.toggle('header__sm-menu--active');
     this.menuIcon.classList.toggle('d-none');
     this.closeIcon.classList.toggle('d-none');
+
+    if (isActive) {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        this.header.style.backgroundColor = '#121212';
+      }
+      else {
+        this.header.style.backgroundColor = '#fff';
+      }
+    } else {
+      this.header.style.backgroundColor = '';
+      this.header.style.boxShadow = '';
+    }
   }
 
   closeMenu() {
     this.smallMenu.classList.remove('header__sm-menu--active');
     this.menuIcon.classList.remove('d-none');
     this.closeIcon.classList.add('d-none');
+    this.header.style.backgroundColor = '';
+    this.header.style.boxShadow = '';
   }
 }
 

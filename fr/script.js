@@ -59,6 +59,7 @@ class HamburgerMenu {
     this.menuIcon = document.querySelector('.header__main-ham-menu');
     this.closeIcon = document.querySelector('.header__main-ham-menu-close');
     this.menuLinks = document.querySelectorAll('.header__sm-menu-link');
+    this.header = document.querySelector('.header');
 
     this.init();
   }
@@ -71,15 +72,29 @@ class HamburgerMenu {
   }
 
   toggleMenu() {
-    this.smallMenu.classList.toggle('header__sm-menu--active');
+    const isActive = this.smallMenu.classList.toggle('header__sm-menu--active');
     this.menuIcon.classList.toggle('d-none');
     this.closeIcon.classList.toggle('d-none');
+
+    if (isActive) {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        this.header.style.backgroundColor = '#121212';
+      }
+      else {
+        this.header.style.backgroundColor = '#fff';
+      }
+    } else {
+      this.header.style.backgroundColor = '';
+      this.header.style.boxShadow = '';
+    }
   }
 
   closeMenu() {
     this.smallMenu.classList.remove('header__sm-menu--active');
     this.menuIcon.classList.remove('d-none');
     this.closeIcon.classList.add('d-none');
+    this.header.style.backgroundColor = '';
+    this.header.style.boxShadow = '';
   }
 }
 
@@ -166,10 +181,8 @@ class HeaderNav {
 
   init() {
     window.addEventListener('scroll', () => this.updateActiveSection());
-    // Mise à jour initiale
     this.updateActiveSection();
 
-    // Ajouter les événements de clic pour un défilement fluide
     this.navLinks.forEach(link => {
       link.addEventListener('click', (e) => this.handleNavClick(e));
     });
@@ -184,12 +197,10 @@ class HeaderNav {
       const sectionId = section.getAttribute('id');
 
       if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        // Retirer la classe active de tous les liens
         this.navLinks.forEach(link => {
           link.classList.remove('active');
         });
 
-        // Ajouter la classe active au lien correspondant
         const activeLink = document.querySelector(`.header__link[href="./#${sectionId}"]`);
         if (activeLink) {
           activeLink.classList.add('active');
