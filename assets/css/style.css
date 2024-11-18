@@ -1378,7 +1378,6 @@ textarea {
 .main-footer__lower {
     padding: 4rem 0;
     border-top: 1px solid #444;
-    color: black;
     font-size: 1.2rem;
     text-align: left;
     text-align: center
@@ -1417,7 +1416,6 @@ textarea {
 
 #selectLang {
     background-color: transparent;
-    color: black;
 }
 
 #selectLang {
@@ -1546,7 +1544,7 @@ textarea {
     }
 
     .main-footer {
-        background: black;
+        background: rgb(15, 15, 15);
         color: white
     }
 
