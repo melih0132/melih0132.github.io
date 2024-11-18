@@ -641,6 +641,12 @@ textarea {
     max-width: 90rem;
 }
 
+.about__content-details {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
 @media only screen and (max-width: 56.25em) {
     .about__content {
         grid-template-columns: 1fr;
@@ -651,8 +657,6 @@ textarea {
     }
 
     .about__content-details {
-        display: flex;
-        flex-direction: column;
         text-align: center;
         align-items: center;
         max-width: 60rem;
@@ -836,10 +840,10 @@ textarea {
 .projects__row {
     display: flex;
     flex-direction: column;
-    grid-template-columns: 1.5fr 1fr;
     gap: 3rem;
-    border-radius: 15px 0 15px 0;
+    border-radius: 15px;
     padding: 5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -851,7 +855,7 @@ textarea {
 
 .projects__row:hover {
     transform: scale(1.05);
-    box-shadow: 1px 1px 10px #24292e;
+    box-shadow: 1px 1px 10px rgba(36, 41, 46, 0.5);
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -927,7 +931,7 @@ textarea {
 }
 
 .projects__row-content-desc {
-    justify-self: left;
+    text-align: justify;
     font-size: 1.8rem;
     color: #666;
     max-width: 60rem;
@@ -937,7 +941,8 @@ textarea {
 
 @media only screen and (max-width: 37.5em) {
     .projects__row-content-desc {
-        font-size: 1.7rem
+        font-size: 1.7rem;
+        text-align: center
     }
 }
 
@@ -970,12 +975,12 @@ textarea {
 .projects__links-btn {
     display: flex;
     justify-content: center;
-    margin-top: 12rem;
+    margin-top: 8rem;
 }
 
 @media only screen and (max-width: 37.5em) {
     .projects__links-btn {
-        margin-top: 6rem;
+        margin-top: 4rem;
     }
 }
 
@@ -1041,7 +1046,7 @@ textarea {
     max-width: 64rem;
     text-align: right;
     width: 95%;
-    border-radius: 15px 0 15px 0;
+    border-radius: 15px;
     margin: 4rem auto 0 auto;
 }
 
