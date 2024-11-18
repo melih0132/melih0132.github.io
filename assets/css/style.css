@@ -842,7 +842,7 @@ textarea {
     flex-direction: column;
     text-align: center;
     align-items: center;
-    gap: 3rem;
+    gap: 3.5rem;
     border-radius: 15px;
     padding: 5rem;
     transition: transform 1s ease, box-shadow 0.3s ease, filter 0.5 ease;
@@ -923,7 +923,7 @@ textarea {
 .project__row-desc {
     display: flex;
     align-items: center;
-    gap: 5rem;
+    gap: 2.5rem
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -947,17 +947,19 @@ textarea {
 }
 
 .projects__row-content {
-    padding: 2rem 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center
+    justify-content: center;
+    padding: 2rem 0;
+    gap: 3rem;
 }
 
 @media only screen and (max-width: 56.25em) {
     .projects__row-content {
         place-items: center;
         padding: 0 0 2rem 0;
+        gap: 2rem;
     }
 }
 
@@ -979,7 +981,6 @@ textarea {
     color: #666;
     max-width: 60rem;
     line-height: 1.7;
-    margin-bottom: 3rem
 }
 
 @media only screen and (max-width: 37.5em) {
