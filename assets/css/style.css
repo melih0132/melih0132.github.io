@@ -111,12 +111,14 @@ textarea {
     font-weight: 700;
     border-radius: 15px 0 15px 0;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer
 }
 
 .btn--bg {
     padding: 1.7rem 8rem;
     font-size: 2rem;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -127,7 +129,7 @@ textarea {
 }
 
 .btn--bg:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
 }
 
 .btn--med {
@@ -136,19 +138,21 @@ textarea {
 }
 
 .btn--theme:hover {
-    background: #16B364;
+    background: #14a357;
 }
 
 .btn--theme-inv {
-    background-color: #66fcf1;
+    background-color: #efefef;
     color: #181a1b;
     border: 2px solid #16B364;
     box-shadow: none;
-    padding: calc(1.5rem - 2px) calc(5rem - 2px)
+    padding: calc(1.5rem - 2px) calc(5rem - 2px);
+    transition: all 0.3s ease
 }
 
 .btn--theme-inv:hover {
-    background: #fff
+    background: #fff;
+    color: #16B364
 }
 
 /* * Section Padding */
@@ -1186,7 +1190,7 @@ textarea {
 
 /* ! Project CS */
 .project-cs-hero {
-    background: #939393
+    background: #c4c4c4
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -1223,7 +1227,7 @@ textarea {
 }
 
 .project-details {
-    background: url(../../assets/svg/common-bg.svg);
+    background: linear-gradient(to right, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5)), url(../../assets/svg/common-bg.svg);
     background-size: cover;
     background-position: center
 }

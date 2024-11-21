@@ -89,7 +89,6 @@ class HamburgerMenu {
       }
     } else {
       this.header.style.backgroundColor = '';
-      this.header.style.boxShadow = '';
     }
   }
 
@@ -98,7 +97,6 @@ class HamburgerMenu {
     this.menuIcon.classList.remove('d-none');
     this.closeIcon.classList.add('d-none');
     this.header.style.backgroundColor = '';
-    this.header.style.boxShadow = '';
   }
 }
 

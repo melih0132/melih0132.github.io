@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
             header.style.backgroundColor = "#121212";
           } else {
-            header.style.backgroundColor = "#ffffff";
+            header.style.backgroundColor = "#fff";
           }
         }
       }
@@ -44,9 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (header) {
         if (isActive) {
           if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            header.style.backgroundColor = "#121212";
+            header.style.backgroundColor = "#1d1d1d";
           } else {
-            header.style.backgroundColor = "#ffffff";
+            header.style.backgroundColor = "#c4c4c4";
           }
         }
       }
