@@ -139,6 +139,11 @@ textarea {
 
 .btn--theme:hover {
     background: #14a357;
+    transform: translateX(5px);
+}
+
+.btn--theme2:hover {
+    background: #14a357;
 }
 
 .btn--theme-inv {
