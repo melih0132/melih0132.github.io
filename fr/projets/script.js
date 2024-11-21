@@ -107,7 +107,10 @@ document.addEventListener("DOMContentLoaded", () => {
     Linux: "#ffc200",
     XAML: "#0C54C2",
     SQL: "#CC2927",
-    "3D Modeling": "#FF5733"
+    "3D Modeling": "#FF5733",
+    Tkinter: "#1D6E1F",
+    SQLite: "#003B57",
+    CSV: "#FF9800"
   };
 
   document.querySelectorAll(".skills__skill").forEach(skill => {
