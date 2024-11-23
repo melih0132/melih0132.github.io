@@ -183,10 +183,8 @@ class HeaderNav {
 
   init() {
     window.addEventListener('scroll', () => this.updateActiveSection());
-    // Initial update
     this.updateActiveSection();
 
-    // Add click events for smooth scrolling
     this.navLinks.forEach(link => {
       link.addEventListener('click', (e) => this.handleNavClick(e));
     });
@@ -201,12 +199,10 @@ class HeaderNav {
       const sectionId = section.getAttribute('id');
 
       if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        // Remove active class from all links
         this.navLinks.forEach(link => {
           link.classList.remove('active');
         });
 
-        // Add active class to corresponding link
         const activeLink = document.querySelector(`.header__link[href="./#${sectionId}"]`);
         if (activeLink) {
           activeLink.classList.add('active');
@@ -348,7 +344,7 @@ class LanguageSelector {
 
   handleLanguageChange() {
     const selectedLang = this.selector.value;
-    location.href = `/${selectedLang}/#home`;
+    location.href = `/${selectedLang}/`;
   }
 }
 

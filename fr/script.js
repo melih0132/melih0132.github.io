@@ -344,7 +344,7 @@ class LanguageSelector {
 
   handleLanguageChange() {
     const selectedLang = this.selector.value;
-    location.href = `/${selectedLang}/#home`;
+    location.href = `/${selectedLang}/`;
   }
 }
 
