@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const skillColors = {
     HTML: "#E34C26",
-    CSS: "#1572B6",
+    CSS: "#732f9c",
     JavaScript: "#F7DF1E",
     PHP: "#777BB4",
     Python: "#306998",
