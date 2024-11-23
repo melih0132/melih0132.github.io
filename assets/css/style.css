@@ -666,7 +666,6 @@ textarea {
 @media only screen and (max-width: 56.25em) {
     .about__content {
         grid-template-columns: 1fr;
-        grid-gap: 8rem;
         text-align: center;
         align-items: center;
         justify-content: center
