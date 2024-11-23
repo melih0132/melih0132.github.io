@@ -24,6 +24,8 @@ const CONFIG = {
     "MongoDB": "#47A248",
     "pgAdmin4": "#326690",
     "phpMyAdmin": "#f89d06",
+    "ERD": "#FF5733",
+    "LDM": "#33FF57",
     "Visual Paradigm": "#cc3433",
     "PowerAMC": "#F08080",
     "Node.js": "#3C873A",

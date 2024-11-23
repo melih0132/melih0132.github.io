@@ -26,6 +26,8 @@ const CONFIG = {
     "phpMyAdmin": "#f89d06",
     "Visual Paradigm": "#cc3433",
     "PowerAMC": "#F08080",
+    "ERD": "#FF5733",
+    "LDM": "#33FF57",
     "Node.js": "#3C873A",
     "Express": "#4B8BBE",
     "Socket.io": "#24c29f",
