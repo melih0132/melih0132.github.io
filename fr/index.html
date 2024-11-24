@@ -486,7 +486,42 @@
   </footer>
 
   <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-  <script src="https://files.bpcontent.cloud/2024/11/24/15/20241124152924-09KPRMVR.js"></script>
+  <script>
+    window.botpress.init({
+      "botId": "169da4cb-2095-4e00-8f43-2627d154f765",
+      "configuration": {
+        "composerPlaceholder": "Chat with the boss",
+        "botName": "Balthazar",
+        "botAvatar": "https://files.bpcontent.cloud/2024/11/24/15/20241124153217-BX74QKCR.jpeg",
+        "botDescription": "AKA BIG BOSS YK",
+        "website": {
+          "title": "https://melih0132.github.io/",
+          "link": "https://melih0132.github.io/"
+        },
+        "email": {
+          "title": "melih.cetinkaya.32@gmail.com",
+          "link": "melih.cetinkaya.32@gmail.com"
+        },
+        "phone": {
+          "title": "+33 06 98 24 89 32",
+          "link": "+33 06 98 24 89 32"
+        },
+        "termsOfService": {},
+        "privacyPolicy": {},
+        "color": "#16b365",
+        "variant": "soft",
+        "themeMode": "dark",
+        "fontFamily": "rubik",
+        "radius": 2,
+        "additionalStylesheetUrl": "https://files.bpcontent.cloud/2024/11/24/13/20241124132136-6O3OMFJ8.css",
+        "allowFileUpload": true
+      },
+      "clientId": "68912ca9-ac16-47d1-8f02-5e8247b32eda"
+    });
+    window.botpressWebChat.onEvent(function () {
+      window.botpressWebChat.sendEvent({ type: "show" });
+    }, ["LIFECYCLE.LOADED"]);
+  </script>
   <script src="/fr/script.js"></script>
 </body>
 
