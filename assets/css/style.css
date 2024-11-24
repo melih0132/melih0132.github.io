@@ -672,8 +672,6 @@ textarea {
     }
 
     .about__content-details {
-        text-align: center;
-        align-items: center;
         max-width: 60rem;
     }
 }
