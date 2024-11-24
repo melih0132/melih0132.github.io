@@ -511,42 +511,54 @@
     </div>
   </footer>
 
-  <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+  <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js" defer></script>
   <script>
-    window.botpress.init({
-      "botId": "169da4cb-2095-4e00-8f43-2627d154f765",
-      "configuration": {
-        "composerPlaceholder": "Chat with the boss",
-        "botName": "Balthazar",
-        "botAvatar": "https://files.bpcontent.cloud/2024/11/24/15/20241124153217-BX74QKCR.jpeg",
-        "botDescription": "AKA BIG BOSS YK",
-        "website": {
-          "title": "https://melih0132.github.io/",
-          "link": "https://melih0132.github.io/"
-        },
-        "email": {
-          "title": "melih.cetinkaya.32@gmail.com",
-          "link": "melih.cetinkaya.32@gmail.com"
-        },
-        "phone": {
-          "title": "+33 06 98 24 89 32",
-          "link": "+33 06 98 24 89 32"
-        },
-        "termsOfService": {},
-        "privacyPolicy": {},
-        "color": "#16b365",
-        "variant": "soft",
-        "themeMode": "dark",
-        "fontFamily": "rubik",
-        "radius": 2,
-        "additionalStylesheetUrl": "https://files.bpcontent.cloud/2024/11/24/13/20241124132136-6O3OMFJ8.css",
-        "allowFileUpload": true
-      },
-      "clientId": "68912ca9-ac16-47d1-8f02-5e8247b32eda"
+    window.addEventListener('load', function () {
+      if (window.botpress) {
+        try {
+          window.botpress.init({
+            botId: "169da4cb-2095-4e00-8f43-2627d154f765",
+            configuration: {
+              composerPlaceholder: "Chat with the boss",
+              botName: "Balthazar",
+              botAvatar: "https://files.bpcontent.cloud/2024/11/24/15/20241124153217-BX74QKCR.jpeg",
+              botDescription: "AKA BIG BOSS YK",
+              website: {
+                title: "My Portfolio",
+                link: "https://melih0132.github.io/"
+              },
+              email: {
+                title: "Contact me",
+                link: "mailto:melih.cetinkaya.32@gmail.com"
+              },
+              phone: {
+                title: "Call me",
+                link: "tel:+33 06 98 24 89 32"
+              },
+              termsOfService: {},
+              privacyPolicy: {},
+              color: "#16b365",
+              variant: "soft",
+              themeMode: "dark",
+              fontFamily: "Rubik, sans-serif",  // Corrected font family syntax
+              radius: 2,
+              additionalStylesheetUrl: "https://files.bpcontent.cloud/2024/11/24/13/20241124132136-6O3OMFJ8.css",
+              allowFileUpload: true
+            },
+            clientId: "68912ca9-ac16-47d1-8f02-5e8247b32eda"
+          });
+
+          // Ensure the bot is shown once loaded
+          window.botpressWebChat.onEvent(function () {
+            window.botpressWebChat.sendEvent({ type: "show" });
+          }, ["LIFECYCLE.LOADED"]);
+        } catch (error) {
+          console.error('Error initializing Botpress webchat:', error);
+        }
+      } else {
+        console.warn('Botpress library is not loaded.');
+      }
     });
-    window.botpressWebChat.onEvent(function () {
-      window.botpressWebChat.sendEvent({ type: "show" });
-    }, ["LIFECYCLE.LOADED"]);
   </script>
   <script src="/en/script.js"></script>
 </body>
