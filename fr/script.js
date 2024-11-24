@@ -265,6 +265,50 @@ class Skills {
   }
 }
 
+class CollapsibleSkills {
+  constructor() {
+    this.titles = document.querySelectorAll('.skills__category-title');
+    this.skillRows = document.querySelectorAll('.skills__skill-row');
+    this.mediaQuery = window.matchMedia('(max-width: 37.5em)'); // 37.5em = 600px
+    this.init();
+  }
+
+  init() {
+    this.addEventListeners();
+    this.handleMediaQueryChange(this.mediaQuery); // Initial check
+    this.mediaQuery.addEventListener('change', (e) => this.handleMediaQueryChange(e));
+  }
+
+  addEventListeners() {
+    this.titles.forEach(title => {
+      title.addEventListener('click', () => {
+        const skillRow = title.nextElementSibling;
+        skillRow.classList.toggle('hidden');
+      });
+    });
+  }
+
+  toggleAll(expand) {
+    this.skillRows.forEach(skillRow => {
+      if (expand) {
+        skillRow.classList.remove('hidden');
+      } else {
+        skillRow.classList.add('hidden');
+      }
+    });
+  }
+
+  handleMediaQueryChange(mediaQuery) {
+    if (mediaQuery.matches) {
+      // Screen size <= 600px: Expand all
+      this.toggleAll(false);
+    } else {
+      // Screen size > 600px: Collapse all
+      this.toggleAll(true);
+    }
+  }
+}
+
 class Projects {
   constructor() {
     this.paragraphs = document.querySelectorAll('.projects__row-content-desc');
@@ -356,6 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new HeaderNav();
   new MultilingualGreeting();
   new Skills();
+  new CollapsibleSkills();
   new Projects();
   new ContactForm();
   new LanguageSelector();

@@ -667,7 +667,6 @@ textarea {
     .about__content {
         grid-template-columns: 1fr;
         text-align: center;
-        align-items: center;
         justify-content: center
     }
 
@@ -763,6 +762,7 @@ textarea {
 }
 
 .skills__category-title {
+    cursor: pointer;
     font-size: 1.8rem;
     font-weight: 700;
     color: black;
@@ -773,10 +773,26 @@ textarea {
     padding-left: 0.5rem;
 }
 
+@media only screen and (max-width: 37.5em) {
+    .skills__category-title {
+        background-color: #fff;
+        color: #16B364;
+        padding: 1.5rem;
+        border-radius: 8px;
+        width: 100%;
+        border-left: none;
+    }
+}
+
 .skills__skill-row {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
+    transition: max-height 0.3s ease-out;
+}
+
+.skills__skill-row.hidden {
+    display: none;
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -831,6 +847,8 @@ textarea {
 
     .skills__category {
         width: 100%;
+        align-items: center;
+        margin-bottom: 0;
     }
 
     .skills__skill {
@@ -1522,6 +1540,13 @@ textarea {
 
     .skills__category-title {
         color: white;
+    }
+
+    @media only screen and (max-width: 37.5em) {
+        .skills__category-title {
+            background-color: #121212;
+            color: #16B364;
+        }
     }
 
     .skills__skill:hover {
