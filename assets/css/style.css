@@ -788,7 +788,13 @@ textarea {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
-    transition: max-height 0.3s ease-out;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 2s ease-out;
+}
+
+.skills__skill-row.expend {
+    max-height: 100rem;
 }
 
 .skills__skill-row.hidden {

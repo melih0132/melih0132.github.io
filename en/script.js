@@ -269,7 +269,7 @@ class CollapsibleSkills {
   constructor() {
     this.titles = document.querySelectorAll('.skills__category-title');
     this.skillRows = document.querySelectorAll('.skills__skill-row');
-    this.mediaQuery = window.matchMedia('(max-width: 37.5em)'); // 37.5em = 600px
+    this.mediaQuery = window.matchMedia('(max-width: 37.5em)');
     this.init();
   }
 
@@ -283,7 +283,11 @@ class CollapsibleSkills {
     this.titles.forEach(title => {
       title.addEventListener('click', () => {
         const skillRow = title.nextElementSibling;
-        skillRow.classList.toggle('hidden');
+        if (skillRow.classList.contains('expanded')) {
+          this.collapse(skillRow);
+        } else {
+          this.expand(skillRow);
+        }
       });
     });
   }
@@ -291,11 +295,25 @@ class CollapsibleSkills {
   toggleAll(expand) {
     this.skillRows.forEach(skillRow => {
       if (expand) {
-        skillRow.classList.remove('hidden');
+        this.expand(skillRow);
       } else {
-        skillRow.classList.add('hidden');
+        this.collapse(skillRow);
       }
     });
+  }
+
+  expand(skillRow) {
+    skillRow.classList.add('expanded');
+    skillRow.style.maxHeight = `${skillRow.scrollHeight}px`; // Ajuste la hauteur au contenu
+  }
+
+  collapse(skillRow) {
+    skillRow.style.maxHeight = '0';
+    skillRow.addEventListener(
+      'transitionend',
+      () => skillRow.classList.remove('expanded'),
+      { once: true } // Supprime l'écouteur après un événement
+    );
   }
 
   handleMediaQueryChange(mediaQuery) {
