@@ -820,12 +820,6 @@ textarea {
     font-size: 1.6rem;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease
-}
-
-.skills__skill:hover {
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 8px 20px;
-    transform: scale(1.05);
 }
 
 .skills__projects {
@@ -1553,10 +1547,6 @@ textarea {
             background-color: #121212;
             color: #16B364;
         }
-    }
-
-    .skills__skill:hover {
-        box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
     }
 
     #projects {
