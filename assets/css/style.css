@@ -790,7 +790,7 @@ textarea {
     gap: 1.5rem;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 2s ease-out;
+    transition: max-height 1s ease-out;
 }
 
 .skills__skill-row.expend {
