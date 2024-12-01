@@ -270,30 +270,40 @@ class CollapsibleSkills {
     this.titles = document.querySelectorAll('.skills__category-title');
     this.skillRows = document.querySelectorAll('.skills__skill-row');
     this.mediaQuery = window.matchMedia('(max-width: 37.5em)');
+    this.active = this.mediaQuery.matches;
     this.init();
   }
 
   init() {
-    this.addEventListeners();
-    this.handleMediaQueryChange(this.mediaQuery); // Initial check
+    this.handleMediaQueryChange(this.mediaQuery);
     this.mediaQuery.addEventListener('change', (e) => this.handleMediaQueryChange(e));
   }
 
   addEventListeners() {
-    this.titles.forEach(title => {
-      title.addEventListener('click', () => {
-        const skillRow = title.nextElementSibling;
-        if (skillRow.classList.contains('expanded')) {
-          this.collapse(skillRow);
-        } else {
-          this.expand(skillRow);
-        }
-      });
+    this.titles.forEach((title) => {
+      title.addEventListener('click', this.toggleSkillRow);
     });
   }
 
+  removeEventListeners() {
+    this.titles.forEach((title) => {
+      title.removeEventListener('click', this.toggleSkillRow);
+    });
+  }
+
+  toggleSkillRow = (event) => {
+    if (!this.active) return;
+    const title = event.currentTarget;
+    const skillRow = title.nextElementSibling;
+    if (skillRow.classList.contains('expanded')) {
+      this.collapse(skillRow);
+    } else {
+      this.expand(skillRow);
+    }
+  };
+
   toggleAll(expand) {
-    this.skillRows.forEach(skillRow => {
+    this.skillRows.forEach((skillRow) => {
       if (expand) {
         this.expand(skillRow);
       } else {
@@ -304,7 +314,7 @@ class CollapsibleSkills {
 
   expand(skillRow) {
     skillRow.classList.add('expanded');
-    skillRow.style.maxHeight = `${skillRow.scrollHeight}px`; // Ajuste la hauteur au contenu
+    skillRow.style.maxHeight = `${skillRow.scrollHeight}px`;
   }
 
   collapse(skillRow) {
@@ -312,17 +322,18 @@ class CollapsibleSkills {
     skillRow.addEventListener(
       'transitionend',
       () => skillRow.classList.remove('expanded'),
-      { once: true } // Supprime l'écouteur après un événement
+      { once: true }
     );
   }
 
   handleMediaQueryChange(mediaQuery) {
-    if (mediaQuery.matches) {
-      // Screen size <= 600px: Expand all
+    this.active = mediaQuery.matches;
+    if (this.active) {
       this.toggleAll(false);
+      this.addEventListeners();
     } else {
-      // Screen size > 600px: Collapse all
       this.toggleAll(true);
+      this.removeEventListeners();
     }
   }
 }
