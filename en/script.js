@@ -340,12 +340,15 @@ class CollapsibleSkills {
 
 class Projects {
   constructor() {
-    this.paragraphs = document.querySelectorAll('.projects__row-content-desc');
+    this.paragraphs = document.querySelectorAll('.projects__row-content');
+    this.mediaQuery = window.matchMedia('(max-width: 37.5em)');
     this.init();
   }
 
   init() {
     this.applySkillColors();
+    this.handleMediaQueryChange(this.mediaQuery);
+    this.mediaQuery.addEventListener('change', (e) => this.handleMediaQueryChange(e));
   }
 
   applySkillColors() {
@@ -359,6 +362,41 @@ class Projects {
           span.style.color = CONFIG.skillColors[skillText];
         }
       });
+    });
+  }
+
+  handleMediaQueryChange(mediaQuery) {
+    if (mediaQuery.matches) {
+      this.addLinks();
+    } else {
+      this.removeLinks();
+    }
+  }
+
+  addLinks() {
+    this.paragraphs.forEach((paragraph, index) => {
+      if (paragraph.closest('#other-projects')) return;
+  
+      if (!paragraph.querySelector('.btn--theme')) {
+        const link = document.createElement('a');
+        link.href = `/en/projets/projet-${index + 1}.html`;
+        link.className = "btn btn--med btn--theme links";
+        link.target = "_self";
+        link.textContent = "See more";
+  
+        paragraph.appendChild(link);
+      }
+    });
+  }
+
+  removeLinks() {
+    this.paragraphs.forEach(paragraph => {
+      if (paragraph.closest('#other-projects')) return;
+
+      const existingLink = paragraph.querySelector('.btn--theme');
+      if (existingLink) {
+        paragraph.removeChild(existingLink);
+      }
     });
   }
 }
