@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     Linux: "#ffc200",
     XAML: "#0C54C2",
     SQL: "#CC2927",
+    Laravel: "#F05340",
     "3D Modeling": "#FF5733",
     Tkinter: "#1D6E1F",
     SQLite: "#003B57",

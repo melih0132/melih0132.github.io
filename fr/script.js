@@ -54,6 +54,7 @@ const CONFIG = {
     "Agile": "#A0CE4E",
     "Scrum": "#FF7043",
     "Terminal": "#111111",
+    "Laravel": "#F05340",
     "Powershell": "#012456"
   }
 };

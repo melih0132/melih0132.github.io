@@ -52,6 +52,7 @@ const CONFIG = {
     "Unit Tests": "#55606E",
     "UML": "#007ACC",
     "Agile": "#A0CE4E",
+    "Laravel": "#F05340",
     "Scrum": "#FF7043",
     "Terminal": "#111111",
     "Powershell": "#012456"
