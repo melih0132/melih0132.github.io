@@ -1271,6 +1271,32 @@ textarea {
     margin-bottom: 2rem
 }
 
+.project-details__desc-para a {
+    position: relative;
+    font-weight: 700;
+    color: #16B364;
+    margin: 0 3px;
+    text-decoration: none;
+}
+
+.project-details__desc-para a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #16B364;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.project-details__desc-para a:hover::after {
+    transform: scaleX(1);
+    transform-origin: center;
+}
+
 .project-details__tools-used {
     margin: 3rem 0 4rem 0
 }

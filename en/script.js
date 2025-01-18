@@ -344,6 +344,8 @@ class Projects {
   constructor() {
     this.paragraphs = document.querySelectorAll('.projects__row-content');
     this.mediaQuery = window.matchMedia('(max-width: 37.5em)');
+    this.projectLinks = document.querySelectorAll('.project__link');
+    this.githubProjectIndex = Array.from(this.projectLinks).findIndex(link => link.href.includes('github.com'));
     this.init();
   }
 
@@ -376,16 +378,28 @@ class Projects {
   }
 
   addLinks() {
+    let adjustedIndex = 1; // Débuter l'indexation des projets à 1
+
     this.paragraphs.forEach((paragraph, index) => {
       if (paragraph.closest('#other-projects')) return;
-  
+      
+      const parentProject = paragraph.closest('.projects__row');
+      const projectIndex = Array.from(this.projectLinks).indexOf(parentProject.closest('.project__link'));
+      
       if (!paragraph.querySelector('.btn--theme')) {
         const link = document.createElement('a');
-        link.href = `/en/projets/projet-${index + 1}.html`;
+        
+        if (projectIndex === this.githubProjectIndex) {
+          link.href = this.projectLinks[this.githubProjectIndex].href;
+          link.target = "_blank";
+        } else {
+          link.href = `/en/projets/projet-${adjustedIndex}.html`;
+          link.target = "_self";
+          adjustedIndex++; // Incrémenter uniquement pour les projets non GitHub
+        }
+        
         link.className = "btn btn--med btn--theme links";
-        link.target = "_self";
         link.textContent = "See more";
-  
         paragraph.appendChild(link);
       }
     });
