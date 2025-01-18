@@ -1,30 +1,30 @@
 # Portfolio - Melih CETINKAYA
 
-Bienvenue sur mon portfolio GitHub ! Ce site présente mes projets, compétences et expériences en développement. Vous pouvez découvrir mes réalisations et voir le code source de chacun de mes projets.
+Welcome to my GitHub portfolio! This site showcases my projects, skills, and development experiences. You can explore my work and view the source code for each of my projects.
 
-## Lien vers le portfolio
+## Portfolio Link
 
 [melih0132.github.io](https://melih0132.github.io/)
 
-## Technologies et outils
+## Technologies and Tools
 
-Voici les principales technologies et outils que j'utilise :
+Here are the main technologies and tools I use:
 
-- **Langages :** HTML, CSS, JavaScript, etc.
-- **Outils :** Git, GitHub, VS Code, etc.
+- **Languages:** HTML, CSS, JavaScript, etc.
+- **Tools:** Git, GitHub, VS Code, etc.
 
-## Ce que j'apprends actuellement
+## What I'm Currently Learning
 
-Je travaille actuellement sur les technologies suivantes pour continuer d'améliorer mes compétences :
+I am currently working on the following technologies to further improve my skills:
 
-- Laravel
-- WebSocket
+- Laravel  
+- WebSocket  
 
 ## Contact
 
-N'hésitez pas à me contacter pour toute question, collaboration ou opportunité professionnelle !
+Feel free to reach out to me for any questions, collaborations, or professional opportunities!
 
-- **Email :** melih.cetinkaya.32@gmail.com
-- **LinkedIn :** [linkedin.com/in/melih-ctk](https://www.linkedin.com/in/melih-ctk/)
+- **Email:** melih.cetinkaya.32@gmail.com  
+- **LinkedIn:** [linkedin.com/in/melih-ctk](https://www.linkedin.com/in/melih-ctk/)  
 
-Merci de visiter mon portfolio !
+Thank you for visiting my portfolio!
