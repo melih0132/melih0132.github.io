@@ -511,36 +511,52 @@ textarea {
     }
 }
 
-/* * Home Hero Socials */
 .home-hero__socials {
     display: flex;
     flex-direction: column;
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    background: #fff;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 0px 15px 15px 0px;
     padding: 0.5rem;
+    overflow: hidden;
+}
+
+.home-hero__socials::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+}
+
+.home-hero__socials:hover::before {
+    opacity: 1;
 }
 
 @media only screen and (max-width: 56.25em) {
     .home-hero__socials {
-        display: none
+        display: none;
     }
 }
 
 .home-hero__social {
     margin: 2px;
-    width: 5rem
+    width: 5rem;
 }
 
 .home-hero__social-icon-link {
     width: 100%;
     display: block;
     padding: 1rem 1rem 0.5rem 1rem;
-    transition: background .3s;
-    border-radius: 10px
+    transition: background 0.3s;
+    border-radius: 10px;
 }
 
 .home-hero__social-icon-link:hover {
@@ -548,7 +564,7 @@ textarea {
 }
 
 .home-hero__social-icon-link--bd-none {
-    border-bottom: 0
+    border-bottom: 0;
 }
 
 .home-hero__social-icon {
