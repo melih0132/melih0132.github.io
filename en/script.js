@@ -286,7 +286,7 @@ class CollapsibleSkills {
 
     this.handleMediaQueryChange(this.mediaQuery);
     this.mediaQuery.addEventListener('change', (e) => this.handleMediaQueryChange(e));
-    
+
     document.documentElement.classList.add('js-enabled');
   }
 
@@ -306,9 +306,9 @@ class CollapsibleSkills {
     if (!this.active) return;
     const title = event.currentTarget;
     const skillRow = title.nextElementSibling;
-    
+
     const isCurrentlyExpanded = skillRow.classList.contains('expanded');
-    
+
     this.skillRows.forEach(row => {
       if (row !== skillRow) {
         this.collapse(row);
@@ -412,13 +412,13 @@ class Projects {
 
     this.paragraphs.forEach((paragraph, index) => {
       if (paragraph.closest('#other-projects')) return;
-      
+
       const parentProject = paragraph.closest('.projects__row');
       const projectIndex = Array.from(this.projectLinks).indexOf(parentProject.closest('.project__link'));
-      
+
       if (!paragraph.querySelector('.btn--theme')) {
         const link = document.createElement('a');
-        
+
         if (projectIndex === this.githubProjectIndex) {
           link.href = this.projectLinks[this.githubProjectIndex].href;
           link.target = "_blank";
@@ -427,7 +427,7 @@ class Projects {
           link.target = "_self";
           adjustedIndex++; // Incrémenter uniquement pour les projets non GitHub
         }
-        
+
         link.className = "btn btn--med btn--theme links";
         link.textContent = "See more";
         paragraph.appendChild(link);
