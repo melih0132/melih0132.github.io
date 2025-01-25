@@ -770,7 +770,6 @@ textarea {
 
 @media only screen and (max-width: 37.5em) {
     .skills__category-title {
-        cursor: pointer;
         background-color: #fff;
         color: #16B364;
         padding: 1.5rem;
@@ -784,29 +783,38 @@ textarea {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 1s ease-out;
-}
-
-.skills__skill-row.expend {
-    max-height: 120rem;
-}
-
-.skills__skill-row.hidden {
-    display: none;
-}
-
-@media only screen and (max-width: 56.25em) {
-    .skills__skill-row {
-        justify-content: start;
-        gap: 1.5rem;
-    }
 }
 
 @media only screen and (max-width: 37.5em) {
     .skills__skill-row {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out;
         width: 100%;
+    }
+
+    .js-enabled .skills__category-title {
+        display: flex;
+        position: relative;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .js-enabled .skills__category-title::after {
+        content: '▼';
+        position: absolute;
+        right: 10px;
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+    }
+
+    .js-enabled .skills__category-title.expanded::after {
+        transform: rotate(180deg);
+    }
+
+    .skills__skill-row.expanded {
+        max-height: 180rem;
     }
 }
 

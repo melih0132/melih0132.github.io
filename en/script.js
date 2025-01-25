@@ -277,8 +277,17 @@ class CollapsibleSkills {
   }
 
   init() {
+    this.titles.forEach((title, index) => {
+      const skillRow = title.nextElementSibling;
+      title.setAttribute('role', 'button');
+      title.setAttribute('aria-expanded', 'false');
+      skillRow.setAttribute('aria-hidden', 'true');
+    });
+
     this.handleMediaQueryChange(this.mediaQuery);
     this.mediaQuery.addEventListener('change', (e) => this.handleMediaQueryChange(e));
+    
+    document.documentElement.classList.add('js-enabled');
   }
 
   addEventListeners() {
@@ -297,30 +306,36 @@ class CollapsibleSkills {
     if (!this.active) return;
     const title = event.currentTarget;
     const skillRow = title.nextElementSibling;
-    if (skillRow.classList.contains('expanded')) {
-      this.collapse(skillRow);
-    } else {
-      this.expand(skillRow);
-    }
-  };
-
-  toggleAll(expand) {
-    this.skillRows.forEach((skillRow) => {
-      if (expand) {
-        this.expand(skillRow);
-      } else {
-        this.collapse(skillRow);
+    
+    const isCurrentlyExpanded = skillRow.classList.contains('expanded');
+    
+    this.skillRows.forEach(row => {
+      if (row !== skillRow) {
+        this.collapse(row);
+        row.previousElementSibling.setAttribute('aria-expanded', 'false');
       }
     });
-  }
+
+    if (isCurrentlyExpanded) {
+      this.collapse(skillRow);
+      title.setAttribute('aria-expanded', 'false');
+    } else {
+      this.expand(skillRow);
+      title.setAttribute('aria-expanded', 'true');
+    }
+
+    title.classList.toggle('expanded');
+  };
 
   expand(skillRow) {
     skillRow.classList.add('expanded');
     skillRow.style.maxHeight = `${skillRow.scrollHeight}px`;
+    skillRow.setAttribute('aria-hidden', 'false');
   }
 
   collapse(skillRow) {
     skillRow.style.maxHeight = '0';
+    skillRow.setAttribute('aria-hidden', 'true');
     skillRow.addEventListener(
       'transitionend',
       () => skillRow.classList.remove('expanded'),
@@ -337,6 +352,21 @@ class CollapsibleSkills {
       this.toggleAll(true);
       this.removeEventListeners();
     }
+  }
+
+  toggleAll(expand) {
+    this.skillRows.forEach((skillRow, index) => {
+      if (expand) {
+        this.expand(skillRow);
+        skillRow.previousElementSibling.setAttribute('aria-expanded', 'true');
+      } else {
+        this.collapse(skillRow);
+        skillRow.previousElementSibling.setAttribute('aria-expanded', 'false');
+      }
+    });
+    this.titles.forEach((title) => {
+      title.classList.toggle('expanded', expand);
+    });
   }
 }
 
