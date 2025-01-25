@@ -516,7 +516,7 @@ textarea {
 .home-hero__socials {
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
     background: #fff;
@@ -813,22 +813,19 @@ textarea {
 }
 
 .skills__skill {
-    cursor: pointer;
     padding: 1rem 2rem;
     border-radius: 8px;
     font-size: 1.6rem;
     font-weight: 600;
+    cursor: url('../assets/svg/cursor-valide.svg'), auto;
 }
 
 @media only screen and (max-width: 37.5em) {
-
     .skills__skill {
-        cursor: auto;
         width: 100%;
         text-align: center;
     }
 }
-
 
 .skills__projects {
     display: flex;
