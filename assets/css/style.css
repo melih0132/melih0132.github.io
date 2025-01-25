@@ -139,7 +139,6 @@ textarea {
 
 .btn--theme:hover {
     background: #14a357;
-    transform: translateX(5px);
 }
 
 .btn--theme2:hover {
@@ -152,7 +151,7 @@ textarea {
     border: 2px solid #16B364;
     box-shadow: none;
     padding: calc(1.5rem - 2px) calc(5rem - 2px);
-    transition: all 0.3s ease
+    transition: all .3s ease
 }
 
 .btn--theme-inv:hover {
