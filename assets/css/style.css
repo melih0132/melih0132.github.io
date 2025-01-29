@@ -910,23 +910,9 @@ textarea {
     gap: 3.5rem;
     border-radius: 12px;
     padding: 4rem;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: background-color 0.3s ease;
     position: relative;
     background: #cacaca;
-}
-
-.projects__row::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, rgba(255, 255, 255, 0.03), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-    border-radius: 12px;
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -937,10 +923,6 @@ textarea {
         justify-content: center;
         align-items: center;
     }
-}
-
-.projects__row:hover::before {
-    opacity: 1;
 }
 
 .projects__row:hover {
@@ -1617,6 +1599,14 @@ textarea {
 
     #projects {
         background: #1d1d1d;
+    }
+
+    .projects__row {
+        background: #262626;
+    }
+    
+    .projects__row:hover {
+        background: #2c2c2c;
     }
 
     .project-cs-hero {
