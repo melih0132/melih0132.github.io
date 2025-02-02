@@ -1082,7 +1082,7 @@ textarea {
     align-items: center;
 }
 
-#other-projects img {
+.projects__row-img-other {
     width: 100%;
     max-height: fit-content;
     border-radius: 8px;
