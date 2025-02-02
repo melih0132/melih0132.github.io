@@ -519,7 +519,7 @@ textarea {
 .home-hero__socials {
     display: flex;
     flex-direction: column;
-    position: absolute; 
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.8);
@@ -930,7 +930,7 @@ textarea {
 }
 
 .project__row-title {
-    padding: 0 0 1rem 0;    
+    padding: 0 0 1rem 0;
     border-bottom: 6px solid #16B364
 }
 
@@ -1080,6 +1080,12 @@ textarea {
 #other-projects {
     flex-direction: column;
     align-items: center;
+}
+
+#other-projects img {
+    width: 100%;
+    max-height: fit-content;
+    border-radius: 8px;
 }
 
 /* ! Contact */
@@ -1604,7 +1610,7 @@ textarea {
     .projects__row {
         background: #262626;
     }
-    
+
     .projects__row:hover {
         background: #2c2c2c;
     }
