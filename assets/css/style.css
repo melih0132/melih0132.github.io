@@ -844,7 +844,6 @@ textarea {
     border-radius: 8px;
     font-size: 1.6rem;
     font-weight: 600;
-    cursor: url('../assets/svg/cursor-valide.svg'), auto;
 }
 
 @media only screen and (max-width: 37.5em) {
