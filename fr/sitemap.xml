@@ -1,50 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
-<url>
-  <loc>http://melih0132.github.io/./#home</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/./#about</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/./#projects</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/./#contact</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/assets/CV - MELIH CETINKAYA.pdf</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/fr/projets/projet-1.html</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/fr/projets/projet-2.html</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/fr/projets/projet-3.html</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/fr/projets/projet-4.html</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/fr/projets/projet-5.html</loc>
-</url>
-<url>
-  <loc></loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/../</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/../#about</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/../#projects</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/../#contact</loc>
-</url>
-<url>
-  <loc>http://melih0132.github.io/../#</loc>
-</url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://melih0132.github.io/</loc>
+    </url>
+    <url>
+        <loc>http://melih0132.github.io/assets/CV - MELIH CETINKAYA.pdf</loc>
+    </url>
+    <url>
+        <loc>http://melih0132.github.io/fr/projets/projet-1.html</loc>
+    </url>
+    <url>
+        <loc>http://melih0132.github.io/fr/projets/projet-2.html</loc>
+    </url>
+    <url>
+        <loc>http://melih0132.github.io/fr/projets/projet-3.html</loc>
+    </url>
+    <url>
+        <loc>http://melih0132.github.io/fr/projets/projet-4.html</loc>
+    </url>
+    <url>
+        <loc>http://melih0132.github.io/fr/projets/projet-5.html</loc>
+    </url>
+</urlset>
