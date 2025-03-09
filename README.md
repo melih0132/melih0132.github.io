@@ -13,13 +13,6 @@ Here are the main technologies and tools I use:
 - **Languages:** HTML, CSS, JavaScript, etc.
 - **Tools:** Git, GitHub, VS Code, etc.
 
-## What I'm Currently Learning
-
-I am currently working on the following technologies to further improve my skills:
-
-- Laravel  
-- WebSocket  
-
 ## Contact
 
 Feel free to reach out to me for any questions, collaborations, or professional opportunities!
