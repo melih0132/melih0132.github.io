@@ -70,7 +70,6 @@ const CONFIG = {
     "Agile": "#A0CE4E",
     "Scrum": "#FF7043",
     "WebSockets": "#0091EA",
-    "TDD": "#673AB7",
     "Reverse Engineering": "#607D8B",
 
     "Laravel": "#F05340",
