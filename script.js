@@ -1,4 +1,3 @@
-// Détéction langage utilisateur
 const userLanguage = navigator.language || navigator.userLanguage;
 
 if (userLanguage.startsWith('fr')) {
