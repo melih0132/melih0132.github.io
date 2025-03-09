@@ -16,18 +16,20 @@ const CONFIG = {
     "Python": "#306998",
     ".NET/C#": "#9B4F96",
     "SQL": "#CC2927",
+    "PL/pgSQL": "#336791",
     "XAML": "#007ACC",
     "Bash": "#4EAA25",
-    "R": "#2167ba",
-    "AutoIT": "#5d82ac",
+    
     "PostgreSQL": "#336791",
     "MongoDB": "#47A248",
     "pgAdmin4": "#326690",
-    "phpMyAdmin": "#f89d06",
     "MCD": "#FF5733",
     "MLD": "#33FF57",
     "Visual Paradigm": "#cc3433",
     "PowerAMC": "#F08080",
+    "JSON/JSONB": "#ffcc00",
+    "Indexation & Optimisation": "#6A1B9A",
+
     "Node.js": "#3C873A",
     "Express": "#4B8BBE",
     "Socket.io": "#24c29f",
@@ -36,6 +38,11 @@ const CONFIG = {
     "Unity": "#222C37",
     "Phaser": "#00BCB4",
     "WPF": "#512BD4",
+    "MVC": "#FF9800",
+    "MVVM": "#009688",
+    "jQuery": "#0769AD",
+    "RESTful API": "#26A69A",
+
     "VS Code": "#007ACC",
     "Visual Studio": "#5C2D91",
     "Git": "#F05032",
@@ -46,17 +53,27 @@ const CONFIG = {
     "Microsoft Azure": "#0078D4",
     "Excel": "#217346",
     "Power BI": "#F2C811",
+    "Docker": "#0db7ed",
+    "Postman": "#FF6C37",
+    "Swagger": "#85EA2D",
+    "Nginx": "#009639",
+    "Apache": "#D22128",
+
     "Figma": "#42498c",
     "Adobe Illustrator": "#FF9A00",
     "WordPress": "#21759B",
     "Canva": "#00C4CC",
+
     "Tests Unitaires": "#55606E",
+    "CRUD": "#4CAF50",
     "UML": "#007ACC",
     "Agile": "#A0CE4E",
     "Scrum": "#FF7043",
-    "Terminal": "#111111",
+    "WebSockets": "#0091EA",
+    "TDD": "#673AB7",
+    "Reverse Engineering": "#607D8B",
+
     "Laravel": "#F05340",
-    "Powershell": "#012456"
   }
 };
 
