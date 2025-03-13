@@ -33,6 +33,7 @@ const CONFIG = {
     "Node.js": "#3C873A",
     "Express": "#4B8BBE",
     "Socket.io": "#24c29f",
+    "Vue.js": "#42b883",
     "Nodemon": "#76D04B",
     "Bootstrap": "#6e11f5",
     "Unity": "#222C37",
