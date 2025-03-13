@@ -48,6 +48,7 @@ const CONFIG = {
     "Git": "#F05032",
     "GitHub": "#181717",
     "Linux": "#ffc200",
+    "Docker": "#0db7ed",
     "Trello": "#0079BF",
     "Microsoft Teams": "#6264A7",
     "Microsoft Azure": "#0078D4",

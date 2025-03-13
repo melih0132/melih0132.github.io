@@ -47,6 +47,7 @@ const CONFIG = {
     "Visual Studio": "#5C2D91",
     "Git": "#F05032",
     "GitHub": "#181717",
+    "Docker": "#0db7ed",
     "Linux": "#ffc200",
     "Trello": "#0079BF",
     "Microsoft Teams": "#6264A7",
