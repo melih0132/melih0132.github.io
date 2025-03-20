@@ -3,10 +3,12 @@ const CONFIG = {
   messageDisplayTime: 3000,
   languageChangeInterval: 2000,
   translations: [
-    "Hi", "Ola", "Ciao", "Hoi", "Yo",
-    "ハイ", "サン", "안녕", "嘿", "Прив",
-    "Bon", "Hai", "Hej", "ねえ", "Ви",
-    "Oi", "よ", "嗨", "เฮ", "नम"
+    "Yo", "Hi", "Ciao", "Hola", "Hey",
+    "Salut", "Oi", "Hej", "Hoi", "Heya",
+    "ねえ", "嗨", "เฮ", "नम", "Прив",
+    "Ви", "よ", "ハイ", "サン", "안녕",
+    "Heyo", "Hola", "Olá", "Zdrav", "Cześć", 
+    "Salaam", "Nam", "Merh", "Selam"
   ],
   skillColors: {
     "HTML": "#E34C26",
@@ -19,7 +21,7 @@ const CONFIG = {
     "PL/pgSQL": "#336791",
     "XAML": "#007ACC",
     "Bash": "#4EAA25",
-    
+
     "PostgreSQL": "#336791",
     "MongoDB": "#47A248",
     "pgAdmin4": "#326690",
