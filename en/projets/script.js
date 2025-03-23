@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     Terminal: "#111111",
     Bash: "#4EAA25",
     Powershell: "#012456",
+    Bootstrap: "#6e11f5",
     "Microsoft Teams": "#6264A7",
     "Microsoft Azure": "#0078D4",
     Trello: "#0079BF",

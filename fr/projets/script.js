@@ -95,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "Microsoft Teams": "#6264A7",
     "Microsoft Azure": "#0078D4",
     Trello: "#0079BF",
+    Bootstrap: "#6e11f5",
     Figma: "#42498c",
     "Adobe Illustrator": "#FF9A00",
     WordPress: "#21759B",

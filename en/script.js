@@ -3,7 +3,7 @@ const CONFIG = {
   messageDisplayTime: 3000,
   languageChangeInterval: 2000,
   translations: [
-    "Yo", "Hi", "Ciao", "Hola", "Hey",
+    "Hi", "Ciao", "Hola", "Hey",
     "Salut", "Oi", "Hej", "Hoi", "Heya",
     "ねえ", "嗨", "เฮ", "नम", "Прив",
     "Ви", "よ", "ハイ", "サン", "안녕",
