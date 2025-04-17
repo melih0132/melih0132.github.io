@@ -256,132 +256,144 @@
       </h2>
       <div class="projects__content">
 
-        <a href="/fr/projets/projet-1.html" class="project__link" target="_self">
-          <div class="projects__row">
-            <div class="project__row-title">
-              <h3 class="projects__row-content-main-title">Evit'Shuriken</h3>
-            </div>
-            <div class="project__row-desc">
-              <div class="projects__row-img-cont">
-                <img src="/assets/webp/Evit'Shuriken/Main.webp" alt="Evit'Shuriken Screenshot" class="projects__row-img"
-                  loading="lazy" />
-              </div>
-              <div class="projects__row-content">
-                <p class="projects__row-content-desc">
-                  <strong>Evit'Shuriken</strong> est un jeu <span>WPF</span> que j'ai créé, combinant des connaissances
-                  en <span>.NET/C#</span> et en <span>XAML</span>.
-                  Ce projet a été réalisé durant ma première année en BUT Informatique.
-                </p>
-              </div>
-            </div>
-          </div>
-        </a>
+        <div class="projects-grid">
 
-        <a href="/fr/projets/projet-2.html" class="project__link" target="_self">
-          <div class="projects__row">
-            <div class="project__row-title">
-              <h3 class="projects__row-content-main-title">DortanApp</h3>
+          <!-- Evit'Shuriken -->
+          <a href="/fr/projets/projet-1.html" class="project-card" target="_self">
+            <div class="project-image">
+              <img src="/assets/webp/Evit'Shuriken/Main.webp" alt="Evit'Shuriken" loading="lazy">
             </div>
-            <div class="project__row-desc">
-              <div class="projects__row-img-cont">
-                <img src="/assets/webp/DortanApp/Réservations.webp" alt="DortanApp Screenshot" class="projects__row-img"
-                  loading="lazy" />
+            <div class="project-info">
+              <h2 class="project-title">Evit'Shuriken</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">WPF</span>
+                <span class="tech-tag">.NET/C#</span>
+                <span class="tech-tag">XAML</span>
+                <span class="tech-tag">+2</span>
               </div>
-              <div class="projects__row-content">
-                <p class="projects__row-content-desc">
-                  <strong>DortanApp</strong> est une application développée en <span>.NET/C#</span> avec
-                  <span>WPF</span>,
-                  intégrant une base de données <span>PostgreSQL</span> pour la gestion des réservations dans une
-                  mairie.
-                </p>
+              <p class="project-description">
+                Jeu que j'ai créé combinant des connaissances en .NET/C# et XAML. Réalisé durant ma première année en
+                BUT Informatique.
+              </p>
+              <div class="project-links">
+                <span class="project-link code-link">Voir détails</span>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
 
-        <a href="/fr/projets/projet-3.html" class="project__link" target="_self">
-          <div class="projects__row">
-            <div class="project__row-title">
-              <h3 class="projects__row-content-main-title">KUBE</h3>
+          <!-- DortanApp -->
+          <a href="/fr/projets/projet-2.html" class="project-card" target="_self">
+            <div class="project-image">
+              <img src="/assets/webp/DortanApp/Réservations.webp" alt="DortanApp" loading="lazy">
             </div>
-            <div class="project__row-desc">
-              <div class="projects__row-img-cont">
-                <img src="/assets/webp/Kube/Menu.webp" alt="KUBE Screenshot" class="projects__row-img" loading="lazy" />
+            <div class="project-info">
+              <h2 class="project-title">DortanApp</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">.NET</span>
+                <span class="tech-tag">WPF</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">+5</span>
               </div>
-              <div class="projects__row-content">
-                <p class="projects__row-content-desc">
-                  <strong>KUBE</strong> est un jeu réalisé via <span>Unity</span> en <span>.NET/C#</span>. Ce projet m'a
-                  permis de découvrir les outils de développement de jeux.
-                </p>
+              <p class="project-description">
+                Application de gestion des réservations pour mairie avec interface WPF et base de données PostgreSQL.
+              </p>
+              <div class="project-links">
+                <span class="project-link code-link">Voir détails</span>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
 
-        <a href="https://github.com/melih0132/PROJECTS/tree/main/WEB/PHASER" class="project__link" target="_blank">
-          <div class="projects__row">
-            <div class="project__row-title">
-              <h3 class="projects__row-content-main-title">Phaser Games</h3>
+          <!-- KUBE -->
+          <a href="/fr/projets/projet-3.html" class="project-card" target="_self">
+            <div class="project-image">
+              <img src="/assets/webp/Kube/Menu.webp" alt="KUBE" loading="lazy">
             </div>
-            <div class="project__row-desc">
-              <div class="projects__row-img-cont">
-                <img src="/assets/webp/Phaser/logo.webp" alt="Phaser Game Screenshot" class="projects__row-img"
-                  loading="lazy" />
+            <div class="project-info">
+              <h2 class="project-title">KUBE</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Unity</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">.NET</span>
+                <span class="tech-tag">+2</span>
               </div>
-              <div class="projects__row-content">
-                <p class="projects__row-content-desc">
-                  Jeux développé avec <span>Phaser</span>, utilisant <span>Express</span> pour le backend,
-                  <span>Socket.io</span> pour la communication en temps réel, et <span>Nodemon</span> pour le
-                  rechargement automatique.
-                </p>
+              <p class="project-description">
+                Jeu développé avec Unity en .NET/C#. Découverte des outils de développement de jeux vidéo.
+              </p>
+              <div class="project-links">
+                <span class="project-link code-link">Voir détails</span>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
 
-        <a href="/fr/projets/projet-4.html" class="project__link" target="_self">
-          <div class="projects__row">
-            <div class="project__row-title">
-              <h3 class="projects__row-content-main-title">LPO</h3>
+          <!-- Phaser Games -->
+          <a href="https://github.com/melih0132/PROJECTS/tree/main/WEB/PHASER" class="project-card" target="_blank">
+            <div class="project-image">
+              <img src="/assets/webp/Phaser/logo.webp" alt="Phaser Games" loading="lazy">
             </div>
-            <div class="project__row-desc">
-              <div class="projects__row-img-cont">
-                <img src="/assets/webp/LPO/logo.webp" alt="LPO Screenshot" class="projects__row-img" loading="lazy" />
+            <div class="project-info">
+              <h2 class="project-title">Phaser Games</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Phaser</span>
+                <span class="tech-tag">Express</span>
+                <span class="tech-tag">Socket.io</span>
+                <span class="tech-tag">Nodemon</span>
               </div>
-              <div class="projects__row-content">
-                <p class="projects__row-content-desc">
-                  Un projet universitaire gérant le comptage
-                  des oiseaux pour la <strong>LPO</strong>, utilisant <span>PostgreSQL</span> pour la gestion,
-                  <span>Excel</span> pour l'analyse, et
-                  <span>Power BI</span> pour la visualisation.
-                </p>
+              <p class="project-description">
+                Jeux développés avec Phaser, utilisant Express pour le backend et Socket.io pour la communication en
+                temps réel.
+              </p>
+              <div class="project-links">
+                <span class="project-link demo-link">Voir sur GitHub</span>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
 
-        <a href="/fr/projets/projet-5.html" class="project__link" target="_self">
-          <div class="projects__row">
-            <div class="project__row-title">
-              <h3 class="projects__row-content-main-title">Application type Uber</h3>
+          <!-- LPO -->
+          <a href="/fr/projets/projet-4.html" class="project-card" target="_self">
+            <div class="project-image">
+              <img src="/assets/webp/LPO/logo.webp" alt="LPO" loading="lazy">
             </div>
-            <div class="project__row-desc">
-              <div class="projects__row-img-cont">
-                <img src="/assets/webp/UBER/logo.webp" alt="Uber-like Application Screenshot" class="projects__row-img"
-                  loading="lazy" />
+            <div class="project-info">
+              <h2 class="project-title">LPO</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Excel</span>
+                <span class="tech-tag">Power BI</span>
+                <span class="tech-tag">+5</span>
               </div>
-              <div class="projects__row-content">
-                <p class="projects__row-content-desc">
-                  Une <strong>application de transport</strong> développée avec <span>Laravel</span>,
-                  <span>PostgreSQL</span>,
-                  <span>Node.js</span>, et <span>Power BI</span> pour l'analyse des données. Elle intègre des
-                  fonctionnalités
-                  de sécurité et de protection des données conformes au RGPD.
-                </p>
+              <p class="project-description">
+                Projet universitaire de comptage d'oiseaux avec gestion PostgreSQL, analyse Excel et visualisation Power
+                BI.
+              </p>
+              <div class="project-links">
+                <span class="project-link code-link">Voir détails</span>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+
+          <!-- Application Uber -->
+          <a href="/fr/projets/projet-5.html" class="project-card" target="_self">
+            <div class="project-image">
+              <img src="/assets/webp/UBER/logo.webp" alt="Application Uber" loading="lazy">
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Clone Uber</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Laravel</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Power BI</span>
+                <span class="tech-tag">+11</span>
+              </div>
+              <p class="project-description">
+                Application de type Uber avec Laravel, PostgreSQL, conforme RGPD avec analyse Power BI.
+              </p>
+              <div class="project-links">
+                <span class="project-link code-link">Voir détails</span>
+              </div>
+            </div>
+          </a>
+
+        </div>
 
         <!--         <a href="/fr/projets/projet-6.html" class="project__link" target="_self">
           <div class="projects__row">
@@ -402,24 +414,21 @@
           </div>
         </a> -->
 
-        <div class="projects__row">
-          <div class="project__row-title">
-            <h3 class="projects__row-content-main-title">Autres projets</h3>
-          </div>
-          <div id="other-projects" class="project__row-desc">
-            <div class="projects__row-img-cont">
-              <img src="/assets/png/projects.png" alt="Capture d'écran des autres projets"
-                class="projects__row-img-other" loading="lazy" />
-            </div>
-            <div class="projects__row-content">
-              <a class="btn btn--med btn--theme" href="https://github.com/melih0132/PROJECTS" target="_blank">Voir mes
-                projets sur
-                GitHub</a>
-            </div>
-          </div>
+        <div class="projects__btn-container">
+          <a class="btn btn--med btn--theme" href="https://github.com/melih0132/PROJECTS" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-github h-5 w-5 mr-2">
+              <path
+                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+              </path>
+              <path d="M9 18c-4.51 2-5-2-7-2"></path>
+            </svg>
+            Voir plus sur GitHub
+          </a>
         </div>
+
       </div>
-    </div>
   </section>
 
   <section id="contact" class="contact sec-pad dynamicBg">
