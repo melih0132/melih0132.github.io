@@ -463,7 +463,7 @@ textarea {
 }
 
 .heading-sec__mb-bg {
-    margin-bottom: 11rem
+    margin-bottom: 10rem
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -986,19 +986,6 @@ textarea {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     background: #fafafa;
-}
-
-/* Project Image */
-.project-image {
-    height: 220px;
-    overflow: hidden;
-    position: relative;
-}
-
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 /* Project Info */
