@@ -217,10 +217,9 @@ textarea {
     display: block;
     font-size: 4rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
     letter-spacing: 3px;
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
     position: relative;
 }
 
@@ -486,7 +485,6 @@ textarea {
     display: block;
     font-size: 4rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
     letter-spacing: 3px;
     text-align: center;
     margin-bottom: 3.5rem;
@@ -499,7 +497,7 @@ textarea {
 
 .heading-sec__main--lt::after {
     content: '';
-    background: #16B364 !important
+    background: #16B364;
 }
 
 .heading-sec__main::after {
@@ -667,16 +665,11 @@ textarea {
 }
 
 @keyframes bounce-down {
-    0% {
+    0%, 100% {
         transform: translateY(0) rotate(135deg);
     }
-
     50% {
         transform: translateY(10px) rotate(135deg);
-    }
-
-    100% {
-        transform: translateY(0) rotate(135deg);
     }
 }
 
@@ -1030,7 +1023,7 @@ textarea {
 
 /* Project Description */
 .project-description {
-    color: #666;
+    color: #444;
     font-size: 1.6rem;
     line-height: 1.7;
     margin-bottom: 2.5rem;
