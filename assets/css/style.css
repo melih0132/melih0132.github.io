@@ -951,6 +951,7 @@ textarea {
 /* Projects Section */
 #projects {
     background: #f5f5f5;
+    padding-bottom: 6rem;
 }
 
 /* Projects Grid Container */
