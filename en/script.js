@@ -436,10 +436,20 @@ class Projects {
   }
 
   addLinks() {
-    let adjustedIndex = 1; // Débuter l'indexation des projets à 1
+    let adjustedIndex = 1;
 
     this.paragraphs.forEach((paragraph, index) => {
-      if (paragraph.closest('#other-projects')) return;
+      if (paragraph.closest('#other-projects')) {
+        if (!paragraph.querySelector('.btn--theme')) {
+          const githubLink = document.createElement('a');
+          githubLink.href = "https://github.com/melih0132/all-my-projects";
+          githubLink.className = "btn btn--med btn--theme links";
+          githubLink.target = "_blank";
+          githubLink.textContent = "See my projects on GitHub";
+          paragraph.appendChild(githubLink);
+        }
+        return;
+      }
 
       const parentProject = paragraph.closest('.projects__row');
       const projectIndex = Array.from(this.projectLinks).indexOf(parentProject.closest('.project__link'));
@@ -451,9 +461,9 @@ class Projects {
           link.href = this.projectLinks[this.githubProjectIndex].href;
           link.target = "_blank";
         } else {
-          link.href = `/en/projets/projet-${adjustedIndex}.html`;
+          link.href = `/en/projects/project-${adjustedIndex}.html`;
           link.target = "_self";
-          adjustedIndex++; // Incrémenter uniquement pour les projets non GitHub
+          adjustedIndex++;
         }
 
         link.className = "btn btn--med btn--theme links";

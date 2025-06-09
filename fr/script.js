@@ -438,7 +438,7 @@ class Projects {
       if (paragraph.closest('#other-projects')) {
         if (!paragraph.querySelector('.btn--theme')) {
           const githubLink = document.createElement('a');
-          githubLink.href = "https://github.com/melih0132/PROJECTS";
+          githubLink.href = "https://github.com/melih0132/all-my-projects";
           githubLink.className = "btn btn--med btn--theme links";
           githubLink.target = "_blank";
           githubLink.textContent = "Voir mes projets sur GitHub";

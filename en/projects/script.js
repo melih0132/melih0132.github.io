@@ -92,10 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
     Terminal: "#111111",
     Bash: "#4EAA25",
     Powershell: "#012456",
-    Bootstrap: "#6e11f5",
     "Microsoft Teams": "#6264A7",
     "Microsoft Azure": "#0078D4",
     Trello: "#0079BF",
+    Bootstrap: "#6e11f5",
     Figma: "#42498c",
     "Adobe Illustrator": "#FF9A00",
     WordPress: "#21759B",
@@ -113,7 +113,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "3D Modeling": "#FF5733",
     Tkinter: "#1D6E1F",
     SQLite: "#003B57",
-    CSV: "#FF9800"
+    CSV: "#FF9800",
+    Flutter: "#02569B",
+    Dart: "#00B4AB",
+    "RESTful API": "#FF6B6B",
+    "Visual Studio": "#5C2D91",
+    Postman: "#FF6C37",
+    Vue: "#4FC08D",
+    ".NET Core": "#512BD4",
+    C: "#A8B9CC",
+    "C++": "#00599C",
+    "C#": "#239120"
   };
 
   document.querySelectorAll(".skills__skill").forEach(skill => {
