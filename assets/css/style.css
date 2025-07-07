@@ -23,8 +23,8 @@ html {
 
 /* * Scrollbar CSS */
 ::-webkit-scrollbar {
-    width: 1rem;
-    height: 1rem;
+    width: 0.8rem;
+    height: 0.8rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -32,12 +32,13 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(22, 179, 100, 0.3);
-    border-radius: 0.5rem;
+    background-color: rgba(128, 128, 128, 0.2);
+    border-radius: 0.4rem;
+    border: 1px solid rgba(128, 128, 128, 0.1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(22, 179, 100, 0.5);
+    background-color: rgba(128, 128, 128, 0.3);
 }
 
 /* * Selection */
