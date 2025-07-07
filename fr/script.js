@@ -36,7 +36,7 @@ const CONFIG = {
     "Flutter": "#02569B",
     "Phaser": "#00BCB4",
     "WPF": "#512BD4",
-    "Socket.js": "#24c29f",
+    "Socket.io": "#24c29f",
     "Nodemon": "#76D04B",
 
     // Bases de Données
