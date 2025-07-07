@@ -869,7 +869,7 @@ textarea {
     .skills__skill-row {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.5s ease-out;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         width: 100%;
     }
 
@@ -879,6 +879,15 @@ textarea {
         align-items: center;
         cursor: pointer;
         user-select: none;
+        transition: background-color 0.2s ease;
+    }
+
+    .js-enabled .skills__category-title:hover {
+        background-color: rgba(22, 179, 100, 0.1);
+    }
+
+    .js-enabled .skills__category-title.expanded {
+        background-color: rgba(22, 179, 100, 0.15);
     }
 
     .js-enabled .skills__category-title::after {
@@ -886,7 +895,8 @@ textarea {
         position: absolute;
         right: 10px;
         font-size: 1.2rem;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: #16B364;
     }
 
     .js-enabled .skills__category-title.expanded::after {

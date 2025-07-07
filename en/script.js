@@ -341,25 +341,29 @@ class CollapsibleSkills {
     if (!this.active) return;
     const title = event.currentTarget;
     const skillRow = title.nextElementSibling;
-
     const isCurrentlyExpanded = skillRow.classList.contains('expanded');
-
+    
+    // Fermer tous les autres panneaux
     this.skillRows.forEach(row => {
       if (row !== skillRow) {
         this.collapse(row);
-        row.previousElementSibling.setAttribute('aria-expanded', 'false');
+        const otherTitle = row.previousElementSibling;
+        otherTitle.setAttribute('aria-expanded', 'false');
+        otherTitle.classList.remove('expanded');
       }
     });
 
+    // Basculer l'état actuel
     if (isCurrentlyExpanded) {
       this.collapse(skillRow);
       title.setAttribute('aria-expanded', 'false');
+      title.classList.remove('expanded');
+      skillRow.classList.remove('expanded');
     } else {
       this.expand(skillRow);
       title.setAttribute('aria-expanded', 'true');
+      title.classList.add('expanded');
     }
-
-    title.classList.toggle('expanded');
   };
 
   expand(skillRow) {
@@ -371,11 +375,6 @@ class CollapsibleSkills {
   collapse(skillRow) {
     skillRow.style.maxHeight = '0';
     skillRow.setAttribute('aria-hidden', 'true');
-    skillRow.addEventListener(
-      'transitionend',
-      () => skillRow.classList.remove('expanded'),
-      { once: true }
-    );
   }
 
   handleMediaQueryChange(mediaQuery) {
@@ -391,16 +390,16 @@ class CollapsibleSkills {
 
   toggleAll(expand) {
     this.skillRows.forEach((skillRow, index) => {
+      const title = skillRow.previousElementSibling;
       if (expand) {
         this.expand(skillRow);
-        skillRow.previousElementSibling.setAttribute('aria-expanded', 'true');
+        title.setAttribute('aria-expanded', 'true');
+        title.classList.add('expanded');
       } else {
         this.collapse(skillRow);
-        skillRow.previousElementSibling.setAttribute('aria-expanded', 'false');
+        title.setAttribute('aria-expanded', 'false');
+        title.classList.remove('expanded');
       }
-    });
-    this.titles.forEach((title) => {
-      title.classList.toggle('expanded', expand);
     });
   }
 }
