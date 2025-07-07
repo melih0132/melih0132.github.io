@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
     Trello: "#0079BF",
     Bootstrap: "#6e11f5",
     Figma: "#42498c",
+    Framer: "#0055FF",
     "Adobe Illustrator": "#FF9A00",
     WordPress: "#21759B",
     "Power BI": "#F2C811",
@@ -124,6 +125,17 @@ document.addEventListener("DOMContentLoaded", () => {
     C: "#A8B9CC",
     "C++": "#00599C",
     "C#": "#239120",
+    FastAPI: "#05998B",
+    React: "#61DAFB",
+    TypeScript: "#3178C6",
+    "Next.js": "#000000",
+    SQLAlchemy: "#D71F24",
+    Alembic: "#FF6B6B",
+    Pytest: "#0A9EDC",
+    Vite: "#646CFF",
+    "Tailwind CSS": "#06B6D4",
+    Swagger: "#85EA2D",
+    Docker: "#2496ED",
   };
 
   document.querySelectorAll(".skills__skill").forEach(skill => {

@@ -15,6 +15,7 @@ const CONFIG = {
     "HTML": "#E34C26",
     "CSS": "#732f9c",
     "JavaScript": "#F7DF1E",
+    "TypeScript": "#3178C6",
     "PHP": "#777BB4",
     "Python": "#306998",
     "C# (.NET)": "#9B4F96",
@@ -32,12 +33,17 @@ const CONFIG = {
     "Vue.js": "#42b883",
     "Bootstrap": "#6e11f5",
     "jQuery": "#0769AD",
-    "FastAPI": "#009688",
+    "FastAPI": "#05998B",
     "Flutter": "#02569B",
     "Phaser": "#00BCB4",
     "WPF": "#512BD4",
     "Socket.io": "#24c29f",
     "Nodemon": "#76D04B",
+    "Vite": "#646CFF",
+    "Tailwind CSS": "#06B6D4",
+    "SQLAlchemy": "#D71F24",
+    "Alembic": "#FF6B6B",
+    "Pytest": "#0A9EDC",
 
     // Bases de Données
     "PostgreSQL": "#336791",
@@ -75,6 +81,7 @@ const CONFIG = {
     "Adobe Illustrator": "#FF9A00",
     "Canva": "#00C4CC",
     "WordPress": "#21759B",
+    "Framer": "#0055FF",
 
     // Méthodologies & Concepts
     "UML": "#007ACC",
