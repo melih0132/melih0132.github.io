@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <title>Melih Cetinkaya | HEVA - Plateforme de Gestion d'Événements</title>
+  <link rel="icon" href="/assets/png/logo.png" type="image/png">
+</head>
+
+<body>
+  <header class="header">
+    <div class="header__content">
+      <div class="header__logo-container">
+        <div class="header__logo-img-cont">
+          <img src="/assets/png/pp.png" alt="PP Melih CETINKAYA" class="header__logo-img" />
+        </div>
+        <span class="header__logo-sub">Melih Cetinkaya</span>
+      </div>
+      <div class="header__main">
+        <ul class="header__links">
+          <li class="header__link-wrapper">
+            <a href="../" class="header__link">Accueil</a>
+          </li>
+          <li class="header__link-wrapper">
+            <a href="../#about" class="header__link">À propos</a>
+          </li>
+          <li class="header__link-wrapper">
+            <a href="../#projects" class="header__link">Projets</a>
+          </li>
+          <li class="header__link-wrapper">
+            <a href="../#contact" class="header__link">Contact</a>
+          </li>
+        </ul>
+        <div class="header__main-ham-menu-cont">
+          <img src="/assets/svg/ham-menu.svg" alt="hamburger menu" class="header__main-ham-menu" />
+          <img src="/assets/svg/ham-menu-close.svg" alt="hamburger menu close"
+            class="header__main-ham-menu-close d-none" />
+        </div>
+      </div>
+    </div>
+    <div class="header__sm-menu">
+      <div class="header__sm-menu-content">
+        <ul class="header__sm-menu-links">
+          <li class="header__sm-menu-link">
+            <a href="../">Accueil</a>
+          </li>
+          <li class="header__sm-menu-link">
+            <a href="../#about">À propos</a>
+          </li>
+          <li class="header__sm-menu-link">
+            <a href="../#projects">Projets</a>
+          </li>
+          <li class="header__sm-menu-link">
+            <a href="../#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section class="project-cs-hero">
+    <div class="project-cs-hero__content">
+      <h1 class="heading-primary"><strong>HEVA - Plateforme de Gestion d'Événements</strong></h1>
+      <div class="project-cs-hero__info">
+        <p class="text-primary">
+          L'<strong>étude de cas</strong> du projet <strong>HEVA</strong> avec FastAPI et React est présentée sur cette page, incluant un
+          <strong>aperçu</strong> du projet ainsi que les <strong>outils utilisés</strong>.
+        </p>
+      </div>
+      <div class="project-cs-hero__cta">
+        <a href="https://heva-events.netlify.app/" class="btn btn--bg"
+          target="_blank" rel="noreferrer"><strong>Maquette en Ligne</strong></a>
+      </div>
+    </div>
+  </section>
+  <section class="project-details">
+    <div class="main-container">
+      <div class="project-details__content">
+
+        <div class="project-details__content-main">
+          <div class="project-details__desc">
+            <h2 class="project-details__content-title"><strong>Présentation du projet</strong></h2>
+
+            <p class="project-details__desc-para">
+              Le projet <strong><a href="https://heva-events.netlify.app/" target="_blank"
+                  rel="noopener noreferrer">HEVA - Event Management Platform</a></strong> est une plateforme complète de gestion d'événements développée avec
+              <strong>FastAPI</strong> pour le backend et <strong>React</strong> avec TypeScript pour le frontend. Il s'agit d'une
+              solution moderne et évolutive pour la gestion complète d'événements, intégrant des fonctionnalités avancées d'IA.
+            </p>
+
+            <div class="project-details__showcase-img-cont">
+              <img src="/assets/webp/Heva/home.webp" alt="Page d'accueil HEVA"
+                loading="lazy" class="project-details__showcase-img" />
+            </div>
+
+            <p class="project-details__desc-para">
+              Cette plateforme intègre des fonctionnalités de <strong>sécurité avancée</strong> avec authentification OTP et 2FA pour les administrateurs,
+              une <strong>architecture modulaire</strong> basée sur Clean Architecture, et une <strong>intégration IA</strong> pour la qualification
+              et la conversation automatisée. Le système est entièrement <strong>multilingue</strong> et conforme aux standards de sécurité.
+            </p>
+
+            <div class="project-details__showcase-img-cont">
+              <img src="/assets/webp/Heva/admin.webp" alt="Interface d'administration"
+                loading="lazy" class="project-details__showcase-img" />
+            </div>
+
+            <p class="project-details__desc-para">
+              Parmi les <strong>fonctionnalités clés</strong>, on retrouve la <strong>gestion complète des projets et briefs</strong>,
+              un <strong>système d'authentification sécurisé</strong> avec OTP et authentification à deux facteurs, une
+              <strong>intégration IA</strong> pour l'assistance et la qualification automatique, une <strong>interface utilisateur moderne</strong>
+              et réactive, la <strong>gestion des services et témoignages</strong>, un <strong>système de contact</strong> intégré,
+              et une <strong>documentation API interactive</strong> via Swagger/OpenAPI.
+            </p>
+
+            <div class="project-details__showcase-img-cont">
+              <img src="/assets/webp/Heva/client.webp" alt="Interface client"
+                loading="lazy" class="project-details__showcase-img" />
+            </div>
+
+            <p class="project-details__desc-para">
+              L'architecture backend utilise <strong>FastAPI</strong> avec <strong>SQLAlchemy</strong> et <strong>PostgreSQL</strong>,
+              incluant des <strong>migrations de base de données</strong> avec Alembic et des <strong>tests automatisés</strong> avec Pytest.
+              Le frontend développé en <strong>React</strong> avec <strong>TypeScript</strong> et <strong>Vite</strong> offre une
+              expérience utilisateur optimale avec <strong>Tailwind CSS</strong> pour le styling.
+            </p>
+
+            <div class="project-details__showcase-img-cont">
+              <img src="/assets/webp/Heva/api.webp" alt="Documentation API"
+                loading="lazy" class="project-details__showcase-img" />
+            </div>
+
+            <p class="project-details__desc-para">
+              Le projet inclut également des <strong>tests de pénétration</strong> et une <strong>analyse de sécurité</strong> complète,
+              une <strong>documentation détaillée</strong> pour le développement, et une <strong>configuration Docker</strong> pour
+              le déploiement. La plateforme est conçue pour être <strong>maintenable</strong>, <strong>évolutive</strong> et
+              <strong>facilement testable</strong>.
+            </p>
+
+            <div class="project-details__showcase-img-cont">
+              <img src="/assets/webp/Heva/ia.webp" alt="Intégration IA"
+                loading="lazy" class="project-details__showcase-img" />
+            </div>
+
+            <div class="project-details__tools-used">
+              <h2 class="project-details__content-title"><strong>Avec</strong></h2>
+              <div class="skills__projects">
+                <div class="skills__skill"><strong>FastAPI</strong></div>
+                <div class="skills__skill"><strong>React</strong></div>
+                <div class="skills__skill"><strong>TypeScript</strong></div>
+                <div class="skills__skill"><strong>Next.js</strong></div>
+                <div class="skills__skill"><strong>PostgreSQL</strong></div>
+                <div class="skills__skill"><strong>SQLAlchemy</strong></div>
+                <div class="skills__skill"><strong>Alembic</strong></div>
+                <div class="skills__skill"><strong>Pytest</strong></div>
+                <div class="skills__skill"><strong>Vite</strong></div>
+                <div class="skills__skill"><strong>Tailwind CSS</strong></div>
+                <div class="skills__skill"><strong>RESTful API</strong></div>
+                <div class="skills__skill"><strong>Swagger</strong></div>
+                <div class="skills__skill"><strong>Postman</strong></div>
+                <div class="skills__skill"><strong>Figma</strong></div>
+                <div class="skills__skill"><strong>Framer</strong></div>
+                <div class="skills__skill"><strong>Docker</strong></div>
+                <div class="skills__skill"><strong>Git</strong></div>
+                <div class="skills__skill"><strong>GitHub</strong></div>
+                <div class="skills__skill"><strong>VS Code</strong></div>
+              </div>
+            </div>
+            <div class="project-details__links">
+              <h2 class="project-details__content-title"><strong>Voir la Maquette</strong></h2>
+              <a href="https://heva-events.netlify.app/"
+                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer"><strong>Maquette
+                  en Ligne</strong></a>
+              <a href="../#" class="btn btn--med btn--theme-inv project-details__links-btn"><strong>Retour</strong></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    <div class="main-container">
+      <div class="main-footer__upper">
+        <div class="main-footer__row main-footer__row-1">
+          <h2 class="heading heading-sm main-footer__heading-sm">
+            <span>Contact</span>
+          </h2>
+          <div class="main-footer__social-cont">
+            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/melih-ctk/">
+              <img id="Linkedin" class="logo" src="/assets/svg/linkedin-dark.svg" alt="LinkedIn">
+            </a>
+            <a target="_blank" rel="noreferrer" href="https://github.com/melih0132">
+              <img id="GitHub" class="logo" src="/assets/svg/github-dark.svg" alt="GitHub">
+            </a>
+            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/m.ctk1/">
+              <img id="Instagram" class="logo" src="/assets/svg/insta-dark.svg" alt="Instagram">
+            </a>
+          </div>
+        </div>
+        <div class="main-footer__row main-footer__row-2">
+          <h2 class="heading heading-sm text-lt">Melih Cetinkaya</h2>
+          <p class="main-footer__short-desc">
+            Développeur Full-Stack passionné par les technologies web modernes et l'innovation numérique.
+          </p>
+        </div>
+      </div>
+
+      <div class="main-footer__lower">
+        &copy; Copyright
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        . Made by Melih Cetinkaya
+      </div>
+    </div>
+  </footer>
+
+  <script src="/fr/projets/script.js"></script>
+</body>
+
+</html> 
