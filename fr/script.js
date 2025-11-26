@@ -23,6 +23,8 @@ const CONFIG = {
     "PL/pgSQL": "#336791",
     "Bash": "#4EAA25",
     "XAML": "#007ACC",
+    "Swift": "#FA7343",
+    "Dart": "#0175C2",
 
     // Frameworks & Bibliothèques
     "Laravel": "#F05340",
@@ -44,9 +46,15 @@ const CONFIG = {
     "SQLAlchemy": "#D71F24",
     "Alembic": "#FF6B6B",
     "Pytest": "#0A9EDC",
+    "UIKit": "#007AFF",
+    "ASP.NET Core": "#512BD4",
+    ".NET Core": "#512BD4",
+    "WinUI 3": "#0078D4",
+    "Tkinter": "#3776AB",
 
     // Bases de Données
     "PostgreSQL": "#336791",
+    "SQLite": "#003B57",
     "MongoDB": "#47A248",
     "JSON / JSONB": "#ffcc00",
     "Indexation": "#6A1B9A",
@@ -58,6 +66,7 @@ const CONFIG = {
     // Environnement & Outils
     "VS Code": "#007ACC",
     "Visual Studio": "#5C2D91",
+    "Xcode": "#147EFB",
     "Unity": "#222C37",
     "Git": "#F05032",
     "GitHub": "#181717",
@@ -90,16 +99,20 @@ const CONFIG = {
     "Tests Unitaires": "#55606E",
     "RESTful API": "#26A69A",
     "WebSockets": "#0091EA",
+    "OOP": "#FF6B6B",
+    "Design Patterns": "#9C27B0",
+    "HTTP": "#0052CC",
+    "Web Service": "#00BCD4",
     "Agile": "#A0CE4E",
     "Scrum": "#FF7043"
   },
   techCategories: {
-    "Langages": ["HTML", "CSS", "JavaScript", "TypeScript", "PHP", "Python", "C#", ".NET", ".NET Core", ".NET/C#", "C# (.NET)", "SQL", "PL/pgSQL", "Bash", "XAML", "Dart"],
-    "Frameworks & Bibliothèques": ["Laravel", "Node.js", "Express", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "FastAPI", "Flutter", "Phaser", "WPF", "Socket.io", "Nodemon", "Vite", "Tailwind CSS", "SQLAlchemy", "Alembic", "Pytest"],
-    "Bases de Données": ["PostgreSQL", "MongoDB", "JSON / JSONB", "pgAdmin4"],
-    "Outils & Environnement": ["VS Code", "Visual Studio", "Unity", "Git", "GitHub", "Docker", "Postman", "Swagger", "Nginx", "Apache", "Linux", "Microsoft Azure", "Excel", "Power BI", "PowerAMC", "Visual Paradigm", "Trello", "Microsoft Teams"],
+    "Langages": ["HTML", "CSS", "JavaScript", "TypeScript", "PHP", "Python", "C#", ".NET", ".NET Core", ".NET/C#", "C# (.NET)", "Swift", "Dart", "SQL", "PL/pgSQL", "Bash", "XAML"],
+    "Frameworks & Bibliothèques": ["Laravel", "Node.js", "Express", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "Tailwind CSS", "Vite", "FastAPI", "ASP.NET Core", ".NET Core", "Flutter", "UIKit", "WPF", "WinUI 3", "Tkinter", "Phaser", "Socket.io", "SQLAlchemy", "Alembic", "Pytest", "Nodemon"],
+    "Bases de Données": ["PostgreSQL", "SQLite", "MongoDB", "JSON / JSONB", "pgAdmin4"],
+    "Outils & Environnement": ["VS Code", "Visual Studio", "Xcode", "Unity", "Git", "GitHub", "Docker", "Nginx", "Apache", "Linux", "Postman", "Swagger", "pgAdmin4", "Microsoft Azure", "Visual Paradigm", "Excel", "Power BI", "PowerAMC", "Trello", "Microsoft Teams"],
     "Design & CMS": ["Figma", "Framer", "Adobe Illustrator", "Canva", "WordPress", "3D Modeling"],
-    "Méthodologies & Concepts": ["UML", "MVC", "CRUD", "Tests Unitaires", "RESTful API", "WebSockets", "Agile", "Scrum"]
+    "Méthodologies & Concepts": ["UML", "MVC", "OOP", "Design Patterns", "CRUD", "Tests Unitaires", "HTTP", "RESTful API", "Web Service", "WebSockets", "Agile", "Scrum"]
   }
 };
 
