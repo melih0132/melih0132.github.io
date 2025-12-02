@@ -1126,11 +1126,17 @@ textarea {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    cursor: pointer;
     position: relative;
     max-height: fit-content;
     min-height: 22rem;
     width: 100%;
+}
+
+/* Cursor pointer sur la carte en mode mobile */
+@media (max-width: 768px) {
+    .skill-card {
+        cursor: pointer;
+    }
 }
 
 .skill-card:hover {
@@ -1266,6 +1272,7 @@ textarea {
     transition: all 0.3s ease;
     margin-top: auto;
     margin-bottom: 0;
+    cursor: pointer;
 }
 
 .skill-card:hover .skill-click-hint {

@@ -441,6 +441,8 @@ class Skills {
   constructor() {
     this.skillCards = safeQuerySelectorAll('.skill-card');
     if (this.skillCards.length > 0) {
+      this.mediaQuery = window.matchMedia('(min-width: 769px)');
+      this.isDesktop = this.mediaQuery.matches;
       this.init();
     }
   }
@@ -449,53 +451,107 @@ class Skills {
     this.addClickHandlers();
     this.addOutsideClickHandler();
     this.addKeyboardSupport();
+    this.handleMediaQueryChange(this.mediaQuery);
+    this.mediaQuery.addEventListener('change', (e) => this.handleMediaQueryChange(e));
+  }
+
+  handleMediaQueryChange(mediaQuery) {
+    this.isDesktop = mediaQuery.matches;
   }
 
   addClickHandlers() {
     this.skillCards.forEach(card => {
-      card.addEventListener('click', (e) => this.handleSkillClick(e));
+      const clickHint = card.querySelector('.skill-click-hint');
+      
+      if (clickHint) {
+        // Toujours écouter le clic sur skill-click-hint en mode bureau
+        clickHint.addEventListener('click', (e) => {
+          if (this.isDesktop) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.handleSkillClick(e, card);
+          }
+        });
+        
+        // Toujours écouter le clic sur la carte en mode mobile
+        card.addEventListener('click', (e) => {
+          if (!this.isDesktop) {
+            // Ne pas déclencher si on clique sur un lien de niveau
+            if (!e.target.closest('.skill-level-link')) {
+              this.handleSkillClick(e, card);
+            }
+          }
+        });
+      }
     });
   }
 
   addOutsideClickHandler() {
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.skill-card')) {
-        this.closeAllDropdowns();
+      // En mode bureau, fermer seulement si on ne clique pas sur skill-click-hint
+      if (this.isDesktop) {
+        if (!e.target.closest('.skill-click-hint') && !e.target.closest('.skill-level-link')) {
+          this.closeAllDropdowns();
+        }
+      } else {
+        // En mode mobile, fermer si on ne clique pas sur la carte
+        if (!e.target.closest('.skill-card')) {
+          this.closeAllDropdowns();
+        }
       }
     });
   }
 
   addKeyboardSupport() {
     this.skillCards.forEach(card => {
-      card.setAttribute('tabindex', '0');
-      card.setAttribute('role', 'button');
-      card.setAttribute('aria-expanded', 'false');
+      const clickHint = card.querySelector('.skill-click-hint');
+      const targetElement = this.isDesktop ? (clickHint || card) : card;
       
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.handleSkillClick(e);
-        } else if (e.key === 'Escape') {
-          this.closeAllDropdowns();
-        }
-      });
+      if (targetElement) {
+        targetElement.setAttribute('tabindex', '0');
+        targetElement.setAttribute('role', 'button');
+        card.setAttribute('aria-expanded', 'false');
+        
+        targetElement.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.handleSkillClick(e, card);
+          } else if (e.key === 'Escape') {
+            this.closeAllDropdowns();
+          }
+        });
+      }
     });
   }
 
-  handleSkillClick(e) {
-    const skillCard = e.currentTarget;
+  handleSkillClick(e, skillCard) {
+    if (!skillCard) {
+      skillCard = e.currentTarget;
+    }
     
     // Empêcher la propagation si on clique sur un lien de niveau
     if (e.target.closest('.skill-level-link')) {
       return;
     }
     
+    const isCurrentlyActive = skillCard.classList.contains('active');
+    
     // Fermer tous les autres dropdowns
-    this.closeAllDropdowns();
+    this.skillCards.forEach(card => {
+      if (card !== skillCard) {
+        card.classList.remove('active');
+        card.setAttribute('aria-expanded', 'false');
+      }
+    });
     
     // Toggle le dropdown actuel
-    skillCard.classList.toggle('active');
-    skillCard.setAttribute('aria-expanded', skillCard.classList.contains('active'));
+    if (isCurrentlyActive) {
+      skillCard.classList.remove('active');
+      skillCard.setAttribute('aria-expanded', 'false');
+    } else {
+      skillCard.classList.add('active');
+      skillCard.setAttribute('aria-expanded', 'true');
+    }
     
     // Animation de clic simple
     skillCard.style.transform = 'scale(0.98)';
