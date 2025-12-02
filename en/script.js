@@ -723,6 +723,10 @@ class ProjectFilters {
   }
 
   createFilterButtons() {
+    // Créer un header pour les onglets de catégories
+    const filtersHeader = document.createElement('div');
+    filtersHeader.className = 'projects-filters-header';
+    
     // Créer les onglets de catégories (desktop)
     const categoryTabs = document.createElement('div');
     categoryTabs.className = 'filter-categories';
@@ -775,10 +779,14 @@ class ProjectFilters {
       categorySelects.appendChild(categorySelect);
     });
     
-    // Insérer les onglets après le bouton "All"
+    // Réorganiser la structure : le bouton "All" reste au-dessus, les onglets en dessous
     if (allBtn) {
-      allBtn.parentNode.insertBefore(categoryTabs, allBtn.nextSibling);
-      allBtn.parentNode.insertBefore(categorySelects, allBtn.nextSibling);
+      // Ajouter les onglets de catégories dans le header
+      filtersHeader.appendChild(categoryTabs);
+      // Insérer le header après le bouton "All"
+      this.filterContainer.insertBefore(filtersHeader, allBtn.nextSibling);
+      // Insérer les selects pour mobile après le header
+      this.filterContainer.insertBefore(categorySelects, filtersHeader.nextSibling);
     }
     
     // Créer les conteneurs de filtres par catégorie (desktop)

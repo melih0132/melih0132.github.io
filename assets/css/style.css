@@ -1391,35 +1391,53 @@ textarea {
     align-items: center;
 }
 
-/* Container for "Tous" button and category tabs */
-.projects-filters > .filter-btn[data-filter="all"] {
+/* Container pour les onglets de catégories */
+.projects-filters-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 2rem;
+    width: 100%;
+}
+
+/* Container for "Tous/All" button */
+.projects-filters > .filter-btn[data-filter="all"] {
     min-width: 120px;
+    margin-bottom: 2rem;
 }
 
 /* Filter Categories Tabs */
 .filter-categories {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 2rem;
+    gap: 1.25rem;
     align-items: center;
+    justify-content: center;
 }
 
 .filter-category-tab {
     padding: 1rem 2rem;
     background: #fff;
     border: 2px solid #e0e0e0;
-    border-radius: 25px;
-    font-size: 1.4rem;
+    border-radius: 8px;
+    font-size: 1.6rem;
     font-weight: 600;
     color: #333;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: "Oswald", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+}
+
+/* Format bureau : style identique aux .skills__skill */
+@media (min-width: 769px) {
+    .filter-category-tab {
+        border-radius: 8px;
+        font-size: 1.6rem;
+        text-transform: none;
+        letter-spacing: normal;
+        font-family: inherit;
+    }
 }
 
 .filter-category-tab:hover {
@@ -1460,8 +1478,9 @@ textarea {
 
 .filter-category-content.active {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: 1.25rem;
+    margin-bottom: 0;
+    justify-content: center;
 }
 
 /* Titre de catégorie pour mobile */
@@ -1478,7 +1497,7 @@ textarea {
     width: 100%;
 }
 
-/* Conteneur des boutons de filtres (comme skills__skill-row) */
+/* Conteneur des boutons de filtres */
 .filter-buttons-row {
     display: flex;
     flex-wrap: wrap;
@@ -1501,15 +1520,23 @@ textarea {
     padding: 1rem 2rem;
     background: #fff;
     border: 2px solid #e0e0e0;
-    border-radius: 25px;
-    font-size: 1.4rem;
+    border-radius: 8px;
+    font-size: 1.6rem;
     font-weight: 600;
     color: #333;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: "Oswald", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+}
+
+/* Format bureau : style identique aux .skills__skill */
+@media (min-width: 769px) {
+    .filter-btn {
+        border-radius: 8px;
+        font-size: 1.6rem;
+        text-transform: none;
+        letter-spacing: normal;
+        font-family: inherit;
+    }
 }
 
 .filter-btn:hover {
@@ -1585,6 +1612,11 @@ textarea {
 }
 
 @media (max-width: 768px) {
+    /* Header : centrer les onglets sur mobile */
+    .projects-filters-header {
+        margin-bottom: 2rem;
+    }
+    
     /* Masquer les onglets sur mobile */
     .filter-categories {
         display: none;
@@ -1706,8 +1738,7 @@ textarea {
     }
     
     .projects-filters > .filter-btn[data-filter="all"] {
-        margin-bottom: 1.2rem;
-        padding: 0.9rem 1.5rem;
+        margin-bottom: 0;
         font-size: 1.3rem;
         width: 100%;
         max-width: 100%;
