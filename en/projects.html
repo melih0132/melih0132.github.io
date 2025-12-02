@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="Hyw4H6O427E0t-A90i-_FCv_3mjHuqSYVS5JRjFso4Q" />
-  <meta name="description" content="Portfolio of Melih Cetinkaya, a passionate full-stack developer specializing in modern web technologies and digital innovation. Explore my projects and skills." />
+  <meta name="description" content="Portfolio de Melih Cetinkaya, développeur full-stack passionné par les technologies web modernes et l'innovation numérique. Découvrez mes projets et compétences." />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <script defer src="https://cloud.umami.is/script.js" data-website-id="fd24f53a-4819-4828-9ed9-b3d15fec0601"></script>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
   <link rel="icon" href="/assets/png/logo.png" type="image/png">
-  <title>Melih Cetinkaya | Developer</title>
+  <title>Melih Cetinkaya | Projects</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
             <a href="./skills.html" class="header__link">Skills</a>
           </li>
           <li class="header__link-wrapper">
-            <a href="./projects.html" class="header__link">Projects</a>
+            <a href="#" class="header__link">Projects</a>
           </li>
           <li class="header__link-wrapper">
             <a href="./contact.html" class="header__link">Contact</a>
@@ -56,7 +56,7 @@
           </li>
 
           <li class="header__sm-menu-link">
-            <a href="./projects.html">Projects</a>
+            <a href="#">Projects</a>
           </li>
           <li class="header__sm-menu-link">
             <a href="./contact.html">Contact</a>
@@ -66,47 +66,360 @@
     </div>
   </header>
 
-<section id="home" class="home-hero">
-    <div class="home-hero__content">
-      <h1 class="heading-primary">
-        <span id="dynamic-lang">Yo</span>, I am Melih Cetinkaya
-      </h1>
-      <div class="home-hero__info">
-        <p class="text-primary">
-          Passionate about web development, I combine technical expertise and creativity to create innovative digital experiences and contribute to exciting projects.
-        </p>
+<section id="projects" class="projects sec-pad">
+    <div class="main-container">
+      <h2 class="heading heading-sec heading-sec__mb-bg scroll-reveal">
+        <span class="heading-sec__main">Projects</span>
+        <span class="heading-sec__sub">
+          Discover here a selection of academic and personal projects I have completed.
+        </span>
+      </h2>
+      <div class="projects__content">
+        <div class="projects-filters scroll-reveal scroll-reveal--delay-1">
+          <button class="filter-btn active" data-filter="all">All</button>
+        </div>
+        <div class="projects-grid">
+          <!-- Evit'Shuriken -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-1">
+            <div class="project-info">
+              <h2 class="project-title">Evit'Shuriken</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">WPF</span>
+                <span class="tech-tag">.NET/C#</span>
+                <span class="tech-tag">XAML</span>
+                <span class="tech-tag">+2</span>
+              </div>
+              <p class="project-description">
+                Game I created combining knowledge in .NET/C# and XAML. Completed during my first year in Computer
+                Science.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/evit-shuriken.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- DortanApp -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-2">
+            <div class="project-info">
+              <h2 class="project-title">DortanApp</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">.NET</span>
+                <span class="tech-tag">WPF</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">+5</span>
+              </div>
+              <p class="project-description">
+                Town hall reservation management application with WPF interface and PostgreSQL database.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/dortan-app.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- KUBE -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-3">
+            <div class="project-info">
+              <h2 class="project-title">KUBE</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Unity</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">.NET</span>
+                <span class="tech-tag">+2</span>
+              </div>
+              <p class="project-description">
+                Game developed with Unity in .NET/C#. This project introduced me to game development tools.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/kube.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phaser Games -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-4">
+            <div class="project-info">
+              <h2 class="project-title">Phaser Games</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Phaser</span>
+                <span class="tech-tag">Express</span>
+                <span class="tech-tag">Socket.io</span>
+                <span class="tech-tag">Nodemon</span>
+              </div>
+              <p class="project-description">
+                Games developed with Phaser using Express for backend and Socket.io for real-time communication.
+              </p>
+              <div class="project-links">
+                <a href="https://github.com/melih0132/all-my-projects/tree/main/web/phaser-projects" class="project-link demo-link" target="_blank">View on GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- LPO -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-5">
+            <div class="project-info">
+              <h2 class="project-title">LPO</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Excel</span>
+                <span class="tech-tag">Power BI</span>
+                <span class="tech-tag">+5</span>
+              </div>
+              <p class="project-description">
+                University project for bird counting with PostgreSQL management, Excel analysis and Power BI
+                visualization.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/lpo.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Application Uber -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-1">
+            <div class="project-info">
+              <h2 class="project-title">Uber Clone with Laravel</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Laravel</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Power BI</span>
+                <span class="tech-tag">+11</span>
+              </div>
+              <p class="project-description">
+                Uber-like application with Laravel, PostgreSQL, GDPR compliant with Power BI analysis.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/uber-laravel.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weather App -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-2">
+            <div class="project-info">
+              <h2 class="project-title">Weather App</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Flutter</span>
+                <span class="tech-tag">Dart</span>
+                <span class="tech-tag">RESTful API</span>
+                <span class="tech-tag">+4</span>
+              </div>
+              <p class="project-description">
+                Cross-platform weather application developed with Flutter, integrating OpenWeatherMap API for real-time weather information.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/weather-app.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Uber Vue.js/.NET -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-3">
+            <div class="project-info">
+              <h2 class="project-title">Uber Clone with Vue.js and .NET Core</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Vue.js</span>
+                <span class="tech-tag">.NET Core</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">+6</span>
+              </div>
+              <p class="project-description">
+                Modern transportation application with Vue.js frontend and .NET Core backend, implementing advanced geolocation and payment features.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/uber-vuejs-dotnet.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- HEVA -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-4">
+            <div class="project-info">
+              <h2 class="project-title">HEVA - Event Management Platform</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">+13</span>
+              </div>
+              <p class="project-description">
+                Comprehensive event management platform with FastAPI, React and TypeScript, integrating AI features and secure authentication.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/heva.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pokemon Trainer Manager -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-1">
+            <div class="project-info">
+              <h2 class="project-title">Pokemon Trainer Manager</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Swift</span>
+                <span class="tech-tag">UIKit</span>
+                <span class="tech-tag">iOS</span>
+                <span class="tech-tag">+4</span>
+              </div>
+              <p class="project-description">
+                Native iOS application developed with Swift and UIKit for managing Pokémon collections and trainer teams.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/pokemon-trainer-manager.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- DocumentApp -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-2">
+            <div class="project-info">
+              <h2 class="project-title">DocumentApp</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Swift</span>
+                <span class="tech-tag">UIKit</span>
+                <span class="tech-tag">iOS</span>
+                <span class="tech-tag">+4</span>
+              </div>
+              <p class="project-description">
+                Native iOS application for document management, allowing users to create, organize, and search documents efficiently.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/document-app.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- APIfilms -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-3">
+            <div class="project-info">
+              <h2 class="project-title">APIfilms - REST API for Films</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">ASP.NET Core</span>
+                <span class="tech-tag">.NET Core</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">+6</span>
+              </div>
+              <p class="project-description">
+                REST API developed with ASP.NET Core for film management, offering complete CRUD operations through a standardized interface.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/api-films.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- FilmRatingsApp -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-4">
+            <div class="project-info">
+              <h2 class="project-title">FilmRatingsApp - WinUI 3 Application</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">WinUI 3</span>
+                <span class="tech-tag">.NET Core</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">+4</span>
+              </div>
+              <p class="project-description">
+                Modern desktop application developed with WinUI 3 and .NET Core for film management and rating.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/film-ratings-app.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- WSConvertisseur -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-1">
+            <div class="project-info">
+              <h2 class="project-title">WSConvertisseur - Web Service Converter</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">ASP.NET Core</span>
+                <span class="tech-tag">.NET Core</span>
+                <span class="tech-tag">RESTful API</span>
+                <span class="tech-tag">+7</span>
+              </div>
+              <p class="project-description">
+                Web service developed with ASP.NET Core providing currency and unit conversion functionalities via a REST API.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/ws-convertisseur.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quiz JSON -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-2">
+            <div class="project-info">
+              <h2 class="project-title">Quiz JSON</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">JSON</span>
+                <span class="tech-tag">File I/O</span>
+                <span class="tech-tag">+3</span>
+              </div>
+              <p class="project-description">
+                Quiz application developed with Python using JSON files to store questions and answers.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/quiz-json.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Little Things -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-3">
+            <div class="project-info">
+              <h2 class="project-title">Little Things - Python Utilities</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Automation</span>
+                <span class="tech-tag">OS Operations</span>
+                <span class="tech-tag">+4</span>
+              </div>
+              <p class="project-description">
+                Collection of Python utilities to automate daily tasks: wallpaper changer, task manager, file renaming.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/little-things.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- POO PHP -->
+          <div class="project-card scroll-reveal scroll-reveal--delay-4">
+            <div class="project-info">
+              <h2 class="project-title">POO PHP - Object-Oriented Programming</h2>
+              <div class="tech-tags">
+                <span class="tech-tag">PHP</span>
+                <span class="tech-tag">OOP</span>
+                <span class="tech-tag">Design Patterns</span>
+                <span class="tech-tag">+5</span>
+              </div>
+              <p class="project-description">
+                Collection of PHP exercises and applications demonstrating mastery of Object-Oriented Programming with classes, inheritance, and design patterns.
+              </p>
+              <div class="project-links">
+                <a href="/en/projects/poo-php.html" class="project-link code-link" target="_self">View details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- GitHub Button as Grid Item -->
+          <div class="projects__btn-container">
+            <a class="btn btn--med btn--theme scroll-reveal scroll-reveal--delay-5" href="https://github.com/melih0132/all-my-projects" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-github">
+                <path
+                  d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+                </path>
+                <path d="M9 18c-4.51 2-5-2-7-2"></path>
+              </svg>
+              <span>Discover all my projects on GitHub</span>
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="home-hero__cta">
-        <a href="/assets/MELIH CETINKAYA - RESUME.pdf" target="_blank" class="btn btn--bg">My Resume</a>
-      </div>
-    </div>
-    <div class="home-hero__socials">
-      <div class="home-hero__social">
-        <a href="https://www.linkedin.com/in/melih-ctk/" class="home-hero__social-icon-link" rel="noreferrer"
-          target="_blank">
-          <img src="/assets/svg/linkedin-dark.svg" alt="Melih Cetinkaya Linkedin" class="home-hero__social-icon" />
-        </a>
-      </div>
-      <div class="home-hero__social">
-        <a href="https://www.instagram.com/m.ctk1/" class="home-hero__social-icon-link" rel="noreferrer"
-          target="_blank">
-          <img src="/assets/svg/insta-dark.svg" alt="Melih Cetinkaya Instagram" class="home-hero__social-icon" />
-        </a>
-      </div>
-      <div class="home-hero__social">
-        <a href="https://x.com/MelMet32" class="home-hero__social-icon-link" rel="noreferrer" target="_blank">
-          <img src="/assets/svg/X-dark.svg" alt="Melih Cetinkaya X" class="home-hero__social-icon" />
-        </a>
-      </div>
-      <div class="home-hero__social">
-        <a href="https://github.com/melih0132" class="home-hero__social-icon-link" rel="noreferrer" target="_blank">
-          <img src="/assets/svg/github-dark.svg" alt="Melih Cetinkaya GitHub Profile" class="home-hero__social-icon" />
-        </a>
-      </div>
-    </div>
-    <div class="home-hero__mouse-scroll-cont">
-      <div class="mouse"></div>
-    </div>
   </section>
 
 <script defer src="https://cloud.umami.is/script.js" data-website-id="fd24f53a-4819-4828-9ed9-b3d15fec0601"></script>

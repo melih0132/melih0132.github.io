@@ -229,7 +229,7 @@ class Header {
   }
 
   handleLogoClick() {
-    location.href = '/en/#home';
+    location.href = '/en/';
   }
 }
 
@@ -272,13 +272,19 @@ class HeaderNav {
   }
 
   handleNavClick(e) {
-    e.preventDefault();
-    const targetId = e.currentTarget.getAttribute('href').replace('./#', '');
-    const targetSection = document.getElementById(targetId);
+    const href = e.currentTarget.getAttribute('href');
+    
+    // Si c'est un lien vers une ancre sur la même page
+    if (href && href.startsWith('./#') || href.startsWith('#') || (href.includes('#') && !href.includes('.html'))) {
+      e.preventDefault();
+      const targetId = href.replace('./#', '').replace('#', '');
+      const targetSection = document.getElementById(targetId);
 
-    if (targetSection) {
-      targetSection.scrollIntoView({ behavior: 'smooth' });
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+    // Sinon, laisser le comportement par défaut (navigation vers une autre page)
   }
 }
 

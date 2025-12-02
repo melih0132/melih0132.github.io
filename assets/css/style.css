@@ -934,6 +934,42 @@ textarea {
     transform-origin: center;
 }
 
+.about__cta-container {
+    margin-top: 3rem;
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about__cta-container .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about__cta-container .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(22, 179, 100, 0.35);
+}
+
+.about__cta-container .btn:active {
+    transform: translateY(0);
+}
+
+@media only screen and (max-width: 37.5em) {
+    .about__cta-container {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+    
+    .about__cta-container .btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
 /* Skills Section */
 .skills {
     display: flex;
