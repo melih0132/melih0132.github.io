@@ -1214,15 +1214,60 @@ class ScrollRevealManager {
   constructor() {
     this.elements = safeQuerySelectorAll('.scroll-reveal');
     if (this.elements.length === 0) return;
+    this.lastScrollY = window.scrollY;
     this.init();
   }
 
   init() {
+    // Track scroll direction globally
+    let lastScrollY = window.scrollY || window.pageYOffset;
+    let currentScrollDirection = 'down';
+    
+    // Mettre à jour la direction à chaque événement scroll
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY || window.pageYOffset;
+      if (currentScrollY !== lastScrollY) {
+        currentScrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+        lastScrollY = currentScrollY;
+      }
+    }, { passive: true });
+    
     // Create intersection observer
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
+        if (entry.isIntersecting && !entry.target.classList.contains('revealed-down') && !entry.target.classList.contains('revealed-up') && !entry.target.classList.contains('revealed')) {
+          const hasSpecialAnimation = entry.target.classList.contains('scroll-reveal--fade-left') || 
+                                      entry.target.classList.contains('scroll-reveal--fade-right') || 
+                                      entry.target.classList.contains('scroll-reveal--scale');
+          
+          if (hasSpecialAnimation) {
+            // Pour les animations spéciales, utiliser la classe revealed standard
+            entry.target.classList.add('revealed');
+          } else {
+            // Remove old revealed classes
+            entry.target.classList.remove('revealed', 'revealed-down', 'revealed-up', 'initial-up');
+            
+            // Utiliser la direction de défilement capturée
+            // Défilement vers le bas → apparition du bas vers le haut
+            // Défilement vers le haut → apparition du haut vers le bas
+            if (currentScrollDirection === 'down') {
+              // Défilement vers le bas : apparition du bas vers le haut
+              entry.target.classList.add('revealed-down');
+            } else {
+              // Défilement vers le haut : apparition du haut vers le bas
+              // Désactiver temporairement la transition pour définir l'état initial sans animation
+              const originalTransition = entry.target.style.transition;
+              entry.target.style.transition = 'none';
+              entry.target.classList.add('initial-up');
+              // Force reflow pour appliquer initial-up
+              void entry.target.offsetHeight;
+              // Réactiver la transition et ajouter revealed-up
+              entry.target.style.transition = originalTransition;
+              requestAnimationFrame(() => {
+                entry.target.classList.add('revealed-up');
+              });
+            }
+          }
         }
       });
     }, {
