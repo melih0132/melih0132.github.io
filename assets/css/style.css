@@ -947,7 +947,7 @@ textarea {
 .timeline-item {
     position: relative;
     margin-bottom: 4rem;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 1s ease, opacity 1s ease;
 }
 
 .timeline-item:hover {
@@ -976,7 +976,7 @@ textarea {
     border: 3px solid #fff;
     position: relative;
     z-index: 2;
-    transition: all 0.3s ease;
+    transition: all 1s ease;
     animation: pulse 2s infinite;
 }
 
@@ -1009,7 +1009,7 @@ textarea {
     border-left: 3px solid transparent;
     border-radius: 12px;
     padding: 2.5rem 3rem;
-    transition: all 0.3s ease;
+    transition: all 1s ease;
     position: relative;
     overflow: hidden;
     background: #fff;
@@ -1025,7 +1025,7 @@ textarea {
     background: linear-gradient(180deg, #16B364 0%, #4ade80 100%);
     transform: scaleY(0);
     transform-origin: top;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .timeline-item:hover .timeline-content::before {
@@ -1121,7 +1121,7 @@ textarea {
     color: #16B364;
     text-decoration: none;
     position: relative;
-    transition: color 0.3s ease;
+    transition: color 1s ease;
 }
 
 .timeline-link::after {
@@ -1132,7 +1132,7 @@ textarea {
     width: 0;
     height: 2px;
     background: linear-gradient(90deg, #16B364, #4ade80);
-    transition: width 0.3s ease;
+    transition: width 1s ease;
 }
 
 .timeline-link:hover {

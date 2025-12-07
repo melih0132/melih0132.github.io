@@ -36,7 +36,6 @@ const CONFIG = {
     "Phaser": "#00BCB4",
     "Socket.io": "#24c29f",
     "Nodemon": "#76D04B",
-    "Vite": "#646CFF",
     "Python ORM": "#D71F24",
     "Pytest": "#0A9EDC",
     "iOS Frameworks": "#007AFF",
@@ -45,6 +44,7 @@ const CONFIG = {
     "Tkinter": "#3776AB",
     "Android UI": "#4285F4",
     "Data Science (Python)": "#306998",
+    "OpenAI": "#10A37F",
 
     // Databases
     "SQL Databases": "#336791",
@@ -88,7 +88,7 @@ const CONFIG = {
   },
   techCategories: {
     "Languages": ["HTML", "CSS", "JavaScript", "TypeScript", "PHP", "Python", "C#", ".NET", ".NET Core", ".NET/C#", "C# (.NET)", "Swift", "Dart", "SQL", "PL/pgSQL", "Bash", "XAML"],
-    "Frameworks & Libraries": ["Laravel", "Node.js", "Express", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "Tailwind CSS", "Vite", "FastAPI", "ASP.NET Core", ".NET Core", "Flutter", "UIKit", "WPF", "WinUI 3", "Tkinter", "Phaser", "Socket.io", "SQLAlchemy", "Alembic", "Pytest", "Nodemon", "iOS"],
+    "Frameworks & Libraries": ["Laravel", "Node.js", "Express", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "Tailwind CSS", "FastAPI", "ASP.NET Core", ".NET Core", "Flutter", "UIKit", "WPF", "WinUI 3", "Tkinter", "Phaser", "Socket.io", "SQLAlchemy", "Alembic", "Pytest", "Nodemon", "iOS", "OpenAI"],
     "Databases": ["PostgreSQL", "SQLite", "MongoDB", "JSON / JSONB", "pgAdmin4"],
     "Tools & Environment": ["VS Code", "Visual Studio", "Xcode", "Unity", "Git", "GitHub", "Docker", "Nginx", "Apache", "Linux", "Postman", "Swagger", "pgAdmin4", "Microsoft Azure", "Visual Paradigm", "Excel", "Power BI", "PowerAMC", "Trello", "Microsoft Teams"],
     "Design & CMS": ["Figma", "Framer", "Adobe Illustrator", "Canva", "WordPress", "3D Modeling"],
