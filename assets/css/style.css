@@ -397,6 +397,7 @@ textarea {
     max-width: 160rem;
     margin: 0 auto;
     width: 100%;
+    position: relative;
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -417,6 +418,8 @@ textarea {
     cursor: pointer;
     transition: all 0.3s ease;
     gap: 1.2rem;
+    flex-shrink: 0;
+    z-index: 10;
 }
 
 .header__logo-container:hover {
@@ -465,6 +468,18 @@ textarea {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.header__links--center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.header__links--right {
+    position: relative;
+    z-index: 5;
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -531,6 +546,10 @@ textarea {
     display: flex;
     align-items: center;
     gap: 2rem;
+    flex: 1;
+    justify-content: flex-end;
+    position: relative;
+    min-width: 0;
 }
 
 .header__main-ham-menu-cont {
