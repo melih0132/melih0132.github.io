@@ -379,22 +379,35 @@ textarea {
     background: transparent;
     box-shadow: none;
     transition: all 0.3s ease;
+    top: 0;
+    left: 0;
 }
 
 .header--scrolled {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .header__content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 5rem
+    padding: 2.5rem 5rem;
+    max-width: 160rem;
+    margin: 0 auto;
+    width: 100%;
 }
 
 @media only screen and (max-width: 56.25em) {
     .header__content {
-        padding: 0 2rem
+        padding: 2rem 3rem;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .header__content {
+        padding: 1.5rem 2rem;
     }
 }
 
@@ -402,27 +415,26 @@ textarea {
     display: flex;
     align-items: center;
     cursor: pointer;
-    transition: color .3s
+    transition: all 0.3s ease;
+    gap: 1.2rem;
 }
 
 .header__logo-container:hover {
-    color: #16B364;
-    transition: color 0.3s ease;
+    opacity: 0.8;
 }
 
 .header__logo-img-cont {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 15px 0 15px 0;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
     overflow: hidden;
-    margin-right: 1.5rem;
+    flex-shrink: 0;
 }
 
 @media only screen and (max-width: 56.25em) {
     .header__logo-img-cont {
-        width: 4.5rem;
-        height: 4.5rem;
-        margin-right: 1.2rem
+        width: 3.5rem;
+        height: 3.5rem;
     }
 }
 
@@ -442,16 +454,17 @@ textarea {
     font-size: 1.8rem;
     text-transform: uppercase;
     font-weight: 700;
-    letter-spacing: 1px
-}
-
-.header__logo-sub:hover {
-    color: #16B364;
+    letter-spacing: 1px;
 }
 
 /* * Header Links */
 .header__links {
-    display: flex
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -460,36 +473,77 @@ textarea {
     }
 }
 
+.header__link-wrapper {
+    margin: 0;
+    padding: 0;
+}
+
 .header__link {
-    padding: 2.2rem 3rem;
+    padding: 1rem 2rem;
     display: inline-block;
     font-size: 1.6rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
     color: #333;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+}
+
+.header__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: calc(100% - 4rem);
+    height: 1px;
+    background: #16B364;
+    transition: transform 0.3s ease;
 }
 
 .header__link:hover {
-    color: #16B364
+    color: #16B364;
+    opacity: 0.8;
+}
+
+.header__link:hover::after {
+    transform: translateX(-50%) scaleX(1);
 }
 
 .header__link.active {
-    color: #16B364
+    color: #16B364;
+}
+
+.header__link.active::after {
+    transform: translateX(-50%) scaleX(1);
 }
 
 @media only screen and (max-width: 56.25em) {
     .header__link {
         padding: 3rem 1.8rem;
-        font-size: 1.5rem
+        font-size: 1.5rem;
     }
+}
+
+.header__main {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 .header__main-ham-menu-cont {
     display: none;
-    width: 3rem;
-    padding: 2.2rem 0
+    width: 2.4rem;
+    height: 2.4rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: opacity 0.3s ease;
+}
+
+.header__main-ham-menu-cont:hover {
+    opacity: 0.6;
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -499,33 +553,57 @@ textarea {
 }
 
 .header__main-ham-menu {
-    width: 100%
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .header__main-ham-menu-close {
-    width: 100%
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .header__sm-menu {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    top: 100%;
-    background: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     visibility: hidden;
     opacity: 0;
-    transition: all .3s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    overflow-y: auto;
 }
 
 .header__sm-menu--active {
-    visibility: hidden;
-    opacity: 0
+    visibility: visible;
+    opacity: 1;
 }
 
-@media only screen and (max-width: 37.5em) {
-    .header__sm-menu--active {
-        visibility: visible;
-        opacity: 1
-    }
+.header__sm-menu-content {
+    padding: 8rem 3rem 4rem;
+    max-width: 160rem;
+    margin: 0 auto;
+}
+
+.header__sm-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header__sm-menu-link {
+    margin: 0;
+    padding: 0;
 }
 
 .header__sm-menu-link a {
@@ -535,19 +613,36 @@ textarea {
     font-size: 1.6rem;
     color: #333;
     text-align: right;
-    border-bottom: 1px solid #eee;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    transition: color .3s
+    transition: all 0.3s ease;
+    position: relative;
+    border-bottom: 1px solid #eee;
+}
+
+.header__sm-menu-link a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #16B364;
+    transition: width 0.3s ease;
 }
 
 .header__sm-menu-link a:hover {
-    color: #16B364
+    color: #16B364;
+    padding-left: 1rem;
+}
+
+.header__sm-menu-link a:hover::after {
+    width: 4rem;
 }
 
 .header__sm-menu-link:first-child a {
-    border-top: 1px solid #eee
+    border-top: none;
 }
 
 .header__sm-menu-link-last {
@@ -3041,12 +3136,17 @@ textarea {
     }
 
     .header--scrolled {
-        background: #121212;
-        box-shadow: 0 10px 100px rgba(0, 0, 0, 0.3);
+        background: rgba(18, 18, 18, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 
     .header__link {
         color: #fff;
+    }
+
+    .header__link::after {
+        background: #16B364;
     }
 
     .header__logo-sub {
@@ -3054,17 +3154,17 @@ textarea {
     }
 
     .header__sm-menu {
-        background: #121212;
-        color: white;
+        background: rgba(18, 18, 18, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
     }
 
     .header__sm-menu-link a {
-        color: white;
-        border-bottom: 1px solid #666;
+        color: #fff;
     }
 
-    .header__sm-menu-link:first-child a {
-        border-top: 1px solid white;
+    .header__sm-menu-link a::after {
+        background: #16B364;
     }
 
     .home-hero__socials {
