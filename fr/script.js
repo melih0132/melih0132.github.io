@@ -184,7 +184,6 @@ class Header {
 
     if (window.scrollY === 0) {
       this.header.style.backgroundColor = 'transparent';
-      this.header.style.boxShadow = 'none';
     }
     else if (window.scrollY > 0 && window.scrollY < CONFIG.scrollThreshold) {
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -218,7 +217,6 @@ class Header {
     if (currentSection) {
       const backgroundColor = window.getComputedStyle(currentSection).backgroundColor;
       this.header.style.backgroundColor = backgroundColor;
-      this.header.style.boxShadow = `0 0 0 0`;
     }
   }
 
