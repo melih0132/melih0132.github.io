@@ -108,11 +108,22 @@ const CONFIG = {
   },
   techCategories: {
     "Langages": ["HTML", "CSS", "JavaScript", "TypeScript", "PHP", "Python", "C#", ".NET", ".NET Core", ".NET/C#", "C# (.NET)", "Swift", "Dart", "SQL", "PL/pgSQL", "Bash", "XAML"],
-    "Frameworks & Bibliothèques": ["Laravel", "Node.js", "Express", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "Tailwind CSS", "Vite", "FastAPI", "ASP.NET Core", ".NET Core", "Flutter", "UIKit", "WPF", "WinUI 3", "Tkinter", "Phaser", "Socket.io", "SQLAlchemy", "Alembic", "Pytest", "Nodemon"],
+    "Frameworks & Bibliothèques": ["Laravel", "Node.js", "Express", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "Tailwind CSS", "Vite", "FastAPI", "ASP.NET Core", ".NET Core", "Flutter", "UIKit", "WPF", "WinUI 3", "Tkinter", "Phaser", "Socket.io", "SQLAlchemy", "Alembic", "Pytest", "Nodemon", "iOS"],
     "Bases de Données": ["PostgreSQL", "SQLite", "MongoDB", "JSON / JSONB", "pgAdmin4"],
     "Outils & Environnement": ["VS Code", "Visual Studio", "Xcode", "Unity", "Git", "GitHub", "Docker", "Nginx", "Apache", "Linux", "Postman", "Swagger", "pgAdmin4", "Microsoft Azure", "Visual Paradigm", "Excel", "Power BI", "PowerAMC", "Trello", "Microsoft Teams"],
     "Design & CMS": ["Figma", "Framer", "Adobe Illustrator", "Canva", "WordPress", "3D Modeling"],
     "Méthodologies & Concepts": ["UML", "MVC", "OOP", "Design Patterns", "CRUD", "Tests Unitaires", "HTTP", "RESTful API", "Web Service", "WebSockets", "Agile", "Scrum"]
+  },
+  languageFrameworks: {
+    "Python": ["FastAPI", "Tkinter", "SQLAlchemy", "Alembic", "Pytest", "Flask", "Django"],
+    "JavaScript": ["React", "Next.js", "Vue.js", "Vue", "Express", "Node.js", "jQuery"],
+    "TypeScript": ["React", "Next.js", "Vue.js", "Vue"],
+    "PHP": ["Laravel"],
+    "Swift": ["UIKit", "iOS"],
+    "Dart": ["Flutter"],
+    "C#": ["ASP.NET Core", ".NET Core", "WPF", "WinUI 3"],
+    ".NET": ["ASP.NET Core", ".NET Core", "WPF", "WinUI 3"],
+    ".NET Core": ["ASP.NET Core", ".NET Core", "WPF", "WinUI 3"]
   }
 };
 
@@ -1222,17 +1233,33 @@ class ProjectFilters {
           projectTechs.push(...fallbackTechs);
         }
         
-        projectTechs.forEach(tech => {
-          // Normaliser la technologie avec le mapping
-          const normalizedTech = this.normalizeTech(tech);
-          
-          // Normaliser le filtre pour la comparaison
-          const normalizedFilter = filter.toLowerCase()
+        // Normaliser le filtre pour la comparaison
+        const normalizedFilter = filter.toLowerCase()
+          .replace(/\.net/g, 'net')
+          .replace(/c#/g, 'csharp')
+          .replace(/[^a-z0-9]/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-|-$/g, '');
+        
+        // Trouver le langage correspondant au filtre (si c'est un langage)
+        let matchingLanguage = null;
+        for (const [lang, frameworks] of Object.entries(CONFIG.languageFrameworks || {})) {
+          const normalizedLang = lang.toLowerCase()
             .replace(/\.net/g, 'net')
             .replace(/c#/g, 'csharp')
             .replace(/[^a-z0-9]/g, '-')
             .replace(/-+/g, '-')
             .replace(/^-|-$/g, '');
+          
+          if (normalizedLang === normalizedFilter) {
+            matchingLanguage = lang;
+            break;
+          }
+        }
+        
+        projectTechs.forEach(tech => {
+          // Normaliser la technologie avec le mapping
+          const normalizedTech = this.normalizeTech(tech);
           
           // Normaliser la technologie pour la comparaison
           const normalizedTechForFilter = normalizedTech.toLowerCase()
@@ -1242,8 +1269,25 @@ class ProjectFilters {
             .replace(/-+/g, '-')
             .replace(/^-|-$/g, '');
           
+          // Vérifier si la technologie correspond directement au filtre
           if (normalizedTechForFilter === normalizedFilter) {
             hasTech = true;
+          }
+          
+          // Si le filtre est un langage, vérifier aussi les frameworks associés
+          if (matchingLanguage && CONFIG.languageFrameworks[matchingLanguage]) {
+            const associatedFrameworks = CONFIG.languageFrameworks[matchingLanguage];
+            if (associatedFrameworks.some(fw => {
+              const normalizedFw = fw.toLowerCase()
+                .replace(/\.net/g, 'net')
+                .replace(/c#/g, 'csharp')
+                .replace(/[^a-z0-9]/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '');
+              return normalizedFw === normalizedTechForFilter || tech === fw;
+            })) {
+              hasTech = true;
+            }
           }
         });
         
