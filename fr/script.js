@@ -122,6 +122,13 @@ class HamburgerMenu {
   }
 
   init() {
+    // Initialiser l'état des icônes au chargement
+    // L'icône hamburger doit être visible, l'icône close doit être cachée
+    this.menuIcon?.classList.remove('d-none');
+    this.closeIcon?.classList.add('d-none');
+    // S'assurer que le menu est fermé
+    this.smallMenu?.classList.remove('header__sm-menu--active');
+    
     this.menuBtn?.addEventListener('click', () => this.toggleMenu());
     this.menuLinks.forEach(link => {
       link.addEventListener('click', () => this.closeMenu());
@@ -142,6 +149,7 @@ class HamburgerMenu {
       }
     } else {
       this.header.style.backgroundColor = '';
+      window.dispatchEvent(new Event('scroll'));
     }
   }
 
@@ -150,6 +158,7 @@ class HamburgerMenu {
     this.menuIcon.classList.remove('d-none');
     this.closeIcon.classList.add('d-none');
     this.header.style.backgroundColor = '';
+    window.dispatchEvent(new Event('scroll'));
   }
 }
 
@@ -175,13 +184,25 @@ class Header {
   }
 
   handleScroll() {
-    this.updateHeaderBackground();
+    // Ne pas modifier le background si le menu hamburger est actif
+    const smallMenu = document.querySelector('.header__sm-menu');
+    const isMenuActive = smallMenu && smallMenu.classList.contains('header__sm-menu--active');
+    
+    // Gérer la classe header--scrolled même si le menu est actif
     if (window.scrollY > CONFIG.scrollThreshold) {
       this.header.classList.add('header--scrolled');
     } else {
       this.header.classList.remove('header--scrolled');
     }
 
+    // Ne pas modifier le backgroundColor si le menu est ouvert
+    if (isMenuActive) {
+      return;
+    }
+
+    // Mettre à jour le background seulement si le menu n'est pas actif
+    this.updateHeaderBackground();
+    
     if (window.scrollY === 0) {
       this.header.style.backgroundColor = 'transparent';
     }
@@ -195,6 +216,13 @@ class Header {
   }
 
   updateHeaderBackground() {
+    // Ne pas modifier le background si le menu hamburger est actif
+    const smallMenu = document.querySelector('.header__sm-menu');
+    const isMenuActive = smallMenu && smallMenu.classList.contains('header__sm-menu--active');
+    if (isMenuActive) {
+      return;
+    }
+
     let currentSection = null;
     let closestDistance = Infinity;
 
