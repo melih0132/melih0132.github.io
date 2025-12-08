@@ -982,17 +982,30 @@ textarea {
 }
 
 .main-container-about {
-    display: grid;
     max-width: 120rem;
-    margin: auto;
+    margin: 0 auto;
     width: 92%;
-    place-items: center;
+    padding: 0 2rem;
+    box-sizing: border-box;
+}
+
+@media (max-width: 48em) {
+    .main-container-about {
+        width: 95%;
+        padding: 0 1.5rem;
+    }
+}
+
+@media (max-width: 30em) {
+    .main-container-about {
+        width: 98%;
+        padding: 0 1rem;
+    }
 }
 
 .about__content {
     display: flex;
     flex-direction: column;
-    max-width: 110rem;
 }
 
 .about__content-main {
@@ -1011,7 +1024,6 @@ textarea {
 
 @media only screen and (max-width: 56.25em) {
     .about__content {
-        max-width: 70rem;
         grid-template-columns: 1fr;
         text-align: center;
         justify-content: center
@@ -1672,7 +1684,6 @@ textarea {
 @media only screen and (max-width: 56.25em) {
     .skills__category {
         flex-basis: 100%;
-        max-width: 60rem;
         align-items: start;
     }
 }
