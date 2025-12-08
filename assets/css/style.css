@@ -1062,7 +1062,7 @@ textarea {
 
 .about__content-details-para {
     font-size: 1.8rem;
-    color: #999;
+    color: #777;
     line-height: 1.7;
     margin-bottom: 1rem
 }
@@ -1250,7 +1250,7 @@ textarea {
 .timeline-date {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #999;
+    color: #777;
     letter-spacing: 0.3px;
 }
 
@@ -1454,7 +1454,7 @@ textarea {
     .timeline-date {
         font-size: 1.3rem;
         font-weight: 600;
-        color: #999;
+        color: #777;
         letter-spacing: 0.3px;
     }
 
@@ -1505,7 +1505,7 @@ textarea {
     .timeline-description {
         font-size: 1.8rem;
         line-height: 1.7;
-        color: #999;
+        color: #777;
         margin: 0;
         text-align: justify;
     }
@@ -2680,7 +2680,7 @@ textarea {
 }
 
 .contact__form-label {
-    color: #999;
+    color: #777;
     font-size: 1.4rem;
     letter-spacing: 1px;
     font-weight: 700;
@@ -2950,7 +2950,7 @@ textarea {
 .project-details__desc-para {
     font-size: 1.8rem;
     line-height: 1.7;
-    color: #999;
+    color: #777;
     margin-bottom: 2rem
 }
 
