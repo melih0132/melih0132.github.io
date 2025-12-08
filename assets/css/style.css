@@ -390,9 +390,9 @@ textarea {
 }
 
 .header__content {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr auto;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 2.5rem 5rem;
     max-width: 160rem;
     margin: 0 auto;
@@ -420,8 +420,6 @@ textarea {
     gap: 1.2rem;
     flex-shrink: 0;
     z-index: 10;
-    grid-column: 1;
-    justify-self: start;
 }
 
 .header__logo-container:hover {
@@ -472,12 +470,6 @@ textarea {
     padding: 0;
 }
 
-.header__links--center {
-    position: relative;
-    left: auto;
-    transform: none;
-    white-space: nowrap;
-}
 
 @media only screen and (max-width: 37.5em) {
     .header__links {
@@ -549,30 +541,24 @@ textarea {
 .header__main {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    flex: 1;
     justify-content: center;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     min-width: 0;
     z-index: 5;
+    position: relative;
 }
 
-@media only screen and (max-width: 37.5em) {
-    .header__main {
-        position: static;
-        left: auto;
-        transform: none;
-        justify-content: flex-end;
-        flex: 1;
-    }
+.header__links--center {
+    display: flex;
+    align-items: center;
+    gap: 0;
 }
 
 .header__links--right {
+    display: flex;
+    align-items: center;
     flex-shrink: 0;
     z-index: 5;
-    grid-column: 3;
-    justify-self: end;
 }
 
 .header__main-ham-menu-cont {
@@ -584,23 +570,15 @@ textarea {
     position: relative;
     z-index: 1001;
     flex-shrink: 0;
-    grid-column: 4;
-    justify-self: end;
 }
 
 @media only screen and (max-width: 37.5em) {
     .header__content {
-        grid-template-columns: auto 1fr;
         justify-content: space-between;
     }
     
     .header__main {
-        position: static;
-        left: auto;
-        transform: none;
-        justify-content: flex-end;
-        grid-column: 2;
-        justify-self: end;
+        display: none;
     }
     
     .header__links--right {
