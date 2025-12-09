@@ -2988,6 +2988,18 @@ textarea {
     transform-origin: center;
 }
 
+.project-details__desc-link {
+    color: #16B364;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.project-details__desc-link:hover {
+    color: #14a357;
+    text-decoration: underline;
+}
+
 .project-details__tools-used {
     margin: 3rem 0 4rem 0
 }
