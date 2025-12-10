@@ -3150,10 +3150,6 @@ textarea {
     color: #333;
 }
 
-.competence-status-box p strong {
-    color: #16B364;
-}
-
 .competence-status-box p:last-child {
     margin: 0.8rem 0 0 0;
     font-size: 1.4rem;
@@ -3167,7 +3163,7 @@ textarea {
 }
 
 .competence-status-box.status-acquis p strong {
-    color: #16B364;
+    color: #16B364 !important;
 }
 
 /* Statut EN COURS - Orange */
@@ -3176,7 +3172,7 @@ textarea {
 }
 
 .competence-status-box.status-en-cours p strong {
-    color: #f59e0b;
+    color: #f59e0b !important;
 }
 
 /* Statut ÉTUDIÉ - Bleu */
@@ -3185,7 +3181,12 @@ textarea {
 }
 
 .competence-status-box.status-etudie p strong {
-    color: #5786f5;
+    color: #5786f5 !important;
+}
+
+/* Règle générale pour les cas sans classe de statut spécifique */
+.competence-status-box:not(.status-acquis):not(.status-en-cours):not(.status-etudie) p strong {
+    color: #16B364;
 }
 
 /* AC Cards Grid */
@@ -3586,16 +3587,12 @@ textarea {
         color: #fff;
     }
 
-    .competence-status-box p strong {
-        color: #4ade80;
-    }
-
     .competence-status-box.status-acquis {
         border-left-color: #16B364;
     }
 
     .competence-status-box.status-acquis p strong {
-        color: #4ade80;
+        color: #4ade80 !important;
     }
 
     .competence-status-box.status-en-cours {
@@ -3603,7 +3600,7 @@ textarea {
     }
 
     .competence-status-box.status-en-cours p strong {
-        color: #fbbf24;
+        color: #fbbf24 !important;
     }
 
     .competence-status-box.status-etudie {
@@ -3611,7 +3608,12 @@ textarea {
     }
 
     .competence-status-box.status-etudie p strong {
-        color: #7c9eff;
+        color: #7c9eff !important;
+    }
+
+    /* Règle générale pour les cas sans classe de statut spécifique */
+    .competence-status-box:not(.status-acquis):not(.status-en-cours):not(.status-etudie) p strong {
+        color: #4ade80;
     }
 
     .competence-status-box p:last-child {
