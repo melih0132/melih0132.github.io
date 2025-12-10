@@ -102,9 +102,14 @@
           <p class="project-details__desc-para">
             Ce niveau représente ma capacité à gérer des architectures de données complexes, à travailler avec différentes technologies de stockage, et à assurer la gouvernance des données. Ces compétences sont développées principalement lors des <strong>semestres 5 et 6</strong> (troisième année de BUT Informatique) à travers les ressources pédagogiques R4.03, R4.06, R5.10 et R4.09, ainsi que les projets académiques SAÉ 5.01 et mon expérience professionnelle en alternance chez Agence Altimax.
           </p>
-          <p class="project-details__desc-para">
-            <strong>Statut :</strong> 🔄 <strong>EN COURS</strong> - Les ressources de ce niveau sont actuellement en cours d'étude et les compétences sont développées à travers des projets académiques et une expérience professionnelle en alternance.
-          </p>
+          <div class="competence-status-box">
+            <p>
+              <strong>Statut : EN COURS</strong>
+            </p>
+            <p>
+              Les ressources de ce niveau sont actuellement en cours d'étude et les compétences sont développées à travers des projets académiques et une expérience professionnelle en alternance.
+            </p>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -115,11 +120,23 @@
           <p class="project-details__desc-para">
             Les <strong>Apprentissages Critiques (AC)</strong> sont les éléments essentiels que je dois maîtriser pour atteindre ce niveau de compétence. Voici les 3 apprentissages critiques du Niveau 3 :
           </p>
-          <p class="project-details__desc-para">
-            • <strong>AC34.01 | Participer à la conception et à la réalisation de systèmes décisionnels</strong> : Gestion de Big Data (très grandes quantités de données), stockage de données volumineuses, systèmes décisionnels (systèmes d'aide à la décision basés sur les données), architectures de stockage (organisation des systèmes de stockage de données)<br>
-            • <strong>AC34.02 | Intégrer des solutions de gestion de données complexes</strong> : ETL (Extraction, Transformation, Chargement - processus de préparation des données), préparation des données, extraction, transformation, chargement, pipelines de données (flux de traitement des données), intégration de solutions complexes<br>
-            • <strong>AC34.03 | Prendre en compte les enjeux réglementaires (RGPD, conformité)</strong> : RGPD (Règlement Général sur la Protection des Données - loi européenne sur la protection des données), conformité (respect des règles), enjeux réglementaires (aspects légaux), protection des données (sécurité et confidentialité)
-          </p>
+          <div class="ac-cards-grid">
+            <div class="ac-card">
+              <div class="ac-card__code">AC34.01</div>
+              <div class="ac-card__title">Participer à la conception et à la réalisation de systèmes décisionnels</div>
+              <div class="ac-card__description">Gestion de Big Data (très grandes quantités de données), stockage de données volumineuses, systèmes décisionnels (systèmes d'aide à la décision basés sur les données), architectures de stockage (organisation des systèmes de stockage de données)</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC34.02</div>
+              <div class="ac-card__title">Intégrer des solutions de gestion de données complexes</div>
+              <div class="ac-card__description">ETL (Extraction, Transformation, Chargement - processus de préparation des données), préparation des données, extraction, transformation, chargement, pipelines de données (flux de traitement des données), intégration de solutions complexes</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC34.03</div>
+              <div class="ac-card__title">Prendre en compte les enjeux réglementaires (RGPD, conformité)</div>
+              <div class="ac-card__description">RGPD (Règlement Général sur la Protection des Données - loi européenne sur la protection des données), conformité (respect des règles), enjeux réglementaires (aspects légaux), protection des données (sécurité et confidentialité)</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -127,24 +144,64 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            <strong>R4.03 : Qualité et au delà du relationnel (MongoDB)</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Technologies :</strong> MongoDB (base de données NoSQL)<br>
-            <strong>Contenu :</strong> Bases de données NoSQL, MongoDB avancé (structure de données en documents complexes), qualité des données, gestion de données non structurées.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R4.06 : Groupes, Réunions, Infographie et Datavisualisation</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Contenu :</strong> Infographie (création de graphiques et visualisations), datavisualisation (visualisation de données), communication visuelle de données, création de rapports visuels.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R5.10 : Nouvelles base de données (MongoDB plus complexes)</strong> → <strong>Statut : EN COURS</strong><br>
-            <strong>Technologies :</strong> MongoDB avancé<br>
-            <strong>Contenu :</strong> Bases de données NoSQL avancées, MongoDB complexe (requêtes avancées, agrégations, index complexes), gestion de données volumineuses, architectures de données distribuées.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R4.09 : Management avancé des systèmes d'informations : Simulation CESIM, Cartographie</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Contenu :</strong> Management avancé des systèmes d'information, cartographie des systèmes d'information (représentation visuelle de l'architecture), simulation CESIM (outil de simulation), gouvernance des données.
-          </p>
+          <div class="resource-cards-container">
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R4.03 : Qualité et au delà du relationnel (MongoDB)</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Technologies :</strong>
+                <span>MongoDB (base de données NoSQL)</span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Bases de données NoSQL, MongoDB avancé (structure de données en documents complexes), qualité des données, gestion de données non structurées.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R4.06 : Groupes, Réunions, Infographie et Datavisualisation</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Infographie (création de graphiques et visualisations), datavisualisation (visualisation de données), communication visuelle de données, création de rapports visuels.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R5.10 : Nouvelles base de données (MongoDB plus complexes)</div>
+                  <span class="resource-card__badge">EN COURS</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Technologies :</strong>
+                <span>MongoDB avancé</span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Bases de données NoSQL avancées, MongoDB complexe (requêtes avancées, agrégations, index complexes), gestion de données volumineuses, architectures de données distribuées.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R4.09 : Management avancé des systèmes d'informations : Simulation CESIM, Cartographie</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Management avancé des systèmes d'information, cartographie des systèmes d'information (représentation visuelle de l'architecture), simulation CESIM (outil de simulation), gouvernance des données.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -204,44 +261,40 @@
             Les <strong>traces</strong> sont des documents bruts qui témoignent de mon activité. Les <strong>preuves</strong> sont ces traces contextualisées avec une réflexion sur l'apprentissage. Voici mes traces et preuves pour le Niveau 3 :
           </p>
           
-          <h3 class="project-details__proof-title">PREUVE 1 : SAÉ 5.01 - SmartHome (MongoDB avancé, IoT data, IA classification)</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en troisième année (Semestre 5) dans le cadre de la SAÉ 5.01. Il s'agit d'un projet complexe développant une application mobile Android avec Kotlin, intégrant l'IoT (Internet des Objets) via MQTT et Raspberry Pi, et utilisant l'intelligence artificielle pour la classification de données, nécessitant une gestion de données avancée avec MongoDB.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Architecture de données avec MongoDB avancé pour stocker les données IoT<br>
-            • Système décisionnel pour analyser les données collectées<br>
-            • Datavisualisation et infographie pour présenter les données (R4.06)<br>
-            • Cartographie du système d'information (R4.09)<br>
-            • Code source de l'application avec gestion de données (projet en cours, confidentiel)
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>participer à la conception et à la réalisation de systèmes décisionnels (AC34.01)</strong> en créant un système pour analyser les données IoT collectées. Il illustre également ma compétence à <strong>intégrer des solutions de gestion de données complexes (AC34.02)</strong> en utilisant MongoDB avancé (R5.10) pour gérer les données volumineuses provenant de l'IoT. J'ai utilisé les ressources R4.03 (MongoDB), R4.06 (Datavisualisation), R5.10 (MongoDB avancé) et R4.09 (Cartographie SI).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet est le plus complexe en termes de gestion de données car il combine plusieurs sources de données (IoT, IA, mobile) nécessitant une architecture de données sophistiquée. La principale difficulté a été de concevoir une architecture MongoDB adaptée pour gérer les données IoT en temps réel tout en permettant l'analyse et la classification par IA. J'ai surmonté cette difficulté en étudiant les architectures de données pour l'IoT, en pratiquant avec MongoDB avancé, et en appliquant les concepts enseignés dans les ressources R4.03, R4.06, R5.10 et R4.09. Ce projet m'a montré l'importance de la conception d'architectures de données pour les systèmes complexes.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 1 : SAÉ 5.01 - SmartHome (MongoDB avancé, IoT data, IA classification)</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Projet académique réalisé en troisième année (Semestre 5) dans le cadre de la SAÉ 5.01. Il s'agit d'un projet complexe développant une application mobile Android avec Kotlin, intégrant l'IoT (Internet des Objets) via MQTT et Raspberry Pi, et utilisant l'intelligence artificielle pour la classification de données, nécessitant une gestion de données avancée avec MongoDB.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Architecture de données avec MongoDB avancé pour stocker les données IoT</li>
+                <li>Système décisionnel pour analyser les données collectées</li>
+                <li>Datavisualisation et infographie pour présenter les données (R4.06)</li>
+                <li>Cartographie du système d'information (R4.09)</li>
+                <li>Code source de l'application avec gestion de données (projet en cours, confidentiel)</li>
+              </ul>
+              <p><strong>Justification :</strong> Ce projet démontre ma capacité à <strong>participer à la conception et à la réalisation de systèmes décisionnels (AC34.01)</strong> en créant un système pour analyser les données IoT collectées. Il illustre également ma compétence à <strong>intégrer des solutions de gestion de données complexes (AC34.02)</strong> en utilisant MongoDB avancé (R5.10) pour gérer les données volumineuses provenant de l'IoT. J'ai utilisé les ressources R4.03 (MongoDB), R4.06 (Datavisualisation), R5.10 (MongoDB avancé) et R4.09 (Cartographie SI).</p>
+              <p><strong>Réflexion :</strong> Ce projet est le plus complexe en termes de gestion de données car il combine plusieurs sources de données (IoT, IA, mobile) nécessitant une architecture de données sophistiquée. La principale difficulté a été de concevoir une architecture MongoDB adaptée pour gérer les données IoT en temps réel tout en permettant l'analyse et la classification par IA. J'ai surmonté cette difficulté en étudiant les architectures de données pour l'IoT, en pratiquant avec MongoDB avancé, et en appliquant les concepts enseignés dans les ressources R4.03, R4.06, R5.10 et R4.09. Ce projet m'a montré l'importance de la conception d'architectures de données pour les systèmes complexes.</p>
+            </div>
+          </div>
 
-          <h3 class="project-details__proof-title">PREUVE 2 : ALTERNANCE - Agence Altimax (Gestion de données WordPress, MySQL)</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Alternance professionnelle depuis septembre 2025 (4 mois, en cours) en tant que Développeur web chez Agence Altimax à Annecy. Je développe et maintiens des sites web avec WordPress, nécessitant la gestion de bases de données MySQL, l'optimisation des performances, et la prise en compte des enjeux réglementaires (RGPD).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Gestion de bases de données MySQL pour les sites WordPress<br>
-            • Optimisation des performances des bases de données<br>
-            • Prise en compte des enjeux réglementaires (RGPD) dans la gestion des données clients<br>
-            • Documentation de la conformité RGPD<br>
-            • Sites web WordPress en production (propriétaires, non publics)<br>
-            • Contributions régulières avec commits Git documentés
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Cette alternance démontre ma capacité à <strong>intégrer des solutions de gestion de données complexes (AC34.02)</strong> dans un contexte professionnel réel, en gérant les bases de données MySQL pour les sites WordPress. Elle illustre également ma compétence à <strong>prendre en compte les enjeux réglementaires (AC34.03)</strong> en respectant le RGPD dans la gestion des données clients. L'expérience quotidienne en entreprise me permet d'appliquer les compétences de gestion de données avancée dans un contexte réel avec des contraintes de production et de conformité.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Cette alternance est une expérience professionnelle continue qui me permet de développer mes compétences de gestion de données avancée dans un contexte réel. La principale difficulté a été de comprendre comment gérer les données clients en respectant le RGPD tout en optimisant les performances. J'ai surmonté cette difficulté en étudiant les exigences du RGPD, en communiquant avec l'équipe, et en appliquant les bonnes pratiques de gestion de données. Cette expérience m'a montré l'importance de la conformité réglementaire dans la gestion de données professionnelle et m'a permis de développer ma capacité à gérer des données dans un contexte de production.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 2 : ALTERNANCE - Agence Altimax (Gestion de données WordPress, MySQL)</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Alternance professionnelle depuis septembre 2025 (4 mois, en cours) en tant que Développeur web chez Agence Altimax à Annecy. Je développe et maintiens des sites web avec WordPress, nécessitant la gestion de bases de données MySQL, l'optimisation des performances, et la prise en compte des enjeux réglementaires (RGPD).</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Gestion de bases de données MySQL pour les sites WordPress</li>
+                <li>Optimisation des performances des bases de données</li>
+                <li>Prise en compte des enjeux réglementaires (RGPD) dans la gestion des données clients</li>
+                <li>Documentation de la conformité RGPD</li>
+                <li>Sites web WordPress en production (propriétaires, non publics)</li>
+                <li>Contributions régulières avec commits Git documentés</li>
+              </ul>
+              <p><strong>Justification :</strong> Cette alternance démontre ma capacité à <strong>intégrer des solutions de gestion de données complexes (AC34.02)</strong> dans un contexte professionnel réel, en gérant les bases de données MySQL pour les sites WordPress. Elle illustre également ma compétence à <strong>prendre en compte les enjeux réglementaires (AC34.03)</strong> en respectant le RGPD dans la gestion des données clients. L'expérience quotidienne en entreprise me permet d'appliquer les compétences de gestion de données avancée dans un contexte réel avec des contraintes de production et de conformité.</p>
+              <p><strong>Réflexion :</strong> Cette alternance est une expérience professionnelle continue qui me permet de développer mes compétences de gestion de données avancée dans un contexte réel. La principale difficulté a été de comprendre comment gérer les données clients en respectant le RGPD tout en optimisant les performances. J'ai surmonté cette difficulté en étudiant les exigences du RGPD, en communiquant avec l'équipe, et en appliquant les bonnes pratiques de gestion de données. Cette expérience m'a montré l'importance de la conformité réglementaire dans la gestion de données professionnelle et m'a permis de développer ma capacité à gérer des données dans un contexte de production.</p>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -249,18 +302,20 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            Le <strong>Niveau 3</strong> représente l'aboutissement de ma progression dans la gestion de données. À travers des projets comme <strong>SmartHome (SAÉ 5.01)</strong> et mon <strong>alternance chez Agence Altimax</strong>, j'ai développé ma capacité à concevoir des architectures de données complexes, à intégrer des solutions de gestion de données avancées, et à prendre en compte les enjeux réglementaires (RGPD).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Défis rencontrés :</strong> Les principaux défis à ce niveau concernaient la conception d'architectures de données pour des systèmes complexes (IoT, IA), l'intégration de solutions NoSQL avancées (MongoDB), et la prise en compte des enjeux réglementaires (RGPD) dans la gestion de données.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Solutions apportées :</strong> Pour surmonter ces difficultés, j'ai étudié les architectures de données pour l'IoT et le Big Data, j'ai pratiqué avec MongoDB avancé, j'ai étudié les exigences du RGPD, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R4.03 (MongoDB), R4.06 (Datavisualisation), R5.10 (MongoDB avancé) et R4.09 (Cartographie SI).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Progression :</strong> Ces expériences m'ont permis de développer une expertise en gestion de données avancée, de la conception d'architectures complexes à la conformité réglementaire. L'alternance m'a particulièrement appris à gérer des données en production avec des contraintes réelles, préparant ainsi mon insertion dans le monde professionnel.
-          </p>
+          <div class="reflection-cards-grid">
+            <div class="reflection-card reflection-card--challenge">
+              <div class="reflection-card__title">Défis rencontrés</div>
+              <div class="reflection-card__content">Les principaux défis à ce niveau concernaient la conception d'architectures de données pour des systèmes complexes (IoT, IA), l'intégration de solutions NoSQL avancées (MongoDB), et la prise en compte des enjeux réglementaires (RGPD) dans la gestion de données.</div>
+            </div>
+            <div class="reflection-card reflection-card--solution">
+              <div class="reflection-card__title">Solutions apportées</div>
+              <div class="reflection-card__content">Pour surmonter ces difficultés, j'ai étudié les architectures de données pour l'IoT et le Big Data, j'ai pratiqué avec MongoDB avancé, j'ai étudié les exigences du RGPD, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R4.03 (MongoDB), R4.06 (Datavisualisation), R5.10 (MongoDB avancé) et R4.09 (Cartographie SI).</div>
+            </div>
+            <div class="reflection-card reflection-card--progress">
+              <div class="reflection-card__title">Progression</div>
+              <div class="reflection-card__content">Le Niveau 3 représente l'aboutissement de ma progression dans la gestion de données. À travers des projets comme SmartHome (SAÉ 5.01) et mon alternance chez Agence Altimax, j'ai développé ma capacité à concevoir des architectures de données complexes, à intégrer des solutions de gestion de données avancées, et à prendre en compte les enjeux réglementaires (RGPD). Ces expériences m'ont permis de développer une expertise en gestion de données avancée, de la conception d'architectures complexes à la conformité réglementaire. L'alternance m'a particulièrement appris à gérer des données en production avec des contraintes réelles, préparant ainsi mon insertion dans le monde professionnel.</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__links">

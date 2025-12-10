@@ -102,9 +102,14 @@
           <p class="project-details__desc-para">
             Ce niveau représente ma capacité à gérer la scalabilité (capacité d'un système à gérer une charge croissante) et la charge, à optimiser des systèmes complexes, et à mettre en place des solutions d'optimisation avancées. Ces compétences sont développées principalement lors des <strong>semestres 5 et 6</strong> (troisième année de BUT Informatique) à travers les ressources pédagogiques R5.04, R5.11 et R5.12, ainsi que les projets académiques SAÉ 5.01 et mon expérience professionnelle en alternance chez Agence Altimax.
           </p>
-          <p class="project-details__desc-para">
-            <strong>Statut :</strong> 🔄 <strong>EN COURS</strong> - Les ressources de ce niveau sont actuellement en cours d'étude et les compétences sont développées à travers des projets académiques et une expérience professionnelle en alternance.
-          </p>
+          <div class="competence-status-box">
+            <p>
+              <strong>Statut : EN COURS</strong>
+            </p>
+            <p>
+              Les ressources de ce niveau sont actuellement en cours d'étude et les compétences sont développées à travers des projets académiques et une expérience professionnelle en alternance.
+            </p>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -115,11 +120,23 @@
           <p class="project-details__desc-para">
             Les <strong>Apprentissages Critiques (AC)</strong> sont les éléments essentiels que je dois maîtriser pour atteindre ce niveau de compétence. Voici les 3 apprentissages critiques du Niveau 3 :
           </p>
-          <p class="project-details__desc-para">
-            • <strong>AC32.01 | Anticiper et évaluer les performances (temps, mémoire, précision, charge)</strong> : Analyse prévisionnelle des performances (prévoir les performances avant l'implémentation), évaluation des métriques (temps d'exécution, occupation mémoire, montée en charge - capacité à gérer une charge croissante), optimisation proactive (optimisation avant que les problèmes n'apparaissent)<br>
-            • <strong>AC32.02 | Analyser le code et proposer des optimisations</strong> : Profiling de code (analyse détaillée du temps d'exécution de chaque partie du code), analyse du comportement, identification des goulots d'étranglement (points qui ralentissent l'application), justification des optimisations<br>
-            • <strong>AC32.03 | Justifier les choix algorithmiques en regard de contraintes multiples</strong> : Sélection de bibliothèques spécialisées, utilisation de méthodes dédiées selon le domaine (IA - Intelligence Artificielle, imagerie, parallélisme - exécution simultanée sur plusieurs processeurs, etc.), optimisation par domaine, justification des choix en tenant compte de plusieurs contraintes (performance, coût, maintenabilité)
-          </p>
+          <div class="ac-cards-grid">
+            <div class="ac-card">
+              <div class="ac-card__code">AC32.01</div>
+              <div class="ac-card__title">Anticiper et évaluer les performances (temps, mémoire, précision, charge)</div>
+              <div class="ac-card__description">Analyse prévisionnelle des performances (prévoir les performances avant l'implémentation), évaluation des métriques (temps d'exécution, occupation mémoire, montée en charge - capacité à gérer une charge croissante), optimisation proactive (optimisation avant que les problèmes n'apparaissent)</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC32.02</div>
+              <div class="ac-card__title">Analyser le code et proposer des optimisations</div>
+              <div class="ac-card__description">Profiling de code (analyse détaillée du temps d'exécution de chaque partie du code), analyse du comportement, identification des goulots d'étranglement (points qui ralentissent l'application), justification des optimisations</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC32.03</div>
+              <div class="ac-card__title">Justifier les choix algorithmiques en regard de contraintes multiples</div>
+              <div class="ac-card__description">Sélection de bibliothèques spécialisées, utilisation de méthodes dédiées selon le domaine (IA - Intelligence Artificielle, imagerie, parallélisme - exécution simultanée sur plusieurs processeurs, etc.), optimisation par domaine, justification des choix en tenant compte de plusieurs contraintes (performance, coût, maintenabilité)</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -127,20 +144,52 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            <strong>R5.04 : Qualité algorithmique</strong> → <strong>Statut : NON ÉTUDIÉ</strong> (sera vu ultérieurement)<br>
-            Qualité algorithmique, anticipation et évaluation des performances, analyse de code et optimisation.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R5.11 : Méthode d'optimisation</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Repository GitHub officiel :</strong> <a href="https://github.com/oeoecbien/opti" target="_blank" rel="noreferrer" class="project-details__desc-link">https://github.com/oeoecbien/opti</a><br>
-            <strong>Contenu :</strong> Méthodes d'optimisation avancées, profiling (analyse de performance), benchmarking (tests de performance), analyse de code et justification des choix algorithmiques.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R5.12 : Modélisation mathématiques : IA</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Repository GitHub officiel :</strong> <a href="https://github.com/oeoecbien/ai" target="_blank" rel="noreferrer" class="project-details__desc-link">https://github.com/oeoecbien/ai</a><br>
-            <strong>Contenu :</strong> Intégration de l'IA (Intelligence Artificielle) dans les applications, apprentissage par renforcement (méthode d'apprentissage automatique), régression (prédiction de valeurs continues), perceptron (réseau de neurones simple), classification (catégorisation de données), optimisation avec IA.
-          </p>
+          <div class="resource-cards-container">
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R5.04 : Qualité algorithmique</div>
+                  <span class="resource-card__badge">NON ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Qualité algorithmique, anticipation et évaluation des performances, analyse de code et optimisation. (sera vu ultérieurement)</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R5.11 : Méthode d'optimisation</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Repository GitHub officiel :</strong>
+                <span><a href="https://github.com/oeoecbien/opti" target="_blank" rel="noreferrer">https://github.com/oeoecbien/opti</a></span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Méthodes d'optimisation avancées, profiling (analyse de performance), benchmarking (tests de performance), analyse de code et justification des choix algorithmiques.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R5.12 : Modélisation mathématiques : IA</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Repository GitHub officiel :</strong>
+                <span><a href="https://github.com/oeoecbien/ai" target="_blank" rel="noreferrer">https://github.com/oeoecbien/ai</a></span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Intégration de l'IA (Intelligence Artificielle) dans les applications, apprentissage par renforcement (méthode d'apprentissage automatique), régression (prédiction de valeurs continues), perceptron (réseau de neurones simple), classification (catégorisation de données), optimisation avec IA.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -181,7 +230,6 @@
             • <strong>ALTERNANCE : Agence Altimax</strong> - Optimisation avancée dans un contexte professionnel, profiling et analyse de code, justification des choix algorithmiques. Cette expérience me permet d'anticiper et d'évaluer les performances (temps, mémoire, précision, charge), d'analyser le code et de proposer des optimisations, et de justifier les choix algorithmiques en regard de contraintes multiples.
           </p>
         </div>
-        </div>
 
         <div class="project-details__tools-used">
           <div class="project-details__tools-used-list">
@@ -204,43 +252,39 @@
             Les <strong>traces</strong> sont des documents bruts qui témoignent de mon activité. Les <strong>preuves</strong> sont ces traces contextualisées avec une réflexion sur l'apprentissage. Voici mes traces et preuves pour le Niveau 3 :
           </p>
           
-          <h3 class="project-details__proof-title">PREUVE 1 : SAÉ 5.01 - SmartHome (IA Classification et optimisation IoT)</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en troisième année (Semestre 5) dans le cadre de la SAÉ 5.01. Il s'agit d'un projet complexe développant une application mobile Android avec Kotlin, intégrant l'IoT (Internet des Objets) via MQTT et Raspberry Pi, et utilisant l'intelligence artificielle pour la classification de données, nécessitant une optimisation avancée des performances.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Code source de l'application Kotlin avec algorithmes d'IA optimisés (projet en cours, confidentiel)<br>
-            • Architecture IoT optimisée avec MQTT (protocole de communication pour l'IoT) et Raspberry Pi<br>
-            • Intégration d'IA pour la classification avec optimisation des performances<br>
-            • Documentation de l'analyse de performance et des optimisations réalisées
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>anticiper et évaluer les performances (AC32.01)</strong> en prévoyant les besoins en termes de temps d'exécution, mémoire et charge pour l'IA et l'IoT. Il illustre également ma compétence à <strong>analyser le code et proposer des optimisations (AC32.02)</strong> en identifiant les goulots d'étranglement dans le traitement des données IoT et l'exécution des algorithmes d'IA. J'ai appliqué des <strong>justifications des choix algorithmiques (AC32.03)</strong> en sélectionnant les algorithmes d'IA les plus appropriés (classification) selon les contraintes de performance et de précision. Ce projet mobilise les ressources R5.11 (Méthode d'optimisation) et R5.12 (IA - Classification).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet est le plus complexe en termes d'optimisation car il combine trois domaines différents : développement mobile, IoT et intelligence artificielle, chacun avec ses propres contraintes de performance. La principale difficulté a été d'optimiser les algorithmes d'IA pour qu'ils s'exécutent rapidement sur un appareil mobile tout en maintenant une bonne précision de classification. J'ai surmonté cette difficulté en utilisant les techniques d'optimisation enseignées dans R5.11, en analysant les performances avec des outils de profiling, et en appliquant les méthodes d'IA optimisées de R5.12. Ce projet m'a montré l'importance de l'optimisation dans les systèmes intégrant plusieurs technologies complexes.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 1 : SAÉ 5.01 - SmartHome (IA Classification et optimisation IoT)</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Projet académique réalisé en troisième année (Semestre 5) dans le cadre de la SAÉ 5.01. Il s'agit d'un projet complexe développant une application mobile Android avec Kotlin, intégrant l'IoT (Internet des Objets) via MQTT et Raspberry Pi, et utilisant l'intelligence artificielle pour la classification de données, nécessitant une optimisation avancée des performances.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Code source de l'application Kotlin avec algorithmes d'IA optimisés (projet en cours, confidentiel)</li>
+                <li>Architecture IoT optimisée avec MQTT (protocole de communication pour l'IoT) et Raspberry Pi</li>
+                <li>Intégration d'IA pour la classification avec optimisation des performances</li>
+                <li>Documentation de l'analyse de performance et des optimisations réalisées</li>
+              </ul>
+              <p><strong>Justification :</strong> Ce projet démontre ma capacité à <strong>anticiper et évaluer les performances (AC32.01)</strong> en prévoyant les besoins en termes de temps d'exécution, mémoire et charge pour l'IA et l'IoT. Il illustre également ma compétence à <strong>analyser le code et proposer des optimisations (AC32.02)</strong> en identifiant les goulots d'étranglement dans le traitement des données IoT et l'exécution des algorithmes d'IA. J'ai appliqué des <strong>justifications des choix algorithmiques (AC32.03)</strong> en sélectionnant les algorithmes d'IA les plus appropriés (classification) selon les contraintes de performance et de précision. Ce projet mobilise les ressources R5.11 (Méthode d'optimisation) et R5.12 (IA - Classification).</p>
+              <p><strong>Réflexion :</strong> Ce projet est le plus complexe en termes d'optimisation car il combine trois domaines différents : développement mobile, IoT et intelligence artificielle, chacun avec ses propres contraintes de performance. La principale difficulté a été d'optimiser les algorithmes d'IA pour qu'ils s'exécutent rapidement sur un appareil mobile tout en maintenant une bonne précision de classification. J'ai surmonté cette difficulté en utilisant les techniques d'optimisation enseignées dans R5.11, en analysant les performances avec des outils de profiling, et en appliquant les méthodes d'IA optimisées de R5.12. Ce projet m'a montré l'importance de l'optimisation dans les systèmes intégrant plusieurs technologies complexes.</p>
+            </div>
+          </div>
 
-          <h3 class="project-details__proof-title">PREUVE 2 : ALTERNANCE - Agence Altimax (Optimisation de code WordPress)</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Alternance professionnelle depuis septembre 2025 (4 mois, en cours) en tant que Développeur web chez Agence Altimax à Annecy. Je développe et maintiens des sites web avec WordPress, en optimisant le code, en améliorant les performances, et en analysant les goulots d'étranglement pour proposer des optimisations.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Sites web WordPress optimisés en production (propriétaires, non publics)<br>
-            • Optimisations de code PHP, HTML, CSS, JavaScript réalisées<br>
-            • Améliorations de performance mesurées (réduction du temps de chargement, optimisation des requêtes)<br>
-            • Analyses de performance avec outils de profiling<br>
-            • Documentation des optimisations et justifications des choix algorithmiques<br>
-            • Contributions régulières avec commits Git documentés
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Cette alternance démontre ma capacité à <strong>anticiper et évaluer les performances (AC32.01)</strong> en prévoyant l'impact des optimisations sur le temps de chargement et l'expérience utilisateur. Elle illustre également ma compétence à <strong>analyser le code et proposer des optimisations (AC32.02)</strong> en identifiant les parties du code WordPress qui ralentissent les sites, en utilisant des outils de profiling, et en proposant des solutions d'optimisation. J'ai appliqué des <strong>justifications des choix algorithmiques (AC32.03)</strong> en sélectionnant les meilleures techniques d'optimisation selon les contraintes (performance, maintenabilité, compatibilité WordPress). L'expérience quotidienne en entreprise me permet d'appliquer les compétences de niveau 3 dans un contexte professionnel réel avec des contraintes de production.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Cette alternance est une expérience professionnelle continue qui me permet de développer mes compétences d'optimisation avancée dans un contexte réel. La principale difficulté a été de comprendre comment optimiser le code WordPress existant sans casser les fonctionnalités, tout en respectant les contraintes de l'entreprise. J'ai surmonté cette difficulté en analysant le code avec des outils de profiling, en testant les optimisations sur des environnements de développement, et en mesurant les améliorations de performance. Cette expérience m'a montré l'importance de l'optimisation continue dans un contexte professionnel et m'a permis de développer ma capacité à justifier mes choix algorithmiques face à des contraintes multiples (performance, coût, maintenabilité, délais).
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 2 : ALTERNANCE - Agence Altimax (Optimisation de code WordPress)</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Alternance professionnelle depuis septembre 2025 (4 mois, en cours) en tant que Développeur web chez Agence Altimax à Annecy. Je développe et maintiens des sites web avec WordPress, en optimisant le code, en améliorant les performances, et en analysant les goulots d'étranglement pour proposer des optimisations.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Sites web WordPress optimisés en production (propriétaires, non publics)</li>
+                <li>Optimisations de code PHP, HTML, CSS, JavaScript réalisées</li>
+                <li>Améliorations de performance mesurées (réduction du temps de chargement, optimisation des requêtes)</li>
+                <li>Analyses de performance avec outils de profiling</li>
+                <li>Documentation des optimisations et justifications des choix algorithmiques</li>
+                <li>Contributions régulières avec commits Git documentés</li>
+              </ul>
+              <p><strong>Justification :</strong> Cette alternance démontre ma capacité à <strong>anticiper et évaluer les performances (AC32.01)</strong> en prévoyant l'impact des optimisations sur le temps de chargement et l'expérience utilisateur. Elle illustre également ma compétence à <strong>analyser le code et proposer des optimisations (AC32.02)</strong> en identifiant les parties du code WordPress qui ralentissent les sites, en utilisant des outils de profiling, et en proposant des solutions d'optimisation. J'ai appliqué des <strong>justifications des choix algorithmiques (AC32.03)</strong> en sélectionnant les meilleures techniques d'optimisation selon les contraintes (performance, maintenabilité, compatibilité WordPress). L'expérience quotidienne en entreprise me permet d'appliquer les compétences de niveau 3 dans un contexte professionnel réel avec des contraintes de production.</p>
+              <p><strong>Réflexion :</strong> Cette alternance est une expérience professionnelle continue qui me permet de développer mes compétences d'optimisation avancée dans un contexte réel. La principale difficulté a été de comprendre comment optimiser le code WordPress existant sans casser les fonctionnalités, tout en respectant les contraintes de l'entreprise. J'ai surmonté cette difficulté en analysant le code avec des outils de profiling, en testant les optimisations sur des environnements de développement, et en mesurant les améliorations de performance. Cette expérience m'a montré l'importance de l'optimisation continue dans un contexte professionnel et m'a permis de développer ma capacité à justifier mes choix algorithmiques face à des contraintes multiples (performance, coût, maintenabilité, délais).</p>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -248,18 +292,20 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            Le <strong>Niveau 3</strong> représente l'aboutissement de ma progression dans l'optimisation. À travers des projets comme <strong>SmartHome (SAÉ 5.01)</strong> et mon <strong>alternance chez Agence Altimax</strong>, j'ai développé ma capacité à optimiser des systèmes complexes, à gérer la scalabilité (capacité à gérer une charge croissante), et à mettre en place des solutions d'optimisation avancées.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Défis rencontrés :</strong> Les principaux défis à ce niveau concernaient l'anticipation des performances dans des systèmes complexes intégrant plusieurs technologies (mobile, IoT, IA), l'analyse de code existant pour identifier les optimisations possibles, et la justification des choix algorithmiques face à des contraintes multiples (performance, coût, maintenabilité, précision).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Solutions apportées :</strong> Pour surmonter ces difficultés, j'ai utilisé des outils de profiling pour analyser les performances, j'ai étudié les techniques d'optimisation avancées, j'ai pratiqué l'optimisation dans un contexte professionnel réel, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R5.11 (Méthode d'optimisation) et R5.12 (IA - Classification).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Progression :</strong> Ces expériences m'ont permis de développer une expertise en optimisation avancée, de la prévision des performances à l'implémentation de solutions optimisées en production. L'alternance m'a particulièrement appris à justifier mes choix algorithmiques face à des contraintes professionnelles réelles, préparant ainsi mon insertion dans le monde professionnel.
-          </p>
+          <div class="reflection-cards-grid">
+            <div class="reflection-card reflection-card--challenge">
+              <div class="reflection-card__title">Défis rencontrés</div>
+              <div class="reflection-card__content">Les principaux défis à ce niveau concernaient l'anticipation des performances dans des systèmes complexes intégrant plusieurs technologies (mobile, IoT, IA), l'analyse de code existant pour identifier les optimisations possibles, et la justification des choix algorithmiques face à des contraintes multiples (performance, coût, maintenabilité, précision).</div>
+            </div>
+            <div class="reflection-card reflection-card--solution">
+              <div class="reflection-card__title">Solutions apportées</div>
+              <div class="reflection-card__content">Pour surmonter ces difficultés, j'ai utilisé des outils de profiling pour analyser les performances, j'ai étudié les techniques d'optimisation avancées, j'ai pratiqué l'optimisation dans un contexte professionnel réel, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R5.11 (Méthode d'optimisation) et R5.12 (IA - Classification).</div>
+            </div>
+            <div class="reflection-card reflection-card--progress">
+              <div class="reflection-card__title">Progression</div>
+              <div class="reflection-card__content">Le Niveau 3 représente l'aboutissement de ma progression dans l'optimisation. À travers des projets comme SmartHome (SAÉ 5.01) et mon alternance chez Agence Altimax, j'ai développé ma capacité à optimiser des systèmes complexes, à gérer la scalabilité (capacité à gérer une charge croissante), et à mettre en place des solutions d'optimisation avancées. Ces expériences m'ont permis de développer une expertise en optimisation avancée, de la prévision des performances à l'implémentation de solutions optimisées en production. L'alternance m'a particulièrement appris à justifier mes choix algorithmiques face à des contraintes professionnelles réelles, préparant ainsi mon insertion dans le monde professionnel.</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__links">

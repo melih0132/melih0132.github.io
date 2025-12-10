@@ -102,9 +102,14 @@
           <p class="project-details__desc-para">
             Ce niveau représente ma capacité à prendre en charge des projets stratégiques, à établir des processus, et à garantir la qualité et la continuité des projets. Ces compétences sont développées principalement lors des <strong>semestres 5 et 6</strong> (troisième année de BUT Informatique) à travers les ressources pédagogiques R5.01, R4.09, R5.02 et R5.13, ainsi que les projets académiques SAÉ 5.01 et mon expérience professionnelle en alternance chez Agence Altimax.
           </p>
-          <p class="project-details__desc-para">
-            <strong>Statut :</strong> 🔄 <strong>EN COURS</strong> - Les ressources de ce niveau sont actuellement en cours d'étude et les compétences sont développées à travers des projets académiques et une expérience professionnelle en alternance.
-          </p>
+          <div class="competence-status-box">
+            <p>
+              <strong>Statut : EN COURS</strong>
+            </p>
+            <p>
+              Les ressources de ce niveau sont actuellement en cours d'étude et les compétences sont développées à travers des projets académiques et une expérience professionnelle en alternance.
+            </p>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -115,11 +120,23 @@
           <p class="project-details__desc-para">
             Les <strong>Apprentissages Critiques (AC)</strong> sont les éléments essentiels que je dois maîtriser pour atteindre ce niveau de compétence. Voici les 3 apprentissages critiques du Niveau 3 :
           </p>
-          <p class="project-details__desc-para">
-            • <strong>AC35.01 | Mesurer les impacts du projet</strong> : Évaluation des impacts économiques (coûts, bénéfices), sociétaux (impact sur la société) et technologiques (impact technique), analyse de la valeur (valeur apportée), mesure des résultats<br>
-            • <strong>AC35.02 | Intégrer un projet dans un système d'information</strong> : Intégration dans les systèmes d'information (connexion avec les systèmes existants), architecture SI (organisation des systèmes), compatibilité (fonctionnement avec les systèmes existants), alignement métier (correspondance avec les besoins métiers)<br>
-            • <strong>AC35.03 | Adapter un système d'information à l'évolution des besoins</strong> : Évolution des systèmes (modification continue), adaptation aux besoins changeants (flexibilité), transformation digitale (modernisation numérique)
-          </p>
+          <div class="ac-cards-grid">
+            <div class="ac-card">
+              <div class="ac-card__code">AC35.01</div>
+              <div class="ac-card__title">Mesurer les impacts du projet</div>
+              <div class="ac-card__description">Évaluation des impacts économiques (coûts, bénéfices), sociétaux (impact sur la société) et technologiques (impact technique), analyse de la valeur (valeur apportée), mesure des résultats</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC35.02</div>
+              <div class="ac-card__title">Intégrer un projet dans un système d'information</div>
+              <div class="ac-card__description">Intégration dans les systèmes d'information (connexion avec les systèmes existants), architecture SI (organisation des systèmes), compatibilité (fonctionnement avec les systèmes existants), alignement métier (correspondance avec les besoins métiers)</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC35.03</div>
+              <div class="ac-card__title">Adapter un système d'information à l'évolution des besoins</div>
+              <div class="ac-card__description">Évolution des systèmes (modification continue), adaptation aux besoins changeants (flexibilité), transformation digitale (modernisation numérique)</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -127,26 +144,68 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            <strong>R5.01 : Initiation au Management d'une équipe de projet informatique : RACI, Gestion des conflits</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Contenu :</strong> Management d'équipe, RACI (matrice de responsabilités), gestion des conflits, coordination d'équipe, leadership.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R4.09 : Management avancé des systèmes d'informations : Simulation CESIM, Cartographie</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Contenu :</strong> Gestion de projet dans le contexte SI, intégration, impacts organisationnels, cartographie des systèmes d'information, simulation CESIM.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R5.02 : PPP : Future (Master ou Travail)</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Contenu :</strong> Projet professionnel et personnel, réflexion sur l'avenir professionnel, orientation Master ou Travail.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R5.13 : Economie durable et numérique (Fresque du numérique)</strong> → <strong>Statut : EN COURS</strong><br>
-            <strong>Contenu :</strong> Economie durable et numérique, Fresque du numérique (outil de sensibilisation aux impacts environnementaux du numérique), mesure des impacts environnementaux.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>SAÉ 5.01 : SmartHome</strong> → <strong>Statut : EN COURS</strong><br>
-            <strong>Contenu :</strong> Situations d'apprentissage et d'évaluation spécifiques au parcours RA (Réalisation d'Applications).
-          </p>
+          <div class="resource-cards-container">
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R5.01 : Initiation au Management d'une équipe de projet informatique : RACI, Gestion des conflits</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Management d'équipe, RACI (matrice de responsabilités), gestion des conflits, coordination d'équipe, leadership.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R4.09 : Management avancé des systèmes d'informations : Simulation CESIM, Cartographie</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Gestion de projet dans le contexte SI, intégration, impacts organisationnels, cartographie des systèmes d'information, simulation CESIM.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R5.02 : PPP : Future (Master ou Travail)</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Projet professionnel et personnel, réflexion sur l'avenir professionnel, orientation Master ou Travail.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R5.13 : Economie durable et numérique (Fresque du numérique)</div>
+                  <span class="resource-card__badge">EN COURS</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Economie durable et numérique, Fresque du numérique (outil de sensibilisation aux impacts environnementaux du numérique), mesure des impacts environnementaux.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">SAÉ 5.01 : SmartHome</div>
+                  <span class="resource-card__badge">EN COURS</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Situations d'apprentissage et d'évaluation spécifiques au parcours RA (Réalisation d'Applications).</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -205,45 +264,41 @@
             Les <strong>traces</strong> sont des documents bruts qui témoignent de mon activité. Les <strong>preuves</strong> sont ces traces contextualisées avec une réflexion sur l'apprentissage. Voici mes traces et preuves pour le Niveau 3 :
           </p>
           
-          <h3 class="project-details__proof-title">PREUVE 1 : SAÉ 5.01 - SmartHome (Mesure d'impacts, intégration système, management d'équipe)</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en troisième année (Semestre 5) dans le cadre de la SAÉ 5.01. Il s'agit d'un projet complexe développant une application mobile Android avec Kotlin, intégrant l'IoT (Internet des Objets) via MQTT et Raspberry Pi, et utilisant l'intelligence artificielle, nécessitant la mesure des impacts, l'intégration dans un système d'information, et le management d'équipe.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Mesure des impacts du projet (économiques, sociétaux, environnementaux) via Fresque du numérique (R5.13)<br>
-            • Intégration d'un projet dans un système d'information avec cartographie (R4.09)<br>
-            • Management d'équipe avec RACI (matrice de responsabilités) et gestion des conflits (R5.01)<br>
-            • Documentation de l'architecture système d'information<br>
-            • Code source de l'application (projet en cours, confidentiel)
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>mesurer les impacts du projet (AC35.01)</strong> en utilisant la Fresque du numérique pour évaluer les impacts économiques, sociétaux et environnementaux. Il illustre également ma compétence à <strong>intégrer un projet dans un système d'information (AC35.02)</strong> en créant une cartographie du système d'information et en intégrant plusieurs technologies (mobile, IoT, IA). Enfin, il montre ma capacité en management d'équipe avec l'utilisation de RACI et la gestion des conflits. J'ai utilisé les ressources R5.01 (Management d'équipe), R4.09 (Cartographie SI) et R5.13 (Fresque du numérique).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet est le plus complexe en termes de conduite de projet car il combine plusieurs aspects : mesure des impacts, intégration système, et management d'équipe. La principale difficulté a été de coordonner tous ces aspects tout en gérant une équipe et en mesurant les impacts du projet. J'ai surmonté cette difficulté en appliquant les méthodes de management d'équipe (RACI), en utilisant la cartographie pour visualiser l'intégration système, et en appliquant les concepts de la Fresque du numérique pour mesurer les impacts. Ce projet m'a montré l'importance de la vision globale dans la conduite de projets avancés.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 1 : SAÉ 5.01 - SmartHome (Mesure d'impacts, intégration système, management d'équipe)</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Projet académique réalisé en troisième année (Semestre 5) dans le cadre de la SAÉ 5.01. Il s'agit d'un projet complexe développant une application mobile Android avec Kotlin, intégrant l'IoT (Internet des Objets) via MQTT et Raspberry Pi, et utilisant l'intelligence artificielle, nécessitant la mesure des impacts, l'intégration dans un système d'information, et le management d'équipe.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Mesure des impacts du projet (économiques, sociétaux, environnementaux) via Fresque du numérique (R5.13)</li>
+                <li>Intégration d'un projet dans un système d'information avec cartographie (R4.09)</li>
+                <li>Management d'équipe avec RACI (matrice de responsabilités) et gestion des conflits (R5.01)</li>
+                <li>Documentation de l'architecture système d'information</li>
+                <li>Code source de l'application (projet en cours, confidentiel)</li>
+              </ul>
+              <p><strong>Justification :</strong> Ce projet démontre ma capacité à <strong>mesurer les impacts du projet (AC35.01)</strong> en utilisant la Fresque du numérique pour évaluer les impacts économiques, sociétaux et environnementaux. Il illustre également ma compétence à <strong>intégrer un projet dans un système d'information (AC35.02)</strong> en créant une cartographie du système d'information et en intégrant plusieurs technologies (mobile, IoT, IA). Enfin, il montre ma capacité en management d'équipe avec l'utilisation de RACI et la gestion des conflits. J'ai utilisé les ressources R5.01 (Management d'équipe), R4.09 (Cartographie SI) et R5.13 (Fresque du numérique).</p>
+              <p><strong>Réflexion :</strong> Ce projet est le plus complexe en termes de conduite de projet car il combine plusieurs aspects : mesure des impacts, intégration système, et management d'équipe. La principale difficulté a été de coordonner tous ces aspects tout en gérant une équipe et en mesurant les impacts du projet. J'ai surmonté cette difficulté en appliquant les méthodes de management d'équipe (RACI), en utilisant la cartographie pour visualiser l'intégration système, et en appliquant les concepts de la Fresque du numérique pour mesurer les impacts. Ce projet m'a montré l'importance de la vision globale dans la conduite de projets avancés.</p>
+            </div>
+          </div>
 
-          <h3 class="project-details__proof-title">PREUVE 2 : ALTERNANCE - Agence Altimax (Management de projet, suivi des spécifications, RACI)</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Alternance professionnelle depuis septembre 2025 (4 mois, en cours) en tant que Développeur web chez Agence Altimax à Annecy. Je participe au management de projet, au suivi des spécifications, à l'utilisation de RACI, à la mesure des impacts, à l'intégration de projets dans le système d'information, et à l'adaptation du système d'information aux besoins de l'organisation.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Management de projet avec suivi des spécifications<br>
-            • Utilisation de RACI (matrice de responsabilités) pour clarifier les rôles<br>
-            • Mesure des impacts du projet (économiques, sociétaux)<br>
-            • Intégration de projets dans le système d'information de l'entreprise<br>
-            • Adaptation du système d'information aux besoins changeants des clients<br>
-            • Sites web WordPress en production (propriétaires, non publics)<br>
-            • Contributions régulières avec commits Git documentés
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Cette alternance démontre ma capacité à <strong>mesurer les impacts du projet (AC35.01)</strong> en évaluant les impacts économiques et sociétaux des projets développés. Elle illustre également ma compétence à <strong>intégrer un projet dans un système d'information (AC35.02)</strong> en intégrant les sites WordPress dans le système d'information de l'entreprise. Enfin, elle montre ma capacité à <strong>adapter un système d'information à l'évolution des besoins (AC35.03)</strong> en adaptant les sites aux besoins changeants des clients. L'expérience quotidienne en entreprise me permet d'appliquer les compétences de conduite de projet avancée dans un contexte réel avec des contraintes professionnelles.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Cette alternance est une expérience professionnelle continue qui me permet de développer mes compétences de conduite de projet avancée dans un contexte réel. La principale difficulté a été de comprendre comment mesurer les impacts des projets dans un contexte professionnel et comment adapter les systèmes aux besoins changeants des clients. J'ai surmonté cette difficulté en communiquant régulièrement avec l'équipe, en utilisant RACI pour clarifier les responsabilités, et en appliquant les bonnes pratiques de management de projet. Cette expérience m'a montré l'importance de la flexibilité et de l'adaptation dans la conduite de projets professionnels et m'a permis de développer ma capacité à gérer des projets complexes en production.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 2 : ALTERNANCE - Agence Altimax (Management de projet, suivi des spécifications, RACI)</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Alternance professionnelle depuis septembre 2025 (4 mois, en cours) en tant que Développeur web chez Agence Altimax à Annecy. Je participe au management de projet, au suivi des spécifications, à l'utilisation de RACI, à la mesure des impacts, à l'intégration de projets dans le système d'information, et à l'adaptation du système d'information aux besoins de l'organisation.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Management de projet avec suivi des spécifications</li>
+                <li>Utilisation de RACI (matrice de responsabilités) pour clarifier les rôles</li>
+                <li>Mesure des impacts du projet (économiques, sociétaux)</li>
+                <li>Intégration de projets dans le système d'information de l'entreprise</li>
+                <li>Adaptation du système d'information aux besoins changeants des clients</li>
+                <li>Sites web WordPress en production (propriétaires, non publics)</li>
+                <li>Contributions régulières avec commits Git documentés</li>
+              </ul>
+              <p><strong>Justification :</strong> Cette alternance démontre ma capacité à <strong>mesurer les impacts du projet (AC35.01)</strong> en évaluant les impacts économiques et sociétaux des projets développés. Elle illustre également ma compétence à <strong>intégrer un projet dans un système d'information (AC35.02)</strong> en intégrant les sites WordPress dans le système d'information de l'entreprise. Enfin, elle montre ma capacité à <strong>adapter un système d'information à l'évolution des besoins (AC35.03)</strong> en adaptant les sites aux besoins changeants des clients. L'expérience quotidienne en entreprise me permet d'appliquer les compétences de conduite de projet avancée dans un contexte réel avec des contraintes professionnelles.</p>
+              <p><strong>Réflexion :</strong> Cette alternance est une expérience professionnelle continue qui me permet de développer mes compétences de conduite de projet avancée dans un contexte réel. La principale difficulté a été de comprendre comment mesurer les impacts des projets dans un contexte professionnel et comment adapter les systèmes aux besoins changeants des clients. J'ai surmonté cette difficulté en communiquant régulièrement avec l'équipe, en utilisant RACI pour clarifier les responsabilités, et en appliquant les bonnes pratiques de management de projet. Cette expérience m'a montré l'importance de la flexibilité et de l'adaptation dans la conduite de projets professionnels et m'a permis de développer ma capacité à gérer des projets complexes en production.</p>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -251,18 +306,20 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            Le <strong>Niveau 3</strong> représente l'aboutissement de ma progression dans la conduite de projet. À travers des projets comme <strong>SmartHome (SAÉ 5.01)</strong> et mon <strong>alternance chez Agence Altimax</strong>, j'ai développé ma capacité à mesurer les impacts du projet, à intégrer un projet dans un système d'information, et à adapter un système d'information à l'évolution des besoins.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Défis rencontrés :</strong> Les principaux défis à ce niveau concernaient la mesure des impacts (économiques, sociétaux, environnementaux), l'intégration de projets complexes dans des systèmes d'information, le management d'équipe avec RACI, et l'adaptation des systèmes aux besoins changeants.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Solutions apportées :</strong> Pour surmonter ces difficultés, j'ai étudié les méthodes de mesure des impacts (Fresque du numérique), j'ai pratiqué la cartographie des systèmes d'information, j'ai appliqué les méthodes de management d'équipe (RACI, gestion des conflits), et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R5.01, R4.09, R5.02 et R5.13.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Progression :</strong> Ces expériences m'ont permis de développer une expertise en conduite de projet avancée, de la mesure des impacts à l'adaptation des systèmes. L'alternance m'a particulièrement appris à gérer des projets complexes en production avec des contraintes réelles, préparant ainsi mon insertion dans le monde professionnel en tant que chef de projet ou manager.
-          </p>
+          <div class="reflection-cards-grid">
+            <div class="reflection-card reflection-card--challenge">
+              <div class="reflection-card__title">Défis rencontrés</div>
+              <div class="reflection-card__content">Les principaux défis à ce niveau concernaient la mesure des impacts (économiques, sociétaux, environnementaux), l'intégration de projets complexes dans des systèmes d'information, le management d'équipe avec RACI, et l'adaptation des systèmes aux besoins changeants.</div>
+            </div>
+            <div class="reflection-card reflection-card--solution">
+              <div class="reflection-card__title">Solutions apportées</div>
+              <div class="reflection-card__content">Pour surmonter ces difficultés, j'ai étudié les méthodes de mesure des impacts (Fresque du numérique), j'ai pratiqué la cartographie des systèmes d'information, j'ai appliqué les méthodes de management d'équipe (RACI, gestion des conflits), et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R5.01, R4.09, R5.02 et R5.13.</div>
+            </div>
+            <div class="reflection-card reflection-card--progress">
+              <div class="reflection-card__title">Progression</div>
+              <div class="reflection-card__content">Le Niveau 3 représente l'aboutissement de ma progression dans la conduite de projet. À travers des projets comme SmartHome (SAÉ 5.01) et mon alternance chez Agence Altimax, j'ai développé ma capacité à mesurer les impacts du projet, à intégrer un projet dans un système d'information, et à adapter un système d'information à l'évolution des besoins. Ces expériences m'ont permis de développer une expertise en conduite de projet avancée, de la mesure des impacts à l'adaptation des systèmes. L'alternance m'a particulièrement appris à gérer des projets complexes en production avec des contraintes réelles, préparant ainsi mon insertion dans le monde professionnel en tant que chef de projet ou manager.</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__links">

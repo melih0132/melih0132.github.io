@@ -102,9 +102,14 @@
           <p class="project-details__desc-para">
             Ce niveau représente une évolution dans ma capacité à analyser et visualiser les données, à optimiser les performances, et à gérer des volumes de données plus importants. Ces compétences ont été développées principalement lors des <strong>semestres 3 et 4</strong> (deuxième année de BUT Informatique) à travers les ressources pédagogiques R2.06, R3.07 et R4.03, ainsi que les projets académiques SAÉ 2.04, SAÉ 3.01, SAÉ 4.01 et mon stage professionnel chez HEVA.
           </p>
-          <p class="project-details__desc-para">
-            <strong>Statut :</strong> <strong>ACQUIS</strong> - Toutes les ressources de ce niveau ont été étudiées et les compétences ont été validées à travers des projets concrets et une expérience professionnelle en stage.
-          </p>
+          <div class="competence-status-box">
+            <p>
+              <strong>Statut : ACQUIS</strong>
+            </p>
+            <p>
+              Toutes les ressources de ce niveau ont été étudiées et les compétences ont été validées à travers des projets concrets et une expérience professionnelle en stage.
+            </p>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -115,11 +120,23 @@
           <p class="project-details__desc-para">
             Les <strong>Apprentissages Critiques (AC)</strong> sont les éléments essentiels que je dois maîtriser pour atteindre ce niveau de compétence. Voici les 3 apprentissages critiques du Niveau 2 :
           </p>
-          <p class="project-details__desc-para">
-            • <strong>AC24.01 | Optimiser les performances d'une base de données</strong> : Optimisation des performances (amélioration de la vitesse d'exécution des requêtes), indexation (création d'index pour accélérer les recherches), requêtes optimisées (requêtes SQL améliorées pour de meilleures performances)<br>
-            • <strong>AC24.02 | Assurer la sécurité et l'intégrité des données</strong> : Sécurisation des données (protection contre les accès non autorisés), intégrité référentielle (garantir la cohérence des relations entre tables), protection des données (chiffrement, sauvegardes)<br>
-            • <strong>AC24.03 | Organiser la restitution et la visualisation des données</strong> : Restitution de données (présentation des données), visualisation (création de graphiques et tableaux), rapports et dashboards (tableaux de bord interactifs)
-          </p>
+          <div class="ac-cards-grid">
+            <div class="ac-card">
+              <div class="ac-card__code">AC24.01</div>
+              <div class="ac-card__title">Optimiser les performances d'une base de données</div>
+              <div class="ac-card__description">Optimisation des performances (amélioration de la vitesse d'exécution des requêtes), indexation (création d'index pour accélérer les recherches), requêtes optimisées (requêtes SQL améliorées pour de meilleures performances)</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC24.02</div>
+              <div class="ac-card__title">Assurer la sécurité et l'intégrité des données</div>
+              <div class="ac-card__description">Sécurisation des données (protection contre les accès non autorisés), intégrité référentielle (garantir la cohérence des relations entre tables), protection des données (chiffrement, sauvegardes)</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC24.03</div>
+              <div class="ac-card__title">Organiser la restitution et la visualisation des données</div>
+              <div class="ac-card__description">Restitution de données (présentation des données), visualisation (création de graphiques et tableaux), rapports et dashboards (tableaux de bord interactifs)</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -127,21 +144,56 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            <strong>R2.06 : Exploitation d'une base de données (SQL)</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Technologies :</strong> SQL (langage de requête pour bases de données)<br>
-            <strong>Contenu :</strong> Optimisation des performances (indexation, plan d'exécution), sécurité et intégrité des données (authentification, contraintes), restitution et visualisation (rapports, requêtes complexes).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R3.07 : Triggers, Procédure, NoSQL</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Technologies :</strong> SQL avancé (Triggers - déclencheurs automatiques, Procédures stockées), NoSQL (bases de données non relationnelles)<br>
-            <strong>Contenu :</strong> Triggers (déclencheurs automatiques sur événements), procédures stockées (fonctions SQL réutilisables), introduction aux bases de données NoSQL (MongoDB).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R4.03 : Qualité et au delà du relationnel (MongoDB)</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Technologies :</strong> MongoDB (base de données NoSQL)<br>
-            <strong>Contenu :</strong> Bases de données NoSQL, MongoDB (structure de données en documents), qualité des données, gestion de données non structurées.
-          </p>
+          <div class="resource-cards-container">
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R2.06 : Exploitation d'une base de données (SQL)</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Technologies :</strong>
+                <span>SQL (langage de requête pour bases de données)</span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Optimisation des performances (indexation, plan d'exécution), sécurité et intégrité des données (authentification, contraintes), restitution et visualisation (rapports, requêtes complexes).</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R3.07 : Triggers, Procédure, NoSQL</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Technologies :</strong>
+                <span>SQL avancé (Triggers - déclencheurs automatiques, Procédures stockées), NoSQL (bases de données non relationnelles)</span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Triggers (déclencheurs automatiques sur événements), procédures stockées (fonctions SQL réutilisables), introduction aux bases de données NoSQL (MongoDB).</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R4.03 : Qualité et au delà du relationnel (MongoDB)</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Technologies :</strong>
+                <span>MongoDB (base de données NoSQL)</span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Bases de données NoSQL, MongoDB (structure de données en documents), qualité des données, gestion de données non structurées.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -205,83 +257,75 @@
             Les <strong>traces</strong> sont des documents bruts qui témoignent de mon activité. Les <strong>preuves</strong> sont ces traces contextualisées avec une réflexion sur l'apprentissage. Voici mes traces et preuves pour le Niveau 2 :
           </p>
           
-          <h3 class="project-details__proof-title">PREUVE 1 : SAÉ 2.04 - Jeu de données, Requêtes complexes, PowerBI</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 2) dans le cadre de la SAÉ 2.04. Il s'agissait d'analyser un jeu de données complexe, d'optimiser les requêtes SQL, et de créer des visualisations de données avec PowerBI.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Requêtes SQL complexes avec optimisations<br>
-            • Dashboards PowerBI interactifs avec visualisations de données<br>
-            • Analyses de performance des requêtes<br>
-            • Documentation des optimisations réalisées<br>
-            • Fiche projet détaillée : <a href="/fr/projets/lpo.html" class="project-details__desc-link">voir la fiche projet</a>
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>optimiser les performances d'une base de données (AC24.01)</strong> en créant des requêtes SQL optimisées et en analysant les performances. Il illustre également ma compétence à <strong>organiser la restitution et la visualisation des données (AC24.03)</strong> en créant des dashboards PowerBI interactifs avec des visualisations de données. J'ai utilisé les ressources R2.06 (Exploitation d'une base de données) et R3.07 (Triggers, Procédures).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet m'a permis de comprendre l'importance de l'optimisation des requêtes SQL et de la visualisation de données. La principale difficulté a été de créer des requêtes SQL complexes et performantes pour analyser de grandes quantités de données. J'ai surmonté cette difficulté en étudiant les techniques d'optimisation SQL, en utilisant l'indexation, et en appliquant les concepts enseignés dans les ressources R2.06 et R3.07. Cette expérience m'a montré l'importance de la visualisation de données pour faciliter la compréhension et la prise de décision.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 1 : SAÉ 2.04 - Jeu de données, Requêtes complexes, PowerBI</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 2) dans le cadre de la SAÉ 2.04. Il s'agissait d'analyser un jeu de données complexe, d'optimiser les requêtes SQL, et de créer des visualisations de données avec PowerBI.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Requêtes SQL complexes avec optimisations</li>
+                <li>Dashboards PowerBI interactifs avec visualisations de données</li>
+                <li>Analyses de performance des requêtes</li>
+                <li>Documentation des optimisations réalisées</li>
+                <li>Fiche projet détaillée : <a href="/fr/projets/lpo.html">voir la fiche projet</a></li>
+              </ul>
+              <p><strong>Justification :</strong> Ce projet démontre ma capacité à <strong>optimiser les performances d'une base de données (AC24.01)</strong> en créant des requêtes SQL optimisées et en analysant les performances. Il illustre également ma compétence à <strong>organiser la restitution et la visualisation des données (AC24.03)</strong> en créant des dashboards PowerBI interactifs avec des visualisations de données. J'ai utilisé les ressources R2.06 (Exploitation d'une base de données) et R3.07 (Triggers, Procédures).</p>
+              <p><strong>Réflexion :</strong> Ce projet m'a permis de comprendre l'importance de l'optimisation des requêtes SQL et de la visualisation de données. La principale difficulté a été de créer des requêtes SQL complexes et performantes pour analyser de grandes quantités de données. J'ai surmonté cette difficulté en étudiant les techniques d'optimisation SQL, en utilisant l'indexation, et en appliquant les concepts enseignés dans les ressources R2.06 et R3.07. Cette expérience m'a montré l'importance de la visualisation de données pour faciliter la compréhension et la prise de décision.</p>
+            </div>
+          </div>
 
-          <h3 class="project-details__proof-title">PREUVE 2 : SAÉ 3.01 - Clone Uber (Laravel) - Base de données complexe</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 3) dans le cadre de la SAÉ 3.01. Il s'agissait de développer une application web complète similaire à Uber en utilisant Laravel, nécessitant la gestion d'une base de données complexe avec optimisation des performances et sécurité des données.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Base de données relationnelle optimisée avec indexation<br>
-            • Requêtes SQL optimisées pour les performances<br>
-            • Sécurité et intégrité des données implémentées<br>
-            • Code source avec gestion de données disponible sur <a href="https://github.com/melih0132/uber-complete-system-laravel" target="_blank" rel="noreferrer" class="project-details__desc-link">GitHub</a><br>
-            • Fiche projet détaillée : <a href="/fr/projets/uber-laravel.html" class="project-details__desc-link">voir la fiche projet</a>
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>optimiser les performances d'une base de données (AC24.01)</strong> en utilisant l'indexation et en optimisant les requêtes SQL. Il illustre également ma compétence à <strong>assurer la sécurité et l'intégrité des données (AC24.02)</strong> en implémentant l'authentification, l'autorisation et les contraintes d'intégrité. J'ai utilisé les ressources R2.06 (Exploitation d'une base de données) et R3.07 (Triggers, Procédures).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet a été un défi majeur en termes de gestion de données car il fallait gérer de grandes quantités de données (utilisateurs, trajets, calculs) tout en garantissant les performances et la sécurité. La principale difficulté a été d'optimiser les requêtes SQL pour garantir des temps de réponse acceptables. J'ai surmonté cette difficulté en analysant les plans d'exécution des requêtes, en utilisant l'indexation appropriée, et en appliquant les techniques enseignées dans les ressources R2.06 et R3.07. Ce projet m'a montré l'importance de l'optimisation et de la sécurité dans la gestion de données en production.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 2 : SAÉ 3.01 - Clone Uber (Laravel) - Base de données complexe</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 3) dans le cadre de la SAÉ 3.01. Il s'agissait de développer une application web complète similaire à Uber en utilisant Laravel, nécessitant la gestion d'une base de données complexe avec optimisation des performances et sécurité des données.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Base de données relationnelle optimisée avec indexation</li>
+                <li>Requêtes SQL optimisées pour les performances</li>
+                <li>Sécurité et intégrité des données implémentées</li>
+                <li>Code source avec gestion de données disponible sur <a href="https://github.com/melih0132/uber-complete-system-laravel" target="_blank" rel="noreferrer">GitHub</a></li>
+                <li>Fiche projet détaillée : <a href="/fr/projets/uber-laravel.html">voir la fiche projet</a></li>
+              </ul>
+              <p><strong>Justification :</strong> Ce projet démontre ma capacité à <strong>optimiser les performances d'une base de données (AC24.01)</strong> en utilisant l'indexation et en optimisant les requêtes SQL. Il illustre également ma compétence à <strong>assurer la sécurité et l'intégrité des données (AC24.02)</strong> en implémentant l'authentification, l'autorisation et les contraintes d'intégrité. J'ai utilisé les ressources R2.06 (Exploitation d'une base de données) et R3.07 (Triggers, Procédures).</p>
+              <p><strong>Réflexion :</strong> Ce projet a été un défi majeur en termes de gestion de données car il fallait gérer de grandes quantités de données (utilisateurs, trajets, calculs) tout en garantissant les performances et la sécurité. La principale difficulté a été d'optimiser les requêtes SQL pour garantir des temps de réponse acceptables. J'ai surmonté cette difficulté en analysant les plans d'exécution des requêtes, en utilisant l'indexation appropriée, et en appliquant les techniques enseignées dans les ressources R2.06 et R3.07. Ce projet m'a montré l'importance de l'optimisation et de la sécurité dans la gestion de données en production.</p>
+            </div>
+          </div>
 
-          <h3 class="project-details__proof-title">PREUVE 3 : SAÉ 4.01 - Clone Uber (.NET + Vue.js) - MongoDB et bases relationnelles</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 4) dans le cadre de la SAÉ 4.01. Il s'agissait de développer une application web complète similaire à Uber en utilisant .NET Core pour le backend et Vue.js pour le frontend, avec gestion de données complexes utilisant à la fois des bases de données relationnelles et NoSQL (MongoDB).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Base de données relationnelle (PostgreSQL) optimisée<br>
-            • Base de données NoSQL (MongoDB) pour certaines fonctionnalités<br>
-            • Optimisation des performances des deux types de bases de données<br>
-            • Sécurité et intégrité des données implémentées<br>
-            • Code source avec gestion de données disponible sur <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" target="_blank" rel="noreferrer" class="project-details__desc-link">GitHub</a><br>
-            • Fiche projet détaillée : <a href="/fr/projets/uber-vuejs-dotnet.html" class="project-details__desc-link">voir la fiche projet</a>
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>optimiser les performances d'une base de données (AC24.01)</strong> en optimisant à la fois les bases de données relationnelles et NoSQL. Il illustre également ma compétence à <strong>assurer la sécurité et l'intégrité des données (AC24.02)</strong> dans un contexte multi-bases de données. J'ai utilisé les ressources R2.06 (Exploitation d'une base de données), R3.07 (NoSQL) et R4.03 (MongoDB).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet a été enrichissant car il m'a permis de travailler avec deux types de bases de données différents (relationnelle et NoSQL). La principale difficulté a été de comprendre quand utiliser chaque type de base de données et comment optimiser les performances dans les deux cas. J'ai surmonté cette difficulté en étudiant les avantages et inconvénients de chaque type de base de données, en pratiquant avec MongoDB, et en appliquant les concepts enseignés dans les ressources R3.07 et R4.03. Cette expérience m'a montré l'importance de choisir le bon type de base de données selon les besoins du projet.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 3 : SAÉ 4.01 - Clone Uber (.NET + Vue.js) - MongoDB et bases relationnelles</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 4) dans le cadre de la SAÉ 4.01. Il s'agissait de développer une application web complète similaire à Uber en utilisant .NET Core pour le backend et Vue.js pour le frontend, avec gestion de données complexes utilisant à la fois des bases de données relationnelles et NoSQL (MongoDB).</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Base de données relationnelle (PostgreSQL) optimisée</li>
+                <li>Base de données NoSQL (MongoDB) pour certaines fonctionnalités</li>
+                <li>Optimisation des performances des deux types de bases de données</li>
+                <li>Sécurité et intégrité des données implémentées</li>
+                <li>Code source avec gestion de données disponible sur <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" target="_blank" rel="noreferrer">GitHub</a></li>
+                <li>Fiche projet détaillée : <a href="/fr/projets/uber-vuejs-dotnet.html">voir la fiche projet</a></li>
+              </ul>
+              <p><strong>Justification :</strong> Ce projet démontre ma capacité à <strong>optimiser les performances d'une base de données (AC24.01)</strong> en optimisant à la fois les bases de données relationnelles et NoSQL. Il illustre également ma compétence à <strong>assurer la sécurité et l'intégrité des données (AC24.02)</strong> dans un contexte multi-bases de données. J'ai utilisé les ressources R2.06 (Exploitation d'une base de données), R3.07 (NoSQL) et R4.03 (MongoDB).</p>
+              <p><strong>Réflexion :</strong> Ce projet a été enrichissant car il m'a permis de travailler avec deux types de bases de données différents (relationnelle et NoSQL). La principale difficulté a été de comprendre quand utiliser chaque type de base de données et comment optimiser les performances dans les deux cas. J'ai surmonté cette difficulté en étudiant les avantages et inconvénients de chaque type de base de données, en pratiquant avec MongoDB, et en appliquant les concepts enseignés dans les ressources R3.07 et R4.03. Cette expérience m'a montré l'importance de choisir le bon type de base de données selon les besoins du projet.</p>
+            </div>
+          </div>
 
-          <h3 class="project-details__proof-title">PREUVE 4 : STAGE - HEVA - Helvetic Events Agency</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Stage professionnel de 3 mois (avril 2025 - juin 2025) en tant que Développeur Full Stack chez HEVA - Helvetic Events Agency à Annecy. J'ai participé au développement d'une application web de gestion de projet utilisant React (frontend) et FastAPI (backend Python), nécessitant la gestion de données complexes avec optimisation des performances et sécurité.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Base de données relationnelle optimisée en production<br>
-            • Requêtes SQL optimisées pour les performances<br>
-            • Sécurité et intégrité des données implémentées<br>
-            • Code source de l'application avec gestion de données (propriétaire, non public)<br>
-            • Captures d'écran de l'application en production (<a href="/fr/projets/heva.html" class="project-details__desc-link">voir la fiche projet</a>)<br>
-            • Contributions au code source avec commits Git documentés
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce stage démontre ma capacité à <strong>optimiser les performances d'une base de données (AC24.01)</strong> dans un contexte professionnel réel, en optimisant les requêtes SQL pour une application en production. Il illustre également ma compétence à <strong>assurer la sécurité et l'intégrité des données (AC24.02)</strong> en implémentant la sécurité dans une application professionnelle. L'expérience quotidienne en entreprise m'a permis d'appliquer les compétences de gestion de données complexes dans un contexte réel avec des contraintes de production.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce stage a été une expérience professionnelle enrichissante qui m'a permis de mettre en pratique toutes les compétences de gestion de données acquises en cours dans un contexte réel. La principale difficulté a été de comprendre comment optimiser et sécuriser les données dans une application en production avec les contraintes de l'entreprise. J'ai surmonté cette difficulté en communiquant régulièrement avec l'équipe, en suivant les bonnes pratiques de l'entreprise, et en appliquant les techniques apprises dans les ressources R2.06 et R3.07. Cette expérience m'a montré l'importance de la gestion de données en production et m'a permis de développer ma confiance en tant que gestionnaire de données.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 4 : STAGE - HEVA - Helvetic Events Agency</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Stage professionnel de 3 mois (avril 2025 - juin 2025) en tant que Développeur Full Stack chez HEVA - Helvetic Events Agency à Annecy. J'ai participé au développement d'une application web de gestion de projet utilisant React (frontend) et FastAPI (backend Python), nécessitant la gestion de données complexes avec optimisation des performances et sécurité.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Base de données relationnelle optimisée en production</li>
+                <li>Requêtes SQL optimisées pour les performances</li>
+                <li>Sécurité et intégrité des données implémentées</li>
+                <li>Code source de l'application avec gestion de données (propriétaire, non public)</li>
+                <li>Captures d'écran de l'application en production (<a href="/fr/projets/heva.html">voir la fiche projet</a>)</li>
+                <li>Contributions au code source avec commits Git documentés</li>
+              </ul>
+              <p><strong>Justification :</strong> Ce stage démontre ma capacité à <strong>optimiser les performances d'une base de données (AC24.01)</strong> dans un contexte professionnel réel, en optimisant les requêtes SQL pour une application en production. Il illustre également ma compétence à <strong>assurer la sécurité et l'intégrité des données (AC24.02)</strong> en implémentant la sécurité dans une application professionnelle. L'expérience quotidienne en entreprise m'a permis d'appliquer les compétences de gestion de données complexes dans un contexte réel avec des contraintes de production.</p>
+              <p><strong>Réflexion :</strong> Ce stage a été une expérience professionnelle enrichissante qui m'a permis de mettre en pratique toutes les compétences de gestion de données acquises en cours dans un contexte réel. La principale difficulté a été de comprendre comment optimiser et sécuriser les données dans une application en production avec les contraintes de l'entreprise. J'ai surmonté cette difficulté en communiquant régulièrement avec l'équipe, en suivant les bonnes pratiques de l'entreprise, et en appliquant les techniques apprises dans les ressources R2.06 et R3.07. Cette expérience m'a montré l'importance de la gestion de données en production et m'a permis de développer ma confiance en tant que gestionnaire de données.</p>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -289,18 +333,20 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            Le <strong>Niveau 2</strong> m'a permis de développer mes compétences en gestion de données complexes. À travers des projets comme <strong>SAÉ 2.04 (PowerBI)</strong>, <strong>Clone Uber (SAÉ 3.01 et SAÉ 4.01)</strong> et mon <strong>stage chez HEVA</strong>, j'ai appris à optimiser les performances des bases de données, à assurer la sécurité et l'intégrité des données, et à organiser la restitution et la visualisation des données.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Défis rencontrés :</strong> Les principaux défis à ce niveau concernaient l'optimisation des performances des requêtes SQL, la gestion de bases de données NoSQL (MongoDB), et la création de visualisations de données efficaces avec PowerBI.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Solutions apportées :</strong> Pour surmonter ces difficultés, j'ai étudié les techniques d'optimisation SQL, j'ai pratiqué avec MongoDB, j'ai créé des dashboards PowerBI, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R2.06 (Exploitation d'une base de données), R3.07 (Triggers, Procédures, NoSQL) et R4.03 (MongoDB).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Progression :</strong> Ces expériences m'ont permis de développer une expertise en gestion de données complexes, de l'optimisation des performances à la visualisation de données. Le stage chez HEVA m'a particulièrement appris à gérer des données en production, préparant ainsi mon insertion dans le monde professionnel.
-          </p>
+          <div class="reflection-cards-grid">
+            <div class="reflection-card reflection-card--challenge">
+              <div class="reflection-card__title">Défis rencontrés</div>
+              <div class="reflection-card__content">Les principaux défis à ce niveau concernaient l'optimisation des performances des requêtes SQL, la gestion de bases de données NoSQL (MongoDB), et la création de visualisations de données efficaces avec PowerBI.</div>
+            </div>
+            <div class="reflection-card reflection-card--solution">
+              <div class="reflection-card__title">Solutions apportées</div>
+              <div class="reflection-card__content">Pour surmonter ces difficultés, j'ai étudié les techniques d'optimisation SQL, j'ai pratiqué avec MongoDB, j'ai créé des dashboards PowerBI, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R2.06 (Exploitation d'une base de données), R3.07 (Triggers, Procédures, NoSQL) et R4.03 (MongoDB).</div>
+            </div>
+            <div class="reflection-card reflection-card--progress">
+              <div class="reflection-card__title">Progression</div>
+              <div class="reflection-card__content">Le Niveau 2 m'a permis de développer mes compétences en gestion de données complexes. À travers des projets comme SAÉ 2.04 (PowerBI), Clone Uber (SAÉ 3.01 et SAÉ 4.01) et mon stage chez HEVA, j'ai appris à optimiser les performances des bases de données, à assurer la sécurité et l'intégrité des données, et à organiser la restitution et la visualisation des données. Ces expériences m'ont permis de développer une expertise en gestion de données complexes, de l'optimisation des performances à la visualisation de données. Le stage chez HEVA m'a particulièrement appris à gérer des données en production, préparant ainsi mon insertion dans le monde professionnel.</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__links">
