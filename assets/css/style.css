@@ -2950,7 +2950,7 @@ textarea {
 .project-details__desc-para {
     font-size: 1.8rem;
     line-height: 1.7;
-    color: #777;
+    color: #999;
     margin-bottom: 2rem
 }
 
@@ -3132,6 +3132,569 @@ textarea {
 @media only screen and (max-width: 37.5em) {
     .project-details__links-btn:last-child {
         margin: 0
+    }
+}
+
+/* Competence Status Box - Style minimaliste */
+.competence-status-box {
+    border-left: 4px solid #16B364;
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: transparent;
+}
+
+.competence-status-box p {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.competence-status-box p:last-child {
+    margin: 0.8rem 0 0 0;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #555;
+}
+
+/* Statut ACQUIS - Vert */
+.competence-status-box.status-acquis {
+    border-left-color: #16B364;
+}
+
+.competence-status-box.status-acquis p strong {
+    color: #16B364 !important;
+}
+
+/* Statut EN COURS - Orange */
+.competence-status-box.status-en-cours {
+    border-left-color: #f59e0b;
+}
+
+.competence-status-box.status-en-cours p strong {
+    color: #f59e0b !important;
+}
+
+/* Statut ÉTUDIÉ - Bleu */
+.competence-status-box.status-etudie {
+    border-left-color: #5786f5;
+}
+
+.competence-status-box.status-etudie p strong {
+    color: #5786f5 !important;
+}
+
+/* Règle générale pour les cas sans classe de statut spécifique */
+.competence-status-box:not(.status-acquis):not(.status-en-cours):not(.status-etudie) p strong {
+    color: #16B364;
+}
+
+/* AC Cards Grid */
+.ac-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+@media only screen and (max-width: 37.5em) {
+    .ac-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.ac-card {
+    background: #f8f9fa;
+    border-left: 4px solid #16B364;
+    padding: 2rem;
+    border-radius: 4px;
+    transition: transform 1s ease;
+}
+
+.ac-card:hover {
+    transform: translateY(-2px);
+}
+
+.ac-card__code {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #16B364;
+    margin-bottom: 1rem;
+}
+
+.ac-card__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2d3748;
+}
+
+.ac-card__description {
+    font-size: 1.4rem;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+/* Resource Cards Container */
+.resource-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.resource-card {
+    background: #f8f9fa;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 2rem;
+    transition: transform 1s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-2px);
+}
+
+.resource-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.resource-card__title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.resource-card__badge {
+    background: #16B364;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.resource-card__field {
+    margin-bottom: 1rem;
+}
+
+.resource-card__field strong {
+    color: #4a5568;
+    font-size: 1.4rem;
+}
+
+.resource-card__field span {
+    color: #718096;
+    font-size: 1.4rem;
+    margin-left: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Proof Cards - Style minimaliste */
+.proof-card {
+    background: transparent;
+    border: none;
+    border-left: 3px solid #e2e8f0;
+    padding: 0;
+    border-radius: 0;
+    margin: 3rem 0;
+    padding-left: 2rem;
+}
+
+.proof-card:hover {
+    border-left-color: #16B364;
+}
+
+.proof-card--purple {
+    border-left-color: #16B364;
+}
+
+.proof-card--pink {
+    border-left-color: #16B364;
+}
+
+.proof-card__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #333;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.proof-card:hover .proof-card__title {
+    border-bottom-color: #16B364;
+}
+
+.proof-card__section {
+    background: transparent;
+    border-left: none;
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.proof-card__section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.proof-card__section-title {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.8rem;
+    color: #16B364;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.proof-card__section strong {
+    font-weight: 600;
+    color: inherit;
+}
+
+.proof-card__section p {
+    margin: 0 0 1.2rem 0;
+    font-size: 1.4rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+.proof-card__section p:last-child {
+    margin-bottom: 0;
+}
+
+.proof-card__section ul {
+    margin: 0 0 1.2rem 0;
+    padding-left: 2rem;
+    font-size: 1.4rem;
+    line-height: 1.8;
+    color: #555;
+    list-style: disc;
+    list-style-position: outside;
+}
+
+.proof-card__section ul:last-child {
+    margin-bottom: 0;
+}
+
+.proof-card__section li {
+    margin-bottom: 0.6rem;
+    padding-left: 0.4rem;
+    list-style: disc !important;
+    display: list-item !important;
+}
+
+.proof-card__section li:last-child {
+    margin-bottom: 0;
+}
+
+.proof-card__section a {
+    color: #16B364;
+    text-decoration: none;
+    font-weight: 700;
+    position: relative;
+}
+
+.proof-card__section a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #16B364;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.proof-card__section a:hover {
+    color: #14a357;
+}
+
+.proof-card__section a:hover::after {
+    transform: scaleX(1);
+    transform-origin: center;
+}
+
+/* Reflection Cards Grid */
+.reflection-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+@media only screen and (max-width: 37.5em) {
+    .reflection-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.reflection-card {
+    padding: 2rem;
+    border-radius: 4px;
+}
+
+.reflection-card--challenge {
+    background: #fff5f5;
+    border-left: 4px solid #fc8181;
+}
+
+.reflection-card--solution {
+    background: #f0fff4;
+    border-left: 4px solid #68d391;
+}
+
+.reflection-card--progress {
+    background: #ebf8ff;
+    border-left: 4px solid #63b3ed;
+}
+
+.reflection-card__title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.reflection-card--challenge .reflection-card__title {
+    color: #c53030;
+}
+
+.reflection-card--solution .reflection-card__title {
+    color: #22543d;
+}
+
+.reflection-card--progress .reflection-card__title {
+    color: #2c5282;
+}
+
+.reflection-card__content {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #4a5568;
+    line-height: 1.7;
+}
+
+.reflection-progress {
+    margin-top: 2rem;
+    padding: 0;
+    font-size: 1.4rem;
+    color: #4a5568;
+    line-height: 1.7;
+}
+
+.reflection-progress strong {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2c5282;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .ac-card {
+        background: #262626;
+        border-left-color: #16B364;
+    }
+
+    .ac-card__title {
+        color: #fff;
+    }
+
+    .ac-card__description {
+        color: #ccc;
+    }
+
+    .resource-card {
+        background: #262626;
+        border-color: #444;
+    }
+
+    .resource-card__title {
+        color: #fff;
+    }
+
+    .resource-card__field strong {
+        color: #ccc;
+    }
+
+    .resource-card__field span {
+        color: #aaa;
+    }
+
+    .reflection-card--challenge {
+        background: rgba(252, 129, 129, 0.1);
+        border-left-color: #fc8181;
+    }
+
+    .reflection-card--solution {
+        background: rgba(104, 211, 145, 0.1);
+        border-left-color: #68d391;
+    }
+
+    .reflection-card--progress {
+        background: rgba(99, 179, 237, 0.1);
+        border-left-color: #63b3ed;
+    }
+
+    .reflection-card--challenge .reflection-card__title {
+        color: #fc8181;
+    }
+
+    .reflection-card--solution .reflection-card__title {
+        color: #68d391;
+    }
+
+    .reflection-card--progress .reflection-card__title {
+        color: #63b3ed;
+    }
+
+    .reflection-card__content {
+        color: #ccc;
+    }
+
+    .reflection-progress {
+        color: #ccc;
+    }
+
+    .reflection-progress strong {
+        color: #63b3ed;
+    }
+
+    .competence-status-box {
+        border-left-color: #16B364;
+    }
+
+    .competence-status-box p {
+        color: #fff;
+    }
+
+    .competence-status-box.status-acquis {
+        border-left-color: #16B364;
+    }
+
+    .competence-status-box.status-acquis p strong {
+        color: #4ade80 !important;
+    }
+
+    .competence-status-box.status-en-cours {
+        border-left-color: #f59e0b;
+    }
+
+    .competence-status-box.status-en-cours p strong {
+        color: #fbbf24 !important;
+    }
+
+    .competence-status-box.status-etudie {
+        border-left-color: #5786f5;
+    }
+
+    .competence-status-box.status-etudie p strong {
+        color: #7c9eff !important;
+    }
+
+    /* Règle générale pour les cas sans classe de statut spécifique */
+    .competence-status-box:not(.status-acquis):not(.status-en-cours):not(.status-etudie) p strong {
+        color: #4ade80;
+    }
+
+    .competence-status-box p:last-child {
+        color: #ccc;
+    }
+
+    .proof-card {
+        background: transparent;
+        border-left-color: #444;
+    }
+
+    .proof-card:hover {
+        border-left-color: #16B364;
+    }
+
+    .proof-card__title {
+        color: #fff;
+        border-bottom-color: #444;
+    }
+
+    .proof-card:hover .proof-card__title {
+        border-bottom-color: #16B364;
+    }
+
+    .proof-card__section {
+        background: transparent;
+        border-bottom-color: #333;
+    }
+
+    .proof-card__section-title {
+        color: #4ade80;
+    }
+
+    .proof-card__section strong {
+        color: inherit;
+        font-weight: 600;
+    }
+
+    .proof-card__section p {
+        margin: 0 0 1.2rem 0;
+        color: #ccc;
+    }
+
+    .proof-card__section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .proof-card__section ul {
+        margin: 0 0 1.2rem 0;
+        padding-left: 2rem;
+        color: #ccc;
+        list-style: disc;
+        list-style-position: outside;
+    }
+
+    .proof-card__section ul:last-child {
+        margin-bottom: 0;
+    }
+
+    .proof-card__section li {
+        margin-bottom: 0.6rem;
+        padding-left: 0.4rem;
+        color: #ccc;
+        list-style: inherit;
+        display: list-item;
+    }
+
+    .proof-card__section li:last-child {
+        margin-bottom: 0;
+    }
+
+    .proof-card__section a {
+        color: #4ade80;
+    }
+
+    .proof-card__section a:hover {
+        color: #16B364;
+    }
+
+    .proof-card__section a::after {
+        background-color: #4ade80;
     }
 }
 

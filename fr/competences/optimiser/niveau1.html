@@ -102,9 +102,14 @@
           <p class="project-details__desc-para">
             Ce niveau représente mes premiers pas dans l'analyse et l'optimisation d'algorithmes, où j'ai appris les concepts fondamentaux de la complexité algorithmique et l'importance du choix des structures de données. Ces compétences ont été développées principalement lors des <strong>semestres 1 et 2</strong> (première année de BUT Informatique) à travers les ressources pédagogiques R1.01, R1.06 et R2.07, ainsi que les projets académiques SAÉ 1.01, 1.02 et 2.02.
           </p>
-          <p class="project-details__desc-para">
-            <strong>Statut :</strong> <strong>ACQUIS</strong> - Toutes les ressources de ce niveau ont été étudiées et les compétences ont été validées à travers des projets concrets.
-          </p>
+          <div class="competence-status-box status-acquis">
+            <p>
+              <strong>Statut : ACQUIS</strong>
+            </p>
+            <p>
+              Toutes les ressources de ce niveau ont été étudiées et les compétences ont été validées à travers des projets concrets.
+            </p>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -115,10 +120,18 @@
           <p class="project-details__desc-para">
             Les <strong>Apprentissages Critiques (AC)</strong> sont les éléments essentiels que je dois maîtriser pour atteindre ce niveau de compétence. Voici les 2 apprentissages critiques du Niveau 1 :
           </p>
-          <p class="project-details__desc-para">
-            • <strong>AC12.01 | Analyser un problème par découpage en sous-problèmes</strong> : Décomposition de problèmes complexes en plus petits problèmes, identification de sous-problèmes (problèmes plus simples à résoudre), approche modulaire (diviser pour mieux régner)<br>
-            • <strong>AC12.02 | Construire un algorithme simple pour résoudre un problème donné</strong> : Création d'algorithmes basiques (séquences d'instructions pour résoudre un problème), implémentation de solutions simples en code, résolution de problèmes algorithmiques élémentaires
-          </p>
+          <div class="ac-cards-grid">
+            <div class="ac-card">
+              <div class="ac-card__code">AC12.01</div>
+              <div class="ac-card__title">Analyser un problème par découpage en sous-problèmes</div>
+              <div class="ac-card__description">Décomposition de problèmes complexes en plus petits problèmes, identification de sous-problèmes (problèmes plus simples à résoudre), approche modulaire (diviser pour mieux régner)</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC12.02</div>
+              <div class="ac-card__title">Construire un algorithme simple pour résoudre un problème donné</div>
+              <div class="ac-card__description">Création d'algorithmes basiques (séquences d'instructions pour résoudre un problème), implémentation de solutions simples en code, résolution de problèmes algorithmiques élémentaires</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -126,18 +139,52 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            <strong>R1.01 : Initiation au développement</strong> → C# (WPF)<br>
-            Introduction aux algorithmes de base, structures de contrôle, et résolution de problèmes simples. Découpage de problèmes en sous-problèmes, construction d'algorithmes simples en C#.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R1.06 : Mathématiques discrètes</strong><br>
-            Fondements mathématiques pour l'algorithmique : logique, ensembles, relations, fonctions. Base théorique pour la construction d'algorithmes.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R2.07 : Graphes</strong> → (mathématiques)<br>
-            Introduction aux structures de données et algorithmes sur les graphes. Modélisation de problèmes avec des graphes, théorie des graphes.
-          </p>
+          <div class="resource-cards-container">
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R1.01 : Initiation au développement</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Technologies :</strong>
+                <span>C# (WPF)</span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Introduction aux algorithmes de base, structures de contrôle, et résolution de problèmes simples. Découpage de problèmes en sous-problèmes, construction d'algorithmes simples en C#.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R1.06 : Mathématiques discrètes</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Fondements mathématiques pour l'algorithmique : logique, ensembles, relations, fonctions. Base théorique pour la construction d'algorithmes.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R2.07 : Graphes</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Technologies :</strong>
+                <span>Mathématiques</span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Introduction aux structures de données et algorithmes sur les graphes. Modélisation de problèmes avec des graphes, théorie des graphes.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -200,40 +247,42 @@
             Les <strong>traces</strong> sont des documents bruts qui témoignent de mon activité. Les <strong>preuves</strong> sont ces traces contextualisées avec une réflexion sur l'apprentissage. Voici mes traces et preuves pour le Niveau 1 :
           </p>
           
-          <h3 class="project-details__proof-title">PREUVE 1 : SAÉ 1.01 et 1.02 - Evit'Shuriken</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en première année (Semestre 1) dans le cadre des SAÉ 1.01 et 1.02. Il s'agissait de développer un jeu vidéo simple en utilisant Unity et C#, nécessitant l'implémentation d'algorithmes pour la gestion du gameplay (déplacement, collisions, score).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Code source avec algorithmes implémentés disponible sur <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer" class="project-details__desc-link">GitHub (repository all-my-projects)</a><br>
-            • Captures d'écran du jeu montrant les fonctionnalités algorithmiques (<a href="/fr/projets/evit-shuriken.html" class="project-details__desc-link">voir la fiche projet</a>)<br>
-            • Commentaires dans le code expliquant les choix algorithmiques
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>analyser un problème par découpage en sous-problèmes (AC12.01)</strong> en divisant le développement du jeu en sous-problèmes (gestion des collisions, calcul du score, déplacement du personnage). Il illustre également ma compétence à <strong>construire un algorithme simple (AC12.02)</strong> en créant des algorithmes pour gérer les interactions du jeu. J'ai utilisé la ressource R1.01 (C#) pour implémenter ces algorithmes.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet m'a permis de comprendre l'importance de découper un problème complexe en sous-problèmes plus simples. La principale difficulté a été de comprendre comment structurer les algorithmes pour gérer les collisions et les interactions. J'ai surmonté cette difficulté en étudiant la documentation Unity, en pratiquant régulièrement, et en appliquant les concepts vus en cours (R1.01). Cette expérience m'a montré l'importance de la planification algorithmique avant l'implémentation.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 1 : SAÉ 1.01 et 1.02 - Evit'Shuriken</h3>
+            <div class="proof-card__section">
+              <strong class="proof-card__section-title">Contexte</strong>
+              <p>Projet académique réalisé en première année (Semestre 1) dans le cadre des SAÉ 1.01 et 1.02. Il s'agissait de développer un jeu vidéo simple en utilisant Unity et C#, nécessitant l'implémentation d'algorithmes pour la gestion du gameplay (déplacement, collisions, score).</p>
+              <strong class="proof-card__section-title">Trace</strong>
+              <ul>
+                <li>Code source avec algorithmes implémentés disponible sur <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">GitHub (repository all-my-projects)</a></li>
+                <li>Captures d'écran du jeu montrant les fonctionnalités algorithmiques (<a href="/fr/projets/evit-shuriken.html">voir la fiche projet</a>)</li>
+                <li>Commentaires dans le code expliquant les choix algorithmiques</li>
+              </ul>
+              <strong class="proof-card__section-title">Justification</strong>
+              <p>Ce projet m'a appris à <strong>analyser un problème en le découpant en sous-problèmes (AC12.01)</strong>. J'ai divisé le développement du jeu en plusieurs parties : la gestion des collisions, le calcul du score et le déplacement du personnage. J'ai aussi appris à <strong>construire des algorithmes simples (AC12.02)</strong> pour gérer toutes les interactions du jeu. J'ai utilisé ce que j'avais appris dans la ressource R1.01 (C#) pour implémenter ces algorithmes.</p>
+              <strong class="proof-card__section-title">Réflexion</strong>
+              <p>Ce projet m'a permis de comprendre l'importance de découper un problème complexe en sous-problèmes plus simples. La principale difficulté a été de comprendre comment structurer les algorithmes pour gérer les collisions et les interactions. J'ai surmonté cette difficulté en étudiant la documentation Unity, en pratiquant régulièrement, et en appliquant les concepts vus en cours (R1.01). Cette expérience m'a montré l'importance de la planification algorithmique avant l'implémentation.</p>
+            </div>
+          </div>
 
-          <h3 class="project-details__proof-title">PREUVE 2 : SAÉ 2.02 - Modélisation Graphes</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en première année (Semestre 2) dans le cadre de la SAÉ 2.02. Il s'agissait d'utiliser la théorie des graphes pour modéliser des problèmes et créer des outils d'aide à la décision, en utilisant Excel et des techniques algorithmiques.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Modélisation de problèmes avec des graphes<br>
-            • Outils d'aide à la décision développés avec Excel<br>
-            • Documentation de l'analyse algorithmique<br>
-            • Code source et fichiers Excel disponibles sur <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer" class="project-details__desc-link">GitHub (repository all-my-projects)</a>
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>analyser un problème par découpage en sous-problèmes (AC12.01)</strong> en utilisant la théorie des graphes pour modéliser des problèmes complexes. Il illustre également ma compétence à <strong>construire un algorithme simple (AC12.02)</strong> en créant des algorithmes pour résoudre les problèmes modélisés avec des graphes. J'ai utilisé les ressources R1.06 (Mathématiques discrètes) et R2.07 (Graphes) pour ce projet.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet a été un défi car il m'a fallu comprendre comment utiliser la théorie des graphes pour modéliser des problèmes réels. La principale difficulté a été de faire le lien entre les concepts mathématiques abstraits (graphes) et leur application pratique. J'ai surmonté cette difficulté en étudiant les exemples de modélisation par graphes, en pratiquant avec Excel, et en appliquant les concepts enseignés dans les ressources R1.06 et R2.07. Ce projet m'a montré l'importance des mathématiques discrètes et de la théorie des graphes pour l'optimisation algorithmique.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 2 : SAÉ 2.02 - Modélisation Graphes</h3>
+            <div class="proof-card__section">
+              <strong class="proof-card__section-title">Contexte</strong>
+              <p>Projet académique réalisé en première année (Semestre 2) dans le cadre de la SAÉ 2.02. Il s'agissait d'utiliser la théorie des graphes pour modéliser des problèmes et créer des outils d'aide à la décision, en utilisant Excel et des techniques algorithmiques.</p>
+              <strong class="proof-card__section-title">Trace</strong>
+              <ul>
+                <li>Modélisation de problèmes avec des graphes</li>
+                <li>Outils d'aide à la décision développés avec Excel</li>
+                <li>Documentation de l'analyse algorithmique</li>
+                <li>Code source et fichiers Excel disponibles sur <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">GitHub (repository all-my-projects)</a></li>
+              </ul>
+              <strong class="proof-card__section-title">Justification</strong>
+              <p>Ce projet m'a permis d'apprendre à <strong>analyser un problème en le découpant en sous-problèmes (AC12.01)</strong> en utilisant la théorie des graphes pour modéliser des situations complexes. J'ai découvert comment représenter des problèmes réels sous forme de graphes. J'ai aussi appris à <strong>construire des algorithmes simples (AC12.02)</strong> pour résoudre ces problèmes modélisés. J'ai mis en pratique ce que j'avais appris dans les ressources R1.06 (Mathématiques discrètes) et R2.07 (Graphes).</p>
+              <strong class="proof-card__section-title">Réflexion</strong>
+              <p>Ce projet a été un défi car il m'a fallu comprendre comment utiliser la théorie des graphes pour modéliser des problèmes réels. La principale difficulté a été de faire le lien entre les concepts mathématiques abstraits (graphes) et leur application pratique. J'ai surmonté cette difficulté en étudiant les exemples de modélisation par graphes, en pratiquant avec Excel, et en appliquant les concepts enseignés dans les ressources R1.06 et R2.07. Ce projet m'a montré l'importance des mathématiques discrètes et de la théorie des graphes pour l'optimisation algorithmique.</p>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -241,17 +290,19 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            Le <strong>Niveau 1</strong> m'a permis de comprendre l'importance de l'optimisation algorithmique et de développer une réflexion sur la complexité des solutions. À travers des projets comme <strong>Evit'Shuriken</strong> et la <strong>modélisation de graphes (SAÉ 2.02)</strong>, j'ai appris à analyser la performance de mon code, à découper des problèmes complexes en sous-problèmes, et à choisir les structures de données les plus appropriées.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Défis rencontrés :</strong> Les principaux défis à ce niveau concernaient la compréhension de la complexité algorithmique (notation O), la modélisation de problèmes avec des graphes, et le choix des structures de données appropriées.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Solutions apportées :</strong> Pour surmonter ces difficultés, j'ai étudié les concepts théoriques des mathématiques discrètes et de la théorie des graphes, j'ai pratiqué régulièrement en implémentant des algorithmes, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R1.01 (C#), R1.06 (Mathématiques discrètes) et R2.07 (Graphes).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Progression :</strong> Ces premières expériences ont été fondamentales pour développer ma compréhension de l'optimisation algorithmique. Elles m'ont préparé à aborder le Niveau 2 avec des techniques algorithmiques plus avancées et des structures de données complexes.
+          <div class="reflection-cards-grid">
+            <div class="reflection-card reflection-card--challenge">
+              <div class="reflection-card__title">Défis rencontrés</div>
+              <div class="reflection-card__content">Les principaux défis à ce niveau concernaient la compréhension de la complexité algorithmique (notation O), la modélisation de problèmes avec des graphes, et le choix des structures de données appropriées.</div>
+            </div>
+            <div class="reflection-card reflection-card--solution">
+              <div class="reflection-card__title">Solutions apportées</div>
+              <div class="reflection-card__content">Pour surmonter ces difficultés, j'ai étudié les concepts théoriques des mathématiques discrètes et de la théorie des graphes, j'ai pratiqué régulièrement en implémentant des algorithmes, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R1.01 (C#), R1.06 (Mathématiques discrètes) et R2.07 (Graphes).</div>
+            </div>
+          </div>
+          <p class="reflection-progress">
+            <strong>Progression</strong>
+            Le Niveau 1 m'a permis de comprendre l'importance de l'optimisation algorithmique et de développer une réflexion sur la complexité des solutions. À travers des projets comme Evit'Shuriken et la modélisation de graphes (SAÉ 2.02), j'ai appris à analyser la performance de mon code, à découper des problèmes complexes en sous-problèmes, et à choisir les structures de données les plus appropriées. Ces premières expériences ont été fondamentales pour développer ma compréhension de l'optimisation algorithmique. Elles m'ont préparé à aborder le Niveau 2 avec des techniques algorithmiques plus avancées et des structures de données complexes.
           </p>
         </div>
 

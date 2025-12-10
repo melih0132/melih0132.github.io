@@ -102,9 +102,14 @@
           <p class="project-details__desc-para">
             Ce niveau représente ma capacité à gérer des infrastructures de production complexes, à assurer la sécurité des systèmes, et à garantir la haute disponibilité des services. Ces compétences sont développées principalement lors des <strong>semestres 5 et 6</strong> (troisième année de BUT Informatique) à travers les ressources pédagogiques R4.09, R3.09, R5.09 et R5.07, ainsi que les projets académiques SAÉ 5.01 et mon expérience professionnelle en alternance chez Agence Altimax.
           </p>
-          <p class="project-details__desc-para">
-            <strong>Statut :</strong> 🔄 <strong>EN COURS</strong> - Les ressources de ce niveau sont actuellement en cours d'étude et les compétences sont développées à travers des projets académiques et une expérience professionnelle en alternance.
-          </p>
+          <div class="competence-status-box status-en-cours">
+            <p>
+              <strong>Statut : EN COURS</strong>
+            </p>
+            <p>
+              Les ressources de ce niveau sont actuellement en cours d'étude et les compétences sont développées à travers des projets académiques et une expérience professionnelle en alternance.
+            </p>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -115,11 +120,23 @@
           <p class="project-details__desc-para">
             Les <strong>Apprentissages Critiques (AC)</strong> sont les éléments essentiels que je dois maîtriser pour atteindre ce niveau de compétence. Voici les 3 apprentissages critiques du Niveau 3 :
           </p>
-          <p class="project-details__desc-para">
-            • <strong>AC33.01 | Participer à la conception et à la mise en œuvre d'un projet système d'information</strong> : Automatisation des processus (automatisation des tâches répétitives), gestion de configuration (gestion des paramètres des systèmes), CI/CD (Intégration Continue / Déploiement Continu), orchestration (gestion automatisée de plusieurs services), conception de systèmes d'information (architecture des systèmes informatiques d'une organisation)<br>
-            • <strong>AC33.02 | Mesurer les impacts (économiques, sociétaux, environnementaux)</strong> : Évaluation des impacts (analyse des conséquences), analyse économique (coûts, bénéfices), sociétale (impact sur la société) et environnementale (impact sur l'environnement), mesure des conséquences<br>
-            • <strong>AC33.03 | Adapter un système d'information aux besoins d'une organisation</strong> : Adaptation des systèmes (modification selon les besoins), évolution selon les besoins (évolution continue), transformation digitale (modernisation numérique), alignement métier (correspondance avec les besoins métiers)
-          </p>
+          <div class="ac-cards-grid">
+            <div class="ac-card">
+              <div class="ac-card__code">AC33.01</div>
+              <div class="ac-card__title">Participer à la conception et à la mise en œuvre d'un projet système d'information</div>
+              <div class="ac-card__description">Automatisation des processus (automatisation des tâches répétitives), gestion de configuration (gestion des paramètres des systèmes), CI/CD (Intégration Continue / Déploiement Continu), orchestration (gestion automatisée de plusieurs services), conception de systèmes d'information (architecture des systèmes informatiques d'une organisation)</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC33.02</div>
+              <div class="ac-card__title">Mesurer les impacts (économiques, sociétaux, environnementaux)</div>
+              <div class="ac-card__description">Évaluation des impacts (analyse des conséquences), analyse économique (coûts, bénéfices), sociétale (impact sur la société) et environnementale (impact sur l'environnement), mesure des conséquences</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC33.03</div>
+              <div class="ac-card__title">Adapter un système d'information aux besoins d'une organisation</div>
+              <div class="ac-card__description">Adaptation des systèmes (modification selon les besoins), évolution selon les besoins (évolution continue), transformation digitale (modernisation numérique), alignement métier (correspondance avec les besoins métiers)</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -127,22 +144,56 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            <strong>R4.09 : Management avancé des systèmes d'informations : Simulation CESIM, Cartographie</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Contenu :</strong> Conception et mise en œuvre de projets système d'information, cartographie des systèmes (représentation visuelle de l'architecture), mesure des impacts, simulation CESIM (outil de simulation de gestion).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R3.09 : Cryptographie et sécurité</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Contenu :</strong> Sécurité avancée, cryptographie (chiffrement des données), protection des données, gestion des risques, sécurisation des services et données.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R5.09 : Virtualisation Avancée</strong> → <strong>Statut : NON ÉTUDIÉ</strong> (sera vu ultérieurement)<br>
-            <strong>Contenu :</strong> Virtualisation avancée, conteneurisation avancée, orchestration (gestion de plusieurs conteneurs), déploiement en production, gestion d'infrastructure.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R5.07 : Automatisation de la chaîne de production</strong> → <strong>Statut : NON ÉTUDIÉ</strong> (sera vu ultérieurement)<br>
-            <strong>Contenu :</strong> CI/CD (Intégration Continue / Déploiement Continu), pipelines de déploiement automatisé, intégration continue, déploiement continu, orchestration.
-          </p>
+          <div class="resource-cards-container">
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R4.09 : Management avancé des systèmes d'informations : Simulation CESIM, Cartographie</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Conception et mise en œuvre de projets système d'information, cartographie des systèmes (représentation visuelle de l'architecture), mesure des impacts, simulation CESIM (outil de simulation de gestion).</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R3.09 : Cryptographie et sécurité</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Sécurité avancée, cryptographie (chiffrement des données), protection des données, gestion des risques, sécurisation des services et données.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R5.09 : Virtualisation Avancée</div>
+                  <span class="resource-card__badge">NON ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Virtualisation avancée, conteneurisation avancée, orchestration (gestion de plusieurs conteneurs), déploiement en production, gestion d'infrastructure. (sera vu ultérieurement)</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R5.07 : Automatisation de la chaîne de production</div>
+                  <span class="resource-card__badge">NON ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>CI/CD (Intégration Continue / Déploiement Continu), pipelines de déploiement automatisé, intégration continue, déploiement continu, orchestration. (sera vu ultérieurement)</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -201,44 +252,40 @@
             Les <strong>traces</strong> sont des documents bruts qui témoignent de mon activité. Les <strong>preuves</strong> sont ces traces contextualisées avec une réflexion sur l'apprentissage. Voici mes traces et preuves pour le Niveau 3 :
           </p>
           
-          <h3 class="project-details__proof-title">PREUVE 1 : SAÉ 5.01 - SmartHome (Architecture IoT, sécurité MQTT, virtualisation)</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en troisième année (Semestre 5) dans le cadre de la SAÉ 5.01. Il s'agit d'un projet complexe développant une application mobile Android avec Kotlin, intégrant l'IoT (Internet des Objets) via MQTT et Raspberry Pi, et utilisant l'intelligence artificielle, nécessitant la conception et la mise en œuvre d'un système d'information complet et sécurisé.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Architecture système d'information complète avec cartographie (R4.09)<br>
-            • Sécurisation de la communication MQTT (protocole IoT) avec cryptographie (R3.09)<br>
-            • Architecture IoT sécurisée pour la collecte et le traitement des données<br>
-            • Documentation de l'architecture système d'information<br>
-            • Code source de l'application avec architecture sécurisée (projet en cours, confidentiel)
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>participer à la conception et à la mise en œuvre d'un projet système d'information (AC33.01)</strong> en créant une architecture système d'information complète avec cartographie. Il illustre également ma compétence à assurer la sécurité des systèmes en sécurisant la communication MQTT avec la cryptographie. J'ai utilisé les ressources R4.09 (Management avancé des systèmes d'information, cartographie) et R3.09 (Cryptographie et sécurité).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet est le plus complexe en termes d'administration système car il combine plusieurs technologies (mobile, IoT, IA) nécessitant une architecture système d'information sophistiquée. La principale difficulté a été de concevoir une architecture sécurisée pour l'IoT tout en garantissant la performance et la fiabilité. J'ai surmonté cette difficulté en étudiant les architectures IoT sécurisées, en appliquant les concepts de cryptographie, et en utilisant les méthodes enseignées dans les ressources R4.09 et R3.09. Ce projet m'a montré l'importance de la conception d'architectures système d'information pour les projets complexes.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 1 : SAÉ 5.01 - SmartHome (Architecture IoT, sécurité MQTT, virtualisation)</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Projet académique réalisé en troisième année (Semestre 5) dans le cadre de la SAÉ 5.01. Il s'agit d'un projet complexe développant une application mobile Android avec Kotlin, intégrant l'IoT (Internet des Objets) via MQTT et Raspberry Pi, et utilisant l'intelligence artificielle, nécessitant la conception et la mise en œuvre d'un système d'information complet et sécurisé.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Architecture système d'information complète avec cartographie (R4.09)</li>
+                <li>Sécurisation de la communication MQTT (protocole IoT) avec cryptographie (R3.09)</li>
+                <li>Architecture IoT sécurisée pour la collecte et le traitement des données</li>
+                <li>Documentation de l'architecture système d'information</li>
+                <li>Code source de l'application avec architecture sécurisée (projet en cours, confidentiel)</li>
+              </ul>
+              <p><strong>Justification :</strong> Ce projet m'a permis d'apprendre à <strong>participer à la conception et à la mise en œuvre d'un système d'information (AC33.01)</strong> en créant une architecture complète avec une cartographie qui montrait comment tout était organisé. J'ai aussi découvert l'importance de <strong>sécuriser les systèmes</strong> en protégeant la communication MQTT avec la cryptographie pour que les données soient bien protégées. J'ai utilisé les connaissances des ressources R4.09 (Management avancé des systèmes d'information, cartographie) et R3.09 (Cryptographie et sécurité).</p>
+              <p><strong>Réflexion :</strong> Ce projet est le plus complexe en termes d'administration système car il combine plusieurs technologies (mobile, IoT, IA) nécessitant une architecture système d'information sophistiquée. La principale difficulté a été de concevoir une architecture sécurisée pour l'IoT tout en garantissant la performance et la fiabilité. J'ai surmonté cette difficulté en étudiant les architectures IoT sécurisées, en appliquant les concepts de cryptographie, et en utilisant les méthodes enseignées dans les ressources R4.09 et R3.09. Ce projet m'a montré l'importance de la conception d'architectures système d'information pour les projets complexes.</p>
+            </div>
+          </div>
 
-          <h3 class="project-details__proof-title">PREUVE 2 : ALTERNANCE - Agence Altimax (Administration système WordPress)</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Alternance professionnelle depuis septembre 2025 (4 mois, en cours) en tant que Développeur web chez Agence Altimax à Annecy. Je développe et maintiens des sites web avec WordPress, nécessitant l'administration système, la gestion des environnements, et l'adaptation du système d'information aux besoins de l'organisation.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Administration système WordPress en production<br>
-            • Gestion des environnements (développement, staging, production)<br>
-            • Adaptation du système d'information aux besoins de l'organisation<br>
-            • Sites web WordPress en production (propriétaires, non publics)<br>
-            • Contributions régulières avec commits Git documentés<br>
-            • Documentation de l'administration système
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Cette alternance démontre ma capacité à <strong>participer à la conception et à la mise en œuvre d'un projet système d'information (AC33.01)</strong> dans un contexte professionnel réel, en administrant les systèmes WordPress de l'entreprise. Elle illustre également ma compétence à <strong>adapter un système d'information aux besoins d'une organisation (AC33.03)</strong> en adaptant les sites WordPress aux besoins spécifiques des clients. L'expérience quotidienne en entreprise me permet d'appliquer les compétences d'administration système avancée dans un contexte réel avec des contraintes professionnelles.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Cette alternance est une expérience professionnelle continue qui me permet de développer mes compétences d'administration système avancée dans un contexte réel. La principale difficulté a été de comprendre comment administrer et adapter les systèmes WordPress selon les besoins des clients tout en respectant les contraintes de l'entreprise. J'ai surmonté cette difficulté en communiquant régulièrement avec l'équipe, en suivant les procédures de l'entreprise, et en appliquant les bonnes pratiques d'administration système. Cette expérience m'a montré l'importance de l'adaptation des systèmes d'information aux besoins organisationnels et m'a permis de développer ma capacité à gérer des systèmes en production.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 2 : ALTERNANCE - Agence Altimax (Administration système WordPress)</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Alternance professionnelle depuis septembre 2025 (4 mois, en cours) en tant que Développeur web chez Agence Altimax à Annecy. Je développe et maintiens des sites web avec WordPress, nécessitant l'administration système, la gestion des environnements, et l'adaptation du système d'information aux besoins de l'organisation.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Administration système WordPress en production</li>
+                <li>Gestion des environnements (développement, staging, production)</li>
+                <li>Adaptation du système d'information aux besoins de l'organisation</li>
+                <li>Sites web WordPress en production (propriétaires, non publics)</li>
+                <li>Contributions régulières avec commits Git documentés</li>
+                <li>Documentation de l'administration système</li>
+              </ul>
+              <p><strong>Justification :</strong> Cette alternance m'a permis d'apprendre à <strong>participer à la conception et à la mise en œuvre d'un système d'information (AC33.01)</strong> dans un vrai contexte professionnel, en administrant les systèmes WordPress de l'entreprise. J'ai découvert comment gérer ces systèmes au quotidien. J'ai aussi appris à <strong>adapter un système d'information aux besoins d'une organisation (AC33.03)</strong> en adaptant les sites WordPress aux besoins spécifiques de chaque client. Cette expérience quotidienne me permet d'appliquer mes compétences d'administration système dans un contexte réel avec toutes les contraintes professionnelles.</p>
+              <p><strong>Réflexion :</strong> Cette alternance est une expérience professionnelle continue qui me permet de développer mes compétences d'administration système avancée dans un contexte réel. La principale difficulté a été de comprendre comment administrer et adapter les systèmes WordPress selon les besoins des clients tout en respectant les contraintes de l'entreprise. J'ai surmonté cette difficulté en communiquant régulièrement avec l'équipe, en suivant les procédures de l'entreprise, et en appliquant les bonnes pratiques d'administration système. Cette expérience m'a montré l'importance de l'adaptation des systèmes d'information aux besoins organisationnels et m'a permis de développer ma capacité à gérer des systèmes en production.</p>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -246,17 +293,19 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            Le <strong>Niveau 3</strong> représente l'aboutissement de ma progression dans l'administration système. À travers des projets comme <strong>SmartHome (SAÉ 5.01)</strong> et mon <strong>alternance chez Agence Altimax</strong>, j'ai développé ma capacité à participer à la conception et à la mise en œuvre de projets système d'information, à mesurer les impacts, et à adapter les systèmes d'information aux besoins des organisations.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Défis rencontrés :</strong> Les principaux défis à ce niveau concernaient la conception d'architectures système d'information pour des projets complexes (IoT, IA), la sécurisation des systèmes, et l'adaptation des systèmes aux besoins organisationnels.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Solutions apportées :</strong> Pour surmonter ces difficultés, j'ai étudié les architectures système d'information, j'ai appliqué les concepts de cryptographie et de sécurité, j'ai pratiqué la cartographie des systèmes, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R4.09 (Management avancé des systèmes d'information) et R3.09 (Cryptographie et sécurité).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Progression :</strong> Ces expériences m'ont permis de développer une expertise en administration système avancée, de la conception d'architectures complexes à l'adaptation aux besoins organisationnels. L'alternance m'a particulièrement appris à gérer des systèmes en production avec des contraintes réelles, préparant ainsi mon insertion dans le monde professionnel.
+          <div class="reflection-cards-grid">
+            <div class="reflection-card reflection-card--challenge">
+              <div class="reflection-card__title">Défis rencontrés</div>
+              <div class="reflection-card__content">Les principaux défis à ce niveau concernaient la conception d'architectures système d'information pour des projets complexes (IoT, IA), la sécurisation des systèmes, et l'adaptation des systèmes aux besoins organisationnels.</div>
+            </div>
+            <div class="reflection-card reflection-card--solution">
+              <div class="reflection-card__title">Solutions apportées</div>
+              <div class="reflection-card__content">Pour surmonter ces difficultés, j'ai étudié les architectures système d'information, j'ai appliqué les concepts de cryptographie et de sécurité, j'ai pratiqué la cartographie des systèmes, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R4.09 (Management avancé des systèmes d'information) et R3.09 (Cryptographie et sécurité).</div>
+            </div>
+          </div>
+          <p class="reflection-progress">
+            <strong>Progression</strong>
+            Le Niveau 3 représente l'aboutissement de ma progression dans l'administration système. À travers des projets comme SmartHome (SAÉ 5.01) et mon alternance chez Agence Altimax, j'ai développé ma capacité à participer à la conception et à la mise en œuvre de projets système d'information, à mesurer les impacts, et à adapter les systèmes d'information aux besoins des organisations. Ces expériences m'ont permis de développer une expertise en administration système avancée, de la conception d'architectures complexes à l'adaptation aux besoins organisationnels. L'alternance m'a particulièrement appris à gérer des systèmes en production avec des contraintes réelles, préparant ainsi mon insertion dans le monde professionnel.
           </p>
         </div>
 

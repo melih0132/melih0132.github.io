@@ -102,9 +102,14 @@
           <p class="project-details__desc-para">
             Ce niveau représente une évolution dans ma capacité à gérer des infrastructures plus complexes, à automatiser les déploiements, et à assurer le monitoring des systèmes. Ces compétences ont été développées principalement lors des <strong>semestres 3 et 4</strong> (deuxième année de BUT Informatique) à travers les ressources pédagogiques R2.05, R3.05, R3.06 et R4.08, ainsi que les projets académiques SAÉ 3.01, SAÉ 4.01 et mon stage professionnel chez HEVA.
           </p>
-          <p class="project-details__desc-para">
-            <strong>Statut :</strong> <strong>ACQUIS</strong> - Toutes les ressources de ce niveau ont été étudiées et les compétences ont été validées à travers des projets concrets et une expérience professionnelle en stage.
-          </p>
+          <div class="competence-status-box status-acquis">
+            <p>
+              <strong>Statut : ACQUIS</strong>
+            </p>
+            <p>
+              Toutes les ressources de ce niveau ont été étudiées et les compétences ont été validées à travers des projets concrets et une expérience professionnelle en stage.
+            </p>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -115,11 +120,23 @@
           <p class="project-details__desc-para">
             Les <strong>Apprentissages Critiques (AC)</strong> sont les éléments essentiels que je dois maîtriser pour atteindre ce niveau de compétence. Voici les 3 apprentissages critiques du Niveau 2 :
           </p>
-          <p class="project-details__desc-para">
-            • <strong>AC23.01 | Déployer des services dans une architecture réseau</strong> : Déploiement de services (mise en ligne d'applications), configuration réseau (réglage des connexions entre serveurs), architecture distribuée (système réparti sur plusieurs serveurs)<br>
-            • <strong>AC23.02 | Utiliser des serveurs et outils de virtualisation</strong> : Virtualisation (création de machines virtuelles), containers (conteneurs Docker - environnements isolés), orchestration (gestion automatisée de plusieurs conteneurs), gestion de serveurs<br>
-            • <strong>AC23.03 | Sécuriser les services et les données associées</strong> : Sécurisation des services (protection des applications), protection des données (chiffrement, sauvegardes), gestion de la sécurité (authentification, autorisation, pare-feu)
-          </p>
+          <div class="ac-cards-grid">
+            <div class="ac-card">
+              <div class="ac-card__code">AC23.01</div>
+              <div class="ac-card__title">Déployer des services dans une architecture réseau</div>
+              <div class="ac-card__description">Déploiement de services (mise en ligne d'applications), configuration réseau (réglage des connexions entre serveurs), architecture distribuée (système réparti sur plusieurs serveurs)</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC23.02</div>
+              <div class="ac-card__title">Utiliser des serveurs et outils de virtualisation</div>
+              <div class="ac-card__description">Virtualisation (création de machines virtuelles), containers (conteneurs Docker - environnements isolés), orchestration (gestion automatisée de plusieurs conteneurs), gestion de serveurs</div>
+            </div>
+            <div class="ac-card">
+              <div class="ac-card__code">AC23.03</div>
+              <div class="ac-card__title">Sécuriser les services et les données associées</div>
+              <div class="ac-card__description">Sécurisation des services (protection des applications), protection des données (chiffrement, sauvegardes), gestion de la sécurité (authentification, autorisation, pare-feu)</div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -127,26 +144,72 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            <strong>R2.05 : Introduction aux services réseaux</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Technologies :</strong> PHP (langage de programmation)<br>
-            <strong>Contenu :</strong> Principes des réseaux (communication entre ordinateurs), services réseau (applications qui fonctionnent sur le réseau), protocoles de communication (règles de communication). Déploiement de services dans une architecture réseau avec PHP.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R3.05 : Programmation système</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Technologies :</strong> WebSockets (protocole de communication temps réel)<br>
-            <strong>Contenu :</strong> Programmation au niveau système (programmation proche du système d'exploitation), gestion des processus (programmes en cours d'exécution), communication inter-processus (communication entre programmes). WebSockets pour la communication temps réel (communication instantanée entre client et serveur).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R3.06 : Architecture des réseaux</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Contenu :</strong> Architecture des réseaux TCP/IP (protocole de communication Internet), routage (acheminement des données sur le réseau), services réseau avancés (services complexes sur le réseau).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>R4.08 : Virtualisation</strong> → <strong>Statut : ÉTUDIÉ</strong><br>
-            <strong>Repository GitHub officiel :</strong> <a href="https://github.com/oeoecbien/docker" target="_blank" rel="noreferrer" class="project-details__desc-link">https://github.com/oeoecbien/docker</a><br>
-            <strong>Technologies :</strong> Docker (outil de conteneurisation)<br>
-            <strong>Contenu :</strong> Virtualisation avec Docker, conteneurisation (création de conteneurs - environnements isolés), déploiement de services, orchestration de base (gestion de plusieurs conteneurs).
-          </p>
+          <div class="resource-cards-container">
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R2.05 : Introduction aux services réseaux</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Technologies :</strong>
+                <span>PHP (langage de programmation)</span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Principes des réseaux (communication entre ordinateurs), services réseau (applications qui fonctionnent sur le réseau), protocoles de communication (règles de communication). Déploiement de services dans une architecture réseau avec PHP.</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R3.05 : Programmation système</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Technologies :</strong>
+                <span>WebSockets (protocole de communication temps réel)</span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Programmation au niveau système (programmation proche du système d'exploitation), gestion des processus (programmes en cours d'exécution), communication inter-processus (communication entre programmes). WebSockets pour la communication temps réel (communication instantanée entre client et serveur).</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R3.06 : Architecture des réseaux</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Architecture des réseaux TCP/IP (protocole de communication Internet), routage (acheminement des données sur le réseau), services réseau avancés (services complexes sur le réseau).</span>
+              </div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-card__header">
+                <div>
+                  <div class="resource-card__title">R4.08 : Virtualisation</div>
+                  <span class="resource-card__badge">ÉTUDIÉ</span>
+                </div>
+              </div>
+              <div class="resource-card__field">
+                <strong>Repository GitHub officiel :</strong>
+                <span><a href="https://github.com/oeoecbien/docker" target="_blank" rel="noreferrer">https://github.com/oeoecbien/docker</a></span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Technologies :</strong>
+                <span>Docker (outil de conteneurisation)</span>
+              </div>
+              <div class="resource-card__field">
+                <strong>Contenu :</strong>
+                <span>Virtualisation avec Docker, conteneurisation (création de conteneurs - environnements isolés), déploiement de services, orchestration de base (gestion de plusieurs conteneurs).</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -207,63 +270,57 @@
             Les <strong>traces</strong> sont des documents bruts qui témoignent de mon activité. Les <strong>preuves</strong> sont ces traces contextualisées avec une réflexion sur l'apprentissage. Voici mes traces et preuves pour le Niveau 2 :
           </p>
           
-          <h3 class="project-details__proof-title">PREUVE 1 : SAÉ 3.01 - Clone Uber (Laravel) - Déploiement réseau</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 3) dans le cadre de la SAÉ 3.01. Il s'agissait de développer une application web complète similaire à Uber en utilisant Laravel, nécessitant le déploiement de services dans une architecture réseau et la sécurisation des services.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Code source avec architecture réseau complète disponible sur <a href="https://github.com/melih0132/uber-complete-system-laravel" target="_blank" rel="noreferrer" class="project-details__desc-link">GitHub</a><br>
-            • Configuration des services réseau (PHP, Laravel, base de données)<br>
-            • Sécurisation des services (authentification, autorisation, protection des données)<br>
-            • Documentation de l'architecture réseau<br>
-            • Fiche projet détaillée : <a href="/fr/projets/uber-laravel.html" class="project-details__desc-link">voir la fiche projet</a>
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>déployer des services dans une architecture réseau (AC23.01)</strong> en configurant et déployant une application Laravel avec plusieurs services (application web, base de données, services d'authentification). Il illustre également ma compétence à <strong>sécuriser les services et les données (AC23.03)</strong> en implémentant l'authentification, l'autorisation et la protection des données. J'ai utilisé les ressources R2.05 (Services réseaux PHP), R3.05 (WebSockets) et R3.06 (Architecture des réseaux).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet m'a permis de comprendre comment déployer une application complexe dans une architecture réseau. La principale difficulté a été de comprendre comment configurer correctement les services réseau et de sécuriser l'application. J'ai surmonté cette difficulté en étudiant la documentation Laravel, en suivant les bonnes pratiques de sécurité, et en appliquant les concepts enseignés dans les ressources R2.05, R3.05 et R3.06. Ce projet m'a montré l'importance de la sécurité dans le déploiement de services.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 1 : SAÉ 3.01 - Clone Uber (Laravel) - Déploiement réseau</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 3) dans le cadre de la SAÉ 3.01. Il s'agissait de développer une application web complète similaire à Uber en utilisant Laravel, nécessitant le déploiement de services dans une architecture réseau et la sécurisation des services.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Code source avec architecture réseau complète disponible sur <a href="https://github.com/melih0132/uber-complete-system-laravel" target="_blank" rel="noreferrer">GitHub</a></li>
+                <li>Configuration des services réseau (PHP, Laravel, base de données)</li>
+                <li>Sécurisation des services (authentification, autorisation, protection des données)</li>
+                <li>Documentation de l'architecture réseau</li>
+                <li>Fiche projet détaillée : <a href="/fr/projets/uber-laravel.html">voir la fiche projet</a></li>
+              </ul>
+              <p><strong>Justification :</strong> Ce projet m'a permis d'apprendre à <strong>déployer des services dans une architecture réseau (AC23.01)</strong> en configurant et déployant une application Laravel avec plusieurs services qui devaient fonctionner ensemble : l'application web, la base de données et les services d'authentification. J'ai aussi découvert l'importance de <strong>sécuriser les services et les données (AC23.03)</strong> en mettant en place l'authentification, l'autorisation et la protection des données. J'ai utilisé les connaissances des ressources R2.05 (Services réseaux PHP), R3.05 (WebSockets) et R3.06 (Architecture des réseaux).</p>
+              <p><strong>Réflexion :</strong> Ce projet m'a permis de comprendre comment déployer une application complexe dans une architecture réseau. La principale difficulté a été de comprendre comment configurer correctement les services réseau et de sécuriser l'application. J'ai surmonté cette difficulté en étudiant la documentation Laravel, en suivant les bonnes pratiques de sécurité, et en appliquant les concepts enseignés dans les ressources R2.05, R3.05 et R3.06. Ce projet m'a montré l'importance de la sécurité dans le déploiement de services.</p>
+            </div>
+          </div>
 
-          <h3 class="project-details__proof-title">PREUVE 2 : SAÉ 4.01 - Clone Uber (.NET + Vue.js) - Virtualisation Docker</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 4) dans le cadre de la SAÉ 4.01. Il s'agissait de développer une application web complète similaire à Uber en utilisant .NET Core pour le backend et Vue.js pour le frontend, avec virtualisation Docker pour le déploiement.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Code source avec configuration Docker disponible sur <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" target="_blank" rel="noreferrer" class="project-details__desc-link">GitHub</a><br>
-            • Dockerfiles pour le backend (.NET Core) et le frontend (Vue.js)<br>
-            • Configuration docker-compose.yml pour orchestrer les services<br>
-            • Documentation du déploiement avec Docker<br>
-            • Fiche projet détaillée : <a href="/fr/projets/uber-vuejs-dotnet.html" class="project-details__desc-link">voir la fiche projet</a>
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce projet démontre ma capacité à <strong>utiliser des serveurs et outils de virtualisation (AC23.02)</strong> en utilisant Docker pour conteneuriser l'application et orchestrer les services (backend, frontend, base de données). Il illustre également ma compétence à <strong>déployer des services dans une architecture réseau (AC23.01)</strong> en configurant une architecture distribuée avec plusieurs conteneurs Docker. J'ai utilisé la ressource R4.08 (Virtualisation Docker).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce projet a été un tournant dans mon apprentissage de l'administration système car il m'a permis de maîtriser Docker et la conteneurisation. La principale difficulté a été de comprendre comment créer des Dockerfiles efficaces et comment orchestrer plusieurs conteneurs avec docker-compose. J'ai surmonté cette difficulté en étudiant la documentation Docker, en pratiquant avec des exemples, et en appliquant les concepts enseignés dans la ressource R4.08. Ce projet m'a montré l'importance de la virtualisation pour simplifier le déploiement et la gestion des applications.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 2 : SAÉ 4.01 - Clone Uber (.NET + Vue.js) - Virtualisation Docker</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 4) dans le cadre de la SAÉ 4.01. Il s'agissait de développer une application web complète similaire à Uber en utilisant .NET Core pour le backend et Vue.js pour le frontend, avec virtualisation Docker pour le déploiement.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Code source avec configuration Docker disponible sur <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" target="_blank" rel="noreferrer">GitHub</a></li>
+                <li>Dockerfiles pour le backend (.NET Core) et le frontend (Vue.js)</li>
+                <li>Configuration docker-compose.yml pour orchestrer les services</li>
+                <li>Documentation du déploiement avec Docker</li>
+                <li>Fiche projet détaillée : <a href="/fr/projets/uber-vuejs-dotnet.html">voir la fiche projet</a></li>
+              </ul>
+              <p><strong>Justification :</strong> Ce projet m'a permis d'apprendre à <strong>utiliser des outils de virtualisation (AC23.02)</strong> en utilisant Docker pour conteneuriser l'application et orchestrer tous les services (backend, frontend, base de données). J'ai découvert comment simplifier le déploiement avec des conteneurs. J'ai aussi appris à <strong>déployer des services dans une architecture réseau (AC23.01)</strong> en configurant une architecture distribuée avec plusieurs conteneurs Docker qui communiquent entre eux. J'ai utilisé la ressource R4.08 (Virtualisation Docker).</p>
+              <p><strong>Réflexion :</strong> Ce projet a été un tournant dans mon apprentissage de l'administration système car il m'a permis de maîtriser Docker et la conteneurisation. La principale difficulté a été de comprendre comment créer des Dockerfiles efficaces et comment orchestrer plusieurs conteneurs avec docker-compose. J'ai surmonté cette difficulté en étudiant la documentation Docker, en pratiquant avec des exemples, et en appliquant les concepts enseignés dans la ressource R4.08. Ce projet m'a montré l'importance de la virtualisation pour simplifier le déploiement et la gestion des applications.</p>
+            </div>
+          </div>
 
-          <h3 class="project-details__proof-title">PREUVE 3 : STAGE - HEVA - Helvetic Events Agency</h3>
-          <p class="project-details__desc-para">
-            <strong>Contexte :</strong> Stage professionnel de 3 mois (avril 2025 - juin 2025) en tant que Développeur Full Stack chez HEVA - Helvetic Events Agency à Annecy. J'ai participé au développement d'une application web de gestion de projet utilisant React (frontend) et FastAPI (backend Python), nécessitant l'administration système et le déploiement de services.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Trace :</strong>
-            • Code source de l'application React + FastAPI (propriétaire, non public)<br>
-            • Configuration et déploiement de l'application en production<br>
-            • Administration système (gestion des serveurs, configuration des environnements)<br>
-            • Sécurisation des services et des données<br>
-            • Captures d'écran de l'application en production (<a href="/fr/projets/heva.html" class="project-details__desc-link">voir la fiche projet</a>)<br>
-            • Contributions au code source avec commits Git documentés
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Justification :</strong> Ce stage démontre ma capacité à <strong>déployer des services dans une architecture réseau (AC23.01)</strong> dans un contexte professionnel réel, en déployant une application React + FastAPI en production. Il illustre également ma compétence à <strong>sécuriser les services et les données (AC23.03)</strong> en implémentant la sécurité dans une application professionnelle. L'expérience quotidienne en entreprise m'a permis d'appliquer les compétences d'administration de systèmes complexes dans un contexte réel avec des contraintes de production.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Réflexion :</strong> Ce stage a été une expérience professionnelle enrichissante qui m'a permis de mettre en pratique toutes les compétences d'administration système acquises en cours dans un contexte réel. La principale difficulté a été de comprendre comment déployer et administrer une application en production avec les contraintes de l'entreprise. J'ai surmonté cette difficulté en communiquant régulièrement avec l'équipe, en suivant les procédures de l'entreprise, et en appliquant les bonnes pratiques d'administration système. Cette expérience m'a montré l'importance de l'administration système en production et m'a permis de développer ma confiance en tant qu'administrateur système.
-          </p>
+          <div class="proof-card">
+            <h3 class="proof-card__title">PREUVE 3 : STAGE - HEVA - Helvetic Events Agency</h3>
+            <div class="proof-card__section">
+              <p><strong>Contexte :</strong> Stage professionnel de 3 mois (avril 2025 - juin 2025) en tant que Développeur Full Stack chez HEVA - Helvetic Events Agency à Annecy. J'ai participé au développement d'une application web de gestion de projet utilisant React (frontend) et FastAPI (backend Python), nécessitant l'administration système et le déploiement de services.</p>
+              <p><strong>Trace :</strong></p>
+              <ul>
+                <li>Code source de l'application React + FastAPI (propriétaire, non public)</li>
+                <li>Configuration et déploiement de l'application en production</li>
+                <li>Administration système (gestion des serveurs, configuration des environnements)</li>
+                <li>Sécurisation des services et des données</li>
+                <li>Captures d'écran de l'application en production (<a href="/fr/projets/heva.html">voir la fiche projet</a>)</li>
+                <li>Contributions au code source avec commits Git documentés</li>
+              </ul>
+              <p><strong>Justification :</strong> Ce stage m'a permis d'apprendre à <strong>déployer des services dans une architecture réseau (AC23.01)</strong> dans un vrai contexte professionnel, en déployant une application React + FastAPI qui était utilisée en production. J'ai découvert les défis réels du déploiement en entreprise. J'ai aussi appris à <strong>sécuriser les services et les données (AC23.03)</strong> en mettant en place la sécurité dans une application professionnelle avec des utilisateurs réels. Cette expérience quotidienne m'a permis d'appliquer mes compétences d'administration de systèmes dans un contexte réel avec toutes les contraintes de production.</p>
+              <p><strong>Réflexion :</strong> Ce stage a été une expérience professionnelle enrichissante qui m'a permis de mettre en pratique toutes les compétences d'administration système acquises en cours dans un contexte réel. La principale difficulté a été de comprendre comment déployer et administrer une application en production avec les contraintes de l'entreprise. J'ai surmonté cette difficulté en communiquant régulièrement avec l'équipe, en suivant les procédures de l'entreprise, et en appliquant les bonnes pratiques d'administration système. Cette expérience m'a montré l'importance de l'administration système en production et m'a permis de développer ma confiance en tant qu'administrateur système.</p>
+            </div>
+          </div>
         </div>
 
         <div class="project-details__content-title">
@@ -271,17 +328,19 @@
         </div>
 
         <div class="project-details__desc">
-          <p class="project-details__desc-para">
-            Le <strong>Niveau 2</strong> m'a permis de développer mes compétences en administration de systèmes complexes. À travers des projets comme le <strong>Clone Uber (SAÉ 3.01 et SAÉ 4.01)</strong> et mon <strong>stage chez HEVA</strong>, j'ai appris à containeriser des applications avec Docker, à déployer des services dans une architecture réseau, et à sécuriser les services et les données.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Défis rencontrés :</strong> Les principaux défis à ce niveau concernaient la compréhension de Docker et de la conteneurisation, la configuration d'architectures réseau complexes, et la sécurisation des services en production.
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Solutions apportées :</strong> Pour surmonter ces difficultés, j'ai étudié la documentation Docker, j'ai pratiqué avec des projets concrets, j'ai suivi les bonnes pratiques de sécurité, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R2.05 (Services réseaux), R3.05 (WebSockets), R3.06 (Architecture des réseaux) et R4.08 (Virtualisation Docker).
-          </p>
-          <p class="project-details__desc-para">
-            <strong>Progression :</strong> Ces expériences m'ont permis de développer une expertise en administration de systèmes complexes, du déploiement de services à la virtualisation avec Docker. Le stage chez HEVA m'a particulièrement appris à gérer des systèmes en production, préparant ainsi mon insertion dans le monde professionnel.
+          <div class="reflection-cards-grid">
+            <div class="reflection-card reflection-card--challenge">
+              <div class="reflection-card__title">Défis rencontrés</div>
+              <div class="reflection-card__content">Les principaux défis à ce niveau concernaient la compréhension de Docker et de la conteneurisation, la configuration d'architectures réseau complexes, et la sécurisation des services en production.</div>
+            </div>
+            <div class="reflection-card reflection-card--solution">
+              <div class="reflection-card__title">Solutions apportées</div>
+              <div class="reflection-card__content">Pour surmonter ces difficultés, j'ai étudié la documentation Docker, j'ai pratiqué avec des projets concrets, j'ai suivi les bonnes pratiques de sécurité, et j'ai appliqué les méthodes enseignées dans les ressources pédagogiques R2.05 (Services réseaux), R3.05 (WebSockets), R3.06 (Architecture des réseaux) et R4.08 (Virtualisation Docker).</div>
+            </div>
+          </div>
+          <p class="reflection-progress">
+            <strong>Progression</strong>
+            Le Niveau 2 m'a permis de développer mes compétences en administration de systèmes complexes. À travers des projets comme le Clone Uber (SAÉ 3.01 et SAÉ 4.01) et mon stage chez HEVA, j'ai appris à containeriser des applications avec Docker, à déployer des services dans une architecture réseau, et à sécuriser les services et les données. Ces expériences m'ont permis de développer une expertise en administration de systèmes complexes, du déploiement de services à la virtualisation avec Docker. Le stage chez HEVA m'a particulièrement appris à gérer des systèmes en production, préparant ainsi mon insertion dans le monde professionnel.
           </p>
         </div>
 
