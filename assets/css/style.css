@@ -2950,7 +2950,7 @@ textarea {
 .project-details__desc-para {
     font-size: 1.8rem;
     line-height: 1.7;
-    color: #777;
+    color: #999;
     margin-bottom: 2rem
 }
 
@@ -3135,26 +3135,57 @@ textarea {
     }
 }
 
-/* Competence Status Box */
+/* Competence Status Box - Style minimaliste */
 .competence-status-box {
-    background: linear-gradient(135deg, #16B364 0%, #0d8a4f 100%);
-    color: white;
-    padding: 2rem;
-    border-radius: 8px;
+    border-left: 4px solid #16B364;
+    padding: 1rem 1.5rem;
     margin: 2rem 0;
+    background: transparent;
 }
 
 .competence-status-box p {
     margin: 0;
     font-size: 1.6rem;
     font-weight: 600;
+    color: #333;
+}
+
+.competence-status-box p strong {
+    color: #16B364;
 }
 
 .competence-status-box p:last-child {
-    margin: 1rem 0 0 0;
+    margin: 0.8rem 0 0 0;
     font-size: 1.4rem;
-    opacity: 0.95;
     font-weight: 400;
+    color: #555;
+}
+
+/* Statut ACQUIS - Vert */
+.competence-status-box.status-acquis {
+    border-left-color: #16B364;
+}
+
+.competence-status-box.status-acquis p strong {
+    color: #16B364;
+}
+
+/* Statut EN COURS - Orange */
+.competence-status-box.status-en-cours {
+    border-left-color: #f59e0b;
+}
+
+.competence-status-box.status-en-cours p strong {
+    color: #f59e0b;
+}
+
+/* Statut ÉTUDIÉ - Bleu */
+.competence-status-box.status-etudie {
+    border-left-color: #5786f5;
+}
+
+.competence-status-box.status-etudie p strong {
+    color: #5786f5;
 }
 
 /* AC Cards Grid */
@@ -3266,19 +3297,19 @@ textarea {
     line-height: 1.6;
 }
 
-/* Proof Cards */
+/* Proof Cards - Style minimaliste */
 .proof-card {
-    background: #f8f9fa;
-    border: 1px solid #e2e8f0;
-    border-left: 6px solid #16B364;
-    padding: 2.5rem;
-    border-radius: 8px;
+    background: transparent;
+    border: none;
+    border-left: 3px solid #e2e8f0;
+    padding: 0;
+    border-radius: 0;
     margin: 3rem 0;
-    transition: transform 1s ease;
+    padding-left: 2rem;
 }
 
 .proof-card:hover {
-    transform: translateY(-2px);
+    border-left-color: #16B364;
 }
 
 .proof-card--purple {
@@ -3290,53 +3321,85 @@ textarea {
 }
 
 .proof-card__title {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     color: #333;
-    border-bottom: 3px solid #16B364;
-    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
+.proof-card:hover .proof-card__title {
+    border-bottom-color: #16B364;
+}
+
 .proof-card__section {
-    background: #ffffff;
-    border-left: 3px solid #16B364;
-    padding: 1.5rem;
-    border-radius: 4px;
+    background: transparent;
+    border-left: none;
+    padding: 0;
+    border-radius: 0;
     margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .proof-card__section:last-child {
     margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
-.proof-card__section strong {
-    font-size: 1.6rem;
+.proof-card__section-title {
+    font-size: 1.5rem;
     display: block;
     margin-bottom: 0.8rem;
     color: #16B364;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.proof-card__section strong {
+    font-weight: 600;
+    color: inherit;
 }
 
 .proof-card__section p {
-    margin: 0;
+    margin: 0 0 1.2rem 0;
     font-size: 1.4rem;
     line-height: 1.7;
     color: #555;
 }
 
+.proof-card__section p:last-child {
+    margin-bottom: 0;
+}
+
 .proof-card__section ul {
-    margin: 0;
+    margin: 0 0 1.2rem 0;
+    padding-left: 2rem;
     font-size: 1.4rem;
     line-height: 1.8;
     color: #555;
+    list-style: disc;
+    list-style-position: outside;
+}
+
+.proof-card__section ul:last-child {
+    margin-bottom: 0;
 }
 
 .proof-card__section li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
+    padding-left: 0.4rem;
+    list-style: disc !important;
+    display: list-item !important;
+}
+
+.proof-card__section li:last-child {
+    margin-bottom: 0;
 }
 
 .proof-card__section a {
@@ -3356,7 +3419,7 @@ textarea {
     background-color: #16B364;
     transform: scaleX(0);
     transform-origin: right;
-    transition: transform 1s ease;
+    transition: transform 0.3s ease;
 }
 
 .proof-card__section a:hover {
@@ -3371,7 +3434,7 @@ textarea {
 /* Reflection Cards Grid */
 .reflection-cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin: 2rem 0;
 }
@@ -3426,6 +3489,22 @@ textarea {
     font-size: 1.4rem;
     color: #4a5568;
     line-height: 1.7;
+}
+
+.reflection-progress {
+    margin-top: 2rem;
+    padding: 0;
+    font-size: 1.4rem;
+    color: #4a5568;
+    line-height: 1.7;
+}
+
+.reflection-progress strong {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2c5282;
+    display: block;
+    margin-bottom: 1rem;
 }
 
 /* Dark Mode Support */
@@ -3491,36 +3570,117 @@ textarea {
         color: #ccc;
     }
 
-    .proof-card {
-        background: #262626;
-        border-color: #444;
+    .reflection-progress {
+        color: #ccc;
+    }
+
+    .reflection-progress strong {
+        color: #63b3ed;
+    }
+
+    .competence-status-box {
         border-left-color: #16B364;
     }
 
+    .competence-status-box p {
+        color: #fff;
+    }
+
+    .competence-status-box p strong {
+        color: #4ade80;
+    }
+
+    .competence-status-box.status-acquis {
+        border-left-color: #16B364;
+    }
+
+    .competence-status-box.status-acquis p strong {
+        color: #4ade80;
+    }
+
+    .competence-status-box.status-en-cours {
+        border-left-color: #f59e0b;
+    }
+
+    .competence-status-box.status-en-cours p strong {
+        color: #fbbf24;
+    }
+
+    .competence-status-box.status-etudie {
+        border-left-color: #5786f5;
+    }
+
+    .competence-status-box.status-etudie p strong {
+        color: #7c9eff;
+    }
+
+    .competence-status-box p:last-child {
+        color: #ccc;
+    }
+
+    .proof-card {
+        background: transparent;
+        border-left-color: #444;
+    }
+
     .proof-card:hover {
-        background: #2e2e2e;
+        border-left-color: #16B364;
     }
 
     .proof-card__title {
         color: #fff;
+        border-bottom-color: #444;
+    }
+
+    .proof-card:hover .proof-card__title {
         border-bottom-color: #16B364;
     }
 
     .proof-card__section {
-        background: #2e2e2e;
-        border-left-color: #16B364;
+        background: transparent;
+        border-bottom-color: #333;
     }
 
-    .proof-card__section strong {
+    .proof-card__section-title {
         color: #4ade80;
     }
 
+    .proof-card__section strong {
+        color: inherit;
+        font-weight: 600;
+    }
+
     .proof-card__section p {
+        margin: 0 0 1.2rem 0;
         color: #ccc;
     }
 
+    .proof-card__section p:last-child {
+        margin-bottom: 0;
+    }
+
     .proof-card__section ul {
+        margin: 0 0 1.2rem 0;
+        padding-left: 2rem;
         color: #ccc;
+        list-style: disc;
+        list-style-position: outside;
+    }
+
+    .proof-card__section ul:last-child {
+        margin-bottom: 0;
+    }
+
+    .proof-card__section li {
+        margin-bottom: 0.6rem;
+        padding-left: 0.4rem;
+        color: #ccc;
+        list-style: inherit;
+        display: list-item;
+    }
+
+    .proof-card__section li:last-child {
+        margin-bottom: 0;
     }
 
     .proof-card__section a {
