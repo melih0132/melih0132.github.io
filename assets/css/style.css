@@ -1822,6 +1822,8 @@ textarea {
     position: relative;
     font-weight: 700;
     line-height: 1.2;
+    display: inline-block;
+    width: fit-content;
 }
 
 .skill-title::after {
@@ -1829,7 +1831,7 @@ textarea {
     position: absolute;
     bottom: -8px;
     left: 0;
-    width: 50px;
+    width: 100%;
     height: 3px;
     background: linear-gradient(90deg, #16B364, #4ade80);
     border-radius: 2px;
