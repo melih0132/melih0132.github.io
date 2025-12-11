@@ -76,105 +76,168 @@
       <h1 class="heading-primary"><strong>LPO</strong></h1>
       <div class="project-cs-hero__info">
         <p class="text-primary">
-          L'<strong>étude de cas</strong> du projet <strong>LPO</strong> est présentée sur cette page, y compris un
-          <strong>aperçu</strong> du projet et des <strong>outils utilisés</strong>.
+          Base de données complète pour la gestion des données de <strong>comptage d'oiseaux</strong> développée avec
+          <strong>PostgreSQL</strong>, intégrant <strong>Excel</strong> et <strong>Power BI</strong> pour l'analyse et la visualisation des données.
         </p>
       </div>
       <div class="project-cs-hero__cta">
         <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo" class="btn btn--bg" target="_blank"
-          rel="noreferrer"><strong>Lien du projet</strong></a>
+          rel="noreferrer"><strong>Voir sur GitHub</strong></a>
       </div>
     </div>
   </section>
+
   <section class="project-details">
     <div class="main-container">
       <div class="project-details__content">
-        <div class="project-details__showcase-img-cont">
-          <img src="/assets/webp/LPO/logo.webp" alt="Image du projet LPO" loading="lazy"
-            class="project-details__showcase-img" />
-        </div>
         <div class="project-details__content-main">
-          <div class="project-details__desc">
+          
+          <!-- Section: Aperçu du projet -->
+          <div class="project-details__section">
             <h2 class="project-details__content-title"><strong>Aperçu du projet</strong></h2>
-            <p class="project-details__desc-para">
-              Ce projet vise à développer une <strong>base de données complète</strong> pour la gestion des données de
-              <strong>comptage d'oiseaux</strong>, permettant à la <strong>Ligue pour la Protection des Oiseaux
-                (LPO)</strong> de collecter, analyser et présenter efficacement des informations vitales. Construit sur
-              <strong>PostgreSQL</strong>, la base de données s'intègre parfaitement avec des outils comme
-              <strong>Excel</strong> et <strong>Power BI</strong> pour améliorer les capacités
-              d'<strong>analyse</strong> et de <strong>visualisation des données</strong>.
-            </p>
-            <p class="project-details__desc-para">
-              La phase de <strong>modélisation de la base de données</strong> a inclus la création d'un
-              <strong>Modèle Conceptuel de Données (MCD)</strong> pour définir les entités clés telles que les
-              comptages
-              d'oiseaux, les observateurs, les espèces et les sites, ainsi que leurs relations et contraintes. Cela a
-              été suivi par le <strong>Modèle de Données Logique (MLD)</strong>, qui a traduit l'MCD en tables
-              relationnelles spécifiquement adaptées à PostgreSQL.
-            </p>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/MCD.webp" alt="ERD" class="project-details__showcase-img" />
-            </div>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/MLD.webp" alt="LDM" class="project-details__showcase-img" />
-            </div>
-            <p class="project-details__desc-para">
-              Dans la configuration de la base de données, des tables ont été créées avec des <strong>contraintes
-                définies</strong>, y compris des <strong>clés primaires</strong> et <strong>étrangères</strong>, pour
-              garantir l'<strong>intégrité des données</strong>. Des enregistrements simulés de comptage d'oiseaux ont
-              ensuite été peuplés dans la base de données, et des <strong>requêtes SQL</strong> ont été développées pour
-              une <strong>gestion</strong> et une <strong>analyse efficaces</strong> des données.
-            </p>
-            <p class="project-details__desc-para">
-              Pour l'<strong>analyse statistique</strong>, des données pertinentes ont été extraites pour une
-              utilisation dans <strong>Excel</strong>, où des <strong>statistiques descriptives</strong> ont été
-              réalisées pour évaluer le nombre d'individus par espèce, la distribution géographique des observations et
-              les tendances de population au fil du temps. Des visualisations ont été créées pour représenter
-              efficacement ces résultats.
-            </p>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/Excel.webp" alt="Excel pour les statistiques"
-                class="project-details__showcase-img" />
-            </div>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/Excel2.webp" alt="Excel pour les statistiques"
-                class="project-details__showcase-img" />
-            </div>
-            <p class="project-details__desc-para">
-              Le projet s'est concrétisé par le développement d'un <strong>rapport interactif</strong> utilisant
-              <strong>Power BI</strong>. Les données consolidées ont été importées pour concevoir un <strong>tableau de
-                bord dynamique</strong> qui affiche les tendances des populations d'oiseaux, identifie les zones de
-              haute biodiversité et facilite les comparaisons annuelles ou saisonnières.
-            </p>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/PowerBI.webp" alt="Tableau de bord Power BI"
-                class="project-details__showcase-img" />
-            </div>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/PowerBI2.webp" alt="Tableau de bord Power BI"
-                class="project-details__showcase-img" />
+            <div class="project-details__desc">
+              <p class="project-details__desc-para">
+                Ce projet vise à développer une <strong>base de données complète</strong> pour la gestion des données de
+                <strong>comptage d'oiseaux</strong>, permettant à la <strong>Ligue pour la Protection des Oiseaux
+                  (LPO)</strong> de collecter, analyser et présenter efficacement des informations vitales. Construit sur
+                <strong>PostgreSQL</strong>, la base de données s'intègre parfaitement avec des outils comme
+                <strong>Excel</strong> et <strong>Power BI</strong> pour améliorer les capacités
+                d'<strong>analyse</strong> et de <strong>visualisation des données</strong>.
+              </p>
+              <p class="project-details__desc-para">
+                La phase de <strong>modélisation de la base de données</strong> a inclus la création d'un
+                <strong>Modèle Conceptuel de Données (MCD)</strong> pour définir les entités clés telles que les
+                comptages d'oiseaux, les observateurs, les espèces et les sites, ainsi que leurs relations et contraintes.
+                Cela a été suivi par le <strong>Modèle de Données Logique (MLD)</strong>, qui a traduit l'MCD en tables
+                relationnelles spécifiquement adaptées à PostgreSQL.
+              </p>
+              <p class="project-details__desc-para">
+                Dans la configuration de la base de données, des tables ont été créées avec des <strong>contraintes
+                  définies</strong>, y compris des <strong>clés primaires</strong> et <strong>étrangères</strong>, pour
+                garantir l'<strong>intégrité des données</strong>. Des enregistrements simulés de comptage d'oiseaux ont
+                ensuite été peuplés dans la base de données, et des <strong>requêtes SQL</strong> ont été développées pour
+                une <strong>gestion</strong> et une <strong>analyse efficaces</strong> des données.
+              </p>
             </div>
           </div>
-          <div class="project-details__tools-used">
-            <h2 class="project-details__content-title"><strong>Avec</strong></h2>
-            <div class="skills__projects">
-              <div class="skills__skill"><strong>Visual Paradigm</strong></div>
-              <div class="skills__skill"><strong>PowerAMC</strong></div>
-              <div class="skills__skill"><strong>PostgreSQL</strong></div>
-              <div class="skills__skill"><strong>pgAdmin4</strong></div>
-              <div class="skills__skill"><strong>SQL</strong></div>
-              <div class="skills__skill"><strong>Excel</strong></div>
-              <div class="skills__skill"><strong>Power BI</strong></div>
-              <div class="skills__skill"><strong>Microsoft Teams</strong></div>
+
+          <!-- Section: Fonctionnalités principales -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Fonctionnalités principales</strong></h2>
+            <div class="project-details__features">
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Modélisation de base de données</h3>
+                <p class="project-details__desc-para">
+                  Création d'un Modèle Conceptuel de Données (MCD) et d'un Modèle de Données Logique (MLD) pour
+                  structurer efficacement les données de comptage d'oiseaux avec leurs relations et contraintes.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Base de données PostgreSQL</h3>
+                <p class="project-details__desc-para">
+                  Implémentation d'une base de données robuste avec contraintes d'intégrité, clés primaires et étrangères
+                  pour garantir la cohérence et la qualité des données.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Analyse statistique avec Excel</h3>
+                <p class="project-details__desc-para">
+                  Extraction et analyse des données dans Excel pour évaluer le nombre d'individus par espèce, la
+                  distribution géographique des observations et les tendances de population au fil du temps.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Tableau de bord Power BI</h3>
+                <p class="project-details__desc-para">
+                  Développement d'un rapport interactif avec Power BI affichant les tendances des populations d'oiseaux,
+                  identifiant les zones de haute biodiversité et facilitant les comparaisons annuelles ou saisonnières.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Requêtes SQL optimisées</h3>
+                <p class="project-details__desc-para">
+                  Développement de requêtes SQL efficaces pour la gestion et l'analyse des données, permettant une
+                  extraction rapide et précise des informations pertinentes.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Visualisation des données</h3>
+                <p class="project-details__desc-para">
+                  Création de visualisations efficaces dans Excel et Power BI pour représenter les résultats statistiques
+                  et faciliter la compréhension des tendances et patterns.
+                </p>
+              </div>
             </div>
           </div>
-          <div class="project-details__links">
-            <h2 class="project-details__content-title"><strong>Voir GitHub</strong></h2>
-            <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo"
-              class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer"><strong>Lien
-                du projet</strong></a>
-            <a href="../#" class="btn btn--med btn--theme-inv project-details__links-btn"><strong>Retour</strong></a>
+
+          <!-- Section: Galerie d'images -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Galerie du projet</strong></h2>
+            <div class="project-details__gallery">
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/MCD.webp" alt="Modèle Conceptuel de Données (MCD) du projet LPO"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Modèle Conceptuel de Données (MCD)</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/MLD.webp" alt="Modèle de Données Logique (MLD) du projet LPO"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Modèle de Données Logique (MLD)</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/Excel.webp" alt="Analyse statistique avec Excel"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Analyse statistique avec Excel</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/Excel2.webp" alt="Visualisations Excel"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Visualisations et statistiques dans Excel</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/PowerBI.webp" alt="Tableau de bord Power BI"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Tableau de bord interactif Power BI</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/PowerBI2.webp" alt="Tableau de bord Power BI - Vue détaillée"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Analyse approfondie avec Power BI</p>
+              </div>
+            </div>
           </div>
+
+          <!-- Section: Technologies utilisées -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Technologies utilisées</strong></h2>
+            <div class="project-details__tools-used">
+              <div class="skills__projects">
+                <div class="skills__skill"><strong>Visual Paradigm</strong></div>
+                <div class="skills__skill"><strong>PowerAMC</strong></div>
+                <div class="skills__skill"><strong>PostgreSQL</strong></div>
+                <div class="skills__skill"><strong>pgAdmin4</strong></div>
+                <div class="skills__skill"><strong>SQL</strong></div>
+                <div class="skills__skill"><strong>Excel</strong></div>
+                <div class="skills__skill"><strong>Power BI</strong></div>
+                <div class="skills__skill"><strong>Microsoft Teams</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Liens du projet -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Explorer le projet</strong></h2>
+            <div class="project-details__links">
+              <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo"
+                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
+                <strong>Voir sur GitHub</strong>
+              </a>
+              <a href="/fr/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
+                <strong>Retour aux projets</strong>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -212,7 +275,7 @@
         <script>
           document.write(new Date().getFullYear());
         </script>
-        . Réalisé par Melih Cetinkaya
+        . Made by Melih Cetinkaya
       </div>
     </div>
   </footer>

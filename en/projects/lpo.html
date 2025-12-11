@@ -76,106 +76,171 @@
       <h1 class="heading-primary"><strong>LPO</strong></h1>
       <div class="project-cs-hero__info">
         <p class="text-primary">
-          This page showcases the <strong>case study</strong> for the <strong>LPO project</strong>, providing an
-          <strong>overview</strong> and details about the <strong>tools utilized</strong>.
+          Comprehensive database for managing <strong>bird count data</strong> developed with
+          <strong>PostgreSQL</strong>, integrating <strong>Excel</strong> and <strong>Power BI</strong> for data analysis and visualization.
         </p>
       </div>
       <div class="project-cs-hero__cta">
         <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo" class="btn btn--bg" target="_blank"
-          rel="noreferrer"><strong>Project Link</strong></a>
+          rel="noreferrer"><strong>View on GitHub</strong></a>
       </div>
     </div>
   </section>
+
   <section class="project-details">
     <div class="main-container">
       <div class="project-details__content">
-        <div class="project-details__showcase-img-cont">
-          <img src="/assets/webp/LPO/logo.webp" alt="LPO Project Image" loading="lazy"
-            class="project-details__showcase-img" />
-        </div>
         <div class="project-details__content-main">
-          <div class="project-details__desc">
+          
+          <!-- Section: Project Overview -->
+          <div class="project-details__section">
             <h2 class="project-details__content-title"><strong>Project Overview</strong></h2>
-            <p class="project-details__desc-para">
-              This initiative centers on developing a <strong>comprehensive database</strong> for managing <strong>bird
-                count data</strong>, empowering the
-              <strong>League for the Protection of Birds (LPO)</strong> to effectively collect, analyze, and present
-              critical
-              information. Built on <strong>PostgreSQL</strong>, the database integrates smoothly with tools like
-              <strong>Excel</strong> and <strong>Power BI</strong>, enhancing data
-              analysis and visualization.
-            </p>
-            <p class="project-details__desc-para">
-              The database modeling process began with creating an <strong>Entity-Relationship Diagram (ERD)</strong> to
-              define key
-              entities such as <strong>bird counts</strong>, <strong>observers</strong>, <strong>species</strong>, and
-              <strong>locations</strong>, along with their relationships and constraints. This
-              was succeeded by the <strong>Logical Data Model (LDM)</strong>, which transformed the ERD into relational
-              tables optimized
-              for PostgreSQL.
-            </p>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/MCD.webp" alt="ERD" class="project-details__showcase-img" />
-            </div>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/MLD.webp" alt="LDM" class="project-details__showcase-img" />
-            </div>
-            <p class="project-details__desc-para">
-              During the setup phase, <strong>tables</strong> were created with specific constraints, including
-              <strong>primary</strong> and <strong>foreign keys</strong>,
-              to maintain <strong>data integrity</strong>. Simulated bird count records were then added to the database,
-              and <strong>SQL</strong>
-              queries were crafted for efficient data management and analysis.
-            </p>
-            <p class="project-details__desc-para">
-              For <strong>statistical analysis</strong>, relevant data was extracted for use in <strong>Excel</strong>,
-              where descriptive statistics were
-              conducted to evaluate the number of individuals per species, the geographic distribution of observations,
-              and population trends over time. <strong>Visualizations</strong> were generated to effectively convey
-              these insights.
-            </p>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/Excel.webp" alt="Excel for statistics" class="project-details__showcase-img" />
-            </div>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/Excel2.webp" alt="Excel for statistics"
-                class="project-details__showcase-img" />
-            </div>
-            <p class="project-details__desc-para">
-              The project culminated in creating an <strong>interactive report</strong> using <strong>Power BI</strong>.
-              Consolidated data was
-              imported to design a <strong>dynamic dashboard</strong> that showcases trends in bird populations,
-              highlights areas of high
-              biodiversity, and facilitates annual or seasonal comparisons.
-            </p>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/PowerBI.webp" alt="Power BI Dashboard" class="project-details__showcase-img" />
-            </div>
-            <div class="project-details__showcase-img-cont">
-              <img src="/assets/webp/LPO/PowerBI2.webp" alt="Power BI Dashboard"
-                class="project-details__showcase-img" />
+            <div class="project-details__desc">
+              <p class="project-details__desc-para">
+                This initiative centers on developing a <strong>comprehensive database</strong> for managing <strong>bird
+                  count data</strong>, empowering the
+                <strong>League for the Protection of Birds (LPO)</strong> to effectively collect, analyze, and present
+                critical
+                information. Built on <strong>PostgreSQL</strong>, the database integrates smoothly with tools like
+                <strong>Excel</strong> and <strong>Power BI</strong>, enhancing data
+                analysis and visualization.
+              </p>
+              <p class="project-details__desc-para">
+                The database modeling process began with creating an <strong>Entity-Relationship Diagram (ERD)</strong> to
+                define key
+                entities such as <strong>bird counts</strong>, <strong>observers</strong>, <strong>species</strong>, and
+                <strong>locations</strong>, along with their relationships and constraints. This
+                was succeeded by the <strong>Logical Data Model (LDM)</strong>, which transformed the ERD into relational
+                tables optimized
+                for PostgreSQL.
+              </p>
+              <p class="project-details__desc-para">
+                During the setup phase, <strong>tables</strong> were created with specific constraints, including
+                <strong>primary</strong> and <strong>foreign keys</strong>,
+                to maintain <strong>data integrity</strong>. Simulated bird count records were then added to the database,
+                and <strong>SQL</strong>
+                queries were crafted for efficient data management and analysis.
+              </p>
             </div>
           </div>
-          <div class="project-details__tools-used">
+
+          <!-- Section: Main Features -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Main Features</strong></h2>
+            <div class="project-details__features">
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Database Modeling</h3>
+                <p class="project-details__desc-para">
+                  Creation of an Entity-Relationship Diagram (ERD) and Logical Data Model (LDM) to effectively structure
+                  bird count data with their relationships and constraints.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">PostgreSQL Database</h3>
+                <p class="project-details__desc-para">
+                  Implementation of a robust database with integrity constraints, primary and foreign keys to ensure data
+                  consistency and quality.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Statistical Analysis with Excel</h3>
+                <p class="project-details__desc-para">
+                  Data extraction and analysis in Excel to evaluate the number of individuals per species, geographic
+                  distribution of observations and population trends over time.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Power BI Dashboard</h3>
+                <p class="project-details__desc-para">
+                  Development of an interactive report with Power BI displaying bird population trends, identifying areas
+                  of high biodiversity and facilitating annual or seasonal comparisons.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Optimized SQL Queries</h3>
+                <p class="project-details__desc-para">
+                  Development of efficient SQL queries for data management and analysis, enabling fast and accurate
+                  extraction of relevant information.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Data Visualization</h3>
+                <p class="project-details__desc-para">
+                  Creation of effective visualizations in Excel and Power BI to represent statistical results and
+                  facilitate understanding of trends and patterns.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Project Gallery -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Project Gallery</strong></h2>
+            <div class="project-details__gallery">
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/MCD.webp" alt="Entity-Relationship Diagram (ERD) of LPO project"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Entity-Relationship Diagram (ERD)</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/MLD.webp" alt="Logical Data Model (LDM) of LPO project"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Logical Data Model (LDM)</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/Excel.webp" alt="Statistical analysis with Excel"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Statistical analysis with Excel</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/Excel2.webp" alt="Excel visualizations"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Visualizations and statistics in Excel</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/PowerBI.webp" alt="Power BI Dashboard"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">Interactive Power BI dashboard</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LPO/PowerBI2.webp" alt="Power BI Dashboard - Detailed view"
+                  class="project-details__showcase-img" loading="lazy" />
+                <p class="project-details__img-caption">In-depth analysis with Power BI</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Technologies Used -->
+          <div class="project-details__section">
             <h2 class="project-details__content-title"><strong>Technologies Used</strong></h2>
-            <div class="skills__projects">
-              <div class="skills__skill"><strong>Visual Paradigm</strong></div>
-              <div class="skills__skill"><strong>PowerAMC</strong></div>
-              <div class="skills__skill"><strong>PostgreSQL</strong></div>
-              <div class="skills__skill"><strong>pgAdmin4</strong></div>
-              <div class="skills__skill"><strong>SQL</strong></div>
-              <div class="skills__skill"><strong>Excel</strong></div>
-              <div class="skills__skill"><strong>Power BI</strong></div>
-              <div class="skills__skill"><strong>Microsoft Teams</strong></div>
+            <div class="project-details__tools-used">
+              <div class="skills__projects">
+                <div class="skills__skill"><strong>Visual Paradigm</strong></div>
+                <div class="skills__skill"><strong>PowerAMC</strong></div>
+                <div class="skills__skill"><strong>PostgreSQL</strong></div>
+                <div class="skills__skill"><strong>pgAdmin4</strong></div>
+                <div class="skills__skill"><strong>SQL</strong></div>
+                <div class="skills__skill"><strong>Excel</strong></div>
+                <div class="skills__skill"><strong>Power BI</strong></div>
+                <div class="skills__skill"><strong>Microsoft Teams</strong></div>
+              </div>
             </div>
           </div>
-          <div class="project-details__links">
-            <h2 class="project-details__content-title"><strong>View on GitHub</strong></h2>
-            <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo"
-              class="btn btn--med btn--theme project-details__links-btn" target="_blank"
-              rel="noreferrer"><strong>Project Link</strong></a>
-            <a href="../#" class="btn btn--med btn--theme-inv project-details__links-btn"><strong>Back</strong></a>
+
+          <!-- Section: Project Links -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Explore the Project</strong></h2>
+            <div class="project-details__links">
+              <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo"
+                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
+                <strong>View on GitHub</strong>
+              </a>
+              <a href="/en/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
+                <strong>Back to projects</strong>
+              </a>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -208,11 +273,11 @@
         </div>
       </div>
       <div class="main-footer__lower">
-        &copy;
+        &copy; Copyright
         <script>
           document.write(new Date().getFullYear());
         </script>
-        <span>Made by Melih Cetinkaya</span>
+        . Made by Melih Cetinkaya
       </div>
     </div>
   </footer>
