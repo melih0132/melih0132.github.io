@@ -535,6 +535,9 @@ class ProjectFilters {
       'C# (.NET)': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)']
     };
     
+    // Technologies à exclure des filtres
+    this.excludedTechs = ['pgAdmin4', 'pgAdmin', 'Express', 'Nodemon', 'Socket.io', 'PowerAMC', 'Visual Paradigm', 'OOP'];
+    
     if (this.projectCards.length === 0 || !this.filterContainer) {
       return;
     }
@@ -562,13 +565,23 @@ class ProjectFilters {
     
     // Catégoriser chaque technologie
     this.technologies.forEach(tech => {
+      // Exclure les technologies de la liste d'exclusion
+      if (this.excludedTechs.some(excluded => 
+        tech.toLowerCase() === excluded.toLowerCase() || 
+        tech.toLowerCase().includes(excluded.toLowerCase())
+      )) {
+        return;
+      }
+      
       let categorized = false;
       
       for (const [category, techs] of Object.entries(CONFIG.techCategories)) {
         if (techs.some(t => {
           const normalizedTech = this.normalizeTech(tech);
           const normalizedT = this.normalizeTech(t);
-          return normalizedTech === normalizedT || tech === t;
+          // Comparaison insensible à la casse et avec trim
+          return normalizedTech.toLowerCase().trim() === normalizedT.toLowerCase().trim() || 
+                 tech.toLowerCase().trim() === t.toLowerCase().trim();
         })) {
           this.techCategories[category].push(tech);
           categorized = true;

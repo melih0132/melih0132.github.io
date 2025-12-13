@@ -1321,7 +1321,7 @@ textarea {
 .timeline-description {
     font-size: 1.6rem;
     line-height: 1.7;
-    color: #555;
+    color: #999;
     margin: 0;
 }
 
@@ -3044,7 +3044,7 @@ textarea {
     margin-top: 0.8rem;
     font-weight: 400;
     letter-spacing: 0.8px;
-    color: #555;
+    color: #999;
     text-transform: none;
     font-style: italic;
 }
@@ -3228,7 +3228,7 @@ textarea {
     margin: 0.8rem 0 0 0;
     font-size: 1.4rem;
     font-weight: 400;
-    color: #555;
+    color: #999;
 }
 
 /* Statut ACQUIS - Vert */
@@ -3445,7 +3445,7 @@ textarea {
     margin: 0 0 1.2rem 0;
     font-size: 1.4rem;
     line-height: 1.7;
-    color: #555;
+    color: #999;
     text-align: justify;
 }
 
@@ -3458,7 +3458,7 @@ textarea {
     padding-left: 2rem;
     font-size: 1.4rem;
     line-height: 1.8;
-    color: #555;
+    color: #999;
     list-style: disc;
     list-style-position: outside;
 }
