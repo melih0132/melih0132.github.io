@@ -242,9 +242,9 @@
 
         <div class="project-details__desc">
           <p class="project-details__desc-para">
-            • <strong><a href="/en/projects/uber-laravel.html" class="project-details__desc-link">Clone Uber (Laravel)</a></strong> - Deployment of services in a network architecture with PHP (R2.05), use of Laravel, service security. I used resources R3.05 (WebSockets) and R3.06 (Network Architecture) to create a complete network architecture. Project carried out as part of SAÉ 3.01. Source code available on GitHub.<br><br>
-            • <strong><a href="/en/projects/uber-vuejs-dotnet.html" class="project-details__desc-link">Clone Uber (.NET + Vue.js)</a></strong> - Deployment of a complex application, virtualization with Docker (R4.08), network architecture. This project allowed me to master virtualization and service deployment in a complex network architecture. Project carried out as part of SAÉ 4.01. Source code available on GitHub.<br><br>
-            • <strong><a href="/en/projects/Helvetics Events.html" class="project-details__desc-link">INTERNSHIP: Helvetic Events Agency</a></strong> - Professional experience in system administration, service deployment, virtualization. This internship allowed me to apply complex system administration skills in a real professional context.
+            • <strong>Clone Uber (Laravel)</strong> - Deployment of services in a network architecture with PHP (R2.05), use of Laravel, service security. I used resources R3.05 (WebSockets) and R3.06 (Network Architecture) to create a complete network architecture. Project carried out as part of SAÉ 3.01.<br><br>
+            • <strong>Clone Uber (.NET + Vue.js)</strong> - Deployment of a complex application, virtualization with Docker (R4.08), network architecture. This project allowed me to master virtualization and service deployment in a complex network architecture. Project carried out as part of SAÉ 4.01.<br><br>
+            • <strong>INTERNSHIP: Helvetic Events Agency</strong> - Professional experience in system administration, service deployment, virtualization. This internship allowed me to apply complex system administration skills in a real professional context.
           </p>
         </div>
 
@@ -303,7 +303,29 @@
           </div>
 
           <div class="proof-card">
-            <h3 class="proof-card__title">EVIDENCE 3: INTERNSHIP - Helvetic Events Agency</h3>
+            <h3 class="proof-card__title">EVIDENCE 3: Network Services Installation on Raspberry Pi - WordPress with Nginx and MySQL (SAÉ 2.03)</h3>
+            <div class="proof-card__section">
+              <p><strong>Context:</strong> Academic project carried out in the first year (Semester 2) as part of SAÉ 2.03 "Network Services Installation". After installing and configuring Linux on the Raspberry Pi (level 1), I installed and configured complete network services: Nginx web server, MariaDB (MySQL) database, and WordPress application. This project also included implementing security mechanisms (fail2ban, UFW firewall, SSH port change). Project carried out in collaboration with Baptiste CREPON and Tanguy ABDOULVAID.</p>
+              <p><strong>Trace:</strong></p>
+              <ul>
+                <li>Installation and configuration of Nginx web server on Raspberry Pi</li>
+                <li>Installation and configuration of MariaDB (MySQL database)</li>
+                <li>Installation and configuration of PHP for WordPress</li>
+                <li>Creation of a WordPress database and user configuration</li>
+                <li>Nginx configuration to serve WordPress (configuration file <code>/etc/nginx/sites-available/wordpress.conf</code>)</li>
+                <li>Download and complete configuration of WordPress</li>
+                <li>Implementation of security mechanisms: fail2ban (protection against connection attempts), UFW firewall (port configuration), SSH default port change (port 22 → port 26)</li>
+                <li>Creation of a new system user and removal of default "pi" user to strengthen security</li>
+                <li><a href="/assets/pdf/guide_rasberry.pdf" target="_blank" rel="noopener noreferrer" class="project-details__desc-link">Complete installation and configuration guide in PDF</a> documenting all steps (service installation, configuration, security)</li>
+                <li>Functionality tests (PHP verification, MariaDB, WordPress operational)</li>
+              </ul>
+              <p><strong>Justification:</strong> This project allowed me to learn to <strong>install and configure network services (AC23.01)</strong> by installing and configuring Nginx (web server), MariaDB (database) and WordPress (web application) on the Raspberry Pi. I discovered how to configure a web server to serve an application, how to create and manage a database, and how to integrate all these services to create a functional web application. I also learned to <strong>implement security mechanisms (AC23.03)</strong> by installing fail2ban to protect against brute force attacks, configuring the UFW firewall to control port access, and changing the default SSH port to strengthen security. I used knowledge from resource R2.05 (Network Services).</p>
+              <p><strong>Reflection:</strong> This project was fundamental for understanding how to deploy complete network services on a Linux system. The main difficulty was understanding how to correctly configure Nginx to serve WordPress and how to integrate all components (Nginx, PHP, MySQL, WordPress) so they work together. I overcame this difficulty by studying the documentation of each service, following configuration best practices, and testing each step. Implementing security (fail2ban, UFW, SSH port change) showed me the importance of securing services from their installation. This experience prepared me to deploy more complex services in production environments. The installation guide we produced demonstrates our ability to document complex technical procedures.</p>
+            </div>
+          </div>
+
+          <div class="proof-card">
+            <h3 class="proof-card__title">EVIDENCE 4: INTERNSHIP - Helvetic Events Agency</h3>
             <div class="proof-card__section">
               <p><strong>Context:</strong> Professional internship of 3 months (April 2025 - June 2025) as a Full Stack Developer at Helvetic Events Agency in Annecy. I participated in the development of a project management web application using React (frontend) and FastAPI (Python backend), requiring system administration and service deployment.</p>
               <p><strong>Trace:</strong></p>

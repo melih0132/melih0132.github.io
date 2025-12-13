@@ -241,8 +241,8 @@
 
         <div class="project-details__desc">
           <p class="project-details__desc-para">
-            • <strong>Machine virtuelle sur Oracle VM VirtualBox</strong> - Installation et configuration d'une machine virtuelle avec Debian 11 (GUI Debian), configuration d'un disque dur de 60 Go, installation de la librairie Monogame. Ce projet m'a permis d'appliquer les ressources R1.03 (Linux et commandes bash) et R1.04 (VM et Système d'exploitation Linux) pour installer et configurer un poste de développement avec virtualisation. Projet réalisé dans le cadre de la SAÉ 1.03. <a href="/assets/pdf/guide_debian_11.pdf" target="_blank" rel="noopener noreferrer" class="project-details__desc-link">Guide d'installation en PDF</a> disponible.<br><br>
-            • <strong>Linux sur Raspberry Pi</strong> - Installation et configuration de Linux sur Raspberry Pi (mini-ordinateur), administration système, configuration d'environnement. J'ai utilisé les connaissances acquises en systèmes d'exploitation (R1.04) pour configurer un environnement de travail simple sur un système embarqué. Projet réalisé dans le cadre de la SAÉ 2.03. Documentation et configurations disponibles sur GitHub.
+            • <strong>Machine virtuelle sur Oracle VM VirtualBox</strong> - Installation et configuration d'une machine virtuelle avec Debian 11 (GUI Debian), configuration d'un disque dur de 60 Go, installation de la librairie Monogame. Ce projet m'a permis d'appliquer les ressources R1.03 (Linux et commandes bash) et R1.04 (VM et Système d'exploitation Linux) pour installer et configurer un poste de développement avec virtualisation. Projet réalisé dans le cadre de la SAÉ 1.03.<br><br>
+            • <strong>Linux sur Raspberry Pi</strong> - Installation et configuration de Linux sur Raspberry Pi (mini-ordinateur), administration système, configuration d'environnement. J'ai utilisé les connaissances acquises en systèmes d'exploitation (R1.04) pour configurer un environnement de travail simple sur un système embarqué. Projet réalisé dans le cadre de la SAÉ 2.03.
           </p>
         </div>
 
@@ -286,19 +286,21 @@
           </div>
 
           <div class="proof-card">
-            <h3 class="proof-card__title">PREUVE 2 : Linux sur Raspberry Pi</h3>
+            <h3 class="proof-card__title">PREUVE 2 : Installation et configuration de Linux sur Raspberry Pi (SAÉ 2.03)</h3>
             <div class="proof-card__section">
-              <p><strong>Contexte :</strong> Projet académique réalisé en première année (Semestre 2) dans le cadre de la SAÉ 2.03. Il s'agissait d'installer et de configurer Linux sur un Raspberry Pi (mini-ordinateur), de configurer l'environnement système, et d'administrer ce système embarqué.</p>
+              <p><strong>Contexte :</strong> Projet académique réalisé en première année (Semestre 2) dans le cadre de la SAÉ 2.03 "Installation de services réseau". Il s'agissait d'installer et de configurer Linux sur un Raspberry Pi (mini-ordinateur), de configurer l'environnement système, et d'administrer ce système embarqué. Ce projet a été réalisé en collaboration avec Baptiste CREPON et Tanguy ABDOULVAID.</p>
               <p><strong>Trace :</strong></p>
               <ul>
-                <li>Installation de Linux sur Raspberry Pi</li>
+                <li>Installation de Raspberry Pi OS (système d'exploitation basé sur Debian) sur Raspberry Pi</li>
+                <li>Configuration d'une adresse IP fixe via le fichier <code>/etc/dhcpcd.conf</code></li>
+                <li>Configuration de PuTTY pour la connexion SSH au Raspberry Pi</li>
                 <li>Configuration de l'environnement système (ligne de commande, gestion des processus)</li>
                 <li>Administration système de base (gestion des utilisateurs, permissions, fichiers)</li>
+                <li><a href="/assets/pdf/guide_rasberry.pdf" target="_blank" rel="noopener noreferrer" class="project-details__desc-link">Guide d'installation et de configuration complet en PDF</a> documentant toutes les étapes (installation de l'OS, configuration IP fixe, connexion SSH, installation de services réseau)</li>
                 <li>Documentation des procédures d'installation et de configuration</li>
-                <li>Fichiers de configuration disponibles sur GitHub</li>
               </ul>
-              <p><strong>Justification :</strong> Ce projet m'a permis d'apprendre à <strong>installer et configurer un poste de développement (AC13.01)</strong> en installant Linux sur un Raspberry Pi et en configurant l'environnement pour qu'il fonctionne correctement. J'ai aussi découvert comment <strong>installer les logiciels nécessaires (AC13.02)</strong> en installant les outils et logiciels dont j'avais besoin sur le système Linux. J'ai appris à <strong>configurer un environnement de travail simple (AC13.03)</strong> en mettant en place un environnement Linux fonctionnel sur ce système embarqué. J'ai utilisé la ressource R1.04 (Système d'exploitation Linux).</p>
-              <p><strong>Réflexion :</strong> Ce projet a été enrichissant car il m'a permis de travailler sur un système embarqué réel (Raspberry Pi) plutôt que sur une machine virtuelle. La principale difficulté a été de comprendre comment utiliser la ligne de commande Linux pour administrer le système. J'ai surmonté cette difficulté en étudiant les commandes Linux de base, en pratiquant régulièrement, et en appliquant les concepts enseignés dans la ressource R1.04. Cette expérience m'a montré l'importance de l'administration système et m'a préparé à travailler sur des systèmes Linux en production.</p>
+              <p><strong>Justification :</strong> Ce projet m'a permis d'apprendre à <strong>identifier les différents composants d'un système numérique (AC13.01)</strong> en travaillant avec un Raspberry Pi et en comprenant son architecture matérielle (processeur, mémoire, stockage). J'ai découvert comment <strong>utiliser les fonctionnalités de base d'un système multitâche (AC13.02)</strong> en utilisant la ligne de commande Linux pour gérer les processus et naviguer dans le système de fichiers. J'ai appris à <strong>installer et configurer un poste de travail (AC13.03)</strong> en installant Raspberry Pi OS, en configurant l'adresse IP fixe, et en mettant en place un environnement Linux fonctionnel sur ce système embarqué. J'ai utilisé les connaissances des ressources R1.03 (Linux et commandes bash) et R1.04 (Système d'exploitation Linux).</p>
+              <p><strong>Réflexion :</strong> Ce projet a été enrichissant car il m'a permis de travailler sur un système embarqué réel (Raspberry Pi) plutôt que sur une machine virtuelle. La principale difficulté a été de comprendre comment configurer correctement l'adresse IP fixe et d'établir la connexion SSH avec PuTTY. J'ai surmonté cette difficulté en étudiant la documentation Raspberry Pi, en suivant le guide d'installation que nous avons créé, et en appliquant les concepts enseignés dans les ressources R1.03 et R1.04. Cette expérience m'a montré l'importance de l'administration système et m'a préparé à travailler sur des systèmes Linux en production. Le guide d'installation que nous avons produit témoigne de notre capacité à documenter et partager nos connaissances techniques.</p>
             </div>
           </div>
         </div>
