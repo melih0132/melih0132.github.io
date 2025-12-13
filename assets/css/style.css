@@ -2934,7 +2934,8 @@ textarea {
     font-size: 1.8rem;
     line-height: 1.7;
     color: #999;
-    margin-bottom: 2rem
+    margin-bottom: 2rem;
+    text-align: justify;
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -3445,6 +3446,7 @@ textarea {
     font-size: 1.4rem;
     line-height: 1.7;
     color: #555;
+    text-align: justify;
 }
 
 .proof-card__section p:last-child {
@@ -3792,6 +3794,7 @@ textarea {
     .proof-card__section p {
         margin: 0 0 1.2rem 0;
         color: #ccc;
+        text-align: justify;
     }
 
     .proof-card__section p:last-child {
