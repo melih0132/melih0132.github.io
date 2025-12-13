@@ -226,10 +226,6 @@
                 </div>
               </div>
               <div class="resource-card__field">
-                <strong>Repository GitHub officiel :</strong>
-                <span><a href="https://github.com/oeoecbien/docker" target="_blank" rel="noreferrer">https://github.com/oeoecbien/docker</a></span>
-              </div>
-              <div class="resource-card__field">
                 <strong>Technologies :</strong>
                 <span>Docker (outil de conteneurisation)</span>
               </div>
@@ -274,7 +270,6 @@
         <div class="project-details__desc">
           <p class="project-details__desc-para">
             • <strong>Clone Uber (Laravel)</strong> - Déploiement de services dans une architecture réseau avec PHP (R2.05), utilisation de Laravel, sécurisation des services. J'ai utilisé les ressources R3.05 (WebSockets) et R3.06 (Architecture des réseaux) pour créer une architecture réseau complète. Projet réalisé dans le cadre de la SAÉ 3.01.<br><br>
-            • <strong>Clone Uber (.NET + Vue.js)</strong> - Déploiement d'une application complexe, virtualisation avec Docker (R4.08), architecture réseau. Ce projet m'a permis de maîtriser la virtualisation et le déploiement de services dans une architecture réseau complexe. Projet réalisé dans le cadre de la SAÉ 4.01.<br><br>
             • <strong>STAGE : Helvetic Events Agency</strong> - Expérience professionnelle en administration système, déploiement de services, virtualisation. Ce stage m'a permis d'appliquer les compétences d'administration de systèmes complexes dans un contexte professionnel réel.
           </p>
         </div>
@@ -317,46 +312,25 @@
           </div>
 
           <div class="proof-card">
-            <h3 class="proof-card__title">PREUVE 2 : Clone Uber (.NET + Vue.js) - Virtualisation Docker</h3>
+            <h3 class="proof-card__title">PREUVE 2 : Docker - Exercices de conteneurisation</h3>
             <div class="proof-card__section">
-              <p><strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 4) dans le cadre de la SAÉ 4.01. Il s'agissait de développer une application web complète similaire à Uber en utilisant .NET Core pour le backend et Vue.js pour le frontend, avec virtualisation Docker pour le déploiement.</p>
+              <p><strong>Contexte :</strong> Projet académique réalisé en deuxième année (Semestre 4) dans le cadre de la ressource R4.08 (Virtualisation). Il s'agissait de maîtriser Docker et la conteneurisation à travers une série d'exercices progressifs, de la création de conteneurs simples à l'orchestration de services complexes avec Docker Compose.</p>
               <p><strong>Trace :</strong></p>
               <ul>
-                <li>Code source avec configuration Docker disponible sur GitHub</li>
-                <li>Dockerfiles pour le backend (.NET Core) et le frontend (Vue.js)</li>
+                <li>Repository GitHub avec 7 exercices Docker progressifs : <a href="https://github.com/melih0132/docker-exercices" target="_blank" rel="noopener noreferrer" class="project-details__desc-link">https://github.com/melih0132/docker-exercices</a></li>
+                <li>Exercices couvrant : conteneurs de base, compilation SASS, applications Node.js/MongoDB, PHP/Apache/MariaDB, architectures multi-services, applications complètes avec CI/CD</li>
+                <li>Dockerfiles optimisés pour chaque exercice</li>
                 <li>Configuration docker-compose.yml pour orchestrer les services</li>
-                <li>Documentation du déploiement avec Docker</li>
-                <li>Fiche projet détaillée (<a href="/fr/projets/uber-vuejs-dotnet.html">voir la fiche projet</a>)</li>
+                <li>Intégration CI/CD avec GitLab CI et GitHub Actions</li>
+                <li>Documentation complète pour chaque exercice</li>
               </ul>
-              <p><strong>Justification :</strong> Ce projet m'a permis d'apprendre à <strong>utiliser des outils de virtualisation (AC23.02)</strong> en utilisant Docker pour conteneuriser l'application et orchestrer tous les services (backend, frontend, base de données). J'ai découvert comment simplifier le déploiement avec des conteneurs. J'ai aussi appris à <strong>déployer des services dans une architecture réseau (AC23.01)</strong> en configurant une architecture distribuée avec plusieurs conteneurs Docker qui communiquent entre eux. J'ai utilisé la ressource R4.08 (Virtualisation Docker).</p>
-              <p><strong>Réflexion :</strong> Ce projet a été un tournant dans mon apprentissage de l'administration système car il m'a permis de maîtriser Docker et la conteneurisation. La principale difficulté a été de comprendre comment créer des Dockerfiles efficaces et comment orchestrer plusieurs conteneurs avec docker-compose. J'ai surmonté cette difficulté en étudiant la documentation Docker, en pratiquant avec des exemples, et en appliquant les concepts enseignés dans la ressource R4.08. Ce projet m'a montré l'importance de la virtualisation pour simplifier le déploiement et la gestion des applications.</p>
+              <p><strong>Justification :</strong> Ce projet m'a permis d'apprendre à <strong>utiliser des outils de virtualisation (AC23.02)</strong> en maîtrisant Docker pour conteneuriser des applications et orchestrer plusieurs services avec Docker Compose. J'ai découvert comment simplifier le déploiement avec des conteneurs, comment optimiser les images Docker, et comment intégrer Docker dans des pipelines CI/CD. J'ai aussi appris à <strong>déployer des services dans une architecture réseau (AC23.01)</strong> en configurant des architectures distribuées avec plusieurs conteneurs Docker qui communiquent entre eux (bases de données, serveurs web, applications). J'ai utilisé la ressource R4.08 (Virtualisation Docker).</p>
+              <p><strong>Réflexion :</strong> Ce projet a été fondamental pour maîtriser Docker et la conteneurisation. La progression à travers 7 exercices m'a permis de comprendre progressivement les concepts, de la création de conteneurs simples à l'orchestration de services complexes. La principale difficulté a été de comprendre comment créer des Dockerfiles efficaces et comment orchestrer plusieurs conteneurs avec docker-compose. J'ai surmonté cette difficulté en étudiant la documentation Docker, en pratiquant avec chaque exercice, et en appliquant les concepts enseignés dans la ressource R4.08. L'intégration CI/CD m'a montré comment Docker s'intègre dans les workflows de développement modernes. Ce projet m'a montré l'importance de la virtualisation pour simplifier le déploiement et la gestion des applications.</p>
             </div>
           </div>
 
           <div class="proof-card">
-            <h3 class="proof-card__title">PREUVE 3 : Installation de services réseau sur Raspberry Pi - WordPress avec Nginx et MySQL (SAÉ 2.03)</h3>
-            <div class="proof-card__section">
-              <p><strong>Contexte :</strong> Projet académique réalisé en première année (Semestre 2) dans le cadre de la SAÉ 2.03 "Installation de services réseau". Après avoir installé et configuré Linux sur le Raspberry Pi (niveau 1), j'ai installé et configuré des services réseau complets : serveur web Nginx, base de données MariaDB (MySQL), et application WordPress. Ce projet a également inclus la mise en place de mécanismes de sécurité (fail2ban, pare-feu UFW, changement du port SSH). Projet réalisé en collaboration avec Baptiste CREPON et Tanguy ABDOULVAID.</p>
-              <p><strong>Trace :</strong></p>
-              <ul>
-                <li>Installation et configuration du serveur web Nginx sur Raspberry Pi</li>
-                <li>Installation et configuration de MariaDB (base de données MySQL)</li>
-                <li>Installation et configuration de PHP pour WordPress</li>
-                <li>Création d'une base de données WordPress et configuration des utilisateurs</li>
-                <li>Configuration de Nginx pour servir WordPress (fichier de configuration <code>/etc/nginx/sites-available/wordpress.conf</code>)</li>
-                <li>Téléchargement et configuration complète de WordPress</li>
-                <li>Mise en place de mécanismes de sécurité : fail2ban (protection contre les tentatives de connexion), pare-feu UFW (configuration des ports), changement du port SSH par défaut (port 22 → port 26)</li>
-                <li>Création d'un nouvel utilisateur système et suppression de l'utilisateur par défaut "pi" pour renforcer la sécurité</li>
-                <li><a href="/assets/pdf/guide_rasberry.pdf" target="_blank" rel="noopener noreferrer" class="project-details__desc-link">Guide d'installation et de configuration complet en PDF</a> documentant toutes les étapes (installation des services, configuration, sécurité)</li>
-                <li>Tests de fonctionnement (vérification PHP, MariaDB, WordPress opérationnel)</li>
-              </ul>
-              <p><strong>Justification :</strong> Ce projet m'a permis d'apprendre à <strong>installer et configurer des services réseaux (AC23.01)</strong> en installant et configurant Nginx (serveur web), MariaDB (base de données) et WordPress (application web) sur le Raspberry Pi. J'ai découvert comment configurer un serveur web pour servir une application, comment créer et gérer une base de données, et comment intégrer tous ces services pour créer une application web fonctionnelle. J'ai aussi appris à <strong>mettre en œuvre des mécanismes de sécurité (AC23.03)</strong> en installant fail2ban pour protéger contre les attaques par force brute, en configurant le pare-feu UFW pour contrôler l'accès aux ports, et en changeant le port SSH par défaut pour renforcer la sécurité. J'ai utilisé les connaissances de la ressource R2.05 (Services réseaux).</p>
-              <p><strong>Réflexion :</strong> Ce projet a été fondamental pour comprendre comment déployer des services réseau complets sur un système Linux. La principale difficulté a été de comprendre comment configurer correctement Nginx pour servir WordPress et comment intégrer tous les composants (Nginx, PHP, MySQL, WordPress) pour qu'ils fonctionnent ensemble. J'ai surmonté cette difficulté en étudiant la documentation de chaque service, en suivant les bonnes pratiques de configuration, et en testant chaque étape. La mise en place de la sécurité (fail2ban, UFW, changement de port SSH) m'a montré l'importance de sécuriser les services dès leur installation. Cette expérience m'a préparé à déployer des services plus complexes dans des environnements de production. Le guide d'installation que nous avons produit témoigne de notre capacité à documenter des procédures techniques complexes.</p>
-            </div>
-          </div>
-
-          <div class="proof-card">
-            <h3 class="proof-card__title">PREUVE 4 : STAGE - Helvetic Events Agency</h3>
+            <h3 class="proof-card__title">PREUVE 3 : STAGE - Helvetic Events Agency</h3>
             <div class="proof-card__section">
               <p><strong>Contexte :</strong> Stage professionnel de 3 mois (avril 2025 - juin 2025) en tant que Développeur Full Stack chez Helvetic Events Agency à Annecy. J'ai participé au développement d'une application web de gestion de projet utilisant React (frontend) et FastAPI (backend Python), nécessitant l'administration système et le déploiement de services.</p>
               <p><strong>Trace :</strong></p>
