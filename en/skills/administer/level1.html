@@ -111,6 +111,37 @@
         </div>
 
         <div class="project-details__content-title">
+          Essential Components (CE)
+        </div>
+        
+        <div class="project-details__desc">
+          <p class="project-details__desc-para">
+            To act with quality in this competency, I must:
+          </p>
+          <ul class="project-details__desc-para">
+            <li><strong>CE4.01</strong> | Respect regulations on privacy and personal data protection</li>
+            <li><strong>CE4.02</strong> | Respect the economic, societal and ecological issues of data storage use, as well as different infrastructures (data centers, cloud, etc.)</li>
+            <li><strong>CE4.03</strong> | Rely on mathematical foundations</li>
+            <li><strong>CE4.05</strong> | Ensure coherence and quality</li>
+          </ul>
+        </div>
+
+        <div class="project-details__content-title">
+          Professional Situations
+        </div>
+        
+        <div class="project-details__desc">
+          <p class="project-details__desc-para">
+            This competency is exercised in the following professional situations:
+          </p>
+          <ul class="project-details__desc-para">
+            <li>Deploy a new technical architecture</li>
+            <li>Improve an existing infrastructure</li>
+            <li>Secure applications and services</li>
+          </ul>
+        </div>
+
+        <div class="project-details__content-title">
           Critical Learning (AC) for Level 1
         </div>
 
@@ -121,18 +152,18 @@
           <div class="ac-cards-grid">
             <div class="ac-card">
               <div class="ac-card__code">AC13.01</div>
-              <div class="ac-card__title">Install and configure a development workstation</div>
-              <div class="ac-card__description">Configuration of development environments (IDE - Integrated Development Environment, development tools), installation of necessary tools, basic settings (initial configuration)</div>
+              <div class="ac-card__title">Identify the different components of a digital system</div>
+              <div class="ac-card__description">Recognition of hardware components (processor, memory, storage, peripherals), understanding of system architecture, identification of elements of a computer system</div>
             </div>
             <div class="ac-card">
               <div class="ac-card__code">AC13.02</div>
-              <div class="ac-card__title">Install software necessary for activity</div>
-              <div class="ac-card__description">Software installation (computer programs), dependency management (software needed to run other software), tool configuration</div>
+              <div class="ac-card__title">Use basic features of a multitasking system</div>
+              <div class="ac-card__description">Process management (running programs), use of multitasking features (simultaneous execution of multiple programs), system resource management</div>
             </div>
             <div class="ac-card">
               <div class="ac-card__code">AC13.03</div>
-              <div class="ac-card__title">Configure a simple work environment</div>
-              <div class="ac-card__description">Setup of basic environments (simple work environments), initial configuration (starting settings), simple settings (elementary configuration)</div>
+              <div class="ac-card__title">Install and configure a workstation</div>
+              <div class="ac-card__description">Operating system installation, workstation configuration, basic settings, setup of a functional work environment</div>
             </div>
           </div>
         </div>
@@ -152,11 +183,11 @@
               </div>
               <div class="resource-card__field">
                 <strong>Technologies:</strong>
-                <span>C language (system programming language)</span>
+                <span>Linux, Bash (command line)</span>
               </div>
               <div class="resource-card__field">
                 <strong>Content:</strong>
-                <span>Understanding hardware architecture (physical components of a computer), computer components (processor, memory, storage), basic operation. System programming in C (hardware-close programming).</span>
+                <span>Introduction to Linux and bash commands, command line usage, file system navigation, file and directory management, basic shell bash commands.</span>
               </div>
             </div>
             <div class="resource-card">
@@ -185,7 +216,7 @@
         <div class="project-details__desc">
           <p class="project-details__desc-para">
             • Installation and configuration of a development workstation: IDE, tools, environment<br>
-            • System programming in C: process management, files, permissions<br>
+            • Linux and bash commands: command line usage, file system navigation, file and directory management<br>
             • Virtualization: Oracle VM VirtualBox, creation and management of virtual machines<br>
             • Linux operating systems: process management, files and permissions, simple work environment configuration
           </p>
@@ -210,15 +241,17 @@
 
         <div class="project-details__desc">
           <p class="project-details__desc-para">
-            • <strong>Virtual machine on Oracle VM VirtualBox</strong> - Installation and configuration of virtual machines, operating system management, virtualization. This project allowed me to apply resources R1.03 (C language) and R1.04 (VM and Linux operating system) to install and configure a development workstation with virtualization. Project carried out as part of SAÉ 1.03. Documentation and configurations available on GitHub.<br><br>
+            • <strong>Virtual machine on Oracle VM VirtualBox</strong> - Installation and configuration of a virtual machine with Debian 11 (Debian GUI), configuration of a 60 GB hard drive, installation of the Monogame library. This project allowed me to apply resources R1.03 (Linux and bash commands) and R1.04 (VM and Linux operating system) to install and configure a development workstation with virtualization. Project carried out as part of SAÉ 1.03. <a href="/assets/pdf/guide_debian_11.pdf" target="_blank" rel="noopener noreferrer" class="project-details__desc-link">Complete installation guide in PDF</a> available.<br><br>
             • <strong>Linux on Raspberry Pi</strong> - Installation and configuration of Linux on Raspberry Pi (mini-computer), system administration, environment configuration. I used knowledge acquired in operating systems (R1.04) to configure a simple work environment on an embedded system. Project carried out as part of SAÉ 2.03. Documentation and configurations available on GitHub.
           </p>
         </div>
 
         <div class="project-details__tools-used">
           <div class="project-details__tools-used-list">
-            <div class="project-details__tools-used-item">C</div>
             <div class="project-details__tools-used-item">Linux</div>
+            <div class="project-details__tools-used-item">Debian 11</div>
+            <div class="project-details__tools-used-item">Bash</div>
+            <div class="project-details__tools-used-item">Monogame</div>
             <div class="project-details__tools-used-item">Oracle VM VirtualBox</div>
             <div class="project-details__tools-used-item">Raspberry Pi</div>
             <div class="project-details__tools-used-item">Virtualization</div>
@@ -237,16 +270,17 @@
           <div class="proof-card">
             <h3 class="proof-card__title">EVIDENCE 1: Virtual machine on Oracle VM VirtualBox</h3>
             <div class="proof-card__section">
-              <p><strong>Context:</strong> Academic project carried out in the first year (Semester 1) as part of SAÉ 1.03. This involved installing and configuring a virtual machine (simulated computer) on Oracle VM VirtualBox, with a Linux operating system, and installing web services (PHP) on it.</p>
+              <p><strong>Context:</strong> Academic project carried out in the first year (Semester 1) as part of SAÉ 1.03. This involved installing and configuring a virtual machine on Oracle VM VirtualBox with the following specifications: Debian 11 operating system (Debian GUI), 60 GB hard drive, and installation of the Monogame library for development.</p>
               <p><strong>Trace:</strong></p>
               <ul>
                 <li>Virtual machine configuration with Oracle VM VirtualBox</li>
-                <li>Linux installation and configuration on virtual machines</li>
-                <li>Web services (PHP) installation on virtual machines</li>
+                <li>Installation and configuration of Debian 11 (Debian GUI) on the virtual machine</li>
+                <li>Configuration of a 60 GB hard drive</li>
+                <li>Installation of the Monogame library</li>
+                <li><a href="/assets/pdf/guide_debian_11.pdf" target="_blank" rel="noopener noreferrer" class="project-details__desc-link">Complete installation guide in PDF</a> documenting all steps</li>
                 <li>Configuration and installation procedure documentation</li>
-                <li>Configuration files and scripts available on GitHub</li>
               </ul>
-              <p><strong>Justification:</strong> This project taught me to <strong>install and configure a development workstation (AC13.01)</strong> by creating a development environment with a virtual machine. I discovered how to <strong>install necessary software (AC13.02)</strong> by installing Linux and web services on the virtual machine. I also learned to <strong>configure a simple work environment (AC13.03)</strong> by setting up a Linux environment that worked correctly. I used knowledge from resources R1.03 (C language to understand architecture) and R1.04 (VM and Linux).</p>
+              <p><strong>Justification:</strong> This project taught me to <strong>identify the different components of a digital system (AC13.01)</strong> by configuring a virtual machine with the required specifications (Debian 11, 60 GB hard drive). I discovered how to <strong>use basic features of a multitasking system (AC13.02)</strong> by using bash commands to navigate and manage the Debian system. I also learned to <strong>install and configure a workstation (AC13.03)</strong> by installing Debian 11 with its graphical interface, configuring the hard drive, and installing the Monogame library for development. I used knowledge from resources R1.03 (Linux and bash commands) and R1.04 (VM and Linux).</p>
               <p><strong>Reflection:</strong> This project helped me understand the basics of virtualization and system administration. The main difficulty was understanding how to properly configure a virtual machine and install Linux on it. I overcame this difficulty by following tutorials, practicing regularly, and applying concepts taught in resources R1.03 and R1.04. This experience showed me the importance of virtualization for creating isolated and reproducible development environments.</p>
             </div>
           </div>
