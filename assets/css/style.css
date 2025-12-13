@@ -384,7 +384,6 @@ textarea {
 }
 
 .header--scrolled {
-    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -4010,7 +4009,6 @@ textarea {
     }
 
     .header--scrolled {
-        background: rgba(18, 18, 18, 0.95);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
     }

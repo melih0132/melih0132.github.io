@@ -24,12 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
       this.closeIcon.classList.toggle("d-none");
 
       const header = document.querySelector(".header");
+      const heroSection = document.querySelector(".project-cs-hero");
       if (header) {
         if (isActive) {
-          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            header.style.backgroundColor = "#121212";
+          if (heroSection) {
+            const heroBackgroundColor = window
+              .getComputedStyle(heroSection)
+              .backgroundColor;
+            header.style.backgroundColor = heroBackgroundColor;
           } else {
-            header.style.backgroundColor = "#fff";
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+              header.style.backgroundColor = "#121212";
+            } else {
+              header.style.backgroundColor = "#fff";
+            }
           }
         }
       }
@@ -41,8 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
       this.closeIcon.classList.add("d-none");
 
       const header = document.querySelector(".header");
+      const heroSection = document.querySelector(".project-cs-hero");
       if (header) {
-        if (isActive) {
+        if (heroSection) {
+          const heroBackgroundColor = window
+            .getComputedStyle(heroSection)
+            .backgroundColor;
+          header.style.backgroundColor = heroBackgroundColor;
+        } else {
           if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
             header.style.backgroundColor = "#1d1d1d";
           } else {
@@ -63,10 +77,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".header");
   const heroSection = document.querySelector(".project-cs-hero");
   if (header && heroSection) {
-    const heroBackgroundColor = window
-      .getComputedStyle(heroSection)
-      .backgroundColor;
-    header.style.backgroundColor = heroBackgroundColor;
+    const updateHeaderColor = () => {
+      const heroBackgroundColor = window
+        .getComputedStyle(heroSection)
+        .backgroundColor;
+      header.style.backgroundColor = heroBackgroundColor;
+    };
+    
+    // Appliquer la couleur initiale
+    updateHeaderColor();
+    
+    // Maintenir la couleur même lors du scroll
+    window.addEventListener("scroll", updateHeaderColor);
+    
+    // Observer les changements de mode dark/light
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", updateHeaderColor);
   }
 
   const skillColors = {
