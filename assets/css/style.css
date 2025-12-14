@@ -2976,7 +2976,7 @@ textarea {
     line-height: 1.7;
     color: #999;
     margin-bottom: 2rem;
-    text-align: justify;
+    text-align: left;
 }
 
 @media only screen and (max-width: 37.5em) {
