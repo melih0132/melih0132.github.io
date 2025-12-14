@@ -923,26 +923,52 @@ class ProjectFilters {
 
   initMobileAccordion() {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
-    const categoryTitles = this.filterContainer.querySelectorAll('.filter-category-title');
-    const filterButtonsRows = this.filterContainer.querySelectorAll('.filter-buttons-row');
+    
+    // Fonction pour obtenir tous les éléments à chaque fois (au cas où ils changent)
+    const getCategoryElements = () => {
+      return {
+        categoryTitles: this.filterContainer.querySelectorAll('.filter-category-title'),
+        filterButtonsRows: this.filterContainer.querySelectorAll('.filter-buttons-row')
+      };
+    };
     
     // Initialiser les attributs ARIA
-    categoryTitles.forEach((title, index) => {
-      const buttonsRow = title.nextElementSibling;
-      if (buttonsRow && buttonsRow.classList.contains('filter-buttons-row')) {
-        title.setAttribute('role', 'button');
-        title.setAttribute('aria-expanded', 'false');
-        buttonsRow.setAttribute('aria-hidden', 'true');
-      }
-    });
+    const initializeAriaAttributes = () => {
+      const { categoryTitles, filterButtonsRows } = getCategoryElements();
+      
+      categoryTitles.forEach((title) => {
+        // Chercher le filter-buttons-row qui suit directement le titre
+        let buttonsRow = title.nextElementSibling;
+        
+        // Si nextElementSibling n'est pas le bon, chercher dans le parent
+        if (!buttonsRow || !buttonsRow.classList.contains('filter-buttons-row')) {
+          const parent = title.parentElement;
+          if (parent) {
+            buttonsRow = parent.querySelector('.filter-buttons-row');
+          }
+        }
+        
+        if (buttonsRow && buttonsRow.classList.contains('filter-buttons-row')) {
+          title.setAttribute('role', 'button');
+          title.setAttribute('aria-expanded', 'false');
+          buttonsRow.setAttribute('aria-hidden', 'true');
+        }
+      });
+    };
+    
+    // Initialiser maintenant
+    initializeAriaAttributes();
     
     // Gérer le changement de media query
     const handleMediaQueryChange = (mq) => {
+      const { categoryTitles, filterButtonsRows } = getCategoryElements();
+      
       if (mq.matches) {
         // Mobile : masquer tous les panneaux par défaut
         filterButtonsRows.forEach(row => {
           row.style.maxHeight = '0';
           row.setAttribute('aria-hidden', 'true');
+          row.classList.remove('expanded');
         });
         categoryTitles.forEach(title => {
           title.setAttribute('aria-expanded', 'false');
@@ -954,6 +980,7 @@ class ProjectFilters {
         filterButtonsRows.forEach(row => {
           row.style.maxHeight = '';
           row.setAttribute('aria-hidden', 'false');
+          row.classList.remove('expanded');
         });
         categoryTitles.forEach(title => {
           title.setAttribute('aria-expanded', 'true');
@@ -987,7 +1014,15 @@ class ProjectFilters {
   
   toggleCategoryRow = (event) => {
     const title = event.currentTarget;
-    const buttonsRow = title.nextElementSibling;
+    let buttonsRow = title.nextElementSibling;
+    
+    // Si nextElementSibling n'est pas le bon, chercher dans le parent
+    if (!buttonsRow || !buttonsRow.classList.contains('filter-buttons-row')) {
+      const parent = title.parentElement;
+      if (parent) {
+        buttonsRow = parent.querySelector('.filter-buttons-row');
+      }
+    }
     
     if (!buttonsRow || !buttonsRow.classList.contains('filter-buttons-row')) {
       return;
@@ -1001,10 +1036,14 @@ class ProjectFilters {
     allRows.forEach(row => {
       if (row !== buttonsRow) {
         this.collapseFilterRow(row);
-        const otherTitle = row.previousElementSibling;
-        if (otherTitle && otherTitle.classList.contains('filter-category-title')) {
-          otherTitle.setAttribute('aria-expanded', 'false');
-          otherTitle.classList.remove('expanded');
+        // Trouver le titre associé à cette row
+        const parent = row.parentElement;
+        if (parent) {
+          const otherTitle = parent.querySelector('.filter-category-title');
+          if (otherTitle) {
+            otherTitle.setAttribute('aria-expanded', 'false');
+            otherTitle.classList.remove('expanded');
+          }
         }
       }
     });
