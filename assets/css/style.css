@@ -2891,13 +2891,13 @@ textarea {
     font-size: 2.8rem;
     border-left: 6px solid #16B364;
     padding-left: 0.7rem;
-    margin-bottom: 3rem
+    margin-bottom: 2rem
 }
 
 @media only screen and (max-width: 37.5em) {
     .project-details__content-title {
         font-size: 2.4rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         padding-left: 1rem
     }
 }
@@ -2962,12 +2962,12 @@ textarea {
 }
 
 .project-details__desc {
-    margin: 3rem 0
+    margin: 2rem 0 3rem 0
 }
 
 @media only screen and (max-width: 37.5em) {
     .project-details__desc {
-        margin: 2rem 0
+        margin: 1rem 0
     }
 }
 
