@@ -1216,15 +1216,29 @@ class ContactForm {
   }
 
   showMessage(message, type) {
+    // Supprimer l'ancien message s'il existe
+    const existingMessage = this.form.querySelector('.contact__message');
+    if (existingMessage) {
+      existingMessage.classList.add('fade-out');
+      setTimeout(() => {
+        existingMessage.remove();
+      }, 400);
+    }
+
     const messageElement = document.createElement('div');
     messageElement.className = `contact__message ${type}`;
     messageElement.textContent = message;
 
-    document.body.appendChild(messageElement);
+    // Insérer le message à la fin du formulaire (en bas à gauche)
+    this.form.appendChild(messageElement);
 
+    // Attendre un peu avant de commencer la disparition pour laisser le temps de voir le message
     setTimeout(() => {
-      messageElement.remove();
-    }, CONFIG.messageDisplayTime);
+      messageElement.classList.add('fade-out');
+      setTimeout(() => {
+        messageElement.remove();
+      }, 400);
+    }, CONFIG.messageDisplayTime - 400);
   }
 }
 
