@@ -1061,7 +1061,7 @@ textarea {
 
 .about__content-details-para {
     font-size: 1.8rem;
-    color: #777;
+    color: #555;
     line-height: 1.7;
     margin-bottom: 1rem
 }
@@ -1253,7 +1253,7 @@ textarea {
 .timeline-date {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #777;
+    color: #555;
     letter-spacing: 0.3px;
 }
 
@@ -1314,14 +1314,14 @@ textarea {
 
 .timeline-location {
     font-size: 1.3rem;
-    color: #888;
+    color: #666;
     font-weight: 500;
 }
 
 .timeline-description {
     font-size: 1.6rem;
     line-height: 1.7;
-    color: #999;
+    color: #666;
     margin: 0;
 }
 
@@ -1457,7 +1457,7 @@ textarea {
     .timeline-date {
         font-size: 1.3rem;
         font-weight: 600;
-        color: #777;
+        color: #bbb;
         letter-spacing: 0.3px;
     }
 
@@ -1498,20 +1498,20 @@ textarea {
         color: #16B364;
     }
 
-    .timeline-location {
-        font-size: 1.3rem;
-        font-weight: 500;
-        line-height: 1.4;
-        color: #888;
-    }
+        .timeline-location {
+            font-size: 1.3rem;
+            font-weight: 500;
+            line-height: 1.4;
+            color: #666;
+        }
 
-    .timeline-description {
-        font-size: 1.8rem;
-        line-height: 1.7;
-        color: #777;
-        margin: 0;
-        text-align: justify;
-    }
+        .timeline-description {
+            font-size: 1.8rem;
+            line-height: 1.7;
+            color: #666;
+            margin: 0;
+            text-align: justify;
+        }
 }
 
 /* Timeline Responsive - Small Mobile */
@@ -1573,11 +1573,12 @@ textarea {
         font-size: 1.2rem;
     }
 
-    .timeline-description {
-        font-size: 1.6rem;
-        line-height: 1.7;
-        text-align: justify;
-    }
+        .timeline-description {
+            font-size: 1.6rem;
+            line-height: 1.7;
+            color: #666;
+            text-align: justify;
+        }
 }
 
 /* Skills Section */
@@ -1891,7 +1892,7 @@ textarea {
 
 .skill-project:last-child {
     background-color: #f0f0f0;
-    color: #777;
+    color: #555;
 }
 
 /* Skill Links */
@@ -2500,7 +2501,7 @@ textarea {
 
 .tech-tag.extra {
     background-color: #f0f0f0;
-    color: #777;
+    color: #555;
 }
 
 /* Project Description */
@@ -2694,7 +2695,7 @@ textarea {
 }
 
 .contact__form-label {
-    color: #777;
+    color: #555;
     font-size: 1.4rem;
     letter-spacing: 1px;
     font-weight: 700;
@@ -2789,14 +2790,15 @@ textarea {
 }
 
 @media only screen and (max-width: 37.5em) {
-    .contact__message {
-        position: static;
-        font-size: 1.2rem;
-        margin-top: 1.6rem;
-        text-align: left;
-        max-width: 100%;
-        word-wrap: break-word;
-    }
+        .contact__message {
+            position: static;
+            font-size: 1.2rem;
+            margin-top: 1.6rem;
+            text-align: left;
+            max-width: 100%;
+            word-wrap: break-word;
+            color: #333;
+        }
 }
 
 /* ! Project CS */
@@ -2974,7 +2976,7 @@ textarea {
 .project-details__desc-para {
     font-size: 1.8rem;
     line-height: 1.7;
-    color: #999;
+    color: #666;
     margin-bottom: 2rem;
     text-align: left;
 }
@@ -2983,6 +2985,7 @@ textarea {
     .project-details__desc-para {
         font-size: 1.6rem;
         line-height: 1.6;
+        color: #666;
         margin-bottom: 1.5rem
     }
 }
@@ -3085,7 +3088,7 @@ textarea {
     margin-top: 0.8rem;
     font-weight: 400;
     letter-spacing: 0.8px;
-    color: #999;
+    color: #666;
     text-transform: none;
     font-style: italic;
 }
@@ -3121,7 +3124,7 @@ textarea {
     background: rgba(153, 153, 153, 0.2);
     border-radius: 5px;
     font-weight: 600;
-    color: #777
+    color: #555
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -3237,17 +3240,18 @@ textarea {
 .project-details__img-caption {
     margin-top: 1rem;
     font-size: 1.4rem;
-    color: #777;
+    color: #666;
     font-style: italic;
     text-align: center;
     padding: 0 1rem;
 }
 
 @media only screen and (max-width: 37.5em) {
-    .project-details__img-caption {
-        font-size: 1.3rem;
-        margin-top: 0.8rem;
-    }
+        .project-details__img-caption {
+            font-size: 1.3rem;
+            color: #666;
+            margin-top: 0.8rem;
+        }
 }
 
 /* Competence Status Box - Style minimaliste */
@@ -3269,7 +3273,7 @@ textarea {
     margin: 0.8rem 0 0 0;
     font-size: 1.4rem;
     font-weight: 400;
-    color: #999;
+    color: #666;
 }
 
 /* Statut ACQUIS - Vert */
@@ -3411,7 +3415,7 @@ textarea {
 }
 
 .resource-card__field span {
-    color: #718096;
+    color: #555;
     font-size: 1.4rem;
     margin-left: 0.5rem;
     line-height: 1.6;
@@ -3513,7 +3517,7 @@ textarea {
     margin: 0 0 1.2rem 0;
     font-size: 1.4rem;
     line-height: 1.7;
-    color: #999;
+    color: #666;
     text-align: justify;
 }
 
@@ -3526,7 +3530,7 @@ textarea {
     padding-left: 2rem;
     font-size: 1.4rem;
     line-height: 1.8;
-    color: #999;
+    color: #666;
     list-style: disc;
     list-style-position: outside;
 }
@@ -3692,7 +3696,7 @@ textarea {
 .hobby-description {
     font-size: 1.5rem;
     line-height: 1.6;
-    color: #666;
+    color: #555;
 }
 
 /* Civil Status */
@@ -3727,7 +3731,7 @@ textarea {
     }
 
     .ac-card__description {
-        color: #ccc;
+        color: #ddd;
     }
 
     .resource-card {
@@ -3740,11 +3744,11 @@ textarea {
     }
 
     .resource-card__field strong {
-        color: #ccc;
+        color: #ddd;
     }
 
     .resource-card__field span {
-        color: #aaa;
+        color: #bbb;
     }
 
     .reflection-card--challenge {
@@ -3775,11 +3779,11 @@ textarea {
     }
 
     .reflection-card__content {
-        color: #ccc;
+        color: #ddd;
     }
 
     .reflection-progress {
-        color: #ccc;
+        color: #ddd;
     }
 
     .reflection-progress strong {
@@ -3824,7 +3828,7 @@ textarea {
     }
 
     .competence-status-box p:last-child {
-        color: #ccc;
+        color: #bbb;
     }
 
     .proof-card {
@@ -3861,7 +3865,7 @@ textarea {
 
     .proof-card__section p {
         margin: 0 0 1.2rem 0;
-        color: #ccc;
+        color: #ddd;
         text-align: justify;
     }
 
@@ -3872,7 +3876,7 @@ textarea {
     .proof-card__section ul {
         margin: 0 0 1.2rem 0;
         padding-left: 2rem;
-        color: #ccc;
+        color: #ddd;
         list-style: disc;
         list-style-position: outside;
     }
@@ -3884,7 +3888,7 @@ textarea {
     .proof-card__section li {
         margin-bottom: 0.6rem;
         padding-left: 0.4rem;
-        color: #ccc;
+        color: #ddd;
         list-style: inherit;
         display: list-item;
     }
@@ -4198,9 +4202,9 @@ textarea {
         border-color: rgba(87, 134, 245, 0.4);
     }
 
-    .timeline-date {
-        color: #aaa;
-    }
+        .timeline-date {
+            color: #bbb;
+        }
 
     .timeline-title {
         background: linear-gradient(135deg, #e5e5e5 0%, #4ade80 100%);
@@ -4229,7 +4233,7 @@ textarea {
     }
 
     .timeline-location {
-        color: #888;
+        color: #bbb;
     }
 
     /* Timeline Dark Mode - Mobile */
@@ -4256,7 +4260,7 @@ textarea {
         }
 
         .timeline-date {
-            color: #aaa;
+            color: #bbb;
         }
 
         .timeline-link {
@@ -4268,12 +4272,12 @@ textarea {
         }
 
         .timeline-location {
-            color: #888;
+            color: #bbb;
         }
 
-        .timeline-description {
-            color: #ccc;
-        }
+    .timeline-description {
+        color: #ddd;
+    }
     }
 
     .skills__category-title {
@@ -4322,7 +4326,7 @@ textarea {
     }
 
     .skill-description {
-        color: #ccc;
+        color: #ddd;
     }
 
     .skill-description strong {
@@ -4371,7 +4375,7 @@ textarea {
     }
 
     .level-text {
-        color: #ccc;
+        color: #ddd;
     }
 
     .skill-project {
@@ -4381,7 +4385,7 @@ textarea {
 
     .skill-project:last-child {
         background-color: #444;
-        color: #aaa;
+        color: #bbb;
     }
 
     #projects {
@@ -4391,7 +4395,7 @@ textarea {
     .filter-btn {
         background: #262626;
         border-color: #444;
-        color: #ccc;
+        color: #ddd;
     }
 
     .filter-btn:hover {
@@ -4414,7 +4418,7 @@ textarea {
     .filter-category-tab {
         background: #262626;
         border-color: #444;
-        color: #ccc;
+        color: #ddd;
     }
 
     .filter-category-tab:hover {
@@ -4437,8 +4441,8 @@ textarea {
     .filter-category-select {
         background: #262626;
         border-color: #444;
-        color: #ccc;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ccc' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        color: #ddd;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ddd' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
     }
 
     .filter-category-select:hover {
@@ -4453,7 +4457,7 @@ textarea {
 
     .filter-category-select option {
         background: #262626;
-        color: #ccc;
+        color: #ddd;
     }
 
     .project-card {
@@ -4469,7 +4473,7 @@ textarea {
     }
 
     .project-description {
-        color: #ccc;
+        color: #ddd;
     }
 
     /* Hobbies Section Dark Mode */
@@ -4490,7 +4494,7 @@ textarea {
     }
 
     .hobby-description {
-        color: #ccc;
+        color: #ddd;
     }
 
     /* Civil Status Dark Mode */
@@ -4517,7 +4521,7 @@ textarea {
 
     .tech-tag.extra {
         background-color: #444;
-        color: #aaa;
+        color: #bbb;
     }
 
     /* GitHub Button Dark Mode */
@@ -4569,7 +4573,7 @@ textarea {
     }
     
     .project-details__img-caption {
-        color: #b0b0b0;
+        color: #ddd;
     }
 
     /* * Background pas centré */
@@ -4589,7 +4593,7 @@ textarea {
     }
 
     .contact__form-label {
-        color: #dbdbdb;
+        color: #e5e5e5;
     }
 
     .main-footer {
