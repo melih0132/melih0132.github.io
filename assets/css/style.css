@@ -451,7 +451,7 @@ textarea {
 }
 
 .header__logo-sub {
-    color: #333;
+    color: #2a2a2a;
     transition: color 0.3s ease;
     font-size: 1.8rem;
     text-transform: uppercase;
@@ -488,7 +488,7 @@ textarea {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
-    color: #333;
+    color: #2a2a2a;
     transition: all 0.3s ease;
     text-decoration: none;
     position: relative;
@@ -632,7 +632,7 @@ textarea {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(245, 245, 245, 0.95);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     visibility: hidden;
@@ -674,14 +674,14 @@ textarea {
     text-decoration: none;
     padding: 2rem 2.5rem;
     font-size: 1.5rem;
-    color: #2a2a2a;
+    color: #1a1a1a;
     text-align: right;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .header__sm-menu-link a::after {
@@ -830,7 +830,7 @@ textarea {
 }
 
 .home-hero {
-    background: linear-gradient(to right, rgba(245, 245, 245, 0.3), rgba(245, 245, 245, 0.5)), url(../../assets/svg/common-bg.svg);
+    background: linear-gradient(to right, rgba(235, 235, 235, 0.3), rgba(235, 235, 235, 0.5)), url(../../assets/svg/common-bg.svg);
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -852,7 +852,7 @@ textarea {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(240, 240, 240, 0.8);
     border-radius: 0px 15px 15px 0px;
     padding: 0.5rem;
     overflow: hidden;
@@ -977,7 +977,7 @@ textarea {
 
 /* ! About */
 #about {
-    background: #f9f9f9;
+    background: #f0f0f0;
 }
 
 .main-container-about {
@@ -1061,7 +1061,7 @@ textarea {
 
 .about__content-details-para {
     font-size: 1.8rem;
-    color: #555;
+    color: #444;
     line-height: 1.7;
     margin-bottom: 1rem
 }
@@ -1181,7 +1181,7 @@ textarea {
     transition: border-left-color 1s ease, transform 1s ease;
     position: relative;
     overflow: hidden;
-    background: #fff;
+    background: #f5f5f5;
 }
 
 .timeline-content::before {
@@ -1253,17 +1253,17 @@ textarea {
 .timeline-date {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #555;
+    color: #444;
     letter-spacing: 0.3px;
 }
 
 .timeline-title {
     font-size: 2rem;
     font-weight: 700;
-    color: #333;
+    color: #2a2a2a;
     margin-bottom: 0.8rem;
     line-height: 1.3;
-    background: linear-gradient(135deg, #333 0%, #16B364 100%);
+    background: linear-gradient(135deg, #2a2a2a 0%, #16B364 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1314,14 +1314,14 @@ textarea {
 
 .timeline-location {
     font-size: 1.3rem;
-    color: #666;
+    color: #555;
     font-weight: 500;
 }
 
 .timeline-description {
     font-size: 1.6rem;
     line-height: 1.7;
-    color: #666;
+    color: #555;
     margin: 0;
 }
 
@@ -1401,7 +1401,7 @@ textarea {
     .timeline-item {
         margin-bottom: 3rem;
         padding-bottom: 2.5rem;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid #d0d0d0;
     }
 
     .timeline-item:last-child {
@@ -1461,15 +1461,15 @@ textarea {
         letter-spacing: 0.3px;
     }
 
-    .timeline-title {
+        .timeline-title {
         font-size: 2rem;
         font-weight: 700;
         margin-bottom: 1rem;
         line-height: 1.3;
-        color: #333;
+        color: #2a2a2a;
         background: none;
         -webkit-background-clip: unset;
-        -webkit-text-fill-color: #333;
+        -webkit-text-fill-color: #2a2a2a;
         background-clip: unset;
         border-left: 4px solid #16B364;
         padding-left: 1rem;
@@ -1479,9 +1479,9 @@ textarea {
     .timeline-item:hover .timeline-title {
         background: none;
         -webkit-background-clip: unset;
-        -webkit-text-fill-color: #333;
+        -webkit-text-fill-color: #2a2a2a;
         background-clip: unset;
-        color: #333;
+        color: #2a2a2a;
     }
 
     .timeline-company {
@@ -1502,13 +1502,13 @@ textarea {
             font-size: 1.3rem;
             font-weight: 500;
             line-height: 1.4;
-            color: #666;
+            color: #555;
         }
 
         .timeline-description {
             font-size: 1.8rem;
             line-height: 1.7;
-            color: #666;
+            color: #555;
             margin: 0;
             text-align: justify;
         }
@@ -1596,7 +1596,7 @@ textarea {
 .skills__category-title {
     font-size: 1.8rem;
     font-weight: 700;
-    color: black;
+    color: #1a1a1a;
     margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -1604,16 +1604,16 @@ textarea {
     padding-left: 0.5rem;
 }
 
-@media only screen and (max-width: 37.5em) {
-    .skills__category-title {
-        background-color: #fff;
-        color: #16B364;
-        padding: 1.5rem;
-        border-radius: 8px;
-        width: 100%;
-        border-left: none;
+    @media only screen and (max-width: 37.5em) {
+        .skills__category-title {
+            background-color: #f5f5f5;
+            color: #16B364;
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 100%;
+            border-left: none;
+        }
     }
-}
 
 .skills__skill-row {
     display: flex;
@@ -1709,7 +1709,7 @@ textarea {
 
 /* Skills Section */
 #skills {
-    background: #f9f9f9;
+    background: #f0f0f0;
 }
 
 /* Skills Grid Container */
@@ -1778,7 +1778,7 @@ textarea {
 
 /* Skill Card */
 .skill-card {
-    background: #fff;
+    background: #f5f5f5;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -1799,12 +1799,12 @@ textarea {
 
 .skill-card:hover {
     transform: translateY(-5px);
-    background: #fafafa;
+    background: #eeeeee;
 }
 
 .skill-card.active {
     transform: translateY(-5px);
-    background: #fafafa;
+    background: #eeeeee;
     max-height: 500px;
 }
 
@@ -1820,7 +1820,7 @@ textarea {
 .skill-title {
     font-size: 2.4rem;
     margin-bottom: 1.5rem;
-    color: #333;
+    color: #2a2a2a;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     position: relative;
@@ -1861,7 +1861,7 @@ textarea {
 
 /* Skill Description */
 .skill-description {
-    color: #444;
+    color: #3a3a3a;
     font-size: 1.6rem;
     line-height: 1.7;
     margin-bottom: 2rem;
@@ -1870,7 +1870,7 @@ textarea {
 }
 
 .skill-description strong {
-    color: #333;
+    color: #2a2a2a;
 }
 
 /* Skill Projects */
@@ -1962,7 +1962,7 @@ textarea {
 /* Skill Levels Dropdown */
 .skill-levels-dropdown {
     position: relative;
-    background: #f8f9fa;
+    background: #eeeeee;
     border-radius: 0 0 12px 12px;
     opacity: 0;
     visibility: hidden;
@@ -1970,7 +1970,7 @@ textarea {
     overflow: hidden;
     transition: all 0.3s ease;
     z-index: 10;
-    border-top: 1px solid #e9ecef;
+    border-top: 1px solid #d5d5d5;
     margin-top: 0;
     padding: 0;
 }
@@ -2027,7 +2027,7 @@ textarea {
 .level-text {
     font-size: 1.4rem;
     font-weight: 500;
-    color: #333;
+    color: #2a2a2a;
     line-height: 1.4;
     flex: 1;
     margin: 0;
@@ -2035,7 +2035,7 @@ textarea {
 
 /* Projects Section */
 #projects {
-    background: #f5f5f5;
+    background: #eeeeee;
     padding-bottom: 6rem;
 }
 
@@ -2076,12 +2076,12 @@ textarea {
 
 .filter-category-tab {
     padding: 1rem 2rem;
-    background: #fff;
-    border: 2px solid #e0e0e0;
+    background: #f5f5f5;
+    border: 2px solid #d0d0d0;
     border-radius: 8px;
     font-size: 1.6rem;
     font-weight: 600;
-    color: #333;
+    color: #2a2a2a;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -2098,7 +2098,7 @@ textarea {
 }
 
 .filter-category-tab:hover {
-    background: #f0f0f0;
+    background: #e8e8e8;
     border-color: #16B364;
     color: #16B364;
     transform: translateY(-2px);
@@ -2142,7 +2142,7 @@ textarea {
     display: none;
     font-size: 1.8rem;
     font-weight: 700;
-    color: black;
+    color: #1a1a1a;
     margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -2172,12 +2172,12 @@ textarea {
 
 .filter-btn {
     padding: 1rem 2rem;
-    background: #fff;
-    border: 2px solid #e0e0e0;
+    background: #f5f5f5;
+    border: 2px solid #d0d0d0;
     border-radius: 8px;
     font-size: 1.6rem;
     font-weight: 600;
-    color: #333;
+    color: #2a2a2a;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -2194,7 +2194,7 @@ textarea {
 }
 
 .filter-btn:hover {
-    background: #f0f0f0;
+    background: #e8e8e8;
     border-color: #16B364;
     color: #16B364;
     transform: translateY(-2px);
@@ -2225,19 +2225,19 @@ textarea {
 .filter-category-select {
     width: 100%;
     padding: 1rem 1.5rem;
-    background: #fff;
-    border: 2px solid #e0e0e0;
+    background: #f5f5f5;
+    border: 2px solid #d0d0d0;
     border-radius: 12px;
     font-size: 1.4rem;
     font-weight: 600;
-    color: #333;
+    color: #2a2a2a;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: "Oswald", sans-serif;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232a2a2a' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1.5rem center;
     background-size: 12px;
@@ -2246,7 +2246,7 @@ textarea {
 
 .filter-category-select:hover {
     border-color: #16B364;
-    background-color: #f0f0f0;
+    background-color: #e8e8e8;
 }
 
 .filter-category-select:focus {
@@ -2302,7 +2302,7 @@ textarea {
     /* Afficher les titres de catégories sur mobile */
     .filter-category-title {
         display: block !important;
-        background-color: #fff;
+        background-color: #f5f5f5;
         color: #16B364;
         padding: 1.5rem;
         border-radius: 8px;
@@ -2450,7 +2450,7 @@ textarea {
 
 /* Project Card */
 .project-card {
-    background: #fff;
+    background: #f5f5f5;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -2462,7 +2462,7 @@ textarea {
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-    background: #fafafa;
+    background: #eeeeee;
 }
 
 /* Project Info */
@@ -2476,7 +2476,7 @@ textarea {
 .project-title {
     font-size: 2.4rem;
     margin-bottom: 1.5rem;
-    color: #333;
+    color: #2a2a2a;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     position: relative;
@@ -2506,7 +2506,7 @@ textarea {
 
 /* Project Description */
 .project-description {
-    color: #444;
+    color: #3a3a3a;
     font-size: 1.6rem;
     line-height: 1.7;
     margin-bottom: 2.5rem;
@@ -2515,7 +2515,7 @@ textarea {
 }
 
 .project-description strong {
-    color: #333;
+    color: #2a2a2a;
 }
 
 /* Project Links */
@@ -2575,7 +2575,7 @@ textarea {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    background: #fff;
+    background: #f5f5f5;
     color: #16B364;
     border: 2px solid #16B364;
     min-height: 200px;
@@ -2586,7 +2586,7 @@ textarea {
 .projects__btn-container .btn:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-    background: #fafafa;
+    background: #eeeeee;
     border-color: #14a357;
     color: #14a357;
 }
@@ -2662,7 +2662,7 @@ textarea {
 
 /* ! Contact */
 .contact {
-    background: linear-gradient(to right, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5)), url(../../assets/svg/common-bg.svg);
+    background: linear-gradient(to right, rgba(235, 235, 235, 0.5), rgba(235, 235, 235, 0.5)), url(../../assets/svg/common-bg.svg);
     background-size: cover;
 }
 
@@ -2674,7 +2674,7 @@ textarea {
 
 .contact__form-container {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(245, 245, 245, 0.7);
     padding: 3.2rem;
     margin-top: 4.8rem;
     max-width: 64rem;
@@ -2695,7 +2695,7 @@ textarea {
 }
 
 .contact__form-label {
-    color: #555;
+    color: #444;
     font-size: 1.4rem;
     letter-spacing: 1px;
     font-weight: 700;
@@ -2705,10 +2705,11 @@ textarea {
 }
 
 .contact__form-input {
-    color: #333;
+    color: #2a2a2a;
     padding: 1.6rem;
     width: 100%;
-    border: 1px solid #ebebeb;
+    border: 1px solid #d5d5d5;
+    background: #fafafa;
     font-size: 1.28rem;
     letter-spacing: 0px;
     border-radius: 5px;
@@ -2716,9 +2717,11 @@ textarea {
 }
 
 .contact__form-select {
-    color: #333;
+    color: #2a2a2a;
     padding: 1.6rem;
     width: 100%;
+    background: #fafafa;
+    border: 1px solid #d5d5d5;
     font-size: 1.28rem;
     letter-spacing: 0px;
     border-radius: 5px;
@@ -2855,7 +2858,7 @@ textarea {
 }
 
 .project-details {
-    background: linear-gradient(to right, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5)), url(../../assets/svg/common-bg.svg);
+    background: linear-gradient(to right, rgba(235, 235, 235, 0.5), rgba(235, 235, 235, 0.5)), url(../../assets/svg/common-bg.svg);
     background-size: cover;
     background-position: center
 }
@@ -2945,7 +2948,7 @@ textarea {
     display: block;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
     object-fit: cover;
-    background: #f5f5f5;
+    background: #eeeeee;
 }
 
 .project-details__content-main {
@@ -2976,7 +2979,7 @@ textarea {
 .project-details__desc-para {
     font-size: 1.8rem;
     line-height: 1.7;
-    color: #666;
+    color: #555;
     margin-bottom: 2rem;
     text-align: left;
 }
@@ -3088,7 +3091,7 @@ textarea {
     margin-top: 0.8rem;
     font-weight: 400;
     letter-spacing: 0.8px;
-    color: #666;
+    color: #555;
     text-transform: none;
     font-style: italic;
 }
@@ -3124,7 +3127,7 @@ textarea {
     background: rgba(153, 153, 153, 0.2);
     border-radius: 5px;
     font-weight: 600;
-    color: #555
+    color: #444
 }
 
 @media only screen and (max-width: 37.5em) {
@@ -3197,7 +3200,7 @@ textarea {
 
 .project-details__feature-item {
     padding: 2rem;
-    background: rgba(245, 245, 245, 0.5);
+    background: rgba(235, 235, 235, 0.5);
     border-radius: 12px;
     border-left: 4px solid #16B364;
     transition: all 1s ease;
@@ -3206,13 +3209,13 @@ textarea {
 .project-details__feature-item:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    background: rgba(245, 245, 245, 0.8);
+    background: rgba(235, 235, 235, 0.8);
 }
 
 .project-details__feature-title {
     font-size: 2rem;
     font-weight: 700;
-    color: #333;
+    color: #2a2a2a;
     margin-bottom: 1rem;
     letter-spacing: 0.3px;
 }
@@ -3240,7 +3243,7 @@ textarea {
 .project-details__img-caption {
     margin-top: 1rem;
     font-size: 1.4rem;
-    color: #666;
+    color: #555;
     font-style: italic;
     text-align: center;
     padding: 0 1rem;
@@ -3266,14 +3269,14 @@ textarea {
     margin: 0;
     font-size: 1.6rem;
     font-weight: 600;
-    color: #333;
+    color: #2a2a2a;
 }
 
 .competence-status-box p:last-child {
     margin: 0.8rem 0 0 0;
     font-size: 1.4rem;
     font-weight: 400;
-    color: #666;
+    color: #555;
 }
 
 /* Statut ACQUIS - Vert */
@@ -3324,7 +3327,7 @@ textarea {
 }
 
 .ac-card {
-    background: #f8f9fa;
+    background: #eeeeee;
     border-left: 4px solid #16B364;
     padding: 2rem;
     border-radius: 4px;
@@ -3346,12 +3349,12 @@ textarea {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #2d3748;
+    color: #1a1a1a;
 }
 
 .ac-card__description {
     font-size: 1.4rem;
-    color: #4a5568;
+    color: #3a3a3a;
     line-height: 1.6;
 }
 
@@ -3364,8 +3367,8 @@ textarea {
 }
 
 .resource-card {
-    background: #f8f9fa;
-    border: 1px solid #e2e8f0;
+    background: #eeeeee;
+    border: 1px solid #d0d0d0;
     border-radius: 8px;
     padding: 2rem;
     padding-right: 10%;
@@ -3385,7 +3388,7 @@ textarea {
 .resource-card__title {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #2d3748;
+    color: #1a1a1a;
     margin-bottom: 0;
     flex: 1;
     padding-right: 1rem;
@@ -3410,12 +3413,12 @@ textarea {
 }
 
 .resource-card__field strong {
-    color: #4a5568;
+    color: #3a3a3a;
     font-size: 1.4rem;
 }
 
 .resource-card__field span {
-    color: #555;
+    color: #444;
     font-size: 1.4rem;
     margin-left: 0.5rem;
     line-height: 1.6;
@@ -3448,7 +3451,7 @@ textarea {
 .proof-card {
     background: transparent;
     border: none;
-    border-left: 3px solid #e2e8f0;
+    border-left: 3px solid #d0d0d0;
     padding: 0;
     border-radius: 0;
     margin: 3rem 0;
@@ -3471,8 +3474,8 @@ textarea {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    color: #333;
-    border-bottom: 2px solid #e2e8f0;
+    color: #2a2a2a;
+    border-bottom: 2px solid #d0d0d0;
     padding-bottom: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -3489,7 +3492,7 @@ textarea {
     border-radius: 0;
     margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .proof-card__section:last-child {
@@ -3517,7 +3520,7 @@ textarea {
     margin: 0 0 1.2rem 0;
     font-size: 1.4rem;
     line-height: 1.7;
-    color: #666;
+    color: #555;
     text-align: justify;
 }
 
@@ -3530,7 +3533,7 @@ textarea {
     padding-left: 2rem;
     font-size: 1.4rem;
     line-height: 1.8;
-    color: #666;
+    color: #555;
     list-style: disc;
     list-style-position: outside;
 }
@@ -3635,7 +3638,7 @@ textarea {
 .reflection-card__content {
     margin: 0;
     font-size: 1.4rem;
-    color: #4a5568;
+    color: #3a3a3a;
     line-height: 1.7;
 }
 
@@ -3643,7 +3646,7 @@ textarea {
     margin-top: 2rem;
     padding: 0;
     font-size: 1.4rem;
-    color: #4a5568;
+    color: #3a3a3a;
     line-height: 1.7;
 }
 
@@ -3657,7 +3660,7 @@ textarea {
 
 /* Hobbies Section */
 .hobbies {
-    background-color: #f8f9fa;
+    background-color: #eeeeee;
 }
 
 .hobbies__content {
@@ -3672,7 +3675,7 @@ textarea {
 }
 
 .hobby-card {
-    background: #fff;
+    background: #f5f5f5;
     border-radius: 12px;
     padding: 3rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -3683,25 +3686,25 @@ textarea {
 .hobby-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-    background: #fafafa;
+    background: #eeeeee;
 }
 
 .hobby-title {
     font-size: 2rem;
     font-weight: 600;
-    color: #333;
+    color: #2a2a2a;
     margin-bottom: 1.5rem;
 }
 
 .hobby-description {
     font-size: 1.5rem;
     line-height: 1.6;
-    color: #555;
+    color: #444;
 }
 
 /* Civil Status */
 .civil-status {
-    background: #fff;
+    background: #f5f5f5;
     border-radius: 12px;
     padding: 2.5rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -3711,7 +3714,7 @@ textarea {
 .civil-status p {
     font-size: 1.6rem;
     line-height: 2;
-    color: #333;
+    color: #2a2a2a;
 }
 
 .civil-status strong {
@@ -3976,7 +3979,7 @@ textarea {
 
 .main-footer__short-desc {
     margin-top: 1rem;
-    color: #333;
+    color: #2a2a2a;
     font-size: 1.5rem;
     line-height: 1.7
 }
