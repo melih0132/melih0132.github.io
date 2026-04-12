@@ -185,7 +185,20 @@ document.addEventListener("DOMContentLoaded", () => {
     jQuery: "#0769AD",
     MongoDB: "#47A248",
     "PL/pgSQL": "#336791",
-    Canva: "#00C4CC"
+    Canva: "#00C4CC",
+    Kotlin: "#7F52FF",
+    "Jetpack Compose": "#4284F3",
+    "Raspberry Pi": "#C51A4A",
+    "Z-Wave": "#0B5E8C",
+    Gradle: "#02303A",
+    "Android Studio": "#073042",
+    Vite: "#646CFF",
+    Zustand: "#27272a",
+    "Express.js": "#4B8BBE",
+    iOS: "#000000",
+    Android: "#166534",
+    Flask: "#000000",
+    Django: "#092E20"
   };
 
   document.querySelectorAll(".skills__skill").forEach(skill => {

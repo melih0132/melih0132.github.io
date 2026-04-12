@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-  <title>Melih Cetinkaya | SmartHome Lite</title>
+  <title>Melih Cetinkaya | SmartHome Lite With FastAPI</title>
   <link rel="icon" href="/assets/png/logo.png" type="image/png">
 </head>
 
@@ -68,68 +68,100 @@
       <h1 class="heading-primary"><strong>SmartHome Lite</strong></h1>
       <div class="project-cs-hero__info">
         <p class="text-primary">
-          Distributed smart-home portfolio: web and mobile control of lights and sockets,
-          <strong>Z-Wave</strong> presence sensing, <strong>IF-THEN</strong> rules, ambient-based dimming and
-          <strong>ML</strong> on the backend. Main repository:
-          <a href="https://github.com/melih0132/smarthome-lite" target="_blank" rel="noreferrer">smarthome-lite</a>.
+          Distributed smart home with <strong>FastAPI</strong>, <strong>Next.js</strong> and <strong>Kotlin</strong> /
+          <strong>Jetpack Compose</strong>, <strong>Z-Wave</strong> sensors and <strong>ML</strong> pipelines. SAE BUT3 FA coursework.
         </p>
       </div>
       <div class="project-cs-hero__cta">
         <a href="https://github.com/melih0132/smarthome-lite" class="btn btn--bg" target="_blank"
-          rel="noreferrer"><strong>Main repository</strong></a>
+          rel="noreferrer"><strong>View on GitHub</strong></a>
       </div>
     </div>
   </section>
-
   <section class="project-details">
     <div class="main-container">
       <div class="project-details__content">
         <div class="project-details__content-main">
 
+          <!-- Section: Project Overview -->
           <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Overview</strong></h2>
+            <h2 class="project-details__content-title"><strong>Project Overview</strong></h2>
             <div class="project-details__desc">
               <p class="project-details__desc-para">
-                The <strong>big-projects/smarthome-lite</strong> folder in
-                <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">all-my-projects</a>
-                redirects to the dedicated repo. The stack includes <strong>PostgreSQL</strong>
-                (relational and time-series data), <strong>FastAPI</strong> (SQLAlchemy, JWT),
-                <strong>Next.js</strong> (App Router, TypeScript, Tailwind), a <strong>Kotlin / Jetpack Compose</strong>
-                Android app, and a <strong>Raspberry Pi</strong> edge with a Flask API and <strong>Z-Wave JS UI</strong>.
+                The <strong>SmartHome Lite</strong> project is a distributed smart-home system built with
+                <strong>FastAPI</strong>, <strong>SQLAlchemy</strong> and <strong>PostgreSQL</strong> (relational data and
+                time series via the <strong>TimescaleDB</strong> extension), a <strong>Next.js</strong> UI (App Router,
+                TypeScript, <strong>Tailwind CSS</strong>) and an Android app in <strong>Kotlin</strong> with
+                <strong>Jetpack Compose</strong>. It covers <strong>lights</strong> and <strong>sockets</strong>,
+                <strong>automation rules</strong>, <strong>presence detection</strong> and <strong>smart dimming</strong>.
+              </p>
+              <p class="project-details__desc-para">
+                The project also includes <strong>JWT authentication</strong>, password hashing with <strong>bcrypt</strong>,
+                <strong>Pydantic</strong> validation and a <strong>Raspberry Pi</strong> node running a <strong>Flask</strong> API
+                and <strong>Z-Wave JS UI</strong>. The <strong>big-projects/smarthome-lite</strong> folder in the
+                <strong>all-my-projects</strong> GitHub repository points to this dedicated repo.
+              </p>
+              <p class="project-details__desc-para">
+                The system is designed to deliver a <strong>smooth user experience</strong> on web and mobile, with
+                <strong>automated tests</strong> (Pytest), presence and luminance charts, and detailed documentation
+                (README).
               </p>
             </div>
           </div>
 
+          <!-- Section: Main Features -->
           <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Features</strong></h2>
+            <h2 class="project-details__content-title"><strong>Main Features</strong></h2>
             <div class="project-details__features">
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Control and automation</h3>
+                <h3 class="project-details__feature-title">Device management and dashboard</h3>
                 <p class="project-details__desc-para">
-                  Manual control of lights and sockets, a rule engine and predefined scenarios.
+                  ON/OFF and brightness control for lights, socket management and a centralized equipment view on web and mobile.
                 </p>
               </div>
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Sensors and history</h3>
+                <h3 class="project-details__feature-title">Presence detection and history</h3>
                 <p class="project-details__desc-para">
-                  Presence (e.g. MultiSensor 7), history and dashboards for presence and luminosity.
+                  Z-Wave sensor (e.g. MultiSensor 7), events pushed to the backend and historical data for analytics and rules.
                 </p>
               </div>
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Machine learning</h3>
+                <h3 class="project-details__feature-title">IF-THEN engine and scenarios</h3>
                 <p class="project-details__desc-para">
-                  Scenario classification and intensity prediction with ML models (pandas, NumPy).
+                  Rule CRUD, automatic evaluation and predefined scenarios to chain conditions and actions.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Machine learning and smart dimming</h3>
+                <p class="project-details__desc-para">
+                  Scenario classification, intensity regression, user-habit clustering (documented path) and adaptation to ambient light.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Visualization and monitoring</h3>
+                <p class="project-details__desc-para">
+                  Presence and luminance charts, measurement tracking and automatic adjustment history on the Next.js dashboard and Android app.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Raspberry Pi gateway and Z-Wave</h3>
+                <p class="project-details__desc-para">
+                  Local Flask API, Z-Wave JS UI integration (Socket.IO / WebSocket) and an HTTP contract aligned with the backend to drive radio nodes.
                 </p>
               </div>
             </div>
           </div>
 
+          <!-- Section: Technologies Used -->
           <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Technologies</strong></h2>
+            <h2 class="project-details__content-title"><strong>Technologies Used</strong></h2>
             <div class="project-details__tools-used">
               <div class="skills__projects">
-                <div class="skills__skill"><strong>PostgreSQL</strong></div>
+                <div class="skills__skill"><strong>Python</strong></div>
                 <div class="skills__skill"><strong>FastAPI</strong></div>
+                <div class="skills__skill"><strong>Flask</strong></div>
+                <div class="skills__skill"><strong>PostgreSQL</strong></div>
+                <div class="skills__skill"><strong>SQLAlchemy</strong></div>
                 <div class="skills__skill"><strong>Next.js</strong></div>
                 <div class="skills__skill"><strong>React</strong></div>
                 <div class="skills__skill"><strong>TypeScript</strong></div>
@@ -138,22 +170,20 @@
                 <div class="skills__skill"><strong>Jetpack Compose</strong></div>
                 <div class="skills__skill"><strong>Raspberry Pi</strong></div>
                 <div class="skills__skill"><strong>Z-Wave</strong></div>
+                <div class="skills__skill"><strong>VS Code</strong></div>
                 <div class="skills__skill"><strong>Git</strong></div>
                 <div class="skills__skill"><strong>GitHub</strong></div>
               </div>
             </div>
           </div>
 
+          <!-- Section: Explore the Project -->
           <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Links</strong></h2>
+            <h2 class="project-details__content-title"><strong>Explore the Project</strong></h2>
             <div class="project-details__links">
               <a href="https://github.com/melih0132/smarthome-lite"
                 class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>SmartHome Lite repository</strong>
-              </a>
-              <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/smarthome-lite"
-                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>Monorepo entry</strong>
+                <strong>View on GitHub</strong>
               </a>
               <a href="/en/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
                 <strong>Back to projects</strong>

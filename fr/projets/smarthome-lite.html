@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-  <title>Melih Cetinkaya | SmartHome Lite</title>
+  <title>Melih Cetinkaya | SmartHome Lite Avec FastAPI</title>
   <link rel="icon" href="/assets/png/logo.png" type="image/png">
 </head>
 
@@ -68,69 +68,102 @@
       <h1 class="heading-primary"><strong>SmartHome Lite</strong></h1>
       <div class="project-cs-hero__info">
         <p class="text-primary">
-          Vitrine domotique distribuée : éclairage et prises pilotés depuis le web et le mobile, détection de présence
-          <strong>Z-Wave</strong>, règles <strong>IF-THEN</strong>, assombrissement selon la luminosité ambiante, et
-          <strong>ML</strong> côté serveur. Dépôt principal sur
-          <a href="https://github.com/melih0132/smarthome-lite" target="_blank" rel="noreferrer">smarthome-lite</a>.
+          Domotique distribuée avec <strong>FastAPI</strong>, <strong>Next.js</strong> et <strong>Kotlin</strong> /
+          <strong>Jetpack Compose</strong>, capteurs <strong>Z-Wave</strong> et pipelines <strong>ML</strong>. SAE BUT3 FA.
         </p>
       </div>
       <div class="project-cs-hero__cta">
         <a href="https://github.com/melih0132/smarthome-lite" class="btn btn--bg" target="_blank"
-          rel="noreferrer"><strong>Dépôt principal</strong></a>
+          rel="noreferrer"><strong>Voir sur GitHub</strong></a>
       </div>
     </div>
   </section>
-
   <section class="project-details">
     <div class="main-container">
       <div class="project-details__content">
         <div class="project-details__content-main">
 
+          <!-- Section: Aperçu du projet -->
           <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Aperçu</strong></h2>
+            <h2 class="project-details__content-title"><strong>Aperçu du projet</strong></h2>
             <div class="project-details__desc">
+
               <p class="project-details__desc-para">
-                Le dossier <strong>big-projects/smarthome-lite</strong> du monorepo
-                <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">all-my-projects</a>
-                renvoie vers le dépôt dédié. Le projet couvre une stack complète : <strong>PostgreSQL</strong>
-                (données et séries temporelles), <strong>FastAPI</strong> (SQLAlchemy, JWT),
-                interface <strong>Next.js</strong> (App Router, TypeScript, Tailwind), application mobile
-                <strong>Kotlin / Jetpack Compose</strong>, bord <strong>Raspberry Pi</strong> avec API Flask et
-                <strong>Z-Wave JS UI</strong>.
+                Le projet <strong>SmartHome Lite</strong> est un système domotique distribué développé avec
+                <strong>FastAPI</strong>, <strong>SQLAlchemy</strong> et <strong>PostgreSQL</strong> (données relationnelles
+                et séries temporelles via <strong>TimescaleDB</strong>), une interface <strong>Next.js</strong> (App Router,
+                TypeScript, <strong>Tailwind CSS</strong>) et une application mobile <strong>Kotlin</strong> avec
+                <strong>Jetpack Compose</strong>. Il couvre le contrôle des <strong>lampes</strong> et <strong>prises</strong>,
+                les <strong>règles d'automatisation</strong>, la <strong>détection de présence</strong> et le <strong>smart dimming</strong>.
+              </p>
+
+              <p class="project-details__desc-para">
+                Ce projet intègre une <strong>authentification JWT</strong>, le hachage des mots de passe (<strong>bcrypt</strong>),
+                la validation <strong>Pydantic</strong> et un nœud <strong>Raspberry Pi</strong> avec API <strong>Flask</strong>
+                et <strong>Z-Wave JS UI</strong>. L'entrée <strong>big-projects/smarthome-lite</strong> du dépôt
+                <strong>all-my-projects</strong> sur GitHub renvoie vers ce dépôt dédié.
+              </p>
+              <p class="project-details__desc-para">
+                Le système est conçu pour une <strong>expérience utilisateur</strong> fluide sur le web et le mobile, avec des
+                <strong>tests automatisés</strong> (Pytest), des graphiques de présence et de luminosité, et une documentation
+                détaillée (README et documentation).
               </p>
             </div>
           </div>
 
+          <!-- Section: Fonctionnalités principales -->
           <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Fonctionnalités</strong></h2>
+            <h2 class="project-details__content-title"><strong>Fonctionnalités principales</strong></h2>
             <div class="project-details__features">
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Contrôle et scénarios</h3>
+                <h3 class="project-details__feature-title">Gestion des appareils et tableau de bord</h3>
                 <p class="project-details__desc-para">
-                  Commande manuelle des lumières et prises, moteur de règles et scénarios prédéfinis.
+                  Contrôle ON/OFF et luminosité des lampes, gestion des prises et vue centralisée des équipements depuis le web et le mobile.
                 </p>
               </div>
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Capteurs et historique</h3>
+                <h3 class="project-details__feature-title">Détection de présence et historique</h3>
                 <p class="project-details__desc-para">
-                  Présence (ex. MultiSensor 7), historique et tableaux de bord (présence, luminosité).
+                  Capteur Z-Wave (ex. MultiSensor 7), remontée des événements vers le backend et historique pour analyse et règles.
                 </p>
               </div>
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Intelligence</h3>
+                <h3 class="project-details__feature-title">Moteur IF-THEN et scénarios</h3>
                 <p class="project-details__desc-para">
-                  Classification de scénarios et prédiction d'intensité avec des modèles ML (pandas, NumPy).
+                  CRUD des règles, évaluation automatique et scénarios prédéfinis pour enchaîner actions et conditions.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Intelligence artificielle et smart dimming</h3>
+                <p class="project-details__desc-para">
+                  Classification de scénarios, régression pour l'intensité, clustering des habitudes (parcours documenté) et adaptation à la luminosité ambiante.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Visualisation et supervision</h3>
+                <p class="project-details__desc-para">
+                  Graphiques de présence et de luminosité, suivi des mesures et des ajustements automatiques sur le dashboard Next.js et l'app Android.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Passerelle Raspberry Pi et Z-Wave</h3>
+                <p class="project-details__desc-para">
+                  API Flask locale, intégration Z-Wave JS UI (Socket.IO / WebSocket) et contrat HTTP aligné avec le backend pour piloter les nœuds radio.
                 </p>
               </div>
             </div>
           </div>
 
+          <!-- Section: Technologies utilisées -->
           <div class="project-details__section">
             <h2 class="project-details__content-title"><strong>Technologies utilisées</strong></h2>
             <div class="project-details__tools-used">
               <div class="skills__projects">
-                <div class="skills__skill"><strong>PostgreSQL</strong></div>
+                <div class="skills__skill"><strong>Python</strong></div>
                 <div class="skills__skill"><strong>FastAPI</strong></div>
+                <div class="skills__skill"><strong>Flask</strong></div>
+                <div class="skills__skill"><strong>PostgreSQL</strong></div>
+                <div class="skills__skill"><strong>SQLAlchemy</strong></div>
                 <div class="skills__skill"><strong>Next.js</strong></div>
                 <div class="skills__skill"><strong>React</strong></div>
                 <div class="skills__skill"><strong>TypeScript</strong></div>
@@ -139,22 +172,20 @@
                 <div class="skills__skill"><strong>Jetpack Compose</strong></div>
                 <div class="skills__skill"><strong>Raspberry Pi</strong></div>
                 <div class="skills__skill"><strong>Z-Wave</strong></div>
+                <div class="skills__skill"><strong>VS Code</strong></div>
                 <div class="skills__skill"><strong>Git</strong></div>
                 <div class="skills__skill"><strong>GitHub</strong></div>
               </div>
             </div>
           </div>
 
+          <!-- Section: Liens du projet -->
           <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Liens</strong></h2>
+            <h2 class="project-details__content-title"><strong>Explorer le projet</strong></h2>
             <div class="project-details__links">
               <a href="https://github.com/melih0132/smarthome-lite"
                 class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>Dépôt SmartHome Lite</strong>
-              </a>
-              <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/smarthome-lite"
-                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>Entrée monorepo</strong>
+                <strong>Voir sur GitHub</strong>
               </a>
               <a href="/fr/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
                 <strong>Retour aux projets</strong>
