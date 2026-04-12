@@ -1313,6 +1313,8 @@ textarea {
     width: 100%;
     max-width: none;
     min-width: 0;
+    position: relative;
+    z-index: 20;
 }
 
 .projects-filters-search__inner {
@@ -1421,8 +1423,6 @@ textarea {
     width: 100%;
     max-width: none;
     margin-top: 1rem;
-    position: relative;
-    z-index: 1;
 }
 
 .projects-filters-chip {
