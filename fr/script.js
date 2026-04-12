@@ -86,14 +86,6 @@ const CONFIG = {
     "HTTP": "#0052CC",
     "Agile/Scrum": "#A0CE4E"
   },
-  techCategories: {
-    "Langages": ["HTML", "CSS", "JavaScript", "TypeScript", "PHP", "Python", "C#", ".NET", ".NET Core", ".NET/C#", "C# (.NET)", "Swift", "Kotlin", "Dart", "SQL", "PL/pgSQL", "Bash", "XAML"],
-    "Frameworks & Bibliothèques": ["Laravel", "Node.js", "Express", "Express.js", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "Tailwind CSS", "FastAPI", "Flask", "ASP.NET Core", ".NET Core", "Flutter", "UIKit", "WPF", "WinUI 3", "Tkinter", "Phaser", "Socket.io", "SQLAlchemy", "Alembic", "Pytest", "Nodemon", "iOS", "Android", "OpenAI", "Jetpack Compose", "Vite", "Zustand"],
-    "Bases de Données": ["PostgreSQL", "SQLite", "MongoDB", "JSON / JSONB", "pgAdmin4"],
-    "Outils & Environnement": ["VS Code", "Visual Studio", "Xcode", "Unity", "Git", "GitHub", "Docker", "Nginx", "Apache", "Linux", "Postman", "Swagger", "pgAdmin4", "Microsoft Azure", "Visual Paradigm", "Excel", "Power BI", "PowerAMC", "Trello", "Microsoft Teams", "Raspberry Pi", "Z-Wave", "Gradle", "Android Studio"],
-    "Design & CMS": ["Figma", "Framer", "Adobe Illustrator", "Canva", "WordPress", "3D Modeling"],
-    "Méthodologies & Concepts": ["UML", "MVC", "OOP", "Design Patterns", "CRUD", "Tests Unitaires", "HTTP", "RESTful API", "Web Service", "WebSockets", "Agile", "Scrum", "JWT"]
-  },
   projectFilterUi: {
     searchPlaceholder: "Rechercher une technologie…",
     searchAriaLabel: "Filtrer les projets par technologie",
@@ -713,9 +705,6 @@ class ProjectFilters {
       'C# (.NET)': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
       'React': ['React', 'React 19']
     };
-    
-    // Technologies à exclure des filtres
-    this.excludedTechs = ['pgAdmin4', 'pgAdmin', 'Express', 'Nodemon', 'Socket.io', 'PowerAMC', 'Visual Paradigm', 'OOP'];
     
     if (this.projectCards.length === 0 || !this.filterContainer) {
       return;

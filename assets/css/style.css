@@ -104,9 +104,9 @@ textarea {
 
 /* * Containers */
 .main-container {
-    max-width: 120rem;
+    max-width: 130rem;
     margin: 0 auto;
-    width: 92%;
+    width: 94%;
     padding: 0 2rem;
     box-sizing: border-box;
 }
@@ -981,9 +981,9 @@ textarea {
 }
 
 .main-container-about {
-    max-width: 120rem;
+    max-width: 130rem;
     margin: 0 auto;
-    width: 92%;
+    width: 94%;
     padding: 0 2rem;
     box-sizing: border-box;
 }
@@ -1535,10 +1535,46 @@ textarea {
         font-size: 1.4rem;
     }
 
-    .filter-btn {
-        width: 100%;
+    .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(1.4rem, 3.5vw, 2.4rem);
+        padding: 0;
+    }
+
+    #projects .project-info {
+        padding: 1.5rem 1.25rem;
+    }
+
+    #projects .project-title {
+        font-size: 1.85rem;
+        margin-bottom: 1rem;
+    }
+
+    #projects .project-description {
+        font-size: 1.35rem;
+        line-height: 1.55;
+        margin-bottom: 1.5rem;
+    }
+
+    #projects .tech-tags {
+        gap: 0.5rem;
+        margin-bottom: 1.2rem;
+    }
+
+    #projects .tech-tag {
+        font-size: 1.15rem;
+        padding: 0.35rem 0.75rem;
+    }
+
+    #projects .project-links {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    #projects .project-link {
+        padding: 0.75rem 1.25rem;
+        font-size: 1.3rem;
         text-align: center;
-        box-sizing: border-box;
     }
 }
 
@@ -1572,22 +1608,38 @@ textarea {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 34rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 38rem), 1fr));
     gap: 3rem;
     padding: 0;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 56.25em) {
+    #projects .main-container {
+        max-width: 130rem;
+        width: 94%;
+        padding-left: clamp(1.25rem, 2vw, 3rem);
+        padding-right: clamp(1.25rem, 2vw, 3rem);
+    }
+
+    .projects-layout {
+        gap: clamp(2rem, 2.8vw, 4.5rem);
+    }
+
+    .projects-filters-panel {
+        flex: 0 0 clamp(22rem, 17vw, 26rem);
+        max-width: 28rem;
+        padding-right: clamp(0.75rem, 1.2vw, 1.75rem);
+    }
+
     .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        padding: 0;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 40rem), 1fr));
+        gap: clamp(2.5rem, 3vw, 4rem);
     }
 }
 
 @media (max-width: 480px) {
     .projects-grid {
-        gap: 2.5rem;
+        gap: clamp(1rem, 2.5vw, 1.6rem);
     }
 }
 
@@ -2022,14 +2074,21 @@ textarea {
 
 /* Ajustement pour main-container dans project-details (pages de projets) */
 .project-details .main-container {
-    max-width: 120rem;
-    width: 100%;
+    max-width: 130rem;
+    width: 94%;
     padding: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 48em) {
+    .project-details .main-container {
+        width: 95%;
+    }
 }
 
 @media only screen and (max-width: 37.5em) {
     .project-details .main-container {
-        width: 100%;
+        width: 98%;
         padding: 0;
     }
 }
@@ -2051,7 +2110,7 @@ textarea {
 }
 
 .project-details__showcase-img-cont {
-    max-width: 100rem;
+    max-width: 130rem;
     width: 100%;
     padding: 0 2rem;
     box-sizing: border-box;
@@ -2094,7 +2153,7 @@ textarea {
 
 .project-details__content-main {
     width: 100%;
-    max-width: 100rem;
+    max-width: 130rem;
     margin: auto;
     padding: 0 2rem;
 }
