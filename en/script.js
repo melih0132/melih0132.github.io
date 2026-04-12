@@ -88,7 +88,7 @@ const CONFIG = {
   },
   techCategories: {
     "Languages": ["HTML", "CSS", "JavaScript", "TypeScript", "PHP", "Python", "C#", ".NET", ".NET Core", ".NET/C#", "C# (.NET)", "Swift", "Kotlin", "Dart", "SQL", "PL/pgSQL", "Bash", "XAML"],
-    "Frameworks & Libraries": ["Laravel", "Node.js", "Express", "Express.js", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "Tailwind CSS", "FastAPI", "ASP.NET Core", ".NET Core", "Flutter", "UIKit", "WPF", "WinUI 3", "Tkinter", "Phaser", "Socket.io", "SQLAlchemy", "Alembic", "Pytest", "Nodemon", "iOS", "Android", "OpenAI", "Jetpack Compose", "Vite", "Zustand"],
+    "Frameworks & Libraries": ["Laravel", "Node.js", "Express", "Express.js", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "Tailwind CSS", "FastAPI", "Flask", "ASP.NET Core", ".NET Core", "Flutter", "UIKit", "WPF", "WinUI 3", "Tkinter", "Phaser", "Socket.io", "SQLAlchemy", "Alembic", "Pytest", "Nodemon", "iOS", "Android", "OpenAI", "Jetpack Compose", "Vite", "Zustand"],
     "Databases": ["PostgreSQL", "SQLite", "MongoDB", "JSON / JSONB", "pgAdmin4"],
     "Tools & Environment": ["VS Code", "Visual Studio", "Xcode", "Unity", "Git", "GitHub", "Docker", "Nginx", "Apache", "Linux", "Postman", "Swagger", "pgAdmin4", "Microsoft Azure", "Visual Paradigm", "Excel", "Power BI", "PowerAMC", "Trello", "Microsoft Teams", "Raspberry Pi", "Z-Wave", "Gradle", "Android Studio"],
     "Design & CMS": ["Figma", "Framer", "Adobe Illustrator", "Canva", "WordPress", "3D Modeling"],
