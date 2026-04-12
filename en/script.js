@@ -402,6 +402,7 @@ class CollapsibleSkills {
     this.active = mediaQuery.matches;
     if (this.active) {
       this.toggleAll(false);
+      this.removeEventListeners();
       this.addEventListeners();
     } else {
       this.toggleAll(true);
@@ -518,6 +519,15 @@ class Projects {
       }
     });
   }
+}
+
+function normalizeFilterKey(str) {
+  return str.toLowerCase()
+    .replace(/\.net/g, 'net')
+    .replace(/c#/g, 'csharp')
+    .replace(/[^a-z0-9]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
 }
 
 class ProjectFilters {
@@ -793,13 +803,7 @@ class ProjectFilters {
       // Options pour chaque technologie
       this.techCategories[category].forEach(tech => {
         const option = document.createElement('option');
-        const normalizedFilter = tech.toLowerCase()
-          .replace(/\.net/g, 'net')
-          .replace(/c#/g, 'csharp')
-          .replace(/[^a-z0-9]/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-|-$/g, '');
-        option.value = normalizedFilter;
+        option.value = normalizeFilterKey(tech);
         const displayName = this.techMap.get(tech) || tech;
         option.textContent = displayName;
         categorySelect.appendChild(option);
@@ -846,14 +850,7 @@ class ProjectFilters {
       this.techCategories[category].forEach(tech => {
         const button = document.createElement('button');
         button.className = 'filter-btn';
-        // Normaliser le filtre de la même manière que dans filterProjects
-        const normalizedFilter = tech.toLowerCase()
-          .replace(/\.net/g, 'net')
-          .replace(/c#/g, 'csharp')
-          .replace(/[^a-z0-9]/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-|-$/g, '');
-        button.setAttribute('data-filter', normalizedFilter);
+        button.setAttribute('data-filter', normalizeFilterKey(tech));
         // Utiliser la variante la plus courante pour l'affichage
         const displayName = this.techMap.get(tech) || tech;
         button.textContent = displayName;
@@ -911,7 +908,10 @@ class ProjectFilters {
         } else {
           // Si on réinitialise le select, réactiver "All"
           const allBtn = this.filterContainer.querySelector('.filter-btn[data-filter="all"]');
-          if (allBtn && !categorySelects.querySelector('.filter-category-select[value!=""]')) {
+          const anySelectValue = Array.from(
+            categorySelects.querySelectorAll('.filter-category-select')
+          ).some(sel => sel.value !== '');
+          if (allBtn && !anySelectValue) {
             this.setActiveFilter('all');
             this.filterProjects('all');
           }
@@ -973,6 +973,7 @@ class ProjectFilters {
           title.setAttribute('aria-expanded', 'false');
           title.classList.remove('expanded');
         });
+        this.removeMobileEventListeners();
         this.addMobileEventListeners();
       } else {
         // Desktop : afficher tous les panneaux
@@ -1137,59 +1138,29 @@ class ProjectFilters {
           projectTechs.push(...fallbackTechs);
         }
         
-        // Normaliser le filtre pour la comparaison
-        const normalizedFilter = filter.toLowerCase()
-          .replace(/\.net/g, 'net')
-          .replace(/c#/g, 'csharp')
-          .replace(/[^a-z0-9]/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-|-$/g, '');
+        const normalizedFilter = normalizeFilterKey(filter);
         
-        // Trouver le langage correspondant au filtre (si c'est un langage)
         let matchingLanguage = null;
-        for (const [lang, frameworks] of Object.entries(CONFIG.languageFrameworks || {})) {
-          const normalizedLang = lang.toLowerCase()
-            .replace(/\.net/g, 'net')
-            .replace(/c#/g, 'csharp')
-            .replace(/[^a-z0-9]/g, '-')
-            .replace(/-+/g, '-')
-            .replace(/^-|-$/g, '');
-          
-          if (normalizedLang === normalizedFilter) {
+        for (const [lang] of Object.entries(CONFIG.languageFrameworks || {})) {
+          if (normalizeFilterKey(lang) === normalizedFilter) {
             matchingLanguage = lang;
             break;
           }
         }
         
         projectTechs.forEach(tech => {
-          // Normaliser la technologie avec le mapping
           const normalizedTech = this.normalizeTech(tech);
+          const normalizedTechForFilter = normalizeFilterKey(normalizedTech);
           
-          // Normaliser la technologie pour la comparaison
-          const normalizedTechForFilter = normalizedTech.toLowerCase()
-            .replace(/\.net/g, 'net')
-            .replace(/c#/g, 'csharp')
-            .replace(/[^a-z0-9]/g, '-')
-            .replace(/-+/g, '-')
-            .replace(/^-|-$/g, '');
-          
-          // Vérifier si la technologie correspond directement au filtre
           if (normalizedTechForFilter === normalizedFilter) {
             hasTech = true;
           }
           
-          // Si le filtre est un langage, vérifier aussi les frameworks associés
           if (matchingLanguage && CONFIG.languageFrameworks[matchingLanguage]) {
             const associatedFrameworks = CONFIG.languageFrameworks[matchingLanguage];
-            if (associatedFrameworks.some(fw => {
-              const normalizedFw = fw.toLowerCase()
-                .replace(/\.net/g, 'net')
-                .replace(/c#/g, 'csharp')
-                .replace(/[^a-z0-9]/g, '-')
-                .replace(/-+/g, '-')
-                .replace(/^-|-$/g, '');
-              return normalizedFw === normalizedTechForFilter || tech === fw;
-            })) {
+            if (associatedFrameworks.some(fw =>
+              normalizeFilterKey(fw) === normalizedTechForFilter || tech === fw
+            )) {
               hasTech = true;
             }
           }
