@@ -70,8 +70,9 @@
       <h1 class="heading-primary"><strong>Shared IA - Shared AI Platform</strong></h1>
       <div class="project-cs-hero__info">
         <p class="text-primary">
-          Shared artificial intelligence platform developed with <strong>FastAPI</strong> and <strong>React</strong>.
-          Collaboration and sharing of AI resources between users with scalable architecture.
+          Full-stack collaborative AI chat: up to <strong>4 users</strong> per room, collective message validation before
+          sending to the AI, conflict resolution and real-time updates via <strong>Socket.io</strong>
+          (<strong>Node.js</strong> / <strong>Express</strong>, <strong>React 19</strong>).
         </p>
       </div>
       <div class="project-cs-hero__cta">
@@ -90,21 +91,21 @@
             <h2 class="project-details__content-title"><strong>Project Overview</strong></h2>
             <div class="project-details__desc">
               <p class="project-details__desc-para">
-                <strong>Shared IA</strong> is a shared artificial intelligence platform developed to enable
-                collaboration and sharing of AI resources between users. This modern solution integrates
-                advanced AI features and offers a scalable architecture for managing AI models and services.
+                <strong>Shared IA</strong> is a collaborative AI chat application: several users (max 4) share a room;
+                every message must be validated by the other members before it is sent to the <strong>OpenAI API</strong>.
+                A dedicated flow resolves simultaneous proposals (voting / conflict resolution).
               </p>
               <p class="project-details__desc-para">
-                The platform offers a <strong>robust backend architecture</strong> with a complete REST API for
-                managing AI models, users and shared resources. The system integrates
-                <strong>advanced security features</strong> to protect data and models, as well as a
-                <strong>permission management system</strong> to control access to resources.
+                The <strong>backend</strong> is a <strong>Node.js</strong> API with <strong>Express</strong>,
+                <strong>Socket.io</strong> for real time, <strong>PostgreSQL</strong>, <strong>JWT</strong> authentication
+                and <strong>Swagger</strong> documentation. The <strong>frontend</strong> is a <strong>React 19</strong>
+                SPA with <strong>TypeScript</strong> and <strong>Vite</strong>, state with <strong>Zustand</strong>,
+                <strong>Tailwind CSS</strong> and <strong>shadcn/ui</strong> components.
               </p>
               <p class="project-details__desc-para">
-                The backend architecture uses modern technologies to ensure <strong>performance</strong>,
-                <strong>scalability</strong> and <strong>maintainability</strong>. The frontend offers an
-                <strong>optimal user experience</strong> with a reactive and modern interface, enabling
-                smooth interaction with AI services.
+                Source code lives under <code>big-projects/shared-ia</code> in the
+                <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">all-my-projects</a>
+                repository.
               </p>
             </div>
           </div>
@@ -114,39 +115,39 @@
             <h2 class="project-details__content-title"><strong>Main Features</strong></h2>
             <div class="project-details__features">
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">AI Model Management</h3>
+                <h3 class="project-details__feature-title">Collective validation</h3>
                 <p class="project-details__desc-para">
-                  Complete system to manage, deploy and share artificial intelligence models between users.
+                  Messages stay pending until every other room member validates them; reject, edit or retract before the AI call.
                 </p>
               </div>
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Resource Sharing</h3>
+                <h3 class="project-details__feature-title">Conflict resolution</h3>
                 <p class="project-details__desc-para">
-                  Efficient collaboration between users with secure sharing of resources and AI models.
+                  When several messages are proposed at once, members vote to pick the one sent to the AI.
                 </p>
               </div>
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Intuitive User Interface</h3>
+                <h3 class="project-details__feature-title">Real time</h3>
                 <p class="project-details__desc-para">
-                  Reactive and modern interface developed with React and TypeScript for smooth interaction with AI services.
+                  Instant updates over Socket.io (typing indicators, presence, state sync).
                 </p>
               </div>
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Secure Authentication System</h3>
+                <h3 class="project-details__feature-title">Rooms and invitations</h3>
                 <p class="project-details__desc-para">
-                  Robust authentication with permission management to control access to resources and models.
+                  Room management, invitations, JWT authentication and OpenAI integration (streaming).
                 </p>
               </div>
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">API Management</h3>
+                <h3 class="project-details__feature-title">React interface</h3>
                 <p class="project-details__desc-para">
-                  Integration of external models via complete REST API with interactive documentation via Swagger.
+                  React 19 + TypeScript + Vite SPA, React Hook Form / Zod, shadcn/ui.
                 </p>
               </div>
               <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Complete Documentation</h3>
+                <h3 class="project-details__feature-title">Documented API</h3>
                 <p class="project-details__desc-para">
-                  Detailed documentation for developers facilitating integration and use of the platform.
+                  Express backend with REST routes and Swagger docs at <code>/docs</code>.
                 </p>
               </div>
             </div>
@@ -162,9 +163,9 @@
                 <p class="project-details__img-caption">Platform frontend interface</p>
               </div>
               <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/SharedIA/backend.webp" alt="Shared IA backend architecture"
+                <img src="/assets/webp/SharedIA/backend.webp" alt="Shared IA Node Express backend"
                   loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Backend architecture with FastAPI</p>
+                <p class="project-details__img-caption">Node.js / Express backend</p>
               </div>
               <div class="project-details__showcase-img-cont">
                 <img src="/assets/webp/SharedIA/frontend2.webp" alt="Shared IA user interface"
@@ -184,15 +185,18 @@
             <h2 class="project-details__content-title"><strong>Technologies Used</strong></h2>
             <div class="project-details__tools-used">
               <div class="skills__projects">
-                <div class="skills__skill"><strong>FastAPI</strong></div>
-                <div class="skills__skill"><strong>React</strong></div>
-                <div class="skills__skill"><strong>TypeScript</strong></div>
                 <div class="skills__skill"><strong>Node.js</strong></div>
-                <div class="skills__skill"><strong>Swagger</strong></div>
+                <div class="skills__skill"><strong>Express.js</strong></div>
+                <div class="skills__skill"><strong>Socket.io</strong></div>
+                <div class="skills__skill"><strong>React 19</strong></div>
+                <div class="skills__skill"><strong>TypeScript</strong></div>
+                <div class="skills__skill"><strong>Vite</strong></div>
+                <div class="skills__skill"><strong>Tailwind CSS</strong></div>
+                <div class="skills__skill"><strong>Zustand</strong></div>
                 <div class="skills__skill"><strong>OpenAI</strong></div>
                 <div class="skills__skill"><strong>PostgreSQL</strong></div>
-                <div class="skills__skill"><strong>SQLAlchemy</strong></div>
-                <div class="skills__skill"><strong>RESTful API</strong></div>
+                <div class="skills__skill"><strong>JWT</strong></div>
+                <div class="skills__skill"><strong>Swagger</strong></div>
                 <div class="skills__skill"><strong>Git</strong></div>
                 <div class="skills__skill"><strong>GitHub</strong></div>
               </div>

@@ -87,17 +87,18 @@ const CONFIG = {
     "Agile/Scrum": "#A0CE4E"
   },
   techCategories: {
-    "Langages": ["HTML", "CSS", "JavaScript", "TypeScript", "PHP", "Python", "C#", ".NET", ".NET Core", ".NET/C#", "C# (.NET)", "Swift", "Dart", "SQL", "PL/pgSQL", "Bash", "XAML"],
-    "Frameworks & Bibliothèques": ["Laravel", "Node.js", "Express", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "Tailwind CSS", "FastAPI", "ASP.NET Core", ".NET Core", "Flutter", "UIKit", "WPF", "WinUI 3", "Tkinter", "Phaser", "Socket.io", "SQLAlchemy", "Alembic", "Pytest", "Nodemon", "iOS", "OpenAI"],
+    "Langages": ["HTML", "CSS", "JavaScript", "TypeScript", "PHP", "Python", "C#", ".NET", ".NET Core", ".NET/C#", "C# (.NET)", "Swift", "Kotlin", "Dart", "SQL", "PL/pgSQL", "Bash", "XAML"],
+    "Frameworks & Bibliothèques": ["Laravel", "Node.js", "Express", "Express.js", "React", "Next.js", "Vue.js", "Vue", "Bootstrap", "jQuery", "Tailwind CSS", "FastAPI", "ASP.NET Core", ".NET Core", "Flutter", "UIKit", "WPF", "WinUI 3", "Tkinter", "Phaser", "Socket.io", "SQLAlchemy", "Alembic", "Pytest", "Nodemon", "iOS", "Android", "OpenAI", "Jetpack Compose", "Vite", "Zustand"],
     "Bases de Données": ["PostgreSQL", "SQLite", "MongoDB", "JSON / JSONB", "pgAdmin4"],
-    "Outils & Environnement": ["VS Code", "Visual Studio", "Xcode", "Unity", "Git", "GitHub", "Docker", "Nginx", "Apache", "Linux", "Postman", "Swagger", "pgAdmin4", "Microsoft Azure", "Visual Paradigm", "Excel", "Power BI", "PowerAMC", "Trello", "Microsoft Teams"],
+    "Outils & Environnement": ["VS Code", "Visual Studio", "Xcode", "Unity", "Git", "GitHub", "Docker", "Nginx", "Apache", "Linux", "Postman", "Swagger", "pgAdmin4", "Microsoft Azure", "Visual Paradigm", "Excel", "Power BI", "PowerAMC", "Trello", "Microsoft Teams", "Raspberry Pi", "Z-Wave", "Gradle", "Android Studio"],
     "Design & CMS": ["Figma", "Framer", "Adobe Illustrator", "Canva", "WordPress", "3D Modeling"],
-    "Méthodologies & Concepts": ["UML", "MVC", "OOP", "Design Patterns", "CRUD", "Tests Unitaires", "HTTP", "RESTful API", "Web Service", "WebSockets", "Agile", "Scrum"]
+    "Méthodologies & Concepts": ["UML", "MVC", "OOP", "Design Patterns", "CRUD", "Tests Unitaires", "HTTP", "RESTful API", "Web Service", "WebSockets", "Agile", "Scrum", "JWT"]
   },
   languageFrameworks: {
     "Python": ["FastAPI", "Tkinter", "SQLAlchemy", "Alembic", "Pytest", "Flask", "Django"],
-    "JavaScript": ["React", "Next.js", "Vue.js", "Vue", "Express", "Node.js", "jQuery"],
-    "TypeScript": ["React", "Next.js", "Vue.js", "Vue"],
+    "JavaScript": ["React", "Next.js", "Vue.js", "Vue", "Express", "Express.js", "Node.js", "jQuery", "Vite", "Zustand"],
+    "TypeScript": ["React", "Next.js", "Vue.js", "Vue", "Vite", "Zustand"],
+    "Kotlin": ["Jetpack Compose"],
     "PHP": ["Laravel"],
     "Swift": ["UIKit", "iOS"],
     "Dart": ["Flutter"],
@@ -691,7 +692,8 @@ class ProjectFilters {
       'C#': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
       '.NET Core': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
       '.NET/C#': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
-      'C# (.NET)': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)']
+      'C# (.NET)': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
+      'React': ['React', 'React 19']
     };
     
     // Technologies à exclure des filtres
@@ -725,10 +727,7 @@ class ProjectFilters {
     // Catégoriser chaque technologie
     this.technologies.forEach(tech => {
       // Exclure les technologies de la liste d'exclusion
-      if (this.excludedTechs.some(excluded => 
-        tech.toLowerCase() === excluded.toLowerCase() || 
-        tech.toLowerCase().includes(excluded.toLowerCase())
-      )) {
+      if (this.excludedTechs.some(excluded => tech.toLowerCase() === excluded.toLowerCase())) {
         return;
       }
       
