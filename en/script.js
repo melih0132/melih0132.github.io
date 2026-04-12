@@ -94,6 +94,13 @@ const CONFIG = {
     "Design & CMS": ["Figma", "Framer", "Adobe Illustrator", "Canva", "WordPress", "3D Modeling"],
     "Methodologies & Concepts": ["UML", "MVC", "OOP", "Design Patterns", "CRUD", "Unit Testing", "HTTP", "RESTful API", "Web Service", "WebSockets", "Agile", "Scrum", "JWT"]
   },
+  projectFilterUi: {
+    searchPlaceholder: "Search by technology…",
+    searchAriaLabel: "Filter projects by technology",
+    clearAriaLabel: "Clear search",
+    filterChipsAriaLabel: "Active filters (match all)",
+    removeFilterChipAriaPrefix: "Remove filter"
+  },
   languageFrameworks: {
     "Python": ["FastAPI", "Tkinter", "SQLAlchemy", "Alembic", "Pytest", "Flask", "Django"],
     "JavaScript": ["React", "Next.js", "Vue.js", "Vue", "Express", "Express.js", "Node.js", "jQuery", "Vite", "Zustand"],
@@ -534,7 +541,7 @@ class ProjectFilters {
   constructor() {
     this.projectCards = document.querySelectorAll('.project-card');
     this.filterContainer = document.querySelector('.projects-filters');
-    this.activeFilter = 'all';
+    this.activeFilters = new Map();
     this.projectTechs = new Map(); // Stocker les technologies de chaque projet
     
     // Mapping pour regrouper les technologies similaires
@@ -560,58 +567,8 @@ class ProjectFilters {
   async init() {
     await this.loadProjectTechnologies();
     this.extractTechnologies();
-    this.categorizeTechnologies();
-    this.createFilterButtons();
+    this.createFilterSearchUi();
     this.attachEventListeners();
-  }
-
-  // Catégoriser les technologies
-  categorizeTechnologies() {
-    this.techCategories = {};
-    const uncategorized = [];
-    
-    // Initialiser les catégories
-    Object.keys(CONFIG.techCategories).forEach(category => {
-      this.techCategories[category] = [];
-    });
-    
-    // Catégoriser chaque technologie
-    this.technologies.forEach(tech => {
-      // Exclure les technologies de la liste d'exclusion
-      if (this.excludedTechs.some(excluded => tech.toLowerCase() === excluded.toLowerCase())) {
-        return;
-      }
-      
-      let categorized = false;
-      
-      for (const [category, techs] of Object.entries(CONFIG.techCategories)) {
-        if (techs.some(t => {
-          const normalizedTech = this.normalizeTech(tech);
-          const normalizedT = this.normalizeTech(t);
-          // Comparaison insensible à la casse et avec trim
-          return normalizedTech.toLowerCase().trim() === normalizedT.toLowerCase().trim() || 
-                 tech.toLowerCase().trim() === t.toLowerCase().trim();
-        })) {
-          this.techCategories[category].push(tech);
-          categorized = true;
-          break;
-        }
-      }
-      
-      if (!categorized) {
-        uncategorized.push(tech);
-      }
-    });
-    
-    // Ajouter les technologies non catégorisées dans "Autres"
-    if (uncategorized.length > 0) {
-      this.techCategories["Others"] = uncategorized;
-    }
-    
-    // Trier les technologies dans chaque catégorie
-    Object.keys(this.techCategories).forEach(category => {
-      this.techCategories[category].sort();
-    });
   }
 
   // Charger les technologies depuis les pages de détails des projets
@@ -761,324 +718,333 @@ class ProjectFilters {
     this.techMap = techMap; // Stocker le mapping pour l'affichage
   }
 
-  createFilterButtons() {
-    // Créer un header pour les onglets de catégories
-    const filtersHeader = document.createElement('div');
-    filtersHeader.className = 'projects-filters-header';
-    
-    // Créer les onglets de catégories (desktop)
-    const categoryTabs = document.createElement('div');
-    categoryTabs.className = 'filter-categories';
-    
-    // Créer les selects de catégories (mobile)
-    const categorySelects = document.createElement('div');
-    categorySelects.className = 'filter-category-selects';
-    
-    // Bouton "All" (existant)
+  createFilterSearchUi() {
     const allBtn = this.filterContainer.querySelector('.filter-btn[data-filter="all"]');
-    
-    // Créer les onglets et selects pour chaque catégorie
-    Object.keys(this.techCategories).forEach((category, index) => {
-      if (this.techCategories[category].length === 0) return;
-      
-      // Onglet pour desktop
-      const categoryTab = document.createElement('button');
-      categoryTab.className = 'filter-category-tab';
-      categoryTab.textContent = category;
-      categoryTab.setAttribute('data-category', category);
-      if (index === 0) categoryTab.classList.add('active');
-      categoryTabs.appendChild(categoryTab);
-      
-      // Select pour mobile
-      const categorySelect = document.createElement('select');
-      categorySelect.className = 'filter-category-select';
-      categorySelect.setAttribute('data-category', category);
-      
-      // Option par défaut
-      const defaultOption = document.createElement('option');
-      defaultOption.value = '';
-      defaultOption.textContent = category;
-      categorySelect.appendChild(defaultOption);
-      
-      // Options pour chaque technologie
-      this.techCategories[category].forEach(tech => {
-        const option = document.createElement('option');
-        option.value = normalizeFilterKey(tech);
-        const displayName = this.techMap.get(tech) || tech;
-        option.textContent = displayName;
-        categorySelect.appendChild(option);
-      });
-      
-      categorySelects.appendChild(categorySelect);
-    });
-    
-    // Réorganiser la structure : le bouton "All" reste au-dessus, les onglets en dessous
-    if (allBtn) {
-      // Ajouter les onglets de catégories dans le header
-      filtersHeader.appendChild(categoryTabs);
-      // Insérer le header après le bouton "All"
-      this.filterContainer.insertBefore(filtersHeader, allBtn.nextSibling);
-      // Insérer les selects pour mobile après le header
-      this.filterContainer.insertBefore(categorySelects, filtersHeader.nextSibling);
+    if (!allBtn) {
+      return;
     }
-    
-    // Créer les conteneurs de filtres par catégorie (desktop)
-    const filtersWrapper = document.createElement('div');
-    filtersWrapper.className = 'filters-wrapper';
-    
-    Object.keys(this.techCategories).forEach((category, index) => {
-      if (this.techCategories[category].length === 0) return;
-      
-      const categoryContainer = document.createElement('div');
-      categoryContainer.className = 'filter-category-content';
-      categoryContainer.setAttribute('data-category', category);
-      if (index === 0) categoryContainer.classList.add('active');
-      
-      // Ajouter un titre de catégorie pour mobile
-      const categoryTitle = document.createElement('h4');
-      categoryTitle.className = 'filter-category-title';
-      categoryTitle.textContent = category;
-      categoryTitle.setAttribute('role', 'button');
-      categoryTitle.setAttribute('aria-expanded', 'false');
-      categoryContainer.appendChild(categoryTitle);
-      
-      // Créer un conteneur pour les boutons de filtres (comme skills__skill-row)
-      const filterButtonsRow = document.createElement('div');
-      filterButtonsRow.className = 'filter-buttons-row';
-      filterButtonsRow.setAttribute('aria-hidden', 'true');
-      
-      this.techCategories[category].forEach(tech => {
-        const button = document.createElement('button');
-        button.className = 'filter-btn';
-        button.setAttribute('data-filter', normalizeFilterKey(tech));
-        // Utiliser la variante la plus courante pour l'affichage
-        const displayName = this.techMap.get(tech) || tech;
-        button.textContent = displayName;
-        filterButtonsRow.appendChild(button);
-      });
-      
-      categoryContainer.appendChild(filterButtonsRow);
-      
-      filtersWrapper.appendChild(categoryContainer);
+
+    const toolbar = document.createElement('div');
+    toolbar.className = 'projects-filters-toolbar';
+    this.filterContainer.insertBefore(toolbar, this.filterContainer.firstChild);
+    toolbar.appendChild(allBtn);
+
+    const ui = CONFIG.projectFilterUi || {};
+    const wrap = document.createElement('div');
+    wrap.className = 'projects-filters-search';
+
+    const inner = document.createElement('div');
+    inner.className = 'projects-filters-search__inner';
+
+    const input = document.createElement('input');
+    input.type = 'search';
+    input.className = 'projects-filters-search__input';
+    input.setAttribute('autocomplete', 'off');
+    input.setAttribute('spellcheck', 'false');
+    input.placeholder = ui.searchPlaceholder || '…';
+    input.setAttribute('aria-label', ui.searchAriaLabel || input.placeholder);
+    input.setAttribute('aria-autocomplete', 'list');
+    input.setAttribute('aria-expanded', 'false');
+
+    const listId = 'projects-filter-suggestions';
+    const list = document.createElement('ul');
+    list.id = listId;
+    list.className = 'projects-filters-search__list';
+    list.setAttribute('role', 'listbox');
+    list.hidden = true;
+    input.setAttribute('aria-controls', listId);
+
+    const clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'projects-filters-search__clear';
+    clearBtn.setAttribute('aria-label', ui.clearAriaLabel || 'Clear');
+    clearBtn.textContent = '×';
+    clearBtn.hidden = true;
+
+    inner.appendChild(input);
+    inner.appendChild(clearBtn);
+    inner.appendChild(list);
+    wrap.appendChild(inner);
+    toolbar.appendChild(wrap);
+
+    const chipsWrap = document.createElement('div');
+    chipsWrap.className = 'projects-filters-chips';
+    chipsWrap.setAttribute('aria-label', ui.filterChipsAriaLabel || 'Active filters');
+    chipsWrap.hidden = true;
+    this.filterContainer.appendChild(chipsWrap);
+    this.chipsWrap = chipsWrap;
+    chipsWrap.addEventListener('click', (e) => {
+      const chip = e.target.closest('.projects-filters-chip');
+      if (!chip || !this.chipsWrap.contains(chip)) {
+        return;
+      }
+      const key = chip.getAttribute('data-filter-key');
+      if (key && this.activeFilters.has(key)) {
+        this.activeFilters.delete(key);
+        this.renderFilterChips();
+        this.syncAllButtonState();
+        this.filterProjects();
+      }
     });
-    
-    this.filterContainer.appendChild(filtersWrapper);
-    
-    // Gérer les clics sur les titres de catégories (mobile - accordéon)
-    this.initMobileAccordion();
-    
-    // Gérer les clics sur les onglets de catégories (desktop)
-    categoryTabs.querySelectorAll('.filter-category-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const category = tab.getAttribute('data-category');
-        
-        // Désactiver tous les onglets
-        categoryTabs.querySelectorAll('.filter-category-tab').forEach(t => t.classList.remove('active'));
-        // Activer l'onglet cliqué
-        tab.classList.add('active');
-        
-        // Masquer tous les contenus
-        filtersWrapper.querySelectorAll('.filter-category-content').forEach(c => c.classList.remove('active'));
-        // Afficher le contenu de la catégorie sélectionnée
-        const content = filtersWrapper.querySelector(`.filter-category-content[data-category="${category}"]`);
-        if (content) {
-          content.classList.add('active');
-        }
-      });
+
+    this.searchInput = input;
+    this.searchList = list;
+    this.searchClearBtn = clearBtn;
+    this.searchWrap = wrap;
+    this.searchHighlightIndex = -1;
+
+    this._onSearchDocClick = (e) => {
+      if (!this.searchWrap || this.searchWrap.contains(e.target)) {
+        return;
+      }
+      this.closeSearchSuggestions();
+    };
+    document.addEventListener('click', this._onSearchDocClick);
+
+    input.addEventListener('focus', () => {
+      this.refreshSearchSuggestions();
+      this.openSearchSuggestions();
     });
-    
-    // Gérer les changements sur les selects (mobile)
-    categorySelects.querySelectorAll('.filter-category-select').forEach(select => {
-      select.addEventListener('change', (e) => {
-        const filter = e.target.value;
-        if (filter) {
-          this.setActiveFilter(filter);
-          this.filterProjects(filter);
-          // Désactiver le bouton "All"
-          const allBtn = this.filterContainer.querySelector('.filter-btn[data-filter="all"]');
-          if (allBtn) {
-            allBtn.classList.remove('active');
-          }
-          // Réinitialiser tous les autres selects
-          categorySelects.querySelectorAll('.filter-category-select').forEach(s => {
-            if (s !== select) {
-              s.value = '';
-            }
-          });
-        } else {
-          // Si on réinitialise le select, réactiver "All"
-          const allBtn = this.filterContainer.querySelector('.filter-btn[data-filter="all"]');
-          const anySelectValue = Array.from(
-            categorySelects.querySelectorAll('.filter-category-select')
-          ).some(sel => sel.value !== '');
-          if (allBtn && !anySelectValue) {
-            this.setActiveFilter('all');
-            this.filterProjects('all');
-          }
+
+    input.addEventListener('input', () => {
+      this.searchHighlightIndex = -1;
+      this.refreshSearchSuggestions();
+      this.openSearchSuggestions();
+      if (this.searchClearBtn) {
+        this.searchClearBtn.hidden = input.value.trim() === '';
+      }
+    });
+
+    clearBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      input.value = '';
+      clearBtn.hidden = true;
+      this.closeSearchSuggestions();
+    });
+
+    list.addEventListener('click', (e) => {
+      const li = e.target.closest('[role="option"]');
+      if (!li || !this.searchList.contains(li)) {
+        return;
+      }
+      const key = li.getAttribute('data-filter');
+      const label = li.getAttribute('data-label') || li.textContent;
+      if (key) {
+        this.applyTechFromSearch(key, label);
+      }
+    });
+
+    input.addEventListener('keydown', (e) => {
+      const items = this.searchList.querySelectorAll('[role="option"]');
+      if (!items.length) {
+        return;
+      }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        this.searchHighlightIndex = Math.min(this.searchHighlightIndex + 1, items.length - 1);
+        this.highlightSearchOption(items);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        this.searchHighlightIndex = Math.max(this.searchHighlightIndex - 1, 0);
+        this.highlightSearchOption(items);
+      } else if (e.key === 'Enter' && this.searchHighlightIndex >= 0) {
+        e.preventDefault();
+        const li = items[this.searchHighlightIndex];
+        const key = li.getAttribute('data-filter');
+        const label = li.getAttribute('data-label') || li.textContent;
+        if (key) {
+          this.applyTechFromSearch(key, label);
         }
-      });
+      } else if (e.key === 'Escape') {
+        this.closeSearchSuggestions();
+        this.searchInput.blur();
+      }
     });
   }
 
-  initMobileAccordion() {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-    
-    // Fonction pour obtenir tous les éléments à chaque fois (au cas où ils changent)
-    const getCategoryElements = () => {
-      return {
-        categoryTitles: this.filterContainer.querySelectorAll('.filter-category-title'),
-        filterButtonsRows: this.filterContainer.querySelectorAll('.filter-buttons-row')
-      };
-    };
-    
-    // Initialiser les attributs ARIA
-    const initializeAriaAttributes = () => {
-      const { categoryTitles, filterButtonsRows } = getCategoryElements();
-      
-      categoryTitles.forEach((title) => {
-        // Chercher le filter-buttons-row qui suit directement le titre
-        let buttonsRow = title.nextElementSibling;
-        
-        // Si nextElementSibling n'est pas le bon, chercher dans le parent
-        if (!buttonsRow || !buttonsRow.classList.contains('filter-buttons-row')) {
-          const parent = title.parentElement;
-          if (parent) {
-            buttonsRow = parent.querySelector('.filter-buttons-row');
-          }
-        }
-        
-        if (buttonsRow && buttonsRow.classList.contains('filter-buttons-row')) {
-          title.setAttribute('role', 'button');
-          title.setAttribute('aria-expanded', 'false');
-          buttonsRow.setAttribute('aria-hidden', 'true');
-        }
-      });
-    };
-    
-    // Initialiser maintenant
-    initializeAriaAttributes();
-    
-    // Gérer le changement de media query
-    const handleMediaQueryChange = (mq) => {
-      const { categoryTitles, filterButtonsRows } = getCategoryElements();
-      
-      if (mq.matches) {
-        // Mobile : masquer tous les panneaux par défaut
-        filterButtonsRows.forEach(row => {
-          row.style.maxHeight = '0';
-          row.setAttribute('aria-hidden', 'true');
-          row.classList.remove('expanded');
+  getSearchMatches(query) {
+    const q = (query || '').trim().toLowerCase();
+    const rows = [];
+    (this.technologies || []).forEach(tech => {
+      const display = this.techMap.get(tech) || tech;
+      const hay = `${display} ${tech}`.toLowerCase();
+      if (!q || hay.includes(q)) {
+        rows.push({
+          key: normalizeFilterKey(tech),
+          label: display
         });
-        categoryTitles.forEach(title => {
-          title.setAttribute('aria-expanded', 'false');
-          title.classList.remove('expanded');
-        });
-        this.removeMobileEventListeners();
-        this.addMobileEventListeners();
-      } else {
-        // Desktop : afficher tous les panneaux
-        filterButtonsRows.forEach(row => {
-          row.style.maxHeight = '';
-          row.setAttribute('aria-hidden', 'false');
-          row.classList.remove('expanded');
-        });
-        categoryTitles.forEach(title => {
-          title.setAttribute('aria-expanded', 'true');
-        });
-        this.removeMobileEventListeners();
       }
-    };
-    
-    handleMediaQueryChange(mediaQuery);
-    mediaQuery.addEventListener('change', handleMediaQueryChange);
-    
-    // Ajouter la classe js-enabled pour le CSS
-    document.documentElement.classList.add('js-enabled-filters');
-  }
-  
-  addMobileEventListeners() {
-    const categoryTitles = this.filterContainer.querySelectorAll('.filter-category-title');
-    
-    categoryTitles.forEach(title => {
-      title.addEventListener('click', this.toggleCategoryRow);
     });
+    rows.sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: 'base' }));
+    return rows.slice(0, 12);
   }
-  
-  removeMobileEventListeners() {
-    const categoryTitles = this.filterContainer.querySelectorAll('.filter-category-title');
-    
-    categoryTitles.forEach(title => {
-      title.removeEventListener('click', this.toggleCategoryRow);
-    });
-  }
-  
-  toggleCategoryRow = (event) => {
-    const title = event.currentTarget;
-    let buttonsRow = title.nextElementSibling;
-    
-    // Si nextElementSibling n'est pas le bon, chercher dans le parent
-    if (!buttonsRow || !buttonsRow.classList.contains('filter-buttons-row')) {
-      const parent = title.parentElement;
-      if (parent) {
-        buttonsRow = parent.querySelector('.filter-buttons-row');
-      }
-    }
-    
-    if (!buttonsRow || !buttonsRow.classList.contains('filter-buttons-row')) {
+
+  refreshSearchSuggestions() {
+    if (!this.searchList || !this.searchInput) {
       return;
     }
-    
-    const isCurrentlyExpanded = buttonsRow.classList.contains('expanded');
-    const allRows = this.filterContainer.querySelectorAll('.filter-buttons-row');
-    const allTitles = this.filterContainer.querySelectorAll('.filter-category-title');
-    
-    // Fermer tous les autres panneaux
-    allRows.forEach(row => {
-      if (row !== buttonsRow) {
-        this.collapseFilterRow(row);
-        // Trouver le titre associé à cette row
-        const parent = row.parentElement;
-        if (parent) {
-          const otherTitle = parent.querySelector('.filter-category-title');
-          if (otherTitle) {
-            otherTitle.setAttribute('aria-expanded', 'false');
-            otherTitle.classList.remove('expanded');
-          }
+    const matches = this.getSearchMatches(this.searchInput.value);
+    this.searchList.innerHTML = '';
+    matches.forEach((m, i) => {
+      const li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      li.setAttribute('data-filter', m.key);
+      li.setAttribute('data-label', m.label);
+      li.id = `filter-suggest-${i}`;
+      li.textContent = m.label;
+      if (this.activeFilters.has(m.key)) {
+        li.classList.add('is-already-active');
+      }
+      this.searchList.appendChild(li);
+    });
+    this.searchHighlightIndex = matches.length ? 0 : -1;
+    const items = this.searchList.querySelectorAll('[role="option"]');
+    this.highlightSearchOption(items);
+  }
+
+  highlightSearchOption(items) {
+    items.forEach((el, i) => {
+      el.classList.toggle('is-highlighted', i === this.searchHighlightIndex);
+    });
+  }
+
+  openSearchSuggestions() {
+    if (!this.searchList || !this.searchInput) {
+      return;
+    }
+    if (this.searchList.children.length === 0) {
+      return;
+    }
+    this.searchList.hidden = false;
+    this.searchInput.setAttribute('aria-expanded', 'true');
+  }
+
+  closeSearchSuggestions() {
+    if (!this.searchList || !this.searchInput) {
+      return;
+    }
+    this.searchList.hidden = true;
+    this.searchInput.setAttribute('aria-expanded', 'false');
+    this.searchHighlightIndex = -1;
+  }
+
+  renderFilterChips() {
+    if (!this.chipsWrap) {
+      return;
+    }
+    this.chipsWrap.innerHTML = '';
+    if (this.activeFilters.size === 0) {
+      this.chipsWrap.hidden = true;
+      return;
+    }
+    this.chipsWrap.hidden = false;
+    const ui = CONFIG.projectFilterUi || {};
+    const prefix = ui.removeFilterChipAriaPrefix || 'Remove filter';
+    this.activeFilters.forEach((label, key) => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'projects-filters-chip';
+      chip.setAttribute('data-filter-key', key);
+      chip.setAttribute('aria-label', `${prefix} ${label}`);
+      const text = document.createElement('span');
+      text.className = 'projects-filters-chip__text';
+      text.textContent = label;
+      const x = document.createElement('span');
+      x.className = 'projects-filters-chip__remove';
+      x.setAttribute('aria-hidden', 'true');
+      x.textContent = '×';
+      chip.appendChild(text);
+      chip.appendChild(x);
+      this.chipsWrap.appendChild(chip);
+    });
+  }
+
+  syncAllButtonState() {
+    const allBtn = this.filterContainer.querySelector('.filter-btn[data-filter="all"]');
+    if (allBtn) {
+      if (this.activeFilters.size === 0) {
+        allBtn.classList.add('active');
+      } else {
+        allBtn.classList.remove('active');
+      }
+    }
+  }
+
+  cardMatchesSingleFilter(card, filterKey) {
+    let projectTechs = this.projectTechs.get(card) || [];
+    if (projectTechs.length === 0) {
+      this.fallbackToTechTags(card);
+      projectTechs = this.projectTechs.get(card) || [];
+    }
+    const normalizedFilter = normalizeFilterKey(filterKey);
+    let matchingLanguage = null;
+    for (const [lang] of Object.entries(CONFIG.languageFrameworks || {})) {
+      if (normalizeFilterKey(lang) === normalizedFilter) {
+        matchingLanguage = lang;
+        break;
+      }
+    }
+    for (const tech of projectTechs) {
+      const normalizedTech = this.normalizeTech(tech);
+      const normalizedTechForFilter = normalizeFilterKey(normalizedTech);
+      if (normalizedTechForFilter === normalizedFilter) {
+        return true;
+      }
+      if (matchingLanguage && CONFIG.languageFrameworks[matchingLanguage]) {
+        const associatedFrameworks = CONFIG.languageFrameworks[matchingLanguage];
+        if (associatedFrameworks.some(fw =>
+          normalizeFilterKey(fw) === normalizedTechForFilter || tech === fw
+        )) {
+          return true;
         }
       }
-    });
-    
-    // Basculer l'état actuel
-    if (isCurrentlyExpanded) {
-      this.collapseFilterRow(buttonsRow);
-      title.setAttribute('aria-expanded', 'false');
-      title.classList.remove('expanded');
-    } else {
-      this.expandFilterRow(buttonsRow);
-      title.setAttribute('aria-expanded', 'true');
-      title.classList.add('expanded');
     }
-  };
-  
-  expandFilterRow(row) {
-    row.classList.add('expanded');
-    // Forcer le recalcul en affichant temporairement le contenu
-    const originalMaxHeight = row.style.maxHeight;
-    const originalOverflow = row.style.overflow;
-    row.style.maxHeight = 'none';
-    row.style.overflow = 'visible';
-    const height = row.scrollHeight;
-    row.style.maxHeight = originalMaxHeight;
-    row.style.overflow = originalOverflow;
-    // Appliquer la hauteur calculée
-    row.style.maxHeight = `${height}px`;
-    row.setAttribute('aria-hidden', 'false');
+    return false;
   }
-  
-  collapseFilterRow(row) {
-    row.style.maxHeight = '0';
-    row.setAttribute('aria-hidden', 'true');
-    row.classList.remove('expanded');
+
+  applyTechFromSearch(filterKey, displayLabel) {
+    if (!filterKey) {
+      return;
+    }
+    const key = normalizeFilterKey(filterKey);
+    if (this.activeFilters.has(key)) {
+      this.closeSearchSuggestions();
+      if (this.searchInput) {
+        this.searchInput.value = '';
+      }
+      if (this.searchClearBtn) {
+        this.searchClearBtn.hidden = true;
+      }
+      return;
+    }
+    this.activeFilters.set(key, (displayLabel || '').trim() || key);
+    if (this.searchInput) {
+      this.searchInput.value = '';
+    }
+    if (this.searchClearBtn) {
+      this.searchClearBtn.hidden = true;
+    }
+    this.closeSearchSuggestions();
+    this.syncAllButtonState();
+    this.renderFilterChips();
+    this.filterProjects();
+  }
+
+  resetSearchFilter() {
+    this.activeFilters.clear();
+    if (this.searchInput) {
+      this.searchInput.value = '';
+    }
+    if (this.searchClearBtn) {
+      this.searchClearBtn.hidden = true;
+    }
+    if (this.searchList) {
+      this.searchList.innerHTML = '';
+    }
+    this.closeSearchSuggestions();
+    this.renderFilterChips();
+    this.syncAllButtonState();
+    this.filterProjects();
   }
 
   attachEventListeners() {
@@ -1088,91 +1054,31 @@ class ProjectFilters {
       button.addEventListener('click', (e) => {
         e.preventDefault();
         const filter = button.getAttribute('data-filter');
-        this.setActiveFilter(filter);
-        this.filterProjects(filter);
-        
-        // Si on clique sur "All", réinitialiser tous les selects
         if (filter === 'all') {
-          const selects = this.filterContainer.querySelectorAll('.filter-category-select');
-          selects.forEach(select => {
-            select.value = '';
-          });
+          this.resetSearchFilter();
         }
       });
     });
   }
 
-  setActiveFilter(filter) {
-    this.activeFilter = filter;
-    const filterButtons = this.filterContainer.querySelectorAll('.filter-btn');
-    
-    filterButtons.forEach(btn => {
-      if (btn.getAttribute('data-filter') === filter) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    });
-  }
-
-  filterProjects(filter) {
+  filterProjects() {
+    const keys = Array.from(this.activeFilters.keys());
     this.projectCards.forEach(card => {
-      // Ne pas filtrer le bouton GitHub
       if (card.closest('.projects__btn-container')) {
         return;
       }
-      
-      if (filter === 'all') {
+      if (keys.length === 0) {
+        card.style.display = '';
+        card.classList.remove('filtered-out');
+        return;
+      }
+      const match = keys.every(k => this.cardMatchesSingleFilter(card, k));
+      if (match) {
         card.style.display = '';
         card.classList.remove('filtered-out');
       } else {
-        let hasTech = false;
-        
-        // Utiliser les technologies chargées depuis les pages de détails
-        const projectTechs = this.projectTechs.get(card) || [];
-        
-        // Si aucune technologie n'a été chargée, utiliser les tech-tags comme fallback
-        if (projectTechs.length === 0) {
-          this.fallbackToTechTags(card);
-          const fallbackTechs = this.projectTechs.get(card) || [];
-          projectTechs.push(...fallbackTechs);
-        }
-        
-        const normalizedFilter = normalizeFilterKey(filter);
-        
-        let matchingLanguage = null;
-        for (const [lang] of Object.entries(CONFIG.languageFrameworks || {})) {
-          if (normalizeFilterKey(lang) === normalizedFilter) {
-            matchingLanguage = lang;
-            break;
-          }
-        }
-        
-        projectTechs.forEach(tech => {
-          const normalizedTech = this.normalizeTech(tech);
-          const normalizedTechForFilter = normalizeFilterKey(normalizedTech);
-          
-          if (normalizedTechForFilter === normalizedFilter) {
-            hasTech = true;
-          }
-          
-          if (matchingLanguage && CONFIG.languageFrameworks[matchingLanguage]) {
-            const associatedFrameworks = CONFIG.languageFrameworks[matchingLanguage];
-            if (associatedFrameworks.some(fw =>
-              normalizeFilterKey(fw) === normalizedTechForFilter || tech === fw
-            )) {
-              hasTech = true;
-            }
-          }
-        });
-        
-        if (hasTech) {
-          card.style.display = '';
-          card.classList.remove('filtered-out');
-        } else {
-          card.style.display = 'none';
-          card.classList.add('filtered-out');
-        }
+        card.style.display = 'none';
+        card.classList.add('filtered-out');
       }
     });
     

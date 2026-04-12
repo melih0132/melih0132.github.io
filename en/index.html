@@ -265,9 +265,14 @@
         </span>
       </h2>
       <div class="projects__content">
-        <div class="projects-filters scroll-reveal scroll-reveal--delay-1" role="region" aria-label="Project filters">
-          <button type="button" class="filter-btn active" data-filter="all">All</button>
-        </div>
+        <div class="projects-layout">
+        <aside class="projects-filters-panel scroll-reveal scroll-reveal--delay-1" role="complementary" aria-label="Project filters">
+          <p class="projects-filters-panel__hint">Filters</p>
+          <div class="projects-filters">
+            <button type="button" class="filter-btn active" data-filter="all">All</button>
+          </div>
+        </aside>
+        <div class="projects-main">
         <div class="projects-grid">
           <!-- Evit'Shuriken -->
           <div class="project-card scroll-reveal scroll-reveal--delay-1">
@@ -611,6 +616,8 @@
               <span>Discover all my projects on GitHub</span>
             </a>
           </div>
+        </div>
+        </div>
         </div>
       </div>
   </section>
