@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     FastAPI: "#05998B",
     React: "#61DAFB",
     TypeScript: "#3178C6",
-    "Next.js": "#000000",
+    "Next": "#000000",
     SQLAlchemy: "#D71F24",
     OpenAI: "#10A37F",
     Alembic: "#FF6B6B",

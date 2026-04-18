@@ -28,7 +28,7 @@ const CONFIG = {
     // Frameworks & Libraries
     "Laravel": "#F05340",
     "Node.js & Express": "#3C873A",
-    "React & Next.js": "#61DAFB",
+    "React & Next": "#61DAFB",
     "Vue.js": "#42b883",
     "CSS Frameworks": "#6e11f5",
     "FastAPI": "#05998B",
@@ -95,8 +95,8 @@ const CONFIG = {
   },
   languageFrameworks: {
     "Python": ["FastAPI", "Tkinter", "SQLAlchemy", "Alembic", "Pytest", "Flask", "Django"],
-    "JavaScript": ["React", "Next.js", "Vue.js", "Vue", "Express", "Express.js", "Node.js", "jQuery", "Vite", "Zustand"],
-    "TypeScript": ["React", "Next.js", "Vue.js", "Vue", "Vite", "Zustand"],
+    "JavaScript": ["React", "Next", "Vue.js", "Vue", "Express", "Express.js", "Node.js", "jQuery", "Vite", "Zustand"],
+    "TypeScript": ["React", "Next", "Vue.js", "Vue", "Vite", "Zustand"],
     "Kotlin": ["Jetpack Compose"],
     "PHP": ["Laravel"],
     "Swift": ["UIKit", "iOS"],
@@ -542,8 +542,7 @@ class ProjectFilters {
       'C#': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
       '.NET Core': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
       '.NET/C#': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
-      'C# (.NET)': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
-      'React': ['React', 'React 19']
+      'C# (.NET)': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)']
     };
     
     if (this.projectCards.length === 0 || !this.filterContainer) {
