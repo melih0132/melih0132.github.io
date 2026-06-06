@@ -1,4 +1,37 @@
-const CONFIG = {
+const LOCALE = document.documentElement.lang.startsWith('fr') ? 'fr' : 'en';
+
+const I18N = {
+  en: {
+    homePath: '/en/#home',
+    projectFilterUi: {
+      searchPlaceholder: 'Search by technology…',
+      searchAriaLabel: 'Filter projects by technology',
+      filterChipsAriaLabel: 'Active filters (match all)',
+      removeFilterChipAriaPrefix: 'Remove filter',
+      resultsCount: (n) => `${n} project${n === 1 ? '' : 's'}`
+    },
+    contactForm: {
+      success: 'Thank you! Your message has been sent.',
+      error: 'An error occurred. Please try again.'
+    }
+  },
+  fr: {
+    homePath: '/fr/#home',
+    projectFilterUi: {
+      searchPlaceholder: 'Rechercher une technologie…',
+      searchAriaLabel: 'Filtrer les projets par technologie',
+      filterChipsAriaLabel: 'Filtres actifs (intersection)',
+      removeFilterChipAriaPrefix: 'Retirer le filtre',
+      resultsCount: (n) => `${n} projet${n === 1 ? '' : 's'}`
+    },
+    contactForm: {
+      success: 'Merci ! Votre message a été envoyé.',
+      error: 'Une erreur est survenue. Veuillez réessayer.'
+    }
+  }
+};
+
+const BASE_CONFIG = {
   scrollThreshold: 50,
   messageDisplayTime: 3000,
   languageChangeInterval: 2000,
@@ -80,17 +113,12 @@ const CONFIG = {
     "MVC": "#FF9800",
     "CRUD": "#4CAF50",
     "Unit Testing": "#55606E",
+    "Tests Unitaires": "#55606E",
     "API & Web Services": "#26A69A",
     "OOP": "#FF6B6B",
     "Design Patterns": "#9C27B0",
     "HTTP": "#0052CC",
     "Agile/Scrum": "#A0CE4E"
-  },
-  projectFilterUi: {
-    searchPlaceholder: "Search by technology…",
-    searchAriaLabel: "Filter projects by technology",
-    filterChipsAriaLabel: "Active filters (match all)",
-    removeFilterChipAriaPrefix: "Remove filter"
   },
   languageFrameworks: {
     "Python": ["FastAPI", "Tkinter", "SQLAlchemy", "Alembic", "Pytest", "Flask", "Django"],
@@ -106,8 +134,49 @@ const CONFIG = {
   }
 };
 
+const CONFIG = {
+  ...BASE_CONFIG,
+  projectFilterUi: I18N[LOCALE].projectFilterUi,
+  contactForm: I18N[LOCALE].contactForm,
+  homePath: I18N[LOCALE].homePath
+};
+
 function getScrollY() {
   return window.lenis?.scroll ?? window.scrollY;
+}
+
+function getHeaderScrollOffset() {
+  const header = document.querySelector('.header');
+  return header?.offsetHeight ?? 100;
+}
+
+function getSectionScrollTarget(section) {
+  if (!section || section.id === 'home') {
+    return section;
+  }
+  return section.querySelector('.heading-sec') ?? section;
+}
+
+function scrollToSection(section) {
+  if (!section) {
+    return;
+  }
+  const target = getSectionScrollTarget(section);
+  const offset = -getHeaderScrollOffset();
+  if (window.lenis) {
+    window.lenis.scrollTo(target, { offset });
+  } else {
+    const top = target.getBoundingClientRect().top + window.scrollY + offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+
+function getHashFromHref(href) {
+  if (!href || !href.includes('#')) {
+    return null;
+  }
+  const hash = href.split('#')[1];
+  return hash || null;
 }
 
 class HamburgerMenu {
@@ -231,7 +300,8 @@ class Header {
     let closestDistance = Infinity;
 
     this.sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
+      const headerOffset = getHeaderScrollOffset();
+      const sectionTop = section.offsetTop - headerOffset;
       const sectionHeight = section.offsetHeight;
       const sectionBottom = sectionTop + sectionHeight;
       const distance = Math.abs(getScrollY() - sectionTop);
@@ -253,13 +323,13 @@ class Header {
   }
 
   handleLogoClick() {
-    location.href = '/en/#home';
+    location.href = CONFIG.homePath;
   }
 }
 
 class HeaderNav {
   constructor() {
-    this.navLinks = document.querySelectorAll('.header__link');
+    this.navLinks = document.querySelectorAll('.header__link, .header__sm-menu-link a');
     this.sections = document.querySelectorAll('section[id]');
 
     this.init();
@@ -276,14 +346,33 @@ class HeaderNav {
     this.navLinks.forEach(link => {
       link.addEventListener('click', (e) => this.handleNavClick(e));
     });
+
+    this.scrollToHashOnLoad();
+  }
+
+  scrollToHashOnLoad() {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) {
+      return;
+    }
+    const section = document.getElementById(hash);
+    if (!section) {
+      return;
+    }
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToSection(section);
+      });
+    });
   }
 
   updateActiveSection() {
     const scrollY = getScrollY();
+    const headerOffset = getHeaderScrollOffset();
 
     this.sections.forEach(section => {
       const sectionHeight = section.offsetHeight;
-      const sectionTop = section.offsetTop - 100;
+      const sectionTop = section.offsetTop - headerOffset;
       const sectionId = section.getAttribute('id');
 
       if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
@@ -291,7 +380,7 @@ class HeaderNav {
           link.classList.remove('active');
         });
 
-        const activeLink = safeQuerySelector(`.header__link[href="./#${sectionId}"]`);
+        const activeLink = document.querySelector(`.header__link[href="./#${sectionId}"], .header__link[href="#${sectionId}"]`);
         if (activeLink) {
           activeLink.classList.add('active');
         }
@@ -300,17 +389,19 @@ class HeaderNav {
   }
 
   handleNavClick(e) {
-    e.preventDefault();
-    const targetId = e.currentTarget.getAttribute('href').replace('./#', '');
-    const targetSection = document.getElementById(targetId);
-
-    if (targetSection) {
-      if (window.lenis) {
-        window.lenis.scrollTo(targetSection, { offset: -100 });
-      } else {
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-      }
+    const href = e.currentTarget.getAttribute('href');
+    const targetId = getHashFromHref(href);
+    if (!targetId) {
+      return;
     }
+
+    const targetSection = document.getElementById(targetId);
+    if (!targetSection) {
+      return;
+    }
+
+    e.preventDefault();
+    scrollToSection(targetSection);
   }
 }
 
@@ -362,53 +453,67 @@ class CollapsibleSkills {
 
   addEventListeners() {
     this.titles.forEach((title) => {
-      title.addEventListener('click', this.toggleSkillRow);
+      title.addEventListener('pointerup', this.handleTitlePointerUp);
     });
   }
 
   removeEventListeners() {
     this.titles.forEach((title) => {
-      title.removeEventListener('click', this.toggleSkillRow);
+      title.removeEventListener('pointerup', this.handleTitlePointerUp);
     });
   }
 
-  toggleSkillRow = (event) => {
-    if (!this.active) return;
+  handleTitlePointerUp = (event) => {
+    if (!this.active) {
+      return;
+    }
+    if (event.pointerType === 'mouse' && event.button !== 0) {
+      return;
+    }
+    event.preventDefault();
+    this.toggleSkillRow(event);
+  };
+
+  toggleSkillRow(event) {
+    if (!this.active) {
+      return;
+    }
     const title = event.currentTarget;
     const skillRow = title.nextElementSibling;
-    const isCurrentlyExpanded = skillRow.classList.contains('expanded');
-    
-    // Fermer tous les autres panneaux
+    if (!skillRow?.classList.contains('skills__skill-row')) {
+      return;
+    }
+    const isCurrentlyExpanded = title.getAttribute('aria-expanded') === 'true';
+
     this.skillRows.forEach(row => {
       if (row !== skillRow) {
         this.collapse(row);
         const otherTitle = row.previousElementSibling;
-        otherTitle.setAttribute('aria-expanded', 'false');
-        otherTitle.classList.remove('expanded');
+        otherTitle?.setAttribute('aria-expanded', 'false');
+        otherTitle?.classList.remove('expanded');
       }
     });
 
-    // Basculer l'état actuel
     if (isCurrentlyExpanded) {
       this.collapse(skillRow);
       title.setAttribute('aria-expanded', 'false');
       title.classList.remove('expanded');
-      skillRow.classList.remove('expanded');
     } else {
       this.expand(skillRow);
       title.setAttribute('aria-expanded', 'true');
       title.classList.add('expanded');
     }
-  };
+  }
 
   expand(skillRow) {
     skillRow.classList.add('expanded');
-    skillRow.style.maxHeight = `${skillRow.scrollHeight}px`;
+    skillRow.style.removeProperty('max-height');
     skillRow.setAttribute('aria-hidden', 'false');
   }
 
   collapse(skillRow) {
-    skillRow.style.maxHeight = '0';
+    skillRow.classList.remove('expanded');
+    skillRow.style.removeProperty('max-height');
     skillRow.setAttribute('aria-hidden', 'true');
   }
 
@@ -435,101 +540,6 @@ class CollapsibleSkills {
         this.collapse(skillRow);
         title.setAttribute('aria-expanded', 'false');
         title.classList.remove('expanded');
-      }
-    });
-  }
-}
-
-class Projects {
-  constructor() {
-    this.paragraphs = safeQuerySelectorAll('.projects__row-content');
-    this.projectLinks = safeQuerySelectorAll('.project__link');
-    
-    // Si aucun élément n'est trouvé, ne pas initialiser
-    if (this.paragraphs.length === 0) {
-      return;
-    }
-    
-    this.mediaQuery = window.matchMedia('(max-width: 37.5em)');
-    this.githubProjectIndex = this.projectLinks.length > 0 
-      ? Array.from(this.projectLinks).findIndex(link => link.href.includes('github.com'))
-      : -1;
-    this.init();
-  }
-
-  init() {
-    this.applySkillColors();
-    this.handleMediaQueryChange(this.mediaQuery);
-    this.mediaQuery.addEventListener('change', (e) => this.handleMediaQueryChange(e));
-  }
-
-  applySkillColors() {
-    this.paragraphs.forEach(paragraph => {
-      const spans = paragraph.querySelectorAll('span');
-
-      spans.forEach(span => {
-        const skillText = span.textContent.trim();
-
-        if (CONFIG.skillColors.hasOwnProperty(skillText)) {
-          span.style.color = CONFIG.skillColors[skillText];
-        }
-      });
-    });
-  }
-
-  handleMediaQueryChange(mediaQuery) {
-    if (mediaQuery.matches) {
-      this.addLinks();
-    } else {
-      this.removeLinks();
-    }
-  }
-
-  addLinks() {
-    let adjustedIndex = 1;
-
-    this.paragraphs.forEach((paragraph, index) => {
-      if (paragraph.closest('#other-projects')) {
-        if (!paragraph.querySelector('.btn--theme')) {
-          const githubLink = document.createElement('a');
-          githubLink.href = "https://github.com/melih0132/all-my-projects";
-          githubLink.className = "btn btn--med btn--theme links";
-          githubLink.target = "_blank";
-          githubLink.textContent = "See my projects on GitHub";
-          paragraph.appendChild(githubLink);
-        }
-        return;
-      }
-
-      const parentProject = paragraph.closest('.projects__row');
-      const projectIndex = Array.from(this.projectLinks).indexOf(parentProject.closest('.project__link'));
-
-      if (!paragraph.querySelector('.btn--theme')) {
-        const link = document.createElement('a');
-
-        if (projectIndex === this.githubProjectIndex) {
-          link.href = this.projectLinks[this.githubProjectIndex].href;
-          link.target = "_blank";
-        } else {
-          link.href = `/en/projects/project-${adjustedIndex}.html`;
-          link.target = "_self";
-          adjustedIndex++;
-        }
-
-        link.className = "btn btn--med btn--theme links";
-        link.textContent = "See more";
-        paragraph.appendChild(link);
-      }
-    });
-  }
-
-  removeLinks() {
-    this.paragraphs.forEach(paragraph => {
-      if (paragraph.closest('#other-projects')) return;
-
-      const existingLink = paragraph.querySelector('.btn--theme');
-      if (existingLink) {
-        paragraph.removeChild(existingLink);
       }
     });
   }
@@ -572,77 +582,43 @@ class ProjectFilters {
     this.extractTechnologies();
     this.createFilterSearchUi();
     this.attachEventListeners();
+    this.updateResultsCount(this.projectCards.length);
   }
 
   // Charger les technologies depuis les pages de détails des projets
   async loadProjectTechnologies() {
-    const promises = [];
-    
-    this.projectCards.forEach(card => {
-      const link = card.querySelector('a[href*="/projects/"], a[href*="/projets/"]');
-      if (link && link.href) {
-        const projectUrl = link.getAttribute('href');
-        if (projectUrl && !projectUrl.includes('github.com')) {
-          promises.push(this.fetchProjectTechnologies(projectUrl, card));
-        } else {
-          // Pour les projets sans page de détails, utiliser les tech-tags
-          this.fallbackToTechTags(card);
-        }
-      } else {
-        // Pas de lien, utiliser les tech-tags
-        this.fallbackToTechTags(card);
-      }
-    });
-    
-    await Promise.all(promises);
-  }
-
-  // Extraire les technologies depuis une page de détails
-  async fetchProjectTechnologies(url, card) {
+    let projectsData = null;
     try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        this.fallbackToTechTags(card);
-        return;
-      }
-      
-      const html = await response.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      
-      // Chercher la section .skills__projects
-      const skillsProjects = doc.querySelector('.skills__projects');
-      if (!skillsProjects) {
-        this.fallbackToTechTags(card);
-        return;
-      }
-      
-      const technologies = [];
-      const skillElements = skillsProjects.querySelectorAll('.skills__skill');
-      
-      skillElements.forEach(skill => {
-        const tech = skill.textContent.trim();
-        if (tech) {
-          technologies.push(tech);
-        }
-      });
-      
-      // Stocker les technologies pour ce projet
-      if (technologies.length > 0) {
-        this.projectTechs.set(card, technologies);
-        // Ajouter un attribut data-tech à la carte pour référence rapide
-        card.setAttribute('data-tech', technologies.join('|'));
-      } else {
-        this.fallbackToTechTags(card);
+      const response = await fetch('/assets/data/projects.json');
+      if (response.ok) {
+        projectsData = await response.json();
       }
     } catch (error) {
-      console.warn(`Impossible de charger les technologies depuis ${url}:`, error);
-      // En cas d'erreur, utiliser les tech-tags comme fallback
-      this.fallbackToTechTags(card);
+      console.warn('Unable to load projects.json:', error);
     }
+
+    const projectsById = new Map();
+    if (projectsData?.projects) {
+      projectsData.projects.forEach(project => {
+        projectsById.set(project.id, project);
+      });
+    }
+
+    this.projectCards.forEach(card => {
+      const projectId = card.getAttribute('data-project-id');
+      const project = projectId ? projectsById.get(projectId) : null;
+
+      if (project?.technologies?.length) {
+        this.projectTechs.set(card, project.technologies);
+        card.setAttribute('data-tech', project.technologies.join('|'));
+        return;
+      }
+
+      this.fallbackToTechTags(card);
+    });
   }
 
-  // Fallback : utiliser les tech-tags si la page de détails ne peut pas être chargée
+  // Fallback : utiliser les tech-tags si projects.json est indisponible
   fallbackToTechTags(card) {
     // Ne pas écraser si les technologies ont déjà été chargées
     if (this.projectTechs.has(card)) {
@@ -656,6 +632,13 @@ class ProjectFilters {
       const tech = tag.textContent.trim();
       if (!tech.startsWith('+') && tech !== '') {
         technologies.push(tech);
+        return;
+      }
+      if (tech.startsWith('+')) {
+        const extra = tag.getAttribute('title');
+        if (extra) {
+          extra.split(',').map(t => t.trim()).filter(Boolean).forEach(t => technologies.push(t));
+        }
       }
     });
     
@@ -746,6 +729,8 @@ class ProjectFilters {
     input.setAttribute('spellcheck', 'false');
     input.placeholder = ui.searchPlaceholder || '…';
     input.setAttribute('aria-label', ui.searchAriaLabel || input.placeholder);
+    input.setAttribute('role', 'combobox');
+    input.setAttribute('aria-haspopup', 'listbox');
     input.setAttribute('aria-autocomplete', 'list');
     input.setAttribute('aria-expanded', 'false');
 
@@ -761,10 +746,19 @@ class ProjectFilters {
     inner.appendChild(input);
     inner.appendChild(list);
     wrap.appendChild(inner);
+
+    const resultsCount = document.createElement('p');
+    resultsCount.className = 'projects-filters-search__count';
+    resultsCount.setAttribute('aria-live', 'polite');
+    resultsCount.setAttribute('aria-atomic', 'true');
+    wrap.appendChild(resultsCount);
+    this.resultsCountEl = resultsCount;
+
     toolbar.appendChild(wrap);
 
     const chipsWrap = document.createElement('div');
     chipsWrap.className = 'projects-filters-chips';
+    chipsWrap.setAttribute('role', 'group');
     chipsWrap.setAttribute('aria-label', ui.filterChipsAriaLabel || 'Active filters');
     chipsWrap.hidden = true;
     this.filterContainer.appendChild(chipsWrap);
@@ -873,6 +867,7 @@ class ProjectFilters {
     matches.forEach((m, i) => {
       const li = document.createElement('li');
       li.setAttribute('role', 'option');
+      li.setAttribute('aria-selected', 'false');
       li.setAttribute('data-filter', m.key);
       li.setAttribute('data-label', m.label);
       li.id = `filter-suggest-${i}`;
@@ -890,7 +885,13 @@ class ProjectFilters {
   highlightSearchOption(items) {
     items.forEach((el, i) => {
       el.classList.toggle('is-highlighted', i === this.searchHighlightIndex);
+      el.setAttribute('aria-selected', i === this.searchHighlightIndex ? 'true' : 'false');
     });
+    if (this.searchInput && this.searchHighlightIndex >= 0 && items[this.searchHighlightIndex]) {
+      this.searchInput.setAttribute('aria-activedescendant', items[this.searchHighlightIndex].id);
+    } else if (this.searchInput) {
+      this.searchInput.removeAttribute('aria-activedescendant');
+    }
   }
 
   openSearchSuggestions() {
@@ -910,6 +911,7 @@ class ProjectFilters {
     }
     this.searchList.hidden = true;
     this.searchInput.setAttribute('aria-expanded', 'false');
+    this.searchInput.removeAttribute('aria-activedescendant');
     this.searchHighlightIndex = -1;
   }
 
@@ -1039,6 +1041,8 @@ class ProjectFilters {
 
   filterProjects() {
     const keys = Array.from(this.activeFilters.keys());
+    let visibleCount = 0;
+
     this.projectCards.forEach(card => {
       if (card.closest('.projects__btn-container')) {
         return;
@@ -1046,17 +1050,21 @@ class ProjectFilters {
       if (keys.length === 0) {
         card.style.display = '';
         card.classList.remove('filtered-out');
+        visibleCount++;
         return;
       }
       const match = keys.every(k => this.cardMatchesSingleFilter(card, k));
       if (match) {
         card.style.display = '';
         card.classList.remove('filtered-out');
+        visibleCount++;
       } else {
         card.style.display = 'none';
         card.classList.add('filtered-out');
       }
     });
+
+    this.updateResultsCount(visibleCount);
     
     // Animation pour les projets visibles
     setTimeout(() => {
@@ -1072,6 +1080,15 @@ class ProjectFilters {
         }
       });
     }, 100);
+  }
+
+  updateResultsCount(count) {
+    if (!this.resultsCountEl) {
+      return;
+    }
+    const ui = CONFIG.projectFilterUi || {};
+    const formatter = ui.resultsCount || ((n) => `${n}`);
+    this.resultsCountEl.textContent = formatter(count);
   }
 }
 
@@ -1096,13 +1113,13 @@ class ContactForm {
       });
 
       if (response.ok) {
-        this.showMessage("Thank you! Your message has been sent.", "success");
+        this.showMessage(CONFIG.contactForm.success, 'success');
         this.form.reset();
       } else {
-        this.showMessage("An error occurred. Please try again.", "error");
+        this.showMessage(CONFIG.contactForm.error, 'error');
       }
     } catch (error) {
-      this.showMessage("An error occurred. Please try again.", "error");
+      this.showMessage(CONFIG.contactForm.error, 'error');
     }
   }
 
@@ -1431,12 +1448,6 @@ document.addEventListener('DOMContentLoaded', () => {
       new Skills();
     }
     
-    // Initialiser Projects seulement si les éléments existent (pas de warning si absents)
-    if (safeQuerySelectorAll('.projects__row-content').length > 0) {
-      new Projects();
-    }
-    
-    // Initialiser ProjectFilters pour les nouveaux projets
     if (safeQuerySelectorAll('.project-card').length > 0) {
       new ProjectFilters();
     }

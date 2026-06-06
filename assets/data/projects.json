@@ -1,0 +1,313 @@
+{
+  "projects": [
+    {
+      "id": "evit-shuriken",
+      "technologies": [
+        ".NET/C#",
+        "WPF",
+        "XAML",
+        "Git",
+        "GitHub"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/evit-shuriken.html",
+        "fr": "/fr/projets/evit-shuriken.html"
+      }
+    },
+    {
+      "id": "dortan-app",
+      "technologies": [
+        ".NET/C#",
+        "WPF",
+        "XAML",
+        "SQL",
+        "PostgreSQL",
+        "pgAdmin4",
+        "Figma",
+        "Git",
+        "GitHub"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/dortan-app.html",
+        "fr": "/fr/projets/dortan-app.html"
+      }
+    },
+    {
+      "id": "kube",
+      "technologies": [
+        "Unity",
+        ".NET/C#",
+        "3D Modeling",
+        "Git",
+        "GitHub"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/kube.html",
+        "fr": "/fr/projets/kube.html"
+      }
+    },
+    {
+      "id": "phaser-games",
+      "technologies": [
+        "Phaser",
+        "Express",
+        "Socket.io",
+        "Nodemon"
+      ],
+      "githubOnly": true,
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/web/phaser-projects"
+    },
+    {
+      "id": "lpo",
+      "technologies": [
+        "Visual Paradigm",
+        "PowerAMC",
+        "PostgreSQL",
+        "pgAdmin4",
+        "SQL",
+        "Excel",
+        "Power BI",
+        "Microsoft Teams"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/lpo.html",
+        "fr": "/fr/projets/lpo.html"
+      }
+    },
+    {
+      "id": "uber-laravel",
+      "technologies": [
+        "PHP",
+        "Laravel",
+        "PostgreSQL",
+        "SQL",
+        "Bootstrap",
+        "Node.js",
+        "Power BI",
+        "Visual Paradigm",
+        "PowerAMC",
+        "Microsoft Azure",
+        "Microsoft Teams",
+        "VS Code",
+        "Git",
+        "GitHub",
+        "Agile",
+        "MVC"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/uber-laravel.html",
+        "fr": "/fr/projets/uber-laravel.html"
+      }
+    },
+    {
+      "id": "flutter-apps",
+      "technologies": [
+        "Flutter",
+        "Dart",
+        "RESTful API",
+        "Visual Studio Code",
+        "Git",
+        "GitHub"
+      ],
+      "githubOnly": true,
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/flutter"
+    },
+    {
+      "id": "uber-vuejs-dotnet",
+      "technologies": [
+        "Vue.js",
+        ".NET Core",
+        "C#",
+        "Node.js",
+        "PostgreSQL",
+        "RESTful API",
+        "VS Code",
+        "Visual Studio",
+        "Git",
+        "GitHub",
+        "Postman",
+        "Microsoft Teams",
+        "MVC"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/uber-vuejs-dotnet.html",
+        "fr": "/fr/projets/uber-vuejs-dotnet.html"
+      }
+    },
+    {
+      "id": "heva",
+      "technologies": [
+        "FastAPI",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "OpenAI",
+        "Next",
+        "PostgreSQL",
+        "SQLAlchemy",
+        "Alembic",
+        "Pytest",
+        "Tailwind CSS",
+        "RESTful API",
+        "Swagger",
+        "Postman",
+        "Figma",
+        "Framer",
+        "Docker",
+        "Git",
+        "GitHub",
+        "VS Code"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/heva.html",
+        "fr": "/fr/projets/heva.html"
+      }
+    },
+    {
+      "id": "smarthome-lite",
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "Flask",
+        "PostgreSQL",
+        "SQLAlchemy",
+        "Next",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Kotlin",
+        "Jetpack Compose",
+        "Raspberry Pi",
+        "Z-Wave",
+        "VS Code",
+        "Git",
+        "GitHub"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/smarthome-lite.html",
+        "fr": "/fr/projets/smarthome-lite.html"
+      }
+    },
+    {
+      "id": "shared-ia",
+      "technologies": [
+        "Node.js",
+        "Express.js",
+        "Socket.io",
+        "React",
+        "TypeScript",
+        "Vite",
+        "Tailwind CSS",
+        "Zustand",
+        "OpenAI",
+        "PostgreSQL",
+        "JWT",
+        "Swagger",
+        "Git",
+        "GitHub"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/shared-ia.html",
+        "fr": "/fr/projets/shared-ia.html"
+      }
+    },
+    {
+      "id": "swift-apps",
+      "technologies": [
+        "Swift",
+        "UIKit",
+        "Xcode",
+        "iOS",
+        "Git",
+        "GitHub",
+        "SwiftUI"
+      ],
+      "githubOnly": true,
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/swift"
+    },
+    {
+      "id": "kotlin-apps",
+      "technologies": [
+        "Kotlin",
+        "Jetpack Compose",
+        "Gradle",
+        "Android Studio",
+        "Material 3",
+        "Git",
+        "GitHub"
+      ],
+      "githubOnly": true,
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/kotlin"
+    },
+    {
+      "id": "dotnet-core-projects",
+      "technologies": [
+        "ASP.NET Core",
+        ".NET Core",
+        "C#",
+        "RESTful API",
+        "PostgreSQL",
+        "Visual Studio",
+        "Git",
+        "GitHub",
+        "Postman"
+      ],
+      "githubOnly": true,
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/.net-core-projects"
+    },
+    {
+      "id": "python-projects",
+      "technologies": [
+        "Python",
+        "Tkinter",
+        "SQLite",
+        "Git",
+        "GitHub",
+        "VS Code",
+        "PyCharm",
+        "pip"
+      ],
+      "githubOnly": true,
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/python"
+    },
+    {
+      "id": "ranking",
+      "technologies": [
+        "Python",
+        "Tkinter",
+        "SQLite",
+        "Git",
+        "GitHub"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/ranking.html",
+        "fr": "/fr/projets/ranking.html"
+      }
+    },
+    {
+      "id": "web-projects",
+      "technologies": [
+        "PHP",
+        "OOP",
+        "Design Patterns",
+        "MySQL",
+        "HTML/CSS",
+        "JavaScript",
+        "Git",
+        "GitHub"
+      ],
+      "githubOnly": true,
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/web"
+    }
+  ]
+}

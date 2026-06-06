@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://melih0132.github.io/fr/sitemap.xml
+Sitemap: https://melih0132.github.io/en/sitemap.xml

@@ -8,7 +8,6 @@
 
   const lenis = new Lenis({
     autoRaf: true,
-    anchors: { offset: 100 },
     allowNestedScroll: true
   });
   window.lenis = lenis;
