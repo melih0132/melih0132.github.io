@@ -2152,8 +2152,8 @@ textarea {
 .project-details__content-title {
     font-weight: 700;
     font-size: 2.8rem;
-    border-left: 6px solid #16B364;
-    padding-left: 0.7rem;
+    border-left: var(--details-accent) solid #16B364;
+    padding-left: var(--details-title-gap);
     margin-bottom: 2rem
 }
 
@@ -2161,7 +2161,6 @@ textarea {
     .project-details__content-title {
         font-size: 2.4rem;
         margin-bottom: 1rem;
-        padding-left: 1rem
     }
 }
 
@@ -2223,33 +2222,46 @@ textarea {
 }
 
 .project-details__desc {
-    margin: 2rem 0 3rem 0
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    margin: 0 0 3rem;
+    width: 100%;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
 }
 
 @media only screen and (max-width: 37.5em) {
     .project-details__desc {
-        margin: 1rem 0
+        gap: 1.4rem;
+        margin-bottom: 2rem;
     }
 }
 
 .project-details__desc-para {
     font-size: 1.8rem;
-    line-height: 1.7;
+    line-height: 1.75;
     color: #444;
     margin-bottom: 2rem;
     text-align: left;
 }
 
+.project-details__desc .project-details__desc-para {
+    margin-bottom: 0;
+    text-align: inherit;
+}
+
 @media only screen and (max-width: 37.5em) {
     .project-details__desc-para {
         font-size: 1.6rem;
-        line-height: 1.6;
-        color: #444;
+        line-height: 1.65;
         margin-bottom: 1.5rem;
-        text-align: justify;
-        text-justify: inter-word;
-        hyphens: auto;
-        -webkit-hyphens: auto;
+    }
+
+    .project-details__desc .project-details__desc-para {
+        margin-bottom: 0;
     }
 }
 
@@ -2424,6 +2436,8 @@ textarea {
 
 /* Nouvelle structure organisée */
 .project-details__section {
+    --details-accent: 6px;
+    --details-title-gap: 0.7rem;
     margin-bottom: 6rem;
     padding-bottom: 4rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -2437,6 +2451,7 @@ textarea {
 
 @media only screen and (max-width: 37.5em) {
     .project-details__section {
+        --details-title-gap: 1rem;
         margin-bottom: 4rem;
         padding-bottom: 3rem;
     }
