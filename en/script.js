@@ -89,7 +89,6 @@ const CONFIG = {
   projectFilterUi: {
     searchPlaceholder: "Search by technology…",
     searchAriaLabel: "Filter projects by technology",
-    clearAriaLabel: "Clear search",
     filterChipsAriaLabel: "Active filters (match all)",
     removeFilterChipAriaPrefix: "Remove filter"
   },
@@ -106,6 +105,10 @@ const CONFIG = {
     ".NET Core": ["ASP.NET Core", ".NET Core", "WPF", "WinUI 3"]
   }
 };
+
+function getScrollY() {
+  return window.lenis?.scroll ?? window.scrollY;
+}
 
 class HamburgerMenu {
   constructor() {
@@ -175,7 +178,11 @@ class Header {
   }
 
   init() {
-    window.addEventListener('scroll', () => this.handleScroll());
+    const onScroll = () => this.handleScroll();
+    window.addEventListener('scroll', onScroll);
+    if (window.lenis) {
+      window.lenis.on('scroll', onScroll);
+    }
     this.logoContainer.addEventListener('click', () => this.handleLogoClick());
     this.handleScroll();
   }
@@ -186,7 +193,7 @@ class Header {
     const isMenuActive = smallMenu && smallMenu.classList.contains('header__sm-menu--active');
     
     // Gérer la classe header--scrolled même si le menu est actif
-    if (window.scrollY > CONFIG.scrollThreshold) {
+    if (getScrollY() > CONFIG.scrollThreshold) {
       this.header.classList.add('header--scrolled');
     } else {
       this.header.classList.remove('header--scrolled');
@@ -200,10 +207,10 @@ class Header {
     // Mettre à jour le background seulement si le menu n'est pas actif
     this.updateHeaderBackground();
     
-    if (window.scrollY === 0) {
+    if (getScrollY() === 0) {
       this.header.style.backgroundColor = 'transparent';
     }
-    else if (window.scrollY > 0 && window.scrollY < CONFIG.scrollThreshold) {
+    else if (getScrollY() > 0 && getScrollY() < CONFIG.scrollThreshold) {
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         this.header.style.backgroundColor = this.darkBackgroundColor;
       } else {
@@ -227,13 +234,13 @@ class Header {
       const sectionTop = section.offsetTop - 100;
       const sectionHeight = section.offsetHeight;
       const sectionBottom = sectionTop + sectionHeight;
-      const distance = Math.abs(window.scrollY - sectionTop);
+      const distance = Math.abs(getScrollY() - sectionTop);
 
       if (section.id === 'home' || section.id === 'contact') {
         return;
       }
 
-      if (distance < closestDistance && window.scrollY >= sectionTop && window.scrollY <= sectionBottom) {
+      if (distance < closestDistance && getScrollY() >= sectionTop && getScrollY() <= sectionBottom) {
         currentSection = section;
         closestDistance = distance;
       }
@@ -259,7 +266,11 @@ class HeaderNav {
   }
 
   init() {
-    window.addEventListener('scroll', () => this.updateActiveSection());
+    const onScroll = () => this.updateActiveSection();
+    window.addEventListener('scroll', onScroll);
+    if (window.lenis) {
+      window.lenis.on('scroll', onScroll);
+    }
     this.updateActiveSection();
 
     this.navLinks.forEach(link => {
@@ -268,7 +279,7 @@ class HeaderNav {
   }
 
   updateActiveSection() {
-    const scrollY = window.pageYOffset;
+    const scrollY = getScrollY();
 
     this.sections.forEach(section => {
       const sectionHeight = section.offsetHeight;
@@ -294,7 +305,11 @@ class HeaderNav {
     const targetSection = document.getElementById(targetId);
 
     if (targetSection) {
-      targetSection.scrollIntoView({ behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(targetSection, { offset: -100 });
+      } else {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }
 }
@@ -739,18 +754,11 @@ class ProjectFilters {
     list.id = listId;
     list.className = 'projects-filters-search__list';
     list.setAttribute('role', 'listbox');
+    list.setAttribute('data-lenis-prevent', '');
     list.hidden = true;
     input.setAttribute('aria-controls', listId);
 
-    const clearBtn = document.createElement('button');
-    clearBtn.type = 'button';
-    clearBtn.className = 'projects-filters-search__clear';
-    clearBtn.setAttribute('aria-label', ui.clearAriaLabel || 'Clear');
-    clearBtn.textContent = '×';
-    clearBtn.hidden = true;
-
     inner.appendChild(input);
-    inner.appendChild(clearBtn);
     inner.appendChild(list);
     wrap.appendChild(inner);
     toolbar.appendChild(wrap);
@@ -777,7 +785,6 @@ class ProjectFilters {
 
     this.searchInput = input;
     this.searchList = list;
-    this.searchClearBtn = clearBtn;
     this.searchWrap = wrap;
     this.searchHighlightIndex = -1;
 
@@ -798,16 +805,6 @@ class ProjectFilters {
       this.searchHighlightIndex = -1;
       this.refreshSearchSuggestions();
       this.openSearchSuggestions();
-      if (this.searchClearBtn) {
-        this.searchClearBtn.hidden = input.value.trim() === '';
-      }
-    });
-
-    clearBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      input.value = '';
-      clearBtn.hidden = true;
-      this.closeSearchSuggestions();
     });
 
     list.addEventListener('click', (e) => {
@@ -864,7 +861,7 @@ class ProjectFilters {
       }
     });
     rows.sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: 'base' }));
-    return rows.slice(0, 12);
+    return rows;
   }
 
   refreshSearchSuggestions() {
@@ -1000,17 +997,11 @@ class ProjectFilters {
       if (this.searchInput) {
         this.searchInput.value = '';
       }
-      if (this.searchClearBtn) {
-        this.searchClearBtn.hidden = true;
-      }
       return;
     }
     this.activeFilters.set(key, (displayLabel || '').trim() || key);
     if (this.searchInput) {
       this.searchInput.value = '';
-    }
-    if (this.searchClearBtn) {
-      this.searchClearBtn.hidden = true;
     }
     this.closeSearchSuggestions();
     this.syncAllButtonState();
@@ -1022,9 +1013,6 @@ class ProjectFilters {
     this.activeFilters.clear();
     if (this.searchInput) {
       this.searchInput.value = '';
-    }
-    if (this.searchClearBtn) {
-      this.searchClearBtn.hidden = true;
     }
     if (this.searchList) {
       this.searchList.innerHTML = '';
