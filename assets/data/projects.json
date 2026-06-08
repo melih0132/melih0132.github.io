@@ -53,9 +53,15 @@
       "id": "phaser-games",
       "technologies": [
         "Phaser",
-        "Express",
+        "Node.js",
+        "JavaScript",
+        "Express.js",
         "Socket.io",
-        "Nodemon"
+        "HTML/CSS",
+        "Nodemon",
+        "VS Code",
+        "Git",
+        "GitHub"
       ],
       "githubOnly": true,
       "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/web/phaser-projects"
@@ -110,7 +116,7 @@
         "Flutter",
         "Dart",
         "RESTful API",
-        "Visual Studio Code",
+        "VS Code",
         "Git",
         "GitHub"
       ],
@@ -126,6 +132,8 @@
         "Node.js",
         "PostgreSQL",
         "RESTful API",
+        "JWT",
+        "Swagger",
         "VS Code",
         "Visual Studio",
         "Git",
@@ -178,6 +186,8 @@
         "Flask",
         "PostgreSQL",
         "SQLAlchemy",
+        "JWT",
+        "Pytest",
         "Next",
         "React",
         "TypeScript",
@@ -211,6 +221,7 @@
         "PostgreSQL",
         "JWT",
         "Swagger",
+        "VS Code",
         "Git",
         "GitHub"
       ],
@@ -255,8 +266,12 @@
         ".NET Core",
         "C#",
         "RESTful API",
+        "Entity Framework Core",
+        "WinUI 3",
         "PostgreSQL",
+        "Swagger",
         "Visual Studio",
+        "VS Code",
         "Git",
         "GitHub",
         "Postman"
@@ -285,6 +300,7 @@
         "Python",
         "Tkinter",
         "SQLite",
+        "VS Code",
         "Git",
         "GitHub"
       ],
@@ -300,9 +316,11 @@
         "PHP",
         "OOP",
         "Design Patterns",
+        "MVC",
         "MySQL",
         "HTML/CSS",
         "JavaScript",
+        "VS Code",
         "Git",
         "GitHub"
       ],
