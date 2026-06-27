@@ -565,11 +565,25 @@ class ProjectFilters {
     
     // Mapping pour regrouper les technologies similaires
     this.techMapping = {
-      '.NET': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
-      'C#': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
-      '.NET Core': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
-      '.NET/C#': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)'],
-      'C# (.NET)': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)']
+      '.NET': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)', 'ASP.NET Core'],
+      'C#': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)', 'ASP.NET Core'],
+      '.NET Core': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)', 'ASP.NET Core'],
+      '.NET/C#': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)', 'ASP.NET Core'],
+      'C# (.NET)': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)', 'ASP.NET Core'],
+      'ASP.NET Core': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)', 'ASP.NET Core'],
+      'Express': ['Express', 'Express.js'],
+      'Express.js': ['Express', 'Express.js'],
+      'Vue': ['Vue', 'Vue.js'],
+      'Vue.js': ['Vue', 'Vue.js'],
+      'VS Code': ['VS Code', 'Visual Studio Code'],
+      'Visual Studio Code': ['VS Code', 'Visual Studio Code'],
+      'Phaser': ['Phaser', 'Phaser.js'],
+      'Phaser.js': ['Phaser', 'Phaser.js'],
+      'Next': ['Next', 'Next.js'],
+      'Next.js': ['Next', 'Next.js'],
+      'Material 3': ['Material 3', 'Material Design 3'],
+      'Material Design 3': ['Material 3', 'Material Design 3'],
+      'HTML/CSS': ['HTML/CSS', 'HTML', 'CSS', 'HTML5']
     };
     
     if (this.projectCards.length === 0 || !this.filterContainer) {

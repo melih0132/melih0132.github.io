@@ -206,7 +206,11 @@ document.addEventListener("DOMContentLoaded", () => {
     iOS: "#000000",
     Android: "#166534",
     Flask: "#000000",
-    Django: "#092E20"
+    Django: "#092E20",
+    JWT: "#D63AFF",
+    "Entity Framework Core": "#512BD4",
+    MySQL: "#4479A1",
+    "Material 3": "#4285F4"
   };
 
   document.querySelectorAll(".skills__skill").forEach(skill => {
