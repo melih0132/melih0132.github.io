@@ -60,6 +60,7 @@ const BASE_CONFIG = {
 
     // Frameworks & Libraries
     "Laravel": "#F05340",
+    "Symfony": "#000000",
     "Node.js & Express": "#3C873A",
     "React & Next": "#61DAFB",
     "Vue.js": "#42b883",
@@ -81,6 +82,7 @@ const BASE_CONFIG = {
 
     // Databases
     "SQL Databases": "#336791",
+    "MySQL": "#4479A1",
     "MongoDB": "#47A248",
     "JSON / JSONB": "#ffcc00",
     "Database Optimization": "#6A1B9A",
@@ -125,7 +127,7 @@ const BASE_CONFIG = {
     "JavaScript": ["React", "Next", "Vue.js", "Vue", "Express", "Express.js", "Node.js", "jQuery", "Vite", "Zustand"],
     "TypeScript": ["React", "Next", "Vue.js", "Vue", "Vite", "Zustand"],
     "Kotlin": ["Jetpack Compose"],
-    "PHP": ["Laravel"],
+    "PHP": ["Laravel", "Symfony"],
     "Swift": ["UIKit", "iOS"],
     "Dart": ["Flutter"],
     "C#": ["ASP.NET Core", ".NET Core", "WPF", "WinUI 3"],

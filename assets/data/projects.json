@@ -295,6 +295,30 @@
       }
     },
     {
+      "id": "la-guilde-des-seigneurs",
+      "technologies": [
+        "PHP",
+        "Symfony",
+        "MySQL",
+        "Doctrine",
+        "JWT",
+        "Bootstrap",
+        "Twig",
+        "OpenAPI",
+        "RESTful API",
+        "HttpClient",
+        "PHPUnit",
+        "Git",
+        "GitHub",
+        "MVC"
+      ],
+      "githubOnly": false,
+      "detailPaths": {
+        "en": "/en/projects/la-guilde-des-seigneurs.html",
+        "fr": "/fr/projets/la-guilde-des-seigneurs.html"
+      }
+    },
+    {
       "id": "web-projects",
       "technologies": [
         "PHP",

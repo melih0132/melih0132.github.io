@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Monorepo Symfony : API REST JWT et application web consommatrice pour La Guilde des Seigneurs." />
+  <link rel="canonical" href="https://melih0132.github.io/fr/projets/la-guilde-des-seigneurs.html" />
+  <link rel="alternate" hreflang="en" href="https://melih0132.github.io/en/projects/la-guilde-des-seigneurs.html" />
+  <link rel="alternate" hreflang="fr" href="https://melih0132.github.io/fr/projets/la-guilde-des-seigneurs.html" />
+  <link rel="alternate" hreflang="x-default" href="https://melih0132.github.io/en/projects/la-guilde-des-seigneurs.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="La Guilde des Seigneurs | Melih Cetinkaya" />
+  <meta property="og:description" content="Monorepo Symfony : API REST JWT et application web consommatrice pour La Guilde des Seigneurs." />
+  <meta property="og:url" content="https://melih0132.github.io/fr/projets/la-guilde-des-seigneurs.html" />
+  <meta property="og:image" content="https://melih0132.github.io/assets/png/pp.png" />
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="stylesheet" href="/assets/css/style.min.css" />
+  <title>La Guilde des Seigneurs | Melih Cetinkaya</title>
+  <link rel="icon" href="/assets/png/logo.png" type="image/png">
+</head>
+
+<body>
+  <header class="header">
+    <div class="header__content">
+      <div class="header__logo-container">
+        <div class="header__logo-img-cont">
+          <img src="/assets/png/pp.png" alt="PP Melih CETINKAYA" class="header__logo-img" width="40" height="40" />
+        </div>
+        <span class="header__logo-sub">MELIH C.</span>
+      </div>
+      <div class="header__main">
+        <ul class="header__links header__links--center">
+          <li class="header__link-wrapper">
+            <a href="/fr/#home" class="header__link">Accueil</a>
+          </li>
+          <li class="header__link-wrapper">
+            <a href="/fr/#about" class="header__link">À propos</a>
+          </li>
+          <li class="header__link-wrapper">
+            <a href="/fr/#projects" class="header__link">Projets</a>
+          </li>
+        </ul>
+      </div>
+      <ul class="header__links header__links--right">
+        <li class="header__link-wrapper">
+          <a href="/fr/#contact" class="header__link">Contact</a>
+        </li>
+      </ul>
+      <div class="header__main-ham-menu-cont">
+        <img src="/assets/svg/ham-menu.svg" alt="hamburger menu" class="header__main-ham-menu" width="26" height="26" />
+        <img src="/assets/svg/ham-menu-close.svg" alt="hamburger menu close"
+          class="header__main-ham-menu-close d-none" width="26" height="26" />
+      </div>
+    </div>
+    <div class="header__sm-menu">
+      <div class="header__sm-menu-content">
+        <ul class="header__sm-menu-links">
+          <li class="header__sm-menu-link">
+            <a href="/fr/#home">Accueil</a>
+          </li>
+          <li class="header__sm-menu-link">
+            <a href="/fr/#about">À propos</a>
+          </li>
+
+
+          <li class="header__sm-menu-link">
+            <a href="/fr/#projects">Projets</a>
+          </li>
+          <li class="header__sm-menu-link">
+            <a href="/fr/#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+  <section class="project-cs-hero">
+    <div class="project-cs-hero__content">
+      <h1 class="heading-primary"><strong>La Guilde des Seigneurs - Monorepo Symfony</strong></h1>
+      <div class="project-cs-hero__info">
+        <p class="text-primary">
+          Projet EIP <strong>Symfony 7.4</strong> en monorepo : une <strong>API REST</strong> sécurisée par
+          <strong>JWT</strong> et une application web consommatrice gérant personnages, bâtiments et utilisateurs.
+        </p>
+      </div>
+      <div class="project-cs-hero__cta">
+        <a href="https://github.com/oeoecbien/symfony-project" class="btn btn--bg"
+          target="_blank" rel="noreferrer"><strong>Voir sur GitHub</strong></a>
+      </div>
+    </div>
+  </section>
+  <section class="project-details">
+    <div class="main-container">
+      <div class="project-details__content">
+        <div class="project-details__content-main">
+          
+          <!-- Section: Aperçu du projet -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Aperçu du projet</strong></h2>
+            <div class="project-details__desc">
+              <p class="project-details__desc-para">
+                <strong>La Guilde des Seigneurs</strong> est un projet de formation EIP structuré en monorepo
+                (<code>api/</code> + <code>front/</code>). L'API expose des ressources REST pour les
+                <strong>personnages</strong>, les <strong>bâtiments</strong> et les <strong>utilisateurs</strong>,
+                avec authentification <strong>JWT</strong>, contrôle d'accès via <strong>voters</strong> et documentation
+                <strong>OpenAPI</strong>.
+              </p>
+              <p class="project-details__desc-para">
+                Le <strong>backend</strong> est une API REST <strong>Symfony 7.4</strong> avec <strong>MySQL</strong>,
+                <strong>Doctrine</strong>, authentification <strong>JWT</strong> et documentation <strong>Swagger</strong>
+                via NelmioApiDocBundle. Le <strong>front</strong> est une application Symfony consommatrice avec
+                <strong>Twig</strong>, <strong>Bootstrap</strong> et <strong>HttpClient</strong>, stockant le token JWT
+                en session pour un CRUD complet avec inscription, connexion et vérification d'e-mail.
+              </p>
+              <p class="project-details__desc-para">
+                Le code source est publié dans le dépôt
+                <a href="https://github.com/oeoecbien/symfony-project" target="_blank" rel="noreferrer">symfony-project</a> :
+                deux applications Symfony 7.4 indépendantes (<code>api/</code> et <code>front/</code>). Le front appelle
+                l'API via la variable <code>API_URL</code>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Section: Fonctionnalités principales -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Fonctionnalités principales</strong></h2>
+            <div class="project-details__features">
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">API REST documentée</h3>
+                <p class="project-details__desc-para">
+                  CRUD sur personnages et bâtiments, pagination, filtres et documentation Swagger accessible via
+                  NelmioApiDocBundle.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Authentification JWT</h3>
+                <p class="project-details__desc-para">
+                  Inscription, connexion et émission de tokens JWT pour sécuriser les endpoints de l'API.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Front consommateur</h3>
+                <p class="project-details__desc-para">
+                  Application Symfony dédiée consommant l'API distante avec gestion de session et interface CRUD
+                  francisée.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Contrôle d'accès</h3>
+                <p class="project-details__desc-para">
+                  Autorisation via voters sur les ressources API (personnages, bâtiments, utilisateurs).
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Doctrine et fixtures</h3>
+                <p class="project-details__desc-para">
+                  Migrations Doctrine, fixtures JSON locales et tests PHPUnit sur les deux applications.
+                </p>
+              </div>
+              <div class="project-details__feature-item">
+                <h3 class="project-details__feature-title">Interface Twig / Bootstrap</h3>
+                <p class="project-details__desc-para">
+                  CRUD complet en Twig et Bootstrap avec inscription, connexion et vérification d'e-mail.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Galerie d'images -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Galerie du projet</strong></h2>
+            <div class="project-details__gallery">
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LaGuildeDesSeigneurs/homepage-api.webp" alt="Page d'accueil de l'API Symfony"
+                  loading="lazy" class="project-details__showcase-img" />
+                <p class="project-details__img-caption">Page d'accueil de l'API</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LaGuildeDesSeigneurs/doc-api.webp" alt="Documentation OpenAPI via NelmioApiDocBundle"
+                  loading="lazy" class="project-details__showcase-img" />
+                <p class="project-details__img-caption">Documentation OpenAPI (Swagger)</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LaGuildeDesSeigneurs/login-front.webp" alt="Page de connexion de l'application front"
+                  loading="lazy" class="project-details__showcase-img" />
+                <p class="project-details__img-caption">Connexion (application front)</p>
+              </div>
+              <div class="project-details__showcase-img-cont">
+                <img src="/assets/webp/LaGuildeDesSeigneurs/list-characters.webp" alt="Liste des personnages gérée via l'API REST"
+                  loading="lazy" class="project-details__showcase-img" />
+                <p class="project-details__img-caption">Liste des personnages (CRUD)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Technologies utilisées -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Technologies utilisées</strong></h2>
+            <div class="project-details__tools-used">
+              <div class="skills__projects">
+                <div class="skills__skill"><strong>PHP</strong></div>
+                <div class="skills__skill"><strong>Symfony</strong></div>
+                <div class="skills__skill"><strong>MySQL</strong></div>
+                <div class="skills__skill"><strong>Doctrine</strong></div>
+                <div class="skills__skill"><strong>JWT</strong></div>
+                <div class="skills__skill"><strong>Bootstrap</strong></div>
+                <div class="skills__skill"><strong>Twig</strong></div>
+                <div class="skills__skill"><strong>OpenAPI</strong></div>
+                <div class="skills__skill"><strong>RESTful API</strong></div>
+                <div class="skills__skill"><strong>HttpClient</strong></div>
+                <div class="skills__skill"><strong>PHPUnit</strong></div>
+                <div class="skills__skill"><strong>Git</strong></div>
+                <div class="skills__skill"><strong>GitHub</strong></div>
+                <div class="skills__skill"><strong>MVC</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Liens du projet -->
+          <div class="project-details__section">
+            <h2 class="project-details__content-title"><strong>Explorer le projet</strong></h2>
+            <div class="project-details__links">
+              <a href="https://github.com/oeoecbien/symfony-project"
+                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
+                <strong>Voir sur GitHub</strong>
+              </a>
+              <a href="/fr/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
+                <strong>Retour aux projets</strong>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="main-footer">
+    <div class="main-container">
+      <div class="main-footer__upper">
+        <div class="main-footer__row main-footer__row-1">
+          <h2 class="heading heading-sm main-footer__heading-sm">
+            <span>Contact</span>
+          </h2>
+          <div class="main-footer__social-cont">
+            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/melih-ctk/">
+              <img id="Linkedin" class="logo" src="/assets/svg/linkedin-dark.svg" alt="LinkedIn">
+            </a>
+            <a target="_blank" rel="noreferrer" href="https://github.com/melih0132">
+              <img id="GitHub" class="logo" src="/assets/svg/github-dark.svg" alt="GitHub">
+            </a>
+            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/m.ctk1/">
+              <img id="Instagram" class="logo" src="/assets/svg/insta-dark.svg" alt="Instagram">
+            </a>
+          </div>
+        </div>
+        <div class="main-footer__row main-footer__row-2">
+          <h2 class="heading heading-sm text-lt">Melih Cetinkaya</h2>
+          <p class="main-footer__short-desc">
+            Développeur Full-Stack passionné par les technologies web modernes et l'innovation numérique.
+          </p>
+        </div>
+      </div>
+
+      <div class="main-footer__lower">
+        &copy; Copyright
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        . Made by Melih Cetinkaya
+      </div>
+    </div>
+  </footer>
+
+      <script defer src="/assets/vendor/lenis/lenis.min.js"></script>
+  <script defer src="/assets/js/lenis-init.min.js"></script>
+  <script defer src="/fr/projets/script.min.js"></script>
+</body>
+
+</html>
