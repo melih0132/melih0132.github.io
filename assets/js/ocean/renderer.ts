@@ -10,10 +10,21 @@
  */
 import { labelCells } from "./label.ts";
 import { clamp, hash3, smoothstep } from "./math.ts";
+import { KOI_COLOR_COUNT } from "./species.ts";
 import { SHARK_NODES, type Shark, type SharkKind, type World } from "./world.ts";
 
 const ALPHA_LEVELS = 6;
 const FISH_ALPHAS = [0.28, 0.42, 0.58, 0.74, 0.9];
+
+/** Adaptation: koi skins — beni, shiro, sumi, orange, kin. */
+const KOI_RGB: [number, number, number][] = [
+  [220, 56, 42],
+  [240, 236, 228],
+  [36, 34, 38],
+  [232, 140, 36],
+  [210, 168, 58],
+];
+
 
 // Dot colour classes: blue, green, red, pale; the last entry is the cyan wake.
 const DOT_RGB: [number, number, number][] = [
@@ -21,17 +32,20 @@ const DOT_RGB: [number, number, number][] = [
   [52, 205, 60],
   [228, 50, 44],
   [190, 212, 255],
-  // Adaptation: a soft grey-blue wake instead of bright cyan, to keep the scene sober.
-  [150, 170, 200],
+  // Adaptation: warm amber wake to match the koi pond mood.
+  [190, 160, 110],
 ];
 const DOT_BASE_ALPHA = [1, 1, 1, 1, 1];
 const WAKE = DOT_RGB.length - 1;
 
-// Adaptation: sober greys instead of the original bright shimmer colours.
-const ACCENTS = ["#8a93a6", "#a9b1c0", "#c7ccd6"];
+// Adaptation: warm Japanese accents (vermillion, cream, gold) for koi shimmer.
+const ACCENTS = ["#c43c2c", "#e8dcc8", "#d4a84b", "#e89040"];
 
-/** Adaptation: bubbles replace the red splash where a fish is eaten. */
-const BUBBLE = "rgb(170,185,210)";
+/** Adaptation: soft warm bubbles instead of cool grey-blue. */
+const BUBBLE = "rgb(200,175,140)";
+
+/** Adaptation: red hi patch on koi skin. */
+const FLAG_HI = 8;
 
 export interface RendererOptions {
   /** Adaptation: no black fill nor grid, for drawing over a page. */
@@ -76,6 +90,15 @@ function classicHalfWidth(s: number) {
   return 0.019 * (1 - k) + 0.012 * Math.sin(k * Math.PI);
 }
 
+/** Adaptation: blunt oval carp body with a flaring koi tail. */
+function carpHalfWidth(s: number) {
+  if (s < 0.12) return 0.11 * Math.pow(Math.sin(((s / 0.12) * Math.PI) / 2), 0.5);
+  if (s < 0.38) return 0.11 + 0.025 * smoothstep(0.12, 0.38, s);
+  if (s < 0.76) return 0.028 + 0.107 * Math.pow(1 - (s - 0.38) / 0.38, 1.05);
+  const k = (s - 0.76) / 0.24;
+  return 0.028 * (1 - k) + 0.05 * Math.sin(k * Math.PI);
+}
+
 /** Body outline and fin layout per species. All values are fractions of length. */
 interface SharkShape {
   halfWidth: (s: number) => number;
@@ -100,6 +123,18 @@ interface SharkShape {
   /** Skin colour multipliers (r, g, b). */
   tint: [number, number, number];
 }
+
+const CARP_SHAPE: Omit<SharkShape, "tint"> = {
+  halfWidth: carpHalfWidth,
+  pectoral: [0.14, 0.36, 0.44, 0.2],
+  falcate: false,
+  pelvic: [0.5, 0.58, 0.62, 0.07],
+  caudal: 0.12,
+  dorsal: [0.38, 0.52],
+  secondDorsal: [0.62, 0.68],
+  eye: [0.07, 0.11],
+  gills: [0.16, 0.24],
+};
 
 const SHAPES: Record<SharkKind, SharkShape> = {
   classic: {
@@ -252,6 +287,21 @@ const SHAPES: Record<SharkKind, SharkShape> = {
     gills: [0.14, 0.22],
     tint: [1.1, 0.96, 0.76],
   },
+  // Adaptation: kohaku — cream body, vermillion hi patches.
+  kohaku: {
+    ...CARP_SHAPE,
+    tint: [1.12, 1.05, 0.92],
+  },
+  // Adaptation: showa — cream body, vermillion + sumi (black) patches.
+  showa: {
+    ...CARP_SHAPE,
+    tint: [1.08, 1.02, 0.94],
+  },
+  // Adaptation: ogon — metallic gold body, sparse darker flecks.
+  ogon: {
+    ...CARP_SHAPE,
+    tint: [1.2, 1.05, 0.55],
+  },
 };
 
 const KINDS = Object.keys(SHAPES) as SharkKind[];
@@ -338,9 +388,14 @@ export class AsciiRenderer {
   /** Cells holding a fish this frame (frame stamp); dots skip them. */
   private fishStamp = new Uint32Array(0);
   private frameId = 0;
-  /** Fish cells bucketed by brightness, so each bucket is one fillStyle. */
-  private fishBuckets: number[][] = FISH_ALPHAS.map(() => []);
-  private fishStyles = FISH_ALPHAS.map((a) => `rgba(230,238,255,${a})`);
+  /** Adaptation: fish cells bucketed by koi colour × brightness (one fillStyle each). */
+  private fishBuckets: number[][] = Array.from(
+    { length: KOI_COLOR_COUNT * FISH_ALPHAS.length },
+    () => [],
+  );
+  private fishStyles = KOI_RGB.flatMap(([r, g, b]) =>
+    FISH_ALPHAS.map((a) => `rgba(${r},${g},${b},${a})`),
+  );
 
   constructor(private canvas: HTMLCanvasElement, options: RendererOptions = {}) {
     // Adaptation: options with the original defaults (opaque canvas, built-in colours).
@@ -627,8 +682,11 @@ export class AsciiRenderer {
       } else if (shape === SHAPES.zebra && s > 0.08 && s < 0.55 && (across < 0.1 || Math.abs(across - 0.6) < 0.08)) {
         // Zebra sharks carry pale ridges down the back.
         shade = Math.max(shade, 0.8);
-      } else if (this.marked(s, a * bestSign, L, across)) {
-        flag = FLAG_MARK;
+      } else {
+        const patch = this.koiPatch(s, a * bestSign, L, across);
+        if (patch === 1) flag = FLAG_HI;
+        else if (patch === 2) flag = FLAG_MARK;
+        else if (this.marked(s, a * bestSign, L, across)) flag = FLAG_MARK;
       }
       this.hitFlag = flag;
       this.hitShade = shade;
@@ -642,7 +700,9 @@ export class AsciiRenderer {
       // Falcate (sickle) fins get a concave trailing edge.
       !(shape.falcate && inTriangle(u, a, L * p1, 0, L * (p1 + (p2 - p1) * 0.33), tip * 0.55, L * p2, tip))
     ) {
-      this.hitFlag = this.marked(s, a * bestSign, L, 0) ? FLAG_MARK : FLAG_FIN;
+      const finPatch = this.koiPatch(s, a * bestSign, L, 0);
+      this.hitFlag =
+        finPatch === 1 ? FLAG_HI : finPatch === 2 || this.marked(s, a * bestSign, L, 0) ? FLAG_MARK : FLAG_FIN;
       this.hitShade = 0.38 + 0.22 * (1 - clamp(a / tip, 0, 1));
       return true;
     }
@@ -680,6 +740,46 @@ export class AsciiRenderer {
       return (gu - cu - jx) ** 2 + (gv - cv - jy) ** 2 < 0.08;
     }
     return false;
+  }
+
+  /**
+   * Adaptation: koi blotches that ride with the skin.
+   * 0 = base, 1 = hi (vermillion), 2 = sumi / fleck (black or dark gold).
+   */
+  private koiPatch(s: number, v: number, L: number, across: number): 0 | 1 | 2 {
+    if (
+      this.shape !== SHAPES.kohaku &&
+      this.shape !== SHAPES.showa &&
+      this.shape !== SHAPES.ogon
+    ) {
+      return 0;
+    }
+    if (s < 0.05 || s > 0.93 || across > 0.92) return 0;
+    const gu = s * 5.2;
+    const gv = (v / L) * 4;
+    const cu = Math.floor(gu);
+    const cv = Math.floor(gv);
+    const jx = hash3(cu, cv, this.sharkId) * 0.55 + 0.2;
+    const jy = hash3(cu, cv, this.sharkId + 17) * 0.55 + 0.2;
+    const d2 = (gu - cu - jx) ** 2 + (gv - cv - jy) ** 2;
+    const roll = hash3(cu, cv, this.sharkId + 3);
+    const roll2 = hash3(cu + 1, cv, this.sharkId + 5);
+
+    if (this.shape === SHAPES.ogon) {
+      return d2 < 0.05 && roll < 0.2 ? 2 : 0;
+    }
+    if (this.shape === SHAPES.kohaku) {
+      if (d2 < 0.18 && roll < 0.58) return 1;
+      if (d2 < 0.3 && roll2 < 0.32) return 1;
+      return 0;
+    }
+    // showa
+    if (d2 < 0.15) {
+      if (roll < 0.3) return 2;
+      if (roll < 0.68) return 1;
+    }
+    if (d2 < 0.27 && roll2 > 0.55 && roll2 < 0.82) return 1;
+    return 0;
   }
 
   /**
@@ -826,7 +926,9 @@ export class AsciiRenderer {
       const key = sharkKey[i];
       const shade = sharkShade[i];
       const dim = 0.7 + 0.3 * sharkDepth[i];
-      const [tr, tg, tb] = SHAPES[KINDS[sharkKind[i]]].tint;
+      const kind = KINDS[sharkKind[i]];
+      const [tr, tg, tb] = SHAPES[kind].tint;
+      const isKoi = kind === "kohaku" || kind === "showa" || kind === "ogon";
 
       // Colours re-roll on a staggered clock so the hide shimmers.
       const tick = Math.floor(t * 2.4 + (key % 997) / 97);
@@ -843,11 +945,23 @@ export class AsciiRenderer {
       if (flag === FLAG_EDGE) {
         // Soft, anti-aliased silhouette: no block, just a light glyph.
         const set = shade >= 0.5 ? EDGE_HEAVY : EDGE_LIGHT;
-        const g = (70 + shade * 80) * dim;
-        ctx.fillStyle =
-          roll < 0.07
-            ? this.accents[key % this.accents.length]
-            : `rgb(${Math.round(g * tr)},${Math.round(g * tg)},${Math.min(255, Math.round(g * tb + 6))})`;
+        if (isKoi) {
+          const base =
+            kind === "ogon"
+              ? [200, 160, 55]
+              : [220, 205, 180];
+          const g = (0.45 + shade * 0.55) * dim;
+          ctx.fillStyle =
+            roll < 0.1
+              ? this.accents[key % this.accents.length]
+              : `rgb(${Math.round(base[0] * g)},${Math.round(base[1] * g)},${Math.round(base[2] * g)})`;
+        } else {
+          const g = (70 + shade * 80) * dim;
+          ctx.fillStyle =
+            roll < 0.07
+              ? this.accents[key % this.accents.length]
+              : `rgb(${Math.round(g * tr)},${Math.round(g * tg)},${Math.min(255, Math.round(g * tb + 6))})`;
+        }
         ctx.fillText(set[(key >>> 8) % set.length], x + cw / 2, y + ch / 2 + 1);
         continue;
       }
@@ -860,7 +974,7 @@ export class AsciiRenderer {
       } else if (flag === FLAG_EYE) {
         level = 12;
         glyph = "o";
-      } else if (flag === FLAG_MARK) {
+      } else if (flag === FLAG_HI || flag === FLAG_MARK) {
         level = 24 + shade * 22;
         glyph = MARK_GLYPHS[(key >>> 8) % MARK_GLYPHS.length];
       } else if (flag === FLAG_FIN) {
@@ -872,15 +986,52 @@ export class AsciiRenderer {
         glyph = SKIN_RAMP[clamp(Math.floor((1 - shade) * 8.99) + jitter, 0, SKIN_RAMP.length - 1)];
       }
       level *= dim;
-      // Tinted per species; the classic tint is a cool blue-grey, like a back seen through deep water.
-      ctx.fillStyle = `rgb(${Math.min(255, Math.round(level * tr))},${Math.min(255, Math.round(level * tg))},${Math.min(255, Math.round(level * tb + 4))})`;
+
+      // Adaptation: koi fill cells with cream / vermillion / sumi / gold instead of grey tint.
+      if (isKoi) {
+        let fr: number;
+        let fg: number;
+        let fb: number;
+        if (flag === FLAG_HI) {
+          fr = 210 * dim;
+          fg = 48 * dim;
+          fb = 36 * dim;
+        } else if (flag === FLAG_MARK) {
+          if (kind === "ogon") {
+            fr = 120 * dim;
+            fg = 90 * dim;
+            fb = 30 * dim;
+          } else {
+            fr = 22 * dim;
+            fg = 20 * dim;
+            fb = 24 * dim;
+          }
+        } else if (kind === "ogon") {
+          const lift = 0.55 + shade * 0.45;
+          fr = 220 * lift * dim;
+          fg = 175 * lift * dim;
+          fb = 55 * lift * dim;
+        } else {
+          const lift = 0.7 + shade * 0.3;
+          fr = 235 * lift * dim;
+          fg = 225 * lift * dim;
+          fb = 205 * lift * dim;
+        }
+        ctx.fillStyle = `rgb(${Math.min(255, Math.round(fr))},${Math.min(255, Math.round(fg))},${Math.min(255, Math.round(fb))})`;
+      } else {
+        ctx.fillStyle = `rgb(${Math.min(255, Math.round(level * tr))},${Math.min(255, Math.round(level * tg))},${Math.min(255, Math.round(level * tb + 4))})`;
+      }
       ctx.fillRect(x + 1, y + 1, cw - 1, ch - 1);
 
       let color: string;
-      if (flag === FLAG_EYE) color = "#9aa0ad";
-      else if (flag === FLAG_MARK) color = `rgb(${Math.round(70 * tr)},${Math.round(70 * tg)},${Math.round(70 * tb)})`;
-      else if (roll < 0.09) color = this.accents[key % this.accents.length];
+      if (flag === FLAG_EYE) color = isKoi ? "#2a2218" : "#9aa0ad";
+      else if (flag === FLAG_HI) color = roll < 0.2 ? "#fff4e8" : "#6a1810";
+      else if (flag === FLAG_MARK) {
+        color = kind === "ogon" ? "#3a2a10" : `rgb(${Math.round(70 * tr)},${Math.round(70 * tg)},${Math.round(70 * tb)})`;
+      } else if (roll < 0.09) color = this.accents[key % this.accents.length];
       else if (roll < 0.13) color = "#ffffff";
+      else if (isKoi && kind === "ogon") color = shade > 0.55 ? "#5a4010" : "#7a5820";
+      else if (isKoi) color = shade > 0.55 ? "#4a3a28" : "#6a5848";
       else color = shade > 0.55 ? "#0e0f13" : "#1b1d24";
       ctx.fillStyle = color;
       ctx.fillText(glyph, x + cw / 2, y + ch / 2 + 1);
@@ -890,9 +1041,9 @@ export class AsciiRenderer {
   // ── fish, dots, heat ────────────────────────────────────────────────
 
   /**
-   * Snap each fish to a cell and bucket it by brightness: far fish are dim,
-   * near fish brighter, and turning or panicking fish glint. Nearer fish
-   * claim a cell first when two land in the same one.
+   * Snap each fish to a cell and bucket it by koi colour × brightness: far fish
+   * are dim, near fish brighter, and turning or panicking fish glint. Nearer
+   * fish claim a cell first when two land in the same one.
    */
   private markFish(world: World) {
     const { fishStamp, fishBuckets, sharkFlag } = this;
@@ -906,7 +1057,9 @@ export class AsciiRenderer {
         fishStamp[i] = frame;
         const glint = clamp(Math.abs(f.turn) / 3.5, 0, 1);
         const v = 0.3 + (0.4 * (f.depth - 0.55)) / 0.45 + 0.3 * Math.max(glint, f.alarm);
-        fishBuckets[clamp(Math.floor(v * FISH_ALPHAS.length), 0, FISH_ALPHAS.length - 1)].push(i);
+        const alpha = clamp(Math.floor(v * FISH_ALPHAS.length), 0, FISH_ALPHAS.length - 1);
+        const color = clamp(f.color | 0, 0, KOI_COLOR_COUNT - 1);
+        fishBuckets[color * FISH_ALPHAS.length + alpha].push(i);
       }
     }
   }

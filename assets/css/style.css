@@ -3,7 +3,11 @@
   --ink: #e8ecf2;
   --muted: #8a93a6;
   --line: rgba(169, 177, 192, 0.25);
-  --accent: #a9b1c0;
+  --accent: #d4a84b;
+  --koi-beni: #dc4638;
+  --koi-shiro: #e8dcc8;
+  --koi-orange: #e89040;
+  --koi-kin: #d4a84b;
   --scrim: color-mix(in srgb, #000 78%, transparent);
   --scrim-strong: color-mix(in srgb, #000 88%, transparent);
   --font: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
@@ -647,14 +651,37 @@ textarea {
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 0.75rem;
-  color: var(--muted);
-  font-size: 0.75rem;
+  gap: 0.4rem;
+  font-size: 0.72rem;
   letter-spacing: 0.04em;
 }
 
 .tech-tag {
-  color: inherit;
+  display: inline-block;
+  padding: 0.18rem 0.5rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--koi-beni);
+  background: color-mix(in srgb, var(--koi-beni) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--koi-beni) 45%, transparent);
+}
+
+.tech-tag:nth-child(4n + 2) {
+  color: var(--koi-shiro);
+  background: color-mix(in srgb, var(--koi-shiro) 14%, transparent);
+  border-color: color-mix(in srgb, var(--koi-shiro) 40%, transparent);
+}
+
+.tech-tag:nth-child(4n + 3) {
+  color: var(--koi-orange);
+  background: color-mix(in srgb, var(--koi-orange) 16%, transparent);
+  border-color: color-mix(in srgb, var(--koi-orange) 45%, transparent);
+}
+
+.tech-tag:nth-child(4n + 4) {
+  color: var(--koi-kin);
+  background: color-mix(in srgb, var(--koi-kin) 16%, transparent);
+  border-color: color-mix(in srgb, var(--koi-kin) 45%, transparent);
 }
 
 .project-description {
@@ -942,8 +969,10 @@ textarea {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 0.9rem;
-  color: var(--muted);
+  color: var(--koi-shiro);
   font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
 }
 
 .project-actions {

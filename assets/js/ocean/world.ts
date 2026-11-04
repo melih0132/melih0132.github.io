@@ -16,11 +16,23 @@
  * swimming in from the edges, which keeps the population steady.
  */
 import { angleDiff, clamp, current, rand, randInt, TAU } from "./math.ts";
-import { pickSpecies, SPECIES } from "./species.ts";
+import { pickKoiColor, pickSpecies, SPECIES } from "./species.ts";
 
 export const SHARK_NODES = 20;
 
-export type SharkKind = "classic" | "hammerhead" | "zebra" | "tiger" | "greathammer" | "mako" | "thresher" | "nurse";
+export type SharkKind =
+  | "classic"
+  | "hammerhead"
+  | "zebra"
+  | "tiger"
+  | "greathammer"
+  | "mako"
+  | "thresher"
+  | "nurse"
+  // Adaptation: carp-shaped koi varieties drawn in place of sharks.
+  | "kohaku"
+  | "showa"
+  | "ogon";
 
 /** Which sharks to put in the water; size is relative to the biggest. */
 export type SharkSpec = {
@@ -43,12 +55,12 @@ export interface WorldOptions {
   crossing?: Crossing;
 }
 
-// The landing hero: four of the same shark at different depths.
+// Adaptation: four koi at different depths (kohaku / showa / ogon).
 const DEFAULT_SHARKS: SharkSpec[] = [
-  { kind: "classic", size: 1 },
-  { kind: "classic", size: 0.7 },
-  { kind: "classic", size: 0.84 },
-  { kind: "classic", size: 0.77 },
+  { kind: "kohaku", size: 1 },
+  { kind: "showa", size: 0.72 },
+  { kind: "ogon", size: 0.86 },
+  { kind: "kohaku", size: 0.68 },
 ];
 
 export interface Fish {
@@ -57,6 +69,8 @@ export interface Fish {
   vx: number;
   vy: number;
   species: number;
+  /** Adaptation: koi skin index (0..4), independent of school species. */
+  color: number;
   /** 0 calm → 1 panicking. Spreads to neighbours. */
   alarm: number;
   alive: boolean;
@@ -247,6 +261,7 @@ export class World {
           vx: Math.cos(dir) * sp.cruise,
           vy: Math.sin(dir) * sp.cruise,
           species,
+          color: pickKoiColor(),
           alarm: 0,
           alive: true,
           respawnAt: 0,
@@ -716,6 +731,7 @@ export class World {
     for (const f of due.slice(0, sp.schoolSize[1])) {
       f.alive = true;
       f.species = species;
+      f.color = pickKoiColor();
       f.alarm = 0;
       f.turn = 0;
       f.millDir = millDir;
