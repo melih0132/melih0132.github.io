@@ -31,521 +31,24 @@ const I18N = {
   }
 };
 
-const BASE_CONFIG = {
-  scrollThreshold: 50,
-  messageDisplayTime: 3000,
-  languageChangeInterval: 2000,
-  translations: [
-    "Hi", "Ciao", "Hola", "Hey",
-    "Salut", "Oi", "Hej", "Hoi", "Heya",
-    "ねえ", "嗨", "เฮ", "नम", "Прив",
-    "Ви", "よ", "ハイ", "サン", "안녕",
-    "Heyo", "Hola", "Olá", "Zdrav", "Cześć", 
-    "Salaam", "Nam", "Merh", "Selam"
-  ],
-  skillColors: {
-    // Languages
-    "HTML/CSS": "#E34C26",
-    "JavaScript": "#F7DF1E",
-    "TypeScript": "#3178C6",
-    "PHP": "#777BB4",
-    "Python": "#306998",
-    "C# (.NET)": "#9B4F96",
-    "SQL & PL/pgSQL": "#336791",
-    "Bash": "#4EAA25",
-    "XAML": "#007ACC",
-    "Swift": "#FA7343",
-    "Kotlin": "#7F52FF",
-    "Dart": "#0175C2",
-
-    // Frameworks & Libraries
-    "Laravel": "#F05340",
-    "Symfony": "#000000",
-    "Node.js & Express": "#3C873A",
-    "React & Next": "#61DAFB",
-    "Vue.js": "#42b883",
-    "CSS Frameworks": "#6e11f5",
-    "FastAPI": "#05998B",
-    "Flutter": "#02569B",
-    "Phaser": "#00BCB4",
-    "Socket.io": "#24c29f",
-    "Nodemon": "#76D04B",
-    "Python ORM": "#D71F24",
-    "Pytest": "#0A9EDC",
-    "iOS Frameworks": "#007AFF",
-    ".NET Ecosystem": "#512BD4",
-    "Windows UI": "#512BD4",
-    "Tkinter": "#3776AB",
-    "Android UI": "#4285F4",
-    "Data Science (Python)": "#306998",
-    "OpenAI": "#10A37F",
-
-    // Databases
-    "SQL Databases": "#336791",
-    "MySQL": "#4479A1",
-    "MongoDB": "#47A248",
-    "JSON / JSONB": "#ffcc00",
-    "Database Optimization": "#6A1B9A",
-    "Reverse Engineering": "#607D8B",
-    "Database Design": "#FF5733",
-
-    // Environment & Tools
-    "IDEs": "#007ACC",
-    "Mobile IDEs": "#147EFB",
-    "Unity": "#222C37",
-    "Version Control": "#F05032",
-    "Docker": "#0db7ed",
-    "pgAdmin4": "#326690",
-    "API Tools": "#FF6C37",
-    "Web Servers": "#009639",
-    "Linux": "#ffc200",
-    "Microsoft Azure": "#0078D4",
-    "Data Analysis": "#F2C811",
-    "Visual Paradigm": "#cc3433",
-    "Collaboration Tools": "#0079BF",
-
-    // Design & CMS
-    "Figma": "#42498c",
-    "Canva": "#00C4CC",
-    "WordPress": "#21759B",
-    "Framer": "#0055FF",
-
-    // Methodologies & Concepts
-    "UML": "#007ACC",
-    "MVC": "#FF9800",
-    "CRUD": "#4CAF50",
-    "Unit Testing": "#55606E",
-    "Tests Unitaires": "#55606E",
-    "API & Web Services": "#26A69A",
-    "OOP": "#FF6B6B",
-    "Design Patterns": "#9C27B0",
-    "HTTP": "#0052CC",
-    "Agile/Scrum": "#A0CE4E"
-  },
-  languageFrameworks: {
-    "Python": ["FastAPI", "Tkinter", "SQLAlchemy", "Alembic", "Pytest", "Flask", "Django"],
-    "JavaScript": ["React", "Next", "Vue.js", "Vue", "Express", "Express.js", "Node.js", "jQuery", "Vite", "Zustand"],
-    "TypeScript": ["React", "Next", "Vue.js", "Vue", "Vite", "Zustand"],
-    "Kotlin": ["Jetpack Compose"],
-    "PHP": ["Laravel", "Symfony"],
-    "Swift": ["UIKit", "iOS"],
-    "Dart": ["Flutter"],
-    "C#": ["ASP.NET Core", ".NET Core", "WPF", "WinUI 3"],
-    ".NET": ["ASP.NET Core", ".NET Core", "WPF", "WinUI 3"],
-    ".NET Core": ["ASP.NET Core", ".NET Core", "WPF", "WinUI 3"]
-  }
-};
-
 const CONFIG = {
-  ...BASE_CONFIG,
+  messageDisplayTime: 3000,
+  languageFrameworks: {
+    Python: ['FastAPI', 'Tkinter', 'SQLAlchemy', 'Alembic', 'Pytest', 'Flask', 'Django'],
+    JavaScript: ['React', 'Next', 'Vue.js', 'Vue', 'Express', 'Express.js', 'Node.js', 'jQuery', 'Vite', 'Zustand'],
+    TypeScript: ['React', 'Next', 'Vue.js', 'Vue', 'Vite', 'Zustand'],
+    Kotlin: ['Jetpack Compose'],
+    PHP: ['Laravel', 'Symfony'],
+    Swift: ['UIKit', 'iOS'],
+    Dart: ['Flutter'],
+    'C#': ['ASP.NET Core', '.NET Core', 'WPF', 'WinUI 3'],
+    '.NET': ['ASP.NET Core', '.NET Core', 'WPF', 'WinUI 3'],
+    '.NET Core': ['ASP.NET Core', '.NET Core', 'WPF', 'WinUI 3']
+  },
   projectFilterUi: I18N[LOCALE].projectFilterUi,
   contactForm: I18N[LOCALE].contactForm,
   homePath: I18N[LOCALE].homePath
 };
-
-function getScrollY() {
-  return window.lenis?.scroll ?? window.scrollY;
-}
-
-function getHeaderScrollOffset() {
-  const header = document.querySelector('.header');
-  return header?.offsetHeight ?? 100;
-}
-
-function getSectionScrollTarget(section) {
-  if (!section || section.id === 'home') {
-    return section;
-  }
-  return section.querySelector('.heading-sec') ?? section;
-}
-
-function scrollToSection(section) {
-  if (!section) {
-    return;
-  }
-  const target = getSectionScrollTarget(section);
-  const offset = -getHeaderScrollOffset();
-  if (window.lenis) {
-    window.lenis.scrollTo(target, { offset });
-  } else {
-    const top = target.getBoundingClientRect().top + window.scrollY + offset;
-    window.scrollTo({ top, behavior: 'smooth' });
-  }
-}
-
-function getHashFromHref(href) {
-  if (!href || !href.includes('#')) {
-    return null;
-  }
-  const hash = href.split('#')[1];
-  return hash || null;
-}
-
-class HamburgerMenu {
-  constructor() {
-    this.menuBtn = document.querySelector('.header__main-ham-menu-cont');
-    this.smallMenu = document.querySelector('.header__sm-menu');
-    this.menuIcon = document.querySelector('.header__main-ham-menu');
-    this.closeIcon = document.querySelector('.header__main-ham-menu-close');
-    this.menuLinks = document.querySelectorAll('.header__sm-menu-link');
-    this.header = document.querySelector('.header');
-
-    this.init();
-  }
-
-  init() {
-    // Initialiser l'état des icônes au chargement
-    // L'icône hamburger doit être visible, l'icône close doit être cachée
-    this.menuIcon?.classList.remove('d-none');
-    this.closeIcon?.classList.add('d-none');
-    // S'assurer que le menu est fermé
-    this.smallMenu?.classList.remove('header__sm-menu--active');
-    
-    this.menuBtn?.addEventListener('click', () => this.toggleMenu());
-    this.menuLinks.forEach(link => {
-      link.addEventListener('click', () => this.closeMenu());
-    });
-  }
-
-  toggleMenu() {
-    const isActive = this.smallMenu.classList.toggle('header__sm-menu--active');
-    this.menuIcon.classList.toggle('d-none');
-    this.closeIcon.classList.toggle('d-none');
-
-    if (isActive) {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        this.header.style.backgroundColor = '#121212';
-      }
-      else {
-        this.header.style.backgroundColor = '#fff';
-      }
-    } else {
-      this.header.style.backgroundColor = '';
-      window.dispatchEvent(new Event('scroll'));
-    }
-  }
-
-  closeMenu() {
-    this.smallMenu.classList.remove('header__sm-menu--active');
-    this.menuIcon.classList.remove('d-none');
-    this.closeIcon.classList.add('d-none');
-    this.header.style.backgroundColor = '';
-    window.dispatchEvent(new Event('scroll'));
-  }
-}
-
-class Header {
-  constructor() {
-    this.header = document.querySelector('.header');
-    this.logoContainer = document.querySelector('.header__logo-container');
-    this.sections = document.querySelectorAll('section[id]');
-
-    this.defaultBackgroundColor = window.getComputedStyle(this.header).backgroundColor;
-
-    this.lightBackgroundColor = '#fff';
-    this.darkBackgroundColor = '#121212';
-
-    this.init();
-  }
-
-  init() {
-    const onScroll = () => this.handleScroll();
-    window.addEventListener('scroll', onScroll);
-    if (window.lenis) {
-      window.lenis.on('scroll', onScroll);
-    }
-    this.logoContainer.addEventListener('click', () => this.handleLogoClick());
-    this.handleScroll();
-  }
-
-  handleScroll() {
-    // Ne pas modifier le background si le menu hamburger est actif
-    const smallMenu = document.querySelector('.header__sm-menu');
-    const isMenuActive = smallMenu && smallMenu.classList.contains('header__sm-menu--active');
-    
-    // Gérer la classe header--scrolled même si le menu est actif
-    if (getScrollY() > CONFIG.scrollThreshold) {
-      this.header.classList.add('header--scrolled');
-    } else {
-      this.header.classList.remove('header--scrolled');
-    }
-
-    // Ne pas modifier le backgroundColor si le menu est ouvert
-    if (isMenuActive) {
-      return;
-    }
-
-    // Mettre à jour le background seulement si le menu n'est pas actif
-    this.updateHeaderBackground();
-    
-    if (getScrollY() === 0) {
-      this.header.style.backgroundColor = 'transparent';
-    }
-    else if (getScrollY() > 0 && getScrollY() < CONFIG.scrollThreshold) {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        this.header.style.backgroundColor = this.darkBackgroundColor;
-      } else {
-        this.header.style.backgroundColor = this.lightBackgroundColor;
-      }
-    }
-  }
-
-  updateHeaderBackground() {
-    // Ne pas modifier le background si le menu hamburger est actif
-    const smallMenu = document.querySelector('.header__sm-menu');
-    const isMenuActive = smallMenu && smallMenu.classList.contains('header__sm-menu--active');
-    if (isMenuActive) {
-      return;
-    }
-
-    let currentSection = null;
-    let closestDistance = Infinity;
-
-    this.sections.forEach(section => {
-      const headerOffset = getHeaderScrollOffset();
-      const sectionTop = section.offsetTop - headerOffset;
-      const sectionHeight = section.offsetHeight;
-      const sectionBottom = sectionTop + sectionHeight;
-      const distance = Math.abs(getScrollY() - sectionTop);
-
-      if (section.id === 'home' || section.id === 'contact') {
-        return;
-      }
-
-      if (distance < closestDistance && getScrollY() >= sectionTop && getScrollY() <= sectionBottom) {
-        currentSection = section;
-        closestDistance = distance;
-      }
-    });
-
-    if (currentSection) {
-      const backgroundColor = window.getComputedStyle(currentSection).backgroundColor;
-      this.header.style.backgroundColor = backgroundColor;
-    }
-  }
-
-  handleLogoClick() {
-    location.href = CONFIG.homePath;
-  }
-}
-
-class HeaderNav {
-  constructor() {
-    this.navLinks = document.querySelectorAll('.header__link, .header__sm-menu-link a');
-    this.sections = document.querySelectorAll('section[id]');
-
-    this.init();
-  }
-
-  init() {
-    const onScroll = () => this.updateActiveSection();
-    window.addEventListener('scroll', onScroll);
-    if (window.lenis) {
-      window.lenis.on('scroll', onScroll);
-    }
-    this.updateActiveSection();
-
-    this.navLinks.forEach(link => {
-      link.addEventListener('click', (e) => this.handleNavClick(e));
-    });
-
-    this.scrollToHashOnLoad();
-  }
-
-  scrollToHashOnLoad() {
-    const hash = window.location.hash.replace('#', '');
-    if (!hash) {
-      return;
-    }
-    const section = document.getElementById(hash);
-    if (!section) {
-      return;
-    }
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        scrollToSection(section);
-      });
-    });
-  }
-
-  updateActiveSection() {
-    const scrollY = getScrollY();
-    const headerOffset = getHeaderScrollOffset();
-
-    this.sections.forEach(section => {
-      const sectionHeight = section.offsetHeight;
-      const sectionTop = section.offsetTop - headerOffset;
-      const sectionId = section.getAttribute('id');
-
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        this.navLinks.forEach(link => {
-          link.classList.remove('active');
-        });
-
-        const activeLink = document.querySelector(`.header__link[href="./#${sectionId}"], .header__link[href="#${sectionId}"]`);
-        if (activeLink) {
-          activeLink.classList.add('active');
-        }
-      }
-    });
-  }
-
-  handleNavClick(e) {
-    const href = e.currentTarget.getAttribute('href');
-    const targetId = getHashFromHref(href);
-    if (!targetId) {
-      return;
-    }
-
-    const targetSection = document.getElementById(targetId);
-    if (!targetSection) {
-      return;
-    }
-
-    e.preventDefault();
-    scrollToSection(targetSection);
-  }
-}
-
-class MultilingualGreeting {
-  constructor() {
-    this.currentIndex = 0;
-    this.langElement = document.getElementById('dynamic-lang');
-
-    this.startRotation();
-  }
-
-  changeLanguage() {
-    this.langElement.classList.add('slide-out');
-
-    setTimeout(() => {
-      this.langElement.textContent = CONFIG.translations[this.currentIndex];
-      this.currentIndex = (this.currentIndex + 1) % CONFIG.translations.length;
-      this.langElement.classList.remove('slide-out');
-    }, 500);
-  }
-
-  startRotation() {
-    setInterval(() => this.changeLanguage(), CONFIG.languageChangeInterval);
-  }
-}
-
-class CollapsibleSkills {
-  constructor() {
-    this.titles = document.querySelectorAll('.skills__category-title');
-    this.skillRows = document.querySelectorAll('.skills__skill-row');
-    this.mediaQuery = window.matchMedia('(max-width: 37.5em)');
-    this.active = this.mediaQuery.matches;
-    this.init();
-  }
-
-  init() {
-    this.titles.forEach((title, index) => {
-      const skillRow = title.nextElementSibling;
-      title.setAttribute('role', 'button');
-      title.setAttribute('aria-expanded', 'false');
-      skillRow.setAttribute('aria-hidden', 'true');
-    });
-
-    this.handleMediaQueryChange(this.mediaQuery);
-    this.mediaQuery.addEventListener('change', (e) => this.handleMediaQueryChange(e));
-
-    document.documentElement.classList.add('js-enabled');
-  }
-
-  addEventListeners() {
-    this.titles.forEach((title) => {
-      title.addEventListener('pointerup', this.handleTitlePointerUp);
-    });
-  }
-
-  removeEventListeners() {
-    this.titles.forEach((title) => {
-      title.removeEventListener('pointerup', this.handleTitlePointerUp);
-    });
-  }
-
-  handleTitlePointerUp = (event) => {
-    if (!this.active) {
-      return;
-    }
-    if (event.pointerType === 'mouse' && event.button !== 0) {
-      return;
-    }
-    event.preventDefault();
-    this.toggleSkillRow(event);
-  };
-
-  toggleSkillRow(event) {
-    if (!this.active) {
-      return;
-    }
-    const title = event.currentTarget;
-    const skillRow = title.nextElementSibling;
-    if (!skillRow?.classList.contains('skills__skill-row')) {
-      return;
-    }
-    const isCurrentlyExpanded = title.getAttribute('aria-expanded') === 'true';
-
-    this.skillRows.forEach(row => {
-      if (row !== skillRow) {
-        this.collapse(row);
-        const otherTitle = row.previousElementSibling;
-        otherTitle?.setAttribute('aria-expanded', 'false');
-        otherTitle?.classList.remove('expanded');
-      }
-    });
-
-    if (isCurrentlyExpanded) {
-      this.collapse(skillRow);
-      title.setAttribute('aria-expanded', 'false');
-      title.classList.remove('expanded');
-    } else {
-      this.expand(skillRow);
-      title.setAttribute('aria-expanded', 'true');
-      title.classList.add('expanded');
-    }
-  }
-
-  expand(skillRow) {
-    skillRow.classList.add('expanded');
-    skillRow.style.removeProperty('max-height');
-    skillRow.setAttribute('aria-hidden', 'false');
-  }
-
-  collapse(skillRow) {
-    skillRow.classList.remove('expanded');
-    skillRow.style.removeProperty('max-height');
-    skillRow.setAttribute('aria-hidden', 'true');
-  }
-
-  handleMediaQueryChange(mediaQuery) {
-    this.active = mediaQuery.matches;
-    if (this.active) {
-      this.toggleAll(false);
-      this.removeEventListeners();
-      this.addEventListeners();
-    } else {
-      this.toggleAll(true);
-      this.removeEventListeners();
-    }
-  }
-
-  toggleAll(expand) {
-    this.skillRows.forEach((skillRow, index) => {
-      const title = skillRow.previousElementSibling;
-      if (expand) {
-        this.expand(skillRow);
-        title.setAttribute('aria-expanded', 'true');
-        title.classList.add('expanded');
-      } else {
-        this.collapse(skillRow);
-        title.setAttribute('aria-expanded', 'false');
-        title.classList.remove('expanded');
-      }
-    });
-  }
-}
 
 function normalizeFilterKey(str) {
   return str.toLowerCase()
@@ -767,10 +270,10 @@ class ProjectFilters {
     resultsCount.className = 'projects-filters-search__count';
     resultsCount.setAttribute('aria-live', 'polite');
     resultsCount.setAttribute('aria-atomic', 'true');
-    wrap.appendChild(resultsCount);
     this.resultsCountEl = resultsCount;
 
     toolbar.appendChild(wrap);
+    toolbar.appendChild(resultsCount);
 
     const chipsWrap = document.createElement('div');
     chipsWrap.className = 'projects-filters-chips';
@@ -955,7 +458,7 @@ class ProjectFilters {
       const x = document.createElement('span');
       x.className = 'projects-filters-chip__remove';
       x.setAttribute('aria-hidden', 'true');
-      x.textContent = '×';
+      x.textContent = '✕';
       chip.appendChild(text);
       chip.appendChild(x);
       this.chipsWrap.appendChild(chip);
@@ -1166,322 +669,74 @@ class ContactForm {
   }
 }
 
-class LanguageSelector {
+class SiteChrome {
   constructor() {
-    this.selector = document.getElementById('selectLang');
-    this.init();
-  }
-
-  init() {
-    this.selector.addEventListener('change', () => this.handleLanguageChange());
-  }
-
-  handleLanguageChange() {
-    const selectedLang = this.selector.value;
-    location.href = `/${selectedLang}/`;
-  }
-}
-
-// Classe pour gérer l'année du copyright
-class CopyrightYear {
-  constructor() {
-    this.updateCopyrightYear();
-  }
-
-  updateCopyrightYear() {
-    const copyrightElements = safeQuerySelectorAll('.copyright-year');
-    const currentYear = new Date().getFullYear();
-    
-    copyrightElements.forEach(element => {
-      element.textContent = currentYear;
-    });
-  }
-}
-
-// Fonction utilitaire pour vérifier l'existence des éléments
-// Fonction utilitaire pour vérifier l'existence des éléments (silencieuse)
-function safeQuerySelector(selector) {
-  return document.querySelector(selector);
-}
-
-// Fonction utilitaire pour vérifier l'existence de plusieurs éléments (silencieuse)
-function safeQuerySelectorAll(selector) {
-  return document.querySelectorAll(selector);
-}
-
-// Initialisation sécurisée des composants
-// Scroll Reveal Animation Manager
-class ScrollRevealManager {
-  constructor() {
-    this.elements = safeQuerySelectorAll('.scroll-reveal');
-    if (this.elements.length === 0) return;
-    this.lastScrollY = window.scrollY;
-    this.init();
-  }
-
-  init() {
-    // Track scroll direction globally
-    let lastScrollY = window.scrollY || window.pageYOffset;
-    let currentScrollDirection = 'down';
-    
-    // Mettre à jour la direction à chaque événement scroll
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY || window.pageYOffset;
-      if (currentScrollY !== lastScrollY) {
-        currentScrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
-        lastScrollY = currentScrollY;
-      }
-    }, { passive: true });
-    
-    // Create intersection observer
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('revealed-down') && !entry.target.classList.contains('revealed-up') && !entry.target.classList.contains('revealed')) {
-          const hasSpecialAnimation = entry.target.classList.contains('scroll-reveal--fade-left') || 
-                                      entry.target.classList.contains('scroll-reveal--fade-right') || 
-                                      entry.target.classList.contains('scroll-reveal--scale');
-          
-          if (hasSpecialAnimation) {
-            // Pour les animations spéciales, utiliser la classe revealed standard
-            entry.target.classList.add('revealed');
-          } else {
-            // Remove old revealed classes
-            entry.target.classList.remove('revealed', 'revealed-down', 'revealed-up', 'initial-up');
-            
-            // Utiliser la direction de défilement capturée
-            // Défilement vers le bas → apparition du bas vers le haut
-            // Défilement vers le haut → apparition du haut vers le bas
-            if (currentScrollDirection === 'down') {
-              // Défilement vers le bas : apparition du bas vers le haut
-              entry.target.classList.add('revealed-down');
-            } else {
-              // Défilement vers le haut : apparition du haut vers le bas
-              // Désactiver temporairement la transition pour définir l'état initial sans animation
-              const originalTransition = entry.target.style.transition;
-              entry.target.style.transition = 'none';
-              entry.target.classList.add('initial-up');
-              // Force reflow pour appliquer initial-up
-              void entry.target.offsetHeight;
-              // Réactiver la transition et ajouter revealed-up
-              entry.target.style.transition = originalTransition;
-              requestAnimationFrame(() => {
-                entry.target.classList.add('revealed-up');
-              });
-            }
-          }
-        }
+    this.header = document.querySelector('.header');
+    this.toggle = document.querySelector('[data-nav-toggle]');
+    this.panel = document.querySelector('[data-nav-panel]');
+    this.onScroll = this.onScroll.bind(this);
+    this.onScroll();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.bindHomeLinks();
+    if (location.hash === '#home') {
+      window.scrollTo(0, 0);
+    }
+    if (this.toggle && this.panel) {
+      this.toggle.addEventListener('click', () => {
+        const open = this.panel.classList.toggle('is-open');
+        this.toggle.setAttribute('aria-expanded', String(open));
       });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      this.panel.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', () => {
+          this.panel.classList.remove('is-open');
+          this.toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+    document.querySelectorAll('[data-set-lang]').forEach((a) => {
+      a.addEventListener('click', () => {
+        try {
+          localStorage.setItem('preferredLanguage', a.getAttribute('data-set-lang'));
+        } catch (e) {}
+      });
     });
+  }
 
-    // Observe all scroll reveal elements
-    this.elements.forEach(element => {
-      this.observer.observe(element);
+  bindHomeLinks() {
+    document.querySelectorAll('a[href="#home"]').forEach((a) => {
+      a.addEventListener('click', (event) => {
+        event.preventDefault();
+        const top = document.getElementById('home');
+        if (top) top.focus({ preventScroll: true });
+        history.pushState(null, '', '#home');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     });
+  }
+
+  onScroll() {
+    if (!this.header) return;
+    this.header.classList.toggle('header--scrolled', window.scrollY > 24);
   }
 }
 
-
-// Skills Colors Manager
-class SkillsColors {
+class OceanBoot {
   constructor() {
-    this.skills = safeQuerySelectorAll('.skills__skill');
-    if (this.skills.length > 0) {
-      this.applyColors();
-    }
-  }
-
-  applyColors() {
-    this.skills.forEach(skill => {
-      const skillName = skill.textContent.trim();
-      const color = CONFIG.skillColors[skillName];
-      if (color) {
-        skill.style.backgroundColor = color;
-        skill.style.color = '#ffffff';
-      }
-    });
-  }
-}
-
-class Skills {
-  constructor() {
-    this.skillCards = safeQuerySelectorAll('.skill-card');
-    if (this.skillCards.length > 0) {
-      this.mediaQuery = window.matchMedia('(min-width: 769px)');
-      this.isDesktop = this.mediaQuery.matches;
-      this.init();
-    }
-  }
-
-  init() {
-    this.addClickHandlers();
-    this.addOutsideClickHandler();
-    this.addKeyboardSupport();
-    this.handleMediaQueryChange(this.mediaQuery);
-    this.mediaQuery.addEventListener('change', (e) => this.handleMediaQueryChange(e));
-  }
-
-  handleMediaQueryChange(mediaQuery) {
-    this.isDesktop = mediaQuery.matches;
-  }
-
-  addClickHandlers() {
-    this.skillCards.forEach(card => {
-      const clickHint = card.querySelector('.skill-click-hint');
-      
-      if (clickHint) {
-        // Toujours écouter le clic sur skill-click-hint en mode bureau
-        clickHint.addEventListener('click', (e) => {
-          if (this.isDesktop) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.handleSkillClick(e, card);
-          }
-        });
-        
-        // Toujours écouter le clic sur la carte en mode mobile
-        card.addEventListener('click', (e) => {
-          if (!this.isDesktop) {
-            // Ne pas déclencher si on clique sur un lien de niveau
-            if (!e.target.closest('.skill-level-link')) {
-              this.handleSkillClick(e, card);
-            }
-          }
-        });
-      }
-    });
-  }
-
-  addOutsideClickHandler() {
-    document.addEventListener('click', (e) => {
-      // En mode bureau, fermer seulement si on ne clique pas sur skill-click-hint
-      if (this.isDesktop) {
-        if (!e.target.closest('.skill-click-hint') && !e.target.closest('.skill-level-link')) {
-          this.closeAllDropdowns();
-        }
-      } else {
-        // En mode mobile, fermer si on ne clique pas sur la carte
-        if (!e.target.closest('.skill-card')) {
-          this.closeAllDropdowns();
-        }
-      }
-    });
-  }
-
-  addKeyboardSupport() {
-    this.skillCards.forEach(card => {
-      const clickHint = card.querySelector('.skill-click-hint');
-      const targetElement = this.isDesktop ? (clickHint || card) : card;
-      
-      if (targetElement) {
-        targetElement.setAttribute('tabindex', '0');
-        targetElement.setAttribute('role', 'button');
-        card.setAttribute('aria-expanded', 'false');
-        
-        targetElement.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.handleSkillClick(e, card);
-          } else if (e.key === 'Escape') {
-            this.closeAllDropdowns();
-          }
-        });
-      }
-    });
-  }
-
-  handleSkillClick(e, skillCard) {
-    if (!skillCard) {
-      skillCard = e.currentTarget;
-    }
-    
-    // Empêcher la propagation si on clique sur un lien de niveau
-    if (e.target.closest('.skill-level-link')) {
-      return;
-    }
-    
-    const isCurrentlyActive = skillCard.classList.contains('active');
-    
-    // Fermer tous les autres dropdowns
-    this.skillCards.forEach(card => {
-      if (card !== skillCard) {
-        card.classList.remove('active');
-        card.setAttribute('aria-expanded', 'false');
-      }
-    });
-    
-    // Toggle le dropdown actuel
-    if (isCurrentlyActive) {
-      skillCard.classList.remove('active');
-      skillCard.setAttribute('aria-expanded', 'false');
-    } else {
-      skillCard.classList.add('active');
-      skillCard.setAttribute('aria-expanded', 'true');
-    }
-    
-    // Animation de clic simple
-    skillCard.style.transform = 'scale(0.98)';
-    setTimeout(() => {
-      skillCard.style.transform = '';
-    }, 150);
-  }
-
-  closeAllDropdowns() {
-    this.skillCards.forEach(card => {
-      card.classList.remove('active');
-      card.setAttribute('aria-expanded', 'false');
-    });
+    const canvas = document.querySelector('[data-ocean]');
+    if (!canvas || typeof OceanEngine !== 'function') return;
+    const reduced = document.body.dataset.oceanFish;
+    const fishCount = reduced ? Number(reduced) : undefined;
+    const options = {};
+    if (Number.isFinite(fishCount)) options.fishCount = fishCount;
+    this.engine = new OceanEngine(canvas, undefined, options);
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  try {
-    // Initialiser le copyright en premier
-    new CopyrightYear();
-    
-    // Initialiser les autres composants avec vérifications
-    if (safeQuerySelector('.header__main-ham-menu-cont')) {
-      new HamburgerMenu();
-    }
-    
-    if (safeQuerySelector('.header')) {
-      new Header();
-      new HeaderNav();
-    }
-    
-    if (safeQuerySelector('#dynamic-lang')) {
-      new MultilingualGreeting();
-    }
-    
-    if (safeQuerySelectorAll('.skills__skill').length > 0) {
-      new SkillsColors();
-      new CollapsibleSkills();
-    }
-    
-    if (safeQuerySelectorAll('.skill-card').length > 0) {
-      new Skills();
-    }
-    
-    if (safeQuerySelectorAll('.project-card').length > 0) {
-      new ProjectFilters();
-    }
-    
-    if (safeQuerySelector('.contact__form')) {
-      new ContactForm();
-    }
-    
-    if (safeQuerySelector('#selectLang')) {
-      new LanguageSelector();
-    }
-    
-    // Initialize Scroll Reveal
-    if (safeQuerySelectorAll('.scroll-reveal').length > 0) {
-      new ScrollRevealManager();
-    }
-  } catch (error) {
-    console.error('Error initializing components:', error);
+  new SiteChrome();
+  new OceanBoot();
+  if (document.querySelector('.projects-filters') && document.querySelectorAll('.project-card').length) {
+    new ProjectFilters();
   }
+  if (document.querySelector('.contact__form')) new ContactForm();
 });
-

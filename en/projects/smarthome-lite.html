@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,301 +14,105 @@
   <meta property="og:url" content="https://melih0132.github.io/en/projects/smarthome-lite.html" />
   <meta property="og:image" content="https://melih0132.github.io/assets/png/pp.png" />
   <meta name="twitter:card" content="summary" />
-
   <link rel="stylesheet" href="/assets/css/style.min.css" />
-  <title>SmartHome Lite | Melih Cetinkaya</title>
   <link rel="icon" href="/assets/png/logo.png" type="image/png">
+  <title>SmartHome Lite | Melih Cetinkaya</title>
 </head>
-
-<body>
-  <header class="header">
-    <div class="header__content">
-      <div class="header__logo-container">
-        <div class="header__logo-img-cont">
-          <img src="/assets/png/pp.png" alt="Profile Picture of Melih CETINKAYA" class="header__logo-img" width="40" height="40" />
-        </div>
-        <span class="header__logo-sub">Melih Cetinkaya</span>
+<body data-ocean-fish="48">
+  <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
+  <div class="site">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header class="header">
+      <div class="header__content">
+        <a class="header__brand" href="/en/">Melih C.</a>
+        <ul class="header__links">
+          <li><a class="header__link" href="/en/#home">Home</a></li>
+          <li><a class="header__link" href="/en/#projects">Projects</a></li>
+          <li><a class="header__link" href="/en/#about">About</a></li>
+          <li><a class="header__link" href="/en/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/smarthome-lite.html" data-set-lang="fr">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/smarthome-lite.html" data-set-lang="en" aria-current="true">EN</a></li>
+        </ul>
+        <button class="header__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel">Menu</button>
       </div>
-      <div class="header__main">
-        <ul class="header__links header__links--center">
-          <li class="header__link-wrapper">
-            <a href="/en/#home" class="header__link">Home</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/en/#about" class="header__link">About</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/en/#projects" class="header__link">Projects</a>
-          </li>
+      <div class="header__panel" id="nav-panel" data-nav-panel>
+        <ul>
+          <li><a href="/en/#home">Home</a></li>
+          <li><a href="/en/#projects">Projects</a></li>
+          <li><a href="/en/#about">About</a></li>
+          <li><a href="/en/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/smarthome-lite.html" data-set-lang="fr">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/smarthome-lite.html" data-set-lang="en" aria-current="true">EN</a></li>
         </ul>
       </div>
-      <ul class="header__links header__links--right">
-        <li class="header__link-wrapper">
-          <a href="/en/#contact" class="header__link">Contact</a>
-        </li>
-      </ul>
-      <div class="header__main-ham-menu-cont">
-        <img src="/assets/svg/ham-menu.svg" alt="hamburger menu" class="header__main-ham-menu" width="26" height="26" />
-        <img src="/assets/svg/ham-menu-close.svg" alt="hamburger menu close"
-          class="header__main-ham-menu-close d-none" width="26" height="26" />
-      </div>
-    </div>
-    <div class="header__sm-menu">
-      <div class="header__sm-menu-content">
-        <ul class="header__sm-menu-links">
-          <li class="header__sm-menu-link">
-            <a href="/en/#home">Home</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/en/#about">About</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/en/#projects">Projects</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/en/#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <main id="main">
-
-  <section class="project-cs-hero">
-    <div class="project-cs-hero__content">
-      <h1 class="heading-primary"><strong>SmartHome Lite</strong></h1>
-      <div class="project-cs-hero__info">
-        <p class="text-primary">
+    <main id="main">
+      <section class="project-hero">
+        <div class="wrap">
+          <h1 class="project-hero__title">SmartHome Lite</h1>
+          <div class="project-hero__lead"><p >
           Distributed smart home with <strong>FastAPI</strong>, <strong>Next</strong> and <strong>Kotlin</strong> /
           <strong>Jetpack Compose</strong>, <strong>Z-Wave</strong> sensors and <strong>ML</strong> pipelines.
-        </p>
-      </div>
-      <div class="project-cs-hero__cta">
-        <a href="https://github.com/melih0132/smarthome-lite" class="btn btn--bg" target="_blank"
-          rel="noreferrer"><strong>View on GitHub</strong></a>
-      </div>
-    </div>
-  </section>
-  <section class="project-details">
-    <div class="main-container">
-      <div class="project-details__content">
-        <div class="project-details__content-main">
+        </p></div>
+          <div class="hero__actions"><a class="btn btn--solid" href="https://github.com/melih0132/smarthome-lite" target="_blank" rel="noreferrer">View on GitHub</a></div>
+        </div>
+      </section>
 
-          <!-- Section: Project Overview -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Project Overview</strong></h2>
-            <div class="project-details__desc">
-              <p class="project-details__desc-para">
-                The <strong>SmartHome Lite</strong> project is a distributed smart-home system built with
+      <div class="project-body">
+        <section class="project-block"><div class="wrap"><h2>Overview</h2><p>The <strong>SmartHome Lite</strong> project is a distributed smart-home system built with
                 <strong>FastAPI</strong>, <strong>SQLAlchemy</strong> and <strong>PostgreSQL</strong> (relational data and
                 time series via the <strong>TimescaleDB</strong> extension), a <strong>Next</strong> UI (App Router,
                 TypeScript, <strong>Tailwind CSS</strong>) and an Android app in <strong>Kotlin</strong> with
                 <strong>Jetpack Compose</strong>. It covers <strong>lights</strong> and <strong>sockets</strong>,
-                <strong>automation rules</strong>, <strong>presence detection</strong> and <strong>smart dimming</strong>.
-              </p>
-              <p class="project-details__desc-para">
-                The project also includes <strong>JWT authentication</strong>, password hashing with <strong>bcrypt</strong>,
+                <strong>automation rules</strong>, <strong>presence detection</strong> and <strong>smart dimming</strong>.</p>
+<p>The project also includes <strong>JWT authentication</strong>, password hashing with <strong>bcrypt</strong>,
                 <strong>Pydantic</strong> validation and a <strong>Raspberry Pi</strong> node running a <strong>Flask</strong> API
                 and <strong>Z-Wave JS UI</strong>. The <strong>big-projects/smarthome-lite</strong> folder in the
-                <strong>all-my-projects</strong> GitHub repository points to this dedicated repo.
-              </p>
-              <p class="project-details__desc-para">
-                The system is designed to deliver a <strong>smooth user experience</strong> on web and mobile, with
+                <strong>all-my-projects</strong> GitHub repository points to this dedicated repo.</p>
+<p>The system is designed to deliver a <strong>smooth user experience</strong> on web and mobile, with
                 <strong>automated tests</strong> (Pytest), presence and luminance charts, detailed documentation
-                (README) and the screenshot gallery below.
-              </p>
-            </div>
+                (README) and the screenshot gallery below.</p></div></section>
+        <section class="project-block"><div class="wrap"><h2>Features</h2><ul><li><strong>Device management and dashboard</strong> · ON/OFF and brightness control for lights, socket management and a centralized equipment view on web and mobile.</li>
+<li><strong>Presence detection and history</strong> · Z-Wave sensor (e.g. MultiSensor 7), events pushed to the backend and historical data for analytics and rules.</li>
+<li><strong>IF-THEN engine and scenarios</strong> · Rule CRUD, automatic evaluation and predefined scenarios to chain conditions and actions.</li>
+<li><strong>Machine learning and smart dimming</strong> · Scenario classification, intensity regression, user-habit clustering (documented path) and adaptation to ambient light.</li>
+<li><strong>Visualization and monitoring</strong> · Presence and luminance charts, measurement tracking and automatic adjustment history on the Next dashboard and Android app.</li></ul></div></section>
+        <section class="project-block"><div class="wrap"><h2>Gallery</h2></div><div class="project-gallery"><figure><img src="/assets/webp/Smarthome/dashboard.webp" alt="SmartHome Lite web dashboard" loading="lazy" /><figcaption>Web dashboard</figcaption></figure>
+<figure><img src="/assets/webp/Smarthome/admin.webp" alt="SmartHome Lite admin interface" loading="lazy" /><figcaption>Admin</figcaption></figure>
+<figure><img src="/assets/webp/Smarthome/monitoring.webp" alt="SmartHome Lite monitoring" loading="lazy" /><figcaption>Monitoring</figcaption></figure>
+<figure><img src="/assets/webp/Smarthome/smart-dimming.webp" alt="SmartHome Lite smart dimming" loading="lazy" /><figcaption>Smart dimming</figcaption></figure>
+<figure><img src="/assets/webp/Smarthome/control-panel-z-wave.webp" alt="SmartHome Lite Z-Wave control panel" loading="lazy" /><figcaption>Z-Wave control panel</figcaption></figure>
+<figure><img src="/assets/webp/Smarthome/api.webp" alt="SmartHome Lite API" loading="lazy" /><figcaption>API</figcaption></figure>
+<figure><img src="/assets/webp/Smarthome/ia.webp" alt="SmartHome Lite AI" loading="lazy" /><figcaption>Artificial intelligence</figcaption></figure>
+<figure><img src="/assets/webp/Smarthome/branch-git.webp" alt="SmartHome Lite Git branches" loading="lazy" /><figcaption>Git repository (branches)</figcaption></figure></div></section>
+        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech">Python · FastAPI · Flask · PostgreSQL · SQLAlchemy · JWT · Pytest · Next · React · TypeScript · Tailwind CSS · Kotlin · Jetpack Compose · Raspberry Pi · Z-Wave · VS Code · Git · GitHub</p></div></section>
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Explore</h2>
+            <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/smarthome-lite" target="_blank" rel="noreferrer">View on GitHub</a>
+<a class="btn" href="/en/#projects">Back to projects</a></div>
           </div>
-
-          <!-- Section: Main Features -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Main Features</strong></h2>
-            <div class="project-details__features">
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Device management and dashboard</h3>
-                <p class="project-details__desc-para">
-                  ON/OFF and brightness control for lights, socket management and a centralized equipment view on web and mobile.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Presence detection and history</h3>
-                <p class="project-details__desc-para">
-                  Z-Wave sensor (e.g. MultiSensor 7), events pushed to the backend and historical data for analytics and rules.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">IF-THEN engine and scenarios</h3>
-                <p class="project-details__desc-para">
-                  Rule CRUD, automatic evaluation and predefined scenarios to chain conditions and actions.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Machine learning and smart dimming</h3>
-                <p class="project-details__desc-para">
-                  Scenario classification, intensity regression, user-habit clustering (documented path) and adaptation to ambient light.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Visualization and monitoring</h3>
-                <p class="project-details__desc-para">
-                  Presence and luminance charts, measurement tracking and automatic adjustment history on the Next dashboard and Android app.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Raspberry Pi gateway and Z-Wave</h3>
-                <p class="project-details__desc-para">
-                  Local Flask API, Z-Wave JS UI integration (Socket.IO / WebSocket) and an HTTP contract aligned with the backend to drive radio nodes.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Project Gallery -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Project Gallery</strong></h2>
-            <div class="project-details__gallery">
-              <!-- Web: user-facing -->
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/Smarthome/dashboard.webp" alt="SmartHome Lite web dashboard"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Web dashboard</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/Smarthome/admin.webp" alt="SmartHome Lite admin interface"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Admin</p>
-              </div>
-              <!-- Mobile (portrait) -->
-              <div class="project-details__showcase-img-cont project-details__showcase-img-cont--portrait">
-                <div class="project-details__showcase-portrait-frame">
-                  <img src="/assets/webp/Smarthome/mobile.webp" alt="SmartHome Lite mobile app"
-                    loading="lazy" class="project-details__showcase-img" />
-                </div>
-                <p class="project-details__img-caption">Mobile app (Kotlin)</p>
-              </div>
-              <!-- Monitoring and automation -->
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/Smarthome/monitoring.webp" alt="SmartHome Lite monitoring"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Monitoring</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/Smarthome/smart-dimming.webp" alt="SmartHome Lite smart dimming"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Smart dimming</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/Smarthome/control-panel-z-wave.webp" alt="SmartHome Lite Z-Wave control panel"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Z-Wave control panel</p>
-              </div>
-              <!-- API, AI and repository -->
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/Smarthome/api.webp" alt="SmartHome Lite API"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">API</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/Smarthome/ia.webp" alt="SmartHome Lite AI"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Artificial intelligence</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/Smarthome/branch-git.webp" alt="SmartHome Lite Git branches"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Git repository (branches)</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Technologies Used -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Technologies Used</strong></h2>
-            <div class="project-details__tools-used">
-              <div class="skills__projects">
-                <div class="skills__skill"><strong>Python</strong></div>
-                <div class="skills__skill"><strong>FastAPI</strong></div>
-                <div class="skills__skill"><strong>Flask</strong></div>
-                <div class="skills__skill"><strong>PostgreSQL</strong></div>
-                <div class="skills__skill"><strong>SQLAlchemy</strong></div>
-                <div class="skills__skill"><strong>JWT</strong></div>
-                <div class="skills__skill"><strong>Pytest</strong></div>
-                <div class="skills__skill"><strong>Next</strong></div>
-                <div class="skills__skill"><strong>React</strong></div>
-                <div class="skills__skill"><strong>TypeScript</strong></div>
-                <div class="skills__skill"><strong>Tailwind CSS</strong></div>
-                <div class="skills__skill"><strong>Kotlin</strong></div>
-                <div class="skills__skill"><strong>Jetpack Compose</strong></div>
-                <div class="skills__skill"><strong>Raspberry Pi</strong></div>
-                <div class="skills__skill"><strong>Z-Wave</strong></div>
-                <div class="skills__skill"><strong>VS Code</strong></div>
-                <div class="skills__skill"><strong>Git</strong></div>
-                <div class="skills__skill"><strong>GitHub</strong></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Explore the Project -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Explore the Project</strong></h2>
-            <div class="project-details__links">
-              <a href="https://github.com/melih0132/smarthome-lite"
-                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>View on GitHub</strong>
-              </a>
-              <a href="/en/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
-                <strong>Back to projects</strong>
-              </a>
-            </div>
-          </div>
-
-        </div>
+        </section>
       </div>
-    </div>
-  </section>
+    </main>
 
-  </main>
-
-  <footer class="main-footer">
-    <div class="main-container">
-      <div class="main-footer__upper">
-        <div class="main-footer__row main-footer__row-1">
-          <h2 class="heading heading-sm main-footer__heading-sm">
-            <span>Contact</span>
-          </h2>
-          <div class="main-footer__social-cont">
-            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/melih-ctk/">
-              <img id="Linkedin" class="logo" src="/assets/svg/linkedin-dark.svg" alt="LinkedIn">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://github.com/melih0132">
-              <img id="GitHub" class="logo" src="/assets/svg/github-dark.svg" alt="GitHub">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/m.ctk1/">
-              <img id="Instagram" class="logo" src="/assets/svg/insta-dark.svg" alt="Instagram">
-            </a>
-          </div>
-        </div>
-        <div class="main-footer__row main-footer__row-2">
-          <h2 class="heading heading-sm text-lt">Melih Cetinkaya</h2>
-          <p class="main-footer__short-desc">
-            Passionate full-stack developer focused on modern web technologies and digital innovation.
-          </p>
-        </div>
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>&copy; <span class="copyright-year"></span> Melih Cetinkaya</span>
+        <a href="https://github.com/melih0132" target="_blank" rel="noreferrer">github.com/melih0132</a>
       </div>
-      <div class="main-footer__lower">
-        &copy; Copyright
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-        . Made by Melih Cetinkaya
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
-      <script defer src="/assets/vendor/lenis/lenis.min.js"></script>
-  <script defer src="/assets/js/lenis-init.min.js"></script>
-  <script defer src="/en/projects/script.min.js"></script>
+  <script>
+    document.querySelectorAll('.copyright-year').forEach((el) => { el.textContent = new Date().getFullYear(); });
+  </script>
+  <script src="/assets/js/ocean.min.js"></script>
+  <script defer src="/assets/js/portfolio.min.js"></script>
 </body>
-
 </html>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,271 +14,100 @@
   <meta property="og:url" content="https://melih0132.github.io/fr/projets/shared-ia.html" />
   <meta property="og:image" content="https://melih0132.github.io/assets/png/pp.png" />
   <meta name="twitter:card" content="summary" />
-
   <link rel="stylesheet" href="/assets/css/style.min.css" />
-  <title>Shared IA | Melih Cetinkaya</title>
   <link rel="icon" href="/assets/png/logo.png" type="image/png">
+  <title>Shared IA | Melih Cetinkaya</title>
 </head>
-
-<body>
-  <header class="header">
-    <div class="header__content">
-      <div class="header__logo-container">
-        <div class="header__logo-img-cont">
-          <img src="/assets/png/pp.png" alt="PP Melih CETINKAYA" class="header__logo-img" width="40" height="40" />
-        </div>
-        <span class="header__logo-sub">MELIH C.</span>
+<body data-ocean-fish="48">
+  <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
+  <div class="site">
+    <a href="#main" class="skip-link">Aller au contenu</a>
+    <header class="header">
+      <div class="header__content">
+        <a class="header__brand" href="/fr/">Melih C.</a>
+        <ul class="header__links">
+          <li><a class="header__link" href="/fr/#home">Accueil</a></li>
+          <li><a class="header__link" href="/fr/#projects">Projets</a></li>
+          <li><a class="header__link" href="/fr/#about">À propos</a></li>
+          <li><a class="header__link" href="/fr/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/shared-ia.html" data-set-lang="fr" aria-current="true">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/shared-ia.html" data-set-lang="en">EN</a></li>
+        </ul>
+        <button class="header__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel">Menu</button>
       </div>
-      <div class="header__main">
-        <ul class="header__links header__links--center">
-          <li class="header__link-wrapper">
-            <a href="/fr/#home" class="header__link">Accueil</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/fr/#about" class="header__link">À propos</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/fr/#projects" class="header__link">Projets</a>
-          </li>
+      <div class="header__panel" id="nav-panel" data-nav-panel>
+        <ul>
+          <li><a href="/fr/#home">Accueil</a></li>
+          <li><a href="/fr/#projects">Projets</a></li>
+          <li><a href="/fr/#about">À propos</a></li>
+          <li><a href="/fr/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/shared-ia.html" data-set-lang="fr" aria-current="true">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/shared-ia.html" data-set-lang="en">EN</a></li>
         </ul>
       </div>
-      <ul class="header__links header__links--right">
-        <li class="header__link-wrapper">
-          <a href="/fr/#contact" class="header__link">Contact</a>
-        </li>
-      </ul>
-      <div class="header__main-ham-menu-cont">
-        <img src="/assets/svg/ham-menu.svg" alt="hamburger menu" class="header__main-ham-menu" width="26" height="26" />
-        <img src="/assets/svg/ham-menu-close.svg" alt="hamburger menu close"
-          class="header__main-ham-menu-close d-none" width="26" height="26" />
-      </div>
-    </div>
-    <div class="header__sm-menu">
-      <div class="header__sm-menu-content">
-        <ul class="header__sm-menu-links">
-          <li class="header__sm-menu-link">
-            <a href="/fr/#home">Accueil</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/fr/#about">À propos</a>
-          </li>
+    </header>
 
-
-          <li class="header__sm-menu-link">
-            <a href="/fr/#projects">Projets</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/fr/#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
-  <main id="main">
-
-  <section class="project-cs-hero">
-    <div class="project-cs-hero__content">
-      <h1 class="heading-primary"><strong>Shared IA - Plateforme d'IA Partagée</strong></h1>
-      <div class="project-cs-hero__info">
-        <p class="text-primary">
+    <main id="main">
+      <section class="project-hero">
+        <div class="wrap">
+          <h1 class="project-hero__title">Shared IA - Plateforme d'IA Partagée</h1>
+          <div class="project-hero__lead"><p >
           Application full stack de chat collaboratif avec IA : jusqu'à <strong>4 utilisateurs</strong> par salle,
           validation collective des messages avant envoi à l'IA, résolution de conflits et temps réel via
           <strong>Socket.io</strong> (<strong>Node.js</strong> / <strong>Express</strong>, <strong>React</strong>).
-        </p>
-      </div>
-      <div class="project-cs-hero__cta">
-        <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/shared-ia" class="btn btn--bg"
-          target="_blank" rel="noreferrer"><strong>Voir sur GitHub</strong></a>
-      </div>
-    </div>
-  </section>
-  <section class="project-details">
-    <div class="main-container">
-      <div class="project-details__content">
-        <div class="project-details__content-main">
-          
-          <!-- Section: Aperçu du projet -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Aperçu du projet</strong></h2>
-            <div class="project-details__desc">
-              <p class="project-details__desc-para">
-                <strong>Shared IA</strong> est une application de chat collaboratif avec intelligence artificielle : plusieurs
+        </p></div>
+          <div class="hero__actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/shared-ia" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+        </div>
+      </section>
+
+      <div class="project-body">
+        <section class="project-block"><div class="wrap"><h2>Aperçu</h2><p><strong>Shared IA</strong> est une application de chat collaboratif avec intelligence artificielle : plusieurs
                 utilisateurs (maximum 4) échangent dans une salle ; chaque message doit être validé par les autres membres
                 avant d'être transmis à l'<strong>OpenAI API</strong>. Un mécanisme gère les propositions simultanées
-                (vote / résolution de conflit).
-              </p>
-              <p class="project-details__desc-para">
-                Le <strong>backend</strong> est une API <strong>Node.js</strong> avec <strong>Express</strong>,
+                (vote / résolution de conflit).</p>
+<p>Le <strong>backend</strong> est une API <strong>Node.js</strong> avec <strong>Express</strong>,
                 <strong>Socket.io</strong> pour le temps réel, <strong>PostgreSQL</strong>, authentification
                 <strong>JWT</strong> et documentation <strong>Swagger</strong>. Le <strong>frontend</strong> est une
                 SPA <strong>React</strong> avec <strong>TypeScript</strong> et <strong>Vite</strong>, état avec
-                <strong>Zustand</strong>, styles <strong>Tailwind CSS</strong> et composants <strong>shadcn/ui</strong>.
-              </p>
-              <p class="project-details__desc-para">
-                Le code source est publié sous <code>big-projects/shared-ia</code> du dépôt
-                <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">all-my-projects</a>.
-              </p>
-            </div>
+                <strong>Zustand</strong>, styles <strong>Tailwind CSS</strong> et composants <strong>shadcn/ui</strong>.</p>
+<p>Le code source est publié sous <code>big-projects/shared-ia</code> du dépôt
+                <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">all-my-projects</a>.</p></div></section>
+        <section class="project-block"><div class="wrap"><h2>Fonctionnalités</h2><ul><li><strong>Validation collective</strong> · Chaque message reste en attente jusqu'à validation par tous les autres membres de la salle ; refus, modification ou rétractation possibles avant envoi à l'IA.</li>
+<li><strong>Résolution de conflits</strong> · Si plusieurs messages sont proposés en même temps, vote pour choisir celui envoyé à l'IA.</li>
+<li><strong>Temps réel</strong> · Mises à jour instantanées via Socket.io (indicateurs de frappe, présence, synchronisation).</li>
+<li><strong>Salles et invitations</strong> · Gestion des salles, invitations, authentification JWT et intégration OpenAI (streaming).</li>
+<li><strong>Interface React</strong> · SPA React + TypeScript + Vite, formulaires React Hook Form / Zod, UI shadcn/ui.</li></ul></div></section>
+        <section class="project-block"><div class="wrap"><h2>Galerie</h2></div><div class="project-gallery"><figure><img src="/assets/webp/SharedIA/frontend.webp" alt="Interface frontend Shared IA" loading="lazy" /><figcaption>Interface frontend de la plateforme</figcaption></figure>
+<figure><img src="/assets/webp/SharedIA/backend.webp" alt="Backend Node Express Shared IA" loading="lazy" /><figcaption>Backend Node.js / Express</figcaption></figure>
+<figure><img src="/assets/webp/SharedIA/frontend2.webp" alt="Interface utilisateur Shared IA" loading="lazy" /><figcaption>Interface utilisateur pour l'interaction avec les services d'IA</figcaption></figure>
+<figure><img src="/assets/webp/SharedIA/backend2.webp" alt="Documentation API backend" loading="lazy" /><figcaption>Documentation API interactive avec Swagger</figcaption></figure></div></section>
+        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech">Node.js · Express.js · Socket.io · React · TypeScript · Vite · Tailwind CSS · Zustand · OpenAI · PostgreSQL · JWT · Swagger · VS Code · Git · GitHub</p></div></section>
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Explorer</h2>
+            <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/shared-ia" target="_blank" rel="noreferrer">Voir sur GitHub</a>
+<a class="btn" href="/fr/#projects">Retour aux projets</a></div>
           </div>
-
-          <!-- Section: Fonctionnalités principales -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Fonctionnalités principales</strong></h2>
-            <div class="project-details__features">
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Validation collective</h3>
-                <p class="project-details__desc-para">
-                  Chaque message reste en attente jusqu'à validation par tous les autres membres de la salle ; refus,
-                  modification ou rétractation possibles avant envoi à l'IA.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Résolution de conflits</h3>
-                <p class="project-details__desc-para">
-                  Si plusieurs messages sont proposés en même temps, vote pour choisir celui envoyé à l'IA.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Temps réel</h3>
-                <p class="project-details__desc-para">
-                  Mises à jour instantanées via Socket.io (indicateurs de frappe, présence, synchronisation).
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Salles et invitations</h3>
-                <p class="project-details__desc-para">
-                  Gestion des salles, invitations, authentification JWT et intégration OpenAI (streaming).
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Interface React</h3>
-                <p class="project-details__desc-para">
-                  SPA React + TypeScript + Vite, formulaires React Hook Form / Zod, UI shadcn/ui.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">API documentée</h3>
-                <p class="project-details__desc-para">
-                  Backend Express avec routes REST et documentation Swagger (<code>/docs</code>).
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Galerie d'images -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Galerie du projet</strong></h2>
-            <div class="project-details__gallery">
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/SharedIA/frontend.webp" alt="Interface frontend Shared IA"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Interface frontend de la plateforme</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/SharedIA/backend.webp" alt="Backend Node Express Shared IA"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Backend Node.js / Express</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/SharedIA/frontend2.webp" alt="Interface utilisateur Shared IA"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Interface utilisateur pour l'interaction avec les services d'IA</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/SharedIA/backend2.webp" alt="Documentation API backend"
-                  loading="lazy" class="project-details__showcase-img" />
-                <p class="project-details__img-caption">Documentation API interactive avec Swagger</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Technologies utilisées -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Technologies utilisées</strong></h2>
-            <div class="project-details__tools-used">
-              <div class="skills__projects">
-                <div class="skills__skill"><strong>Node.js</strong></div>
-                <div class="skills__skill"><strong>Express.js</strong></div>
-                <div class="skills__skill"><strong>Socket.io</strong></div>
-                <div class="skills__skill"><strong>React</strong></div>
-                <div class="skills__skill"><strong>TypeScript</strong></div>
-                <div class="skills__skill"><strong>Vite</strong></div>
-                <div class="skills__skill"><strong>Tailwind CSS</strong></div>
-                <div class="skills__skill"><strong>Zustand</strong></div>
-                <div class="skills__skill"><strong>OpenAI</strong></div>
-                <div class="skills__skill"><strong>PostgreSQL</strong></div>
-                <div class="skills__skill"><strong>JWT</strong></div>
-                <div class="skills__skill"><strong>Swagger</strong></div>
-                <div class="skills__skill"><strong>VS Code</strong></div>
-                <div class="skills__skill"><strong>Git</strong></div>
-                <div class="skills__skill"><strong>GitHub</strong></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Liens du projet -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Explorer le projet</strong></h2>
-            <div class="project-details__links">
-              <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/shared-ia"
-                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>Voir sur GitHub</strong>
-              </a>
-              <a href="/fr/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
-                <strong>Retour aux projets</strong>
-              </a>
-            </div>
-          </div>
-
-        </div>
+        </section>
       </div>
-    </div>
-  </section>
+    </main>
 
-  </main>
-
-  <footer class="main-footer">
-    <div class="main-container">
-      <div class="main-footer__upper">
-        <div class="main-footer__row main-footer__row-1">
-          <h2 class="heading heading-sm main-footer__heading-sm">
-            <span>Contact</span>
-          </h2>
-          <div class="main-footer__social-cont">
-            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/melih-ctk/">
-              <img id="Linkedin" class="logo" src="/assets/svg/linkedin-dark.svg" alt="LinkedIn">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://github.com/melih0132">
-              <img id="GitHub" class="logo" src="/assets/svg/github-dark.svg" alt="GitHub">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/m.ctk1/">
-              <img id="Instagram" class="logo" src="/assets/svg/insta-dark.svg" alt="Instagram">
-            </a>
-          </div>
-        </div>
-        <div class="main-footer__row main-footer__row-2">
-          <h2 class="heading heading-sm text-lt">Melih Cetinkaya</h2>
-          <p class="main-footer__short-desc">
-            Développeur Full-Stack passionné par les technologies web modernes et l'innovation numérique.
-          </p>
-        </div>
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>&copy; <span class="copyright-year"></span> Melih Cetinkaya</span>
+        <a href="https://github.com/melih0132" target="_blank" rel="noreferrer">github.com/melih0132</a>
       </div>
+    </footer>
+  </div>
 
-      <div class="main-footer__lower">
-        &copy; Copyright
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-        . Made by Melih Cetinkaya
-      </div>
-    </div>
-  </footer>
-
-      <script defer src="/assets/vendor/lenis/lenis.min.js"></script>
-  <script defer src="/assets/js/lenis-init.min.js"></script>
-  <script defer src="/fr/projets/script.min.js"></script>
+  <script>
+    document.querySelectorAll('.copyright-year').forEach((el) => { el.textContent = new Date().getFullYear(); });
+  </script>
+  <script src="/assets/js/ocean.min.js"></script>
+  <script defer src="/assets/js/portfolio.min.js"></script>
 </body>
-
 </html>
-

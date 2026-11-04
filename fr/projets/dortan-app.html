@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,256 +14,96 @@
   <meta property="og:url" content="https://melih0132.github.io/fr/projets/dortan-app.html" />
   <meta property="og:image" content="https://melih0132.github.io/assets/png/pp.png" />
   <meta name="twitter:card" content="summary" />
-
   <link rel="stylesheet" href="/assets/css/style.min.css" />
-  <title>DortanApp | Melih Cetinkaya</title>
   <link rel="icon" href="/assets/png/logo.png" type="image/png">
+  <title>DortanApp | Melih Cetinkaya</title>
 </head>
-
-<body>
-  <header class="header">
-    <div class="header__content">
-      <div class="header__logo-container">
-        <div class="header__logo-img-cont">
-          <img src="/assets/png/pp.png" alt="PP Melih CETINKAYA" class="header__logo-img" width="40" height="40" />
-        </div>
-        <span class="header__logo-sub">MELIH C.</span>
+<body data-ocean-fish="48">
+  <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
+  <div class="site">
+    <a href="#main" class="skip-link">Aller au contenu</a>
+    <header class="header">
+      <div class="header__content">
+        <a class="header__brand" href="/fr/">Melih C.</a>
+        <ul class="header__links">
+          <li><a class="header__link" href="/fr/#home">Accueil</a></li>
+          <li><a class="header__link" href="/fr/#projects">Projets</a></li>
+          <li><a class="header__link" href="/fr/#about">À propos</a></li>
+          <li><a class="header__link" href="/fr/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/dortan-app.html" data-set-lang="fr" aria-current="true">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/dortan-app.html" data-set-lang="en">EN</a></li>
+        </ul>
+        <button class="header__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel">Menu</button>
       </div>
-      <div class="header__main">
-        <ul class="header__links header__links--center">
-          <li class="header__link-wrapper">
-            <a href="/fr/#home" class="header__link">Accueil</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/fr/#about" class="header__link">À propos</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/fr/#projects" class="header__link">Projets</a>
-          </li>
+      <div class="header__panel" id="nav-panel" data-nav-panel>
+        <ul>
+          <li><a href="/fr/#home">Accueil</a></li>
+          <li><a href="/fr/#projects">Projets</a></li>
+          <li><a href="/fr/#about">À propos</a></li>
+          <li><a href="/fr/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/dortan-app.html" data-set-lang="fr" aria-current="true">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/dortan-app.html" data-set-lang="en">EN</a></li>
         </ul>
       </div>
-      <ul class="header__links header__links--right">
-        <li class="header__link-wrapper">
-          <a href="/fr/#contact" class="header__link">Contact</a>
-        </li>
-      </ul>
-      <div class="header__main-ham-menu-cont">
-        <img src="/assets/svg/ham-menu.svg" alt="hamburger menu" class="header__main-ham-menu" width="26" height="26" />
-        <img src="/assets/svg/ham-menu-close.svg" alt="hamburger menu close"
-          class="header__main-ham-menu-close d-none" width="26" height="26" />
-      </div>
-    </div>
-    <div class="header__sm-menu">
-      <div class="header__sm-menu-content">
-        <ul class="header__sm-menu-links">
-          <li class="header__sm-menu-link">
-            <a href="/fr/#home">Accueil</a>
-          </li>
+    </header>
 
-          <li class="header__sm-menu-link">
-            <a href="/fr/#about">À propos</a>
-          </li>
-
-
-          <li class="header__sm-menu-link">
-            <a href="/fr/#projects">Projets</a>
-          </li>
-
-          <li class="header__sm-menu-link">
-            <a href="/fr/#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
-  <main id="main">
-
-  <section class="project-cs-hero">
-    <div class="project-cs-hero__content">
-      <h1 class="heading-primary"><strong>DortanApp</strong></h1>
-      <div class="project-cs-hero__info">
-        <p class="text-primary">
+    <main id="main">
+      <section class="project-hero">
+        <div class="wrap">
+          <h1 class="project-hero__title">DortanApp</h1>
+          <div class="project-hero__lead"><p >
           Application de gestion d'activités pour mairie développée avec <strong>WPF</strong> et <strong>PostgreSQL</strong>.
           Projet universitaire combinant interface graphique moderne et gestion de base de données robuste.
-        </p>
-      </div>
-      <div class="project-cs-hero__cta">
-        <a href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/csharp-with-db/dortan_app" class="btn btn--bg"
-          target="_blank" rel="noreferrer"><strong>Voir sur GitHub</strong></a>
-      </div>
-    </div>
-  </section>
+        </p></div>
+          <div class="hero__actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/csharp-with-db/dortan_app" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+        </div>
+      </section>
 
-  <section class="project-details">
-    <div class="main-container">
-      <div class="project-details__content">
-        <div class="project-details__content-main">
-          
-          <!-- Section: Aperçu du projet -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Aperçu du projet</strong></h2>
-            <div class="project-details__desc">
-              <p class="project-details__desc-para">
-                DortanApp est un <strong>logiciel basé sur WPF</strong> intégrant une base de données, conçu pour
+      <div class="project-body">
+        <section class="project-block"><div class="wrap"><h2>Aperçu</h2><p>DortanApp est un <strong>logiciel basé sur WPF</strong> intégrant une base de données, conçu pour
                 enregistrer les activités d'une <strong>mairie</strong>. Ce projet a été développé dans le cadre
-                d'un <strong>projet universitaire</strong>.
-              </p>
-              <p class="project-details__desc-para">
-                L'application permet au personnel de la mairie de <strong>créer ou sélectionner des activités</strong>
+                d'un <strong>projet universitaire</strong>.</p>
+<p>L'application permet au personnel de la mairie de <strong>créer ou sélectionner des activités</strong>
                 et de saisir la date de réservation ainsi que d'autres détails pertinents. Elle vise à
                 <strong>simplifier la gestion des activités</strong> et à améliorer l'efficacité opérationnelle de
                 la mairie. Elle offre une <strong>interface utilisateur intuitive</strong> et des fonctionnalités
                 robustes de <strong>gestion des données</strong> pour soutenir le suivi et la planification
                 des événements. L'application utilise le <strong>binding (liaison de données)</strong> de WPF pour
                 synchroniser automatiquement l'interface utilisateur avec les données, garantissant une mise à jour
-                en temps réel et une séparation claire entre la logique métier et la présentation.
-              </p>
-            </div>
+                en temps réel et une séparation claire entre la logique métier et la présentation.</p></div></section>
+        <section class="project-block"><div class="wrap"><h2>Fonctionnalités</h2><ul><li><strong>Gestion des réservations</strong> · Interface graphique intuitive avec options de filtrage pour une navigation facilitée et une gestion efficace des réservations d'activités.</li>
+<li><strong>Création et sélection d'activités</strong> · Système complet permettant de créer de nouvelles activités ou de sélectionner parmi les activités existantes avec saisie des détails pertinents.</li></ul></div></section>
+        <section class="project-block"><div class="wrap"><h2>Galerie</h2></div><div class="project-gallery"><figure><img src="/assets/webp/DortanApp/Connexion.webp" alt="Page de connexion DortanApp" loading="lazy" /><figcaption>Interface de connexion</figcaption></figure>
+<figure><img src="/assets/webp/DortanApp/Réservations.webp" alt="Gestion des réservations DortanApp" loading="lazy" /><figcaption>Gestion des réservations avec filtrage</figcaption></figure>
+<figure><img src="/assets/webp/DortanApp/Mockup.webp" alt="Maquette de design DortanApp" loading="lazy" /><figcaption>Maquette initiale créée avec Figma</figcaption></figure></div></section>
+        
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Explorer</h2>
+            <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/csharp-with-db/dortan_app" target="_blank" rel="noreferrer">Voir sur GitHub</a>
+<a class="btn btn--solid" href="https://www.figma.com/proto/TrvLrLGDltam9NDw0tEQel/Dortan-App?node-id=0-1&t=hRuIK4PKOe81uO6B-1" target="_blank" rel="noreferrer">Prototype Figma</a>
+<a class="btn" href="/fr/#projects">Retour aux projets</a></div>
           </div>
-
-          <!-- Section: Fonctionnalités principales -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Fonctionnalités principales</strong></h2>
-            <div class="project-details__features">
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Gestion des réservations</h3>
-                <p class="project-details__desc-para">
-                  Interface graphique intuitive avec options de filtrage pour une navigation facilitée et une gestion efficace des réservations d'activités.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Création et sélection d'activités</h3>
-                <p class="project-details__desc-para">
-                  Système complet permettant de créer de nouvelles activités ou de sélectionner parmi les activités existantes avec saisie des détails pertinents.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Base de données robuste</h3>
-                <p class="project-details__desc-para">
-                  Intégration PostgreSQL pour un stockage sécurisé et performant des données avec gestion complète des relations.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Galerie d'images -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Galerie du projet</strong></h2>
-            <div class="project-details__gallery">
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/DortanApp/Connexion.webp" alt="Page de connexion DortanApp"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Interface de connexion</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/DortanApp/Réservations.webp" alt="Gestion des réservations DortanApp"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Gestion des réservations avec filtrage</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/DortanApp/Mockup.webp" alt="Maquette de design DortanApp"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Maquette initiale créée avec Figma</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Technologies utilisées -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Technologies utilisées</strong></h2>
-            <div class="project-details__tools-used">
-              <div class="skills__projects">
-                <div class="skills__skill"><strong>.NET/C#</strong></div>
-                <div class="skills__skill"><strong>WPF</strong></div>
-                <div class="skills__skill"><strong>XAML</strong></div>
-                <div class="skills__skill"><strong>SQL</strong></div>
-                <div class="skills__skill"><strong>PostgreSQL</strong></div>
-                <div class="skills__skill"><strong>pgAdmin4</strong></div>
-                <div class="skills__skill"><strong>Figma</strong></div>
-                <div class="skills__skill"><strong>Git</strong></div>
-                <div class="skills__skill"><strong>GitHub</strong></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Aspects techniques -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Aspects techniques</strong></h2>
-            <div class="project-details__desc">
-              <p class="project-details__desc-para">
-                Ce projet a permis d'appliquer des concepts avancés de WPF, notamment le <strong>binding (liaison de données)</strong>. 
-                Le binding WPF permet de lier automatiquement les propriétés de l'interface utilisateur aux propriétés des objets de données, 
-                assurant une synchronisation automatique entre l'interface et les données. Cette approche simplifie la gestion de l'état de 
-                l'application et améliore la maintenabilité du code en séparant clairement la logique métier de la présentation.
-              </p>
-            </div>
-          </div>
-
-          <!-- Section: Liens du projet -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Explorer le projet</strong></h2>
-            <div class="project-details__links">
-              <a href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/csharp-with-db/dortan_app"
-                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>Voir sur GitHub</strong>
-              </a>
-              <a href="https://www.figma.com/proto/TrvLrLGDltam9NDw0tEQel/Dortan-App?node-id=0-1&t=hRuIK4PKOe81uO6B-1"
-                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>Prototype Figma</strong>
-              </a>
-              <a href="/fr/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
-                <strong>Retour aux projets</strong>
-              </a>
-            </div>
-          </div>
-
-        </div>
+        </section>
       </div>
-    </div>
-  </section>
+    </main>
 
-  </main>
-
-  <footer class="main-footer">
-    <div class="main-container">
-      <div class="main-footer__upper">
-        <div class="main-footer__row main-footer__row-1">
-          <h2 class="heading heading-sm main-footer__heading-sm">
-            <span>Contact</span>
-          </h2>
-          <div class="main-footer__social-cont">
-            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/melih-ctk/">
-              <img id="Linkedin" class="logo" src="/assets/svg/linkedin-dark.svg" alt="LinkedIn">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://github.com/melih0132">
-              <img id="GitHub" class="logo" src="/assets/svg/github-dark.svg" alt="GitHub">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/m.ctk1/">
-              <img id="Instagram" class="logo" src="/assets/svg/insta-dark.svg" alt="Instagram">
-            </a>
-          </div>
-        </div>
-        <div class="main-footer__row main-footer__row-2">
-          <h2 class="heading heading-sm text-lt">Melih Cetinkaya</h2>
-          <p class="main-footer__short-desc">
-            Développeur Full-Stack passionné par les technologies web modernes et l'innovation numérique.
-          </p>
-        </div>
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>&copy; <span class="copyright-year"></span> Melih Cetinkaya</span>
+        <a href="https://github.com/melih0132" target="_blank" rel="noreferrer">github.com/melih0132</a>
       </div>
-      <div class="main-footer__lower">
-        &copy; Copyright
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-        . Made by Melih Cetinkaya
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
-      <script defer src="/assets/vendor/lenis/lenis.min.js"></script>
-  <script defer src="/assets/js/lenis-init.min.js"></script>
-  <script defer src="/fr/projets/script.min.js"></script>
+  <script>
+    document.querySelectorAll('.copyright-year').forEach((el) => { el.textContent = new Date().getFullYear(); });
+  </script>
+  <script src="/assets/js/ocean.min.js"></script>
+  <script defer src="/assets/js/portfolio.min.js"></script>
 </body>
-
 </html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>404 | Melih Cetinkaya</title>
+  <link rel="icon" href="/assets/png/logo.png" type="image/png">
+  <script>
+    (function () {
+      var lang = null;
+      var match = /^\/(fr|en)(\/|$)/.exec(location.pathname);
+      if (match) lang = match[1];
+      if (!lang) {
+        try {
+          lang = localStorage.getItem('preferredLanguage');
+        } catch (e) {}
+      }
+      if (lang !== 'fr' && lang !== 'en') {
+        lang = (navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+      }
+      document.documentElement.lang = lang;
+      document.documentElement.dataset.lang = lang;
+    })();
+  </script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      color-scheme: dark;
+      min-height: 100svh;
+      display: grid;
+      place-items: safe center;
+      background: #000;
+      overflow: hidden;
+      font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+      padding: 1.5rem;
+    }
+
+    .ocean {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      font-family: inherit;
+    }
+
+    .panel {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 0.85rem;
+      justify-items: start;
+      max-width: 28rem;
+      text-decoration: none;
+      color: inherit;
+      text-shadow: 0 0 24px rgba(0, 0, 0, 0.85);
+    }
+
+    .panel:focus-visible {
+      outline: 1px solid #a9b1c0;
+      outline-offset: 8px;
+    }
+
+    .code {
+      color: #e8ecf2;
+      font-size: clamp(4.5rem, 18vw, 9rem);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      line-height: 0.95;
+      user-select: none;
+    }
+
+    .copy {
+      display: none;
+    }
+
+    html:not([data-lang]) .copy[lang='en'],
+    html[data-lang='en'] .copy[lang='en'],
+    html[data-lang='fr'] .copy[lang='fr'] {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .copy strong {
+      color: #e8ecf2;
+      font-size: clamp(1rem, 3.2vw, 1.25rem);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .copy span {
+      color: #8a93a6;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
+  <a class="panel" data-home href="/en/">
+    <span class="code">404</span>
+    <span class="copy" lang="fr">
+      <strong>Page introuvable</strong>
+      <span>Cette page n’existe pas ou a été déplacée. Retour à l’accueil.</span>
+    </span>
+    <span class="copy" lang="en">
+      <strong>Page not found</strong>
+      <span>This page does not exist or has moved. Back to home.</span>
+    </span>
+  </a>
+
+  <script src="/assets/js/ocean.min.js"></script>
+  <script>
+    (function () {
+      var home = document.querySelector('[data-home]');
+      if (home) {
+        home.setAttribute('href', '/' + (document.documentElement.dataset.lang || 'en') + '/');
+      }
+      var canvas = document.querySelector('[data-ocean]');
+      if (canvas && typeof OceanEngine === 'function') {
+        new OceanEngine(canvas);
+      }
+    })();
+  </script>
+</body>
+</html>

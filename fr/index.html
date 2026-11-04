@@ -1,819 +1,381 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="Hyw4H6O427E0t-A90i-_FCv_3mjHuqSYVS5JRjFso4Q" />
-  <meta name="description"
-    content="Portfolio de Melih Cetinkaya, développeur web passionné par les technologies web modernes et l'innovation numérique. Découvrez mes projets et compétences." />
+  <meta name="description" content="Portfolio de Melih Cetinkaya, développeur web. Projets, compétences et contact." />
   <link rel="canonical" href="https://melih0132.github.io/fr/" />
   <link rel="alternate" hreflang="en" href="https://melih0132.github.io/en/" />
   <link rel="alternate" hreflang="fr" href="https://melih0132.github.io/fr/" />
   <link rel="alternate" hreflang="x-default" href="https://melih0132.github.io/en/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Melih Cetinkaya | Développeur" />
-  <meta property="og:description"
-    content="Portfolio de Melih Cetinkaya, développeur full-stack. Découvrez mes projets et compétences." />
+  <meta property="og:description" content="Portfolio de Melih Cetinkaya, développeur full-stack." />
   <meta property="og:url" content="https://melih0132.github.io/fr/" />
   <meta property="og:image" content="https://melih0132.github.io/assets/png/pp.png" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:locale" content="fr_FR" />
-  <meta property="og:site_name" content="Melih Cetinkaya" />
-  <meta name="twitter:title" content="Melih Cetinkaya | Développeur" />
-  <meta name="twitter:description"
-    content="Portfolio de Melih Cetinkaya, développeur full-stack. Découvrez mes projets et compétences." />
-  <meta name="twitter:image" content="https://melih0132.github.io/assets/png/pp.png" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Melih Cetinkaya",
-    "url": "https://melih0132.github.io/fr/",
-    "jobTitle": "Développeur web",
-    "sameAs": [
-      "https://github.com/melih0132",
-      "https://www.linkedin.com/in/melih-ctk/"
-    ]
-  }
-  </script>
-  <link rel="stylesheet" href="/assets/css/style.core.min.css" />
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="fd24f53a-4819-4828-9ed9-b3d15fec0601"></script>
+  <link rel="stylesheet" href="/assets/css/style.min.css" />
   <link rel="icon" href="/assets/png/logo.png" type="image/png">
   <title>Melih Cetinkaya | Développeur</title>
 </head>
-
 <body>
-  <a href="#main" class="skip-link">Aller au contenu</a>
-  <header class="header">
-    <div class="header__content">
-      <div class="header__logo-container">
-        <div class="header__logo-img-cont">
-          <img src="/assets/png/pp.png" alt="PP Melih CETINKAYA" class="header__logo-img" width="40" height="40" />
-        </div>
-        <span class="header__logo-sub">MELIH C.</span>
+  <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
+  <div class="site">
+    <div id="home" class="page-top" tabindex="-1"></div>
+    <a href="#main" class="skip-link">Aller au contenu</a>
+    <header class="header">
+      <div class="header__content">
+        <a class="header__brand" href="#home">Melih C.</a>
+        <ul class="header__links">
+          <li><a class="header__link" href="#home">Accueil</a></li>
+          <li><a class="header__link" href="#projects">Projets</a></li>
+          <li><a class="header__link" href="#about">À propos</a></li>
+          <li><a class="header__link" href="#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="/fr/" data-set-lang="fr" aria-current="true">FR</a></li>
+          <li><a href="/en/" data-set-lang="en">EN</a></li>
+        </ul>
+        <button class="header__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel">Menu</button>
       </div>
-      <div class="header__main">
-        <ul class="header__links header__links--center">
-          <li class="header__link-wrapper">
-            <a href="./#home" class="header__link">Accueil</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="./#about" class="header__link">À propos</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="./#projects" class="header__link">Projets</a>
-          </li>
+      <div class="header__panel" id="nav-panel" data-nav-panel>
+        <ul>
+          <li><a href="#home">Accueil</a></li>
+          <li><a href="#projects">Projets</a></li>
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="/fr/" data-set-lang="fr" aria-current="true">FR</a></li>
+          <li><a href="/en/" data-set-lang="en">EN</a></li>
         </ul>
       </div>
-      <ul class="header__links header__links--right">
-        <li class="header__link-wrapper">
-          <a href="./#contact" class="header__link">Contact</a>
-        </li>
-      </ul>
-      <div class="header__main-ham-menu-cont">
-        <img src="/assets/svg/ham-menu.svg" alt="Menu" class="header__main-ham-menu" width="26" height="26" />
-        <img src="/assets/svg/ham-menu-close.svg" alt="Fermer le menu" class="header__main-ham-menu-close d-none" width="26" height="26" />
-      </div>
-    </div>
-    <div class="header__sm-menu">
-      <div class="header__sm-menu-content">
-        <ul class="header__sm-menu-links">
-          <li class="header__sm-menu-link">
-            <a href="./#home">Accueil</a>
-          </li>
+    </header>
 
-          <li class="header__sm-menu-link">
-            <a href="./#about">À propos</a>
-          </li>
-
-
-          <li class="header__sm-menu-link">
-            <a href="./#projects">Projets</a>
-          </li>
-
-          <li class="header__sm-menu-link">
-            <a href="./#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
-  <main id="main">
-
-  <section id="home" class="home-hero">
-    <div class="home-hero__content">
-      <h1 class="heading-primary">
-        <span id="dynamic-lang">Yo</span>, je suis Melih Cetinkaya
-      </h1>
-      <div class="home-hero__info">
-        <p class="text-primary">
-          Passionné par le développement web, je combine expertise technique et créativité pour créer des expériences
-          numériques innovantes et contribuer à des projets passionnants.
-        </p>
-      </div>
-      <div class="home-hero__cta">
-        <a href="/assets/cv/melih-cetinkaya-cv.pdf" target="_blank" class="btn btn--bg">Mon CV</a>
-      </div>
-    </div>
-    <div class="home-hero__socials">
-      <div class="home-hero__social">
-        <a href="https://www.linkedin.com/in/melih-ctk/" class="home-hero__social-icon-link" rel="noreferrer"
-          target="_blank">
-          <img src="/assets/svg/linkedin-dark.svg" alt="Melih Cetinkaya Linkedin" class="home-hero__social-icon" width="30" height="30" />
-        </a>
-      </div>
-      <div class="home-hero__social">
-        <a href="https://www.instagram.com/m.ctk1/" class="home-hero__social-icon-link" rel="noreferrer"
-          target="_blank">
-          <img src="/assets/svg/insta-dark.svg" alt="Melih Cetinkaya Instagram" class="home-hero__social-icon" width="30" height="30" />
-        </a>
-      </div>
-      <div class="home-hero__social">
-        <a href="https://x.com/MelMet32" class="home-hero__social-icon-link" rel="noreferrer" target="_blank">
-          <img src="/assets/svg/X-dark.svg" alt="Melih Cetinkaya X" class="home-hero__social-icon" width="30" height="30" />
-        </a>
-      </div>
-      <div class="home-hero__social">
-        <a href="https://github.com/melih0132" class="home-hero__social-icon-link" rel="noreferrer" target="_blank">
-          <img src="/assets/svg/github-dark.svg" alt="Melih Cetinkaya GitHub Profile" class="home-hero__social-icon" width="30" height="30" />
-        </a>
-      </div>
-    </div>
-    <div class="home-hero__mouse-scroll-cont">
-      <div class="mouse"></div>
-    </div>
-  </section>
-
-  <section id="about" class="about sec-pad">
-    <div class="main-container-about">
-      <h2 class="heading heading-sec heading-sec__mb-med scroll-reveal">
-        <span class="heading-sec__main">À propos de moi</span>
-        <span class="heading-sec__sub">
-          Découvrez qui je suis, mes compétences en programmation et les projets que j'ai réalisés.
-        </span>
-      </h2>
-      <div class="about__content">
-        <div class="about__content-main_fr scroll-reveal scroll-reveal--delay-1">
-          <h3 class="about__content-title">Découvrez mon parcours et mes passions</h3>
-          <div class="about__content-details">
-            <p class="about__content-details-para scroll-reveal scroll-reveal--delay-2">
-              Salut ! Je suis Melih. Je suis en <strong>Master Mathématiques et informatique appliquées aux
-                sciences humaines et sociales (MIASHS)</strong> à l'<a rel="noreferrer"
-                href="https://www.univ-grenoble-alpes.fr/" target="_blank">Université Grenoble Alpes (UGA)</a>.
-              J'adore transformer des idées en solutions numériques.
-            </p>
-            <p class="about__content-details-para scroll-reveal scroll-reveal--delay-3">
-              <strong>Développeur web passionné</strong>, je crée des sites web et applications mobiles. J'ai aussi de
-              l'expérience professionnelle en développement backend de sites web.
-            </p>
-            <p class="about__content-details-para scroll-reveal scroll-reveal--delay-4">
-              Je conçois des interfaces et travaille sur des projets variés, allant de plateformes de gestion
-              d'événements (Helvetic Events) à des applications de transport. Je suis adepte des méthodologies agiles et
-              j'écris du code propre et maintenable avec des tests appropriés.
-            </p>
-            <p class="about__content-details-para scroll-reveal scroll-reveal--delay-5">
-              Je recherche des <strong>opportunités de stage</strong>, des <strong>contrats en alternance</strong>, ou
-              des <strong>postes à temps plein</strong> où je pourrais contribuer à des projets passionnants.
-            </p>
-            <p class="about__content-details-para scroll-reveal scroll-reveal--delay-5">
-              N'hésitez pas à me contacter sur <a rel="noreferrer" href="https://www.linkedin.com/in/melih-ctk/"
-                target="_blank">LinkedIn</a>
-              ou sur
-              <a rel="noreferrer" href="https://www.instagram.com/m.ctk1/" target="_blank">Instagram</a>.
-              Que vous ayez une opportunité, que vous souhaitiez collaborer, ou simplement discuter de tech, je suis
-              toujours ouvert à échanger !
-            </p>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__inner">
+          <span class="hero__brand">Melih C.</span>
+          <h1 class="hero__title" id="hero-title">Développeur web</h1>
+          <p class="hero__lead">
+            Je construis des expériences numériques claires, du backend aux interfaces, et je cherche des projets où le code compte autant que le produit.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="/assets/cv/melih-cetinkaya-cv.pdf" target="_blank" rel="noreferrer">Mon CV</a>
+            <a class="btn" href="#projects">Voir les projets</a>
           </div>
-          <a href="./#contact" class="btn btn--med btn--theme scroll-reveal scroll-reveal--delay-5">Contactez-moi</a>
+          <ul class="hero__socials">
+            <li><a href="https://www.linkedin.com/in/melih-ctk/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+            <li><a href="https://github.com/melih0132" target="_blank" rel="noreferrer">GitHub</a></li>
+            <li><a href="https://www.instagram.com/m.ctk1/" target="_blank" rel="noreferrer">Instagram</a></li>
+            <li><a href="https://x.com/MelMet32" target="_blank" rel="noreferrer">X</a></li>
+          </ul>
         </div>
-        <div class="about__content-skills scroll-reveal scroll-reveal--fade-right">
-          <h3 class="about__content-title-2">Technologies & Outils</h3>
-          <div class="skills">
+      </section>
 
-            <div class="skills__category scroll-reveal scroll-reveal--delay-1">
-              <h4 class="skills__category-title">Langages</h4>
-              <div class="skills__skill-row">
-                <div class="skills__skill skill-transform">HTML/CSS</div>
-                <div class="skills__skill skill-transform">JavaScript</div>
-                <div class="skills__skill skill-transform">TypeScript</div>
-                <div class="skills__skill skill-transform">PHP</div>
-                <div class="skills__skill skill-transform">Python</div>
-                <div class="skills__skill skill-transform">C# (.NET)</div>
-                <div class="skills__skill skill-transform">Swift</div>
-                <div class="skills__skill skill-transform">Kotlin</div>
-                <div class="skills__skill skill-transform">Dart</div>
-                <div class="skills__skill skill-transform">SQL & PL/pgSQL</div>
-                <div class="skills__skill skill-transform">Bash</div>
-                <div class="skills__skill skill-transform">XAML</div>
-              </div>
-            </div>
+      <section id="projects" class="section section--scrim">
+        <div class="wrap">
+          <header class="section__head">
+            <span class="section__eyebrow">Index</span>
+            <h2 class="section__title">Projets</h2>
+            <p class="section__sub">Sélection de projets académiques et personnels.</p>
+          </header>
 
-            <div class="skills__category scroll-reveal scroll-reveal--delay-2">
-              <h4 class="skills__category-title">Frameworks & Bibliothèques</h4>
-              <div class="skills__skill-row">
-                <div class="skills__skill skill-transform">React & Next</div>
-                <div class="skills__skill skill-transform">Vue.js</div>
-                <div class="skills__skill skill-transform">CSS Frameworks</div>
-                <div class="skills__skill skill-transform">Node.js & Express</div>
-                <div class="skills__skill skill-transform">Socket.io</div>
-                <div class="skills__skill skill-transform">Nodemon</div>
-                <div class="skills__skill skill-transform">Laravel</div>
-                <div class="skills__skill skill-transform">Symfony</div>
-                <div class="skills__skill skill-transform">FastAPI</div>
-                <div class="skills__skill skill-transform">Python ORM</div>
-                <div class="skills__skill skill-transform">Data Science (Python)</div>
-                <div class="skills__skill skill-transform">Pytest</div>
-                <div class="skills__skill skill-transform">Tkinter</div>
-                <div class="skills__skill skill-transform">.NET Ecosystem</div>
-                <div class="skills__skill skill-transform">Windows UI</div>
-                <div class="skills__skill skill-transform">Flutter</div>
-                <div class="skills__skill skill-transform">iOS Frameworks</div>
-                <div class="skills__skill skill-transform">Android UI</div>
-                <div class="skills__skill skill-transform">Phaser</div>
-              </div>
-            </div>
-
-            <div class="skills__category scroll-reveal scroll-reveal--delay-3">
-              <h4 class="skills__category-title">Bases de Données</h4>
-              <div class="skills__skill-row">
-                <div class="skills__skill skill-transform">SQL Databases</div>
-                <div class="skills__skill skill-transform">MySQL</div>
-                <div class="skills__skill skill-transform">MongoDB</div>
-                <div class="skills__skill skill-transform">JSON / JSONB</div>
-                <div class="skills__skill skill-transform">Database Optimization</div>
-                <div class="skills__skill skill-transform">Reverse Engineering</div>
-                <div class="skills__skill skill-transform">Database Design</div>
-              </div>
-            </div>
-
-            <div class="skills__category scroll-reveal scroll-reveal--delay-4">
-              <h4 class="skills__category-title">Environnement & Outils</h4>
-              <div class="skills__skill-row">
-                <div class="skills__skill skill-transform">IDEs</div>
-                <div class="skills__skill skill-transform">Mobile IDEs</div>
-                <div class="skills__skill skill-transform">Unity</div>
-                <div class="skills__skill skill-transform">Version Control</div>
-                <div class="skills__skill skill-transform">Docker</div>
-                <div class="skills__skill skill-transform">Web Servers</div>
-                <div class="skills__skill skill-transform">Linux</div>
-                <div class="skills__skill skill-transform">API Tools</div>
-                <div class="skills__skill skill-transform">pgAdmin4</div>
-                <div class="skills__skill skill-transform">Visual Paradigm</div>
-                <div class="skills__skill skill-transform">Data Analysis</div>
-                <div class="skills__skill skill-transform">Microsoft Azure</div>
-                <div class="skills__skill skill-transform">Collaboration Tools</div>
-              </div>
-            </div>
-
-            <div class="skills__category scroll-reveal scroll-reveal--delay-5">
-              <h4 class="skills__category-title">Design & CMS</h4>
-              <div class="skills__skill-row">
-                <div class="skills__skill skill-transform">Figma</div>
-                <div class="skills__skill skill-transform">Framer</div>
-                <div class="skills__skill skill-transform">Canva</div>
-                <div class="skills__skill skill-transform">WordPress</div>
-              </div>
-            </div>
-
-            <div class="skills__category scroll-reveal scroll-reveal--delay-5">
-              <h4 class="skills__category-title">Méthodologies & Concepts</h4>
-              <div class="skills__skill-row">
-                <div class="skills__skill skill-transform">UML</div>
-                <div class="skills__skill skill-transform">MVC</div>
-                <div class="skills__skill skill-transform">OOP</div>
-                <div class="skills__skill skill-transform">Design Patterns</div>
-                <div class="skills__skill skill-transform">CRUD</div>
-                <div class="skills__skill skill-transform">Tests Unitaires</div>
-                <div class="skills__skill skill-transform">HTTP</div>
-                <div class="skills__skill skill-transform">API & Web Services</div>
-                <div class="skills__skill skill-transform">Agile/Scrum</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section id="projects" class="projects sec-pad">
-    <div class="main-container">
-      <h2 class="heading heading-sec heading-sec__mb-bg scroll-reveal">
-        <span class="heading-sec__main">Projets</span>
-        <span class="heading-sec__sub">
-          Découvrez ici une sélection de projets académiques et personnels que j'ai réalisés.
-        </span>
-      </h2>
-      <div class="projects__content">
-        <div class="projects-layout">
-          <aside class="projects-filters-panel scroll-reveal scroll-reveal--delay-1" role="complementary"
-            aria-label="Filtres des projets">
-            <p class="projects-filters-panel__hint">Filtres</p>
-            <div class="projects-filters">
+          <div class="projects-toolbar">
+            <div class="projects-filters" aria-label="Filtres des projets">
               <button type="button" class="filter-btn active" data-filter="all">Tous</button>
             </div>
-          </aside>
-          <div class="projects-main">
-            <div class="projects-grid">
+          </div>
 
-              <!-- Evit'Shuriken -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-1" data-project-id="evit-shuriken">
-                <div class="project-info">
-                  <h2 class="project-title">Evit'Shuriken</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">WPF</span>
-                    <span class="tech-tag">.NET/C#</span>
-                    <span class="tech-tag">XAML</span>
-                    <span class="tech-tag" title="Git, GitHub">+2</span>
-                  </div>
-                  <p class="project-description">
-                    Jeu que j'ai créé combinant des connaissances en .NET/C# et XAML. Réalisé durant ma première année
-                    en informatique.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/evit-shuriken.html" class="project-link code-link" target="_self">Voir
-                      détails</a>
-                  </div>
-                </div>
+          <ul class="projects-list">
+            <li class="project-card" data-project-id="evit-shuriken">
+              <h3 class="project-title">Evit'Shuriken</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">WPF</span>
+                <span class="tech-tag">.NET/C#</span>
+                <span class="tech-tag">XAML</span>
               </div>
-
-              <!-- DortanApp -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-2" data-project-id="dortan-app">
-                <div class="project-info">
-                  <h2 class="project-title">DortanApp</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">.NET</span>
-                    <span class="tech-tag">WPF</span>
-                    <span class="tech-tag">Figma</span>
-                    <span class="tech-tag">PostgreSQL</span>
-                    <span class="tech-tag" title="XAML, SQL, pgAdmin4, Git, GitHub">+5</span>
-                  </div>
-                  <p class="project-description">
-                    Application de gestion des réservations pour mairie avec interface WPF et base de données
-                    PostgreSQL.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/dortan-app.html" class="project-link code-link" target="_self">Voir détails</a>
-                  </div>
-                </div>
+              <p class="project-description">Jeu .NET/C# et XAML, réalisé en première année d'informatique.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/evit-shuriken.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="dortan-app">
+              <h3 class="project-title">DortanApp</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">.NET</span>
+                <span class="tech-tag">WPF</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Figma</span>
               </div>
-
-              <!-- KUBE -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-3" data-project-id="kube">
-                <div class="project-info">
-                  <h2 class="project-title">KUBE</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Unity</span>
-                    <span class="tech-tag">C#</span>
-                    <span class="tech-tag">.NET</span>
-                    <span class="tech-tag" title="3D Modeling, Git, GitHub">+3</span>
-                  </div>
-                  <p class="project-description">
-                    Jeu développé avec Unity en .NET/C#. Découverte des outils de développement de jeux vidéo.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/kube.html" class="project-link code-link" target="_self">Voir détails</a>
-                  </div>
-                </div>
+              <p class="project-description">Gestion des réservations pour mairie, interface WPF et PostgreSQL.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/dortan-app.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="kube">
+              <h3 class="project-title">KUBE</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Unity</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">.NET</span>
               </div>
-
-              <!-- Phaser Games -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-4" data-project-id="phaser-games">
-                <div class="project-info">
-                  <h2 class="project-title">Phaser Games</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Phaser</span>
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">Express</span>
-                    <span class="tech-tag">Socket.io</span>
-                    <span class="tech-tag" title="JavaScript, HTML/CSS, Nodemon, VS Code, Git, GitHub">+6</span>
-                  </div>
-                  <p class="project-description">
-                    Jeux développés avec Phaser, utilisant Express pour le backend et Socket.io pour la communication en
-                    temps réel.
-                  </p>
-                  <div class="project-links">
-                    <a href="https://github.com/melih0132/all-my-projects/tree/main/web/phaser-projects"
-                      class="project-link demo-link" target="_blank">Voir sur GitHub</a>
-                  </div>
-                </div>
+              <p class="project-description">Jeu Unity en .NET/C#, découverte des outils de jeu vidéo.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/kube.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="phaser-games">
+              <h3 class="project-title">Phaser Games</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Phaser</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Express</span>
+                <span class="tech-tag">Socket.io</span>
               </div>
-
-              <!-- LPO -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-5" data-project-id="lpo">
-                <div class="project-info">
-                  <h2 class="project-title">LPO</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">PostgreSQL</span>
-                    <span class="tech-tag">Excel</span>
-                    <span class="tech-tag">Power BI</span>
-                    <span class="tech-tag" title="Visual Paradigm, PowerAMC, pgAdmin4, SQL, Microsoft Teams">+5</span>
-                  </div>
-                  <p class="project-description">
-                    Projet universitaire de comptage d'oiseaux avec gestion PostgreSQL, analyse Excel et visualisation
-                    Power
-                    BI.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/lpo.html" class="project-link code-link" target="_self">Voir détails</a>
-                  </div>
-                </div>
+              <p class="project-description">Jeux Phaser avec Express et communication temps réel Socket.io.</p>
+              <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/web/phaser-projects" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+            </li>
+            <li class="project-card" data-project-id="lpo">
+              <h3 class="project-title">LPO</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Excel</span>
+                <span class="tech-tag">Power BI</span>
               </div>
-
-              <!-- Application Uber -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-1" data-project-id="uber-laravel">
-                <div class="project-info">
-                  <h2 class="project-title">Clone Uber Avec Laravel</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Laravel</span>
-                    <span class="tech-tag">PostgreSQL</span>
-                    <span class="tech-tag">Power BI</span>
-                    <span class="tech-tag"
-                      title="PHP, SQL, VS Code, Visual Paradigm, PowerAMC, Node.js, Bootstrap, Agile, MVC, Git, GitHub, Microsoft Azure, Microsoft Teams">+11</span>
-                  </div>
-                  <p class="project-description">
-                    Application de type Uber avec Laravel, PostgreSQL, conforme RGPD avec analyse Power BI.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/uber-laravel.html" class="project-link code-link" target="_self">Voir
-                      détails</a>
-                  </div>
-                </div>
+              <p class="project-description">Comptage d'oiseaux : PostgreSQL, analyse Excel et visualisation Power BI.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/lpo.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="uber-laravel">
+              <h3 class="project-title">Clone Uber Avec Laravel</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Laravel</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Power BI</span>
               </div>
-
-              <!-- Applications Flutter -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-2" data-project-id="flutter-apps">
-                <div class="project-info">
-                  <h2 class="project-title">Applications Flutter</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Flutter</span>
-                    <span class="tech-tag">Dart</span>
-                    <span class="tech-tag">RESTful API</span>
-                    <span class="tech-tag" title="VS Code, Git, GitHub">+3</span>
-                  </div>
-                  <p class="project-description">
-                    Applications mobiles multiplateformes développées avec Flutter, incluant des applications météo et
-                    autres projets utilisant l'API REST.
-                  </p>
-                  <div class="project-links">
-                    <a href="https://github.com/melih0132/all-my-projects/tree/main/flutter"
-                      class="project-link demo-link" target="_blank">Voir sur GitHub</a>
-                  </div>
-                </div>
+              <p class="project-description">Application type Uber avec Laravel, PostgreSQL, conforme RGPD.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/uber-laravel.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="flutter-apps">
+              <h3 class="project-title">Applications Flutter</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Flutter</span>
+                <span class="tech-tag">Dart</span>
+                <span class="tech-tag">RESTful API</span>
               </div>
-
-              <!-- Uber Vue.js/.NET -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-3" data-project-id="uber-vuejs-dotnet">
-                <div class="project-info">
-                  <h2 class="project-title">Clone Uber Avec Vue.js et .NET Core</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Vue.js</span>
-                    <span class="tech-tag">.NET Core</span>
-                    <span class="tech-tag">RESTful API</span>
-                    <span class="tech-tag"
-                      title="C#, Node.js, PostgreSQL, JWT, Swagger, VS Code, Visual Studio, Git, GitHub, Postman, Microsoft Teams, MVC">+12</span>
-                  </div>
-                  <p class="project-description">
-                    Application de transport moderne avec frontend Vue.js et backend .NET Core, implémentant des
-                    fonctionnalités avancées de géolocalisation et de paiement.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/uber-vuejs-dotnet.html" class="project-link code-link" target="_self">Voir
-                      détails</a>
-                  </div>
-                </div>
+              <p class="project-description">Applications mobiles multiplateformes, dont météo et clients REST.</p>
+              <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/flutter" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+            </li>
+            <li class="project-card" data-project-id="uber-vuejs-dotnet">
+              <h3 class="project-title">Clone Uber Avec Vue.js et .NET Core</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Vue.js</span>
+                <span class="tech-tag">.NET Core</span>
+                <span class="tech-tag">RESTful API</span>
               </div>
-
-              <!-- Helvetic Events -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-4" data-project-id="heva">
-                <div class="project-info">
-                  <h2 class="project-title">Helvetic Events - Plateforme de Gestion d'Événements</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">FastAPI</span>
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">OpenAI</span>
-                    <span class="tech-tag">Framer</span>
-                    <span class="tech-tag"
-                      title="TypeScript, Node.js, Next, PostgreSQL, SQLAlchemy, Alembic, Pytest, Tailwind CSS, RESTful API, Swagger, Postman, Figma, Docker, Git, GitHub, VS Code">+16</span>
-                  </div>
-                  <p class="project-description">
-                    Plateforme complète de gestion d'événements avec FastAPI et React, intégrant des fonctionnalités
-                    d'IA et une authentification sécurisée.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/heva.html" class="project-link code-link" target="_self">Voir détails</a>
-                  </div>
-                </div>
+              <p class="project-description">Transport moderne : frontend Vue.js, backend .NET Core, géolocalisation et paiement.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/uber-vuejs-dotnet.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="heva">
+              <h3 class="project-title">Helvetic Events</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">OpenAI</span>
+                <span class="tech-tag">Framer</span>
               </div>
-
-              <!-- SmartHome Lite -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-5" data-project-id="smarthome-lite">
-                <div class="project-info">
-                  <h2 class="project-title">SmartHome Lite - Domotique Distribuée</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">FastAPI</span>
-                    <span class="tech-tag">Next</span>
-                    <span class="tech-tag">Kotlin</span>
-                    <span class="tech-tag">Jetpack Compose</span>
-                    <span class="tech-tag"
-                      title="Python, Flask, PostgreSQL, SQLAlchemy, JWT, Pytest, React, TypeScript, Tailwind CSS, Raspberry Pi, Z-Wave, VS Code, Git, GitHub">+14</span>
-                  </div>
-                  <p class="project-description">
-                    Domotique distribuée avec FastAPI, Next et Kotlin / Jetpack Compose ; Z-Wave, automatisation et ML.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/smarthome-lite.html" class="project-link code-link" target="_self">Voir
-                      détails</a>
-                  </div>
-                </div>
+              <p class="project-description">Plateforme de gestion d'événements avec IA et authentification sécurisée.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/heva.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="smarthome-lite">
+              <h3 class="project-title">SmartHome Lite</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Next</span>
+                <span class="tech-tag">Kotlin</span>
+                <span class="tech-tag">Jetpack Compose</span>
               </div>
-
-              <!-- Shared IA -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-1" data-project-id="shared-ia">
-                <div class="project-info">
-                  <h2 class="project-title">Shared IA - Plateforme d'IA Partagée</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Socket.io</span>
-                    <span class="tech-tag"
-                      title="Express.js, TypeScript, Vite, PostgreSQL, OpenAI, JWT, Zustand, Tailwind CSS, Swagger, VS Code, Git, GitHub">+11</span>
-                  </div>
-                  <p class="project-description">
-                    Chat collaboratif avec IA : jusqu'à 4 utilisateurs, validation collective des messages et résolution
-                    de conflits en temps réel.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/shared-ia.html" class="project-link code-link" target="_self">Voir détails</a>
-                  </div>
-                </div>
+              <p class="project-description">Domotique distribuée : FastAPI, Next, Kotlin / Jetpack Compose, Z-Wave.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/smarthome-lite.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="shared-ia">
+              <h3 class="project-title">Shared IA</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Socket.io</span>
               </div>
-
-              <!-- Applications Swift -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-1" data-project-id="swift-apps">
-                <div class="project-info">
-                  <h2 class="project-title">Applications Swift</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Swift</span>
-                    <span class="tech-tag">UIKit</span>
-                    <span class="tech-tag">Xcode</span>
-                    <span class="tech-tag" title="iOS, Git, GitHub, SwiftUI">+4</span>
-                  </div>
-                  <p class="project-description">
-                    Applications iOS natives développées avec Swift et UIKit, incluant des gestionnaires de documents,
-                    de Pokémon et autres projets iOS.
-                  </p>
-                  <div class="project-links">
-                    <a href="https://github.com/melih0132/all-my-projects/tree/main/swift"
-                      class="project-link demo-link" target="_blank">Voir sur GitHub</a>
-                  </div>
-                </div>
+              <p class="project-description">Chat collaboratif avec IA, validation collective et résolution de conflits.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/shared-ia.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="swift-apps">
+              <h3 class="project-title">Applications Swift</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Swift</span>
+                <span class="tech-tag">UIKit</span>
+                <span class="tech-tag">Xcode</span>
               </div>
-
-              <!-- Applications Kotlin -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-2" data-project-id="kotlin-apps">
-                <div class="project-info">
-                  <h2 class="project-title">Applications Kotlin</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Kotlin</span>
-                    <span class="tech-tag">Jetpack Compose</span>
-                    <span class="tech-tag">Gradle</span>
-                    <span class="tech-tag" title="Android Studio, Material 3, Git, GitHub">+4</span>
-                  </div>
-                  <p class="project-description">
-                    Applications Android avec Jetpack Compose et Material Design 3 : tutoriels officiels et exercices
-                    (dés, pourboire, liste, etc.).
-                  </p>
-                  <div class="project-links">
-                    <a href="https://github.com/melih0132/all-my-projects/tree/main/kotlin"
-                      class="project-link demo-link" target="_blank">Voir sur GitHub</a>
-                  </div>
-                </div>
+              <p class="project-description">Applications iOS natives Swift / UIKit.</p>
+              <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/swift" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+            </li>
+            <li class="project-card" data-project-id="kotlin-apps">
+              <h3 class="project-title">Applications Kotlin</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Kotlin</span>
+                <span class="tech-tag">Jetpack Compose</span>
+                <span class="tech-tag">Gradle</span>
               </div>
-
-              <!-- Projets .NET Core -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-3" data-project-id="dotnet-core-projects">
-                <div class="project-info">
-                  <h2 class="project-title">Projets .NET Core</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">ASP.NET Core</span>
-                    <span class="tech-tag">.NET Core</span>
-                    <span class="tech-tag">C#</span>
-                    <span class="tech-tag"
-                      title="RESTful API, Entity Framework Core, WinUI 3, PostgreSQL, Swagger, Visual Studio, VS Code, Git, GitHub, Postman">+10</span>
-                  </div>
-                  <p class="project-description">
-                    Projets développés avec .NET Core incluant des API REST, des applications WinUI 3, des services web
-                    et autres applications .NET.
-                  </p>
-                  <div class="project-links">
-                    <a href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/.net-core-projects"
-                      class="project-link demo-link" target="_blank">Voir sur GitHub</a>
-                  </div>
-                </div>
+              <p class="project-description">Applications Android Compose et Material Design 3.</p>
+              <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/kotlin" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+            </li>
+            <li class="project-card" data-project-id="dotnet-core-projects">
+              <h3 class="project-title">Projets .NET Core</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">ASP.NET Core</span>
+                <span class="tech-tag">.NET Core</span>
+                <span class="tech-tag">C#</span>
               </div>
-
-              <!-- Projets Python -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-2" data-project-id="python-projects">
-                <div class="project-info">
-                  <h2 class="project-title">Projets Python</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Tkinter</span>
-                    <span class="tech-tag">SQLite</span>
-                    <span class="tech-tag" title="Git, GitHub, VS Code, PyCharm, pip">+5</span>
-                  </div>
-                  <p class="project-description">
-                    Applications Python incluant des utilitaires, des quiz, des applications de classement avec
-                    interface graphique et autres projets Python.
-                  </p>
-                  <div class="project-links">
-                    <a href="https://github.com/melih0132/all-my-projects/tree/main/python"
-                      class="project-link demo-link" target="_blank">Voir sur GitHub</a>
-                  </div>
-                </div>
+              <p class="project-description">API REST, WinUI 3 et services web .NET.</p>
+              <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/.net-core-projects" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+            </li>
+            <li class="project-card" data-project-id="python-projects">
+              <h3 class="project-title">Projets Python</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Tkinter</span>
+                <span class="tech-tag">SQLite</span>
               </div>
-
-              <!-- Application de Classement -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-3" data-project-id="ranking">
-                <div class="project-info">
-                  <h2 class="project-title">Application de Classement</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Tkinter</span>
-                    <span class="tech-tag">SQLite</span>
-                    <span class="tech-tag" title="VS Code, Git, GitHub">+3</span>
-                  </div>
-                  <p class="project-description">
-                    Application de gestion de classements développée avec Python et Tkinter, permettant de créer,
-                    modifier et supprimer des classements avec sauvegarde SQLite.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/ranking.html" class="project-link code-link" target="_self">Voir détails</a>
-                  </div>
-                </div>
+              <p class="project-description">Utilitaires, quiz et applications de classement avec GUI.</p>
+              <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/python" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+            </li>
+            <li class="project-card" data-project-id="ranking">
+              <h3 class="project-title">Application de Classement</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Tkinter</span>
+                <span class="tech-tag">SQLite</span>
               </div>
-
-              <!-- La Guilde des Seigneurs -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-1" data-project-id="la-guilde-des-seigneurs">
-                <div class="project-info">
-                  <h2 class="project-title">La Guilde des Seigneurs</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">Symfony</span>
-                    <span class="tech-tag">PHP</span>
-                    <span class="tech-tag">JWT</span>
-                    <span class="tech-tag">MySQL</span>
-                    <span class="tech-tag" title="Doctrine, Bootstrap, Twig, OpenAPI, RESTful API, HttpClient, PHPUnit, Git, GitHub, MVC">+10</span>
-                  </div>
-                  <p class="project-description">
-                    Monorepo Symfony : API REST JWT et application web consommatrice pour gérer personnages, bâtiments
-                    et utilisateurs.
-                  </p>
-                  <div class="project-links">
-                    <a href="/fr/projets/la-guilde-des-seigneurs.html" class="project-link code-link" target="_self">Voir
-                      détails</a>
-                  </div>
-                </div>
+              <p class="project-description">Gestion de classements avec interface Tkinter et sauvegarde SQLite.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/ranking.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="la-guilde-des-seigneurs">
+              <h3 class="project-title">La Guilde des Seigneurs</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Symfony</span>
+                <span class="tech-tag">PHP</span>
+                <span class="tech-tag">JWT</span>
+                <span class="tech-tag">MySQL</span>
               </div>
-
-              <!-- Projets Web -->
-              <div class="project-card scroll-reveal scroll-reveal--delay-1" data-project-id="web-projects">
-                <div class="project-info">
-                  <h2 class="project-title">Projets Web</h2>
-                  <div class="tech-tags">
-                    <span class="tech-tag">PHP</span>
-                    <span class="tech-tag">OOP</span>
-                    <span class="tech-tag">Design Patterns</span>
-                    <span class="tech-tag" title="MySQL, HTML/CSS, JavaScript, MVC, VS Code, Git, GitHub">+7</span>
-                  </div>
-                  <p class="project-description">
-                    Projets web incluant des exercices PHP orientés objet, des applications backend et autres projets
-                    web.
-                  </p>
-                  <div class="project-links">
-                    <a href="https://github.com/melih0132/all-my-projects/tree/main/web" class="project-link demo-link"
-                      target="_blank">Voir sur GitHub</a>
-                  </div>
-                </div>
+              <p class="project-description">Monorepo Symfony : API REST JWT et application web consommatrice.</p>
+              <div class="project-links"><a class="project-link" href="/fr/projets/la-guilde-des-seigneurs.html">Voir détails</a></div>
+            </li>
+            <li class="project-card" data-project-id="web-projects">
+              <h3 class="project-title">Projets Web</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">PHP</span>
+                <span class="tech-tag">OOP</span>
+                <span class="tech-tag">Design Patterns</span>
               </div>
+              <p class="project-description">Exercices PHP orientés objet, backends et projets web.</p>
+              <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/web" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+            </li>
+          </ul>
 
-              <!-- GitHub Button as Grid Item -->
-              <div class="projects__btn-container">
-                <a class="btn btn--med btn--theme scroll-reveal scroll-reveal--delay-5"
-                  href="https://github.com/melih0132/all-my-projects" target="_blank">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-github">
-                    <path
-                      d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
-                    </path>
-                    <path d="M9 18c-4.51 2-5-2-7-2"></path>
-                  </svg>
-                  <span>Découvrir tous mes projets sur GitHub</span>
-                </a>
+          <div class="projects__btn-container">
+            <a class="btn" href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">Tous les projets sur GitHub</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="wrap">
+          <header class="section__head">
+            <span class="section__eyebrow">Profil</span>
+            <h2 class="section__title">À propos</h2>
+          </header>
+          <div class="about-grid">
+            <div class="about-copy">
+              <p>
+                Je suis Melih, en Master MIASHS à l'<a href="https://www.univ-grenoble-alpes.fr/" target="_blank" rel="noreferrer">Université Grenoble Alpes</a>.
+                Développeur web, je transforme des idées en produits : sites, apps mobiles, backends.
+              </p>
+              <p>
+                De la gestion d'événements (Helvetic Events) aux apps de transport, j'écris du code maintenable, testé, en méthodes agiles.
+                Je cherche un stage, une alternance ou un poste à temps plein.
+              </p>
+              <p>
+                <a href="#contact">Contactez-moi</a>
+                ou écrivez-moi sur
+                <a href="https://www.linkedin.com/in/melih-ctk/" target="_blank" rel="noreferrer">LinkedIn</a>.
+              </p>
+            </div>
+            <div class="skills-lines">
+              <div>
+                <h3 class="skills-line__title">Langages</h3>
+                <p class="skills-line__items">HTML/CSS · JavaScript · TypeScript · PHP · Python · C# · Swift · Kotlin · Dart · SQL · Bash · XAML</p>
+              </div>
+              <div>
+                <h3 class="skills-line__title">Frameworks</h3>
+                <p class="skills-line__items">React/Next · Vue · Node/Express · Laravel · Symfony · FastAPI · .NET · Flutter · Phaser</p>
+              </div>
+              <div>
+                <h3 class="skills-line__title">Données & outils</h3>
+                <p class="skills-line__items">PostgreSQL · MySQL · MongoDB · Docker · Git · Linux · Azure · Figma</p>
+              </div>
+              <div>
+                <h3 class="skills-line__title">Méthodes</h3>
+                <p class="skills-line__items">UML · MVC · OOP · Design Patterns · Tests · API · Agile/Scrum</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-  </section>
+      </section>
 
-  <section id="contact" class="contact sec-pad dynamicBg">
-    <div class="main-container">
-      <h2 class="heading heading-sec heading-sec__mb-med">
-        <span class="heading-sec__main heading-sec__main--lt">Contact</span>
-        <span class="heading-sec__sub">
-          N'hésitez pas à me joindre via le formulaire ci-dessous,
-          je vous donnerai une réponse dès que possible.
-        </span>
-      </h2>
-      <div class="contact__form-container">
-        <form action="https://formspree.io/f/xzzbdgkb" method="POST" class="contact__form">
-          <div class="contact__form-field">
-            <label class="contact__form-label" for="name">Quel est votre nom ?</label>
-            <input required placeholder="Ex. : Rémi Gaillard" type="text" class="contact__form-input" name="name"
-              id="name" />
-          </div>
-          <div class="contact__form-field">
-            <label class="contact__form-label" for="email">Votre Email</label>
-            <input required placeholder="nom@example.com" type="email" class="contact__form-input" name="email"
-              id="email" />
-          </div>
-          <div class="contact__form-field">
-            <label class="contact__form-label" for="reason">Comment puis-je vous aider ?</label>
-            <select required name="reason" id="reason" class="contact__form-select">
-              <option value="" disabled selected>Choisissez une option</option>
-              <option value="project_inquiry">Demande de projet</option>
-              <option value="collaboration">Opportunité de collaboration</option>
-              <option value="technical_assistance">Assistance technique</option>
-              <option value="other">Autre</option>
-            </select>
-          </div>
-          <div class="contact__form-field">
-            <label class="contact__form-label" for="message">Dites moi en plus</label>
-            <textarea required cols="30" rows="8" class="contact__form-input"
-              placeholder="Décrivez votre idée ou besoin en détail..." name="message" id="message"></textarea>
-          </div>
-          <button type="submit" class="btn btn--theme2 contact__btn">
-            <span>Envoyer</span>
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  </main>
-
-  <footer class="main-footer">
-    <div class="main-container">
-      <div class="main-footer__upper">
-        <div class="main-footer__row main-footer__row-1">
-          <h2 class="heading heading-sm main-footer__heading-sm">
-            <span>Contact</span>
-          </h2>
-          <div class="main-footer__social-cont">
-            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/melih-ctk/">
-              <img id="Linkedin" class="logo" src="/assets/png/linkedin-ico-dark.png" alt="LinkedIn" width="25" height="25">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://github.com/melih0132">
-              <img id="GitHub" class="logo" src="/assets/png/github-ico-dark.png" alt="GitHub" width="25" height="25">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/m.ctk1/">
-              <img id="Instagram" class="logo" src="/assets/png/insta-ico-dark.png" alt="Instagram" width="25" height="25">
-            </a>
-          </div>
-          <div class="switch-language">
-            <label for="selectLang" class="visually-hidden">Langue</label>
-            <select name="lang" id="selectLang">
-              <option class="selectLang-option" value="fr">Français</option>
-              <option class="selectLang-option" value="en">English</option>
-            </select>
+      <section id="contact" class="section section--scrim">
+        <div class="wrap">
+          <header class="section__head">
+            <span class="section__eyebrow">Écrire</span>
+            <h2 class="section__title">Contact</h2>
+            <p class="section__sub">Une idée, une opportunité, une question : le formulaire ci-dessous.</p>
+          </header>
+          <div class="contact-panel">
+            <form action="https://formspree.io/f/xzzbdgkb" method="POST" class="contact__form">
+              <div class="contact__form-field">
+                <label class="contact__form-label" for="name">Nom</label>
+                <input required placeholder="Ex. : Rémi Gaillard" type="text" class="contact__form-input" name="name" id="name" />
+              </div>
+              <div class="contact__form-field">
+                <label class="contact__form-label" for="email">Email</label>
+                <input required placeholder="nom@example.com" type="email" class="contact__form-input" name="email" id="email" />
+              </div>
+              <div class="contact__form-field">
+                <label class="contact__form-label" for="reason">Motif</label>
+                <select required name="reason" id="reason" class="contact__form-select">
+                  <option value="" disabled selected>Choisissez une option</option>
+                  <option value="project_inquiry">Demande de projet</option>
+                  <option value="collaboration">Opportunité de collaboration</option>
+                  <option value="technical_assistance">Assistance technique</option>
+                  <option value="other">Autre</option>
+                </select>
+              </div>
+              <div class="contact__form-field">
+                <label class="contact__form-label" for="message">Message</label>
+                <textarea required cols="30" rows="6" class="contact__form-input" placeholder="Décrivez votre idée ou besoin…" name="message" id="message"></textarea>
+              </div>
+              <button type="submit" class="btn btn--solid contact__btn">Envoyer</button>
+            </form>
           </div>
         </div>
-        <div class="main-footer__row main-footer__row-2">
-          <h2 class="heading heading-sm text-lt">Melih Cetinkaya</h2>
-          <p class="main-footer__short-desc">
-            Développeur web passionné par les technologies web modernes et l'innovation numérique.
-          </p>
-        </div>
-      </div>
+      </section>
+    </main>
 
-      <div class="main-footer__lower">
-        &copy; Copyright
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-        . Made by Melih Cetinkaya
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>&copy; <span class="copyright-year"></span> Melih Cetinkaya</span>
+        <a href="https://github.com/melih0132" target="_blank" rel="noreferrer">github.com/melih0132</a>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
-  
-  <script defer src="/assets/vendor/lenis/lenis.min.js"></script>
-  <script defer src="/assets/js/lenis-init.min.js"></script>
+  <script>
+    document.querySelectorAll('.copyright-year').forEach((el) => { el.textContent = new Date().getFullYear(); });
+  </script>
+  <script src="/assets/js/ocean.min.js"></script>
   <script defer src="/assets/js/portfolio.min.js"></script>
 </body>
-
 </html>

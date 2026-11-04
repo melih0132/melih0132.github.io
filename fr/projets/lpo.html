@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,283 +14,106 @@
   <meta property="og:url" content="https://melih0132.github.io/fr/projets/lpo.html" />
   <meta property="og:image" content="https://melih0132.github.io/assets/png/pp.png" />
   <meta name="twitter:card" content="summary" />
-
   <link rel="stylesheet" href="/assets/css/style.min.css" />
-  <title>LPO | Melih Cetinkaya</title>
   <link rel="icon" href="/assets/png/logo.png" type="image/png">
+  <title>LPO | Melih Cetinkaya</title>
 </head>
-
-<body>
-  <header class="header">
-    <div class="header__content">
-      <div class="header__logo-container">
-        <div class="header__logo-img-cont">
-          <img src="/assets/png/pp.png" alt="PP Melih CETINKAYA" class="header__logo-img" width="40" height="40" />
-        </div>
-        <span class="header__logo-sub">MELIH C.</span>
+<body data-ocean-fish="48">
+  <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
+  <div class="site">
+    <a href="#main" class="skip-link">Aller au contenu</a>
+    <header class="header">
+      <div class="header__content">
+        <a class="header__brand" href="/fr/">Melih C.</a>
+        <ul class="header__links">
+          <li><a class="header__link" href="/fr/#home">Accueil</a></li>
+          <li><a class="header__link" href="/fr/#projects">Projets</a></li>
+          <li><a class="header__link" href="/fr/#about">À propos</a></li>
+          <li><a class="header__link" href="/fr/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/lpo.html" data-set-lang="fr" aria-current="true">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/lpo.html" data-set-lang="en">EN</a></li>
+        </ul>
+        <button class="header__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel">Menu</button>
       </div>
-      <div class="header__main">
-        <ul class="header__links header__links--center">
-          <li class="header__link-wrapper">
-            <a href="/fr/#home" class="header__link">Accueil</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/fr/#about" class="header__link">À propos</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/fr/#projects" class="header__link">Projets</a>
-          </li>
+      <div class="header__panel" id="nav-panel" data-nav-panel>
+        <ul>
+          <li><a href="/fr/#home">Accueil</a></li>
+          <li><a href="/fr/#projects">Projets</a></li>
+          <li><a href="/fr/#about">À propos</a></li>
+          <li><a href="/fr/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/lpo.html" data-set-lang="fr" aria-current="true">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/lpo.html" data-set-lang="en">EN</a></li>
         </ul>
       </div>
-      <ul class="header__links header__links--right">
-        <li class="header__link-wrapper">
-          <a href="/fr/#contact" class="header__link">Contact</a>
-        </li>
-      </ul>
-      <div class="header__main-ham-menu-cont">
-        <img src="/assets/svg/ham-menu.svg" alt="hamburger menu" class="header__main-ham-menu" width="26" height="26" />
-        <img src="/assets/svg/ham-menu-close.svg" alt="hamburger menu close"
-          class="header__main-ham-menu-close d-none" width="26" height="26" />
-      </div>
-    </div>
-    <div class="header__sm-menu">
-      <div class="header__sm-menu-content">
-        <ul class="header__sm-menu-links">
-          <li class="header__sm-menu-link">
-            <a href="/fr/#home">Accueil</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/fr/#about">À propos</a>
-          </li>
+    </header>
 
-
-          <li class="header__sm-menu-link">
-            <a href="/fr/#projects">Projets</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/fr/#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
-  <main id="main">
-
-  <section class="project-cs-hero">
-    <div class="project-cs-hero__content">
-      <h1 class="heading-primary"><strong>LPO</strong></h1>
-      <div class="project-cs-hero__info">
-        <p class="text-primary">
+    <main id="main">
+      <section class="project-hero">
+        <div class="wrap">
+          <h1 class="project-hero__title">LPO</h1>
+          <div class="project-hero__lead"><p >
           Base de données complète pour la gestion des données de <strong>comptage d'oiseaux</strong> développée avec
           <strong>PostgreSQL</strong>, intégrant <strong>Excel</strong> et <strong>Power BI</strong> pour l'analyse et la visualisation des données.
-        </p>
-      </div>
-      <div class="project-cs-hero__cta">
-        <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo" class="btn btn--bg" target="_blank"
-          rel="noreferrer"><strong>Voir sur GitHub</strong></a>
-      </div>
-    </div>
-  </section>
+        </p></div>
+          <div class="hero__actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+        </div>
+      </section>
 
-  <section class="project-details">
-    <div class="main-container">
-      <div class="project-details__content">
-        <div class="project-details__content-main">
-          
-          <!-- Section: Aperçu du projet -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Aperçu du projet</strong></h2>
-            <div class="project-details__desc">
-              <p class="project-details__desc-para">
-                Ce projet vise à développer une <strong>base de données complète</strong> pour la gestion des données de
+      <div class="project-body">
+        <section class="project-block"><div class="wrap"><h2>Aperçu</h2><p>Ce projet vise à développer une <strong>base de données complète</strong> pour la gestion des données de
                 <strong>comptage d'oiseaux</strong>, permettant à la <strong>Ligue pour la Protection des Oiseaux
                   (LPO)</strong> de collecter, analyser et présenter efficacement des informations vitales. Construit sur
                 <strong>PostgreSQL</strong>, la base de données s'intègre parfaitement avec des outils comme
                 <strong>Excel</strong> et <strong>Power BI</strong> pour améliorer les capacités
-                d'<strong>analyse</strong> et de <strong>visualisation des données</strong>.
-              </p>
-              <p class="project-details__desc-para">
-                La phase de <strong>modélisation de la base de données</strong> a inclus la création d'un
+                d'<strong>analyse</strong> et de <strong>visualisation des données</strong>.</p>
+<p>La phase de <strong>modélisation de la base de données</strong> a inclus la création d'un
                 <strong>Modèle Conceptuel de Données (MCD)</strong> pour définir les entités clés telles que les
                 comptages d'oiseaux, les observateurs, les espèces et les sites, ainsi que leurs relations et contraintes.
                 Cela a été suivi par le <strong>Modèle de Données Logique (MLD)</strong>, qui a traduit l'MCD en tables
-                relationnelles spécifiquement adaptées à PostgreSQL.
-              </p>
-              <p class="project-details__desc-para">
-                Dans la configuration de la base de données, des tables ont été créées avec des <strong>contraintes
+                relationnelles spécifiquement adaptées à PostgreSQL.</p>
+<p>Dans la configuration de la base de données, des tables ont été créées avec des <strong>contraintes
                   définies</strong>, y compris des <strong>clés primaires</strong> et <strong>étrangères</strong>, pour
                 garantir l'<strong>intégrité des données</strong>. Des enregistrements simulés de comptage d'oiseaux ont
                 ensuite été peuplés dans la base de données, et des <strong>requêtes SQL</strong> ont été développées pour
-                une <strong>gestion</strong> et une <strong>analyse efficaces</strong> des données.
-              </p>
-            </div>
+                une <strong>gestion</strong> et une <strong>analyse efficaces</strong> des données.</p></div></section>
+        <section class="project-block"><div class="wrap"><h2>Fonctionnalités</h2><ul><li><strong>Modélisation de base de données</strong> · Création d'un Modèle Conceptuel de Données (MCD) et d'un Modèle de Données Logique (MLD) pour structurer efficacement les données de comptage d'oiseaux avec leurs relations et contraintes.</li>
+<li><strong>Base de données PostgreSQL</strong> · Implémentation d'une base de données robuste avec contraintes d'intégrité, clés primaires et étrangères pour garantir la cohérence et la qualité des données.</li>
+<li><strong>Analyse statistique avec Excel</strong> · Extraction et analyse des données dans Excel pour évaluer le nombre d'individus par espèce, la distribution géographique des observations et les tendances de population au fil du temps.</li>
+<li><strong>Tableau de bord Power BI</strong> · Développement d'un rapport interactif avec Power BI affichant les tendances des populations d'oiseaux, identifiant les zones de haute biodiversité et facilitant les comparaisons annuelles ou saisonnières.</li>
+<li><strong>Requêtes SQL optimisées</strong> · Développement de requêtes SQL efficaces pour la gestion et l'analyse des données, permettant une extraction rapide et précise des informations pertinentes.</li></ul></div></section>
+        <section class="project-block"><div class="wrap"><h2>Galerie</h2></div><div class="project-gallery"><figure><img src="/assets/webp/LPO/MCD.webp" alt="Modèle Conceptuel de Données (MCD) du projet LPO" loading="lazy" /><figcaption>Modèle Conceptuel de Données (MCD)</figcaption></figure>
+<figure><img src="/assets/webp/LPO/MLD.webp" alt="Modèle de Données Logique (MLD) du projet LPO" loading="lazy" /><figcaption>Modèle de Données Logique (MLD)</figcaption></figure>
+<figure><img src="/assets/webp/LPO/Excel.webp" alt="Analyse statistique avec Excel" loading="lazy" /><figcaption>Analyse statistique avec Excel</figcaption></figure>
+<figure><img src="/assets/webp/LPO/Excel2.webp" alt="Visualisations Excel" loading="lazy" /><figcaption>Visualisations et statistiques dans Excel</figcaption></figure>
+<figure><img src="/assets/webp/LPO/PowerBI.webp" alt="Tableau de bord Power BI" loading="lazy" /><figcaption>Tableau de bord interactif Power BI</figcaption></figure>
+<figure><img src="/assets/webp/LPO/PowerBI2.webp" alt="Tableau de bord Power BI - Vue détaillée" loading="lazy" /><figcaption>Analyse approfondie avec Power BI</figcaption></figure></div></section>
+        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech">Visual Paradigm · PowerAMC · PostgreSQL · pgAdmin4 · SQL · Excel · Power BI · Microsoft Teams</p></div></section>
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Explorer</h2>
+            <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo" target="_blank" rel="noreferrer">Voir sur GitHub</a>
+<a class="btn" href="/fr/#projects">Retour aux projets</a></div>
           </div>
-
-          <!-- Section: Fonctionnalités principales -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Fonctionnalités principales</strong></h2>
-            <div class="project-details__features">
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Modélisation de base de données</h3>
-                <p class="project-details__desc-para">
-                  Création d'un Modèle Conceptuel de Données (MCD) et d'un Modèle de Données Logique (MLD) pour
-                  structurer efficacement les données de comptage d'oiseaux avec leurs relations et contraintes.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Base de données PostgreSQL</h3>
-                <p class="project-details__desc-para">
-                  Implémentation d'une base de données robuste avec contraintes d'intégrité, clés primaires et étrangères
-                  pour garantir la cohérence et la qualité des données.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Analyse statistique avec Excel</h3>
-                <p class="project-details__desc-para">
-                  Extraction et analyse des données dans Excel pour évaluer le nombre d'individus par espèce, la
-                  distribution géographique des observations et les tendances de population au fil du temps.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Tableau de bord Power BI</h3>
-                <p class="project-details__desc-para">
-                  Développement d'un rapport interactif avec Power BI affichant les tendances des populations d'oiseaux,
-                  identifiant les zones de haute biodiversité et facilitant les comparaisons annuelles ou saisonnières.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Requêtes SQL optimisées</h3>
-                <p class="project-details__desc-para">
-                  Développement de requêtes SQL efficaces pour la gestion et l'analyse des données, permettant une
-                  extraction rapide et précise des informations pertinentes.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Visualisation des données</h3>
-                <p class="project-details__desc-para">
-                  Création de visualisations efficaces dans Excel et Power BI pour représenter les résultats statistiques
-                  et faciliter la compréhension des tendances et patterns.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Galerie d'images -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Galerie du projet</strong></h2>
-            <div class="project-details__gallery">
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/MCD.webp" alt="Modèle Conceptuel de Données (MCD) du projet LPO"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Modèle Conceptuel de Données (MCD)</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/MLD.webp" alt="Modèle de Données Logique (MLD) du projet LPO"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Modèle de Données Logique (MLD)</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/Excel.webp" alt="Analyse statistique avec Excel"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Analyse statistique avec Excel</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/Excel2.webp" alt="Visualisations Excel"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Visualisations et statistiques dans Excel</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/PowerBI.webp" alt="Tableau de bord Power BI"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Tableau de bord interactif Power BI</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/PowerBI2.webp" alt="Tableau de bord Power BI - Vue détaillée"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Analyse approfondie avec Power BI</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Technologies utilisées -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Technologies utilisées</strong></h2>
-            <div class="project-details__tools-used">
-              <div class="skills__projects">
-                <div class="skills__skill"><strong>Visual Paradigm</strong></div>
-                <div class="skills__skill"><strong>PowerAMC</strong></div>
-                <div class="skills__skill"><strong>PostgreSQL</strong></div>
-                <div class="skills__skill"><strong>pgAdmin4</strong></div>
-                <div class="skills__skill"><strong>SQL</strong></div>
-                <div class="skills__skill"><strong>Excel</strong></div>
-                <div class="skills__skill"><strong>Power BI</strong></div>
-                <div class="skills__skill"><strong>Microsoft Teams</strong></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Liens du projet -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Explorer le projet</strong></h2>
-            <div class="project-details__links">
-              <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo"
-                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>Voir sur GitHub</strong>
-              </a>
-              <a href="/fr/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
-                <strong>Retour aux projets</strong>
-              </a>
-            </div>
-          </div>
-
-        </div>
+        </section>
       </div>
-    </div>
-  </section>
+    </main>
 
-  </main>
-
-  <footer class="main-footer">
-    <div class="main-container">
-      <div class="main-footer__upper">
-        <div class="main-footer__row main-footer__row-1">
-          <h2 class="heading heading-sm main-footer__heading-sm">
-            <span>Contact</span>
-          </h2>
-          <div class="main-footer__social-cont">
-            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/melih-ctk/">
-              <img id="Linkedin" class="logo" src="/assets/svg/linkedin-dark.svg" alt="LinkedIn">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://github.com/melih0132">
-              <img id="GitHub" class="logo" src="/assets/svg/github-dark.svg" alt="GitHub">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/m.ctk1/">
-              <img id="Instagram" class="logo" src="/assets/svg/insta-dark.svg" alt="Instagram">
-            </a>
-          </div>
-        </div>
-        <div class="main-footer__row main-footer__row-2">
-          <h2 class="heading heading-sm text-lt">Melih Cetinkaya</h2>
-          <p class="main-footer__short-desc">
-            Développeur Full-Stack passionné par les technologies web modernes et l'innovation numérique.
-          </p>
-        </div>
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>&copy; <span class="copyright-year"></span> Melih Cetinkaya</span>
+        <a href="https://github.com/melih0132" target="_blank" rel="noreferrer">github.com/melih0132</a>
       </div>
+    </footer>
+  </div>
 
-      <div class="main-footer__lower">
-        &copy; Copyright
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-        . Made by Melih Cetinkaya
-      </div>
-    </div>
-  </footer>
-
-      <script defer src="/assets/vendor/lenis/lenis.min.js"></script>
-  <script defer src="/assets/js/lenis-init.min.js"></script>
-  <script defer src="/fr/projets/script.min.js"></script>
+  <script>
+    document.querySelectorAll('.copyright-year').forEach((el) => { el.textContent = new Date().getFullYear(); });
+  </script>
+  <script src="/assets/js/ocean.min.js"></script>
+  <script defer src="/assets/js/portfolio.min.js"></script>
 </body>
-
 </html>

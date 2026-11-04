@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,259 +14,96 @@
   <meta property="og:url" content="https://melih0132.github.io/en/projects/uber-vuejs-dotnet.html" />
   <meta property="og:image" content="https://melih0132.github.io/assets/png/pp.png" />
   <meta name="twitter:card" content="summary" />
-
   <link rel="stylesheet" href="/assets/css/style.min.css" />
-  <title>Uber Clone Vue.js/.NET | Melih Cetinkaya</title>
   <link rel="icon" href="/assets/png/logo.png" type="image/png">
+  <title>Uber Clone Vue.js/.NET | Melih Cetinkaya</title>
 </head>
-
-<body>
-  <header class="header">
-    <div class="header__content">
-      <div class="header__logo-container">
-        <div class="header__logo-img-cont">
-          <img src="/assets/png/pp.png" alt="PP Melih CETINKAYA" class="header__logo-img" width="40" height="40" />
-        </div>
-        <span class="header__logo-sub">Melih Cetinkaya</span>
+<body data-ocean-fish="48">
+  <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
+  <div class="site">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header class="header">
+      <div class="header__content">
+        <a class="header__brand" href="/en/">Melih C.</a>
+        <ul class="header__links">
+          <li><a class="header__link" href="/en/#home">Home</a></li>
+          <li><a class="header__link" href="/en/#projects">Projects</a></li>
+          <li><a class="header__link" href="/en/#about">About</a></li>
+          <li><a class="header__link" href="/en/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/uber-vuejs-dotnet.html" data-set-lang="fr">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/uber-vuejs-dotnet.html" data-set-lang="en" aria-current="true">EN</a></li>
+        </ul>
+        <button class="header__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel">Menu</button>
       </div>
-      <div class="header__main">
-        <ul class="header__links header__links--center">
-          <li class="header__link-wrapper">
-            <a href="/en/#home" class="header__link">Home</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/en/#about" class="header__link">About</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/en/#projects" class="header__link">Projects</a>
-          </li>
+      <div class="header__panel" id="nav-panel" data-nav-panel>
+        <ul>
+          <li><a href="/en/#home">Home</a></li>
+          <li><a href="/en/#projects">Projects</a></li>
+          <li><a href="/en/#about">About</a></li>
+          <li><a href="/en/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/uber-vuejs-dotnet.html" data-set-lang="fr">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/uber-vuejs-dotnet.html" data-set-lang="en" aria-current="true">EN</a></li>
         </ul>
       </div>
-      <ul class="header__links header__links--right">
-        <li class="header__link-wrapper">
-          <a href="/en/#contact" class="header__link">Contact</a>
-        </li>
-      </ul>
-      <div class="header__main-ham-menu-cont">
-        <img src="/assets/svg/ham-menu.svg" alt="hamburger menu" class="header__main-ham-menu" width="26" height="26" />
-        <img src="/assets/svg/ham-menu-close.svg" alt="hamburger menu close"
-          class="header__main-ham-menu-close d-none" width="26" height="26" />
-      </div>
-    </div>
-    <div class="header__sm-menu">
-      <div class="header__sm-menu-content">
-        <ul class="header__sm-menu-links">
-          <li class="header__sm-menu-link">
-            <a href="/en/#home">Home</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/en/#about">About</a>
-          </li>
+    </header>
 
-
-          <li class="header__sm-menu-link">
-            <a href="/en/#projects">Projects</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/en/#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
-  <main id="main">
-
-  <section class="project-cs-hero">
-    <div class="project-cs-hero__content">
-      <h1 class="heading-primary"><strong>Uber Clone With Vue.js and .NET Core</strong></h1>
-      <div class="project-cs-hero__info">
-        <p class="text-primary">
+    <main id="main">
+      <section class="project-hero">
+        <div class="wrap">
+          <h1 class="project-hero__title">Uber Clone With Vue.js and .NET Core</h1>
+          <div class="project-hero__lead"><p >
           Transportation application developed with <strong>Vue.js</strong> and <strong>.NET Core</strong>.
           Enhanced and modernized version of the Uber clone, focusing on performance and user experience.
-        </p>
-      </div>
-      <div class="project-cs-hero__cta">
-        <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" class="btn btn--bg"
-          target="_blank" rel="noreferrer"><strong>View on GitHub</strong></a>
-      </div>
-    </div>
-  </section>
+        </p></div>
+          <div class="hero__actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" target="_blank" rel="noreferrer">View on GitHub</a></div>
+        </div>
+      </section>
 
-  <section class="project-details">
-    <div class="main-container">
-      <div class="project-details__content">
-        <div class="project-details__content-main">
-          
-          <!-- Section: Project Overview -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Project Overview</strong></h2>
-            <div class="project-details__desc">
-              <p class="project-details__desc-para">
-                The <strong>Modern Uber Clone</strong> is a transportation application developed with
+      <div class="project-body">
+        <section class="project-block"><div class="wrap"><h2>Overview</h2><p>The <strong>Modern Uber Clone</strong> is a transportation application developed with
                 <strong>Vue.js</strong> for the frontend and <strong>.NET Core</strong> for the backend. It is an
                 enhanced and modernized version of the Uber clone, focusing on <strong>performance</strong> and
-                <strong>user experience</strong>.
-              </p>
-              <p class="project-details__desc-para">
-                This project integrates advanced <strong>security</strong> and <strong>performance</strong> features,
+                <strong>user experience</strong>.</p>
+<p>This project integrates advanced <strong>security</strong> and <strong>performance</strong> features,
                 including <strong>encryption</strong> mechanisms and optimized <strong>resource management</strong>.
                 Additionally, it fully complies with <strong>GDPR regulations</strong>. The system is designed to provide a
                 <strong>smooth user experience</strong> and high performance, leveraging Vue.js and .NET Core for
-                business logic management and integrating <strong>unit tests</strong> to ensure code robustness.
-              </p>
-            </div>
+                business logic management and integrating <strong>unit tests</strong> to ensure code robustness.</p></div></section>
+        <section class="project-block"><div class="wrap"><h2>Features</h2><ul><li><strong>Real-time Geolocation</strong> · Real-time tracking of driver and passenger positions with dynamic map updates and route optimization.</li>
+<li><strong>Secure Payment System</strong> · Integration of a secure payment system with encryption of sensitive data and compliance with the strictest security standards.</li>
+<li><strong>Trip and Booking Management</strong> · Complete interface for creating, modifying and tracking trips with advanced booking system and real-time notification management.</li>
+<li><strong>Rating and Review System</strong> · Feature allowing users to rate and review their trip experiences to improve service quality.</li>
+<li><strong>Reactive User Interface</strong> · Modern and intuitive interface developed with Vue.js, offering a smooth and adaptive user experience on all devices.</li></ul></div></section>
+        <section class="project-block"><div class="wrap"><h2>Gallery</h2></div><div class="project-gallery"><figure><img src="/assets/webp/UberS4/home.webp" alt="Uber clone home page" loading="lazy" /><figcaption>Home page with modern interface</figcaption></figure>
+<figure><img src="/assets/webp/UberS4/myaccount.webp" alt="Uber clone my account page" loading="lazy" /><figcaption>User account management</figcaption></figure>
+<figure><img src="/assets/webp/UberS4/filters.webp" alt="Uber clone filters and search options" loading="lazy" /><figcaption>Advanced filters and search options</figcaption></figure></div></section>
+        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech">Vue.js · .NET Core · C# · Node.js · PostgreSQL · RESTful API · JWT · Swagger · VS Code · Visual Studio · Git · GitHub · Postman · Microsoft Teams · MVC</p></div></section>
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Explore</h2>
+            <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" target="_blank" rel="noreferrer">View on GitHub</a>
+<a class="btn" href="/en/#projects">Back to projects</a></div>
           </div>
-
-          <!-- Section: Main Features -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Main Features</strong></h2>
-            <div class="project-details__features">
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Real-time Geolocation</h3>
-                <p class="project-details__desc-para">
-                  Real-time tracking of driver and passenger positions with dynamic map updates and route optimization.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Secure Payment System</h3>
-                <p class="project-details__desc-para">
-                  Integration of a secure payment system with encryption of sensitive data and compliance with the strictest security standards.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Trip and Booking Management</h3>
-                <p class="project-details__desc-para">
-                  Complete interface for creating, modifying and tracking trips with advanced booking system and real-time notification management.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Rating and Review System</h3>
-                <p class="project-details__desc-para">
-                  Feature allowing users to rate and review their trip experiences to improve service quality.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Reactive User Interface</h3>
-                <p class="project-details__desc-para">
-                  Modern and intuitive interface developed with Vue.js, offering a smooth and adaptive user experience on all devices.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Geographic Analysis and Optimization</h3>
-                <p class="project-details__desc-para">
-                  Advanced geographic analysis for route optimization and continuous improvement of system performance.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Project Gallery -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Project Gallery</strong></h2>
-            <div class="project-details__gallery">
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/UberS4/home.webp" alt="Uber clone home page"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Home page with modern interface</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/UberS4/myaccount.webp" alt="Uber clone my account page"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">User account management</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/UberS4/filters.webp" alt="Uber clone filters and search options"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Advanced filters and search options</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Technologies Used -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Technologies Used</strong></h2>
-            <div class="project-details__tools-used">
-              <div class="skills__projects">
-                <div class="skills__skill"><strong>Vue.js</strong></div>
-                <div class="skills__skill"><strong>.NET Core</strong></div>
-                <div class="skills__skill"><strong>C#</strong></div>
-                <div class="skills__skill"><strong>Node.js</strong></div>
-                <div class="skills__skill"><strong>PostgreSQL</strong></div>
-                <div class="skills__skill"><strong>RESTful API</strong></div>
-                <div class="skills__skill"><strong>JWT</strong></div>
-                <div class="skills__skill"><strong>Swagger</strong></div>
-                <div class="skills__skill"><strong>VS Code</strong></div>
-                <div class="skills__skill"><strong>Visual Studio</strong></div>
-                <div class="skills__skill"><strong>Git</strong></div>
-                <div class="skills__skill"><strong>GitHub</strong></div>
-                <div class="skills__skill"><strong>Postman</strong></div>
-                <div class="skills__skill"><strong>Microsoft Teams</strong></div>
-                <div class="skills__skill"><strong>MVC</strong></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Project Links -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Explore the Project</strong></h2>
-            <div class="project-details__links">
-              <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue"
-                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>View on GitHub</strong>
-              </a>
-              <a href="/en/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
-                <strong>Back to projects</strong>
-              </a>
-            </div>
-          </div>
-
-        </div>
+        </section>
       </div>
-    </div>
-  </section>
+    </main>
 
-  </main>
-
-  <footer class="main-footer">
-    <div class="main-container">
-      <div class="main-footer__upper">
-        <div class="main-footer__row main-footer__row-1">
-          <h2 class="heading heading-sm main-footer__heading-sm">
-            <span>Contact</span>
-          </h2>
-          <div class="main-footer__social-cont">
-            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/melih-ctk/">
-              <img id="Linkedin" class="logo" src="/assets/svg/linkedin-dark.svg" alt="LinkedIn">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://github.com/melih0132">
-              <img id="GitHub" class="logo" src="/assets/svg/github-dark.svg" alt="GitHub">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/m.ctk1/">
-              <img id="Instagram" class="logo" src="/assets/svg/insta-dark.svg" alt="Instagram">
-            </a>
-          </div>
-        </div>
-        <div class="main-footer__row main-footer__row-2">
-          <h2 class="heading heading-sm text-lt">Melih Cetinkaya</h2>
-          <p class="main-footer__short-desc">
-            Passionate full-stack developer focused on modern web technologies and digital innovation.
-          </p>
-        </div>
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>&copy; <span class="copyright-year"></span> Melih Cetinkaya</span>
+        <a href="https://github.com/melih0132" target="_blank" rel="noreferrer">github.com/melih0132</a>
       </div>
-      <div class="main-footer__lower">
-        &copy; Copyright
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-        . Made by Melih Cetinkaya
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
-      <script defer src="/assets/vendor/lenis/lenis.min.js"></script>
-  <script defer src="/assets/js/lenis-init.min.js"></script>
-  <script defer src="/en/projects/script.min.js"></script>
+  <script>
+    document.querySelectorAll('.copyright-year').forEach((el) => { el.textContent = new Date().getFullYear(); });
+  </script>
+  <script src="/assets/js/ocean.min.js"></script>
+  <script defer src="/assets/js/portfolio.min.js"></script>
 </body>
-
 </html>

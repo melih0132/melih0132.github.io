@@ -1,7 +1,8 @@
 const userLanguage = navigator.language || navigator.userLanguage;
+const lang = userLanguage.startsWith('fr') ? 'fr' : 'en';
 
-if (userLanguage.startsWith('fr')) {
-  window.location.href = '/fr';
-} else {
-  window.location.href = '/en';
-}
+try {
+  localStorage.setItem('preferredLanguage', lang);
+} catch (e) {}
+
+window.location.href = '/' + lang;

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,285 +14,109 @@
   <meta property="og:url" content="https://melih0132.github.io/en/projects/lpo.html" />
   <meta property="og:image" content="https://melih0132.github.io/assets/png/pp.png" />
   <meta name="twitter:card" content="summary" />
-
   <link rel="stylesheet" href="/assets/css/style.min.css" />
-  <title>LPO | Melih Cetinkaya</title>
   <link rel="icon" href="/assets/png/logo.png" type="image/png">
+  <title>LPO | Melih Cetinkaya</title>
 </head>
-
-<body>
-  <header class="header">
-    <div class="header__content">
-      <div class="header__logo-container">
-        <div class="header__logo-img-cont">
-          <img src="/assets/png/pp.png" alt="Profile Picture of Melih CETINKAYA" class="header__logo-img" width="40" height="40" />
-        </div>
-        <span class="header__logo-sub">Melih Cetinkaya</span>
+<body data-ocean-fish="48">
+  <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
+  <div class="site">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header class="header">
+      <div class="header__content">
+        <a class="header__brand" href="/en/">Melih C.</a>
+        <ul class="header__links">
+          <li><a class="header__link" href="/en/#home">Home</a></li>
+          <li><a class="header__link" href="/en/#projects">Projects</a></li>
+          <li><a class="header__link" href="/en/#about">About</a></li>
+          <li><a class="header__link" href="/en/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/lpo.html" data-set-lang="fr">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/lpo.html" data-set-lang="en" aria-current="true">EN</a></li>
+        </ul>
+        <button class="header__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel">Menu</button>
       </div>
-      <div class="header__main">
-        <ul class="header__links header__links--center">
-          <li class="header__link-wrapper">
-            <a href="/en/#home" class="header__link">Home</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/en/#about" class="header__link">About</a>
-          </li>
-          <li class="header__link-wrapper">
-            <a href="/en/#projects" class="header__link">Projects</a>
-          </li>
+      <div class="header__panel" id="nav-panel" data-nav-panel>
+        <ul>
+          <li><a href="/en/#home">Home</a></li>
+          <li><a href="/en/#projects">Projects</a></li>
+          <li><a href="/en/#about">About</a></li>
+          <li><a href="/en/#contact">Contact</a></li>
+        </ul>
+        <ul class="header__lang">
+          <li><a href="https://melih0132.github.io/fr/projets/lpo.html" data-set-lang="fr">FR</a></li>
+          <li><a href="https://melih0132.github.io/en/projects/lpo.html" data-set-lang="en" aria-current="true">EN</a></li>
         </ul>
       </div>
-      <ul class="header__links header__links--right">
-        <li class="header__link-wrapper">
-          <a href="/en/#contact" class="header__link">Contact</a>
-        </li>
-      </ul>
-      <div class="header__main-ham-menu-cont">
-        <img src="/assets/svg/ham-menu.svg" alt="hamburger menu" class="header__main-ham-menu" width="26" height="26" />
-        <img src="/assets/svg/ham-menu-close.svg" alt="hamburger menu close"
-          class="header__main-ham-menu-close d-none" width="26" height="26" />
-      </div>
-    </div>
-    <div class="header__sm-menu">
-      <div class="header__sm-menu-content">
-        <ul class="header__sm-menu-links">
-          <li class="header__sm-menu-link">
-            <a href="/en/#home">Home</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/en/#about">About</a>
-          </li>
+    </header>
 
-
-          <li class="header__sm-menu-link">
-            <a href="/en/#projects">Projects</a>
-          </li>
-          <li class="header__sm-menu-link">
-            <a href="/en/#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
-  <main id="main">
-
-  <section class="project-cs-hero">
-    <div class="project-cs-hero__content">
-      <h1 class="heading-primary"><strong>LPO</strong></h1>
-      <div class="project-cs-hero__info">
-        <p class="text-primary">
+    <main id="main">
+      <section class="project-hero">
+        <div class="wrap">
+          <h1 class="project-hero__title">LPO</h1>
+          <div class="project-hero__lead"><p >
           Comprehensive database for managing <strong>bird count data</strong> developed with
           <strong>PostgreSQL</strong>, integrating <strong>Excel</strong> and <strong>Power BI</strong> for data analysis and visualization.
-        </p>
-      </div>
-      <div class="project-cs-hero__cta">
-        <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo" class="btn btn--bg" target="_blank"
-          rel="noreferrer"><strong>View on GitHub</strong></a>
-      </div>
-    </div>
-  </section>
+        </p></div>
+          <div class="hero__actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo" target="_blank" rel="noreferrer">View on GitHub</a></div>
+        </div>
+      </section>
 
-  <section class="project-details">
-    <div class="main-container">
-      <div class="project-details__content">
-        <div class="project-details__content-main">
-          
-          <!-- Section: Project Overview -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Project Overview</strong></h2>
-            <div class="project-details__desc">
-              <p class="project-details__desc-para">
-                This initiative centers on developing a <strong>comprehensive database</strong> for managing <strong>bird
+      <div class="project-body">
+        <section class="project-block"><div class="wrap"><h2>Overview</h2><p>This initiative centers on developing a <strong>comprehensive database</strong> for managing <strong>bird
                   count data</strong>, empowering the
                 <strong>League for the Protection of Birds (LPO)</strong> to effectively collect, analyze, and present
                 critical
                 information. Built on <strong>PostgreSQL</strong>, the database integrates smoothly with tools like
                 <strong>Excel</strong> and <strong>Power BI</strong>, enhancing data
-                analysis and visualization.
-              </p>
-              <p class="project-details__desc-para">
-                The database modeling process began with creating an <strong>Entity-Relationship Diagram (ERD)</strong> to
+                analysis and visualization.</p>
+<p>The database modeling process began with creating an <strong>Entity-Relationship Diagram (ERD)</strong> to
                 define key
                 entities such as <strong>bird counts</strong>, <strong>observers</strong>, <strong>species</strong>, and
                 <strong>locations</strong>, along with their relationships and constraints. This
                 was succeeded by the <strong>Logical Data Model (LDM)</strong>, which transformed the ERD into relational
                 tables optimized
-                for PostgreSQL.
-              </p>
-              <p class="project-details__desc-para">
-                During the setup phase, <strong>tables</strong> were created with specific constraints, including
+                for PostgreSQL.</p>
+<p>During the setup phase, <strong>tables</strong> were created with specific constraints, including
                 <strong>primary</strong> and <strong>foreign keys</strong>,
                 to maintain <strong>data integrity</strong>. Simulated bird count records were then added to the database,
                 and <strong>SQL</strong>
-                queries were crafted for efficient data management and analysis.
-              </p>
-            </div>
+                queries were crafted for efficient data management and analysis.</p></div></section>
+        <section class="project-block"><div class="wrap"><h2>Features</h2><ul><li><strong>Database Modeling</strong> · Creation of an Entity-Relationship Diagram (ERD) and Logical Data Model (LDM) to effectively structure bird count data with their relationships and constraints.</li>
+<li><strong>PostgreSQL Database</strong> · Implementation of a robust database with integrity constraints, primary and foreign keys to ensure data consistency and quality.</li>
+<li><strong>Statistical Analysis with Excel</strong> · Data extraction and analysis in Excel to evaluate the number of individuals per species, geographic distribution of observations and population trends over time.</li>
+<li><strong>Power BI Dashboard</strong> · Development of an interactive report with Power BI displaying bird population trends, identifying areas of high biodiversity and facilitating annual or seasonal comparisons.</li>
+<li><strong>Optimized SQL Queries</strong> · Development of efficient SQL queries for data management and analysis, enabling fast and accurate extraction of relevant information.</li></ul></div></section>
+        <section class="project-block"><div class="wrap"><h2>Gallery</h2></div><div class="project-gallery"><figure><img src="/assets/webp/LPO/MCD.webp" alt="Entity-Relationship Diagram (ERD) of LPO project" loading="lazy" /><figcaption>Entity-Relationship Diagram (ERD)</figcaption></figure>
+<figure><img src="/assets/webp/LPO/MLD.webp" alt="Logical Data Model (LDM) of LPO project" loading="lazy" /><figcaption>Logical Data Model (LDM)</figcaption></figure>
+<figure><img src="/assets/webp/LPO/Excel.webp" alt="Statistical analysis with Excel" loading="lazy" /><figcaption>Statistical analysis with Excel</figcaption></figure>
+<figure><img src="/assets/webp/LPO/Excel2.webp" alt="Excel visualizations" loading="lazy" /><figcaption>Visualizations and statistics in Excel</figcaption></figure>
+<figure><img src="/assets/webp/LPO/PowerBI.webp" alt="Power BI Dashboard" loading="lazy" /><figcaption>Interactive Power BI dashboard</figcaption></figure>
+<figure><img src="/assets/webp/LPO/PowerBI2.webp" alt="Power BI Dashboard - Detailed view" loading="lazy" /><figcaption>In-depth analysis with Power BI</figcaption></figure></div></section>
+        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech">Visual Paradigm · PowerAMC · PostgreSQL · pgAdmin4 · SQL · Excel · Power BI · Microsoft Teams</p></div></section>
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Explore</h2>
+            <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo" target="_blank" rel="noreferrer">View on GitHub</a>
+<a class="btn" href="/en/#projects">Back to projects</a></div>
           </div>
-
-          <!-- Section: Main Features -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Main Features</strong></h2>
-            <div class="project-details__features">
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Database Modeling</h3>
-                <p class="project-details__desc-para">
-                  Creation of an Entity-Relationship Diagram (ERD) and Logical Data Model (LDM) to effectively structure
-                  bird count data with their relationships and constraints.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">PostgreSQL Database</h3>
-                <p class="project-details__desc-para">
-                  Implementation of a robust database with integrity constraints, primary and foreign keys to ensure data
-                  consistency and quality.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Statistical Analysis with Excel</h3>
-                <p class="project-details__desc-para">
-                  Data extraction and analysis in Excel to evaluate the number of individuals per species, geographic
-                  distribution of observations and population trends over time.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Power BI Dashboard</h3>
-                <p class="project-details__desc-para">
-                  Development of an interactive report with Power BI displaying bird population trends, identifying areas
-                  of high biodiversity and facilitating annual or seasonal comparisons.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Optimized SQL Queries</h3>
-                <p class="project-details__desc-para">
-                  Development of efficient SQL queries for data management and analysis, enabling fast and accurate
-                  extraction of relevant information.
-                </p>
-              </div>
-              <div class="project-details__feature-item">
-                <h3 class="project-details__feature-title">Data Visualization</h3>
-                <p class="project-details__desc-para">
-                  Creation of effective visualizations in Excel and Power BI to represent statistical results and
-                  facilitate understanding of trends and patterns.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Project Gallery -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Project Gallery</strong></h2>
-            <div class="project-details__gallery">
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/MCD.webp" alt="Entity-Relationship Diagram (ERD) of LPO project"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Entity-Relationship Diagram (ERD)</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/MLD.webp" alt="Logical Data Model (LDM) of LPO project"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Logical Data Model (LDM)</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/Excel.webp" alt="Statistical analysis with Excel"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Statistical analysis with Excel</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/Excel2.webp" alt="Excel visualizations"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Visualizations and statistics in Excel</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/PowerBI.webp" alt="Power BI Dashboard"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">Interactive Power BI dashboard</p>
-              </div>
-              <div class="project-details__showcase-img-cont">
-                <img src="/assets/webp/LPO/PowerBI2.webp" alt="Power BI Dashboard - Detailed view"
-                  class="project-details__showcase-img" loading="lazy" />
-                <p class="project-details__img-caption">In-depth analysis with Power BI</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Technologies Used -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Technologies Used</strong></h2>
-            <div class="project-details__tools-used">
-              <div class="skills__projects">
-                <div class="skills__skill"><strong>Visual Paradigm</strong></div>
-                <div class="skills__skill"><strong>PowerAMC</strong></div>
-                <div class="skills__skill"><strong>PostgreSQL</strong></div>
-                <div class="skills__skill"><strong>pgAdmin4</strong></div>
-                <div class="skills__skill"><strong>SQL</strong></div>
-                <div class="skills__skill"><strong>Excel</strong></div>
-                <div class="skills__skill"><strong>Power BI</strong></div>
-                <div class="skills__skill"><strong>Microsoft Teams</strong></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section: Project Links -->
-          <div class="project-details__section">
-            <h2 class="project-details__content-title"><strong>Explore the Project</strong></h2>
-            <div class="project-details__links">
-              <a href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/lpo"
-                class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">
-                <strong>View on GitHub</strong>
-              </a>
-              <a href="/en/#projects" class="btn btn--med btn--theme-inv project-details__links-btn">
-                <strong>Back to projects</strong>
-              </a>
-            </div>
-          </div>
-
-        </div>
+        </section>
       </div>
-    </div>
-  </section>
+    </main>
 
-  </main>
-
-  <footer class="main-footer">
-    <div class="main-container">
-      <div class="main-footer__upper">
-        <div class="main-footer__row main-footer__row-1">
-          <h2 class="heading heading-sm main-footer__heading-sm">
-            <span>Contact</span>
-          </h2>
-          <div class="main-footer__social-cont">
-            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/melih-ctk/">
-              <img id="Linkedin" class="logo" src="/assets/svg/linkedin-dark.svg" alt="LinkedIn">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://github.com/melih0132">
-              <img id="GitHub" class="logo" src="/assets/svg/github-dark.svg" alt="GitHub">
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/m.ctk1/">
-              <img id="Instagram" class="logo" src="/assets/svg/insta-dark.svg" alt="Instagram">
-            </a>
-          </div>
-        </div>
-        <div class="main-footer__row main-footer__row-2">
-          <h2 class="heading heading-sm text-lt">Melih Cetinkaya</h2>
-          <p class="main-footer__short-desc">
-            Passionate full-stack developer focused on modern web technologies and digital innovation.
-          </p>
-        </div>
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>&copy; <span class="copyright-year"></span> Melih Cetinkaya</span>
+        <a href="https://github.com/melih0132" target="_blank" rel="noreferrer">github.com/melih0132</a>
       </div>
-      <div class="main-footer__lower">
-        &copy; Copyright
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-        . Made by Melih Cetinkaya
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
-      <script defer src="/assets/vendor/lenis/lenis.min.js"></script>
-  <script defer src="/assets/js/lenis-init.min.js"></script>
-  <script defer src="/en/projects/script.min.js"></script>
+  <script>
+    document.querySelectorAll('.copyright-year').forEach((el) => { el.textContent = new Date().getFullYear(); });
+  </script>
+  <script src="/assets/js/ocean.min.js"></script>
+  <script defer src="/assets/js/portfolio.min.js"></script>
 </body>
-
 </html>
