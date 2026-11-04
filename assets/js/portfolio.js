@@ -258,7 +258,6 @@ class ProjectFilters {
     list.id = listId;
     list.className = 'projects-filters-search__list';
     list.setAttribute('role', 'listbox');
-    list.setAttribute('data-lenis-prevent', '');
     list.hidden = true;
     input.setAttribute('aria-controls', listId);
 

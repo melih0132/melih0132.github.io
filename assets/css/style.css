@@ -953,14 +953,6 @@ textarea {
   padding-block: var(--space-l);
 }
 
-/* Legacy hooks kept for portfolio.js */
-.header__main-ham-menu-cont,
-.header__sm-menu,
-.header__main-ham-menu,
-.header__main-ham-menu-close {
-  display: none;
-}
-
 .scroll-reveal {
   opacity: 1;
   transform: none;
