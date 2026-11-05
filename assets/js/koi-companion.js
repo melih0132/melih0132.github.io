@@ -5,7 +5,7 @@
     { id: 'lovely', label: 'lovely', youtube: '8VLXHyHRXjc' }
   ];
   /** @type {{ id: string, label: string, youtube?: string, src?: string }[]} */
-  const TRACKS = BASE_TRACKS.map((t) => ({ ...t }));
+  const TRACKS = [];
 
   const LOOP_GAP = 0.25;
   const STORAGE_KEY = 'koi-chamber';
@@ -114,10 +114,13 @@
     }
   };
 
-  const persistCustomTracks = (data) => {
+  const persistTracks = (data) => {
     data.customTracks = TRACKS.filter(
       (t) => !BASE_TRACKS.some((base) => base.id === t.id)
     ).map((t) => ({ id: t.id, label: t.label, youtube: t.youtube }));
+    data.removedBaseIds = BASE_TRACKS.filter(
+      (base) => !TRACKS.some((t) => t.id === base.id)
+    ).map((base) => base.id);
     saveStore(data);
   };
 
@@ -161,6 +164,13 @@
 
   const stored = loadStore() || {};
   if (!stored.excerpts || typeof stored.excerpts !== 'object') stored.excerpts = {};
+  const removedBaseIds = Array.isArray(stored.removedBaseIds)
+    ? stored.removedBaseIds.filter((id) => typeof id === 'string')
+    : [];
+  for (const base of BASE_TRACKS) {
+    if (removedBaseIds.includes(base.id)) continue;
+    TRACKS.push({ ...base });
+  }
   if (Array.isArray(stored.customTracks)) {
     for (const entry of stored.customTracks) {
       if (!entry || typeof entry !== 'object') continue;
@@ -382,12 +392,17 @@
     audio.loop = false;
     audio.preload = 'metadata';
 
-    const syncSkipButtons = () => {
+    const removeBtn = document.querySelector('[data-audio-remove]');
+
+    const syncPlaybackAvailability = () => {
+      const hasTracks = TRACKS.length > 0;
       const multiTrack = TRACKS.length > 1;
       prevBtn.disabled = !multiTrack;
       nextBtn.disabled = !multiTrack;
+      toggle.disabled = !hasTracks;
+      if (removeBtn instanceof HTMLButtonElement) removeBtn.disabled = !hasTracks;
     };
-    syncSkipButtons();
+    syncPlaybackAvailability();
 
     const addForm = document.querySelector('[data-audio-add]');
     const addId = document.querySelector('[data-audio-add-id]');
@@ -456,13 +471,16 @@
 
     const persist = () => {
       const track = currentTrack();
-      if (!track) return;
-      stored.trackId = track.id;
       stored.volume = clamp(Number(volume.value) || 0, 0, 1);
       stored.loopMode = loopMode;
       delete stored.loopEnabled;
-      if (duration > 0) {
-        stored.excerpts[track.id] = { a: loopStart, b: loopEnd };
+      if (track) {
+        stored.trackId = track.id;
+        if (duration > 0) {
+          stored.excerpts[track.id] = { a: loopStart, b: loopEnd };
+        }
+      } else {
+        delete stored.trackId;
       }
       saveStore(stored);
     };
@@ -527,6 +545,7 @@
     };
 
     const play = () => {
+      if (!currentTrack()) return;
       if (duration > 0 && getTime() >= loopEnd - 0.02) setTime(loopStart);
       if (isYoutube()) {
         if (!ytReady || !ytPlayer || typeof ytPlayer.playVideo !== 'function') {
@@ -790,6 +809,53 @@
       loadTrack(next, { autoplay: !mediaPaused });
     };
 
+    const clearEmptyPlaylist = () => {
+      playWhenReady = false;
+      advancingPlaylist = false;
+      ytLoadToken += 1;
+      stopYtPoll();
+      if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+        try {
+          ytPlayer.pauseVideo();
+        } catch {
+          /* ignore */
+        }
+      }
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
+      trackIndex = 0;
+      loopStart = 0;
+      loopEnd = 0;
+      duration = 0;
+      pendingExcerpt = null;
+      mediaPaused = true;
+      syncTrackUi();
+      syncPlaybackAvailability();
+      syncTimeline();
+      syncToggle();
+      persist();
+    };
+
+    const removeCurrentTrack = () => {
+      if (TRACKS.length === 0) return;
+      const removed = TRACKS[trackIndex];
+      if (!removed) return;
+      const wasPlaying = !mediaPaused;
+      TRACKS.splice(trackIndex, 1);
+      if (stored.excerpts && removed.id in stored.excerpts) {
+        delete stored.excerpts[removed.id];
+      }
+      persistTracks(stored);
+      if (TRACKS.length === 0) {
+        clearEmptyPlaylist();
+        return;
+      }
+      trackIndex = Math.min(trackIndex, TRACKS.length - 1);
+      syncPlaybackAvailability();
+      loadTrack(trackIndex, { autoplay: wasPlaying });
+    };
+
     const loadTrack = (index, { autoplay = false } = {}) => {
       const next = TRACKS[index];
       if (!next) {
@@ -953,8 +1019,8 @@
           return;
         }
         TRACKS.push({ id, label, youtube });
-        persistCustomTracks(stored);
-        syncSkipButtons();
+        persistTracks(stored);
+        syncPlaybackAvailability();
         setAddError('');
         addForm.reset();
         panel.classList.remove('is-add-open');
@@ -964,6 +1030,12 @@
         }
         addForm.setAttribute('hidden', '');
         loadTrack(TRACKS.length - 1, { autoplay: !mediaPaused });
+      });
+    }
+
+    if (removeBtn instanceof HTMLButtonElement) {
+      removeBtn.addEventListener('click', () => {
+        removeCurrentTrack();
       });
     }
 
@@ -1064,6 +1136,7 @@
       if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
       if (event.key === ' ' || event.code === 'Space') {
         event.preventDefault();
+        if (!currentTrack()) return;
         if (mediaPaused) play();
         else pauseMedia();
       } else if (event.key === ',' || event.key === '<') {
@@ -1099,8 +1172,10 @@
       if (audioCtx && audioCtx.state === 'suspended') {
         audioCtx.resume().catch(() => {});
       }
-      playWhenReady = true;
-      play();
+      if (currentTrack()) {
+        playWhenReady = true;
+        play();
+      }
       wakePond();
     };
     window.addEventListener('pointerdown', unlock, { once: true });

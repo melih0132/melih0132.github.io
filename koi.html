@@ -134,6 +134,7 @@
     .audio-reset,
     .audio-excerpt-toggle,
     .audio-add-toggle,
+    .audio-remove,
     .audio-skip {
       display: grid;
       place-items: center;
@@ -157,7 +158,9 @@
       opacity: 0.75;
     }
 
-    .audio-skip:disabled {
+    .audio-skip:disabled,
+    .audio-toggle:disabled,
+    .audio-remove:disabled {
       opacity: 0.25;
       cursor: default;
     }
@@ -176,7 +179,8 @@
 
     .audio-reset,
     .audio-excerpt-toggle,
-    .audio-add-toggle {
+    .audio-add-toggle,
+    .audio-remove {
       width: auto;
       padding: 0 0.2rem;
       font-size: 0.72rem;
@@ -193,8 +197,8 @@
       gap: 0.75rem;
     }
 
-    .audio-toggle:hover,
-    .audio-toggle:focus-visible,
+    .audio-toggle:hover:not(:disabled),
+    .audio-toggle:focus-visible:not(:disabled),
     .audio-loop:hover,
     .audio-loop:focus-visible,
     .audio-reset:hover,
@@ -203,6 +207,8 @@
     .audio-excerpt-toggle:focus-visible,
     .audio-add-toggle:hover,
     .audio-add-toggle:focus-visible,
+    .audio-remove:hover:not(:disabled),
+    .audio-remove:focus-visible:not(:disabled),
     .audio-skip:hover:not(:disabled),
     .audio-skip:focus-visible:not(:disabled),
     .audio-volume:focus-visible {
@@ -546,6 +552,13 @@
       </div>
       <div class="audio-row audio-excerpt-actions">
         <button class="audio-reset" type="button" data-audio-reset aria-label="Réinitialiser l'extrait">reset extrait</button>
+        <button
+          class="audio-remove"
+          type="button"
+          data-audio-remove
+          aria-label="Supprimer la piste"
+          title="Supprimer la piste"
+        >remove</button>
         <button
           class="audio-add-toggle"
           type="button"
