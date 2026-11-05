@@ -13,6 +13,13 @@ const I18N = {
     contactForm: {
       success: 'Thank you! Your message has been sent.',
       error: 'An error occurred. Please try again.'
+    },
+    spotlight: {
+      dialogLabel: 'Image preview',
+      close: 'Close',
+      previous: 'Previous image',
+      next: 'Next image',
+      open: 'Enlarge image'
     }
   },
   fr: {
@@ -27,6 +34,13 @@ const I18N = {
     contactForm: {
       success: 'Merci ! Votre message a été envoyé.',
       error: 'Une erreur est survenue. Veuillez réessayer.'
+    },
+    spotlight: {
+      dialogLabel: 'Aperçu de l’image',
+      close: 'Fermer',
+      previous: 'Image précédente',
+      next: 'Image suivante',
+      open: 'Agrandir l’image'
     }
   }
 };
@@ -47,6 +61,7 @@ const CONFIG = {
   },
   projectFilterUi: I18N[LOCALE].projectFilterUi,
   contactForm: I18N[LOCALE].contactForm,
+  spotlight: I18N[LOCALE].spotlight,
   homePath: I18N[LOCALE].homePath
 };
 
@@ -745,6 +760,185 @@ function syncCopyrightYears() {
   });
 }
 
+class GallerySpotlight {
+  constructor() {
+    this.gallery = document.querySelector('.project-gallery');
+    this.items = [];
+    this.index = 0;
+    this.open = false;
+    this.lastFocus = null;
+    const locale = document.documentElement.lang.startsWith('fr') ? 'fr' : 'en';
+    this.ui = (I18N[locale] && I18N[locale].spotlight) || CONFIG.spotlight || {};
+    this.onKeyDown = this.onKeyDown.bind(this);
+
+    if (!this.gallery) return;
+
+    this.items = Array.from(this.gallery.querySelectorAll('figure')).filter((figure) =>
+      figure.querySelector('img')
+    );
+    if (this.items.length === 0) return;
+
+    this.build();
+    this.bindTriggers();
+  }
+
+  build() {
+    this.root = document.createElement('div');
+    this.root.className = 'spotlight';
+    this.root.hidden = true;
+    this.root.setAttribute('role', 'dialog');
+    this.root.setAttribute('aria-modal', 'true');
+    this.root.setAttribute('aria-label', this.ui.dialogLabel || 'Image preview');
+
+    this.backdrop = document.createElement('button');
+    this.backdrop.type = 'button';
+    this.backdrop.className = 'spotlight__backdrop';
+    this.backdrop.setAttribute('aria-label', this.ui.close || 'Close');
+
+    this.panel = document.createElement('div');
+    this.panel.className = 'spotlight__panel';
+
+    this.img = document.createElement('img');
+    this.img.className = 'spotlight__img';
+    this.img.alt = '';
+
+    this.caption = document.createElement('p');
+    this.caption.className = 'spotlight__caption';
+
+    this.closeBtn = document.createElement('button');
+    this.closeBtn.type = 'button';
+    this.closeBtn.className = 'spotlight__close';
+    this.closeBtn.setAttribute('aria-label', this.ui.close || 'Close');
+    this.closeBtn.textContent = '✕';
+
+    this.prevBtn = document.createElement('button');
+    this.prevBtn.type = 'button';
+    this.prevBtn.className = 'spotlight__nav spotlight__nav--prev';
+    this.prevBtn.setAttribute('aria-label', this.ui.previous || 'Previous image');
+    this.prevBtn.textContent = '‹';
+
+    this.nextBtn = document.createElement('button');
+    this.nextBtn.type = 'button';
+    this.nextBtn.className = 'spotlight__nav spotlight__nav--next';
+    this.nextBtn.setAttribute('aria-label', this.ui.next || 'Next image');
+    this.nextBtn.textContent = '›';
+
+    this.panel.append(this.img, this.caption);
+    this.root.append(this.backdrop, this.prevBtn, this.panel, this.nextBtn, this.closeBtn);
+    document.body.appendChild(this.root);
+
+    this.backdrop.addEventListener('click', () => this.close());
+    this.closeBtn.addEventListener('click', () => this.close());
+    this.prevBtn.addEventListener('click', () => this.show(this.index - 1));
+    this.nextBtn.addEventListener('click', () => this.show(this.index + 1));
+  }
+
+  bindTriggers() {
+    this.items.forEach((figure, i) => {
+      const img = figure.querySelector('img');
+      if (!img) return;
+
+      figure.classList.add('project-gallery__item');
+      img.classList.add('project-gallery__img');
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', this.ui.open || 'Enlarge image');
+
+      const openAt = () => this.show(i);
+      img.addEventListener('click', openAt);
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openAt();
+        }
+      });
+    });
+  }
+
+  show(index) {
+    if (!this.root || this.items.length === 0) return;
+
+    const nextIndex = (index + this.items.length) % this.items.length;
+    const figure = this.items[nextIndex];
+    const source = figure.querySelector('img');
+    const caption = figure.querySelector('figcaption');
+    if (!source) return;
+
+    if (!this.open) {
+      this.lastFocus = document.activeElement;
+      this.open = true;
+      this.root.hidden = false;
+      document.body.classList.add('spotlight-open');
+      document.addEventListener('keydown', this.onKeyDown);
+      requestAnimationFrame(() => {
+        this.root.classList.add('is-active');
+        this.closeBtn.focus();
+      });
+    }
+
+    this.index = nextIndex;
+    this.img.src = source.currentSrc || source.src;
+    this.img.alt = source.alt || '';
+    this.caption.textContent = caption ? caption.textContent.trim() : '';
+    this.caption.hidden = !this.caption.textContent;
+
+    const multi = this.items.length > 1;
+    this.prevBtn.hidden = !multi;
+    this.nextBtn.hidden = !multi;
+  }
+
+  close() {
+    if (!this.open || !this.root) return;
+    this.open = false;
+    this.root.classList.remove('is-active');
+    document.body.classList.remove('spotlight-open');
+    document.removeEventListener('keydown', this.onKeyDown);
+
+    const finish = () => {
+      this.root.hidden = true;
+      this.img.removeAttribute('src');
+      if (this.lastFocus && typeof this.lastFocus.focus === 'function') {
+        this.lastFocus.focus();
+      }
+      this.lastFocus = null;
+    };
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      finish();
+      return;
+    }
+
+    window.setTimeout(finish, 180);
+  }
+
+  onKeyDown(e) {
+    if (!this.open) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      this.close();
+      return;
+    }
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      this.show(this.index - 1);
+      return;
+    }
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      this.show(this.index + 1);
+    }
+  }
+
+  destroy() {
+    document.removeEventListener('keydown', this.onKeyDown);
+    document.body.classList.remove('spotlight-open');
+    if (this.root) this.root.remove();
+    this.root = null;
+    this.items = [];
+    this.open = false;
+  }
+}
+
 function bootPage() {
   if (window.__pageAbort) window.__pageAbort.abort();
   window.__pageAbort = new AbortController();
@@ -754,12 +948,19 @@ function bootPage() {
     window.__projectFilters.destroy();
     window.__projectFilters = null;
   }
+  if (window.__gallerySpotlight) {
+    window.__gallerySpotlight.destroy();
+    window.__gallerySpotlight = null;
+  }
 
   new SiteChrome(signal);
   syncCopyrightYears();
 
   if (document.querySelector('.projects-filters') && document.querySelectorAll('.project-card').length) {
     window.__projectFilters = new ProjectFilters();
+  }
+  if (document.querySelector('.project-gallery')) {
+    window.__gallerySpotlight = new GallerySpotlight();
   }
   if (document.querySelector('.contact__form')) new ContactForm();
 }
