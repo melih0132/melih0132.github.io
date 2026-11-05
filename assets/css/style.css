@@ -360,7 +360,7 @@ textarea {
 }
 
 .hero__inner {
-  width: min(100%, 40rem);
+  width: min(100%, 44rem);
 }
 
 .hero__brand {
@@ -382,7 +382,7 @@ textarea {
 
 .hero__lead {
   color: var(--muted);
-  max-width: 34rem;
+  max-width: 38rem;
   margin-bottom: var(--space-l);
 }
 
@@ -686,9 +686,15 @@ textarea {
 
 .project-description strong,
 .project-hero__lead strong,
-.project-block p strong {
+.project-block p strong,
+.project-block li strong {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: color-mix(in srgb, var(--koi-kin) 22%, transparent);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0.08em 0.22em;
 }
 
 .project-links {
@@ -949,11 +955,6 @@ textarea {
   left: 0.75rem;
   top: 0.75rem;
   color: var(--accent);
-}
-
-.project-block li strong {
-  color: var(--ink);
-  font-weight: 600;
 }
 
 .project-gallery {
