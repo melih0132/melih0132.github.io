@@ -1,9 +1,8 @@
 (() => {
-  // CC0 (OpenGameArt): Indieteur, Cleyton Kauffman, isaiah658
+  // Official YouTube embeds only (IFrame API). No audio files hosted.
   const TRACKS = [
-    { id: 'underwater-world', label: 'underwater world', src: '/assets/mp3/underwater-world.mp3' },
-    { id: 'underwater-theme', label: 'underwater theme', src: '/assets/mp3/underwater-theme.mp3' },
-    { id: 'underwater-pad', label: 'underwater pad', src: '/assets/mp3/underwater-pad.wav' }
+    { id: 'lovesong', label: 'lovesong', youtube: '0wPhbmeNSOs' },
+    { id: 'lovely', label: 'lovely', youtube: '8VLXHyHRXjc' }
   ];
 
   const LOOP_GAP = 0.25;
@@ -304,6 +303,14 @@
     let dragTarget = null;
     let pendingExcerpt = null;
     let advancingPlaylist = false;
+    let mediaPaused = true;
+    /** @type {any} */
+    let ytPlayer = null;
+    let ytReady = false;
+    let ytPoll = 0;
+    let ytLoadToken = 0;
+    let playWhenReady = false;
+    const ytHost = document.querySelector('[data-koi-yt]');
 
     audio.loop = false;
     audio.preload = 'metadata';
@@ -319,8 +326,56 @@
       all: { label: 'Boucle playlist', title: 'Boucle playlist', text: '≡', pressed: 'true' }
     };
 
+    const currentTrack = () => TRACKS[trackIndex] || null;
+    const isYoutube = (track = currentTrack()) => !!(track && track.youtube);
+
+    const waitYtApi = () =>
+      new Promise((resolve) => {
+        if (window.YT && window.YT.Player) {
+          resolve();
+          return;
+        }
+        const prev = window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady = () => {
+          if (typeof prev === 'function') prev();
+          resolve();
+        };
+        const poll = window.setInterval(() => {
+          if (window.YT && window.YT.Player) {
+            window.clearInterval(poll);
+            resolve();
+          }
+        }, 50);
+      });
+
+    const getTime = () => {
+      if (isYoutube()) {
+        if (!ytReady || !ytPlayer || typeof ytPlayer.getCurrentTime !== 'function') return 0;
+        try {
+          return ytPlayer.getCurrentTime() || 0;
+        } catch {
+          return 0;
+        }
+      }
+      return audio.currentTime || 0;
+    };
+
+    const setTime = (t) => {
+      if (isYoutube()) {
+        if (ytReady && ytPlayer && typeof ytPlayer.seekTo === 'function') {
+          try {
+            ytPlayer.seekTo(t, true);
+          } catch {
+            /* player not ready */
+          }
+        }
+        return;
+      }
+      audio.currentTime = t;
+    };
+
     const persist = () => {
-      const track = TRACKS[trackIndex];
+      const track = currentTrack();
       if (!track) return;
       stored.trackId = track.id;
       stored.volume = clamp(Number(volume.value) || 0, 0, 1);
@@ -335,13 +390,16 @@
     const applyVolume = () => {
       const level = clamp(Number(volume.value) || 0, 0, 1);
       audio.volume = level;
+      if (ytPlayer && typeof ytPlayer.setVolume === 'function') {
+        ytPlayer.setVolume(Math.round(level * 100));
+      }
       volume.value = String(level);
       volume.setAttribute('aria-valuenow', String(level));
       persist();
     };
 
     const syncToggle = () => {
-      const on = !audio.paused;
+      const on = !mediaPaused;
       toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
       toggle.setAttribute('aria-label', on ? 'Pause' : 'Lecture');
       toggle.textContent = on ? '⏸' : '▶';
@@ -356,47 +414,102 @@
       loopBtn.textContent = ui.text;
     };
 
-    const onExcerptEnd = () => {
-      if (loopMode === 'one') {
-        audio.currentTime = loopStart;
-        if (audio.paused) play();
-        return;
+    const stopYtPoll = () => {
+      if (ytPoll) {
+        window.clearInterval(ytPoll);
+        ytPoll = 0;
       }
-      if (loopMode === 'all') {
-        if (TRACKS.length <= 1) {
-          audio.currentTime = loopStart;
-          if (audio.paused) play();
-          return;
+    };
+
+    const startYtPoll = () => {
+      stopYtPoll();
+      ytPoll = window.setInterval(() => {
+        if (!isYoutube()) return;
+        tickMedia();
+      }, 250);
+    };
+
+    const pauseMedia = () => {
+      playWhenReady = false;
+      if (isYoutube()) {
+        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+          try {
+            ytPlayer.pauseVideo();
+          } catch {
+            /* ignore */
+          }
         }
-        if (advancingPlaylist) return;
-        advancingPlaylist = true;
+      } else {
         audio.pause();
-        const next = (trackIndex + 1) % TRACKS.length;
-        loadTrack(next, { autoplay: true });
-        return;
       }
-      audio.pause();
-      audio.currentTime = loopEnd;
+      mediaPaused = true;
       syncToggle();
     };
 
     const play = () => {
-      if (duration > 0 && audio.currentTime >= loopEnd - 0.02) {
-        audio.currentTime = loopStart;
+      if (duration > 0 && getTime() >= loopEnd - 0.02) setTime(loopStart);
+      if (isYoutube()) {
+        if (!ytReady || !ytPlayer || typeof ytPlayer.playVideo !== 'function') {
+          playWhenReady = true;
+          return;
+        }
+        playWhenReady = false;
+        try {
+          ytPlayer.playVideo();
+          mediaPaused = false;
+          syncToggle();
+        } catch {
+          playWhenReady = true;
+        }
+        return;
       }
+      playWhenReady = false;
       const start = audio.play();
       if (start && typeof start.then === 'function') {
-        start.then(syncToggle).catch(() => syncToggle());
+        start
+          .then(() => {
+            mediaPaused = false;
+            syncToggle();
+          })
+          .catch(() => {
+            mediaPaused = true;
+            syncToggle();
+          });
       } else {
+        mediaPaused = false;
         syncToggle();
       }
     };
 
+    const onExcerptEnd = () => {
+      if (loopMode === 'one') {
+        setTime(loopStart);
+        if (mediaPaused) play();
+        return;
+      }
+      if (loopMode === 'all') {
+        if (TRACKS.length <= 1) {
+          setTime(loopStart);
+          if (mediaPaused) play();
+          return;
+        }
+        if (advancingPlaylist) return;
+        advancingPlaylist = true;
+        pauseMedia();
+        const next = (trackIndex + 1) % TRACKS.length;
+        loadTrack(next, { autoplay: true });
+        return;
+      }
+      pauseMedia();
+      setTime(loopEnd);
+    };
+
     const syncTimeline = () => {
       const safeDuration = duration > 0 ? duration : 1;
+      const now = getTime();
       const startPct = (loopStart / safeDuration) * 100;
       const endPct = (loopEnd / safeDuration) * 100;
-      const nowPct = (clamp(audio.currentTime || 0, 0, safeDuration) / safeDuration) * 100;
+      const nowPct = (clamp(now, 0, safeDuration) / safeDuration) * 100;
 
       rangeEl.style.left = `${startPct}%`;
       rangeEl.style.width = `${Math.max(0, endPct - startPct)}%`;
@@ -407,9 +520,9 @@
       playhead.style.left = `${nowPct}%`;
 
       timeline.setAttribute('aria-valuemax', String(Math.round(safeDuration)));
-      timeline.setAttribute('aria-valuenow', String(Math.round(audio.currentTime || 0)));
+      timeline.setAttribute('aria-valuenow', String(Math.round(now)));
 
-      if (timeCurrent) timeCurrent.textContent = formatTime(audio.currentTime || 0);
+      if (timeCurrent) timeCurrent.textContent = formatTime(now);
       if (timeA) timeA.textContent = `A ${formatTime(loopStart)}`;
       if (timeB) timeB.textContent = `B ${formatTime(loopEnd)}`;
       if (timeDuration) timeDuration.textContent = formatTime(duration);
@@ -425,9 +538,8 @@
       const minGap = Math.min(LOOP_GAP, duration);
       loopStart = clamp(start, 0, Math.max(0, duration - minGap));
       loopEnd = clamp(end, loopStart + minGap, duration);
-      if (audio.currentTime < loopStart || audio.currentTime > loopEnd) {
-        audio.currentTime = loopStart;
-      }
+      const now = getTime();
+      if (now < loopStart || now > loopEnd) setTime(loopStart);
       syncTimeline();
       if (persistBounds) persist();
     };
@@ -436,16 +548,134 @@
       setLoopBounds(0, duration || 0);
     };
 
+    const applyPendingOrFull = () => {
+      if (pendingExcerpt && duration > 0) {
+        setLoopBounds(pendingExcerpt.a, pendingExcerpt.b);
+        pendingExcerpt = null;
+      } else {
+        setLoopBounds(0, duration);
+      }
+      syncTimeline();
+    };
+
+    const tickMedia = () => {
+      if (!(duration > 0)) {
+        syncTimeline();
+        return;
+      }
+      const now = getTime();
+      if (now < loopStart) setTime(loopStart);
+      if (now >= loopEnd - 0.25) {
+        if (!(loopMode === 'off' && mediaPaused)) onExcerptEnd();
+      }
+      syncTimeline();
+    };
+
     const syncTrackUi = () => {
-      const track = TRACKS[trackIndex];
+      const track = currentTrack();
       trackLabel.textContent = track ? track.label : '—';
       trackMeta.textContent = TRACKS.length ? `${trackIndex + 1}/${TRACKS.length}` : '0/0';
+    };
+
+    const markYtReady = (player) => {
+      ytReady = true;
+      applyVolume();
+      try {
+        const d = player.getDuration?.() || 0;
+        if (Number.isFinite(d) && d > 0) duration = d;
+      } catch {
+        /* ignore */
+      }
+      applyPendingOrFull();
+      advancingPlaylist = false;
+      startYtPoll();
+      if (playWhenReady) play();
+    };
+
+    const ensureYtPlayer = async (videoId) => {
+      await waitYtApi();
+      if (!(ytHost instanceof HTMLElement)) throw new Error('yt host missing');
+
+      if (ytPlayer && typeof ytPlayer.cueVideoById === 'function') {
+        ytReady = false;
+        return new Promise((resolve) => {
+          try {
+            ytPlayer.cueVideoById({ videoId, startSeconds: 0 });
+          } catch {
+            resolve();
+            return;
+          }
+          window.setTimeout(() => {
+            markYtReady(ytPlayer);
+            resolve();
+          }, 500);
+        });
+      }
+
+      ytReady = false;
+      return new Promise((resolve, reject) => {
+        try {
+          ytPlayer = new window.YT.Player(ytHost, {
+            width: '480',
+            height: '270',
+            videoId,
+            host: 'https://www.youtube.com',
+            playerVars: {
+              autoplay: 0,
+              controls: 0,
+              disablekb: 1,
+              fs: 0,
+              modestbranding: 1,
+              playsinline: 1,
+              rel: 0,
+              enablejsapi: 1
+            },
+            events: {
+              onReady: (event) => {
+                markYtReady(event.target);
+                resolve();
+              },
+              onError: () => {
+                ytReady = false;
+                mediaPaused = true;
+                syncToggle();
+                resolve();
+              },
+              onStateChange: (event) => {
+                const YT = window.YT;
+                if (!YT || !YT.PlayerState) return;
+                if (event.data === YT.PlayerState.PLAYING) {
+                  mediaPaused = false;
+                  try {
+                    const d = event.target.getDuration?.() || duration;
+                    if (d > 0) duration = d;
+                  } catch {
+                    /* ignore */
+                  }
+                  syncToggle();
+                } else if (
+                  event.data === YT.PlayerState.PAUSED ||
+                  event.data === YT.PlayerState.CUED
+                ) {
+                  mediaPaused = true;
+                  syncToggle();
+                } else if (event.data === YT.PlayerState.ENDED) {
+                  mediaPaused = true;
+                  onExcerptEnd();
+                }
+              }
+            }
+          });
+        } catch (err) {
+          reject(err);
+        }
+      });
     };
 
     const stepTrack = (delta) => {
       if (TRACKS.length <= 1) return;
       const next = (trackIndex + delta + TRACKS.length) % TRACKS.length;
-      loadTrack(next, { autoplay: !audio.paused });
+      loadTrack(next, { autoplay: !mediaPaused });
     };
 
     const loadTrack = (index, { autoplay = false } = {}) => {
@@ -454,11 +684,9 @@
         advancingPlaylist = false;
         return;
       }
-      const wasPlaying = !audio.paused || autoplay;
+      const wasPlaying = !mediaPaused || autoplay;
       trackIndex = index;
       syncTrackUi();
-      audio.src = next.src;
-      audio.load();
       loopStart = 0;
       loopEnd = 0;
       duration = 0;
@@ -469,6 +697,38 @@
           : null;
       syncTimeline();
       persist();
+
+      if (next.youtube) {
+        audio.pause();
+        audio.removeAttribute('src');
+        audio.load();
+        stopYtPoll();
+        playWhenReady = !!wasPlaying;
+        const token = ++ytLoadToken;
+        ensureYtPlayer(next.youtube)
+          .then(() => {
+            if (token !== ytLoadToken) return;
+            if (wasPlaying) play();
+            else {
+              playWhenReady = false;
+              advancingPlaylist = false;
+              mediaPaused = true;
+              syncToggle();
+            }
+          })
+          .catch(() => {
+            playWhenReady = false;
+            advancingPlaylist = false;
+            mediaPaused = true;
+            syncToggle();
+          });
+        return;
+      }
+
+      stopYtPoll();
+      if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') ytPlayer.pauseVideo();
+      audio.src = next.src;
+      audio.load();
       if (wasPlaying) {
         const resume = () => {
           audio.removeEventListener('loadedmetadata', resume);
@@ -478,6 +738,8 @@
         audio.addEventListener('loadedmetadata', resume);
       } else {
         advancingPlaylist = false;
+        mediaPaused = true;
+        syncToggle();
       }
     };
 
@@ -503,7 +765,7 @@
       if (dragTarget === 'a') setLoopBounds(t, loopEnd, { persistBounds: false });
       else if (dragTarget === 'b') setLoopBounds(loopStart, t, { persistBounds: false });
       else if (dragTarget === 'seek') {
-        audio.currentTime = clamp(t, loopStart, loopEnd);
+        setTime(clamp(t, loopStart, loopEnd));
         syncTimeline();
       }
     };
@@ -533,11 +795,8 @@
     volume.addEventListener('input', applyVolume);
 
     toggle.addEventListener('click', () => {
-      if (audio.paused) play();
-      else {
-        audio.pause();
-        syncToggle();
-      }
+      if (mediaPaused) play();
+      else pauseMedia();
     });
 
     loopBtn.addEventListener('click', () => {
@@ -567,7 +826,7 @@
       if (distA <= grab && distA <= distB) beginDrag('a', event);
       else if (distB <= grab) beginDrag('b', event);
       else {
-        audio.currentTime = clamp(t, loopStart, loopEnd);
+        setTime(clamp(t, loopStart, loopEnd));
         syncTimeline();
         beginDrag('seek', event);
       }
@@ -584,51 +843,46 @@
       if (!(duration > 0)) return;
       const step = event.shiftKey ? 5 : 1;
       if (event.key === 'ArrowLeft') {
-        audio.currentTime = clamp(audio.currentTime - step, loopStart, loopEnd);
+        setTime(clamp(getTime() - step, loopStart, loopEnd));
         syncTimeline();
         event.preventDefault();
       } else if (event.key === 'ArrowRight') {
-        audio.currentTime = clamp(audio.currentTime + step, loopStart, loopEnd);
+        setTime(clamp(getTime() + step, loopStart, loopEnd));
         syncTimeline();
         event.preventDefault();
       }
     });
 
     audio.addEventListener('loadedmetadata', () => {
+      if (isYoutube()) return;
       duration = Number.isFinite(audio.duration) ? audio.duration : 0;
-      if (pendingExcerpt && duration > 0) {
-        setLoopBounds(pendingExcerpt.a, pendingExcerpt.b);
-        pendingExcerpt = null;
-      } else {
-        setLoopBounds(0, duration);
-      }
-      syncTimeline();
+      applyPendingOrFull();
     });
 
     audio.addEventListener('timeupdate', () => {
-      if (!(duration > 0)) {
-        syncTimeline();
-        return;
-      }
-      if (audio.currentTime < loopStart) {
-        audio.currentTime = loopStart;
-      }
-      if (audio.currentTime >= loopEnd - 0.02) {
-        onExcerptEnd();
-      }
-      syncTimeline();
+      if (isYoutube()) return;
+      tickMedia();
     });
 
     audio.addEventListener('ended', () => {
+      if (isYoutube()) return;
       onExcerptEnd();
       syncTimeline();
     });
 
-    audio.addEventListener('play', syncToggle);
-    audio.addEventListener('pause', syncToggle);
+    audio.addEventListener('play', () => {
+      if (isYoutube()) return;
+      mediaPaused = false;
+      syncToggle();
+    });
+    audio.addEventListener('pause', () => {
+      if (isYoutube()) return;
+      mediaPaused = true;
+      syncToggle();
+    });
 
     const ensureAnalyser = () => {
-      if (analyser || reducedMotion.matches) return;
+      if (analyser || reducedMotion.matches || isYoutube()) return;
       try {
         const Ctx = window.AudioContext || window.webkitAudioContext;
         if (!Ctx) return;
@@ -656,11 +910,8 @@
       if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
       if (event.key === ' ' || event.code === 'Space') {
         event.preventDefault();
-        if (audio.paused) play();
-        else {
-          audio.pause();
-          syncToggle();
-        }
+        if (mediaPaused) play();
+        else pauseMedia();
       } else if (event.key === ',' || event.key === '<') {
         event.preventDefault();
         stepTrack(-1);
@@ -687,31 +938,6 @@
       ocean.softRipple(cx - 30, cy + 25);
     };
 
-    let autoplayTried = false;
-    const tryAutoplay = () => {
-      if (autoplayTried || !audio.paused) {
-        if (!audio.paused) wakePond();
-        return;
-      }
-      autoplayTried = true;
-      // Direct element play (no AudioContext yet): best chance under autoplay policies.
-      const start = audio.play();
-      if (start && typeof start.then === 'function') {
-        start
-          .then(() => {
-            syncToggle();
-            wakePond();
-          })
-          .catch(() => {
-            syncToggle();
-            autoplayTried = false;
-          });
-      } else {
-        syncToggle();
-        wakePond();
-      }
-    };
-
     const unlock = () => {
       window.removeEventListener('pointerdown', unlock);
       window.removeEventListener('keydown', unlock);
@@ -719,18 +945,16 @@
       if (audioCtx && audioCtx.state === 'suspended') {
         audioCtx.resume().catch(() => {});
       }
-      if (audio.paused) play();
+      playWhenReady = true;
+      play();
       wakePond();
     };
     window.addEventListener('pointerdown', unlock, { once: true });
     window.addEventListener('keydown', unlock, { once: true });
 
-    loadTrack(trackIndex);
+    // YouTube: wait for gesture (autoplay policies). Load cued, play on first interaction.
+    loadTrack(trackIndex, { autoplay: false });
     syncToggle();
-
-    // Attempt music on open; gesture unlock remains if the browser blocks autoplay.
-    if (audio.readyState >= 1) tryAutoplay();
-    else audio.addEventListener('loadedmetadata', tryAutoplay, { once: true });
   }
 
   if (canvas instanceof HTMLCanvasElement && typeof OceanEngine === 'function') {

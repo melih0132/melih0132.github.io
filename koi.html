@@ -341,6 +341,18 @@
       opacity: 0.9;
     }
 
+    /* Off-screen but real size: YT IFrame API is unreliable on near-invisible players. */
+    .yt-host {
+      position: fixed;
+      left: -10000px;
+      top: 0;
+      width: 480px;
+      height: 270px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
     .visually-hidden {
       position: absolute;
       width: 1px;
@@ -457,7 +469,9 @@
     </div>
   </div>
   <audio data-koi-audio preload="metadata" crossorigin="anonymous"></audio>
+  <div class="yt-host" data-koi-yt aria-hidden="true"></div>
   <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script src="/assets/js/ocean.min.js"></script>
   <script src="/assets/js/koi-companion.js"></script>
 </body>
