@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Une carpe koï ASCII qui suit la souris." />
+  <link rel="icon" href="/assets/img/logo.png" type="image/png">
+  <title>Koï | Melih Cetinkaya</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+      color-scheme: dark;
+      font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    .ocean {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      font-family: inherit;
+      touch-action: none;
+    }
+
+    .clock {
+      position: fixed;
+      top: clamp(1.25rem, 4vh, 2.5rem);
+      left: 50%;
+      z-index: 1;
+      transform: translateX(-50%);
+      color: #c5e4f7;
+      font-size: clamp(1.6rem, 3.8vw, 2.4rem);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.14em;
+      text-shadow: 0 0 24px rgba(74, 144, 200, 0.35);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .audio-panel {
+      position: fixed;
+      right: clamp(1rem, 3vw, 1.75rem);
+      bottom: clamp(1rem, 3vw, 1.75rem);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      width: min(22rem, calc(100vw - 2rem));
+      padding: 0.55rem 0.7rem;
+      border: 1px solid rgba(126, 184, 232, 0.35);
+      background: rgba(0, 0, 0, 0.45);
+      color: #c5e4f7;
+      backdrop-filter: blur(6px);
+    }
+
+    .audio-row {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .audio-toggle,
+    .audio-loop,
+    .audio-reset {
+      display: grid;
+      place-items: center;
+      width: 1.45rem;
+      height: 1.45rem;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 0.95rem;
+      line-height: 1;
+      letter-spacing: 0;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .audio-loop {
+      width: 1.6rem;
+      opacity: 0.45;
+    }
+
+    .audio-loop[aria-pressed="true"] {
+      opacity: 1;
+    }
+
+    .audio-reset {
+      width: auto;
+      padding: 0 0.2rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      opacity: 0.75;
+    }
+
+    .audio-toggle:hover,
+    .audio-toggle:focus-visible,
+    .audio-loop:hover,
+    .audio-loop:focus-visible,
+    .audio-reset:hover,
+    .audio-reset:focus-visible,
+    .audio-track:hover,
+    .audio-track:focus-visible,
+    .audio-volume:focus-visible {
+      color: #e8f4fc;
+      outline: none;
+    }
+
+    .audio-track {
+      flex: 1 1 auto;
+      min-width: 0;
+      max-width: 8.5rem;
+      padding: 0.2rem 0.35rem;
+      border: 1px solid rgba(126, 184, 232, 0.35);
+      background: rgba(0, 0, 0, 0.35);
+      color: inherit;
+      font: inherit;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+    }
+
+    .audio-volume {
+      flex: 1 1 auto;
+      width: 5.5rem;
+      height: 0.3rem;
+      appearance: none;
+      background: rgba(126, 184, 232, 0.25);
+      border-radius: 0;
+      cursor: pointer;
+    }
+
+    .audio-volume::-webkit-slider-thumb {
+      appearance: none;
+      width: 0.7rem;
+      height: 0.7rem;
+      background: #c5e4f7;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .audio-volume::-moz-range-thumb {
+      width: 0.7rem;
+      height: 0.7rem;
+      background: #c5e4f7;
+      border: 0;
+      border-radius: 0;
+      cursor: pointer;
+    }
+
+    .audio-times {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      font-variant-numeric: tabular-nums;
+      opacity: 0.85;
+    }
+
+    .audio-timeline {
+      position: relative;
+      height: 1.35rem;
+      touch-action: none;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .audio-timeline-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 0.28rem;
+      transform: translateY(-50%);
+      background: rgba(126, 184, 232, 0.2);
+    }
+
+    .audio-timeline-range {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background: rgba(126, 184, 232, 0.45);
+    }
+
+    .audio-timeline-progress {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      background: rgba(232, 244, 252, 0.55);
+      pointer-events: none;
+    }
+
+    .audio-handle {
+      position: absolute;
+      top: 50%;
+      width: 0.7rem;
+      height: 0.7rem;
+      border: 0;
+      background: #c5e4f7;
+      transform: translate(-50%, -50%);
+      cursor: ew-resize;
+      padding: 0;
+    }
+
+    .audio-handle[data-handle="playhead"] {
+      width: 0.16rem;
+      height: 1rem;
+      background: #e8f4fc;
+      pointer-events: none;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="visually-hidden">Carpe koï</h1>
+  <time class="clock" data-clock datetime="" aria-live="polite"></time>
+  <div class="audio-panel" data-audio-panel>
+    <div class="audio-row">
+      <button class="audio-toggle" type="button" data-audio-toggle aria-pressed="false" aria-label="Lecture">▶</button>
+      <label class="visually-hidden" for="koi-track">Piste</label>
+      <select class="audio-track" id="koi-track" data-audio-track></select>
+      <button
+        class="audio-loop"
+        type="button"
+        data-audio-loop
+        aria-pressed="true"
+        aria-label="Boucle activée"
+        title="Boucle"
+      >∞</button>
+      <label class="visually-hidden" for="koi-volume">Volume</label>
+      <input
+        class="audio-volume"
+        id="koi-volume"
+        type="range"
+        data-audio-volume
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.55"
+        aria-valuemin="0"
+        aria-valuemax="1"
+        aria-valuenow="0.55"
+      />
+    </div>
+    <div class="audio-times" aria-hidden="true">
+      <span data-audio-time-current>0:00</span>
+      <span>
+        <span data-audio-time-a>A 0:00</span>
+        ·
+        <span data-audio-time-b>B 0:00</span>
+      </span>
+      <span data-audio-time-duration>0:00</span>
+    </div>
+    <div
+      class="audio-timeline"
+      data-audio-timeline
+      role="slider"
+      tabindex="0"
+      aria-label="Position et extrait A B"
+      aria-valuemin="0"
+      aria-valuemax="0"
+      aria-valuenow="0"
+    >
+      <div class="audio-timeline-track">
+        <div class="audio-timeline-range" data-audio-range></div>
+        <div class="audio-timeline-progress" data-audio-progress></div>
+      </div>
+      <button class="audio-handle" type="button" data-handle="a" aria-label="Début extrait A"></button>
+      <button class="audio-handle" type="button" data-handle="b" aria-label="Fin extrait B"></button>
+      <div class="audio-handle" data-handle="playhead" aria-hidden="true"></div>
+    </div>
+    <div class="audio-row">
+      <button class="audio-reset" type="button" data-audio-reset aria-label="Réinitialiser l'extrait">reset extrait</button>
+    </div>
+  </div>
+  <audio data-koi-audio preload="metadata"></audio>
+  <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
+  <script src="/assets/js/ocean.min.js"></script>
+  <script src="/assets/js/koi-companion.js"></script>
+</body>
+</html>

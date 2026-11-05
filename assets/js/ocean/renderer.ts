@@ -304,6 +304,11 @@ const SHAPES: Record<SharkKind, SharkShape> = {
     ...CARP_SHAPE,
     tint: [1.2, 1.05, 0.55],
   },
+  // Adaptation: sora — pale sky body, azure hi patches (companion page).
+  sora: {
+    ...CARP_SHAPE,
+    tint: [0.88, 1.05, 1.22],
+  },
 };
 
 const KINDS = Object.keys(SHAPES) as SharkKind[];
@@ -755,7 +760,8 @@ export class AsciiRenderer {
     if (
       this.shape !== SHAPES.kohaku &&
       this.shape !== SHAPES.showa &&
-      this.shape !== SHAPES.ogon
+      this.shape !== SHAPES.ogon &&
+      this.shape !== SHAPES.sora
     ) {
       return 0;
     }
@@ -773,7 +779,7 @@ export class AsciiRenderer {
     if (this.shape === SHAPES.ogon) {
       return d2 < 0.05 && roll < 0.2 ? 2 : 0;
     }
-    if (this.shape === SHAPES.kohaku) {
+    if (this.shape === SHAPES.kohaku || this.shape === SHAPES.sora) {
       if (d2 < 0.18 && roll < 0.58) return 1;
       if (d2 < 0.3 && roll2 < 0.32) return 1;
       return 0;
@@ -933,7 +939,7 @@ export class AsciiRenderer {
       const dim = 0.7 + 0.3 * sharkDepth[i];
       const kind = KINDS[sharkKind[i]];
       const [tr, tg, tb] = SHAPES[kind].tint;
-      const isKoi = kind === "kohaku" || kind === "showa" || kind === "ogon";
+      const isKoi = kind === "kohaku" || kind === "showa" || kind === "ogon" || kind === "sora";
 
       // Colours re-roll on a staggered clock so the hide shimmers.
       const tick = Math.floor(t * 2.4 + (key % 997) / 97);
@@ -954,7 +960,9 @@ export class AsciiRenderer {
           const base =
             kind === "ogon"
               ? [200, 160, 55]
-              : [220, 205, 180];
+              : kind === "sora"
+                ? [170, 210, 240]
+                : [220, 205, 180];
           const g = (0.45 + shade * 0.55) * dim;
           ctx.fillStyle =
             roll < 0.1
@@ -992,20 +1000,30 @@ export class AsciiRenderer {
       }
       level *= dim;
 
-      // Adaptation: koi fill cells with cream / vermillion / sumi / gold instead of grey tint.
+      // Adaptation: koi fill cells with cream / vermillion / sumi / gold / sky instead of grey tint.
       if (isKoi) {
         let fr: number;
         let fg: number;
         let fb: number;
         if (flag === FLAG_HI) {
-          fr = 210 * dim;
-          fg = 48 * dim;
-          fb = 36 * dim;
+          if (kind === "sora") {
+            fr = 70 * dim;
+            fg = 145 * dim;
+            fb = 220 * dim;
+          } else {
+            fr = 210 * dim;
+            fg = 48 * dim;
+            fb = 36 * dim;
+          }
         } else if (flag === FLAG_MARK) {
           if (kind === "ogon") {
             fr = 120 * dim;
             fg = 90 * dim;
             fb = 30 * dim;
+          } else if (kind === "sora") {
+            fr = 35 * dim;
+            fg = 70 * dim;
+            fb = 110 * dim;
           } else {
             fr = 22 * dim;
             fg = 20 * dim;
@@ -1016,6 +1034,11 @@ export class AsciiRenderer {
           fr = 220 * lift * dim;
           fg = 175 * lift * dim;
           fb = 55 * lift * dim;
+        } else if (kind === "sora") {
+          const lift = 0.72 + shade * 0.28;
+          fr = 185 * lift * dim;
+          fg = 220 * lift * dim;
+          fb = 245 * lift * dim;
         } else {
           const lift = 0.7 + shade * 0.3;
           fr = 235 * lift * dim;
@@ -1029,13 +1052,27 @@ export class AsciiRenderer {
       ctx.fillRect(x + 1, y + 1, cw - 1, ch - 1);
 
       let color: string;
-      if (flag === FLAG_EYE) color = isKoi ? "#2a2218" : "#9aa0ad";
-      else if (flag === FLAG_HI) color = roll < 0.2 ? "#fff4e8" : "#6a1810";
-      else if (flag === FLAG_MARK) {
-        color = kind === "ogon" ? "#3a2a10" : `rgb(${Math.round(70 * tr)},${Math.round(70 * tg)},${Math.round(70 * tb)})`;
+      if (flag === FLAG_EYE) color = isKoi ? (kind === "sora" ? "#122033" : "#2a2218") : "#9aa0ad";
+      else if (flag === FLAG_HI) {
+        color =
+          kind === "sora"
+            ? roll < 0.2
+              ? "#e8f6ff"
+              : "#1a4a7a"
+            : roll < 0.2
+              ? "#fff4e8"
+              : "#6a1810";
+      } else if (flag === FLAG_MARK) {
+        color =
+          kind === "ogon"
+            ? "#3a2a10"
+            : kind === "sora"
+              ? "#1a3555"
+              : `rgb(${Math.round(70 * tr)},${Math.round(70 * tg)},${Math.round(70 * tb)})`;
       } else if (roll < 0.09) color = this.accents[key % this.accents.length];
       else if (roll < 0.13) color = "#ffffff";
       else if (isKoi && kind === "ogon") color = shade > 0.55 ? "#5a4010" : "#7a5820";
+      else if (isKoi && kind === "sora") color = shade > 0.55 ? "#2a5078" : "#3d6a98";
       else if (isKoi) color = shade > 0.55 ? "#4a3a28" : "#6a5848";
       else color = shade > 0.55 ? "#0e0f13" : "#1b1d24";
       ctx.fillStyle = color;
