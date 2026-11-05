@@ -157,6 +157,10 @@ export class World {
   private companionOrbit = 0;
   /** Adaptation: previous idle flag, to seed the orbit on transition. */
   private companionWasIdle = false;
+  /** Adaptation: seconds continuous idle for companion rest transition. */
+  private companionIdleFor = 0;
+  /** Adaptation: true once idle long enough to rest near the bottom. */
+  private companionResting = false;
 
   // Adaptation: options object, and plain fields so Node can run the tests without a build.
   constructor(sharkSpecs: SharkSpec[] = DEFAULT_SHARKS, options: WorldOptions = {}) {
@@ -300,6 +304,18 @@ export class World {
       f.vy += (dy / d) * k;
       f.alarm = 1;
     }
+  }
+
+  /** Adaptation: visual wake only; school stays calm (companion chamber). */
+  softRipple(x: number, y: number) {
+    this.events.push({ kind: "splash", x, y });
+  }
+
+  /** Adaptation: snout of the first (companion) shark, if any. */
+  companionHead(): { x: number; y: number } | null {
+    const sh = this.sharks[0];
+    if (!sh) return null;
+    return { x: sh.nodes[0], y: sh.nodes[1] };
   }
 
   step(dt: number) {
@@ -569,7 +585,7 @@ export class World {
         dx += this.crossing.dir * 1.5;
         dy += clamp((targetY - hy) / cyW, -1, 1) * 1.2;
       } else if (this.companion) {
-        // Adaptation: soft follow (moving) / orbit (idle) / free wander (off-screen).
+        // Adaptation: soft follow (moving) / orbit (idle) / rest (long idle) / free wander.
         sh.hunger = 0;
         sh.target = null;
         const { pointer } = this;
@@ -578,48 +594,58 @@ export class World {
           let tx = pointer.x;
           let ty = pointer.y;
           if (pointer.idle) {
-            // Adaptation: Bernoulli lemniscate (∞) around the idle pointer.
-            // Scale with body length so both lobes stay readable; steer by look-ahead + tangent
-            // so limited turning does not collapse the path into a circle.
-            const a = Math.min(Math.min(W, H) * 0.3, Math.max(180, L * 1.05));
-            const lemni = (phase: number) => {
-              const s = Math.sin(phase);
-              const c = Math.cos(phase);
-              const denom = 1 + s * s;
-              return { x: (a * c) / denom, y: (a * s * c) / denom };
-            };
-            if (!this.companionWasIdle) {
-              let bestT = 0;
-              let bestD = Infinity;
-              for (let i = 0; i < 48; i++) {
-                const phase = (i / 48) * Math.PI * 2;
-                const p = lemni(phase);
-                const dd = (hx - pointer.x - p.x) ** 2 + (hy - pointer.y - p.y) ** 2;
-                if (dd < bestD) {
-                  bestD = dd;
-                  bestT = phase;
+            this.companionIdleFor += dt;
+            if (this.companionIdleFor >= 6) this.companionResting = true;
+            if (this.companionResting) {
+              // Adaptation: glide to rest under the pointer, lower third of the pond.
+              tx = pointer.x;
+              ty = H * 0.72;
+            } else {
+              // Adaptation: Bernoulli lemniscate (∞) around the idle pointer.
+              // Scale with body length so both lobes stay readable; steer by look-ahead + tangent
+              // so limited turning does not collapse the path into a circle.
+              const a = Math.min(Math.min(W, H) * 0.3, Math.max(180, L * 1.05));
+              const lemni = (phase: number) => {
+                const s = Math.sin(phase);
+                const c = Math.cos(phase);
+                const denom = 1 + s * s;
+                return { x: (a * c) / denom, y: (a * s * c) / denom };
+              };
+              if (!this.companionWasIdle) {
+                let bestT = 0;
+                let bestD = Infinity;
+                for (let i = 0; i < 48; i++) {
+                  const phase = (i / 48) * Math.PI * 2;
+                  const p = lemni(phase);
+                  const dd = (hx - pointer.x - p.x) ** 2 + (hy - pointer.y - p.y) ** 2;
+                  if (dd < bestD) {
+                    bestD = dd;
+                    bestT = phase;
+                  }
                 }
+                this.companionOrbit = bestT;
               }
-              this.companionOrbit = bestT;
+              this.companionOrbit += dt * 0.75;
+              const look = 0.55;
+              const here = lemni(this.companionOrbit);
+              const ahead = lemni(this.companionOrbit + look);
+              tx = pointer.x + ahead.x;
+              ty = pointer.y + ahead.y;
+              const tangentX = ahead.x - here.x;
+              const tangentY = ahead.y - here.y;
+              const tangentLen = Math.hypot(tangentX, tangentY) || 1;
+              dx += (tangentX / tangentLen) * 2.4;
+              dy += (tangentY / tangentLen) * 2.4;
+              // Soft path attraction so the snout stays on the ∞ rather than cutting corners.
+              const onX = pointer.x + here.x - hx;
+              const onY = pointer.y + here.y - hy;
+              const onD = Math.hypot(onX, onY) || 1;
+              dx += (onX / onD) * 1.1;
+              dy += (onY / onD) * 1.1;
             }
-            this.companionOrbit += dt * 0.75;
-            const look = 0.55;
-            const here = lemni(this.companionOrbit);
-            const ahead = lemni(this.companionOrbit + look);
-            tx = pointer.x + ahead.x;
-            ty = pointer.y + ahead.y;
-            const tangentX = ahead.x - here.x;
-            const tangentY = ahead.y - here.y;
-            const tangentLen = Math.hypot(tangentX, tangentY) || 1;
-            dx += (tangentX / tangentLen) * 2.4;
-            dy += (tangentY / tangentLen) * 2.4;
-            // Soft path attraction so the snout stays on the ∞ rather than cutting corners.
-            const onX = pointer.x + here.x - hx;
-            const onY = pointer.y + here.y - hy;
-            const onD = Math.hypot(onX, onY) || 1;
-            dx += (onX / onD) * 1.1;
-            dy += (onY / onD) * 1.1;
           } else {
+            this.companionIdleFor = 0;
+            this.companionResting = false;
             // Soft trail: glide toward a point slightly behind the cursor.
             tx -= Math.cos(sh.heading) * L * 0.28;
             ty -= Math.sin(sh.heading) * L * 0.28;
@@ -628,12 +654,14 @@ export class World {
           const ox = tx - hx;
           const oy = ty - hy;
           const d = Math.hypot(ox, oy) || 1;
-          const pull = pointer.idle ? 1.8 : 1.25;
+          const pull = this.companionResting ? 1.35 : pointer.idle ? 1.8 : 1.25;
           dx += (ox / d) * pull;
           dy += (oy / d) * pull;
           closing = clamp(1 - d / (L * 2.2), 0, 1);
         } else {
           this.companionWasIdle = false;
+          this.companionIdleFor = 0;
+          this.companionResting = false;
           const rx = hx - cxW;
           const ry = hy - cyW;
           const r = Math.hypot(rx, ry) || 1;
@@ -742,9 +770,11 @@ export class World {
         ? (W + 2 * L) / this.crossing.duration
         : this.companion
           ? companionFollow
-            ? this.pointer.idle
-              ? cruise * 1.05
-              : cruise * (1.05 + (1 - closing) * 0.95)
+            ? this.companionResting
+              ? cruise * 0.72
+              : this.pointer.idle
+                ? cruise * 1.05
+                : cruise * (1.05 + (1 - closing) * 0.95)
             : cruise * 1.35
           : hunting
             ? cruise * (1.45 + closing * 1.5)

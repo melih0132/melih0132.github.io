@@ -401,17 +401,21 @@ export class AsciiRenderer {
     () => [],
   );
   private fishStyles: string[] = [];
+  /** Adaptation: audio-driven brightness boost for the companion chamber (0..1). */
+  private pulse = 0;
+  /** Adaptation: current koi RGB palette for setPalette rebuilds. */
+  private koiRgb: [number, number, number][];
 
   constructor(private canvas: HTMLCanvasElement, options: RendererOptions = {}) {
     // Adaptation: options with the original defaults (opaque canvas, built-in colours).
     this.transparent = options.transparent ?? false;
     this.accents = options.accents ?? ACCENTS;
     this.bubble = options.bubble ?? BUBBLE;
-    const palette =
-      options.koiRgb && options.koiRgb.length === KOI_COLOR_COUNT ? options.koiRgb : KOI_RGB;
-    this.fishStyles = palette.flatMap(([r, g, b]) =>
-      FISH_ALPHAS.map((a) => `rgba(${r},${g},${b},${a})`),
-    );
+    this.koiRgb =
+      options.koiRgb && options.koiRgb.length === KOI_COLOR_COUNT
+        ? options.koiRgb.map((c) => [c[0], c[1], c[2]] as [number, number, number])
+        : KOI_RGB.map((c) => [c[0], c[1], c[2]] as [number, number, number]);
+    this.rebuildFishStyles();
     // Adaptation: the canvas keeps an alpha channel only in transparent mode.
     const ctx = canvas.getContext("2d", { alpha: this.transparent });
     if (!ctx) throw new Error("2D canvas unavailable");
@@ -443,6 +447,31 @@ export class AsciiRenderer {
 
   setFontFamily(family: string) {
     if (family) this.fontFamily = family;
+  }
+
+  /** Adaptation: 0..1 audio pulse; lifts school opacity slightly. */
+  setPulse(level: number) {
+    const next = clamp(level, 0, 1);
+    if (Math.abs(next - this.pulse) < 0.015) return;
+    this.pulse = next;
+    this.rebuildFishStyles();
+  }
+
+  /** Adaptation: live palette swap for clock-driven chromatic drift. */
+  setPalette(opts: { accents?: string[]; bubble?: string; koiRgb?: [number, number, number][] }) {
+    if (opts.accents && opts.accents.length) this.accents = opts.accents.slice();
+    if (opts.bubble) this.bubble = opts.bubble;
+    if (opts.koiRgb && opts.koiRgb.length === KOI_COLOR_COUNT) {
+      this.koiRgb = opts.koiRgb.map((c) => [c[0], c[1], c[2]] as [number, number, number]);
+      this.rebuildFishStyles();
+    }
+  }
+
+  private rebuildFishStyles() {
+    const boost = 1 + this.pulse * 0.25;
+    this.fishStyles = this.koiRgb.flatMap(([r, g, b]) =>
+      FISH_ALPHAS.map((a) => `rgba(${r},${g},${b},${Math.min(1, a * boost)})`),
+    );
   }
 
   resize(width: number, height: number, dpr: number) {

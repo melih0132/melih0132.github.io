@@ -32,6 +32,19 @@
       height: 100%;
       font-family: inherit;
       touch-action: none;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    body.is-ready .ocean {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ocean {
+        transition: none;
+        opacity: 1;
+      }
     }
 
     .clock {
@@ -47,6 +60,12 @@
       text-shadow: 0 0 24px rgba(74, 144, 200, 0.35);
       pointer-events: none;
       user-select: none;
+      opacity: 0.28;
+      transition: opacity 0.45s ease;
+    }
+
+    .clock.is-awake {
+      opacity: 1;
     }
 
     .audio-panel {
@@ -63,6 +82,14 @@
       background: rgba(0, 0, 0, 0.45);
       color: #c5e4f7;
       backdrop-filter: blur(6px);
+      opacity: 0.28;
+      transition: opacity 0.45s ease;
+    }
+
+    .audio-panel:hover,
+    .audio-panel:focus-within,
+    .audio-panel.is-awake {
+      opacity: 1;
     }
 
     .audio-row {
@@ -73,7 +100,8 @@
 
     .audio-toggle,
     .audio-loop,
-    .audio-reset {
+    .audio-reset,
+    .audio-excerpt-toggle {
       display: grid;
       place-items: center;
       width: 1.45rem;
@@ -99,12 +127,17 @@
       opacity: 1;
     }
 
-    .audio-reset {
+    .audio-reset,
+    .audio-excerpt-toggle {
       width: auto;
       padding: 0 0.2rem;
       font-size: 0.72rem;
       letter-spacing: 0.04em;
       opacity: 0.75;
+    }
+
+    .audio-excerpt-toggle {
+      display: none;
     }
 
     .audio-toggle:hover,
@@ -113,6 +146,8 @@
     .audio-loop:focus-visible,
     .audio-reset:hover,
     .audio-reset:focus-visible,
+    .audio-excerpt-toggle:hover,
+    .audio-excerpt-toggle:focus-visible,
     .audio-track:hover,
     .audio-track:focus-visible,
     .audio-volume:focus-visible {
@@ -160,6 +195,12 @@
       border: 0;
       border-radius: 0;
       cursor: pointer;
+    }
+
+    .audio-excerpt {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
     }
 
     .audio-times {
@@ -226,6 +267,27 @@
       pointer-events: none;
     }
 
+    .audio-hint {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: calc(100% + 0.45rem);
+      padding: 0.35rem 0.45rem;
+      border: 1px solid rgba(126, 184, 232, 0.3);
+      background: rgba(0, 0, 0, 0.7);
+      color: #c5e4f7;
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      line-height: 1.35;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .audio-hint.is-visible {
+      opacity: 0.9;
+    }
+
     .visually-hidden {
       position: absolute;
       width: 1px;
@@ -237,12 +299,31 @@
       white-space: nowrap;
       border: 0;
     }
+
+    @media (max-width: 640px) {
+      .audio-excerpt-toggle {
+        display: grid;
+      }
+
+      .audio-panel:not(.is-excerpt-open) .audio-excerpt {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .clock,
+      .audio-panel,
+      .audio-hint {
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body>
   <h1 class="visually-hidden">Carpe koï</h1>
   <time class="clock" data-clock datetime="" aria-live="polite"></time>
   <div class="audio-panel" data-audio-panel>
+    <p class="audio-hint" data-audio-hint aria-hidden="true">space play · [ ] A/B · ← → seek</p>
     <div class="audio-row">
       <button class="audio-toggle" type="button" data-audio-toggle aria-pressed="false" aria-label="Lecture">▶</button>
       <label class="visually-hidden" for="koi-track">Piste</label>
@@ -269,39 +350,48 @@
         aria-valuemax="1"
         aria-valuenow="0.55"
       />
+      <button
+        class="audio-excerpt-toggle"
+        type="button"
+        data-audio-excerpt-toggle
+        aria-expanded="false"
+        aria-controls="koi-excerpt"
+      >extrait</button>
     </div>
-    <div class="audio-times" aria-hidden="true">
-      <span data-audio-time-current>0:00</span>
-      <span>
-        <span data-audio-time-a>A 0:00</span>
-        ·
-        <span data-audio-time-b>B 0:00</span>
-      </span>
-      <span data-audio-time-duration>0:00</span>
-    </div>
-    <div
-      class="audio-timeline"
-      data-audio-timeline
-      role="slider"
-      tabindex="0"
-      aria-label="Position et extrait A B"
-      aria-valuemin="0"
-      aria-valuemax="0"
-      aria-valuenow="0"
-    >
-      <div class="audio-timeline-track">
-        <div class="audio-timeline-range" data-audio-range></div>
-        <div class="audio-timeline-progress" data-audio-progress></div>
+    <div class="audio-excerpt" id="koi-excerpt" data-audio-excerpt>
+      <div class="audio-times" aria-hidden="true">
+        <span data-audio-time-current>0:00</span>
+        <span>
+          <span data-audio-time-a>A 0:00</span>
+          ·
+          <span data-audio-time-b>B 0:00</span>
+        </span>
+        <span data-audio-time-duration>0:00</span>
       </div>
-      <button class="audio-handle" type="button" data-handle="a" aria-label="Début extrait A"></button>
-      <button class="audio-handle" type="button" data-handle="b" aria-label="Fin extrait B"></button>
-      <div class="audio-handle" data-handle="playhead" aria-hidden="true"></div>
-    </div>
-    <div class="audio-row">
-      <button class="audio-reset" type="button" data-audio-reset aria-label="Réinitialiser l'extrait">reset extrait</button>
+      <div
+        class="audio-timeline"
+        data-audio-timeline
+        role="slider"
+        tabindex="0"
+        aria-label="Position et extrait A B"
+        aria-valuemin="0"
+        aria-valuemax="0"
+        aria-valuenow="0"
+      >
+        <div class="audio-timeline-track">
+          <div class="audio-timeline-range" data-audio-range></div>
+          <div class="audio-timeline-progress" data-audio-progress></div>
+        </div>
+        <button class="audio-handle" type="button" data-handle="a" aria-label="Début extrait A"></button>
+        <button class="audio-handle" type="button" data-handle="b" aria-label="Fin extrait B"></button>
+        <div class="audio-handle" data-handle="playhead" aria-hidden="true"></div>
+      </div>
+      <div class="audio-row">
+        <button class="audio-reset" type="button" data-audio-reset aria-label="Réinitialiser l'extrait">reset extrait</button>
+      </div>
     </div>
   </div>
-  <audio data-koi-audio preload="metadata"></audio>
+  <audio data-koi-audio preload="metadata" crossorigin="anonymous"></audio>
   <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
   <script src="/assets/js/ocean.min.js"></script>
   <script src="/assets/js/koi-companion.js"></script>

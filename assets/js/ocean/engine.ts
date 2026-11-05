@@ -96,6 +96,26 @@ export class OceanEngine {
     window.removeEventListener("mouseout", this.onWindowMouseOut);
   }
 
+  /** Adaptation: 0..1 audio level for companion chamber shimmer. */
+  setPulse(level: number) {
+    this.renderer.setPulse(level);
+  }
+
+  /** Adaptation: clock-driven chromatic drift. */
+  setPalette(opts: { accents?: string[]; bubble?: string; koiRgb?: [number, number, number][] }) {
+    this.renderer.setPalette(opts);
+  }
+
+  /** Adaptation: visual ripple without scaring the school. */
+  softRipple(x: number, y: number) {
+    this.world.softRipple(x, y);
+  }
+
+  /** Adaptation: companion snout position for chamber atmosphere hooks. */
+  getCompanionHead(): { x: number; y: number } | null {
+    return this.world.companionHead();
+  }
+
   private resize() {
     const rect = this.canvas.getBoundingClientRect();
     if (rect.width < 1 || rect.height < 1) return;
