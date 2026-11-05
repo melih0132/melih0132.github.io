@@ -1,13 +1,39 @@
 (() => {
   // Official YouTube embeds only (IFrame API). No audio files hosted.
-  const TRACKS = [
+  const BASE_TRACKS = [
     { id: 'lovesong', label: 'lovesong', youtube: '0wPhbmeNSOs' },
     { id: 'lovely', label: 'lovely', youtube: '8VLXHyHRXjc' }
   ];
+  /** @type {{ id: string, label: string, youtube?: string, src?: string }[]} */
+  const TRACKS = BASE_TRACKS.map((t) => ({ ...t }));
 
   const LOOP_GAP = 0.25;
   const STORAGE_KEY = 'koi-chamber';
   const HINT_KEY = 'koi-hint-seen';
+  const YT_ID_RE = /^[\w-]{11}$/;
+
+  const normalizeYoutubeId = (raw) => {
+    const value = String(raw || '').trim();
+    if (!value) return '';
+    if (YT_ID_RE.test(value)) return value;
+    try {
+      const url = new URL(value);
+      if (url.hostname.includes('youtu.be')) {
+        const id = url.pathname.split('/').filter(Boolean)[0] || '';
+        return YT_ID_RE.test(id) ? id : '';
+      }
+      const v = url.searchParams.get('v');
+      if (v && YT_ID_RE.test(v)) return v;
+      const parts = url.pathname.split('/').filter(Boolean);
+      const embedIdx = parts.indexOf('embed');
+      if (embedIdx >= 0 && parts[embedIdx + 1] && YT_ID_RE.test(parts[embedIdx + 1])) {
+        return parts[embedIdx + 1];
+      }
+    } catch {
+      /* not a URL */
+    }
+    return '';
+  };
 
   const DAY_ACCENTS = ['#7eb8e8', '#c5e4f7', '#4a90c8', '#e8f4fc'];
   const NIGHT_ACCENTS = ['#5a8ab0', '#9ec4dc', '#3a6a90', '#c8dce8'];
@@ -88,6 +114,13 @@
     }
   };
 
+  const persistCustomTracks = (data) => {
+    data.customTracks = TRACKS.filter(
+      (t) => !BASE_TRACKS.some((base) => base.id === t.id)
+    ).map((t) => ({ id: t.id, label: t.label, youtube: t.youtube }));
+    saveStore(data);
+  };
+
   const clock = document.querySelector('[data-clock]');
   const fsToggle = document.querySelector('[data-fs-toggle]');
   const panel = document.querySelector('[data-audio-panel]');
@@ -128,6 +161,17 @@
 
   const stored = loadStore() || {};
   if (!stored.excerpts || typeof stored.excerpts !== 'object') stored.excerpts = {};
+  if (Array.isArray(stored.customTracks)) {
+    for (const entry of stored.customTracks) {
+      if (!entry || typeof entry !== 'object') continue;
+      const id = typeof entry.id === 'string' ? entry.id.trim() : '';
+      const label = typeof entry.label === 'string' ? entry.label.trim() : '';
+      const youtube = normalizeYoutubeId(entry.youtube);
+      if (!id || !label || !youtube) continue;
+      if (TRACKS.some((t) => t.id === id)) continue;
+      TRACKS.push({ id, label, youtube });
+    }
+  }
 
   if (clock instanceof HTMLTimeElement) {
     const tick = () => {
@@ -251,6 +295,29 @@
     syncExcerpt();
   }
 
+  const addToggle = document.querySelector('[data-audio-add-toggle]');
+  if (addToggle instanceof HTMLButtonElement && panel) {
+    const addFormEl = document.querySelector('[data-audio-add]');
+    const syncAdd = () => {
+      const open = panel.classList.contains('is-add-open');
+      addToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      addToggle.textContent = open ? 'close' : 'add extrait';
+      if (addFormEl instanceof HTMLElement) {
+        if (open) addFormEl.removeAttribute('hidden');
+        else addFormEl.setAttribute('hidden', '');
+      }
+    };
+    addToggle.addEventListener('click', () => {
+      panel.classList.toggle('is-add-open');
+      syncAdd();
+      if (panel.classList.contains('is-add-open')) {
+        const first = document.querySelector('[data-audio-add-id]');
+        if (first instanceof HTMLInputElement) first.focus();
+      }
+    });
+    syncAdd();
+  }
+
   const showHintOnce = () => {
     if (!(hint instanceof HTMLElement)) return;
     try {
@@ -315,9 +382,22 @@
     audio.loop = false;
     audio.preload = 'metadata';
 
-    const multiTrack = TRACKS.length > 1;
-    prevBtn.disabled = !multiTrack;
-    nextBtn.disabled = !multiTrack;
+    const syncSkipButtons = () => {
+      const multiTrack = TRACKS.length > 1;
+      prevBtn.disabled = !multiTrack;
+      nextBtn.disabled = !multiTrack;
+    };
+    syncSkipButtons();
+
+    const addForm = document.querySelector('[data-audio-add]');
+    const addId = document.querySelector('[data-audio-add-id]');
+    const addLabel = document.querySelector('[data-audio-add-label]');
+    const addYoutube = document.querySelector('[data-audio-add-youtube]');
+    const addError = document.querySelector('[data-audio-add-error]');
+
+    const setAddError = (message) => {
+      if (addError instanceof HTMLElement) addError.textContent = message || '';
+    };
 
     const LOOP_ORDER = /** @type {const} */ (['off', 'one', 'all']);
     const LOOP_UI = {
@@ -559,7 +639,8 @@
     };
 
     const tickMedia = () => {
-      if (!(duration > 0)) {
+      if (isYoutube()) refreshDuration();
+      if (!(duration > 0) || !(loopEnd > loopStart)) {
         syncTimeline();
         return;
       }
@@ -577,20 +658,54 @@
       trackMeta.textContent = TRACKS.length ? `${trackIndex + 1}/${TRACKS.length}` : '0/0';
     };
 
+    const refreshDuration = (player = ytPlayer) => {
+      if (!player || typeof player.getDuration !== 'function') return false;
+      try {
+        const d = player.getDuration() || 0;
+        if (!Number.isFinite(d) || d <= 0) return false;
+        const prev = duration;
+        duration = d;
+        if (!(prev > 0) || loopEnd <= 0 || loopEnd > d + 0.05) {
+          applyPendingOrFull();
+        }
+        return true;
+      } catch {
+        return false;
+      }
+    };
+
     const markYtReady = (player) => {
       ytReady = true;
       applyVolume();
-      try {
-        const d = player.getDuration?.() || 0;
-        if (Number.isFinite(d) && d > 0) duration = d;
-      } catch {
-        /* ignore */
-      }
-      applyPendingOrFull();
+      refreshDuration(player);
       advancingPlaylist = false;
       startYtPoll();
       if (playWhenReady) play();
     };
+
+    const waitForYtCue = (player, videoId) =>
+      new Promise((resolve) => {
+        let settled = false;
+        const finish = () => {
+          if (settled) return;
+          settled = true;
+          window.clearInterval(poll);
+          window.clearTimeout(failSafe);
+          markYtReady(player);
+          resolve();
+        };
+        const poll = window.setInterval(() => {
+          try {
+            const data = typeof player.getVideoData === 'function' ? player.getVideoData() : null;
+            const idOk = !data || !data.video_id || data.video_id === videoId;
+            const d = player.getDuration?.() || 0;
+            if (idOk && Number.isFinite(d) && d > 0) finish();
+          } catch {
+            /* keep polling */
+          }
+        }, 100);
+        const failSafe = window.setTimeout(finish, 2500);
+      });
 
     const ensureYtPlayer = async (videoId) => {
       await waitYtApi();
@@ -598,18 +713,13 @@
 
       if (ytPlayer && typeof ytPlayer.cueVideoById === 'function') {
         ytReady = false;
-        return new Promise((resolve) => {
-          try {
-            ytPlayer.cueVideoById({ videoId, startSeconds: 0 });
-          } catch {
-            resolve();
-            return;
-          }
-          window.setTimeout(() => {
-            markYtReady(ytPlayer);
-            resolve();
-          }, 500);
-        });
+        try {
+          ytPlayer.cueVideoById({ videoId, startSeconds: 0 });
+        } catch {
+          return;
+        }
+        await waitForYtCue(ytPlayer, videoId);
+        return;
       }
 
       ytReady = false;
@@ -637,6 +747,8 @@
               },
               onError: () => {
                 ytReady = false;
+                playWhenReady = false;
+                advancingPlaylist = false;
                 mediaPaused = true;
                 syncToggle();
                 resolve();
@@ -646,19 +758,19 @@
                 if (!YT || !YT.PlayerState) return;
                 if (event.data === YT.PlayerState.PLAYING) {
                   mediaPaused = false;
-                  try {
-                    const d = event.target.getDuration?.() || duration;
-                    if (d > 0) duration = d;
-                  } catch {
-                    /* ignore */
+                  refreshDuration(event.target);
+                  syncToggle();
+                } else if (event.data === YT.PlayerState.PAUSED) {
+                  if (!playWhenReady) {
+                    mediaPaused = true;
+                    syncToggle();
                   }
-                  syncToggle();
-                } else if (
-                  event.data === YT.PlayerState.PAUSED ||
-                  event.data === YT.PlayerState.CUED
-                ) {
-                  mediaPaused = true;
-                  syncToggle();
+                } else if (event.data === YT.PlayerState.CUED) {
+                  refreshDuration(event.target);
+                  if (!playWhenReady) {
+                    mediaPaused = true;
+                    syncToggle();
+                  }
                 } else if (event.data === YT.PlayerState.ENDED) {
                   mediaPaused = true;
                   onExcerptEnd();
@@ -812,6 +924,48 @@
 
     prevBtn.addEventListener('click', () => stepTrack(-1));
     nextBtn.addEventListener('click', () => stepTrack(1));
+
+    if (
+      addForm instanceof HTMLFormElement &&
+      addId instanceof HTMLInputElement &&
+      addLabel instanceof HTMLInputElement &&
+      addYoutube instanceof HTMLInputElement
+    ) {
+      addForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const id = addId.value.trim();
+        const label = addLabel.value.trim();
+        const youtube = normalizeYoutubeId(addYoutube.value);
+        if (!id) {
+          setAddError('id requis');
+          return;
+        }
+        if (!label) {
+          setAddError('label requis');
+          return;
+        }
+        if (!youtube) {
+          setAddError('youtube id invalide');
+          return;
+        }
+        if (TRACKS.some((t) => t.id === id)) {
+          setAddError(`id deja pris: ${id}`);
+          return;
+        }
+        TRACKS.push({ id, label, youtube });
+        persistCustomTracks(stored);
+        syncSkipButtons();
+        setAddError('');
+        addForm.reset();
+        panel.classList.remove('is-add-open');
+        if (addToggle instanceof HTMLButtonElement) {
+          addToggle.setAttribute('aria-expanded', 'false');
+          addToggle.textContent = 'add extrait';
+        }
+        addForm.setAttribute('hidden', '');
+        loadTrack(TRACKS.length - 1, { autoplay: !mediaPaused });
+      });
+    }
 
     handleA.addEventListener('pointerdown', (event) => beginDrag('a', event));
     handleB.addEventListener('pointerdown', (event) => beginDrag('b', event));

@@ -133,6 +133,7 @@
     .audio-loop,
     .audio-reset,
     .audio-excerpt-toggle,
+    .audio-add-toggle,
     .audio-skip {
       display: grid;
       place-items: center;
@@ -174,7 +175,8 @@
 
 
     .audio-reset,
-    .audio-excerpt-toggle {
+    .audio-excerpt-toggle,
+    .audio-add-toggle {
       width: auto;
       padding: 0 0.2rem;
       font-size: 0.72rem;
@@ -186,6 +188,11 @@
       display: none;
     }
 
+    .audio-excerpt-actions {
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
     .audio-toggle:hover,
     .audio-toggle:focus-visible,
     .audio-loop:hover,
@@ -194,6 +201,8 @@
     .audio-reset:focus-visible,
     .audio-excerpt-toggle:hover,
     .audio-excerpt-toggle:focus-visible,
+    .audio-add-toggle:hover,
+    .audio-add-toggle:focus-visible,
     .audio-skip:hover:not(:disabled),
     .audio-skip:focus-visible:not(:disabled),
     .audio-volume:focus-visible {
@@ -341,6 +350,78 @@
       opacity: 0.9;
     }
 
+    .audio-add {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35rem;
+    }
+
+    .audio-panel.is-add-open .audio-add {
+      display: grid;
+    }
+
+    .audio-add-youtube {
+      grid-column: 1 / -1;
+    }
+
+    .audio-add-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .audio-add input {
+      width: 100%;
+      min-width: 0;
+      padding: 0.28rem 0.4rem;
+      border: 1px solid rgba(126, 184, 232, 0.3);
+      background: rgba(0, 0, 0, 0.35);
+      color: #c5e4f7;
+      font: inherit;
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+    }
+
+    .audio-add input::placeholder {
+      color: rgba(197, 228, 247, 0.4);
+    }
+
+    .audio-add input:focus-visible {
+      outline: none;
+      border-color: rgba(232, 244, 252, 0.55);
+      color: #e8f4fc;
+    }
+
+    .audio-add-submit {
+      flex: 0 0 auto;
+      width: 1.45rem;
+      height: 1.45rem;
+      padding: 0;
+      border: 1px solid rgba(126, 184, 232, 0.35);
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 0.95rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .audio-add-submit:hover,
+    .audio-add-submit:focus-visible {
+      color: #e8f4fc;
+      outline: none;
+    }
+
+    .audio-add-error {
+      flex: 1 1 auto;
+      min-width: 0;
+      font-size: 0.62rem;
+      letter-spacing: 0.04em;
+      opacity: 0.85;
+      color: #e8b4b4;
+    }
+
     /* Off-screen but real size: YT IFrame API is unreliable on near-invisible players. */
     .yt-host {
       position: fixed;
@@ -463,9 +544,37 @@
         <button class="audio-handle" type="button" data-handle="b" aria-label="Fin extrait B"></button>
         <div class="audio-handle" data-handle="playhead" aria-hidden="true"></div>
       </div>
-      <div class="audio-row">
+      <div class="audio-row audio-excerpt-actions">
         <button class="audio-reset" type="button" data-audio-reset aria-label="Réinitialiser l'extrait">reset extrait</button>
+        <button
+          class="audio-add-toggle"
+          type="button"
+          data-audio-add-toggle
+          aria-expanded="false"
+          aria-controls="koi-add"
+        >add extrait</button>
       </div>
+      <form class="audio-add" id="koi-add" data-audio-add autocomplete="off" hidden>
+        <label class="visually-hidden" for="koi-add-id">id</label>
+        <input id="koi-add-id" name="id" type="text" data-audio-add-id placeholder="id" maxlength="64" required />
+        <label class="visually-hidden" for="koi-add-label">label</label>
+        <input id="koi-add-label" name="label" type="text" data-audio-add-label placeholder="label" maxlength="80" required />
+        <label class="visually-hidden" for="koi-add-youtube">youtube id</label>
+        <input
+          class="audio-add-youtube"
+          id="koi-add-youtube"
+          name="youtube"
+          type="text"
+          data-audio-add-youtube
+          placeholder="youtube id"
+          maxlength="128"
+          required
+        />
+        <div class="audio-add-actions">
+          <button class="audio-add-submit" type="submit" aria-label="Ajouter la piste" title="Ajouter">+</button>
+          <p class="audio-add-error" data-audio-add-error aria-live="polite"></p>
+        </div>
+      </form>
     </div>
   </div>
   <audio data-koi-audio preload="metadata" crossorigin="anonymous"></audio>
