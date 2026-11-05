@@ -994,6 +994,12 @@ textarea {
   transform: none;
 }
 
+html.is-soft-nav .site {
+  pointer-events: none;
+  opacity: 0.72;
+  transition: opacity 0.15s ease;
+}
+
 /* Per-project koi universes (pages projet only) */
 [data-universe="evit-shuriken"] {
   --koi-beni: #c43028;
