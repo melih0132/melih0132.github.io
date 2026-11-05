@@ -6,6 +6,7 @@
         ".NET/C#",
         "WPF",
         "XAML",
+        "Visual Studio",
         "Git",
         "GitHub"
       ],
@@ -25,6 +26,7 @@
         "PostgreSQL",
         "pgAdmin4",
         "Figma",
+        "Visual Studio",
         "Git",
         "GitHub"
       ],
@@ -40,6 +42,8 @@
         "Unity",
         ".NET/C#",
         "3D Modeling",
+        "Unity Editor",
+        "Visual Studio",
         "Git",
         "GitHub"
       ],
@@ -76,7 +80,9 @@
         "SQL",
         "Excel",
         "Power BI",
-        "Microsoft Teams"
+        "Microsoft Teams",
+        "Git",
+        "GitHub"
       ],
       "githubOnly": false,
       "detailPaths": {
@@ -196,6 +202,7 @@
         "Jetpack Compose",
         "Raspberry Pi",
         "Z-Wave",
+        "Android Studio",
         "VS Code",
         "Git",
         "GitHub"
@@ -324,6 +331,7 @@
         "RESTful API",
         "HttpClient",
         "PHPUnit",
+        "VS Code",
         "Git",
         "GitHub",
         "MVC"
