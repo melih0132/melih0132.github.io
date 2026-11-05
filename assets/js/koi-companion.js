@@ -1,7 +1,9 @@
 (() => {
+  // CC0 (OpenGameArt): Indieteur, Cleyton Kauffman, isaiah658
   const TRACKS = [
-    { id: 'lovesong', label: 'lovesong', src: '/assets/mp3/lovesong.mp3' },
-    { id: 'lovely', label: 'lovely', src: '/assets/mp3/lovely.mp3' }
+    { id: 'underwater-world', label: 'underwater world', src: '/assets/mp3/underwater-world.mp3' },
+    { id: 'underwater-theme', label: 'underwater theme', src: '/assets/mp3/underwater-theme.mp3' },
+    { id: 'underwater-pad', label: 'underwater pad', src: '/assets/mp3/underwater-pad.wav' }
   ];
 
   const LOOP_GAP = 0.25;
@@ -88,13 +90,17 @@
   };
 
   const clock = document.querySelector('[data-clock]');
+  const fsToggle = document.querySelector('[data-fs-toggle]');
   const panel = document.querySelector('[data-audio-panel]');
   const hint = document.querySelector('[data-audio-hint]');
   const excerptToggle = document.querySelector('[data-audio-excerpt-toggle]');
   const audio = document.querySelector('[data-koi-audio]');
   const toggle = document.querySelector('[data-audio-toggle]');
   const volume = document.querySelector('[data-audio-volume]');
-  const trackSelect = document.querySelector('[data-audio-track]');
+  const trackLabel = document.querySelector('[data-audio-track-label]');
+  const trackMeta = document.querySelector('[data-audio-track-meta]');
+  const prevBtn = document.querySelector('[data-audio-prev]');
+  const nextBtn = document.querySelector('[data-audio-next]');
   const loopBtn = document.querySelector('[data-audio-loop]');
   const resetBtn = document.querySelector('[data-audio-reset]');
   const timeline = document.querySelector('[data-audio-timeline]');
@@ -161,13 +167,61 @@
     const nearClock =
       clientY < Math.min(120, window.innerHeight * 0.18) &&
       Math.abs(clientX - window.innerWidth / 2) < Math.min(220, window.innerWidth * 0.35);
+    const nearFs =
+      clientY < Math.min(100, window.innerHeight * 0.16) &&
+      clientX > window.innerWidth - Math.min(120, window.innerWidth * 0.22);
     const nearPanel =
       clientX > window.innerWidth - Math.min(420, window.innerWidth * 0.55) &&
       clientY > window.innerHeight - Math.min(280, window.innerHeight * 0.45);
-    const awake = nearClock || nearPanel;
+    const awake = nearClock || nearPanel || nearFs;
     if (clock) clock.classList.toggle('is-awake', awake || nearClock);
+    if (fsToggle) fsToggle.classList.toggle('is-awake', awake || nearFs);
     if (panel) panel.classList.toggle('is-awake', awake);
   };
+
+  if (fsToggle instanceof HTMLButtonElement) {
+    const fsElement = () =>
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.msFullscreenElement ||
+      null;
+
+    const syncFs = () => {
+      const on = !!fsElement();
+      fsToggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+      fsToggle.setAttribute('aria-label', on ? 'Quitter le plein écran' : 'Plein écran');
+      fsToggle.title = on ? 'Quitter le plein écran' : 'Plein écran';
+      fsToggle.textContent = on ? '✕' : '⛶';
+    };
+
+    const enterFs = () => {
+      const root = document.documentElement;
+      const req =
+        root.requestFullscreen ||
+        root.webkitRequestFullscreen ||
+        root.msRequestFullscreen;
+      if (req) return req.call(root);
+      return Promise.reject();
+    };
+
+    const exitFs = () => {
+      const exit =
+        document.exitFullscreen ||
+        document.webkitExitFullscreen ||
+        document.msExitFullscreen;
+      if (exit) return exit.call(document);
+      return Promise.reject();
+    };
+
+    fsToggle.addEventListener('click', () => {
+      const go = fsElement() ? exitFs() : enterFs();
+      if (go && typeof go.catch === 'function') go.catch(() => {});
+    });
+
+    document.addEventListener('fullscreenchange', syncFs);
+    document.addEventListener('webkitfullscreenchange', syncFs);
+    syncFs();
+  }
 
   window.addEventListener(
     'pointermove',
@@ -228,7 +282,10 @@
     audio instanceof HTMLAudioElement &&
     toggle instanceof HTMLButtonElement &&
     volume instanceof HTMLInputElement &&
-    trackSelect instanceof HTMLSelectElement &&
+    trackLabel instanceof HTMLElement &&
+    trackMeta instanceof HTMLElement &&
+    prevBtn instanceof HTMLButtonElement &&
+    nextBtn instanceof HTMLButtonElement &&
     loopBtn instanceof HTMLButtonElement &&
     resetBtn instanceof HTMLButtonElement &&
     timeline instanceof HTMLElement &&
@@ -239,30 +296,36 @@
     playhead instanceof HTMLElement
   ) {
     let trackIndex = 0;
-    let loopEnabled = true;
+    /** @type {'off' | 'one' | 'all'} */
+    let loopMode = 'one';
     let loopStart = 0;
     let loopEnd = 0;
     let duration = 0;
     let dragTarget = null;
     let pendingExcerpt = null;
+    let advancingPlaylist = false;
 
     audio.loop = false;
     audio.preload = 'metadata';
 
-    TRACKS.forEach((track, index) => {
-      const option = document.createElement('option');
-      option.value = String(index);
-      option.textContent = track.label;
-      trackSelect.appendChild(option);
-    });
-    trackSelect.disabled = TRACKS.length <= 1;
+    const multiTrack = TRACKS.length > 1;
+    prevBtn.disabled = !multiTrack;
+    nextBtn.disabled = !multiTrack;
+
+    const LOOP_ORDER = /** @type {const} */ (['off', 'one', 'all']);
+    const LOOP_UI = {
+      off: { label: 'Sans boucle', title: 'Sans boucle', text: '→', pressed: 'false' },
+      one: { label: 'Boucle piste', title: 'Boucle piste', text: '∞', pressed: 'true' },
+      all: { label: 'Boucle playlist', title: 'Boucle playlist', text: '≡', pressed: 'true' }
+    };
 
     const persist = () => {
       const track = TRACKS[trackIndex];
       if (!track) return;
       stored.trackId = track.id;
       stored.volume = clamp(Number(volume.value) || 0, 0, 1);
-      stored.loopEnabled = loopEnabled;
+      stored.loopMode = loopMode;
+      delete stored.loopEnabled;
       if (duration > 0) {
         stored.excerpts[track.id] = { a: loopStart, b: loopEnd };
       }
@@ -285,8 +348,36 @@
     };
 
     const syncLoopBtn = () => {
-      loopBtn.setAttribute('aria-pressed', loopEnabled ? 'true' : 'false');
-      loopBtn.setAttribute('aria-label', loopEnabled ? 'Boucle activée' : 'Boucle désactivée');
+      const ui = LOOP_UI[loopMode];
+      loopBtn.dataset.loopMode = loopMode;
+      loopBtn.setAttribute('aria-pressed', ui.pressed);
+      loopBtn.setAttribute('aria-label', ui.label);
+      loopBtn.title = ui.title;
+      loopBtn.textContent = ui.text;
+    };
+
+    const onExcerptEnd = () => {
+      if (loopMode === 'one') {
+        audio.currentTime = loopStart;
+        if (audio.paused) play();
+        return;
+      }
+      if (loopMode === 'all') {
+        if (TRACKS.length <= 1) {
+          audio.currentTime = loopStart;
+          if (audio.paused) play();
+          return;
+        }
+        if (advancingPlaylist) return;
+        advancingPlaylist = true;
+        audio.pause();
+        const next = (trackIndex + 1) % TRACKS.length;
+        loadTrack(next, { autoplay: true });
+        return;
+      }
+      audio.pause();
+      audio.currentTime = loopEnd;
+      syncToggle();
     };
 
     const play = () => {
@@ -345,12 +436,27 @@
       setLoopBounds(0, duration || 0);
     };
 
+    const syncTrackUi = () => {
+      const track = TRACKS[trackIndex];
+      trackLabel.textContent = track ? track.label : '—';
+      trackMeta.textContent = TRACKS.length ? `${trackIndex + 1}/${TRACKS.length}` : '0/0';
+    };
+
+    const stepTrack = (delta) => {
+      if (TRACKS.length <= 1) return;
+      const next = (trackIndex + delta + TRACKS.length) % TRACKS.length;
+      loadTrack(next, { autoplay: !audio.paused });
+    };
+
     const loadTrack = (index, { autoplay = false } = {}) => {
       const next = TRACKS[index];
-      if (!next) return;
+      if (!next) {
+        advancingPlaylist = false;
+        return;
+      }
       const wasPlaying = !audio.paused || autoplay;
       trackIndex = index;
-      trackSelect.value = String(index);
+      syncTrackUi();
       audio.src = next.src;
       audio.load();
       loopStart = 0;
@@ -366,9 +472,12 @@
       if (wasPlaying) {
         const resume = () => {
           audio.removeEventListener('loadedmetadata', resume);
+          advancingPlaylist = false;
           play();
         };
         audio.addEventListener('loadedmetadata', resume);
+      } else {
+        advancingPlaylist = false;
       }
     };
 
@@ -411,8 +520,10 @@
     if (typeof stored.volume === 'number') {
       volume.value = String(clamp(stored.volume, 0, 1));
     }
-    if (typeof stored.loopEnabled === 'boolean') {
-      loopEnabled = stored.loopEnabled;
+    if (stored.loopMode === 'off' || stored.loopMode === 'one' || stored.loopMode === 'all') {
+      loopMode = stored.loopMode;
+    } else if (typeof stored.loopEnabled === 'boolean') {
+      loopMode = stored.loopEnabled ? 'one' : 'off';
     }
     const initialTrack = TRACKS.findIndex((t) => t.id === stored.trackId);
     trackIndex = initialTrack >= 0 ? initialTrack : 0;
@@ -430,7 +541,8 @@
     });
 
     loopBtn.addEventListener('click', () => {
-      loopEnabled = !loopEnabled;
+      const i = LOOP_ORDER.indexOf(loopMode);
+      loopMode = LOOP_ORDER[(i + 1) % LOOP_ORDER.length];
       syncLoopBtn();
       persist();
     });
@@ -439,10 +551,8 @@
       resetExcerpt();
     });
 
-    trackSelect.addEventListener('change', () => {
-      const index = Number(trackSelect.value) || 0;
-      loadTrack(index, { autoplay: !audio.paused });
-    });
+    prevBtn.addEventListener('click', () => stepTrack(-1));
+    nextBtn.addEventListener('click', () => stepTrack(1));
 
     handleA.addEventListener('pointerdown', (event) => beginDrag('a', event));
     handleB.addEventListener('pointerdown', (event) => beginDrag('b', event));
@@ -504,26 +614,14 @@
         audio.currentTime = loopStart;
       }
       if (audio.currentTime >= loopEnd - 0.02) {
-        if (loopEnabled) {
-          audio.currentTime = loopStart;
-          if (audio.paused) play();
-        } else {
-          audio.pause();
-          audio.currentTime = loopEnd;
-          syncToggle();
-        }
+        onExcerptEnd();
       }
       syncTimeline();
     });
 
     audio.addEventListener('ended', () => {
-      if (loopEnabled) {
-        audio.currentTime = loopStart;
-        play();
-      } else {
-        syncToggle();
-        syncTimeline();
-      }
+      onExcerptEnd();
+      syncTimeline();
     });
 
     audio.addEventListener('play', syncToggle);
@@ -563,6 +661,12 @@
           audio.pause();
           syncToggle();
         }
+      } else if (event.key === ',' || event.key === '<') {
+        event.preventDefault();
+        stepTrack(-1);
+      } else if (event.key === '.' || event.key === '>') {
+        event.preventDefault();
+        stepTrack(1);
       } else if (event.key === '[') {
         event.preventDefault();
         nudgeBound('a', event.shiftKey ? -5 : -1);

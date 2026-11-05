@@ -68,6 +68,37 @@
       opacity: 1;
     }
 
+    .fs-toggle {
+      position: fixed;
+      top: clamp(1rem, 3vh, 1.75rem);
+      right: clamp(1rem, 3vw, 1.75rem);
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 1.7rem;
+      height: 1.7rem;
+      padding: 0;
+      border: 1px solid rgba(126, 184, 232, 0.35);
+      background: rgba(0, 0, 0, 0.45);
+      color: #c5e4f7;
+      font: inherit;
+      font-size: 0.78rem;
+      line-height: 1;
+      letter-spacing: 0;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      opacity: 0.28;
+      transition: opacity 0.45s ease, color 0.2s ease;
+    }
+
+    .fs-toggle:hover,
+    .fs-toggle:focus-visible,
+    .fs-toggle.is-awake {
+      opacity: 1;
+      color: #e8f4fc;
+      outline: none;
+    }
+
     .audio-panel {
       position: fixed;
       right: clamp(1rem, 3vw, 1.75rem);
@@ -101,7 +132,8 @@
     .audio-toggle,
     .audio-loop,
     .audio-reset,
-    .audio-excerpt-toggle {
+    .audio-excerpt-toggle,
+    .audio-skip {
       display: grid;
       place-items: center;
       width: 1.45rem;
@@ -118,14 +150,28 @@
       white-space: nowrap;
     }
 
-    .audio-loop {
-      width: 1.6rem;
-      opacity: 0.45;
+    .audio-skip {
+      width: 1.2rem;
+      font-size: 0.85rem;
+      opacity: 0.75;
     }
 
-    .audio-loop[aria-pressed="true"] {
+    .audio-skip:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .audio-loop {
+      width: 1.7rem;
+      opacity: 0.45;
+      font-size: 0.78rem;
+    }
+
+    .audio-loop[data-loop-mode="one"],
+    .audio-loop[data-loop-mode="all"] {
       opacity: 1;
     }
+
 
     .audio-reset,
     .audio-excerpt-toggle {
@@ -148,8 +194,8 @@
     .audio-reset:focus-visible,
     .audio-excerpt-toggle:hover,
     .audio-excerpt-toggle:focus-visible,
-    .audio-track:hover,
-    .audio-track:focus-visible,
+    .audio-skip:hover:not(:disabled),
+    .audio-skip:focus-visible:not(:disabled),
     .audio-volume:focus-visible {
       color: #e8f4fc;
       outline: none;
@@ -158,15 +204,22 @@
     .audio-track {
       flex: 1 1 auto;
       min-width: 0;
-      max-width: 8.5rem;
-      padding: 0.2rem 0.35rem;
-      border: 1px solid rgba(126, 184, 232, 0.35);
-      background: rgba(0, 0, 0, 0.35);
-      color: inherit;
-      font: inherit;
+      max-width: 9rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       font-size: 0.72rem;
       letter-spacing: 0.04em;
-      cursor: pointer;
+      user-select: none;
+    }
+
+    .audio-track-meta {
+      flex: 0 0 auto;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      font-variant-numeric: tabular-nums;
+      opacity: 0.55;
+      user-select: none;
     }
 
     .audio-volume {
@@ -313,7 +366,8 @@
     @media (prefers-reduced-motion: reduce) {
       .clock,
       .audio-panel,
-      .audio-hint {
+      .audio-hint,
+      .fs-toggle {
         transition: none;
       }
     }
@@ -322,19 +376,30 @@
 <body>
   <h1 class="visually-hidden">Carpe koï</h1>
   <time class="clock" data-clock datetime="" aria-live="polite"></time>
+  <button
+    class="fs-toggle"
+    type="button"
+    data-fs-toggle
+    aria-pressed="false"
+    aria-label="Plein écran"
+    title="Plein écran"
+  >⛶</button>
   <div class="audio-panel" data-audio-panel>
-    <p class="audio-hint" data-audio-hint aria-hidden="true">space play · [ ] A/B · ← → seek</p>
+    <p class="audio-hint" data-audio-hint aria-hidden="true">space play · , . piste · ∞ modes · [ ] A/B · ← → seek</p>
     <div class="audio-row">
       <button class="audio-toggle" type="button" data-audio-toggle aria-pressed="false" aria-label="Lecture">▶</button>
-      <label class="visually-hidden" for="koi-track">Piste</label>
-      <select class="audio-track" id="koi-track" data-audio-track></select>
+      <button class="audio-skip" type="button" data-audio-prev aria-label="Piste précédente" title="Piste précédente">‹</button>
+      <span class="audio-track" data-audio-track-label aria-live="polite">—</span>
+      <span class="audio-track-meta" data-audio-track-meta aria-hidden="true">0/0</span>
+      <button class="audio-skip" type="button" data-audio-next aria-label="Piste suivante" title="Piste suivante">›</button>
       <button
         class="audio-loop"
         type="button"
         data-audio-loop
+        data-loop-mode="one"
         aria-pressed="true"
-        aria-label="Boucle activée"
-        title="Boucle"
+        aria-label="Boucle piste"
+        title="Boucle piste"
       >∞</button>
       <label class="visually-hidden" for="koi-volume">Volume</label>
       <input

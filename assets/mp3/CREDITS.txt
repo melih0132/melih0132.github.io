@@ -1,0 +1,15 @@
+Chamber audio (CC0 / public domain via OpenGameArt)
+
+- underwater-world.mp3
+  Indieteur — "Underwater World"
+  https://opengameart.org/content/underwater-world
+
+- underwater-theme.mp3
+  Cleyton Kauffman — "Underwater Theme"
+  https://opengameart.org/content/underwater-theme
+
+- underwater-pad.wav
+  isaiah658 — "Underwater Ambient Pad"
+  https://opengameart.org/content/underwater-ambient-pad
+
+Do not commit files under assets/mp3/local/ (personal copies, gitignored).
