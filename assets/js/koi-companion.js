@@ -583,6 +583,31 @@
       ocean.softRipple(cx - 30, cy + 25);
     };
 
+    let autoplayTried = false;
+    const tryAutoplay = () => {
+      if (autoplayTried || !audio.paused) {
+        if (!audio.paused) wakePond();
+        return;
+      }
+      autoplayTried = true;
+      // Direct element play (no AudioContext yet): best chance under autoplay policies.
+      const start = audio.play();
+      if (start && typeof start.then === 'function') {
+        start
+          .then(() => {
+            syncToggle();
+            wakePond();
+          })
+          .catch(() => {
+            syncToggle();
+            autoplayTried = false;
+          });
+      } else {
+        syncToggle();
+        wakePond();
+      }
+    };
+
     const unlock = () => {
       window.removeEventListener('pointerdown', unlock);
       window.removeEventListener('keydown', unlock);
@@ -598,6 +623,10 @@
 
     loadTrack(trackIndex);
     syncToggle();
+
+    // Attempt music on open; gesture unlock remains if the browser blocks autoplay.
+    if (audio.readyState >= 1) tryAutoplay();
+    else audio.addEventListener('loadedmetadata', tryAutoplay, { once: true });
   }
 
   if (canvas instanceof HTMLCanvasElement && typeof OceanEngine === 'function') {

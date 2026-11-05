@@ -16,6 +16,8 @@ export interface OceanOptions extends RendererOptions {
   /** Adaptation: one koi gently follows the pointer; school stays calm. */
   companion?: boolean;
   onDone?: () => void;
+  /** Adaptation: fired when the azure gate minnow is clicked (homepage easter egg). */
+  onSpecialFishClick?: () => void;
 }
 
 /**
@@ -46,6 +48,7 @@ export class OceanEngine {
       fishCount: options.fishCount,
       crossing: options.crossing,
       companion: options.companion,
+      secretFish: !!options.onSpecialFishClick,
     });
     this.renderer = new AsciiRenderer(canvas, options);
     this.renderer.setFontFamily(getComputedStyle(canvas).fontFamily);
@@ -215,7 +218,12 @@ export class OceanEngine {
 
   private onPointerDown = (e: PointerEvent) => {
     const { x, y, inside } = this.toLocal(e);
-    if (inside && !this.reducedMotion.matches) this.world.splash(x, y);
+    if (!inside) return;
+    if (!this.reducedMotion.matches) this.world.splash(x, y);
+    // Adaptation: click the azure gate minnow (homepage chamber gate).
+    if (this.options.onSpecialFishClick && this.world.hitSpecialFish(x, y)) {
+      this.options.onSpecialFishClick();
+    }
   };
 
   private onPointerLeave = () => {

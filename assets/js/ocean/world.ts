@@ -56,6 +56,8 @@ export interface WorldOptions {
   crossing?: Crossing;
   /** Adaptation: one koi gently follows the pointer instead of hunting. */
   companion?: boolean;
+  /** Adaptation: plant one azure minnow as a chamber gate (homepage easter egg). */
+  secretFish?: boolean;
 }
 
 // Adaptation: four koi at different depths (kohaku / showa / ogon).
@@ -86,6 +88,8 @@ export interface Fish {
   depth: number;
   /** Rotation sense shared by a school when it mills into a bait ball. */
   millDir: 1 | -1;
+  /** Adaptation: azure gate fish; click opens /koi.html on the homepage. */
+  special?: boolean;
 }
 
 export interface Shark {
@@ -153,6 +157,8 @@ export class World {
   private meander = rand(0, TAU);
   /** Adaptation: soft pointer-follow mode for a single koi. */
   private companion = false;
+  /** Adaptation: spawn one clickable azure minnow. */
+  private secretFish = false;
   /** Adaptation: orbit angle while the pointer rests. */
   private companionOrbit = 0;
   /** Adaptation: previous idle flag, to seed the orbit on transition. */
@@ -168,6 +174,7 @@ export class World {
     this.fishCount = options.fishCount;
     this.crossing = options.crossing;
     this.companion = !!options.companion;
+    this.secretFish = !!options.secretFish;
   }
 
   /** Adaptation: true once a crossing shark has fully left the canvas. */
@@ -283,8 +290,15 @@ export class World {
           turn: 0,
           depth: rand(0.55, 1),
           millDir,
+          special: false,
         });
       }
+    }
+    // Adaptation: one azure minnow hidden in the school (homepage chamber gate).
+    if (this.secretFish && this.fish.length > 0) {
+      const pick = this.fish[randInt(0, this.fish.length - 1)];
+      pick.special = true;
+      pick.depth = 1;
     }
     this.bucketNext = new Int32Array(this.fish.length);
   }
@@ -316,6 +330,19 @@ export class World {
     const sh = this.sharks[0];
     if (!sh) return null;
     return { x: sh.nodes[0], y: sh.nodes[1] };
+  }
+
+  /** Adaptation: true if the azure gate minnow is under the point. */
+  hitSpecialFish(x: number, y: number): boolean {
+    const r = 20;
+    const r2 = r * r;
+    for (const f of this.fish) {
+      if (!f.alive || !f.special) continue;
+      const dx = f.x - x;
+      const dy = f.y - y;
+      if (dx * dx + dy * dy <= r2) return true;
+    }
+    return false;
   }
 
   step(dt: number) {

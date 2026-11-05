@@ -401,6 +401,8 @@ export class AsciiRenderer {
     () => [],
   );
   private fishStyles: string[] = [];
+  /** Adaptation: cell indices of the azure gate minnow this frame. */
+  private specialFishCells: number[] = [];
   /** Adaptation: audio-driven brightness boost for the companion chamber (0..1). */
   private pulse = 0;
   /** Adaptation: current koi RGB palette for setPalette rebuilds. */
@@ -1117,15 +1119,21 @@ export class AsciiRenderer {
    * fish claim a cell first when two land in the same one.
    */
   private markFish(world: World) {
-    const { fishStamp, fishBuckets, sharkFlag } = this;
+    const { fishStamp, fishBuckets, sharkFlag, specialFishCells } = this;
     const frame = ++this.frameId;
     for (const bucket of fishBuckets) bucket.length = 0;
+    specialFishCells.length = 0;
     for (let pass = 0; pass < 2; pass++) {
       for (const f of world.fish) {
         if (!f.alive || (f.depth > 0.78 ? 0 : 1) !== pass) continue;
         const i = this.cellIndex(f.x, f.y);
         if (i < 0 || fishStamp[i] === frame || sharkFlag[i]) continue;
         fishStamp[i] = frame;
+        // Adaptation: azure gate minnow drawn apart from the warm school palette.
+        if (f.special) {
+          specialFishCells.push(i);
+          continue;
+        }
         const glint = clamp(Math.abs(f.turn) / 3.5, 0, 1);
         const v = 0.3 + (0.4 * (f.depth - 0.55)) / 0.45 + 0.3 * Math.max(glint, f.alarm);
         const alpha = clamp(Math.floor(v * FISH_ALPHAS.length), 0, FISH_ALPHAS.length - 1);
@@ -1136,13 +1144,19 @@ export class AsciiRenderer {
   }
 
   private drawFish() {
-    const { ctx, cw, ch, cols, fishBuckets } = this;
+    const { ctx, cw, ch, cols, fishBuckets, specialFishCells } = this;
     for (let b = 0; b < fishBuckets.length; b++) {
       const bucket = fishBuckets[b];
       if (!bucket.length) continue;
       ctx.fillStyle = this.fishStyles[b];
       for (const i of bucket) {
         ctx.fillText("-", (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
+      }
+    }
+    if (specialFishCells.length) {
+      ctx.fillStyle = "rgba(126,184,232,0.95)";
+      for (const i of specialFishCells) {
+        ctx.fillText("~", (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
       }
     }
   }

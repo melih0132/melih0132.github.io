@@ -749,7 +749,12 @@ class OceanBoot {
     const canvas = document.querySelector('[data-ocean]');
     if (!canvas || typeof OceanEngine !== 'function') return;
     // Persistent pond: boot once with the default home palette (ignore per-page universe tint).
-    window.__oceanEngine = new OceanEngine(canvas, undefined, {});
+    // Easter egg: one azure "~" minnow in the school → chamber.
+    window.__oceanEngine = new OceanEngine(canvas, undefined, {
+      onSpecialFishClick: () => {
+        location.assign('/koi.html');
+      }
+    });
   }
 }
 
