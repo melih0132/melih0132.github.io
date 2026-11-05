@@ -54,6 +54,8 @@ export interface RendererOptions {
   accents?: string[];
   /** Adaptation: bubble colour is injectable, to follow the site theme. */
   bubble?: string;
+  /** Adaptation: 5 koi fish RGB triples; falls back to KOI_RGB. */
+  koiRgb?: [number, number, number][];
 }
 
 // Sparse glyphs on bright skin, dense glyphs in shadow, so the texture
@@ -393,15 +395,18 @@ export class AsciiRenderer {
     { length: KOI_COLOR_COUNT * FISH_ALPHAS.length },
     () => [],
   );
-  private fishStyles = KOI_RGB.flatMap(([r, g, b]) =>
-    FISH_ALPHAS.map((a) => `rgba(${r},${g},${b},${a})`),
-  );
+  private fishStyles: string[] = [];
 
   constructor(private canvas: HTMLCanvasElement, options: RendererOptions = {}) {
     // Adaptation: options with the original defaults (opaque canvas, built-in colours).
     this.transparent = options.transparent ?? false;
     this.accents = options.accents ?? ACCENTS;
     this.bubble = options.bubble ?? BUBBLE;
+    const palette =
+      options.koiRgb && options.koiRgb.length === KOI_COLOR_COUNT ? options.koiRgb : KOI_RGB;
+    this.fishStyles = palette.flatMap(([r, g, b]) =>
+      FISH_ALPHAS.map((a) => `rgba(${r},${g},${b},${a})`),
+    );
     // Adaptation: the canvas keeps an alpha channel only in transparent mode.
     const ctx = canvas.getContext("2d", { alpha: this.transparent });
     if (!ctx) throw new Error("2D canvas unavailable");

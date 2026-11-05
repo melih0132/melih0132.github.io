@@ -993,3 +993,114 @@ textarea {
   opacity: 1;
   transform: none;
 }
+
+/* Per-project koi universes (pages projet only) */
+[data-universe="evit-shuriken"] {
+  --koi-beni: #c43028;
+  --koi-shiro: #e8dcc8;
+  --koi-orange: #8a2018;
+  --koi-kin: #a87860;
+  --accent: var(--koi-beni);
+  --muted: #9a8078;
+  --ink: #ebe0d6;
+}
+
+[data-universe="dortan-app"] {
+  --koi-beni: #d89060;
+  --koi-shiro: #f0e6d4;
+  --koi-orange: #e0a060;
+  --koi-kin: #c4a888;
+  --accent: var(--koi-orange);
+  --muted: #a89880;
+  --ink: #f2ebe0;
+}
+
+[data-universe="kube"] {
+  --koi-beni: #c89040;
+  --koi-shiro: #f0e8d0;
+  --koi-orange: #e0b050;
+  --koi-kin: #d4a84b;
+  --accent: var(--koi-kin);
+  --muted: #a89060;
+  --ink: #f0e8d4;
+}
+
+[data-universe="lpo"] {
+  --koi-beni: #d87860;
+  --koi-shiro: #ebe6dc;
+  --koi-orange: #c4a888;
+  --koi-kin: #b8c4a0;
+  --accent: var(--koi-shiro);
+  --muted: #9a9880;
+  --ink: #ebe6dc;
+}
+
+[data-universe="uber-laravel"] {
+  --koi-beni: #d86830;
+  --koi-shiro: #f0e4d0;
+  --koi-orange: #e89040;
+  --koi-kin: #e0a050;
+  --accent: var(--koi-orange);
+  --muted: #a88860;
+  --ink: #f0e6d4;
+}
+
+[data-universe="uber-vuejs-dotnet"] {
+  --koi-beni: #c89050;
+  --koi-shiro: #e8dcc8;
+  --koi-orange: #d4a86a;
+  --koi-kin: #d4a84b;
+  --accent: var(--koi-kin);
+  --muted: #a89878;
+  --ink: #ebe4d6;
+}
+
+[data-universe="heva"] {
+  --koi-beni: #dc4638;
+  --koi-shiro: #f0e0d8;
+  --koi-orange: #e07050;
+  --koi-kin: #d48860;
+  --accent: var(--koi-beni);
+  --muted: #a87870;
+  --ink: #f0e4dc;
+}
+
+[data-universe="smarthome-lite"] {
+  --koi-beni: #a87040;
+  --koi-shiro: #d8d0c4;
+  --koi-orange: #908070;
+  --koi-kin: #d4a84b;
+  --accent: var(--koi-kin);
+  --muted: #807868;
+  --ink: #dcd4c8;
+}
+
+[data-universe="shared-ia"] {
+  --koi-beni: #dc4638;
+  --koi-shiro: #f0e4d0;
+  --koi-orange: #e09050;
+  --koi-kin: #d4a84b;
+  --accent: var(--koi-kin);
+  --muted: #a88868;
+  --ink: #efe6d6;
+}
+
+[data-universe="ranking"] {
+  --koi-beni: #dc4638;
+  --koi-shiro: #eee4d4;
+  --koi-orange: #e89040;
+  --koi-kin: #d47840;
+  --accent: var(--koi-beni);
+  --muted: #a88068;
+  --ink: #f0e4d6;
+}
+
+[data-universe="la-guilde-des-seigneurs"] {
+  --koi-beni: #dc4638;
+  --koi-shiro: #e8d8c0;
+  --koi-orange: #c46830;
+  --koi-kin: #d4a84b;
+  --accent: var(--koi-kin);
+  --muted: #988068;
+  --ink: #ebe0d0;
+}

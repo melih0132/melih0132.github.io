@@ -719,14 +719,79 @@ class SiteChrome {
   }
 }
 
+/** Per-project koi pond moods (UI tokens live in CSS; ocean gets accents/bubble/koiRgb). */
+const UNIVERSES = {
+  'evit-shuriken': {
+    accents: ['#c43028', '#2a2422', '#e8dcc8', '#8a2018'],
+    bubble: 'rgb(180,90,70)',
+    koiRgb: [[200, 40, 32], [232, 220, 208], [28, 24, 26], [160, 50, 40], [120, 70, 50]],
+  },
+  'dortan-app': {
+    accents: ['#e8dcc8', '#e0a060', '#c4b49a', '#f0e6d4'],
+    bubble: 'rgb(210,185,150)',
+    koiRgb: [[220, 140, 90], [242, 234, 220], [70, 58, 48], [232, 168, 100], [200, 170, 120]],
+  },
+  kube: {
+    accents: ['#d4a84b', '#f0e0a8', '#a87828', '#e8dcc8'],
+    bubble: 'rgb(210,180,100)',
+    koiRgb: [[210, 168, 58], [245, 236, 210], [50, 42, 28], [232, 190, 80], [180, 140, 50]],
+  },
+  lpo: {
+    accents: ['#e8dcc8', '#d87860', '#b8c4a0', '#c4a888'],
+    bubble: 'rgb(190,175,150)',
+    koiRgb: [[200, 100, 80], [238, 232, 220], [48, 52, 42], [180, 150, 90], [160, 170, 120]],
+  },
+  'uber-laravel': {
+    accents: ['#e89040', '#f0c080', '#c46820', '#e8dcc8'],
+    bubble: 'rgb(220,160,90)',
+    koiRgb: [[232, 140, 36], [240, 230, 210], [42, 32, 24], [220, 110, 50], [200, 150, 70]],
+  },
+  'uber-vuejs-dotnet': {
+    accents: ['#d4a84b', '#e8dcc8', '#c0b090', '#e0c878'],
+    bubble: 'rgb(200,180,130)',
+    koiRgb: [[210, 175, 70], [240, 236, 228], [40, 38, 36], [200, 160, 90], [180, 155, 100]],
+  },
+  heva: {
+    accents: ['#dc4638', '#f0a090', '#e8dcc8', '#c43028'],
+    bubble: 'rgb(210,120,100)',
+    koiRgb: [[220, 56, 42], [242, 228, 220], [36, 28, 28], [232, 100, 60], [200, 120, 70]],
+  },
+  'smarthome-lite': {
+    accents: ['#d4a84b', '#6a6050', '#e8dcc8', '#908070'],
+    bubble: 'rgb(160,140,110)',
+    koiRgb: [[180, 140, 50], [200, 190, 175], [24, 22, 20], [140, 110, 60], [100, 90, 70]],
+  },
+  'shared-ia': {
+    accents: ['#d4a84b', '#dc4638', '#f0d090', '#e8dcc8'],
+    bubble: 'rgb(210,160,100)',
+    koiRgb: [[210, 168, 58], [240, 230, 210], [36, 30, 28], [220, 70, 48], [200, 140, 60]],
+  },
+  ranking: {
+    accents: ['#dc4638', '#e89040', '#e8dcc8', '#c45028'],
+    bubble: 'rgb(210,130,80)',
+    koiRgb: [[220, 50, 36], [238, 228, 210], [32, 28, 26], [232, 140, 36], [200, 100, 40]],
+  },
+  'la-guilde-des-seigneurs': {
+    accents: ['#dc4638', '#d4a84b', '#8a2018', '#e8dcc8'],
+    bubble: 'rgb(190,120,70)',
+    koiRgb: [[200, 40, 36], [236, 220, 190], [28, 22, 20], [210, 168, 58], [160, 90, 40]],
+  },
+};
+
 class OceanBoot {
   constructor() {
     const canvas = document.querySelector('[data-ocean]');
     if (!canvas || typeof OceanEngine !== 'function') return;
     const reduced = document.body.dataset.oceanFish;
     const fishCount = reduced ? Number(reduced) : undefined;
+    const universe = UNIVERSES[document.body.dataset.universe];
     const options = {};
     if (Number.isFinite(fishCount)) options.fishCount = fishCount;
+    if (universe) {
+      options.accents = universe.accents;
+      options.bubble = universe.bubble;
+      options.koiRgb = universe.koiRgb;
+    }
     this.engine = new OceanEngine(canvas, undefined, options);
   }
 }
