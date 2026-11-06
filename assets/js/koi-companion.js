@@ -2,7 +2,11 @@
   // Official YouTube embeds only (IFrame API). No audio files hosted.
   const BASE_TRACKS = [
     { id: 'lovesong', label: 'lovesong', youtube: '0wPhbmeNSOs' },
-    { id: 'lovely', label: 'lovely', youtube: '8VLXHyHRXjc' }
+    { id: 'shotta', label: 'shotta', youtube: 'RMXe4RnC-m8' },
+    { id: 'dietrying', label: 'die trying', youtube: 'b5bR2NqDpqI' },
+    { id: 'reflections', label: 'reflections', youtube: 'x47TgeRJtH0' },
+    { id: 'shameless', label: 'shameless', youtube: 'ESKec2MMzqk' },
+    { id: 'massive', label: 'massive', youtube: 'ay1l_u6vltY' }
   ];
   /** @type {{ id: string, label: string, youtube?: string, src?: string }[]} */
   const TRACKS = [];

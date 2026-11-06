@@ -2,7 +2,11 @@ Chamber audio uses official YouTube IFrame embeds only.
 No copyrighted audio files are stored for publish.
 
 Tracks (video ids):
-- lovesong — 0wPhbmeNSOs
-- lovely — 8VLXHyHRXjc
+- lovesong - 0wPhbmeNSOs
+- shotta - RMXe4RnC-m8
+- die trying - b5bR2NqDpqI
+- reflections - x47TgeRJtH0
+- shameless - ESKec2MMzqk
+- massive - ay1l_u6vltY
 
 Do not commit files under assets/mp3/local/ (personal copies, gitignored).
