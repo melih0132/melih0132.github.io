@@ -1,23 +1,40 @@
 # Portfolio - Melih CETINKAYA
 
-Welcome to my GitHub portfolio! This site showcases my projects, skills, and development experiences. You can explore my work and view the source code for each of my projects.
+Site portfolio bilingue (FR / EN) : projets, compétences, expérience et candidature en alternance.
 
-## Portfolio Link
+## Lien
 
 [melih0132.github.io](https://melih0132.github.io/)
 
-## Technologies and Tools
+- Français : [/fr/](https://melih0132.github.io/fr/)
+- English : [/en/](https://melih0132.github.io/en/)
 
-Here are the main technologies and tools I use:
+## Contenu
 
-- **Languages:** HTML, CSS, JavaScript, etc.
-- **Tools:** Git, GitHub, VS Code, etc.
+- Accueil avec objectif d'alternance et liens CV / réseaux
+- Index de projets avec filtre multi-technologies (autocomplete, chips, intersection)
+- Pages détail pour une partie des projets (galerie, stack, liens)
+- Sections à propos, expérience, compétences, langues, contact
+
+## Stack du site
+
+- HTML5, CSS, JavaScript (vanilla)
+- Hébergement GitHub Pages
+- Données filtres : [`assets/data/projects.json`](assets/data/projects.json)
+- Océan ASCII en fond : sources TypeScript dans [`assets/js/ocean/`](assets/js/ocean/), bundle navigateur [`assets/js/ocean.min.js`](assets/js/ocean.min.js) (adaptation MIT de ascii-sharks, voir [`assets/js/ocean/LICENSE`](assets/js/ocean/LICENSE))
+
+## Sources et fichiers minifiés
+
+Les pages de production chargent les fichiers `.min` :
+
+- [`assets/css/style.min.css`](assets/css/style.min.css) (source : `style.css`)
+- [`assets/js/portfolio.min.js`](assets/js/portfolio.min.js) (source : `portfolio.js`)
+- [`assets/js/ocean.min.js`](assets/js/ocean.min.js) (sources : `assets/js/ocean/*.ts`)
+
+Éditer les sources, puis régénérer les `.min` avant déploiement (ex. `npx terser assets/js/portfolio.js -c -m -o assets/js/portfolio.min.js`). Aucun `package.json` ni pipeline CI n'est fourni dans ce dépôt.
 
 ## Contact
 
-Feel free to reach out to me for any questions, collaborations, or professional opportunities!
-
-- **Email:** melih.cetinkaya.32@gmail.com  
-- **LinkedIn:** [linkedin.com/in/melih-ctk](https://www.linkedin.com/in/melih-ctk/)  
-
-Thank you for visiting my portfolio!
+- Email : melih.cetinkaya.32@gmail.com
+- LinkedIn : [linkedin.com/in/melih-ctk](https://www.linkedin.com/in/melih-ctk/)
+- GitHub : [github.com/melih0132](https://github.com/melih0132)

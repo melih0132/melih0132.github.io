@@ -676,6 +676,9 @@ class ContactForm {
 
     const messageElement = document.createElement('div');
     messageElement.className = `contact__message ${type}`;
+    messageElement.setAttribute('role', 'status');
+    messageElement.setAttribute('aria-live', 'polite');
+    messageElement.setAttribute('aria-atomic', 'true');
     messageElement.textContent = message;
 
     // Insérer le message à la fin du formulaire (en bas à gauche)
@@ -916,11 +919,44 @@ class GallerySpotlight {
     window.setTimeout(finish, 180);
   }
 
+  getFocusableElements() {
+    if (!this.root) return [];
+    const nodes = [this.closeBtn, this.prevBtn, this.nextBtn].filter(
+      (el) => el && !el.hidden && !el.disabled
+    );
+    return nodes;
+  }
+
+  trapFocus(e) {
+    const focusable = this.getFocusableElements();
+    if (focusable.length === 0) {
+      e.preventDefault();
+      return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+
+    if (e.shiftKey) {
+      if (active === first || !this.root.contains(active)) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else if (active === last || !this.root.contains(active)) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
   onKeyDown(e) {
     if (!this.open) return;
     if (e.key === 'Escape') {
       e.preventDefault();
       this.close();
+      return;
+    }
+    if (e.key === 'Tab') {
+      this.trapFocus(e);
       return;
     }
     if (e.key === 'ArrowLeft') {
@@ -971,6 +1007,81 @@ function bootPage() {
 }
 
 /** Soft navigation: swap `.site` only so the ocean canvas keeps running. */
+function syncMetaByName(doc, name) {
+  const next = doc.querySelector(`meta[name="${name}"]`);
+  let cur = document.querySelector(`meta[name="${name}"]`);
+  if (!next) {
+    if (cur) cur.remove();
+    return;
+  }
+  if (!cur) {
+    cur = document.createElement('meta');
+    cur.setAttribute('name', name);
+    document.head.appendChild(cur);
+  }
+  cur.setAttribute('content', next.getAttribute('content') || '');
+}
+
+function syncMetaByProperty(doc, property) {
+  const next = doc.querySelector(`meta[property="${property}"]`);
+  let cur = document.querySelector(`meta[property="${property}"]`);
+  if (!next) {
+    if (cur) cur.remove();
+    return;
+  }
+  if (!cur) {
+    cur = document.createElement('meta');
+    cur.setAttribute('property', property);
+    document.head.appendChild(cur);
+  }
+  cur.setAttribute('content', next.getAttribute('content') || '');
+}
+
+function syncLinkByRel(doc, rel) {
+  const next = doc.querySelector(`link[rel="${rel}"]`);
+  let cur = document.querySelector(`link[rel="${rel}"]`);
+  if (!next) {
+    if (cur) cur.remove();
+    return;
+  }
+  if (!cur) {
+    cur = document.createElement('link');
+    cur.setAttribute('rel', rel);
+    document.head.appendChild(cur);
+  }
+  const href = next.getAttribute('href');
+  if (href != null) cur.setAttribute('href', href);
+  const type = next.getAttribute('type');
+  if (type != null) cur.setAttribute('type', type);
+  else cur.removeAttribute('type');
+}
+
+function syncHreflangAlternates(doc) {
+  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
+  doc.querySelectorAll('link[rel="alternate"][hreflang]').forEach((next) => {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'alternate');
+    link.setAttribute('hreflang', next.getAttribute('hreflang') || '');
+    link.setAttribute('href', next.getAttribute('href') || '');
+    document.head.appendChild(link);
+  });
+}
+
+function syncDocumentHead(doc) {
+  document.documentElement.lang = doc.documentElement.lang || document.documentElement.lang;
+  document.title = doc.title;
+
+  syncMetaByName(doc, 'description');
+  syncMetaByName(doc, 'twitter:card');
+  syncLinkByRel(doc, 'canonical');
+  syncLinkByRel(doc, 'icon');
+  syncHreflangAlternates(doc);
+
+  ['og:type', 'og:title', 'og:description', 'og:url', 'og:image'].forEach((property) => {
+    syncMetaByProperty(doc, property);
+  });
+}
+
 class SoftNav {
   constructor() {
     this.pending = false;
@@ -1050,12 +1161,7 @@ class SoftNav {
         delete document.body.dataset.oceanFish;
       }
 
-      document.documentElement.lang = doc.documentElement.lang || document.documentElement.lang;
-      document.title = doc.title;
-
-      const nextIcon = doc.querySelector('link[rel="icon"]');
-      const curIcon = document.querySelector('link[rel="icon"]');
-      if (nextIcon && curIcon) curIcon.href = nextIcon.href;
+      syncDocumentHead(doc);
 
       if (push) history.pushState({ soft: true }, '', href);
 
