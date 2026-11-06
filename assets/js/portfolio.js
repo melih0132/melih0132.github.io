@@ -20,6 +20,29 @@ const I18N = {
       previous: 'Previous image',
       next: 'Next image',
       open: 'Enlarge image'
+    },
+    oceanPower: {
+      enable: 'Reduced ocean',
+      disable: 'Full ocean',
+      forced: 'Ocean reduced (system preference)'
+    },
+    koiHint: 'Sometimes one fish stands apart.',
+    commandPalette: {
+      dialogLabel: 'Command palette',
+      placeholder: 'Jump to…',
+      empty: 'No matches',
+      sections: 'Sections',
+      projects: 'Projects',
+      actions: 'Actions',
+      home: 'Home',
+      projectsSection: 'Projects',
+      about: 'About',
+      contact: 'Contact',
+      langFr: 'Switch to French',
+      langEn: 'Switch to English',
+      cv: 'Open resume (PDF)',
+      oceanOn: 'Enable reduced ocean',
+      oceanOff: 'Disable reduced ocean'
     }
   },
   fr: {
@@ -41,6 +64,29 @@ const I18N = {
       previous: 'Image précédente',
       next: 'Image suivante',
       open: 'Agrandir l’image'
+    },
+    oceanPower: {
+      enable: 'Océan réduit',
+      disable: 'Océan complet',
+      forced: 'Océan réduit (préférence système)'
+    },
+    koiHint: 'Parfois un poisson se distingue.',
+    commandPalette: {
+      dialogLabel: 'Palette de commandes',
+      placeholder: 'Aller à…',
+      empty: 'Aucun résultat',
+      sections: 'Sections',
+      projects: 'Projets',
+      actions: 'Actions',
+      home: 'Accueil',
+      projectsSection: 'Projets',
+      about: 'À propos',
+      contact: 'Contact',
+      langFr: 'Passer en français',
+      langEn: 'Passer en anglais',
+      cv: 'Ouvrir le CV (PDF)',
+      oceanOn: 'Activer l’océan réduit',
+      oceanOff: 'Désactiver l’océan réduit'
     }
   }
 };
@@ -62,8 +108,77 @@ const CONFIG = {
   projectFilterUi: I18N[LOCALE].projectFilterUi,
   contactForm: I18N[LOCALE].contactForm,
   spotlight: I18N[LOCALE].spotlight,
-  homePath: I18N[LOCALE].homePath
+  homePath: I18N[LOCALE].homePath,
+  oceanPower: I18N[LOCALE].oceanPower,
+  koiHint: I18N[LOCALE].koiHint,
+  commandPalette: I18N[LOCALE].commandPalette
 };
+
+const OCEAN_POWER_KEY = 'ocean-power-save';
+const KOI_HINT_KEY = 'koi-site-hint-seen';
+
+function currentLocale() {
+  return document.documentElement.lang.startsWith('fr') ? 'fr' : 'en';
+}
+
+function uiStrings() {
+  const locale = currentLocale();
+  return I18N[locale] || I18N.en;
+}
+
+function readOceanPowerPref() {
+  try {
+    return localStorage.getItem(OCEAN_POWER_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function writeOceanPowerPref(enabled) {
+  try {
+    localStorage.setItem(OCEAN_POWER_KEY, enabled ? '1' : '0');
+  } catch {}
+}
+
+function systemReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function applyOceanPowerSave(enabled) {
+  const engine = window.__oceanEngine;
+  if (engine && typeof engine.setPowerSave === 'function') {
+    engine.setPowerSave(enabled);
+  }
+  document.documentElement.classList.toggle('ocean-power-save', enabled);
+  document.querySelectorAll('[data-ocean-power]').forEach((btn) => syncOceanPowerButton(btn));
+}
+
+function syncOceanPowerButton(btn) {
+  if (!(btn instanceof HTMLElement)) return;
+  const ui = uiStrings().oceanPower;
+  const forced = systemReducedMotion();
+  const on = forced || readOceanPowerPref() || document.documentElement.classList.contains('ocean-power-save');
+  btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  if (forced) {
+    btn.setAttribute('aria-disabled', 'true');
+    btn.disabled = true;
+    btn.title = ui.forced;
+    btn.textContent = ui.enable;
+  } else {
+    btn.removeAttribute('aria-disabled');
+    btn.disabled = false;
+    btn.title = on ? ui.disable : ui.enable;
+    btn.textContent = on ? ui.disable : ui.enable;
+  }
+}
+
+function toggleOceanPowerSave() {
+  if (systemReducedMotion()) return readOceanPowerPref();
+  const next = !readOceanPowerPref();
+  writeOceanPowerPref(next);
+  applyOceanPowerSave(next);
+  return next;
+}
 
 function normalizeFilterKey(str) {
   return str.toLowerCase()
@@ -758,6 +873,358 @@ class OceanBoot {
         location.assign('/koi.html');
       }
     });
+    const powerOn = systemReducedMotion() || readOceanPowerPref();
+    applyOceanPowerSave(powerOn);
+  }
+}
+
+class OceanPowerToggle {
+  constructor(signal) {
+    this.mount();
+    const btn = document.querySelector('[data-ocean-power]');
+    if (!btn) return;
+    syncOceanPowerButton(btn);
+    btn.addEventListener(
+      'click',
+      () => {
+        toggleOceanPowerSave();
+      },
+      { signal }
+    );
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onMq = () => {
+      if (mq.matches) applyOceanPowerSave(true);
+      else applyOceanPowerSave(readOceanPowerPref());
+      syncOceanPowerButton(btn);
+    };
+    if (typeof mq.addEventListener === 'function') mq.addEventListener('change', onMq, { signal });
+    else mq.addListener(onMq);
+  }
+
+  mount() {
+    const content = document.querySelector('.header__content');
+    if (!content || content.querySelector('[data-ocean-power]')) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'header__ocean-power';
+    btn.setAttribute('data-ocean-power', '');
+    const lang = content.querySelector('.header__lang');
+    const toggle = content.querySelector('[data-nav-toggle]');
+    if (lang) content.insertBefore(btn, lang);
+    else if (toggle) content.insertBefore(btn, toggle);
+    else content.appendChild(btn);
+  }
+}
+
+class KoiSiteHint {
+  constructor() {
+    if (window.__koiHintTimer) {
+      window.clearTimeout(window.__koiHintTimer);
+      window.__koiHintTimer = null;
+    }
+    if (!this.isHome()) return;
+    if (this.shouldSkip()) return;
+    this.el = this.mount();
+    if (!this.el) return;
+    this.timer = window.setTimeout(() => this.reveal(), 6000);
+    window.__koiHintTimer = this.timer;
+  }
+
+  isHome() {
+    const path = location.pathname.replace(/\/+$/, '') || '/';
+    return path === '/fr' || path === '/en' || path === '/fr/index.html' || path === '/en/index.html';
+  }
+
+  shouldSkip() {
+    try {
+      if (localStorage.getItem(KOI_HINT_KEY) === '1') return true;
+      if (localStorage.getItem('koi-chamber')) return true;
+    } catch {}
+    return false;
+  }
+
+  mount() {
+    const footer = document.querySelector('.footer__inner');
+    if (!footer) return null;
+    let el = footer.querySelector('[data-koi-hint]');
+    if (el) return el;
+    el = document.createElement('p');
+    el.className = 'koi-hint';
+    el.setAttribute('data-koi-hint', '');
+    el.setAttribute('hidden', '');
+    el.textContent = uiStrings().koiHint;
+    footer.appendChild(el);
+    el.addEventListener('click', () => this.dismiss());
+    return el;
+  }
+
+  reveal() {
+    if (!this.el || this.shouldSkip()) return;
+    this.el.removeAttribute('hidden');
+    this.el.classList.add('is-visible');
+    try {
+      localStorage.setItem(KOI_HINT_KEY, '1');
+    } catch {}
+  }
+
+  dismiss() {
+    if (this.timer) window.clearTimeout(this.timer);
+    if (!this.el) return;
+    this.el.classList.remove('is-visible');
+    this.el.setAttribute('hidden', '');
+    try {
+      localStorage.setItem(KOI_HINT_KEY, '1');
+    } catch {}
+  }
+}
+
+class CommandPalette {
+  constructor() {
+    if (window.__commandPalette) return window.__commandPalette;
+    this.open = false;
+    this.activeIndex = 0;
+    this.items = [];
+    this.filtered = [];
+    this.lastFocus = null;
+    this.ui = () => uiStrings().commandPalette;
+    this.build();
+    document.addEventListener('keydown', (e) => this.onGlobalKey(e));
+    window.__commandPalette = this;
+  }
+
+  build() {
+    this.root = document.createElement('div');
+    this.root.className = 'cmd-palette';
+    this.root.hidden = true;
+    this.root.setAttribute('role', 'dialog');
+    this.root.setAttribute('aria-modal', 'true');
+
+    this.backdrop = document.createElement('button');
+    this.backdrop.type = 'button';
+    this.backdrop.className = 'cmd-palette__backdrop';
+    this.backdrop.setAttribute('aria-label', 'Close');
+
+    this.panel = document.createElement('div');
+    this.panel.className = 'cmd-palette__panel';
+
+    this.input = document.createElement('input');
+    this.input.type = 'search';
+    this.input.className = 'cmd-palette__input';
+    this.input.autocomplete = 'off';
+    this.input.spellcheck = false;
+
+    this.list = document.createElement('ul');
+    this.list.className = 'cmd-palette__list';
+    this.list.id = 'cmd-palette-list';
+    this.list.setAttribute('role', 'listbox');
+
+    this.empty = document.createElement('p');
+    this.empty.className = 'cmd-palette__empty';
+    this.empty.hidden = true;
+
+    this.panel.append(this.input, this.list, this.empty);
+    this.root.append(this.backdrop, this.panel);
+    document.body.appendChild(this.root);
+
+    this.backdrop.addEventListener('click', () => this.close());
+    this.input.addEventListener('input', () => this.renderList());
+    this.input.addEventListener('keydown', (e) => this.onInputKey(e));
+  }
+
+  onGlobalKey(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (this.open) this.close();
+      else this.show();
+      return;
+    }
+    if (!this.open) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      this.close();
+    }
+  }
+
+  collectItems() {
+    const ui = this.ui();
+    const locale = currentLocale();
+    const homeBase = locale === 'fr' ? '/fr/' : '/en/';
+    const items = [];
+
+    items.push(
+      { group: ui.sections, label: ui.home, href: `${homeBase}#home`, keywords: 'home accueil' },
+      { group: ui.sections, label: ui.projectsSection, href: `${homeBase}#projects`, keywords: 'projects projets' },
+      { group: ui.sections, label: ui.about, href: `${homeBase}#about`, keywords: 'about propos' },
+      { group: ui.sections, label: ui.contact, href: `${homeBase}#contact`, keywords: 'contact' }
+    );
+
+    document.querySelectorAll('.project-card').forEach((card) => {
+      const title = card.querySelector('.project-title')?.textContent?.trim();
+      const link = card.querySelector('.project-link');
+      if (!title || !link) return;
+      items.push({
+        group: ui.projects,
+        label: title,
+        href: link.getAttribute('href'),
+        external: link.target === '_blank',
+        keywords: title
+      });
+    });
+
+    if (!document.querySelector('.project-card')) {
+      document.querySelectorAll('.project-hero__title').forEach((h1) => {
+        const title = h1.textContent.trim();
+        if (title) {
+          items.push({
+            group: ui.projects,
+            label: title,
+            href: location.pathname,
+            keywords: title
+          });
+        }
+      });
+    }
+
+    const otherLang = locale === 'fr' ? 'en' : 'fr';
+    const langLink = document.querySelector(`[data-set-lang="${otherLang}"]`);
+    items.push({
+      group: ui.actions,
+      label: otherLang === 'fr' ? ui.langFr : ui.langEn,
+      href: langLink ? langLink.getAttribute('href') : otherLang === 'fr' ? '/fr/' : '/en/',
+      keywords: 'lang language langue fr en'
+    });
+
+    const cvHref =
+      locale === 'fr'
+        ? '/assets/cv/melih-cetinkaya-cv.pdf'
+        : '/assets/cv/melih-cetinkaya-resume.pdf';
+    items.push({
+      group: ui.actions,
+      label: ui.cv,
+      href: cvHref,
+      external: true,
+      keywords: 'cv resume pdf'
+    });
+
+    const powerOn = systemReducedMotion() || readOceanPowerPref();
+    items.push({
+      group: ui.actions,
+      label: powerOn ? ui.oceanOff : ui.oceanOn,
+      action: 'ocean-toggle',
+      keywords: 'ocean océan battery performance power',
+      disabled: systemReducedMotion()
+    });
+
+    return items;
+  }
+
+  show() {
+    const ui = this.ui();
+    this.items = this.collectItems();
+    this.root.setAttribute('aria-label', ui.dialogLabel);
+    this.input.placeholder = ui.placeholder;
+    this.empty.textContent = ui.empty;
+    this.input.value = '';
+    this.activeIndex = 0;
+    this.lastFocus = document.activeElement;
+    this.open = true;
+    this.root.hidden = false;
+    document.body.classList.add('cmd-palette-open');
+    this.renderList();
+    requestAnimationFrame(() => this.input.focus());
+  }
+
+  close() {
+    if (!this.open) return;
+    this.open = false;
+    this.root.hidden = true;
+    document.body.classList.remove('cmd-palette-open');
+    if (this.lastFocus && typeof this.lastFocus.focus === 'function') {
+      this.lastFocus.focus();
+    }
+    this.lastFocus = null;
+  }
+
+  renderList() {
+    const q = this.input.value.trim().toLowerCase();
+    this.filtered = this.items.filter((item) => {
+      if (!q) return true;
+      const hay = `${item.label} ${item.keywords || ''} ${item.group}`.toLowerCase();
+      return hay.includes(q);
+    });
+    this.list.innerHTML = '';
+    this.empty.hidden = this.filtered.length > 0;
+    if (this.activeIndex >= this.filtered.length) this.activeIndex = Math.max(0, this.filtered.length - 1);
+
+    let lastGroup = '';
+    this.filtered.forEach((item, index) => {
+      if (item.group !== lastGroup) {
+        lastGroup = item.group;
+        const head = document.createElement('li');
+        head.className = 'cmd-palette__group';
+        head.textContent = item.group;
+        head.setAttribute('role', 'presentation');
+        this.list.appendChild(head);
+      }
+      const li = document.createElement('li');
+      li.className = 'cmd-palette__item';
+      li.setAttribute('role', 'option');
+      li.id = `cmd-opt-${index}`;
+      li.setAttribute('aria-selected', index === this.activeIndex ? 'true' : 'false');
+      if (item.disabled) li.setAttribute('aria-disabled', 'true');
+      if (index === this.activeIndex) li.classList.add('is-active');
+      li.textContent = item.label;
+      li.addEventListener('click', () => this.run(item));
+      this.list.appendChild(li);
+    });
+    this.input.setAttribute('aria-activedescendant', this.filtered.length ? `cmd-opt-${this.activeIndex}` : '');
+  }
+
+  onInputKey(e) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (!this.filtered.length) return;
+      this.activeIndex = (this.activeIndex + 1) % this.filtered.length;
+      this.renderList();
+      return;
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!this.filtered.length) return;
+      this.activeIndex = (this.activeIndex - 1 + this.filtered.length) % this.filtered.length;
+      this.renderList();
+      return;
+    }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const item = this.filtered[this.activeIndex];
+      if (item) this.run(item);
+      return;
+    }
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      this.input.focus();
+    }
+  }
+
+  run(item) {
+    if (item.disabled) return;
+    if (item.action === 'ocean-toggle') {
+      toggleOceanPowerSave();
+      this.close();
+      return;
+    }
+    if (!item.href) return;
+    this.close();
+    if (item.external) {
+      window.open(item.href, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    const a = document.createElement('a');
+    a.href = item.href;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
   }
 }
 
@@ -996,6 +1463,8 @@ function bootPage() {
 
   new SiteChrome(signal);
   syncCopyrightYears();
+  new OceanPowerToggle(signal);
+  new KoiSiteHint();
 
   if (document.querySelector('.projects-filters') && document.querySelectorAll('.project-card').length) {
     window.__projectFilters = new ProjectFilters();
@@ -1077,7 +1546,7 @@ function syncDocumentHead(doc) {
   syncLinkByRel(doc, 'icon');
   syncHreflangAlternates(doc);
 
-  ['og:type', 'og:title', 'og:description', 'og:url', 'og:image'].forEach((property) => {
+  ['og:type', 'og:title', 'og:description', 'og:url', 'og:image', 'og:image:width', 'og:image:height'].forEach((property) => {
     syncMetaByProperty(doc, property);
   });
 }
@@ -1191,4 +1660,5 @@ document.addEventListener('DOMContentLoaded', () => {
   new OceanBoot();
   bootPage();
   new SoftNav();
+  new CommandPalette();
 });

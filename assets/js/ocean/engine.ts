@@ -38,6 +38,8 @@ export class OceanEngine {
   private disposed = false;
   private canvas: HTMLCanvasElement;
   private options: OceanOptions;
+  /** Adaptation: user power-save / battery mode (still frame, no RAF). */
+  private powerSave = false;
   /** Adaptation: last pointer sample for companion idle detection. */
   private lastPointer = { x: 0, y: 0, movedAt: 0 };
 
@@ -80,7 +82,7 @@ export class OceanEngine {
     this.resize();
     // Canvas text can't trigger a webfont load; once the mono face is in, redraw.
     document.fonts?.load(`600 16px ${getComputedStyle(canvas).fontFamily}`).then(() => {
-      if (!this.disposed && this.reducedMotion.matches) this.drawStill();
+      if (!this.disposed && this.isStill()) this.drawStill();
     });
     this.schedule();
   }
@@ -119,18 +121,44 @@ export class OceanEngine {
     return this.world.companionHead();
   }
 
+  /** Adaptation: still frame for battery / performance; clicks on the azure gate still work. */
+  setPowerSave(enabled: boolean) {
+    this.powerSave = enabled;
+    if (this.disposed) return;
+    if (this.isStill()) {
+      cancelAnimationFrame(this.raf);
+      this.raf = 0;
+      if (this.options.crossing) {
+        this.renderer.clear();
+        this.options.onDone?.();
+        return;
+      }
+      this.drawStill();
+    } else {
+      this.schedule();
+    }
+  }
+
+  isPowerSave(): boolean {
+    return this.powerSave;
+  }
+
+  private isStill() {
+    return this.powerSave || this.reducedMotion.matches;
+  }
+
   private resize() {
     const rect = this.canvas.getBoundingClientRect();
     if (rect.width < 1 || rect.height < 1) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     this.renderer.resize(rect.width, rect.height, dpr);
     this.world.resize(rect.width, rect.height, this.renderer.cellWidth, this.renderer.cellHeight);
-    if (this.reducedMotion.matches) this.drawStill();
+    if (this.isStill()) this.drawStill();
   }
 
   private schedule() {
     cancelAnimationFrame(this.raf);
-    if (this.disposed || !this.visible || !this.pageVisible || this.reducedMotion.matches) return;
+    if (this.disposed || !this.visible || !this.pageVisible || this.isStill()) return;
     this.last = performance.now();
     this.raf = requestAnimationFrame(this.frame);
   }
@@ -176,8 +204,9 @@ export class OceanEngine {
   }
 
   private onMotionPreference = () => {
-    if (this.reducedMotion.matches) {
+    if (this.isStill()) {
       cancelAnimationFrame(this.raf);
+      this.raf = 0;
       // Adaptation: a crossing in progress is cut short instead of freezing on a still frame.
       if (this.options.crossing) {
         this.renderer.clear();
@@ -219,7 +248,7 @@ export class OceanEngine {
   private onPointerDown = (e: PointerEvent) => {
     const { x, y, inside } = this.toLocal(e);
     if (!inside) return;
-    if (!this.reducedMotion.matches) this.world.splash(x, y);
+    if (!this.isStill()) this.world.splash(x, y);
     // Adaptation: click the azure gate minnow (homepage chamber gate).
     if (this.options.onSpecialFishClick && this.world.hitSpecialFish(x, y)) {
       this.options.onSpecialFishClick();
