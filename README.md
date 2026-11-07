@@ -51,6 +51,6 @@ node scripts/generate-og.mjs
 
 ## Contact
 
-- Email : melih.cetinkaya.32@gmail.com
+- Email : m.ctk3201@gmail.com
 - LinkedIn : [linkedin.com/in/melih-ctk](https://www.linkedin.com/in/melih-ctk/)
 - GitHub : [github.com/melih0132](https://github.com/melih0132)
