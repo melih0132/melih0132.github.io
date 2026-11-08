@@ -66,7 +66,7 @@
       <div class="header__content">
         <a class="header__brand" href="/en/">Melih C.</a>
         <ul class="header__links">
-          <li><a class="header__link" href="/en/#home">Home</a></li>
+          <li><a class="header__link" href="/en/">Home</a></li>
           <li><a class="header__link" href="/en/#projects">Projects</a></li>
           <li><a class="header__link" href="/en/#about">About</a></li>
           <li><a class="header__link" href="/en/#contact">Contact</a></li>
@@ -79,7 +79,7 @@
       </div>
       <div class="header__panel" id="nav-panel" data-nav-panel>
         <ul>
-          <li><a href="/en/#home">Home</a></li>
+          <li><a href="/en/">Home</a></li>
           <li><a href="/en/#projects">Projects</a></li>
           <li><a href="/en/#about">About</a></li>
           <li><a href="/en/#contact">Contact</a></li>
@@ -117,63 +117,75 @@
 <p>The system is designed to deliver a <strong>smooth user experience</strong> on web and mobile, with
                 <strong>automated tests</strong> (Pytest), presence and luminance charts, detailed documentation
                 (README) and the screenshot gallery below.</p></div></section>
-                <section class="project-block" data-arch-section><div class="wrap"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 960 226" role="img" aria-label="SmartHome Lite distributed architecture diagram">
-    <defs>
-      <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
-      </marker>
-    </defs>
-    <g transform="translate(10, 16)">
-      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">CLIENTS</text>
-      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">Next.js & Android</text>
-      <text x="14" y="60" fill="var(--muted)" font-size="10.5">App Router · TS · Tailwind</text>
-      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Kotlin · Jetpack Compose</text>
+                <section class="project-block" data-arch-section><div class="wrap wrap--wide"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 1026 494" role="img" aria-label="SmartHome Lite distributed architecture diagram">
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+    <g transform="translate(10, 18)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">CLIENTS</text>
+      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Next.js</text>
+      <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">&amp; Android</text>
+      <text x="16" y="114" fill="var(--muted)" font-size="16">App Router · TS</text>
+      <text x="16" y="136" fill="var(--muted)" font-size="16">Tailwind</text>
+      <text x="16" y="158" fill="var(--muted)" font-size="16">Kotlin</text>
+      <text x="16" y="180" fill="var(--muted)" font-size="16">Jetpack Compose</text>
     </g>
-    <g transform="translate(10, 122)">
-      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">IOT EDGE NODE</text>
-      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">Raspberry Pi 4</text>
-      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Flask API · Z-Wave JS UI</text>
-      <text x="14" y="76" fill="var(--muted)" font-size="10.5">MultiSensor 7 · Smart Plugs</text>
+    <g transform="translate(10, 258)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">IOT EDGE NODE</text>
+      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Raspberry Pi 4</text>
+      <text x="16" y="90" fill="var(--muted)" font-size="16">Flask API</text>
+      <text x="16" y="112" fill="var(--muted)" font-size="16">Z-Wave JS UI</text>
+      <text x="16" y="134" fill="var(--muted)" font-size="16">MultiSensor 7</text>
+      <text x="16" y="156" fill="var(--muted)" font-size="16">Smart Plugs</text>
     </g>
-    <g transform="translate(370, 38)">
-      <rect width="220" height="150" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
-      <text x="14" y="51" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">CORE BACKEND</text>
-      <text x="14" y="71" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">FastAPI REST API</text>
-      <text x="14" y="89" fill="var(--muted)" font-size="10.5">JWT Auth · bcrypt · Pydantic</text>
-      <text x="14" y="105" fill="var(--muted)" font-size="10.5">IF-THEN Engine · Smart Dimming</text>
+    <g transform="translate(388, 34)">
+      <rect width="250" height="426" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
+      <text x="16" y="144" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">CORE BACKEND</text>
+      <text x="16" y="174" fill="var(--koi-shiro)" font-size="18" font-weight="600">FastAPI REST API</text>
+      <text x="16" y="206" fill="var(--muted)" font-size="16">JWT Auth · bcrypt</text>
+      <text x="16" y="228" fill="var(--muted)" font-size="16">Pydantic</text>
+      <text x="16" y="250" fill="var(--muted)" font-size="16">IF-THEN Engine</text>
+      <text x="16" y="272" fill="var(--muted)" font-size="16">Smart Dimming</text>
     </g>
-    <g transform="translate(740, 16)">
-      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">HYBRID STORAGE</text>
-      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">PostgreSQL</text>
-      <text x="14" y="60" fill="var(--muted)" font-size="10.5">SQLAlchemy · Relational</text>
-      <text x="14" y="76" fill="var(--muted)" font-size="10.5">TimescaleDB Time-Series</text>
+    <g transform="translate(810, 18)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">HYBRID STORAGE</text>
+      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">PostgreSQL</text>
+      <text x="16" y="90" fill="var(--muted)" font-size="16">SQLAlchemy</text>
+      <text x="16" y="112" fill="var(--muted)" font-size="16">Relational</text>
+      <text x="16" y="134" fill="var(--muted)" font-size="16">TimescaleDB</text>
+      <text x="16" y="156" fill="var(--muted)" font-size="16">Time series</text>
     </g>
-    <g transform="translate(740, 122)">
-      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">MACHINE LEARNING</text>
-      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">ML Pipelines</text>
-      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Scenario classification</text>
-      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Regression & Clustering</text>
+    <g transform="translate(810, 258)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">MACHINE LEARNING</text>
+      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">ML Pipelines</text>
+      <text x="16" y="90" fill="var(--muted)" font-size="16">Scenario</text>
+      <text x="16" y="112" fill="var(--muted)" font-size="16">classification</text>
+      <text x="16" y="134" fill="var(--muted)" font-size="16">Regression</text>
+      <text x="16" y="156" fill="var(--muted)" font-size="16">Clustering</text>
     </g>
     <g>
-      <line x1="228" y1="66" x2="362" y2="66" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
-      <text x="295" y="56" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">HTTPS / JWT</text>
+      <line x1="224" y1="127" x2="380" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="302" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTPS / JWT</text>
     </g>
     <g>
-      <line x1="228" y1="160" x2="362" y2="160" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
-      <text x="295" y="150" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">HTTP / Z-Wave</text>
+      <line x1="224" y1="367" x2="380" y2="367" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="302" y="355" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTP / Z-Wave</text>
     </g>
     <g>
-      <line x1="598" y1="66" x2="732" y2="66" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
-      <text x="665" y="56" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">SQLAlchemy</text>
+      <line x1="646" y1="127" x2="802" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">SQLAlchemy</text>
     </g>
     <g>
-      <line x1="598" y1="160" x2="732" y2="160" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
-      <text x="665" y="150" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">ML Inference</text>
-    </g></svg><ul class="arch-legend"><li><strong>Presentation & Edge IoT Layer</strong> · Next.js web dashboard and Kotlin/Compose Android app query the secured API; the Raspberry Pi node bridges local Z-Wave hardware over Flask.</li>
+      <line x1="646" y1="367" x2="802" y2="367" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="355" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">ML Inference</text>
+    </g>
+</svg><a class="arch-link btn" href="/assets/diagrams/en/smarthome-lite.svg" target="_blank" rel="noreferrer">View the diagram</a><ul class="arch-legend"><li><strong>Presentation & Edge IoT Layer</strong> · Next.js web dashboard and Kotlin/Compose Android app query the secured API; the Raspberry Pi node bridges local Z-Wave hardware over Flask.</li>
 <li><strong>FastAPI Orchestration</strong> · JWT authentication, Pydantic schemas, real-time IF-THEN rule evaluation and automated smart dimming.</li>
 <li><strong>Persistence & ML</strong> · Sensor time-series stored in TimescaleDB/PostgreSQL feed classification, regression and habit-clustering pipelines.</li></ul></div></div></section>
         <section class="project-block"><div class="wrap"><h2>Features</h2><ul><li><strong>Device management and dashboard</strong> · ON/OFF and brightness control for lights, socket management and a centralized equipment view on web and mobile.</li>

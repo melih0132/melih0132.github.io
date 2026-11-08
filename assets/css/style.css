@@ -309,16 +309,15 @@ textarea {
   display: none;
 }
 
-@media (max-width: 48em) {
+@media (max-width: 64em) {
   .header__links,
-  .header__lang {
+  .header__lang,
+  .header__cmd-trigger {
     display: none;
   }
 
-  .header__cmd-trigger,
-  .header__ocean-power {
-    font-size: 0.6rem;
-    padding: 0.28rem 0.4rem;
+  .header__cmd-trigger ~ .header__ocean-power {
+    margin-left: auto;
   }
 
   .header__toggle {
@@ -1439,17 +1438,41 @@ body.spotlight-open {
 
 .arch-svg {
   width: 100%;
-  min-width: 42rem;
   height: auto;
   display: block;
   overflow: visible;
   font-family: var(--font);
 }
 
+.arch-link {
+  display: none;
+}
+
 .arch-legend {
   margin-top: var(--space-m);
   padding-top: var(--space-s);
   border-top: 1px dashed var(--line);
+}
+
+@media (max-width: 42rem) {
+  .arch-svg {
+    display: none;
+  }
+
+  .arch-link {
+    display: inline-flex;
+    margin-bottom: var(--space-s);
+  }
+
+  .arch-diagram {
+    overflow-x: visible;
+  }
+
+  .arch-legend {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
 }
 
 /* Previous / Next project pager */

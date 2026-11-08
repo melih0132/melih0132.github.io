@@ -62,7 +62,7 @@
       <div class="header__content">
         <a class="header__brand" href="/fr/">Melih C.</a>
         <ul class="header__links">
-          <li><a class="header__link" href="/fr/#home">Accueil</a></li>
+          <li><a class="header__link" href="/fr/">Accueil</a></li>
           <li><a class="header__link" href="/fr/#projects">Projets</a></li>
           <li><a class="header__link" href="/fr/#about">À propos</a></li>
           <li><a class="header__link" href="/fr/#contact">Contact</a></li>
@@ -75,7 +75,7 @@
       </div>
       <div class="header__panel" id="nav-panel" data-nav-panel>
         <ul>
-          <li><a href="/fr/#home">Accueil</a></li>
+          <li><a href="/fr/">Accueil</a></li>
           <li><a href="/fr/#projects">Projets</a></li>
           <li><a href="/fr/#about">À propos</a></li>
           <li><a href="/fr/#contact">Contact</a></li>
@@ -111,41 +111,50 @@
                 <strong>expérience utilisateur fluide</strong> et performante, en exploitant Vue.js et .NET Core pour
                 la gestion de la logique métier et en intégrant des <strong>tests unitaires</strong> pour assurer la
                 robustesse du code.</p></div></section>
-                <section class="project-block" data-arch-section><div class="wrap"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 960 190" role="img" aria-label="Schéma d’architecture Uber Vue.js et .NET Core">
-    <defs>
-      <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
-      </marker>
-    </defs>
-    <g transform="translate(10, 45)">
-      <rect width="210" height="100" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="14" y="26" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">FRONTEND SPA</text>
-      <text x="14" y="46" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">Application Vue.js</text>
-      <text x="14" y="64" fill="var(--muted)" font-size="10.5">Cartographie & Géolocalisation</text>
-      <text x="14" y="80" fill="var(--muted)" font-size="10.5">Réservation · Paiement</text>
+                <section class="project-block" data-arch-section><div class="wrap wrap--wide"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 1026 254" role="img" aria-label="Schéma d’architecture Uber Vue.js et .NET Core">
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+    <g transform="translate(10, 18)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">FRONTEND SPA</text>
+      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Application</text>
+      <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">Vue.js</text>
+      <text x="16" y="114" fill="var(--muted)" font-size="16">Cartographie</text>
+      <text x="16" y="136" fill="var(--muted)" font-size="16">Géolocalisation</text>
+      <text x="16" y="158" fill="var(--muted)" font-size="16">Réservation</text>
+      <text x="16" y="180" fill="var(--muted)" font-size="16">Paiement</text>
     </g>
-    <g transform="translate(370, 45)">
-      <rect width="220" height="100" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
-      <text x="14" y="26" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">BACKEND API</text>
-      <text x="14" y="46" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">ASP.NET Core (C#)</text>
-      <text x="14" y="64" fill="var(--muted)" font-size="10.5">Architecture MVC · REST API</text>
-      <text x="14" y="80" fill="var(--muted)" font-size="10.5">Auth JWT · Chiffrement RGPD</text>
+    <g transform="translate(388, 18)">
+      <rect width="250" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
+      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">BACKEND API</text>
+      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">ASP.NET Core (C#)</text>
+      <text x="16" y="90" fill="var(--muted)" font-size="16">Architecture MVC</text>
+      <text x="16" y="112" fill="var(--muted)" font-size="16">REST API</text>
+      <text x="16" y="134" fill="var(--muted)" font-size="16">Auth JWT</text>
+      <text x="16" y="156" fill="var(--muted)" font-size="16">Chiffrement RGPD</text>
     </g>
-    <g transform="translate(740, 45)">
-      <rect width="210" height="100" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="14" y="26" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">DONNÉES & TESTS</text>
-      <text x="14" y="46" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">PostgreSQL & EF Core</text>
-      <text x="14" y="64" fill="var(--muted)" font-size="10.5">Trajets, chauffeurs, avis</text>
-      <text x="14" y="80" fill="var(--muted)" font-size="10.5">Tests unitaires · Swagger</text>
+    <g transform="translate(810, 18)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">DONNÉES &amp; TESTS</text>
+      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">PostgreSQL</text>
+      <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">&amp; EF Core</text>
+      <text x="16" y="114" fill="var(--muted)" font-size="16">Trajets</text>
+      <text x="16" y="136" fill="var(--muted)" font-size="16">Chauffeurs, avis</text>
+      <text x="16" y="158" fill="var(--muted)" font-size="16">Tests unitaires</text>
+      <text x="16" y="180" fill="var(--muted)" font-size="16">Swagger</text>
     </g>
     <g>
-      <line x1="228" y1="95" x2="362" y2="95" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
-      <text x="295" y="85" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">REST / JWT</text>
+      <line x1="224" y1="127" x2="380" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="302" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">REST / JWT</text>
     </g>
     <g>
-      <line x1="598" y1="95" x2="732" y2="95" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
-      <text x="665" y="85" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">EF Core</text>
-    </g></svg><ul class="arch-legend"><li><strong>Client SPA Vue.js</strong> · Interface réactive gérant la recherche d’itinéraires, le suivi géographique en temps réel et le tunnel de réservation.</li>
+      <line x1="646" y1="127" x2="802" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">EF Core</text>
+    </g>
+</svg><a class="arch-link btn" href="/assets/diagrams/fr/uber-vuejs-dotnet.svg" target="_blank" rel="noreferrer">Voir le schéma</a><ul class="arch-legend"><li><strong>Client SPA Vue.js</strong> · Interface réactive gérant la recherche d’itinéraires, le suivi géographique en temps réel et le tunnel de réservation.</li>
 <li><strong>API REST .NET Core</strong> · Contrôleurs MVC découplés, authentification JWT, chiffrement des données sensibles et conformité RGPD.</li>
 <li><strong>Persistance PostgreSQL</strong> · Modélisation relationnelle des courses, utilisateurs et évaluations documentée sous Swagger.</li></ul></div></div></section>
         <section class="project-block"><div class="wrap"><h2>Fonctionnalités</h2><ul><li><strong>Géolocalisation en temps réel</strong> · Suivi en temps réel de la position des chauffeurs et des passagers avec mise à jour dynamique de la carte et optimisation des itinéraires.</li>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" class="arch-svg" width="1026" height="254" viewBox="0 0 1026 254" role="img" aria-label="Schéma d’architecture monorepo Symfony La Guilde des Seigneurs" font-family="ui-monospace, Cascadia Code, SF Mono, Menlo, Consolas, monospace">
+  <rect width="1026" height="254" fill="#000" />
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#d4a84b" />
+    </marker>
+  </defs>
+    <g transform="translate(10, 18)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(232,216,192,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">APP FRONT (front/)</text>
+      <text x="16" y="58" fill="#e8d8c0" font-size="18" font-weight="600">Symfony 7.4 Web</text>
+      <text x="16" y="90" fill="#988068" font-size="16">Twig · Bootstrap</text>
+      <text x="16" y="112" fill="#988068" font-size="16">Session JWT</text>
+      <text x="16" y="134" fill="#988068" font-size="16">HttpClient</text>
+      <text x="16" y="156" fill="#988068" font-size="16">API_URL</text>
+    </g>
+    <g transform="translate(388, 18)">
+      <rect width="250" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="#d4a84b" stroke-width="1.5" />
+      <text x="16" y="28" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">API REST (api/)</text>
+      <text x="16" y="58" fill="#e8d8c0" font-size="18" font-weight="600">Symfony 7.4 API</text>
+      <text x="16" y="90" fill="#988068" font-size="16">LexikJWT</text>
+      <text x="16" y="112" fill="#988068" font-size="16">Security Voters</text>
+      <text x="16" y="134" fill="#988068" font-size="16">Nelmio OpenAPI</text>
+      <text x="16" y="156" fill="#988068" font-size="16">PHPUnit</text>
+    </g>
+    <g transform="translate(810, 18)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(232,216,192,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">PERSISTANCE</text>
+      <text x="16" y="58" fill="#e8d8c0" font-size="18" font-weight="600">MySQL</text>
+      <text x="16" y="82" fill="#e8d8c0" font-size="18" font-weight="600">&amp; Doctrine</text>
+      <text x="16" y="114" fill="#988068" font-size="16">Entités Users</text>
+      <text x="16" y="136" fill="#988068" font-size="16">Personnages</text>
+      <text x="16" y="158" fill="#988068" font-size="16">Bâtiments</text>
+      <text x="16" y="180" fill="#988068" font-size="16">Migrations</text>
+    </g>
+    <g>
+      <line x1="224" y1="127" x2="380" y2="127" stroke="#d4a84b" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="302" y="115" text-anchor="middle" fill="#e8d8c0" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTP / Bearer JWT</text>
+    </g>
+    <g>
+      <line x1="646" y1="127" x2="802" y2="127" stroke="#d4a84b" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="115" text-anchor="middle" fill="#e8d8c0" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">Doctrine ORM</text>
+    </g>
+</svg>

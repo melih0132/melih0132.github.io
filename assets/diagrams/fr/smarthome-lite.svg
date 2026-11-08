@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" class="arch-svg" width="1026" height="494" viewBox="0 0 1026 494" role="img" aria-label="Schéma d’architecture distribuée SmartHome Lite" font-family="ui-monospace, Cascadia Code, SF Mono, Menlo, Consolas, monospace">
+  <rect width="1026" height="494" fill="#000" />
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#d4a84b" />
+    </marker>
+  </defs>
+    <g transform="translate(10, 18)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(216,208,196,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">CLIENTS</text>
+      <text x="16" y="58" fill="#d8d0c4" font-size="18" font-weight="600">Next.js</text>
+      <text x="16" y="82" fill="#d8d0c4" font-size="18" font-weight="600">&amp; Android</text>
+      <text x="16" y="114" fill="#807868" font-size="16">App Router · TS</text>
+      <text x="16" y="136" fill="#807868" font-size="16">Tailwind</text>
+      <text x="16" y="158" fill="#807868" font-size="16">Kotlin</text>
+      <text x="16" y="180" fill="#807868" font-size="16">Jetpack Compose</text>
+    </g>
+    <g transform="translate(10, 258)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(216,208,196,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">NOEUD IOT EDGE</text>
+      <text x="16" y="58" fill="#d8d0c4" font-size="18" font-weight="600">Raspberry Pi 4</text>
+      <text x="16" y="90" fill="#807868" font-size="16">API Flask</text>
+      <text x="16" y="112" fill="#807868" font-size="16">Z-Wave JS UI</text>
+      <text x="16" y="134" fill="#807868" font-size="16">MultiSensor 7</text>
+      <text x="16" y="156" fill="#807868" font-size="16">Prises / Lampes</text>
+    </g>
+    <g transform="translate(388, 34)">
+      <rect width="250" height="426" rx="2" fill="rgba(10,10,10,0.92)" stroke="#d4a84b" stroke-width="1.5" />
+      <text x="16" y="144" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">BACKEND CENTRAL</text>
+      <text x="16" y="174" fill="#d8d0c4" font-size="18" font-weight="600">API REST FastAPI</text>
+      <text x="16" y="206" fill="#807868" font-size="16">Auth JWT · bcrypt</text>
+      <text x="16" y="228" fill="#807868" font-size="16">Pydantic</text>
+      <text x="16" y="250" fill="#807868" font-size="16">Moteur IF-THEN</text>
+      <text x="16" y="272" fill="#807868" font-size="16">Smart Dimming</text>
+    </g>
+    <g transform="translate(810, 18)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(216,208,196,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">STOCKAGE HYBRIDE</text>
+      <text x="16" y="58" fill="#d8d0c4" font-size="18" font-weight="600">PostgreSQL</text>
+      <text x="16" y="90" fill="#807868" font-size="16">SQLAlchemy</text>
+      <text x="16" y="112" fill="#807868" font-size="16">Relationnel</text>
+      <text x="16" y="134" fill="#807868" font-size="16">Séries temp.</text>
+      <text x="16" y="156" fill="#807868" font-size="16">TimescaleDB</text>
+    </g>
+    <g transform="translate(810, 258)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(216,208,196,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">INTELLIGENCE</text>
+      <text x="16" y="46" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">ARTIFICIELLE</text>
+      <text x="16" y="76" fill="#d8d0c4" font-size="18" font-weight="600">Pipelines ML</text>
+      <text x="16" y="108" fill="#807868" font-size="16">Classification</text>
+      <text x="16" y="130" fill="#807868" font-size="16">scénarios</text>
+      <text x="16" y="152" fill="#807868" font-size="16">Régression</text>
+      <text x="16" y="174" fill="#807868" font-size="16">Clustering</text>
+    </g>
+    <g>
+      <line x1="224" y1="127" x2="380" y2="127" stroke="#d4a84b" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="302" y="115" text-anchor="middle" fill="#d8d0c4" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTPS / JWT</text>
+    </g>
+    <g>
+      <line x1="224" y1="367" x2="380" y2="367" stroke="#d4a84b" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="302" y="355" text-anchor="middle" fill="#d8d0c4" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTP / Z-Wave</text>
+    </g>
+    <g>
+      <line x1="646" y1="127" x2="802" y2="127" stroke="#d4a84b" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="115" text-anchor="middle" fill="#d8d0c4" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">SQLAlchemy</text>
+    </g>
+    <g>
+      <line x1="646" y1="367" x2="802" y2="367" stroke="#d4a84b" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="355" text-anchor="middle" fill="#d8d0c4" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">Inférence ML</text>
+    </g>
+</svg>

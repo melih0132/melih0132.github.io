@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" class="arch-svg" width="1026" height="446" viewBox="0 0 1026 446" role="img" aria-label="Schéma Clean Architecture Helvetic Events" font-family="ui-monospace, Cascadia Code, SF Mono, Menlo, Consolas, monospace">
+  <rect width="1026" height="446" fill="#000" />
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#dc4638" />
+    </marker>
+  </defs>
+    <g transform="translate(10, 18)">
+      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(240,224,216,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#dc4638" font-size="13" letter-spacing="0.4" font-weight="600">PORTAIL CLIENT</text>
+      <text x="16" y="58" fill="#f0e0d8" font-size="18" font-weight="600">SPA React &amp; TS</text>
+      <text x="16" y="90" fill="#a87870" font-size="16">Briefs événements</text>
+      <text x="16" y="112" fill="#a87870" font-size="16">Multilingue</text>
+      <text x="16" y="134" fill="#a87870" font-size="16">Tailwind CSS</text>
+      <text x="16" y="156" fill="#a87870" font-size="16">Framer</text>
+    </g>
+    <g transform="translate(10, 234)">
+      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(240,224,216,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#dc4638" font-size="13" letter-spacing="0.4" font-weight="600">BACK-OFFICE</text>
+      <text x="16" y="58" fill="#f0e0d8" font-size="18" font-weight="600">Admin Sécurisé</text>
+      <text x="16" y="90" fill="#a87870" font-size="16">Authentification</text>
+      <text x="16" y="112" fill="#a87870" font-size="16">OTP &amp; 2FA</text>
+      <text x="16" y="134" fill="#a87870" font-size="16">Suivi projets</text>
+      <text x="16" y="156" fill="#a87870" font-size="16">et devis</text>
+    </g>
+    <g transform="translate(388, 34)">
+      <rect width="250" height="378" rx="2" fill="rgba(10,10,10,0.92)" stroke="#dc4638" stroke-width="1.5" />
+      <text x="16" y="120" fill="#dc4638" font-size="13" letter-spacing="0.4" font-weight="600">CLEAN ARCHITECTURE</text>
+      <text x="16" y="150" fill="#f0e0d8" font-size="18" font-weight="600">Backend FastAPI</text>
+      <text x="16" y="182" fill="#a87870" font-size="16">Couches Domaine</text>
+      <text x="16" y="204" fill="#a87870" font-size="16">/ Application</text>
+      <text x="16" y="226" fill="#a87870" font-size="16">OpenAPI · Pytest</text>
+      <text x="16" y="248" fill="#a87870" font-size="16">Docker</text>
+    </g>
+    <g transform="translate(810, 18)">
+      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(240,224,216,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#dc4638" font-size="13" letter-spacing="0.4" font-weight="600">PERSISTANCE</text>
+      <text x="16" y="58" fill="#f0e0d8" font-size="18" font-weight="600">PostgreSQL</text>
+      <text x="16" y="90" fill="#a87870" font-size="16">ORM SQLAlchemy</text>
+      <text x="16" y="112" fill="#a87870" font-size="16">Migrations</text>
+      <text x="16" y="134" fill="#a87870" font-size="16">Alembic</text>
+    </g>
+    <g transform="translate(810, 234)">
+      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(240,224,216,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#dc4638" font-size="13" letter-spacing="0.4" font-weight="600">SERVICE IA</text>
+      <text x="16" y="58" fill="#f0e0d8" font-size="18" font-weight="600">OpenAI API</text>
+      <text x="16" y="90" fill="#a87870" font-size="16">Qualification</text>
+      <text x="16" y="112" fill="#a87870" font-size="16">automatique</text>
+      <text x="16" y="134" fill="#a87870" font-size="16">Assistant</text>
+      <text x="16" y="156" fill="#a87870" font-size="16">conversationnel</text>
+    </g>
+    <g>
+      <line x1="224" y1="115" x2="380" y2="115" stroke="#dc4638" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="302" y="103" text-anchor="middle" fill="#f0e0d8" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">REST / JSON</text>
+    </g>
+    <g>
+      <line x1="224" y1="331" x2="380" y2="331" stroke="#dc4638" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="302" y="319" text-anchor="middle" fill="#f0e0d8" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">OTP + 2FA</text>
+    </g>
+    <g>
+      <line x1="646" y1="115" x2="802" y2="115" stroke="#dc4638" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="103" text-anchor="middle" fill="#f0e0d8" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">SQLAlchemy</text>
+    </g>
+    <g>
+      <line x1="646" y1="331" x2="802" y2="331" stroke="#dc4638" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="319" text-anchor="middle" fill="#f0e0d8" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">Prompts / Context</text>
+    </g>
+</svg>

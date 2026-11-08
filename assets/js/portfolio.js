@@ -2,7 +2,7 @@ const LOCALE = document.documentElement.lang.startsWith('fr') ? 'fr' : 'en';
 
 const I18N = {
   en: {
-    homePath: '/en/#home',
+    homePath: '/en/',
     projectFilterUi: {
       searchPlaceholder: 'Search by technology…',
       searchAriaLabel: 'Filter projects by technology',
@@ -51,7 +51,7 @@ const I18N = {
     }
   },
   fr: {
-    homePath: '/fr/#home',
+    homePath: '/fr/',
     projectFilterUi: {
       searchPlaceholder: 'Rechercher une technologie…',
       searchAriaLabel: 'Filtrer les projets par technologie',
@@ -1353,7 +1353,7 @@ class CommandPalette {
     const items = [];
 
     items.push(
-      { group: ui.sections, label: ui.home, href: `${homeBase}#home`, keywords: 'home accueil' },
+      { group: ui.sections, label: ui.home, href: homeBase, keywords: 'home accueil' },
       { group: ui.sections, label: ui.projectsSection, href: `${homeBase}#projects`, keywords: 'projects projets' },
       { group: ui.sections, label: ui.about, href: `${homeBase}#about`, keywords: 'about propos' },
       { group: ui.sections, label: ui.contact, href: `${homeBase}#contact`, keywords: 'contact' }
@@ -1361,7 +1361,20 @@ class CommandPalette {
 
     const catalog = window.__projectsCatalog;
     if (catalog?.projects?.length) {
-      catalog.projects.forEach((proj) => {
+      const projects = catalog.projects.slice().sort((a, b) => {
+        const fa = !!a.featured;
+        const fb = !!b.featured;
+        if (fa !== fb) return fa ? -1 : 1;
+        if (fa && fb) {
+          const foa = typeof a.featuredOrder === 'number' ? a.featuredOrder : 0;
+          const fob = typeof b.featuredOrder === 'number' ? b.featuredOrder : 0;
+          if (foa !== fob) return foa - fob;
+        }
+        const oa = typeof a.order === 'number' ? a.order : 0;
+        const ob = typeof b.order === 'number' ? b.order : 0;
+        return oa - ob;
+      });
+      projects.forEach((proj) => {
         const title = (proj.titles && proj.titles[locale]) || proj.id;
         const href = proj.githubOnly
           ? proj.githubUrl
@@ -1377,7 +1390,19 @@ class CommandPalette {
         });
       });
     } else {
-      document.querySelectorAll('.project-card').forEach((card) => {
+      const cards = Array.from(document.querySelectorAll('.project-card'))
+        .map((card, idx) => ({ card, idx }))
+        .sort((a, b) => {
+          const fa = a.card.getAttribute('data-featured') === 'true';
+          const fb = b.card.getAttribute('data-featured') === 'true';
+          if (fa !== fb) return fa ? -1 : 1;
+          if (fa && fb) return a.idx - b.idx;
+          const oa = Number(a.card.getAttribute('data-order'));
+          const ob = Number(b.card.getAttribute('data-order'));
+          return (Number.isFinite(oa) ? oa : 99) - (Number.isFinite(ob) ? ob : 99);
+        })
+        .map((entry) => entry.card);
+      cards.forEach((card) => {
         const title = card.querySelector('.project-title')?.textContent?.trim();
         const link = card.querySelector('.project-link');
         if (!title || !link) return;
@@ -1506,6 +1531,19 @@ class CommandPalette {
       this.list.appendChild(li);
     });
     this.input.setAttribute('aria-activedescendant', this.filtered.length ? `cmd-opt-${this.activeIndex}` : '');
+    this.scrollActiveIntoView();
+  }
+
+  scrollActiveIntoView() {
+    const active = this.list.querySelector('.cmd-palette__item.is-active');
+    if (!active) return;
+    const listRect = this.list.getBoundingClientRect();
+    const itemRect = active.getBoundingClientRect();
+    if (itemRect.top < listRect.top) {
+      this.list.scrollTop -= listRect.top - itemRect.top;
+    } else if (itemRect.bottom > listRect.bottom) {
+      this.list.scrollTop += itemRect.bottom - listRect.bottom;
+    }
   }
 
   onInputKey(e) {
@@ -1952,13 +1990,14 @@ class SoftNav {
     if (url.origin !== location.origin) return;
     if (!this.isSoftUrl(url)) return;
 
-    if (this.getDocKey(url) === this.getDocKey(location) && url.hash) {
+    if (this.getDocKey(url) === this.getDocKey(location)) {
       e.preventDefault();
-      const nextHref = `${location.pathname}${location.search}${url.hash}`;
+      const hash = url.hash && url.hash !== '#home' ? url.hash : '';
+      const nextHref = `${location.pathname}${location.search}${hash}`;
       if (`${location.pathname}${location.search}${location.hash}` !== nextHref) {
         history.pushState({ soft: true }, '', nextHref);
       }
-      this.scrollToHash(url.hash, 'smooth');
+      this.scrollToHash(hash, 'smooth');
       return;
     }
 

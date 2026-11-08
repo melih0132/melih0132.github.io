@@ -62,7 +62,7 @@
       <div class="header__content">
         <a class="header__brand" href="/en/">Melih C.</a>
         <ul class="header__links">
-          <li><a class="header__link" href="/en/#home">Home</a></li>
+          <li><a class="header__link" href="/en/">Home</a></li>
           <li><a class="header__link" href="/en/#projects">Projects</a></li>
           <li><a class="header__link" href="/en/#about">About</a></li>
           <li><a class="header__link" href="/en/#contact">Contact</a></li>
@@ -75,7 +75,7 @@
       </div>
       <div class="header__panel" id="nav-panel" data-nav-panel>
         <ul>
-          <li><a href="/en/#home">Home</a></li>
+          <li><a href="/en/">Home</a></li>
           <li><a href="/en/#projects">Projects</a></li>
           <li><a href="/en/#about">About</a></li>
           <li><a href="/en/#contact">Contact</a></li>
@@ -112,52 +112,62 @@
 <p>Source code lives under <code>big-projects/shared-ia</code> in the
                 <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">all-my-projects</a>
                 repository.</p></div></section>
-                <section class="project-block" data-arch-section><div class="wrap"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 960 226" role="img" aria-label="Shared IA real-time collaborative architecture diagram">
-    <defs>
-      <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
-      </marker>
-    </defs>
-    <g transform="translate(10, 63)">
-      <rect width="210" height="100" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="14" y="26" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">COLLABORATIVE ROOM</text>
-      <text x="14" y="46" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">React & Vite SPA</text>
-      <text x="14" y="64" fill="var(--muted)" font-size="10.5">Up to 4 members / room</text>
-      <text x="14" y="80" fill="var(--muted)" font-size="10.5">Zustand · Zod · shadcn/ui</text>
+                <section class="project-block" data-arch-section><div class="wrap wrap--wide"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 1026 446" role="img" aria-label="Shared IA real-time collaborative architecture diagram">
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+    <g transform="translate(10, 114)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">COLLABORATIVE ROOM</text>
+      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">React &amp; Vite</text>
+      <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">SPA</text>
+      <text x="16" y="114" fill="var(--muted)" font-size="16">Up to 4 members</text>
+      <text x="16" y="136" fill="var(--muted)" font-size="16">per room</text>
+      <text x="16" y="158" fill="var(--muted)" font-size="16">Zustand · Zod</text>
+      <text x="16" y="180" fill="var(--muted)" font-size="16">shadcn/ui</text>
     </g>
-    <g transform="translate(370, 38)">
-      <rect width="220" height="150" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
-      <text x="14" y="51" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">REAL-TIME & CONSENSUS</text>
-      <text x="14" y="71" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">Node.js & Socket.io</text>
-      <text x="14" y="89" fill="var(--muted)" font-size="10.5">Express · JWT Auth · Swagger</text>
-      <text x="14" y="105" fill="var(--muted)" font-size="10.5">Collective validation & Vote</text>
+    <g transform="translate(388, 34)">
+      <rect width="250" height="378" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
+      <text x="16" y="120" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">REAL-TIME &amp; CONSENSUS</text>
+      <text x="16" y="150" fill="var(--koi-shiro)" font-size="18" font-weight="600">Node.js &amp; Socket.io</text>
+      <text x="16" y="182" fill="var(--muted)" font-size="16">Express · JWT Auth</text>
+      <text x="16" y="204" fill="var(--muted)" font-size="16">Swagger</text>
+      <text x="16" y="226" fill="var(--muted)" font-size="16">Collective</text>
+      <text x="16" y="248" fill="var(--muted)" font-size="16">validation &amp; vote</text>
     </g>
-    <g transform="translate(740, 16)">
-      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">DATABASE</text>
-      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">PostgreSQL</text>
-      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Rooms, members & votes</text>
-      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Prompt & chat history</text>
+    <g transform="translate(810, 18)">
+      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">DATABASE</text>
+      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">PostgreSQL</text>
+      <text x="16" y="90" fill="var(--muted)" font-size="16">Rooms, members</text>
+      <text x="16" y="112" fill="var(--muted)" font-size="16">and votes</text>
+      <text x="16" y="134" fill="var(--muted)" font-size="16">Prompt &amp; chat</text>
+      <text x="16" y="156" fill="var(--muted)" font-size="16">history</text>
     </g>
-    <g transform="translate(740, 122)">
-      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">AI ENGINE</text>
-      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">OpenAI API</text>
-      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Triggered upon consensus</text>
-      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Real-time response broadcast</text>
+    <g transform="translate(810, 234)">
+      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">AI ENGINE</text>
+      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">OpenAI API</text>
+      <text x="16" y="90" fill="var(--muted)" font-size="16">Triggered on</text>
+      <text x="16" y="112" fill="var(--muted)" font-size="16">consensus</text>
+      <text x="16" y="134" fill="var(--muted)" font-size="16">Real-time</text>
+      <text x="16" y="156" fill="var(--muted)" font-size="16">broadcast</text>
     </g>
     <g>
-      <line x1="228" y1="113" x2="362" y2="113" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
-      <text x="295" y="103" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">WSS Socket.io</text>
+      <line x1="224" y1="223" x2="380" y2="223" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="302" y="211" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">WSS Socket.io</text>
     </g>
     <g>
-      <line x1="598" y1="66" x2="732" y2="66" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
-      <text x="665" y="56" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">SQL</text>
+      <line x1="646" y1="115" x2="802" y2="115" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="103" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">SQL</text>
     </g>
     <g>
-      <line x1="598" y1="160" x2="732" y2="160" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
-      <text x="665" y="150" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">AI Stream</text>
-    </g></svg><ul class="arch-legend"><li><strong>WebSocket Synchronization</strong> · Bidirectional Socket.io rooms broadcasting presence, typing indicators and proposal states.</li>
+      <line x1="646" y1="331" x2="802" y2="331" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="319" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">AI Stream</text>
+    </g>
+</svg><a class="arch-link btn" href="/assets/diagrams/en/shared-ia.svg" target="_blank" rel="noreferrer">View the diagram</a><ul class="arch-legend"><li><strong>WebSocket Synchronization</strong> · Bidirectional Socket.io rooms broadcasting presence, typing indicators and proposal states.</li>
 <li><strong>Consensus & Conflict Resolution Engine</strong> · Server-side state machine holding OpenAI calls until members validate a prompt or resolve competing proposals by vote.</li>
 <li><strong>Persistence & Streaming</strong> · PostgreSQL room storage and real-time AI response streaming to all room participants.</li></ul></div></div></section>
         <section class="project-block"><div class="wrap"><h2>Features</h2><ul><li><strong>Collective validation</strong> · Messages stay pending until every other room member validates them; reject, edit or retract before the AI call.</li>
@@ -180,9 +190,9 @@
                 <span class="project-pager__eyebrow">← Previous project</span>
                 <span class="project-pager__title">LPO</span>
               </a>
-              <a class="project-pager__link project-pager__link--next" href="/en/projects/ranking.html">
+              <a class="project-pager__link project-pager__link--next" href="/en/projects/la-guilde-des-seigneurs.html">
                 <span class="project-pager__eyebrow">Next project →</span>
-                <span class="project-pager__title">Ranking</span>
+                <span class="project-pager__title">La Guilde des Seigneurs</span>
               </a>
             </nav>
           </div>

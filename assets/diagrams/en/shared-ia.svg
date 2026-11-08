@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" class="arch-svg" width="1026" height="446" viewBox="0 0 1026 446" role="img" aria-label="Shared IA real-time collaborative architecture diagram" font-family="ui-monospace, Cascadia Code, SF Mono, Menlo, Consolas, monospace">
+  <rect width="1026" height="446" fill="#000" />
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#d4a84b" />
+    </marker>
+  </defs>
+    <g transform="translate(10, 114)">
+      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(240,228,208,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">COLLABORATIVE ROOM</text>
+      <text x="16" y="58" fill="#f0e4d0" font-size="18" font-weight="600">React &amp; Vite</text>
+      <text x="16" y="82" fill="#f0e4d0" font-size="18" font-weight="600">SPA</text>
+      <text x="16" y="114" fill="#a88868" font-size="16">Up to 4 members</text>
+      <text x="16" y="136" fill="#a88868" font-size="16">per room</text>
+      <text x="16" y="158" fill="#a88868" font-size="16">Zustand · Zod</text>
+      <text x="16" y="180" fill="#a88868" font-size="16">shadcn/ui</text>
+    </g>
+    <g transform="translate(388, 34)">
+      <rect width="250" height="378" rx="2" fill="rgba(10,10,10,0.92)" stroke="#d4a84b" stroke-width="1.5" />
+      <text x="16" y="120" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">REAL-TIME &amp; CONSENSUS</text>
+      <text x="16" y="150" fill="#f0e4d0" font-size="18" font-weight="600">Node.js &amp; Socket.io</text>
+      <text x="16" y="182" fill="#a88868" font-size="16">Express · JWT Auth</text>
+      <text x="16" y="204" fill="#a88868" font-size="16">Swagger</text>
+      <text x="16" y="226" fill="#a88868" font-size="16">Collective</text>
+      <text x="16" y="248" fill="#a88868" font-size="16">validation &amp; vote</text>
+    </g>
+    <g transform="translate(810, 18)">
+      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(240,228,208,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">DATABASE</text>
+      <text x="16" y="58" fill="#f0e4d0" font-size="18" font-weight="600">PostgreSQL</text>
+      <text x="16" y="90" fill="#a88868" font-size="16">Rooms, members</text>
+      <text x="16" y="112" fill="#a88868" font-size="16">and votes</text>
+      <text x="16" y="134" fill="#a88868" font-size="16">Prompt &amp; chat</text>
+      <text x="16" y="156" fill="#a88868" font-size="16">history</text>
+    </g>
+    <g transform="translate(810, 234)">
+      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="rgba(240,228,208,0.25)" stroke-width="1" />
+      <text x="16" y="28" fill="#d4a84b" font-size="13" letter-spacing="0.4" font-weight="600">AI ENGINE</text>
+      <text x="16" y="58" fill="#f0e4d0" font-size="18" font-weight="600">OpenAI API</text>
+      <text x="16" y="90" fill="#a88868" font-size="16">Triggered on</text>
+      <text x="16" y="112" fill="#a88868" font-size="16">consensus</text>
+      <text x="16" y="134" fill="#a88868" font-size="16">Real-time</text>
+      <text x="16" y="156" fill="#a88868" font-size="16">broadcast</text>
+    </g>
+    <g>
+      <line x1="224" y1="223" x2="380" y2="223" stroke="#d4a84b" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="302" y="211" text-anchor="middle" fill="#f0e4d0" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">WSS Socket.io</text>
+    </g>
+    <g>
+      <line x1="646" y1="115" x2="802" y2="115" stroke="#d4a84b" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="103" text-anchor="middle" fill="#f0e4d0" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">SQL</text>
+    </g>
+    <g>
+      <line x1="646" y1="331" x2="802" y2="331" stroke="#d4a84b" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+      <text x="724" y="319" text-anchor="middle" fill="#f0e4d0" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">AI Stream</text>
+    </g>
+</svg>
