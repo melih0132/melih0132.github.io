@@ -325,6 +325,58 @@ export class World {
     this.events.push({ kind: "splash", x, y });
   }
 
+  /** Adaptation: dynamically adjust school population without resetting sharks/koi. */
+  setFishCount(count?: number) {
+    this.fishCount = count;
+    const { width: W, height: H } = this;
+    if (W === 0 || H === 0) return;
+    const target = this.fishCount ?? clamp(Math.round((W * H) / 4400), 85, 340);
+    if (this.fish.length === target) return;
+
+    if (this.fish.length > target) {
+      const specialIdx = this.fish.findIndex((f) => f.special);
+      const specialFish = specialIdx >= 0 ? this.fish[specialIdx] : null;
+      this.fish.length = target;
+      if (specialFish && target > 0 && !this.fish.includes(specialFish)) {
+        this.fish[target - 1] = specialFish;
+      }
+    } else {
+      while (this.fish.length < target) {
+        const species = pickSpecies();
+        const sp = SPECIES[species];
+        const size = Math.min(randInt(sp.schoolSize[0], sp.schoolSize[1]), target - this.fish.length);
+        const millDir: 1 | -1 = Math.random() < 0.5 ? 1 : -1;
+        const cx = rand(W * 0.06, W * 0.94);
+        const cy = rand(H * 0.08, H * 0.92);
+        const dir = (Math.random() < 0.5 ? 0 : Math.PI) + rand(-0.5, 0.5);
+        for (let k = 0; k < size; k++) {
+          this.fish.push({
+            x: cx + rand(-1, 1) * (this.sepX[species] || 12) * Math.sqrt(size),
+            y: cy + rand(-1, 1) * (this.sepY[species] || 12) * Math.sqrt(size) * 0.6,
+            vx: Math.cos(dir) * sp.cruise,
+            vy: Math.sin(dir) * sp.cruise,
+            species,
+            color: pickKoiColor(),
+            alarm: 0,
+            alive: true,
+            respawnAt: 0,
+            phase: rand(0, TAU),
+            turn: 0,
+            depth: rand(0.55, 1),
+            millDir,
+            special: false,
+          });
+        }
+      }
+      if (this.secretFish && this.fish.length > 0 && !this.fish.some((f) => f.special)) {
+        const pick = this.fish[randInt(0, this.fish.length - 1)];
+        pick.special = true;
+        pick.depth = 1;
+      }
+    }
+    this.bucketNext = new Int32Array(this.fish.length);
+  }
+
   /** Adaptation: snout of the first (companion) shark, if any. */
   companionHead(): { x: number; y: number } | null {
     const sh = this.sharks[0];

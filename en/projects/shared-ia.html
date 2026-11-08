@@ -19,6 +19,40 @@
   <link rel="stylesheet" href="/assets/css/style.min.css" />
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
   <title>Shared IA | Melih Cetinkaya</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Shared IA",
+    "description": "Collaborative AI chat for up to four users with real-time validation.",
+    "url": "https://melih0132.github.io/en/projects/shared-ia.html",
+    "image": "https://melih0132.github.io/assets/og/shared-ia.png",
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": "Melih Cetinkaya",
+      "url": "https://melih0132.github.io/en/"
+    },
+    "programmingLanguage": [
+      "Node.js",
+      "Express.js",
+      "Socket.io",
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Zustand",
+      "OpenAI",
+      "PostgreSQL",
+      "JWT",
+      "Swagger",
+      "VS Code",
+      "Git",
+      "GitHub"
+    ],
+    "codeRepository": "https://github.com/melih0132/all-my-projects/tree/main/big-projects/shared-ia"
+  }
+  </script>
 </head>
 <body data-ocean-fish="48" data-universe="shared-ia">
   <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
@@ -78,6 +112,54 @@
 <p>Source code lives under <code>big-projects/shared-ia</code> in the
                 <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">all-my-projects</a>
                 repository.</p></div></section>
+                <section class="project-block" data-arch-section><div class="wrap"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 960 226" role="img" aria-label="Shared IA real-time collaborative architecture diagram">
+    <defs>
+      <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
+      </marker>
+    </defs>
+    <g transform="translate(10, 63)">
+      <rect width="210" height="100" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="14" y="26" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">COLLABORATIVE ROOM</text>
+      <text x="14" y="46" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">React & Vite SPA</text>
+      <text x="14" y="64" fill="var(--muted)" font-size="10.5">Up to 4 members / room</text>
+      <text x="14" y="80" fill="var(--muted)" font-size="10.5">Zustand · Zod · shadcn/ui</text>
+    </g>
+    <g transform="translate(370, 38)">
+      <rect width="220" height="150" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
+      <text x="14" y="51" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">REAL-TIME & CONSENSUS</text>
+      <text x="14" y="71" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">Node.js & Socket.io</text>
+      <text x="14" y="89" fill="var(--muted)" font-size="10.5">Express · JWT Auth · Swagger</text>
+      <text x="14" y="105" fill="var(--muted)" font-size="10.5">Collective validation & Vote</text>
+    </g>
+    <g transform="translate(740, 16)">
+      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">DATABASE</text>
+      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">PostgreSQL</text>
+      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Rooms, members & votes</text>
+      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Prompt & chat history</text>
+    </g>
+    <g transform="translate(740, 122)">
+      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">AI ENGINE</text>
+      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">OpenAI API</text>
+      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Triggered upon consensus</text>
+      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Real-time response broadcast</text>
+    </g>
+    <g>
+      <line x1="228" y1="113" x2="362" y2="113" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
+      <text x="295" y="103" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">WSS Socket.io</text>
+    </g>
+    <g>
+      <line x1="598" y1="66" x2="732" y2="66" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
+      <text x="665" y="56" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">SQL</text>
+    </g>
+    <g>
+      <line x1="598" y1="160" x2="732" y2="160" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
+      <text x="665" y="150" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">AI Stream</text>
+    </g></svg><ul class="arch-legend"><li><strong>WebSocket Synchronization</strong> · Bidirectional Socket.io rooms broadcasting presence, typing indicators and proposal states.</li>
+<li><strong>Consensus & Conflict Resolution Engine</strong> · Server-side state machine holding OpenAI calls until members validate a prompt or resolve competing proposals by vote.</li>
+<li><strong>Persistence & Streaming</strong> · PostgreSQL room storage and real-time AI response streaming to all room participants.</li></ul></div></div></section>
         <section class="project-block"><div class="wrap"><h2>Features</h2><ul><li><strong>Collective validation</strong> · Messages stay pending until every other room member validates them; reject, edit or retract before the AI call.</li>
 <li><strong>Conflict resolution</strong> · When several messages are proposed at once, members vote to pick the one sent to the AI.</li>
 <li><strong>Real time</strong> · Instant updates over Socket.io (typing indicators, presence, state sync).</li>
@@ -87,12 +169,22 @@
 <figure><img src="/assets/webp/shared-ia/backend.webp" alt="Shared IA Node Express backend" loading="lazy" width="1898" height="1032" /><figcaption>Node.js / Express backend</figcaption></figure>
 <figure><img src="/assets/webp/shared-ia/frontend2.webp" alt="Shared IA user interface" loading="lazy" width="1916" height="1031" /><figcaption>User interface for interaction with AI services</figcaption></figure>
 <figure><img src="/assets/webp/shared-ia/backend2.webp" alt="Backend API documentation" loading="lazy" width="1901" height="1032" /><figcaption>Interactive API documentation with Swagger</figcaption></figure></div></section>
-        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech">Node.js · Express.js · Socket.io · React · TypeScript · Vite · Tailwind CSS · Zustand · OpenAI · PostgreSQL · JWT · Swagger · VS Code · Git · GitHub</p></div></section>
+        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech"><a class="project-tech__item" href="/en/?tech=node-js#projects">Node.js</a> <a class="project-tech__item" href="/en/?tech=express-js#projects">Express.js</a> <a class="project-tech__item" href="/en/?tech=socket-io#projects">Socket.io</a> <a class="project-tech__item" href="/en/?tech=react#projects">React</a> <a class="project-tech__item" href="/en/?tech=typescript#projects">TypeScript</a> <a class="project-tech__item" href="/en/?tech=vite#projects">Vite</a> <a class="project-tech__item" href="/en/?tech=tailwind-css#projects">Tailwind CSS</a> <a class="project-tech__item" href="/en/?tech=zustand#projects">Zustand</a> <a class="project-tech__item" href="/en/?tech=openai#projects">OpenAI</a> <a class="project-tech__item" href="/en/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/en/?tech=jwt#projects">JWT</a> <a class="project-tech__item" href="/en/?tech=swagger#projects">Swagger</a> <a class="project-tech__item" href="/en/?tech=vs-code#projects">VS Code</a> <a class="project-tech__item" href="/en/?tech=git#projects">Git</a> <a class="project-tech__item" href="/en/?tech=github#projects">GitHub</a></p></div></section>
         <section class="project-block">
           <div class="wrap">
             <h2>Explore</h2>
             <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/shared-ia" target="_blank" rel="noreferrer">View on GitHub</a>
 <a class="btn" href="/en/#projects">Back to projects</a></div>
+            <nav class="project-pager" aria-label="Project navigation" data-project-pager>
+              <a class="project-pager__link project-pager__link--prev" href="/en/projects/lpo.html">
+                <span class="project-pager__eyebrow">← Previous project</span>
+                <span class="project-pager__title">LPO</span>
+              </a>
+              <a class="project-pager__link project-pager__link--next" href="/en/projects/ranking.html">
+                <span class="project-pager__eyebrow">Next project →</span>
+                <span class="project-pager__title">Ranking</span>
+              </a>
+            </nav>
           </div>
         </section>
       </div>

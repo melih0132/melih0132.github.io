@@ -19,6 +19,40 @@
   <link rel="stylesheet" href="/assets/css/style.min.css" />
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
   <title>Shared IA | Melih Cetinkaya</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Shared IA",
+    "description": "Chat IA collaboratif jusqu'à quatre utilisateurs avec validation en temps réel.",
+    "url": "https://melih0132.github.io/fr/projets/shared-ia.html",
+    "image": "https://melih0132.github.io/assets/og/shared-ia.png",
+    "inLanguage": "fr",
+    "author": {
+      "@type": "Person",
+      "name": "Melih Cetinkaya",
+      "url": "https://melih0132.github.io/fr/"
+    },
+    "programmingLanguage": [
+      "Node.js",
+      "Express.js",
+      "Socket.io",
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Zustand",
+      "OpenAI",
+      "PostgreSQL",
+      "JWT",
+      "Swagger",
+      "VS Code",
+      "Git",
+      "GitHub"
+    ],
+    "codeRepository": "https://github.com/melih0132/all-my-projects/tree/main/big-projects/shared-ia"
+  }
+  </script>
 </head>
 <body data-ocean-fish="48" data-universe="shared-ia">
   <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
@@ -78,6 +112,54 @@
                 <strong>Zustand</strong>, styles <strong>Tailwind CSS</strong> et composants <strong>shadcn/ui</strong>.</p>
 <p>Le code source est publié sous <code>big-projects/shared-ia</code> du dépôt
                 <a href="https://github.com/melih0132/all-my-projects" target="_blank" rel="noreferrer">all-my-projects</a>.</p></div></section>
+                <section class="project-block" data-arch-section><div class="wrap"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 960 226" role="img" aria-label="Schéma d’architecture temps réel Shared IA">
+    <defs>
+      <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
+      </marker>
+    </defs>
+    <g transform="translate(10, 63)">
+      <rect width="210" height="100" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="14" y="26" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">SALLE COLLABORATIVE</text>
+      <text x="14" y="46" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">SPA React & Vite</text>
+      <text x="14" y="64" fill="var(--muted)" font-size="10.5">Jusqu’à 4 membres / salle</text>
+      <text x="14" y="80" fill="var(--muted)" font-size="10.5">Zustand · Zod · shadcn/ui</text>
+    </g>
+    <g transform="translate(370, 38)">
+      <rect width="220" height="150" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
+      <text x="14" y="51" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">TEMPS RÉEL & CONSENSUS</text>
+      <text x="14" y="71" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">Node.js & Socket.io</text>
+      <text x="14" y="89" fill="var(--muted)" font-size="10.5">Express · Auth JWT · Swagger</text>
+      <text x="14" y="105" fill="var(--muted)" font-size="10.5">Validation collective & Vote</text>
+    </g>
+    <g transform="translate(740, 16)">
+      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">BASE DE DONNÉES</text>
+      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">PostgreSQL</text>
+      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Salles, membres & votes</text>
+      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Historique des prompts</text>
+    </g>
+    <g transform="translate(740, 122)">
+      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">MOTEUR IA</text>
+      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">OpenAI API</text>
+      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Envoi après unanimité</text>
+      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Diffusion réponse temps réel</text>
+    </g>
+    <g>
+      <line x1="228" y1="113" x2="362" y2="113" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
+      <text x="295" y="103" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">WSS Socket.io</text>
+    </g>
+    <g>
+      <line x1="598" y1="66" x2="732" y2="66" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
+      <text x="665" y="56" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">SQL</text>
+    </g>
+    <g>
+      <line x1="598" y1="160" x2="732" y2="160" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
+      <text x="665" y="150" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">Stream IA</text>
+    </g></svg><ul class="arch-legend"><li><strong>Synchronisation WebSocket</strong> · Communication bidirectionnelle Socket.io entre les membres d’une salle (présence, frappe, états de validation).</li>
+<li><strong>Moteur de consensus & résolution de conflits</strong> · Machine à états côté serveur bloquant l’appel OpenAI tant que la proposition n’est pas validée ou départagée par vote.</li>
+<li><strong>Persistance & Streaming</strong> · Sauvegarde PostgreSQL des salles et diffusion en temps réel de la réponse IA à tous les participants.</li></ul></div></div></section>
         <section class="project-block"><div class="wrap"><h2>Fonctionnalités</h2><ul><li><strong>Validation collective</strong> · Chaque message reste en attente jusqu'à validation par tous les autres membres de la salle ; refus, modification ou rétractation possibles avant envoi à l'IA.</li>
 <li><strong>Résolution de conflits</strong> · Si plusieurs messages sont proposés en même temps, vote pour choisir celui envoyé à l'IA.</li>
 <li><strong>Temps réel</strong> · Mises à jour instantanées via Socket.io (indicateurs de frappe, présence, synchronisation).</li>
@@ -87,12 +169,22 @@
 <figure><img src="/assets/webp/shared-ia/backend.webp" alt="Backend Node Express Shared IA" loading="lazy" width="1898" height="1032" /><figcaption>Backend Node.js / Express</figcaption></figure>
 <figure><img src="/assets/webp/shared-ia/frontend2.webp" alt="Interface utilisateur Shared IA" loading="lazy" width="1916" height="1031" /><figcaption>Interface utilisateur pour l'interaction avec les services d'IA</figcaption></figure>
 <figure><img src="/assets/webp/shared-ia/backend2.webp" alt="Documentation API backend" loading="lazy" width="1901" height="1032" /><figcaption>Documentation API interactive avec Swagger</figcaption></figure></div></section>
-        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech">Node.js · Express.js · Socket.io · React · TypeScript · Vite · Tailwind CSS · Zustand · OpenAI · PostgreSQL · JWT · Swagger · VS Code · Git · GitHub</p></div></section>
+        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech"><a class="project-tech__item" href="/fr/?tech=node-js#projects">Node.js</a> <a class="project-tech__item" href="/fr/?tech=express-js#projects">Express.js</a> <a class="project-tech__item" href="/fr/?tech=socket-io#projects">Socket.io</a> <a class="project-tech__item" href="/fr/?tech=react#projects">React</a> <a class="project-tech__item" href="/fr/?tech=typescript#projects">TypeScript</a> <a class="project-tech__item" href="/fr/?tech=vite#projects">Vite</a> <a class="project-tech__item" href="/fr/?tech=tailwind-css#projects">Tailwind CSS</a> <a class="project-tech__item" href="/fr/?tech=zustand#projects">Zustand</a> <a class="project-tech__item" href="/fr/?tech=openai#projects">OpenAI</a> <a class="project-tech__item" href="/fr/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/fr/?tech=jwt#projects">JWT</a> <a class="project-tech__item" href="/fr/?tech=swagger#projects">Swagger</a> <a class="project-tech__item" href="/fr/?tech=vs-code#projects">VS Code</a> <a class="project-tech__item" href="/fr/?tech=git#projects">Git</a> <a class="project-tech__item" href="/fr/?tech=github#projects">GitHub</a></p></div></section>
         <section class="project-block">
           <div class="wrap">
             <h2>Explorer</h2>
             <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/shared-ia" target="_blank" rel="noreferrer">Voir sur GitHub</a>
 <a class="btn" href="/fr/#projects">Retour aux projets</a></div>
+            <nav class="project-pager" aria-label="Navigation entre les projets" data-project-pager>
+              <a class="project-pager__link project-pager__link--prev" href="/fr/projets/lpo.html">
+                <span class="project-pager__eyebrow">← Projet précédent</span>
+                <span class="project-pager__title">LPO</span>
+              </a>
+              <a class="project-pager__link project-pager__link--next" href="/fr/projets/ranking.html">
+                <span class="project-pager__eyebrow">Projet suivant →</span>
+                <span class="project-pager__title">Ranking</span>
+              </a>
+            </nav>
           </div>
         </section>
       </div>

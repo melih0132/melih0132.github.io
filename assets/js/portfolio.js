@@ -8,6 +8,10 @@ const I18N = {
       searchAriaLabel: 'Filter projects by technology',
       filterChipsAriaLabel: 'Active filters (match all)',
       removeFilterChipAriaPrefix: 'Remove filter',
+      filterByTagAriaPrefix: 'Filter by',
+      sortFeatured: '★ Featured',
+      sortChrono: 'Chronological',
+      sortAriaLabel: 'Sort projects (Featured or Chronological)',
       resultsCount: (n) => `${n} project${n === 1 ? '' : 's'}`
     },
     contactForm: {
@@ -29,6 +33,7 @@ const I18N = {
     koiHint: 'Sometimes one fish stands apart.',
     commandPalette: {
       dialogLabel: 'Command palette',
+      triggerLabel: 'Command palette',
       placeholder: 'Jump to…',
       empty: 'No matches',
       sections: 'Sections',
@@ -52,6 +57,10 @@ const I18N = {
       searchAriaLabel: 'Filtrer les projets par technologie',
       filterChipsAriaLabel: 'Filtres actifs (intersection)',
       removeFilterChipAriaPrefix: 'Retirer le filtre',
+      filterByTagAriaPrefix: 'Filtrer par',
+      sortFeatured: '★ Pertinence',
+      sortChrono: 'Chronologique',
+      sortAriaLabel: 'Trier les projets (Pertinence ou Chronologique)',
       resultsCount: (n) => `${n} projet${n === 1 ? '' : 's'}`
     },
     contactForm: {
@@ -73,6 +82,7 @@ const I18N = {
     koiHint: 'Parfois un poisson se distingue.',
     commandPalette: {
       dialogLabel: 'Palette de commandes',
+      triggerLabel: 'Palette de commandes',
       placeholder: 'Aller à…',
       empty: 'Aucun résultat',
       sections: 'Sections',
@@ -189,12 +199,32 @@ function normalizeFilterKey(str) {
     .replace(/^-|-$/g, '');
 }
 
+async function getProjectsCatalog() {
+  if (window.__projectsCatalog) return window.__projectsCatalog;
+  if (!window.__projectsCatalogPromise) {
+    window.__projectsCatalogPromise = fetch('/assets/data/projects.json')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.projects) {
+          window.__projectsCatalog = data;
+        }
+        return data;
+      })
+      .catch(() => null);
+  }
+  return window.__projectsCatalogPromise;
+}
+
 class ProjectFilters {
   constructor() {
+    this.projectList = document.querySelector('.projects-list');
     this.projectCards = document.querySelectorAll('.project-card');
     this.filterContainer = document.querySelector('.projects-filters');
     this.activeFilters = new Map();
     this.projectTechs = new Map(); // Stocker les technologies de chaque projet
+    this.projectsMeta = new Map();
+    this.sortMode = 'featured'; // 'featured' | 'chrono'
+    this.destroyed = false;
     
     // Mapping pour regrouper les technologies similaires
     this.techMapping = {
@@ -228,34 +258,44 @@ class ProjectFilters {
 
   async init() {
     await this.loadProjectTechnologies();
+    if (this.destroyed) return;
     this.extractTechnologies();
     this.createFilterSearchUi();
+    this.bindCardTechTags();
     this.attachEventListeners();
-    this.updateResultsCount(this.projectCards.length);
+    this.hydrateFromUrl();
+    this.applySortOrder();
+    this.filterProjects(false);
   }
 
   // Charger les technologies depuis les pages de détails des projets
   async loadProjectTechnologies() {
-    let projectsData = null;
-    try {
-      const response = await fetch('/assets/data/projects.json');
-      if (response.ok) {
-        projectsData = await response.json();
-      }
-    } catch (error) {
-      console.warn('Unable to load projects.json:', error);
-    }
+    const projectsData = await getProjectsCatalog();
 
     const projectsById = new Map();
     if (projectsData?.projects) {
-      projectsData.projects.forEach(project => {
+      projectsData.projects.forEach((project, idx) => {
         projectsById.set(project.id, project);
+        this.projectsMeta.set(project.id, {
+          featured: !!project.featured,
+          featuredOrder: typeof project.featuredOrder === 'number' ? project.featuredOrder : idx,
+          order: typeof project.order === 'number' ? project.order : idx
+        });
       });
     }
 
-    this.projectCards.forEach(card => {
+    this.projectCards.forEach((card, domIdx) => {
       const projectId = card.getAttribute('data-project-id');
       const project = projectId ? projectsById.get(projectId) : null;
+
+      if (projectId && !this.projectsMeta.has(projectId)) {
+        const attrOrder = Number(card.getAttribute('data-order'));
+        this.projectsMeta.set(projectId, {
+          featured: card.getAttribute('data-featured') === 'true',
+          featuredOrder: domIdx,
+          order: Number.isFinite(attrOrder) ? attrOrder : domIdx
+        });
+      }
 
       if (project?.technologies?.length) {
         this.projectTechs.set(card, project.technologies);
@@ -364,7 +404,7 @@ class ProjectFilters {
     this.filterContainer.insertBefore(toolbar, this.filterContainer.firstChild);
     toolbar.appendChild(allBtn);
 
-    const ui = CONFIG.projectFilterUi || {};
+    const ui = uiStrings().projectFilterUi || {};
     const wrap = document.createElement('div');
     wrap.className = 'projects-filters-search';
 
@@ -395,6 +435,19 @@ class ProjectFilters {
     inner.appendChild(list);
     wrap.appendChild(inner);
 
+    const sortBtn = document.createElement('button');
+    sortBtn.type = 'button';
+    sortBtn.className = 'projects-sort-btn';
+    sortBtn.setAttribute('data-sort-mode', this.sortMode);
+    sortBtn.setAttribute('aria-label', ui.sortAriaLabel || 'Sort projects');
+    sortBtn.textContent = this.sortMode === 'featured' ? (ui.sortFeatured || '★ Featured') : (ui.sortChrono || 'Chronological');
+    sortBtn.addEventListener('click', () => {
+      this.sortMode = this.sortMode === 'featured' ? 'chrono' : 'featured';
+      this.applySortOrder();
+      this.syncUrlParams();
+    });
+    this.sortBtn = sortBtn;
+
     const resultsCount = document.createElement('p');
     resultsCount.className = 'projects-filters-search__count';
     resultsCount.setAttribute('aria-live', 'polite');
@@ -402,6 +455,7 @@ class ProjectFilters {
     this.resultsCountEl = resultsCount;
 
     toolbar.appendChild(wrap);
+    toolbar.appendChild(sortBtn);
     toolbar.appendChild(resultsCount);
 
     const chipsWrap = document.createElement('div');
@@ -421,6 +475,8 @@ class ProjectFilters {
         this.activeFilters.delete(key);
         this.renderFilterChips();
         this.syncAllButtonState();
+        this.syncCardTagStates();
+        this.syncUrlParams();
         this.filterProjects();
       }
     });
@@ -574,7 +630,7 @@ class ProjectFilters {
       return;
     }
     this.chipsWrap.hidden = false;
-    const ui = CONFIG.projectFilterUi || {};
+    const ui = uiStrings().projectFilterUi || {};
     const prefix = ui.removeFilterChipAriaPrefix || 'Remove filter';
     this.activeFilters.forEach((label, key) => {
       const chip = document.createElement('button');
@@ -593,6 +649,157 @@ class ProjectFilters {
       chip.appendChild(x);
       this.chipsWrap.appendChild(chip);
     });
+  }
+
+  resolveFilterLabel(rawKeyOrLabel) {
+    const targetKey = normalizeFilterKey(rawKeyOrLabel);
+    for (const tech of this.technologies || []) {
+      if (normalizeFilterKey(tech) === targetKey) {
+        return { key: targetKey, label: this.techMap.get(tech) || tech };
+      }
+      const display = this.techMap.get(tech);
+      if (display && normalizeFilterKey(display) === targetKey) {
+        return { key: normalizeFilterKey(tech), label: display };
+      }
+    }
+    const normalized = this.normalizeTech(rawKeyOrLabel);
+    const key = normalizeFilterKey(normalized);
+    const label = (this.techMap && this.techMap.get(normalized)) || rawKeyOrLabel;
+    return { key, label };
+  }
+
+  bindCardTechTags() {
+    const ui = uiStrings().projectFilterUi || {};
+    const prefix = ui.filterByTagAriaPrefix || 'Filter by';
+    this.projectCards.forEach((card) => {
+      card.querySelectorAll('.tech-tag').forEach((tag) => {
+        const raw = tag.textContent.trim();
+        if (!raw || raw.startsWith('+')) return;
+        const { key, label } = this.resolveFilterLabel(raw);
+        tag.setAttribute('role', 'button');
+        tag.setAttribute('tabindex', '0');
+        tag.setAttribute('data-tech-key', key);
+        tag.setAttribute('data-tech-label', label);
+        tag.setAttribute('aria-label', `${prefix} ${raw}`);
+        tag.setAttribute('aria-pressed', 'false');
+
+        const toggleTag = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (this.activeFilters.has(key)) {
+            this.activeFilters.delete(key);
+          } else {
+            this.activeFilters.set(key, label);
+          }
+          this.syncAllButtonState();
+          this.renderFilterChips();
+          this.syncCardTagStates();
+          this.syncUrlParams();
+          this.filterProjects();
+        };
+
+        tag.addEventListener('click', toggleTag);
+        tag.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            toggleTag(e);
+          }
+        });
+      });
+    });
+  }
+
+  syncCardTagStates() {
+    this.projectCards.forEach((card) => {
+      card.querySelectorAll('.tech-tag[data-tech-key]').forEach((tag) => {
+        const key = tag.getAttribute('data-tech-key');
+        const active = !!(key && this.activeFilters.has(key));
+        tag.classList.toggle('is-active', active);
+        tag.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+    });
+  }
+
+  applySortOrder() {
+    if (!this.projectList) return;
+    const ui = uiStrings().projectFilterUi || {};
+    if (this.sortBtn) {
+      this.sortBtn.setAttribute('data-sort-mode', this.sortMode);
+      this.sortBtn.textContent =
+        this.sortMode === 'featured'
+          ? ui.sortFeatured || '★ Featured'
+          : ui.sortChrono || 'Chronological';
+    }
+    const cards = Array.from(this.projectCards);
+    cards.sort((a, b) => {
+      const idA = a.getAttribute('data-project-id') || '';
+      const idB = b.getAttribute('data-project-id') || '';
+      const metaA = this.projectsMeta.get(idA) || {
+        featured: a.getAttribute('data-featured') === 'true',
+        featuredOrder: 99,
+        order: Number(a.getAttribute('data-order') || 99)
+      };
+      const metaB = this.projectsMeta.get(idB) || {
+        featured: b.getAttribute('data-featured') === 'true',
+        featuredOrder: 99,
+        order: Number(b.getAttribute('data-order') || 99)
+      };
+      if (this.sortMode === 'featured') {
+        if (metaA.featured !== metaB.featured) {
+          return metaA.featured ? -1 : 1;
+        }
+        if (metaA.featured && metaB.featured) {
+          return metaA.featuredOrder - metaB.featuredOrder;
+        }
+      }
+      return metaA.order - metaB.order;
+    });
+    const current = Array.from(this.projectList.children);
+    const orderChanged = cards.some((card, idx) => card !== current[idx]);
+    if (orderChanged) {
+      cards.forEach((card) => this.projectList.appendChild(card));
+    }
+  }
+
+  hydrateFromUrl() {
+    const params = new URLSearchParams(location.search);
+    const sortParam = params.get('sort');
+    if (sortParam === 'chrono' || sortParam === 'featured') {
+      this.sortMode = sortParam;
+    }
+    const techParam = params.get('tech');
+    if (techParam) {
+      techParam
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .forEach((token) => {
+          const { key, label } = this.resolveFilterLabel(token);
+          if (key) {
+            this.activeFilters.set(key, label);
+          }
+        });
+    }
+    this.syncAllButtonState();
+    this.renderFilterChips();
+    this.syncCardTagStates();
+  }
+
+  syncUrlParams() {
+    const url = new URL(location.href);
+    if (this.activeFilters.size > 0) {
+      url.searchParams.set('tech', Array.from(this.activeFilters.keys()).join(','));
+    } else {
+      url.searchParams.delete('tech');
+    }
+    if (this.sortMode === 'chrono') {
+      url.searchParams.set('sort', 'chrono');
+    } else {
+      url.searchParams.delete('sort');
+    }
+    const nextHref = `${url.pathname}${url.search}${url.hash}`;
+    if (nextHref !== `${location.pathname}${location.search}${location.hash}`) {
+      history.replaceState(history.state, '', nextHref);
+    }
   }
 
   syncAllButtonState() {
@@ -623,7 +830,7 @@ class ProjectFilters {
     for (const tech of projectTechs) {
       const normalizedTech = this.normalizeTech(tech);
       const normalizedTechForFilter = normalizeFilterKey(normalizedTech);
-      if (normalizedTechForFilter === normalizedFilter) {
+      if (normalizedTechForFilter === normalizedFilter || normalizeFilterKey(tech) === normalizedFilter) {
         return true;
       }
       if (matchingLanguage && CONFIG.languageFrameworks[matchingLanguage]) {
@@ -642,7 +849,7 @@ class ProjectFilters {
     if (!filterKey) {
       return;
     }
-    const key = normalizeFilterKey(filterKey);
+    const { key, label } = this.resolveFilterLabel(displayLabel || filterKey);
     if (this.activeFilters.has(key)) {
       this.closeSearchSuggestions();
       if (this.searchInput) {
@@ -650,13 +857,15 @@ class ProjectFilters {
       }
       return;
     }
-    this.activeFilters.set(key, (displayLabel || '').trim() || key);
+    this.activeFilters.set(key, (displayLabel || label || '').trim() || key);
     if (this.searchInput) {
       this.searchInput.value = '';
     }
     this.closeSearchSuggestions();
     this.syncAllButtonState();
     this.renderFilterChips();
+    this.syncCardTagStates();
+    this.syncUrlParams();
     this.filterProjects();
   }
 
@@ -671,6 +880,8 @@ class ProjectFilters {
     this.closeSearchSuggestions();
     this.renderFilterChips();
     this.syncAllButtonState();
+    this.syncCardTagStates();
+    this.syncUrlParams();
     this.filterProjects();
   }
 
@@ -688,7 +899,7 @@ class ProjectFilters {
     });
   }
 
-  filterProjects() {
+  filterProjects(animate = true) {
     const keys = Array.from(this.activeFilters.keys());
     let visibleCount = 0;
 
@@ -715,6 +926,7 @@ class ProjectFilters {
 
     this.updateResultsCount(visibleCount);
     
+    if (!animate) return;
     // Animation pour les projets visibles
     setTimeout(() => {
       this.projectCards.forEach(card => {
@@ -735,12 +947,13 @@ class ProjectFilters {
     if (!this.resultsCountEl) {
       return;
     }
-    const ui = CONFIG.projectFilterUi || {};
+    const ui = uiStrings().projectFilterUi || {};
     const formatter = ui.resultsCount || ((n) => `${n}`);
     this.resultsCountEl.textContent = formatter(count);
   }
 
   destroy() {
+    this.destroyed = true;
     if (this._docClickBound && this._onSearchDocClick) {
       document.removeEventListener('click', this._onSearchDocClick);
       this._docClickBound = false;
@@ -768,14 +981,16 @@ class ContactForm {
         headers: { 'Accept': 'application/json' }
       });
 
+      const contactUi = uiStrings().contactForm || CONFIG.contactForm;
       if (response.ok) {
-        this.showMessage(CONFIG.contactForm.success, 'success');
+        this.showMessage(contactUi.success, 'success');
         this.form.reset();
       } else {
-        this.showMessage(CONFIG.contactForm.error, 'error');
+        this.showMessage(contactUi.error, 'error');
       }
     } catch (error) {
-      this.showMessage(CONFIG.contactForm.error, 'error');
+      const contactUi = uiStrings().contactForm || CONFIG.contactForm;
+      this.showMessage(contactUi.error, 'error');
     }
   }
 
@@ -849,7 +1064,7 @@ class SiteChrome {
         event.preventDefault();
         const top = document.getElementById('home');
         if (top) top.focus({ preventScroll: true });
-        history.pushState(null, '', '#home');
+        history.pushState({ soft: true }, '', `${location.pathname}${location.search}#home`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }, { signal });
     });
@@ -861,20 +1076,106 @@ class SiteChrome {
   }
 }
 
+function parseCssHexToRgb(hex, fallback) {
+  const clean = (hex || '').trim().replace(/^#/, '');
+  if (/^[0-9a-f]{6}$/i.test(clean)) {
+    return [
+      parseInt(clean.slice(0, 2), 16),
+      parseInt(clean.slice(2, 4), 16),
+      parseInt(clean.slice(4, 6), 16)
+    ];
+  }
+  return fallback;
+}
+
+function syncOceanAtmosphere() {
+  const engine = window.__oceanEngine;
+  if (!engine) return;
+
+  const fishAttr = document.body.dataset.oceanFish;
+  const parsedFish = fishAttr ? Number(fishAttr) : NaN;
+  const targetFish = Number.isFinite(parsedFish) && parsedFish > 0 ? parsedFish : undefined;
+  if (typeof engine.setFishCount === 'function') {
+    engine.setFishCount(targetFish);
+  }
+
+  if (typeof engine.setPalette === 'function') {
+    const cs = getComputedStyle(document.body);
+    const beniHex = cs.getPropertyValue('--koi-beni').trim() || '#dc4638';
+    const shiroHex = cs.getPropertyValue('--koi-shiro').trim() || '#e8dcc8';
+    const orangeHex = cs.getPropertyValue('--koi-orange').trim() || '#e89040';
+    const kinHex = cs.getPropertyValue('--koi-kin').trim() || '#d4a84b';
+
+    const beni = parseCssHexToRgb(beniHex, [220, 56, 42]);
+    const shiro = parseCssHexToRgb(shiroHex, [240, 236, 228]);
+    const orange = parseCssHexToRgb(orangeHex, [232, 140, 36]);
+    const kin = parseCssHexToRgb(kinHex, [210, 168, 58]);
+
+    engine.setPalette({
+      accents: [beniHex, shiroHex, kinHex, orangeHex],
+      bubble: `rgb(${Math.round((shiro[0] + kin[0]) / 2)},${Math.round((shiro[1] + kin[1]) / 2)},${Math.round((shiro[2] + kin[2]) / 2)})`,
+      koiRgb: [beni, shiro, [36, 34, 38], orange, kin]
+    });
+  }
+}
+
 class OceanBoot {
   constructor() {
     if (window.__oceanEngine) return;
     const canvas = document.querySelector('[data-ocean]');
     if (!canvas || typeof OceanEngine !== 'function') return;
-    // Persistent pond: boot once with the default home palette (ignore per-page universe tint).
+    const fishAttr = document.body.dataset.oceanFish;
+    const parsedFish = fishAttr ? Number(fishAttr) : NaN;
+    const fishCount = Number.isFinite(parsedFish) && parsedFish > 0 ? parsedFish : undefined;
     // Easter egg: one azure "~" minnow in the school → chamber.
     window.__oceanEngine = new OceanEngine(canvas, undefined, {
+      fishCount,
       onSpecialFishClick: () => {
         location.assign('/koi.html');
       }
     });
+    syncOceanAtmosphere();
     const powerOn = systemReducedMotion() || readOceanPowerPref();
     applyOceanPowerSave(powerOn);
+  }
+}
+
+class CommandPaletteTrigger {
+  constructor(signal) {
+    this.mount();
+    const btn = document.querySelector('[data-cmd-trigger]');
+    if (!btn) return;
+    const ui = uiStrings().commandPalette;
+    const isApple = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform || navigator.userAgent || '');
+    const shortcut = isApple ? '⌘K' : 'Ctrl+K';
+    btn.textContent = shortcut;
+    btn.title = `${ui.triggerLabel || ui.dialogLabel} (${shortcut})`;
+    btn.setAttribute('aria-label', `${ui.triggerLabel || ui.dialogLabel} (${shortcut})`);
+    btn.addEventListener(
+      'click',
+      () => {
+        if (window.__commandPalette) {
+          window.__commandPalette.show();
+        }
+      },
+      { signal }
+    );
+  }
+
+  mount() {
+    const content = document.querySelector('.header__content');
+    if (!content || content.querySelector('[data-cmd-trigger]')) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'header__cmd-trigger';
+    btn.setAttribute('data-cmd-trigger', '');
+    const powerBtn = content.querySelector('[data-ocean-power]');
+    const lang = content.querySelector('.header__lang');
+    const toggle = content.querySelector('[data-nav-toggle]');
+    if (powerBtn) content.insertBefore(btn, powerBtn);
+    else if (lang) content.insertBefore(btn, lang);
+    else if (toggle) content.insertBefore(btn, toggle);
+    else content.appendChild(btn);
   }
 }
 
@@ -1058,31 +1359,50 @@ class CommandPalette {
       { group: ui.sections, label: ui.contact, href: `${homeBase}#contact`, keywords: 'contact' }
     );
 
-    document.querySelectorAll('.project-card').forEach((card) => {
-      const title = card.querySelector('.project-title')?.textContent?.trim();
-      const link = card.querySelector('.project-link');
-      if (!title || !link) return;
-      items.push({
-        group: ui.projects,
-        label: title,
-        href: link.getAttribute('href'),
-        external: link.target === '_blank',
-        keywords: title
+    const catalog = window.__projectsCatalog;
+    if (catalog?.projects?.length) {
+      catalog.projects.forEach((proj) => {
+        const title = (proj.titles && proj.titles[locale]) || proj.id;
+        const href = proj.githubOnly
+          ? proj.githubUrl
+          : proj.detailPaths && proj.detailPaths[locale];
+        if (!title || !href) return;
+        const techKeywords = (proj.technologies || []).join(' ');
+        items.push({
+          group: ui.projects,
+          label: proj.featured ? `★ ${title}` : title,
+          href,
+          external: !!proj.githubOnly,
+          keywords: `${title} ${proj.id} ${techKeywords}`
+        });
       });
-    });
+    } else {
+      document.querySelectorAll('.project-card').forEach((card) => {
+        const title = card.querySelector('.project-title')?.textContent?.trim();
+        const link = card.querySelector('.project-link');
+        if (!title || !link) return;
+        items.push({
+          group: ui.projects,
+          label: title,
+          href: link.getAttribute('href'),
+          external: link.target === '_blank',
+          keywords: title
+        });
+      });
 
-    if (!document.querySelector('.project-card')) {
-      document.querySelectorAll('.project-hero__title').forEach((h1) => {
-        const title = h1.textContent.trim();
-        if (title) {
-          items.push({
-            group: ui.projects,
-            label: title,
-            href: location.pathname,
-            keywords: title
-          });
-        }
-      });
+      if (!document.querySelector('.project-card')) {
+        document.querySelectorAll('.project-hero__title').forEach((h1) => {
+          const title = h1.textContent.trim();
+          if (title) {
+            items.push({
+              group: ui.projects,
+              label: title,
+              href: location.pathname,
+              keywords: title
+            });
+          }
+        });
+      }
     }
 
     const otherLang = locale === 'fr' ? 'en' : 'fr';
@@ -1121,6 +1441,14 @@ class CommandPalette {
   show() {
     const ui = this.ui();
     this.items = this.collectItems();
+    if (!window.__projectsCatalog) {
+      getProjectsCatalog().then((data) => {
+        if (data && this.open) {
+          this.items = this.collectItems();
+          this.renderList();
+        }
+      });
+    }
     this.root.setAttribute('aria-label', ui.dialogLabel);
     this.input.placeholder = ui.placeholder;
     this.empty.textContent = ui.empty;
@@ -1464,6 +1792,8 @@ function bootPage() {
   new SiteChrome(signal);
   syncCopyrightYears();
   new OceanPowerToggle(signal);
+  new CommandPaletteTrigger(signal);
+  syncOceanAtmosphere();
   new KoiSiteHint();
 
   if (document.querySelector('.projects-filters') && document.querySelectorAll('.project-card').length) {
@@ -1536,6 +1866,16 @@ function syncHreflangAlternates(doc) {
   });
 }
 
+function syncJsonLd(doc) {
+  document.querySelectorAll('script[type="application/ld+json"]').forEach((el) => el.remove());
+  doc.querySelectorAll('script[type="application/ld+json"]').forEach((next) => {
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = next.textContent || '';
+    document.head.appendChild(script);
+  });
+}
+
 function syncDocumentHead(doc) {
   document.documentElement.lang = doc.documentElement.lang || document.documentElement.lang;
   document.title = doc.title;
@@ -1545,19 +1885,55 @@ function syncDocumentHead(doc) {
   syncLinkByRel(doc, 'canonical');
   syncLinkByRel(doc, 'icon');
   syncHreflangAlternates(doc);
+  syncJsonLd(doc);
 
   ['og:type', 'og:title', 'og:description', 'og:url', 'og:image', 'og:image:width', 'og:image:height'].forEach((property) => {
     syncMetaByProperty(doc, property);
   });
 }
 
+function normalizePathname(pathname) {
+  let p = (pathname || '/').replace(/\/index\.html$/i, '/');
+  if (p === '/fr' || p === '/en') p += '/';
+  return p || '/';
+}
+
 class SoftNav {
   constructor() {
     this.pending = false;
+    this.currentDocKey = this.getDocKey(location);
     document.addEventListener('click', (e) => this.onClick(e));
     window.addEventListener('popstate', () => {
+      const nextKey = this.getDocKey(location);
+      if (nextKey === this.currentDocKey) {
+        this.scrollToHash(location.hash, 'smooth');
+        return;
+      }
       this.load(location.href, false);
     });
+  }
+
+  getDocKey(urlLike) {
+    return `${normalizePathname(urlLike.pathname)}${urlLike.search || ''}`;
+  }
+
+  scrollToHash(hash, behavior = 'smooth') {
+    if (!hash || hash === '#' || hash === '#home') {
+      const top = document.getElementById('home');
+      if (top) top.focus({ preventScroll: true });
+      window.scrollTo({ top: 0, behavior });
+      return;
+    }
+    let target = null;
+    try {
+      target = document.querySelector(hash);
+    } catch {
+      const id = decodeURIComponent(hash.slice(1));
+      target = document.getElementById(id);
+    }
+    if (target) {
+      target.scrollIntoView({ behavior });
+    }
   }
 
   onClick(e) {
@@ -1576,12 +1952,13 @@ class SoftNav {
     if (url.origin !== location.origin) return;
     if (!this.isSoftUrl(url)) return;
 
-    if (
-      url.pathname === location.pathname &&
-      url.search === location.search &&
-      url.hash &&
-      !hrefAttr.startsWith('http')
-    ) {
+    if (this.getDocKey(url) === this.getDocKey(location) && url.hash) {
+      e.preventDefault();
+      const nextHref = `${location.pathname}${location.search}${url.hash}`;
+      if (`${location.pathname}${location.search}${location.hash}` !== nextHref) {
+        history.pushState({ soft: true }, '', nextHref);
+      }
+      this.scrollToHash(url.hash, 'smooth');
       return;
     }
 
@@ -1593,7 +1970,7 @@ class SoftNav {
     const p = url.pathname;
     if (p.startsWith('/assets/')) return false;
     if (/\.(pdf|png|jpe?g|webp|svg|zip|css|js|json|xml|txt)$/i.test(p)) return false;
-    if (p === '/404.html' || p.endsWith('/404.html')) return false;
+    if (p === '/404.html' || p.endsWith('/404.html') || p === '/koi.html' || p.endsWith('/koi.html')) return false;
     return true;
   }
 
@@ -1602,18 +1979,29 @@ class SoftNav {
     this.pending = true;
     document.documentElement.classList.add('is-soft-nav');
     try {
-      const res = await fetch(href, { headers: { Accept: 'text/html' }, credentials: 'same-origin' });
-      if (!res.ok) {
-        location.href = href;
+      const targetUrl = new URL(href, location.href);
+      let fetchPath = targetUrl.pathname;
+      let res = await fetch(fetchPath, { headers: { Accept: 'text/html' }, credentials: 'same-origin' });
+      let html = res.ok ? await res.text() : '';
+      let doc = html ? new DOMParser().parseFromString(html, 'text/html') : null;
+
+      if ((!res.ok || !doc?.querySelector('.site')) && normalizePathname(fetchPath).endsWith('/')) {
+        const fallbackPath = `${normalizePathname(fetchPath)}index.html`;
+        res = await fetch(fallbackPath, { headers: { Accept: 'text/html' }, credentials: 'same-origin' });
+        html = res.ok ? await res.text() : '';
+        doc = html ? new DOMParser().parseFromString(html, 'text/html') : null;
+      }
+
+      if (!res.ok || !doc) {
+        location.assign(href);
         return;
       }
-      const html = await res.text();
-      const doc = new DOMParser().parseFromString(html, 'text/html');
+
       const nextSite = doc.querySelector('.site');
       const curSite = document.querySelector('.site');
       const nextOcean = doc.querySelector('[data-ocean]');
       if (!nextSite || !curSite || !nextOcean) {
-        location.href = href;
+        location.assign(href);
         return;
       }
 
@@ -1633,22 +2021,20 @@ class SoftNav {
       syncDocumentHead(doc);
 
       if (push) history.pushState({ soft: true }, '', href);
+      this.currentDocKey = this.getDocKey(targetUrl);
 
-      const url = new URL(href, location.href);
-      if (url.hash) {
-        const target = document.querySelector(url.hash);
-        if (target) {
-          target.scrollIntoView();
-        } else {
-          window.scrollTo(0, 0);
-        }
+      bootPage();
+
+      if (targetUrl.hash) {
+        this.scrollToHash(targetUrl.hash, 'auto');
+        requestAnimationFrame(() => {
+          this.scrollToHash(targetUrl.hash, 'auto');
+        });
       } else {
         window.scrollTo(0, 0);
       }
-
-      bootPage();
     } catch {
-      location.href = href;
+      location.assign(href);
     } finally {
       this.pending = false;
       document.documentElement.classList.remove('is-soft-nav');
@@ -1657,6 +2043,7 @@ class SoftNav {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  getProjectsCatalog();
   new OceanBoot();
   bootPage();
   new SoftNav();

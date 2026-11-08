@@ -224,6 +224,7 @@ textarea {
   color: var(--koi-shiro);
 }
 
+.header__cmd-trigger,
 .header__ocean-power,
 .header__lang,
 .header__toggle {
@@ -252,8 +253,8 @@ textarea {
   border-color: var(--accent);
 }
 
+.header__cmd-trigger,
 .header__ocean-power {
-  margin-left: auto;
   background: none;
   border: 1px solid var(--line);
   color: var(--muted);
@@ -263,12 +264,28 @@ textarea {
   text-transform: uppercase;
   font-size: 0.65rem;
   white-space: nowrap;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
+.header__cmd-trigger {
+  margin-left: auto;
+}
+
+.header__ocean-power {
+  margin-left: auto;
+}
+
+.header__cmd-trigger ~ .header__ocean-power {
+  margin-left: 0;
+}
+
+.header__cmd-trigger:hover,
+.header__cmd-trigger:focus-visible,
 .header__ocean-power:hover,
 .header__ocean-power[aria-pressed="true"] {
   color: var(--accent);
   border-color: var(--accent);
+  outline: none;
 }
 
 .header__ocean-power:disabled {
@@ -298,6 +315,7 @@ textarea {
     display: none;
   }
 
+  .header__cmd-trigger,
   .header__ocean-power {
     font-size: 0.6rem;
     padding: 0.28rem 0.4rem;
@@ -504,19 +522,56 @@ textarea {
 
 .projects-filters-toolbar {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 0.65rem 0.85rem;
 }
 
 @media (max-width: 40em) {
   .projects-filters-toolbar {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .projects-filters-search {
+    grid-column: 1 / -1;
+    order: 2;
   }
 
   .projects-filters-search__count {
     grid-column: 1 / -1;
+    order: 3;
+    line-height: 1.4;
   }
+}
+
+.projects-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  height: 2.5rem;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0 0.75rem;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.projects-sort-btn:hover,
+.projects-sort-btn:focus-visible {
+  border-color: var(--accent);
+  color: var(--koi-shiro);
+  outline: none;
+}
+
+.projects-sort-btn[data-sort-mode="featured"] {
+  border-color: color-mix(in srgb, var(--koi-kin) 55%, var(--line));
+  color: var(--koi-kin);
 }
 
 .filter-btn {
@@ -676,14 +731,41 @@ textarea {
   border-bottom: 1px solid var(--line);
 }
 
+.project-card[data-featured="true"] {
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--koi-kin) 7%, transparent), transparent 75%);
+}
+
 .project-card.filtered-out {
   display: none;
+}
+
+.project-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
 }
 
 .project-title {
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.03em;
+}
+
+.project-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--koi-kin);
+  border: 1px solid color-mix(in srgb, var(--koi-kin) 55%, transparent);
+  background: color-mix(in srgb, var(--koi-kin) 12%, transparent);
 }
 
 .tech-tags {
@@ -695,6 +777,8 @@ textarea {
 }
 
 .tech-tag {
+  position: relative;
+  z-index: 2;
   display: inline-block;
   padding: 0.18rem 0.5rem;
   font-weight: 600;
@@ -702,6 +786,20 @@ textarea {
   color: var(--koi-beni);
   background: color-mix(in srgb, var(--koi-beni) 16%, transparent);
   border: 1px solid color-mix(in srgb, var(--koi-beni) 45%, transparent);
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tech-tag:hover,
+.tech-tag:focus-visible {
+  filter: brightness(1.22);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.tech-tag.is-active {
+  box-shadow: 0 0 0 1px currentColor;
+  filter: brightness(1.25);
 }
 
 .tech-tag:nth-child(4n + 2) {
@@ -1297,11 +1395,30 @@ body.spotlight-open {
 .project-tech {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 0.9rem;
+  gap: 0.45rem 0.55rem;
   color: var(--koi-shiro);
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.03em;
+}
+
+.project-tech__item {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, #000 45%, transparent);
+  color: var(--koi-shiro);
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.project-tech__item:hover,
+.project-tech__item:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--koi-kin) 12%, transparent);
+  outline: none;
 }
 
 .project-actions {
@@ -1309,6 +1426,79 @@ body.spotlight-open {
   flex-wrap: wrap;
   gap: 0.75rem;
   padding-block: var(--space-l);
+}
+
+/* Architecture diagram (project detail pages) */
+.arch-diagram {
+  margin-top: var(--space-s);
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, #000 62%, transparent);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  overflow-x: auto;
+}
+
+.arch-svg {
+  width: 100%;
+  min-width: 42rem;
+  height: auto;
+  display: block;
+  overflow: visible;
+  font-family: var(--font);
+}
+
+.arch-legend {
+  margin-top: var(--space-m);
+  padding-top: var(--space-s);
+  border-top: 1px dashed var(--line);
+}
+
+/* Previous / Next project pager */
+.project-pager {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-s);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 38em) {
+  .project-pager {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-pager__link {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, #000 45%, transparent);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.project-pager__link--next {
+  text-align: right;
+}
+
+.project-pager__link:hover,
+.project-pager__link:focus-visible {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--koi-kin) 10%, transparent);
+  outline: none;
+}
+
+.project-pager__eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.project-pager__title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--koi-shiro);
 }
 
 .scroll-reveal {

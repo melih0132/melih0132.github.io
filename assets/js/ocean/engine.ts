@@ -109,6 +109,14 @@ export class OceanEngine {
   /** Adaptation: clock-driven chromatic drift. */
   setPalette(opts: { accents?: string[]; bubble?: string; koiRgb?: [number, number, number][] }) {
     this.renderer.setPalette(opts);
+    if (this.isStill()) this.drawStill();
+  }
+
+  /** Adaptation: dynamically adjust school size across pages (e.g. data-ocean-fish). */
+  setFishCount(count?: number) {
+    this.options.fishCount = count;
+    this.world.setFishCount(count);
+    if (this.isStill()) this.drawStill();
   }
 
   /** Adaptation: visual ripple without scaring the school. */

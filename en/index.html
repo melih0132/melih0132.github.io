@@ -18,6 +18,62 @@
   <link rel="stylesheet" href="/assets/css/style.min.css" />
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
   <title>Melih Cetinkaya | Full stack developer</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://melih0132.github.io/#person",
+        "name": "Melih Cetinkaya",
+        "jobTitle": "Full Stack Developer",
+        "url": "https://melih0132.github.io/en/",
+        "image": "https://melih0132.github.io/assets/img/pp.jpg",
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Université Grenoble Alpes"
+          },
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Université Savoie Mont Blanc (IUT Annecy)"
+          }
+        ],
+        "knowsAbout": [
+          "Software Engineering",
+          "Application Architecture",
+          "FastAPI",
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Vue.js",
+          ".NET Core",
+          "Symfony",
+          "Laravel",
+          "Kotlin",
+          "Flutter",
+          "PostgreSQL"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/melih-ctk/",
+          "https://github.com/melih0132",
+          "https://www.instagram.com/m.ctk1/",
+          "https://x.com/MelMet32"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://melih0132.github.io/#website",
+        "url": "https://melih0132.github.io/en/",
+        "name": "Melih Cetinkaya | Portfolio",
+        "inLanguage": "en",
+        "publisher": {
+          "@id": "https://melih0132.github.io/#person"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
@@ -79,7 +135,7 @@
           <header class="section__head">
             <span class="section__eyebrow">Index</span>
             <h2 class="section__title">Projects</h2>
-            <p class="section__sub">A selection of academic and personal work.</p>
+            <p class="section__sub">A selection of academic and personal work - distributed architectures, full stack and mobile.</p>
           </header>
 
           <div class="projects-toolbar">
@@ -89,7 +145,74 @@
           </div>
 
           <ul class="projects-list">
-            <li class="project-card" data-project-id="evit-shuriken">
+            <li class="project-card" data-project-id="smarthome-lite" data-featured="true" data-order="9">
+              <div class="project-card__head">
+                <h3 class="project-title">SmartHome Lite</h3>
+                <span class="project-badge">★ Featured</span>
+              </div>
+              <div class="tech-tags">
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Next</span>
+                <span class="tech-tag">Kotlin</span>
+                <span class="tech-tag">Jetpack Compose</span>
+              </div>
+              <p class="project-description">Distributed smart home with <strong>FastAPI</strong>, <strong>Next</strong>, <strong>Kotlin</strong> / <strong>Jetpack Compose</strong>, and <strong>Z-Wave</strong>.</p>
+              <div class="project-links"><a class="project-link" href="/en/projects/smarthome-lite.html">View details</a></div>
+            </li>
+            <li class="project-card" data-project-id="heva" data-featured="true" data-order="8">
+              <div class="project-card__head">
+                <h3 class="project-title">Helvetic Events</h3>
+                <span class="project-badge">★ Featured</span>
+              </div>
+              <div class="tech-tags">
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">OpenAI</span>
+                <span class="tech-tag">Framer</span>
+              </div>
+              <p class="project-description">Event management platform with <strong>AI</strong> features and <strong>secure authentication</strong>.</p>
+              <div class="project-links"><a class="project-link" href="/en/projects/heva.html">View details</a></div>
+            </li>
+            <li class="project-card" data-project-id="kube" data-featured="true" data-order="2">
+              <div class="project-card__head">
+                <h3 class="project-title">KUBE</h3>
+                <span class="project-badge">★ Featured</span>
+              </div>
+              <div class="tech-tags">
+                <span class="tech-tag">Unity</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">Visual Studio</span>
+              </div>
+              <p class="project-description"><strong>Unity</strong> game in <strong>.NET/C#</strong>, exploring game-dev tooling.</p>
+              <div class="project-links"><a class="project-link" href="/en/projects/kube.html">View details</a></div>
+            </li>
+            <li class="project-card" data-project-id="uber-laravel" data-featured="true" data-order="5">
+              <div class="project-card__head">
+                <h3 class="project-title">Uber Laravel</h3>
+                <span class="project-badge">★ Featured</span>
+              </div>
+              <div class="tech-tags">
+                <span class="tech-tag">Laravel</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Power BI</span>
+              </div>
+              <p class="project-description">Uber-like app with <strong>Laravel</strong>, <strong>PostgreSQL</strong>, and <strong>GDPR</strong>-minded analytics.</p>
+              <div class="project-links"><a class="project-link" href="/en/projects/uber-laravel.html">View details</a></div>
+            </li>
+            <li class="project-card" data-project-id="uber-vuejs-dotnet" data-featured="true" data-order="7">
+              <div class="project-card__head">
+                <h3 class="project-title">Uber Vue/.NET</h3>
+                <span class="project-badge">★ Featured</span>
+              </div>
+              <div class="tech-tags">
+                <span class="tech-tag">Vue.js</span>
+                <span class="tech-tag">.NET Core</span>
+                <span class="tech-tag">RESTful API</span>
+              </div>
+              <p class="project-description">Modern transport stack: <strong>Vue.js</strong> frontend, <strong>.NET Core</strong> backend, geolocation and payments.</p>
+              <div class="project-links"><a class="project-link" href="/en/projects/uber-vuejs-dotnet.html">View details</a></div>
+            </li>
+            <li class="project-card" data-project-id="evit-shuriken" data-order="0">
               <h3 class="project-title">Evit'Shuriken</h3>
               <div class="tech-tags">
                 <span class="tech-tag">WPF</span>
@@ -99,7 +222,7 @@
               <p class="project-description">Game built with <strong>.NET/C#</strong> and <strong>XAML</strong> in my first year of computer science.</p>
               <div class="project-links"><a class="project-link" href="/en/projects/evit-shuriken.html">View details</a></div>
             </li>
-            <li class="project-card" data-project-id="dortan-app">
+            <li class="project-card" data-project-id="dortan-app" data-order="1">
               <h3 class="project-title">DortanApp</h3>
               <div class="tech-tags">
                 <span class="tech-tag">WPF</span>
@@ -110,17 +233,7 @@
               <p class="project-description">Town-hall reservation manager with a <strong>WPF</strong> UI and <strong>PostgreSQL</strong>.</p>
               <div class="project-links"><a class="project-link" href="/en/projects/dortan-app.html">View details</a></div>
             </li>
-            <li class="project-card" data-project-id="kube">
-              <h3 class="project-title">KUBE</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">Unity</span>
-                <span class="tech-tag">C#</span>
-                <span class="tech-tag">Visual Studio</span>
-              </div>
-              <p class="project-description"><strong>Unity</strong> game in <strong>.NET/C#</strong>, exploring game-dev tooling.</p>
-              <div class="project-links"><a class="project-link" href="/en/projects/kube.html">View details</a></div>
-            </li>
-            <li class="project-card" data-project-id="phaser-games">
+            <li class="project-card" data-project-id="phaser-games" data-order="3">
               <h3 class="project-title">Phaser Games</h3>
               <div class="tech-tags">
                 <span class="tech-tag">Phaser</span>
@@ -131,7 +244,7 @@
               <p class="project-description"><strong>Phaser</strong> games with <strong>Express</strong> and real-time <strong>Socket.io</strong>.</p>
               <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/web/phaser-projects" target="_blank" rel="noreferrer">View on GitHub</a></div>
             </li>
-            <li class="project-card" data-project-id="lpo">
+            <li class="project-card" data-project-id="lpo" data-order="4">
               <h3 class="project-title">LPO</h3>
               <div class="tech-tags">
                 <span class="tech-tag">PostgreSQL</span>
@@ -141,17 +254,7 @@
               <p class="project-description">Bird-counting project with <strong>PostgreSQL</strong>, <strong>Excel</strong> analysis, and <strong>Power BI</strong>.</p>
               <div class="project-links"><a class="project-link" href="/en/projects/lpo.html">View details</a></div>
             </li>
-            <li class="project-card" data-project-id="uber-laravel">
-              <h3 class="project-title">Uber Laravel</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">Laravel</span>
-                <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">Power BI</span>
-              </div>
-              <p class="project-description">Uber-like app with <strong>Laravel</strong>, <strong>PostgreSQL</strong>, and <strong>GDPR</strong>-minded analytics.</p>
-              <div class="project-links"><a class="project-link" href="/en/projects/uber-laravel.html">View details</a></div>
-            </li>
-            <li class="project-card" data-project-id="flutter-apps">
+            <li class="project-card" data-project-id="flutter-apps" data-order="6">
               <h3 class="project-title">Flutter</h3>
               <div class="tech-tags">
                 <span class="tech-tag">Flutter</span>
@@ -161,39 +264,7 @@
               <p class="project-description"><strong>Cross-platform</strong> mobile apps, including weather and <strong>REST</strong> clients.</p>
               <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/flutter" target="_blank" rel="noreferrer">View on GitHub</a></div>
             </li>
-            <li class="project-card" data-project-id="uber-vuejs-dotnet">
-              <h3 class="project-title">Uber Vue/.NET</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">Vue.js</span>
-                <span class="tech-tag">.NET Core</span>
-                <span class="tech-tag">RESTful API</span>
-              </div>
-              <p class="project-description">Modern transport stack: <strong>Vue.js</strong> frontend, <strong>.NET Core</strong> backend, geolocation and payments.</p>
-              <div class="project-links"><a class="project-link" href="/en/projects/uber-vuejs-dotnet.html">View details</a></div>
-            </li>
-            <li class="project-card" data-project-id="heva">
-              <h3 class="project-title">Helvetic Events</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">OpenAI</span>
-                <span class="tech-tag">Framer</span>
-              </div>
-              <p class="project-description">Event management platform with <strong>AI</strong> features and <strong>secure authentication</strong>.</p>
-              <div class="project-links"><a class="project-link" href="/en/projects/heva.html">View details</a></div>
-            </li>
-            <li class="project-card" data-project-id="smarthome-lite">
-              <h3 class="project-title">SmartHome Lite</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">Next</span>
-                <span class="tech-tag">Kotlin</span>
-                <span class="tech-tag">Jetpack Compose</span>
-              </div>
-              <p class="project-description">Distributed smart home with <strong>FastAPI</strong>, <strong>Next</strong>, <strong>Kotlin</strong> / <strong>Jetpack Compose</strong>, and <strong>Z-Wave</strong>.</p>
-              <div class="project-links"><a class="project-link" href="/en/projects/smarthome-lite.html">View details</a></div>
-            </li>
-            <li class="project-card" data-project-id="shared-ia">
+            <li class="project-card" data-project-id="shared-ia" data-order="10">
               <h3 class="project-title">Shared IA</h3>
               <div class="tech-tags">
                 <span class="tech-tag">Node.js</span>
@@ -203,7 +274,7 @@
               <p class="project-description">Collaborative <strong>AI</strong> chat with <strong>collective validation</strong> and conflict resolution.</p>
               <div class="project-links"><a class="project-link" href="/en/projects/shared-ia.html">View details</a></div>
             </li>
-            <li class="project-card" data-project-id="swift-apps">
+            <li class="project-card" data-project-id="swift-apps" data-order="11">
               <h3 class="project-title">Swift</h3>
               <div class="tech-tags">
                 <span class="tech-tag">Swift</span>
@@ -213,7 +284,7 @@
               <p class="project-description">Native <strong>iOS</strong> apps with <strong>Swift</strong> and <strong>UIKit</strong>.</p>
               <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/swift" target="_blank" rel="noreferrer">View on GitHub</a></div>
             </li>
-            <li class="project-card" data-project-id="kotlin-apps">
+            <li class="project-card" data-project-id="kotlin-apps" data-order="12">
               <h3 class="project-title">Kotlin</h3>
               <div class="tech-tags">
                 <span class="tech-tag">Kotlin</span>
@@ -223,7 +294,7 @@
               <p class="project-description"><strong>Android</strong> apps with <strong>Jetpack Compose</strong> and <strong>Material Design 3</strong>.</p>
               <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/kotlin" target="_blank" rel="noreferrer">View on GitHub</a></div>
             </li>
-            <li class="project-card" data-project-id="dotnet-core-projects">
+            <li class="project-card" data-project-id="dotnet-core-projects" data-order="13">
               <h3 class="project-title">.NET Core</h3>
               <div class="tech-tags">
                 <span class="tech-tag">ASP.NET Core</span>
@@ -233,7 +304,7 @@
               <p class="project-description"><strong>REST APIs</strong>, <strong>WinUI 3</strong>, and <strong>.NET</strong> web services.</p>
               <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/.net-core-projects" target="_blank" rel="noreferrer">View on GitHub</a></div>
             </li>
-            <li class="project-card" data-project-id="python-projects">
+            <li class="project-card" data-project-id="python-projects" data-order="14">
               <h3 class="project-title">Python</h3>
               <div class="tech-tags">
                 <span class="tech-tag">Python</span>
@@ -243,7 +314,7 @@
               <p class="project-description">Utilities, quizzes, and ranking tools with <strong>GUI</strong>.</p>
               <div class="project-links"><a class="project-link" href="https://github.com/melih0132/all-my-projects/tree/main/python" target="_blank" rel="noreferrer">View on GitHub</a></div>
             </li>
-            <li class="project-card" data-project-id="ranking">
+            <li class="project-card" data-project-id="ranking" data-order="15">
               <h3 class="project-title">Ranking</h3>
               <div class="tech-tags">
                 <span class="tech-tag">Python</span>
@@ -253,7 +324,7 @@
               <p class="project-description">Ranking manager with a <strong>Tkinter</strong> UI and <strong>SQLite</strong> storage.</p>
               <div class="project-links"><a class="project-link" href="/en/projects/ranking.html">View details</a></div>
             </li>
-            <li class="project-card" data-project-id="la-guilde-des-seigneurs">
+            <li class="project-card" data-project-id="la-guilde-des-seigneurs" data-order="16">
               <h3 class="project-title">La Guilde des Seigneurs</h3>
               <div class="tech-tags">
                 <span class="tech-tag">Symfony</span>
@@ -264,7 +335,7 @@
               <p class="project-description"><strong>Symfony</strong> monorepo: <strong>JWT</strong> <strong>REST API</strong> and a consuming web app.</p>
               <div class="project-links"><a class="project-link" href="/en/projects/la-guilde-des-seigneurs.html">View details</a></div>
             </li>
-            <li class="project-card" data-project-id="web-projects">
+            <li class="project-card" data-project-id="web-projects" data-order="17">
               <h3 class="project-title">Web</h3>
               <div class="tech-tags">
                 <span class="tech-tag">PHP</span>

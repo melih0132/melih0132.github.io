@@ -16,7 +16,7 @@ import { SHARK_NODES, type Shark, type SharkKind, type World } from "./world.ts"
 const ALPHA_LEVELS = 6;
 const FISH_ALPHAS = [0.28, 0.42, 0.58, 0.74, 0.9];
 
-/** Adaptation: koi skins — beni, shiro, sumi, orange, kin. */
+/** Adaptation: koi skins - beni, shiro, sumi, orange, kin. */
 const KOI_RGB: [number, number, number][] = [
   [220, 56, 42],
   [240, 236, 228],
@@ -289,22 +289,22 @@ const SHAPES: Record<SharkKind, SharkShape> = {
     gills: [0.14, 0.22],
     tint: [1.1, 0.96, 0.76],
   },
-  // Adaptation: kohaku — cream body, vermillion hi patches.
+  // Adaptation: kohaku - cream body, vermillion hi patches.
   kohaku: {
     ...CARP_SHAPE,
     tint: [1.12, 1.05, 0.92],
   },
-  // Adaptation: showa — cream body, vermillion + sumi (black) patches.
+  // Adaptation: showa - cream body, vermillion + sumi (black) patches.
   showa: {
     ...CARP_SHAPE,
     tint: [1.08, 1.02, 0.94],
   },
-  // Adaptation: ogon — metallic gold body, sparse darker flecks.
+  // Adaptation: ogon - metallic gold body, sparse darker flecks.
   ogon: {
     ...CARP_SHAPE,
     tint: [1.2, 1.05, 0.55],
   },
-  // Adaptation: sora — pale sky body, azure hi patches (companion page).
+  // Adaptation: sora - pale sky body, azure hi patches (companion page).
   sora: {
     ...CARP_SHAPE,
     tint: [0.88, 1.05, 1.22],

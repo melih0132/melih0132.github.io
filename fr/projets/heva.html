@@ -19,6 +19,45 @@
   <link rel="stylesheet" href="/assets/css/style.min.css" />
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
   <title>Helvetic Events | Melih Cetinkaya</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Helvetic Events",
+    "description": "Plateforme de gestion d'événements avec FastAPI, React et intégration OpenAI.",
+    "url": "https://melih0132.github.io/fr/projets/heva.html",
+    "image": "https://melih0132.github.io/assets/og/heva.png",
+    "inLanguage": "fr",
+    "author": {
+      "@type": "Person",
+      "name": "Melih Cetinkaya",
+      "url": "https://melih0132.github.io/fr/"
+    },
+    "programmingLanguage": [
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "OpenAI",
+      "Next",
+      "PostgreSQL",
+      "SQLAlchemy",
+      "Alembic",
+      "Pytest",
+      "Tailwind CSS",
+      "RESTful API",
+      "Swagger",
+      "Postman",
+      "Figma",
+      "Framer",
+      "Docker",
+      "Git",
+      "GitHub",
+      "VS Code"
+    ],
+    "codeRepository": "https://heva-events.netlify.app/"
+  }
+  </script>
 </head>
 <body data-ocean-fish="48" data-universe="heva">
   <canvas class="ocean" data-ocean aria-hidden="true"></canvas>
@@ -77,6 +116,65 @@
                 incluant des <strong>migrations de base de données</strong> avec Alembic et des <strong>tests automatisés</strong> avec Pytest.
                 Le frontend développé en <strong>React</strong> avec <strong>TypeScript</strong> offre une
                 expérience utilisateur optimale avec <strong>Tailwind CSS</strong> pour le styling.</p></div></section>
+                <section class="project-block" data-arch-section><div class="wrap"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 960 226" role="img" aria-label="Schéma Clean Architecture Helvetic Events">
+    <defs>
+      <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
+      </marker>
+    </defs>
+    <g transform="translate(10, 16)">
+      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">PORTAIL CLIENT</text>
+      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">SPA React & TS</text>
+      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Briefs événements · Multilingue</text>
+      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Tailwind CSS · Framer</text>
+    </g>
+    <g transform="translate(10, 122)">
+      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">BACK-OFFICE</text>
+      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">Admin Sécurisé</text>
+      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Authentification OTP & 2FA</text>
+      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Suivi projets & devis</text>
+    </g>
+    <g transform="translate(370, 38)">
+      <rect width="220" height="150" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
+      <text x="14" y="51" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">CLEAN ARCHITECTURE</text>
+      <text x="14" y="71" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">Backend FastAPI</text>
+      <text x="14" y="89" fill="var(--muted)" font-size="10.5">Couches Domaine / Application</text>
+      <text x="14" y="105" fill="var(--muted)" font-size="10.5">OpenAPI · Pytest · Docker</text>
+    </g>
+    <g transform="translate(740, 16)">
+      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">PERSISTANCE</text>
+      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">PostgreSQL</text>
+      <text x="14" y="60" fill="var(--muted)" font-size="10.5">ORM SQLAlchemy</text>
+      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Migrations Alembic</text>
+    </g>
+    <g transform="translate(740, 122)">
+      <rect width="210" height="88" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+      <text x="14" y="22" fill="var(--accent)" font-size="9" letter-spacing="1.2" font-weight="600">SERVICE IA</text>
+      <text x="14" y="42" fill="var(--koi-shiro)" font-size="12.5" font-weight="600">OpenAI API</text>
+      <text x="14" y="60" fill="var(--muted)" font-size="10.5">Qualification automatique</text>
+      <text x="14" y="76" fill="var(--muted)" font-size="10.5">Assistant conversationnel</text>
+    </g>
+    <g>
+      <line x1="228" y1="66" x2="362" y2="66" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
+      <text x="295" y="56" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">REST / JSON</text>
+    </g>
+    <g>
+      <line x1="228" y1="160" x2="362" y2="160" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
+      <text x="295" y="150" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">OTP + 2FA</text>
+    </g>
+    <g>
+      <line x1="598" y1="66" x2="732" y2="66" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
+      <text x="665" y="56" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">SQLAlchemy</text>
+    </g>
+    <g>
+      <line x1="598" y1="160" x2="732" y2="160" stroke="var(--accent)" stroke-width="1.25" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" stroke-dasharray="none" />
+      <text x="665" y="150" text-anchor="middle" fill="var(--koi-shiro)" font-size="9.5" letter-spacing="0.4" stroke="#0a0a0a" stroke-width="4" paint-order="stroke">Prompts / Context</text>
+    </g></svg><ul class="arch-legend"><li><strong>Interfaces découplées</strong> · Espace client réactif (React/TypeScript) et portail d’administration protégé par double facteur (OTP / 2FA).</li>
+<li><strong>Backend Clean Architecture</strong> · Séparation stricte des routeurs FastAPI, cas d’usage métier et dépôts de données, testée sous Pytest.</li>
+<li><strong>Qualification IA & Données</strong> · Intégration OpenAI pour qualifier automatiquement les briefs clients et stockage transactionnel PostgreSQL/Alembic.</li></ul></div></div></section>
         <section class="project-block"><div class="wrap"><h2>Fonctionnalités</h2><ul><li><strong>Gestion complète des projets et briefs</strong> · Système complet permettant de créer, gérer et suivre les projets et briefs d'événements avec une interface intuitive.</li>
 <li><strong>Authentification sécurisée</strong> · Système d'authentification robuste avec OTP et authentification à deux facteurs (2FA) pour les administrateurs.</li>
 <li><strong>Intégration IA</strong> · Assistant IA pour la qualification automatique et la conversation automatisée, améliorant l'expérience utilisateur.</li>
@@ -87,12 +185,22 @@
 <figure><img src="/assets/webp/heva/client.webp" alt="Interface client" loading="lazy" width="1897" height="1032" /><figcaption>Interface client avec gestion des services</figcaption></figure>
 <figure><img src="/assets/webp/heva/api.webp" alt="Documentation API" loading="lazy" width="1892" height="1028" /><figcaption>Documentation API interactive avec Swagger</figcaption></figure>
 <figure><img src="/assets/webp/heva/ia.webp" alt="Intégration IA" loading="lazy" width="1232" height="911" /><figcaption>Intégration IA pour l'assistance automatisée</figcaption></figure></div></section>
-        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech">FastAPI · React · TypeScript · Node.js · OpenAI · Next · PostgreSQL · SQLAlchemy · Alembic · Pytest · Tailwind CSS · RESTful API · Swagger · Postman · Figma · Framer · Docker · Git · GitHub · VS Code</p></div></section>
+        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech"><a class="project-tech__item" href="/fr/?tech=fastapi#projects">FastAPI</a> <a class="project-tech__item" href="/fr/?tech=react#projects">React</a> <a class="project-tech__item" href="/fr/?tech=typescript#projects">TypeScript</a> <a class="project-tech__item" href="/fr/?tech=node-js#projects">Node.js</a> <a class="project-tech__item" href="/fr/?tech=openai#projects">OpenAI</a> <a class="project-tech__item" href="/fr/?tech=next#projects">Next</a> <a class="project-tech__item" href="/fr/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/fr/?tech=sqlalchemy#projects">SQLAlchemy</a> <a class="project-tech__item" href="/fr/?tech=alembic#projects">Alembic</a> <a class="project-tech__item" href="/fr/?tech=pytest#projects">Pytest</a> <a class="project-tech__item" href="/fr/?tech=tailwind-css#projects">Tailwind CSS</a> <a class="project-tech__item" href="/fr/?tech=restful-api#projects">RESTful API</a> <a class="project-tech__item" href="/fr/?tech=swagger#projects">Swagger</a> <a class="project-tech__item" href="/fr/?tech=postman#projects">Postman</a> <a class="project-tech__item" href="/fr/?tech=figma#projects">Figma</a> <a class="project-tech__item" href="/fr/?tech=framer#projects">Framer</a> <a class="project-tech__item" href="/fr/?tech=docker#projects">Docker</a> <a class="project-tech__item" href="/fr/?tech=git#projects">Git</a> <a class="project-tech__item" href="/fr/?tech=github#projects">GitHub</a> <a class="project-tech__item" href="/fr/?tech=vs-code#projects">VS Code</a></p></div></section>
         <section class="project-block">
           <div class="wrap">
             <h2>Explorer</h2>
             <div class="project-actions"><a class="btn btn--solid" href="https://heva-events.netlify.app/" target="_blank" rel="noreferrer">Maquette en Ligne</a>
 <a class="btn" href="/fr/#projects">Retour aux projets</a></div>
+            <nav class="project-pager" aria-label="Navigation entre les projets" data-project-pager>
+              <a class="project-pager__link project-pager__link--prev" href="/fr/projets/smarthome-lite.html">
+                <span class="project-pager__eyebrow">← Projet précédent</span>
+                <span class="project-pager__title">SmartHome Lite</span>
+              </a>
+              <a class="project-pager__link project-pager__link--next" href="/fr/projets/kube.html">
+                <span class="project-pager__eyebrow">Projet suivant →</span>
+                <span class="project-pager__title">KUBE</span>
+              </a>
+            </nav>
           </div>
         </section>
       </div>

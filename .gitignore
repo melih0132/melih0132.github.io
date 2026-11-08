@@ -2,6 +2,7 @@
 node_modules/
 package.json
 package-lock.json
+scripts/
 
 # Local-only audio (not for publish)
 assets/mp3/local/
