@@ -4,7 +4,7 @@
       "id": "smarthome-lite",
       "featured": true,
       "featuredOrder": 0,
-      "order": 9,
+      "order": 16,
       "titles": {
         "fr": "SmartHome Lite",
         "en": "SmartHome Lite"
@@ -40,7 +40,7 @@
       "id": "heva",
       "featured": true,
       "featuredOrder": 1,
-      "order": 8,
+      "order": 12,
       "titles": {
         "fr": "Helvetic Events",
         "en": "Helvetic Events"
@@ -77,7 +77,7 @@
       "id": "kube",
       "featured": true,
       "featuredOrder": 2,
-      "order": 2,
+      "order": 8,
       "titles": {
         "fr": "KUBE",
         "en": "KUBE"
@@ -101,7 +101,7 @@
       "id": "uber-laravel",
       "featured": true,
       "featuredOrder": 3,
-      "order": 5,
+      "order": 9,
       "titles": {
         "fr": "Uber Laravel",
         "en": "Uber Laravel"
@@ -134,7 +134,7 @@
       "id": "uber-vuejs-dotnet",
       "featured": true,
       "featuredOrder": 4,
-      "order": 7,
+      "order": 11,
       "titles": {
         "fr": "Uber Vue/.NET",
         "en": "Uber Vue/.NET"
@@ -213,7 +213,7 @@
     {
       "id": "phaser-games",
       "featured": false,
-      "order": 3,
+      "order": 7,
       "titles": {
         "fr": "Phaser Games",
         "en": "Phaser Games"
@@ -236,7 +236,7 @@
     {
       "id": "lpo",
       "featured": false,
-      "order": 4,
+      "order": 6,
       "titles": {
         "fr": "LPO",
         "en": "LPO"
@@ -262,7 +262,7 @@
     {
       "id": "flutter-apps",
       "featured": false,
-      "order": 6,
+      "order": 10,
       "titles": {
         "fr": "Flutter",
         "en": "Flutter"
@@ -281,7 +281,7 @@
     {
       "id": "shared-ia",
       "featured": false,
-      "order": 10,
+      "order": 15,
       "titles": {
         "fr": "Shared IA",
         "en": "Shared IA"
@@ -312,7 +312,7 @@
     {
       "id": "swift-apps",
       "featured": false,
-      "order": 11,
+      "order": 13,
       "titles": {
         "fr": "Swift",
         "en": "Swift"
@@ -332,7 +332,7 @@
     {
       "id": "kotlin-apps",
       "featured": false,
-      "order": 12,
+      "order": 14,
       "titles": {
         "fr": "Kotlin",
         "en": "Kotlin"
@@ -352,7 +352,7 @@
     {
       "id": "dotnet-core-projects",
       "featured": false,
-      "order": 13,
+      "order": 5,
       "titles": {
         "fr": ".NET Core",
         "en": ".NET Core"
@@ -378,7 +378,7 @@
     {
       "id": "python-projects",
       "featured": false,
-      "order": 14,
+      "order": 2,
       "titles": {
         "fr": "Python",
         "en": "Python"
@@ -399,7 +399,7 @@
     {
       "id": "ranking",
       "featured": false,
-      "order": 15,
+      "order": 3,
       "titles": {
         "fr": "Ranking",
         "en": "Ranking"
@@ -421,7 +421,7 @@
     {
       "id": "la-guilde-des-seigneurs",
       "featured": false,
-      "order": 16,
+      "order": 17,
       "titles": {
         "fr": "La Guilde des Seigneurs",
         "en": "La Guilde des Seigneurs"
@@ -452,7 +452,7 @@
     {
       "id": "web-projects",
       "featured": false,
-      "order": 17,
+      "order": 4,
       "titles": {
         "fr": "Web",
         "en": "Web"
