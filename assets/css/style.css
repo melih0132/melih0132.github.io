@@ -1454,6 +1454,11 @@ body.spotlight-open {
   border-top: 1px dashed var(--line);
 }
 
+.arch-diagram:has(.arch-svg) .arch-legend {
+  width: 100%;
+  max-width: none;
+}
+
 @media (max-width: 42rem) {
   .arch-svg {
     display: none;
