@@ -32,14 +32,13 @@ export type SharkKind =
   // Adaptation: carp-shaped koi varieties drawn in place of sharks.
   | "kohaku"
   | "showa"
-  | "ogon"
-  | "sora";
+  | "ogon";
 
 /** Which sharks to put in the water; size is relative to the biggest. */
 export type SharkSpec = {
   kind: SharkKind;
   size: number;
-  /** Adaptation: short text written across the body (easter egg). */
+  /** Adaptation: short text written across the body. */
   label?: string;
 };
 
@@ -54,10 +53,6 @@ export interface WorldOptions {
   /** Overrides the area-based population; 0 leaves the sharks alone. */
   fishCount?: number;
   crossing?: Crossing;
-  /** Adaptation: one koi gently follows the pointer instead of hunting. */
-  companion?: boolean;
-  /** Adaptation: plant one azure minnow as a chamber gate (homepage easter egg). */
-  secretFish?: boolean;
 }
 
 // Adaptation: four koi at different depths (kohaku / showa / ogon).
@@ -88,8 +83,6 @@ export interface Fish {
   depth: number;
   /** Rotation sense shared by a school when it mills into a bait ball. */
   millDir: 1 | -1;
-  /** Adaptation: azure gate fish; click opens /koi.html on the homepage. */
-  special?: boolean;
 }
 
 export interface Shark {
@@ -134,7 +127,7 @@ export class World {
   fish: Fish[] = [];
   sharks: Shark[] = [];
   events: WorldEvent[] = [];
-  pointer = { x: 0, y: 0, active: false, idle: false };
+  pointer = { x: 0, y: 0, active: false };
 
   /** Fish neighbourhood radius; the spatial hash bucket size matches it. */
   private perception = 60;
@@ -155,26 +148,12 @@ export class World {
   private crossing?: Crossing;
   /** Adaptation: phase of the slow vertical meander a crossing shark follows. */
   private meander = rand(0, TAU);
-  /** Adaptation: soft pointer-follow mode for a single koi. */
-  private companion = false;
-  /** Adaptation: spawn one clickable azure minnow. */
-  private secretFish = false;
-  /** Adaptation: orbit angle while the pointer rests. */
-  private companionOrbit = 0;
-  /** Adaptation: previous idle flag, to seed the orbit on transition. */
-  private companionWasIdle = false;
-  /** Adaptation: seconds continuous idle for companion rest transition. */
-  private companionIdleFor = 0;
-  /** Adaptation: true once idle long enough to rest near the bottom. */
-  private companionResting = false;
 
   // Adaptation: options object, and plain fields so Node can run the tests without a build.
   constructor(sharkSpecs: SharkSpec[] = DEFAULT_SHARKS, options: WorldOptions = {}) {
     this.sharkSpecs = sharkSpecs;
     this.fishCount = options.fishCount;
     this.crossing = options.crossing;
-    this.companion = !!options.companion;
-    this.secretFish = !!options.secretFish;
   }
 
   /** Adaptation: true once a crossing shark has fully left the canvas. */
@@ -290,15 +269,8 @@ export class World {
           turn: 0,
           depth: rand(0.55, 1),
           millDir,
-          special: false,
         });
       }
-    }
-    // Adaptation: one azure minnow hidden in the school (homepage chamber gate).
-    if (this.secretFish && this.fish.length > 0) {
-      const pick = this.fish[randInt(0, this.fish.length - 1)];
-      pick.special = true;
-      pick.depth = 1;
     }
     this.bucketNext = new Int32Array(this.fish.length);
   }
@@ -320,11 +292,6 @@ export class World {
     }
   }
 
-  /** Adaptation: visual wake only; school stays calm (companion chamber). */
-  softRipple(x: number, y: number) {
-    this.events.push({ kind: "splash", x, y });
-  }
-
   /** Adaptation: dynamically adjust school population without resetting sharks/koi. */
   setFishCount(count?: number) {
     this.fishCount = count;
@@ -334,12 +301,7 @@ export class World {
     if (this.fish.length === target) return;
 
     if (this.fish.length > target) {
-      const specialIdx = this.fish.findIndex((f) => f.special);
-      const specialFish = specialIdx >= 0 ? this.fish[specialIdx] : null;
       this.fish.length = target;
-      if (specialFish && target > 0 && !this.fish.includes(specialFish)) {
-        this.fish[target - 1] = specialFish;
-      }
     } else {
       while (this.fish.length < target) {
         const species = pickSpecies();
@@ -364,37 +326,11 @@ export class World {
             turn: 0,
             depth: rand(0.55, 1),
             millDir,
-            special: false,
           });
         }
       }
-      if (this.secretFish && this.fish.length > 0 && !this.fish.some((f) => f.special)) {
-        const pick = this.fish[randInt(0, this.fish.length - 1)];
-        pick.special = true;
-        pick.depth = 1;
-      }
     }
     this.bucketNext = new Int32Array(this.fish.length);
-  }
-
-  /** Adaptation: snout of the first (companion) shark, if any. */
-  companionHead(): { x: number; y: number } | null {
-    const sh = this.sharks[0];
-    if (!sh) return null;
-    return { x: sh.nodes[0], y: sh.nodes[1] };
-  }
-
-  /** Adaptation: true if the azure gate minnow is under the point. */
-  hitSpecialFish(x: number, y: number): boolean {
-    const r = 20;
-    const r2 = r * r;
-    for (const f of this.fish) {
-      if (!f.alive || !f.special) continue;
-      const dx = f.x - x;
-      const dy = f.y - y;
-      if (dx * dx + dy * dy <= r2) return true;
-    }
-    return false;
   }
 
   step(dt: number) {
@@ -570,8 +506,7 @@ export class World {
         fear = Math.max(fear, Math.sqrt(w));
       }
 
-      // Adaptation: in companion mode the pointer is a lure, not a threat.
-      if (pointer.active && !this.companion) {
+      if (pointer.active) {
         const pr = 130;
         const dx = f.x - pointer.x;
         const dy = f.y - pointer.y;
@@ -649,116 +584,17 @@ export class World {
 
       // Wander: a slowly drifting offset on a circle ahead of the snout.
       sh.wander = clamp(sh.wander + (Math.random() - 0.5) * dt * 3.2, -1.1, 1.1);
-      const wanderAmp =
-        this.companion && this.pointer.active ? (this.pointer.idle ? 0.03 : 0.12) : 0.45;
-      dx += Math.cos(sh.heading + sh.wander) * wanderAmp;
-      dy += Math.sin(sh.heading + sh.wander) * wanderAmp;
+      dx += Math.cos(sh.heading + sh.wander) * 0.45;
+      dy += Math.sin(sh.heading + sh.wander) * 0.45;
 
       let hunting = false;
       let closing = 0;
-      let companionFollow = false;
       if (this.crossing) {
         // Adaptation: no hunting, patrol or turning back. Swim across while following a slow
         // vertical meander, so the body bends into curves like a patrolling shark.
         const targetY = cyW + Math.sin(time * 0.7 + this.meander) * H * 0.24;
         dx += this.crossing.dir * 1.5;
         dy += clamp((targetY - hy) / cyW, -1, 1) * 1.2;
-      } else if (this.companion) {
-        // Adaptation: soft follow (moving) / orbit (idle) / rest (long idle) / free wander.
-        sh.hunger = 0;
-        sh.target = null;
-        const { pointer } = this;
-        if (pointer.active) {
-          companionFollow = true;
-          let tx = pointer.x;
-          let ty = pointer.y;
-          if (pointer.idle) {
-            this.companionIdleFor += dt;
-            if (this.companionIdleFor >= 6) this.companionResting = true;
-            if (this.companionResting) {
-              // Adaptation: glide to rest under the pointer, lower third of the pond.
-              tx = pointer.x;
-              ty = H * 0.72;
-            } else {
-              // Adaptation: Bernoulli lemniscate (∞) around the idle pointer.
-              // Scale with body length so both lobes stay readable; steer by look-ahead + tangent
-              // so limited turning does not collapse the path into a circle.
-              const a = Math.min(Math.min(W, H) * 0.3, Math.max(180, L * 1.05));
-              const lemni = (phase: number) => {
-                const s = Math.sin(phase);
-                const c = Math.cos(phase);
-                const denom = 1 + s * s;
-                return { x: (a * c) / denom, y: (a * s * c) / denom };
-              };
-              if (!this.companionWasIdle) {
-                let bestT = 0;
-                let bestD = Infinity;
-                for (let i = 0; i < 48; i++) {
-                  const phase = (i / 48) * Math.PI * 2;
-                  const p = lemni(phase);
-                  const dd = (hx - pointer.x - p.x) ** 2 + (hy - pointer.y - p.y) ** 2;
-                  if (dd < bestD) {
-                    bestD = dd;
-                    bestT = phase;
-                  }
-                }
-                this.companionOrbit = bestT;
-              }
-              this.companionOrbit += dt * 0.75;
-              const look = 0.55;
-              const here = lemni(this.companionOrbit);
-              const ahead = lemni(this.companionOrbit + look);
-              tx = pointer.x + ahead.x;
-              ty = pointer.y + ahead.y;
-              const tangentX = ahead.x - here.x;
-              const tangentY = ahead.y - here.y;
-              const tangentLen = Math.hypot(tangentX, tangentY) || 1;
-              dx += (tangentX / tangentLen) * 2.4;
-              dy += (tangentY / tangentLen) * 2.4;
-              // Soft path attraction so the snout stays on the ∞ rather than cutting corners.
-              const onX = pointer.x + here.x - hx;
-              const onY = pointer.y + here.y - hy;
-              const onD = Math.hypot(onX, onY) || 1;
-              dx += (onX / onD) * 1.1;
-              dy += (onY / onD) * 1.1;
-            }
-          } else {
-            this.companionIdleFor = 0;
-            this.companionResting = false;
-            // Soft trail: glide toward a point slightly behind the cursor.
-            tx -= Math.cos(sh.heading) * L * 0.28;
-            ty -= Math.sin(sh.heading) * L * 0.28;
-          }
-          this.companionWasIdle = pointer.idle;
-          const ox = tx - hx;
-          const oy = ty - hy;
-          const d = Math.hypot(ox, oy) || 1;
-          const pull = this.companionResting ? 1.35 : pointer.idle ? 1.8 : 1.25;
-          dx += (ox / d) * pull;
-          dy += (oy / d) * pull;
-          closing = clamp(1 - d / (L * 2.2), 0, 1);
-        } else {
-          this.companionWasIdle = false;
-          this.companionIdleFor = 0;
-          this.companionResting = false;
-          const rx = hx - cxW;
-          const ry = hy - cyW;
-          const r = Math.hypot(rx, ry) || 1;
-          const radius = sh.orbitRadius * (1 + 0.18 * Math.sin(time * 0.05 + sh.id));
-          const radial = clamp((radius - r) / radius, -1, 1);
-          dx += ((-ry / r) * sh.orbitDir + (rx / r) * radial * 0.9) * 0.55;
-          dy += ((rx / r) * sh.orbitDir + (ry / r) * radial * 0.9) * 0.55;
-        }
-
-        const over = Math.max(-hx, hx - W, -hy, hy - H);
-        if (over > -L * 0.05) {
-          const w = clamp((over + L * 0.05) / (L * 0.35), 0, 1) * 2.2;
-          const toX = cxW - hx;
-          const toY = cyW - hy;
-          const d = Math.hypot(toX, toY) || 1;
-          dx += (toX / d) * w;
-          dy += (toY / d) * w;
-        }
       } else {
         // Hunt.
         if (time >= sh.retargetAt) {
@@ -829,13 +665,7 @@ export class World {
 
       const desired = Math.atan2(dy, dx);
       // Sharks can't pivot on the spot: the turning circle grows with speed.
-      // Adaptation: companion turns more slowly for an elegant glide,
-      // but idle lemniscate needs enough yaw to cross the ∞ without rounding into a circle.
-      const agility = this.companion
-        ? this.pointer.idle && companionFollow
-          ? Math.min(1.55, sh.speed / (L * 0.2))
-          : Math.min(companionFollow ? 0.85 + closing * 0.35 : 0.7, sh.speed / (L * 0.32))
-        : Math.min(hunting ? 1.7 + closing : 0.8, sh.speed / (L * 0.22));
+      const agility = Math.min(hunting ? 1.7 + closing : 0.8, sh.speed / (L * 0.22));
       const maxTurn = agility * dt;
       const turned = clamp(angleDiff(sh.heading, desired), -maxTurn, maxTurn);
       sh.heading += turned;
@@ -843,22 +673,12 @@ export class World {
 
       const cruise = 30 + L * 0.04;
       // Adaptation: a crossing keeps the speed that fits its duration.
-      // Adaptation: companion sora koi tracks the pointer more briskly on koi.html.
-      // Idle ∞ runs a bit slower so the lobes stay distinct.
       const targetSpeed = this.crossing
         ? (W + 2 * L) / this.crossing.duration
-        : this.companion
-          ? companionFollow
-            ? this.companionResting
-              ? cruise * 0.72
-              : this.pointer.idle
-                ? cruise * 1.05
-                : cruise * (1.05 + (1 - closing) * 0.95)
-            : cruise * 1.35
-          : hunting
-            ? cruise * (1.45 + closing * 1.5)
-            : cruise;
-      sh.speed += (targetSpeed - sh.speed) * Math.min(1, dt * (this.companion ? 1.15 : 1.1));
+        : hunting
+          ? cruise * (1.45 + closing * 1.5)
+          : cruise;
+      sh.speed += (targetSpeed - sh.speed) * Math.min(1, dt * 1.1);
       sh.phase += dt * (2 + sh.speed / 24);
 
       nodes[0] += Math.cos(sh.heading) * sh.speed * dt;
@@ -880,8 +700,7 @@ export class World {
       }
 
       // Feed.
-      // Adaptation: companion koi never eats the pond school.
-      if (!this.companion && sh.hunger > 0.15) {
+      if (sh.hunger > 0.15) {
         const mouthR = L * 0.05 + 8;
         const mx = nodes[0];
         const my = nodes[1];

@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /koi.html
 
 Sitemap: https://melih0132.github.io/sitemap.xml

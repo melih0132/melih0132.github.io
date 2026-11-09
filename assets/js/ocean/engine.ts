@@ -13,11 +13,7 @@ export interface OceanOptions extends RendererOptions {
   crossing?: Crossing;
   /** Adaptation: false ignores the pointer (fish don't flee, clicks don't splash). */
   interactive?: boolean;
-  /** Adaptation: one koi gently follows the pointer; school stays calm. */
-  companion?: boolean;
   onDone?: () => void;
-  /** Adaptation: fired when the azure gate minnow is clicked (homepage easter egg). */
-  onSpecialFishClick?: () => void;
 }
 
 /**
@@ -40,8 +36,6 @@ export class OceanEngine {
   private options: OceanOptions;
   /** Adaptation: user power-save / battery mode (still frame, no RAF). */
   private powerSave = false;
-  /** Adaptation: last pointer sample for companion idle detection. */
-  private lastPointer = { x: 0, y: 0, movedAt: 0 };
 
   constructor(canvas: HTMLCanvasElement, sharks?: SharkSpec[], options: OceanOptions = {}) {
     this.canvas = canvas;
@@ -49,8 +43,6 @@ export class OceanEngine {
     this.world = new World(sharks, {
       fishCount: options.fishCount,
       crossing: options.crossing,
-      companion: options.companion,
-      secretFish: !!options.onSpecialFishClick,
     });
     this.renderer = new AsciiRenderer(canvas, options);
     this.renderer.setFontFamily(getComputedStyle(canvas).fontFamily);
@@ -68,14 +60,11 @@ export class OceanEngine {
     this.reducedMotion.addEventListener("change", this.onMotionPreference);
     // Adaptation: fixed full-viewport canvases stay "intersecting"; pause when the tab is hidden.
     document.addEventListener("visibilitychange", this.onVisibilityChange);
-    // Adaptation: companion always tracks the pointer, even if interactive is false for splashes.
-    if ((options.interactive ?? true) || options.companion) {
+    if (options.interactive ?? true) {
       window.addEventListener("pointermove", this.onPointerMove, { passive: true });
       document.documentElement.addEventListener("pointerleave", this.onPointerLeave);
       window.addEventListener("blur", this.onPointerLeave);
       window.addEventListener("mouseout", this.onWindowMouseOut);
-    }
-    if (options.interactive ?? true) {
       window.addEventListener("pointerdown", this.onPointerDown, { passive: true });
     }
 
@@ -101,11 +90,6 @@ export class OceanEngine {
     window.removeEventListener("mouseout", this.onWindowMouseOut);
   }
 
-  /** Adaptation: 0..1 audio level for companion chamber shimmer. */
-  setPulse(level: number) {
-    this.renderer.setPulse(level);
-  }
-
   /** Adaptation: clock-driven chromatic drift. */
   setPalette(opts: { accents?: string[]; bubble?: string; koiRgb?: [number, number, number][] }) {
     this.renderer.setPalette(opts);
@@ -119,17 +103,7 @@ export class OceanEngine {
     if (this.isStill()) this.drawStill();
   }
 
-  /** Adaptation: visual ripple without scaring the school. */
-  softRipple(x: number, y: number) {
-    this.world.softRipple(x, y);
-  }
-
-  /** Adaptation: companion snout position for chamber atmosphere hooks. */
-  getCompanionHead(): { x: number; y: number } | null {
-    return this.world.companionHead();
-  }
-
-  /** Adaptation: still frame for battery / performance; clicks on the azure gate still work. */
+  /** Adaptation: still frame for battery / performance. */
   setPowerSave(enabled: boolean) {
     this.powerSave = enabled;
     if (this.disposed) return;
@@ -179,11 +153,6 @@ export class OceanEngine {
   private frame = (now: number) => {
     const dt = Math.min(0.1, (now - this.last) / 1000);
     this.last = now;
-    // Adaptation: idle must be refreshed every frame; pointermove stops when the cursor rests.
-    if (this.options.companion) {
-      const p = this.world.pointer;
-      p.idle = p.active && now - this.lastPointer.movedAt >= 900;
-    }
     this.acc += dt;
     let steps = 0;
     while (this.acc >= STEP && steps < MAX_STEPS) {
@@ -238,34 +207,20 @@ export class OceanEngine {
   private onPointerMove = (e: PointerEvent) => {
     const { x, y, inside } = this.toLocal(e);
     const p = this.world.pointer;
-    const now = performance.now();
-    // Adaptation: touch counts as an active lure in companion mode.
-    const active = inside && (e.pointerType !== "touch" || !!this.options.companion);
-    if (active) {
-      const moved = Math.hypot(x - this.lastPointer.x, y - this.lastPointer.y);
-      if (moved > 2.5 || !p.active) this.lastPointer.movedAt = now;
-      this.lastPointer.x = x;
-      this.lastPointer.y = y;
-    }
+    const active = inside && e.pointerType !== "touch";
     p.x = x;
     p.y = y;
     p.active = active;
-    p.idle = active && now - this.lastPointer.movedAt >= 900;
   };
 
   private onPointerDown = (e: PointerEvent) => {
     const { x, y, inside } = this.toLocal(e);
     if (!inside) return;
     if (!this.isStill()) this.world.splash(x, y);
-    // Adaptation: click the azure gate minnow (homepage chamber gate).
-    if (this.options.onSpecialFishClick && this.world.hitSpecialFish(x, y)) {
-      this.options.onSpecialFishClick();
-    }
   };
 
   private onPointerLeave = () => {
     this.world.pointer.active = false;
-    this.world.pointer.idle = false;
   };
 
   /** Adaptation: catch leaving the browser chrome (relatedTarget null). */

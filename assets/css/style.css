@@ -1025,25 +1025,6 @@ textarea {
   color: var(--accent);
 }
 
-.koi-hint {
-  flex-basis: 100%;
-  margin: 0;
-  color: color-mix(in srgb, var(--muted) 55%, transparent);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  cursor: default;
-}
-
-.koi-hint.is-visible {
-  opacity: 1;
-}
-
-.koi-hint[hidden] {
-  display: none;
-}
-
 body.cmd-palette-open {
   overflow: hidden;
 }

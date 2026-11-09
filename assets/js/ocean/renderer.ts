@@ -304,11 +304,6 @@ const SHAPES: Record<SharkKind, SharkShape> = {
     ...CARP_SHAPE,
     tint: [1.2, 1.05, 0.55],
   },
-  // Adaptation: sora - pale sky body, azure hi patches (companion page).
-  sora: {
-    ...CARP_SHAPE,
-    tint: [0.88, 1.05, 1.22],
-  },
 };
 
 const KINDS = Object.keys(SHAPES) as SharkKind[];
@@ -401,10 +396,6 @@ export class AsciiRenderer {
     () => [],
   );
   private fishStyles: string[] = [];
-  /** Adaptation: cell indices of the azure gate minnow this frame. */
-  private specialFishCells: number[] = [];
-  /** Adaptation: audio-driven brightness boost for the companion chamber (0..1). */
-  private pulse = 0;
   /** Adaptation: current koi RGB palette for setPalette rebuilds. */
   private koiRgb: [number, number, number][];
 
@@ -451,14 +442,6 @@ export class AsciiRenderer {
     if (family) this.fontFamily = family;
   }
 
-  /** Adaptation: 0..1 audio pulse; lifts school opacity slightly. */
-  setPulse(level: number) {
-    const next = clamp(level, 0, 1);
-    if (Math.abs(next - this.pulse) < 0.015) return;
-    this.pulse = next;
-    this.rebuildFishStyles();
-  }
-
   /** Adaptation: live palette swap for clock-driven chromatic drift. */
   setPalette(opts: { accents?: string[]; bubble?: string; koiRgb?: [number, number, number][] }) {
     if (opts.accents && opts.accents.length) this.accents = opts.accents.slice();
@@ -470,9 +453,8 @@ export class AsciiRenderer {
   }
 
   private rebuildFishStyles() {
-    const boost = 1 + this.pulse * 0.25;
     this.fishStyles = this.koiRgb.flatMap(([r, g, b]) =>
-      FISH_ALPHAS.map((a) => `rgba(${r},${g},${b},${Math.min(1, a * boost)})`),
+      FISH_ALPHAS.map((a) => `rgba(${r},${g},${b},${a})`),
     );
   }
 
@@ -788,12 +770,7 @@ export class AsciiRenderer {
    * 0 = base, 1 = hi (vermillion), 2 = sumi / fleck (black or dark gold).
    */
   private koiPatch(s: number, v: number, L: number, across: number): 0 | 1 | 2 {
-    if (
-      this.shape !== SHAPES.kohaku &&
-      this.shape !== SHAPES.showa &&
-      this.shape !== SHAPES.ogon &&
-      this.shape !== SHAPES.sora
-    ) {
+    if (this.shape !== SHAPES.kohaku && this.shape !== SHAPES.showa && this.shape !== SHAPES.ogon) {
       return 0;
     }
     if (s < 0.05 || s > 0.93 || across > 0.92) return 0;
@@ -810,7 +787,7 @@ export class AsciiRenderer {
     if (this.shape === SHAPES.ogon) {
       return d2 < 0.05 && roll < 0.2 ? 2 : 0;
     }
-    if (this.shape === SHAPES.kohaku || this.shape === SHAPES.sora) {
+    if (this.shape === SHAPES.kohaku) {
       if (d2 < 0.18 && roll < 0.58) return 1;
       if (d2 < 0.3 && roll2 < 0.32) return 1;
       return 0;
@@ -970,7 +947,7 @@ export class AsciiRenderer {
       const dim = 0.7 + 0.3 * sharkDepth[i];
       const kind = KINDS[sharkKind[i]];
       const [tr, tg, tb] = SHAPES[kind].tint;
-      const isKoi = kind === "kohaku" || kind === "showa" || kind === "ogon" || kind === "sora";
+      const isKoi = kind === "kohaku" || kind === "showa" || kind === "ogon";
 
       // Colours re-roll on a staggered clock so the hide shimmers.
       const tick = Math.floor(t * 2.4 + (key % 997) / 97);
@@ -988,12 +965,7 @@ export class AsciiRenderer {
         // Soft, anti-aliased silhouette: no block, just a light glyph.
         const set = shade >= 0.5 ? EDGE_HEAVY : EDGE_LIGHT;
         if (isKoi) {
-          const base =
-            kind === "ogon"
-              ? [200, 160, 55]
-              : kind === "sora"
-                ? [170, 210, 240]
-                : [220, 205, 180];
+          const base = kind === "ogon" ? [200, 160, 55] : [220, 205, 180];
           const g = (0.45 + shade * 0.55) * dim;
           ctx.fillStyle =
             roll < 0.1
@@ -1031,30 +1003,20 @@ export class AsciiRenderer {
       }
       level *= dim;
 
-      // Adaptation: koi fill cells with cream / vermillion / sumi / gold / sky instead of grey tint.
+      // Adaptation: koi fill cells with cream / vermillion / sumi / gold instead of grey tint.
       if (isKoi) {
         let fr: number;
         let fg: number;
         let fb: number;
         if (flag === FLAG_HI) {
-          if (kind === "sora") {
-            fr = 70 * dim;
-            fg = 145 * dim;
-            fb = 220 * dim;
-          } else {
-            fr = 210 * dim;
-            fg = 48 * dim;
-            fb = 36 * dim;
-          }
+          fr = 210 * dim;
+          fg = 48 * dim;
+          fb = 36 * dim;
         } else if (flag === FLAG_MARK) {
           if (kind === "ogon") {
             fr = 120 * dim;
             fg = 90 * dim;
             fb = 30 * dim;
-          } else if (kind === "sora") {
-            fr = 35 * dim;
-            fg = 70 * dim;
-            fb = 110 * dim;
           } else {
             fr = 22 * dim;
             fg = 20 * dim;
@@ -1065,11 +1027,6 @@ export class AsciiRenderer {
           fr = 220 * lift * dim;
           fg = 175 * lift * dim;
           fb = 55 * lift * dim;
-        } else if (kind === "sora") {
-          const lift = 0.72 + shade * 0.28;
-          fr = 185 * lift * dim;
-          fg = 220 * lift * dim;
-          fb = 245 * lift * dim;
         } else {
           const lift = 0.7 + shade * 0.3;
           fr = 235 * lift * dim;
@@ -1083,27 +1040,16 @@ export class AsciiRenderer {
       ctx.fillRect(x + 1, y + 1, cw - 1, ch - 1);
 
       let color: string;
-      if (flag === FLAG_EYE) color = isKoi ? (kind === "sora" ? "#122033" : "#2a2218") : "#9aa0ad";
-      else if (flag === FLAG_HI) {
-        color =
-          kind === "sora"
-            ? roll < 0.2
-              ? "#e8f6ff"
-              : "#1a4a7a"
-            : roll < 0.2
-              ? "#fff4e8"
-              : "#6a1810";
-      } else if (flag === FLAG_MARK) {
+      if (flag === FLAG_EYE) color = isKoi ? "#2a2218" : "#9aa0ad";
+      else if (flag === FLAG_HI) color = roll < 0.2 ? "#fff4e8" : "#6a1810";
+      else if (flag === FLAG_MARK) {
         color =
           kind === "ogon"
             ? "#3a2a10"
-            : kind === "sora"
-              ? "#1a3555"
-              : `rgb(${Math.round(70 * tr)},${Math.round(70 * tg)},${Math.round(70 * tb)})`;
+            : `rgb(${Math.round(70 * tr)},${Math.round(70 * tg)},${Math.round(70 * tb)})`;
       } else if (roll < 0.09) color = this.accents[key % this.accents.length];
       else if (roll < 0.13) color = "#ffffff";
       else if (isKoi && kind === "ogon") color = shade > 0.55 ? "#5a4010" : "#7a5820";
-      else if (isKoi && kind === "sora") color = shade > 0.55 ? "#2a5078" : "#3d6a98";
       else if (isKoi) color = shade > 0.55 ? "#4a3a28" : "#6a5848";
       else color = shade > 0.55 ? "#0e0f13" : "#1b1d24";
       ctx.fillStyle = color;
@@ -1119,21 +1065,15 @@ export class AsciiRenderer {
    * fish claim a cell first when two land in the same one.
    */
   private markFish(world: World) {
-    const { fishStamp, fishBuckets, sharkFlag, specialFishCells } = this;
+    const { fishStamp, fishBuckets, sharkFlag } = this;
     const frame = ++this.frameId;
     for (const bucket of fishBuckets) bucket.length = 0;
-    specialFishCells.length = 0;
     for (let pass = 0; pass < 2; pass++) {
       for (const f of world.fish) {
         if (!f.alive || (f.depth > 0.78 ? 0 : 1) !== pass) continue;
         const i = this.cellIndex(f.x, f.y);
         if (i < 0 || fishStamp[i] === frame || sharkFlag[i]) continue;
         fishStamp[i] = frame;
-        // Adaptation: azure gate minnow drawn apart from the warm school palette.
-        if (f.special) {
-          specialFishCells.push(i);
-          continue;
-        }
         const glint = clamp(Math.abs(f.turn) / 3.5, 0, 1);
         const v = 0.3 + (0.4 * (f.depth - 0.55)) / 0.45 + 0.3 * Math.max(glint, f.alarm);
         const alpha = clamp(Math.floor(v * FISH_ALPHAS.length), 0, FISH_ALPHAS.length - 1);
@@ -1144,19 +1084,13 @@ export class AsciiRenderer {
   }
 
   private drawFish() {
-    const { ctx, cw, ch, cols, fishBuckets, specialFishCells } = this;
+    const { ctx, cw, ch, cols, fishBuckets } = this;
     for (let b = 0; b < fishBuckets.length; b++) {
       const bucket = fishBuckets[b];
       if (!bucket.length) continue;
       ctx.fillStyle = this.fishStyles[b];
       for (const i of bucket) {
         ctx.fillText("-", (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
-      }
-    }
-    if (specialFishCells.length) {
-      ctx.fillStyle = "rgba(126,184,232,0.95)";
-      for (const i of specialFishCells) {
-        ctx.fillText("~", (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
       }
     }
   }

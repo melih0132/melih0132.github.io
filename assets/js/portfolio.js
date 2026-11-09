@@ -30,7 +30,6 @@ const I18N = {
       disable: 'Full ocean',
       forced: 'Ocean reduced (system preference)'
     },
-    koiHint: 'Sometimes one fish stands apart.',
     commandPalette: {
       dialogLabel: 'Command palette',
       triggerLabel: 'Command palette',
@@ -79,7 +78,6 @@ const I18N = {
       disable: 'Océan complet',
       forced: 'Océan réduit (préférence système)'
     },
-    koiHint: 'Parfois un poisson se distingue.',
     commandPalette: {
       dialogLabel: 'Palette de commandes',
       triggerLabel: 'Palette de commandes',
@@ -120,12 +118,10 @@ const CONFIG = {
   spotlight: I18N[LOCALE].spotlight,
   homePath: I18N[LOCALE].homePath,
   oceanPower: I18N[LOCALE].oceanPower,
-  koiHint: I18N[LOCALE].koiHint,
   commandPalette: I18N[LOCALE].commandPalette
 };
 
 const OCEAN_POWER_KEY = 'ocean-power-save';
-const KOI_HINT_KEY = 'koi-site-hint-seen';
 
 function currentLocale() {
   return document.documentElement.lang.startsWith('fr') ? 'fr' : 'en';
@@ -1127,12 +1123,8 @@ class OceanBoot {
     const fishAttr = document.body.dataset.oceanFish;
     const parsedFish = fishAttr ? Number(fishAttr) : NaN;
     const fishCount = Number.isFinite(parsedFish) && parsedFish > 0 ? parsedFish : undefined;
-    // Easter egg: one azure "~" minnow in the school → chamber.
     window.__oceanEngine = new OceanEngine(canvas, undefined, {
-      fishCount,
-      onSpecialFishClick: () => {
-        location.assign('/koi.html');
-      }
+      fishCount
     });
     syncOceanAtmosphere();
     const powerOn = systemReducedMotion() || readOceanPowerPref();
@@ -1214,68 +1206,6 @@ class OceanPowerToggle {
     if (lang) content.insertBefore(btn, lang);
     else if (toggle) content.insertBefore(btn, toggle);
     else content.appendChild(btn);
-  }
-}
-
-class KoiSiteHint {
-  constructor() {
-    if (window.__koiHintTimer) {
-      window.clearTimeout(window.__koiHintTimer);
-      window.__koiHintTimer = null;
-    }
-    if (!this.isHome()) return;
-    if (this.shouldSkip()) return;
-    this.el = this.mount();
-    if (!this.el) return;
-    this.timer = window.setTimeout(() => this.reveal(), 6000);
-    window.__koiHintTimer = this.timer;
-  }
-
-  isHome() {
-    const path = location.pathname.replace(/\/+$/, '') || '/';
-    return path === '/fr' || path === '/en' || path === '/fr/index.html' || path === '/en/index.html';
-  }
-
-  shouldSkip() {
-    try {
-      if (localStorage.getItem(KOI_HINT_KEY) === '1') return true;
-      if (localStorage.getItem('koi-chamber')) return true;
-    } catch {}
-    return false;
-  }
-
-  mount() {
-    const footer = document.querySelector('.footer__inner');
-    if (!footer) return null;
-    let el = footer.querySelector('[data-koi-hint]');
-    if (el) return el;
-    el = document.createElement('p');
-    el.className = 'koi-hint';
-    el.setAttribute('data-koi-hint', '');
-    el.setAttribute('hidden', '');
-    el.textContent = uiStrings().koiHint;
-    footer.appendChild(el);
-    el.addEventListener('click', () => this.dismiss());
-    return el;
-  }
-
-  reveal() {
-    if (!this.el || this.shouldSkip()) return;
-    this.el.removeAttribute('hidden');
-    this.el.classList.add('is-visible');
-    try {
-      localStorage.setItem(KOI_HINT_KEY, '1');
-    } catch {}
-  }
-
-  dismiss() {
-    if (this.timer) window.clearTimeout(this.timer);
-    if (!this.el) return;
-    this.el.classList.remove('is-visible');
-    this.el.setAttribute('hidden', '');
-    try {
-      localStorage.setItem(KOI_HINT_KEY, '1');
-    } catch {}
   }
 }
 
@@ -1832,7 +1762,6 @@ function bootPage() {
   new OceanPowerToggle(signal);
   new CommandPaletteTrigger(signal);
   syncOceanAtmosphere();
-  new KoiSiteHint();
 
   if (document.querySelector('.projects-filters') && document.querySelectorAll('.project-card').length) {
     window.__projectFilters = new ProjectFilters();
@@ -2009,7 +1938,7 @@ class SoftNav {
     const p = url.pathname;
     if (p.startsWith('/assets/')) return false;
     if (/\.(pdf|png|jpe?g|webp|svg|zip|css|js|json|xml|txt)$/i.test(p)) return false;
-    if (p === '/404.html' || p.endsWith('/404.html') || p === '/koi.html' || p.endsWith('/koi.html')) return false;
+    if (p === '/404.html' || p.endsWith('/404.html')) return false;
     return true;
   }
 
