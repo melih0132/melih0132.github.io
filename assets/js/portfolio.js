@@ -30,6 +30,10 @@ const I18N = {
       disable: 'Full ocean',
       forced: 'Ocean reduced (system preference)'
     },
+    oceanPause: {
+      pause: 'Pause ocean',
+      resume: 'Resume ocean'
+    },
     commandPalette: {
       dialogLabel: 'Command palette',
       triggerLabel: 'Command palette',
@@ -46,7 +50,12 @@ const I18N = {
       langEn: 'Switch to English',
       cv: 'Open resume (PDF)',
       oceanOn: 'Enable reduced ocean',
-      oceanOff: 'Disable reduced ocean'
+      oceanOff: 'Disable reduced ocean',
+      oceanPause: 'Pause ocean',
+      oceanResume: 'Resume ocean'
+    },
+    projectToc: {
+      label: 'On this page'
     }
   },
   fr: {
@@ -78,6 +87,10 @@ const I18N = {
       disable: 'Océan complet',
       forced: 'Océan réduit (préférence système)'
     },
+    oceanPause: {
+      pause: 'Pause océan',
+      resume: 'Reprendre océan'
+    },
     commandPalette: {
       dialogLabel: 'Palette de commandes',
       triggerLabel: 'Palette de commandes',
@@ -94,7 +107,12 @@ const I18N = {
       langEn: 'Passer en anglais',
       cv: 'Ouvrir le CV (PDF)',
       oceanOn: 'Activer l’océan réduit',
-      oceanOff: 'Désactiver l’océan réduit'
+      oceanOff: 'Désactiver l’océan réduit',
+      oceanPause: 'Mettre l’océan en pause',
+      oceanResume: 'Reprendre l’océan'
+    },
+    projectToc: {
+      label: 'Sur cette page'
     }
   }
 };
@@ -183,6 +201,31 @@ function toggleOceanPowerSave() {
   const next = !readOceanPowerPref();
   writeOceanPowerPref(next);
   applyOceanPowerSave(next);
+  return next;
+}
+
+function isOceanEffectivelyStill() {
+  return systemReducedMotion() || readOceanPowerPref() || document.documentElement.classList.contains('ocean-power-save');
+}
+
+function applyOceanPause(enabled) {
+  const engine = window.__oceanEngine;
+  if (engine && typeof engine.setPaused === 'function') {
+    engine.setPaused(enabled);
+  }
+  document.documentElement.classList.toggle('ocean-paused', enabled);
+}
+
+function isOceanPaused() {
+  const engine = window.__oceanEngine;
+  if (engine && typeof engine.isPaused === 'function') return !!engine.isPaused();
+  return document.documentElement.classList.contains('ocean-paused');
+}
+
+function toggleOceanPause() {
+  if (isOceanEffectivelyStill()) return isOceanPaused();
+  const next = !isOceanPaused();
+  applyOceanPause(next);
   return next;
 }
 
@@ -1025,11 +1068,13 @@ class SiteChrome {
     this.header = document.querySelector('.header');
     this.toggle = document.querySelector('[data-nav-toggle]');
     this.panel = document.querySelector('[data-nav-panel]');
+    this.sectionObserver = null;
     this.onScroll = this.onScroll.bind(this);
     const opts = { passive: true, signal };
     this.onScroll();
     window.addEventListener('scroll', this.onScroll, opts);
     this.bindHomeLinks(signal);
+    this.initScrollSpy(signal);
     if (location.hash === '#home') {
       window.scrollTo(0, 0);
     }
@@ -1054,6 +1099,97 @@ class SiteChrome {
     });
   }
 
+  navLinks() {
+    return Array.from(document.querySelectorAll('.header__link, .header__panel a'));
+  }
+
+  clearNavActive() {
+    this.navLinks().forEach((a) => {
+      a.classList.remove('is-active');
+      if (a.getAttribute('aria-current') === 'location') {
+        a.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  setNavActiveByHash(hash) {
+    this.clearNavActive();
+    if (!hash) return;
+    this.navLinks().forEach((a) => {
+      const href = a.getAttribute('href') || '';
+      if (href.endsWith(hash) || href === hash) {
+        a.classList.add('is-active');
+        a.setAttribute('aria-current', 'location');
+      }
+    });
+  }
+
+  setProjectsNavActive() {
+    this.clearNavActive();
+    this.navLinks().forEach((a) => {
+      const href = a.getAttribute('href') || '';
+      if (href.includes('#projects')) {
+        a.classList.add('is-active');
+        a.setAttribute('aria-current', 'location');
+      }
+    });
+  }
+
+  initScrollSpy(signal) {
+    const path = location.pathname || '';
+    if (/\/(fr\/projets|en\/projects)\//.test(path)) {
+      this.setProjectsNavActive();
+      return;
+    }
+
+    const ids = ['projects', 'about', 'contact'];
+    const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
+    if (sections.length === 0) return;
+
+    const ratios = new Map();
+    this.sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        });
+        let bestId = null;
+        let bestRatio = 0;
+        ratios.forEach((ratio, id) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        });
+        if (bestId && bestRatio > 0) this.setNavActiveByHash(`#${bestId}`);
+        else this.clearNavActive();
+      },
+      { rootMargin: '-40% 0px -45% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] }
+    );
+
+    sections.forEach((section) => this.sectionObserver.observe(section));
+    signal.addEventListener('abort', () => {
+      if (this.sectionObserver) this.sectionObserver.disconnect();
+      this.sectionObserver = null;
+    });
+
+    this.navLinks().forEach((a) => {
+      a.addEventListener(
+        'click',
+        () => {
+          const href = a.getAttribute('href') || '';
+          const hashIdx = href.indexOf('#');
+          if (hashIdx >= 0) {
+            const hash = href.slice(hashIdx);
+            if (hash === '#projects' || hash === '#about' || hash === '#contact') {
+              this.setNavActiveByHash(hash);
+            }
+          }
+        },
+        { signal }
+      );
+    });
+  }
+
   bindHomeLinks(signal) {
     document.querySelectorAll('a[href="#home"]').forEach((a) => {
       a.addEventListener('click', (event) => {
@@ -1062,6 +1198,7 @@ class SiteChrome {
         if (top) top.focus({ preventScroll: true });
         history.pushState({ soft: true }, '', `${location.pathname}${location.search}#home`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.clearNavActive();
       }, { signal });
     });
   }
@@ -1084,35 +1221,118 @@ function parseCssHexToRgb(hex, fallback) {
   return fallback;
 }
 
-function syncOceanAtmosphere() {
+function readOceanPaletteFromCss() {
+  const cs = getComputedStyle(document.body);
+  const beniHex = cs.getPropertyValue('--koi-beni').trim() || '#dc4638';
+  const shiroHex = cs.getPropertyValue('--koi-shiro').trim() || '#e8dcc8';
+  const orangeHex = cs.getPropertyValue('--koi-orange').trim() || '#e89040';
+  const kinHex = cs.getPropertyValue('--koi-kin').trim() || '#d4a84b';
+  const beni = parseCssHexToRgb(beniHex, [220, 56, 42]);
+  const shiro = parseCssHexToRgb(shiroHex, [240, 236, 228]);
+  const orange = parseCssHexToRgb(orangeHex, [232, 140, 36]);
+  const kin = parseCssHexToRgb(kinHex, [210, 168, 58]);
+  return {
+    accents: [beniHex, shiroHex, kinHex, orangeHex],
+    bubbleRgb: [
+      Math.round((shiro[0] + kin[0]) / 2),
+      Math.round((shiro[1] + kin[1]) / 2),
+      Math.round((shiro[2] + kin[2]) / 2)
+    ],
+    koiRgb: [beni, shiro, [36, 34, 38], orange, kin]
+  };
+}
+
+function readTargetFishCount() {
+  const fishAttr = document.body.dataset.oceanFish;
+  const parsedFish = fishAttr ? Number(fishAttr) : NaN;
+  return Number.isFinite(parsedFish) && parsedFish > 0 ? parsedFish : undefined;
+}
+
+function applyOceanPalette(palette, fishCount) {
+  const engine = window.__oceanEngine;
+  if (!engine) return;
+  if (typeof engine.setFishCount === 'function') {
+    engine.setFishCount(fishCount);
+  }
+  if (typeof engine.setPalette === 'function') {
+    const [br, bg, bb] = palette.bubbleRgb;
+    engine.setPalette({
+      accents: palette.accents,
+      bubble: `rgb(${br},${bg},${bb})`,
+      koiRgb: palette.koiRgb
+    });
+  }
+}
+
+function lerpChannel(a, b, t) {
+  return Math.round(a + (b - a) * t);
+}
+
+function lerpRgb(a, b, t) {
+  return [lerpChannel(a[0], b[0], t), lerpChannel(a[1], b[1], t), lerpChannel(a[2], b[2], t)];
+}
+
+function rgbToHex(rgb) {
+  return `#${rgb.map((c) => c.toString(16).padStart(2, '0')).join('')}`;
+}
+
+function easeInOutCubic(t) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+function cancelOceanPaletteLerp() {
+  if (window.__oceanPaletteLerpRaf) {
+    cancelAnimationFrame(window.__oceanPaletteLerpRaf);
+    window.__oceanPaletteLerpRaf = 0;
+  }
+}
+
+function syncOceanAtmosphere(options = {}) {
   const engine = window.__oceanEngine;
   if (!engine) return;
 
-  const fishAttr = document.body.dataset.oceanFish;
-  const parsedFish = fishAttr ? Number(fishAttr) : NaN;
-  const targetFish = Number.isFinite(parsedFish) && parsedFish > 0 ? parsedFish : undefined;
-  if (typeof engine.setFishCount === 'function') {
-    engine.setFishCount(targetFish);
+  const animate = !!options.animate;
+  const fromPalette = options.fromPalette || null;
+  const fromFish = options.fromFish;
+  const toPalette = readOceanPaletteFromCss();
+  const toFish = readTargetFishCount();
+
+  cancelOceanPaletteLerp();
+
+  const skipLerp =
+    !animate ||
+    !fromPalette ||
+    systemReducedMotion() ||
+    document.documentElement.classList.contains('ocean-power-save');
+
+  if (skipLerp) {
+    applyOceanPalette(toPalette, toFish);
+    return;
   }
 
-  if (typeof engine.setPalette === 'function') {
-    const cs = getComputedStyle(document.body);
-    const beniHex = cs.getPropertyValue('--koi-beni').trim() || '#dc4638';
-    const shiroHex = cs.getPropertyValue('--koi-shiro').trim() || '#e8dcc8';
-    const orangeHex = cs.getPropertyValue('--koi-orange').trim() || '#e89040';
-    const kinHex = cs.getPropertyValue('--koi-kin').trim() || '#d4a84b';
+  const duration = 400;
+  const start = performance.now();
+  const fromFishNum = typeof fromFish === 'number' ? fromFish : toFish || 120;
+  const toFishNum = typeof toFish === 'number' ? toFish : fromFishNum;
 
-    const beni = parseCssHexToRgb(beniHex, [220, 56, 42]);
-    const shiro = parseCssHexToRgb(shiroHex, [240, 236, 228]);
-    const orange = parseCssHexToRgb(orangeHex, [232, 140, 36]);
-    const kin = parseCssHexToRgb(kinHex, [210, 168, 58]);
-
-    engine.setPalette({
-      accents: [beniHex, shiroHex, kinHex, orangeHex],
-      bubble: `rgb(${Math.round((shiro[0] + kin[0]) / 2)},${Math.round((shiro[1] + kin[1]) / 2)},${Math.round((shiro[2] + kin[2]) / 2)})`,
-      koiRgb: [beni, shiro, [36, 34, 38], orange, kin]
+  const tick = (now) => {
+    const t = easeInOutCubic(Math.min(1, (now - start) / duration));
+    const koiRgb = fromPalette.koiRgb.map((rgb, i) => lerpRgb(rgb, toPalette.koiRgb[i], t));
+    const accents = fromPalette.accents.map((hex, i) => {
+      const a = parseCssHexToRgb(hex, toPalette.koiRgb[i] || [200, 200, 200]);
+      const b = parseCssHexToRgb(toPalette.accents[i], a);
+      return rgbToHex(lerpRgb(a, b, t));
     });
-  }
+    const bubbleRgb = lerpRgb(fromPalette.bubbleRgb, toPalette.bubbleRgb, t);
+    applyOceanPalette({ accents, bubbleRgb, koiRgb }, Math.round(fromFishNum + (toFishNum - fromFishNum) * t));
+    if (t < 1) {
+      window.__oceanPaletteLerpRaf = requestAnimationFrame(tick);
+    } else {
+      window.__oceanPaletteLerpRaf = 0;
+      applyOceanPalette(toPalette, toFish);
+    }
+  };
+  window.__oceanPaletteLerpRaf = requestAnimationFrame(tick);
 }
 
 class OceanBoot {
@@ -1206,6 +1426,71 @@ class OceanPowerToggle {
     if (lang) content.insertBefore(btn, lang);
     else if (toggle) content.insertBefore(btn, toggle);
     else content.appendChild(btn);
+  }
+}
+
+class ScrollReveal {
+  constructor(signal) {
+    this.observer = null;
+    const selectors = [
+      '.project-card',
+      '.section__head',
+      '.about-grid > *',
+      '.skills-lines > *',
+      '.project-block',
+      '.contact-panel'
+    ];
+    const nodes = Array.from(document.querySelectorAll(selectors.join(', ')));
+    if (!nodes.length) return;
+
+    nodes.forEach((el) => el.classList.add('scroll-reveal'));
+
+    if (systemReducedMotion()) {
+      nodes.forEach((el) => el.classList.add('is-in'));
+      return;
+    }
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          this.observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
+    nodes.forEach((el) => this.observer.observe(el));
+
+    signal.addEventListener('abort', () => {
+      if (this.observer) this.observer.disconnect();
+      this.observer = null;
+    });
+  }
+}
+
+class OceanPauseHotkey {
+  constructor(signal) {
+    document.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.code !== 'Space' && e.key !== ' ') return;
+        if (e.altKey || e.ctrlKey || e.metaKey) return;
+        const t = e.target;
+        if (
+          t instanceof HTMLElement &&
+          (t.closest('input, textarea, select, [contenteditable="true"]') ||
+            t.isContentEditable)
+        ) {
+          return;
+        }
+        if (document.body.classList.contains('cmd-palette-open')) return;
+        if (document.body.classList.contains('spotlight-open')) return;
+        e.preventDefault();
+        toggleOceanPause();
+      },
+      { signal }
+    );
   }
 }
 
@@ -1390,6 +1675,15 @@ class CommandPalette {
       disabled: systemReducedMotion()
     });
 
+    const paused = isOceanPaused();
+    items.push({
+      group: ui.actions,
+      label: paused ? ui.oceanResume : ui.oceanPause,
+      action: 'ocean-pause',
+      keywords: 'pause ocean océan space espace lecture',
+      disabled: isOceanEffectivelyStill()
+    });
+
     return items;
   }
 
@@ -1507,6 +1801,11 @@ class CommandPalette {
     if (item.disabled) return;
     if (item.action === 'ocean-toggle') {
       toggleOceanPowerSave();
+      this.close();
+      return;
+    }
+    if (item.action === 'ocean-pause') {
+      toggleOceanPause();
       this.close();
       return;
     }
@@ -1743,7 +2042,169 @@ class GallerySpotlight {
   }
 }
 
-function bootPage() {
+class ProjectToc {
+  constructor(signal) {
+    this.root = null;
+    this.observer = null;
+    const body = document.querySelector('.project-body');
+    if (!body) return;
+    const headings = Array.from(
+      body.querySelectorAll('.project-block > .wrap > h2, .project-block > .wrap--wide > h2')
+    );
+    if (headings.length < 2) return;
+
+    const existing = body.querySelector('.project-toc');
+    if (existing) existing.remove();
+
+    const ui = uiStrings().projectToc || { label: 'On this page' };
+    const nav = document.createElement('nav');
+    nav.className = 'project-toc';
+    nav.setAttribute('aria-label', ui.label);
+
+    const list = document.createElement('ul');
+    list.className = 'project-toc__list';
+
+    const links = [];
+    headings.forEach((h2) => {
+      const text = (h2.textContent || '').trim();
+      if (!text) return;
+      if (/^actions$/i.test(text)) return;
+      let id = h2.id;
+      if (!id) {
+        id = text
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+        h2.id = id || `section-${links.length}`;
+      }
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.className = 'project-toc__link';
+      a.href = `#${h2.id}`;
+      a.textContent = text;
+      li.appendChild(a);
+      list.appendChild(li);
+      links.push({ a, el: h2.closest('.project-block') || h2 });
+    });
+
+    if (links.length < 2) return;
+
+    nav.appendChild(list);
+    body.insertBefore(nav, body.firstChild);
+    this.root = nav;
+
+    const setCurrent = (id) => {
+      links.forEach(({ a }) => {
+        const active = a.getAttribute('href') === `#${id}`;
+        if (active) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    };
+
+    if (links[0]?.a) {
+      const firstHref = links[0].a.getAttribute('href') || '';
+      if (firstHref.startsWith('#')) setCurrent(firstHref.slice(1));
+    }
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (!visible.length) return;
+        const heading = visible[0].target.querySelector('h2') || visible[0].target;
+        if (heading?.id) setCurrent(heading.id);
+      },
+      { rootMargin: '-28% 0px -52% 0px', threshold: [0, 0.2, 0.5, 1] }
+    );
+    links.forEach(({ el }) => this.observer.observe(el));
+
+    signal.addEventListener('abort', () => {
+      if (this.observer) this.observer.disconnect();
+      this.observer = null;
+      this.root?.remove();
+      this.root = null;
+    });
+  }
+}
+
+class ArchDiagram {
+  constructor(signal) {
+    const sections = document.querySelectorAll('[data-arch-section]');
+    sections.forEach((section) => this.bindSection(section, signal));
+  }
+
+  bindSection(section, signal) {
+    const svg = section.querySelector('.arch-svg');
+    if (!svg || !svg.querySelector('[data-arch-node]')) return;
+    svg.classList.add('is-interactive');
+    const nodes = Array.from(svg.querySelectorAll('[data-arch-node]'));
+    const legends = Array.from(section.querySelectorAll('[data-arch-legend]'));
+
+    const clear = () => {
+      nodes.forEach((n) => n.classList.remove('is-hot', 'is-dim'));
+      legends.forEach((li) => li.classList.remove('is-related', 'is-dim'));
+    };
+
+    const highlight = (nodeId) => {
+      nodes.forEach((n) => {
+        const match = n.getAttribute('data-arch-node') === nodeId;
+        n.classList.toggle('is-hot', match);
+        n.classList.toggle('is-dim', !match);
+      });
+      legends.forEach((li) => {
+        const match = li.getAttribute('data-arch-legend') === nodeId;
+        li.classList.toggle('is-related', match);
+        li.classList.toggle('is-dim', !match);
+      });
+    };
+
+    const goFilter = (node) => {
+      const techs = (node.getAttribute('data-arch-techs') || '')
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean);
+      if (!techs.length) return;
+      const locale = currentLocale();
+      const href = `/${locale}/?tech=${encodeURIComponent(techs.join(','))}#projects`;
+      const a = document.createElement('a');
+      a.href = href;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    };
+
+    nodes.forEach((node) => {
+      const nodeId = node.getAttribute('data-arch-node');
+      node.addEventListener('pointerenter', () => highlight(nodeId), { signal });
+      node.addEventListener('pointerleave', clear, { signal });
+      node.addEventListener('focus', () => highlight(nodeId), { signal });
+      node.addEventListener('blur', clear, { signal });
+      node.addEventListener(
+        'click',
+        (e) => {
+          e.preventDefault();
+          goFilter(node);
+        },
+        { signal }
+      );
+      node.addEventListener(
+        'keydown',
+        (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            goFilter(node);
+          }
+        },
+        { signal }
+      );
+    });
+  }
+}
+
+function bootPage(options = {}) {
   if (window.__pageAbort) window.__pageAbort.abort();
   window.__pageAbort = new AbortController();
   const { signal } = window.__pageAbort;
@@ -1761,7 +2222,13 @@ function bootPage() {
   syncCopyrightYears();
   new OceanPowerToggle(signal);
   new CommandPaletteTrigger(signal);
-  syncOceanAtmosphere();
+  new OceanPauseHotkey(signal);
+  syncOceanAtmosphere({
+    animate: !!options.animateOcean,
+    fromPalette: options.fromPalette,
+    fromFish: options.fromFish
+  });
+  if (isOceanPaused()) applyOceanPause(true);
 
   if (document.querySelector('.projects-filters') && document.querySelectorAll('.project-card').length) {
     window.__projectFilters = new ProjectFilters();
@@ -1770,6 +2237,9 @@ function bootPage() {
     window.__gallerySpotlight = new GallerySpotlight();
   }
   if (document.querySelector('.contact__form')) new ContactForm();
+  new ProjectToc(signal);
+  new ArchDiagram(signal);
+  new ScrollReveal(signal);
 }
 
 /** Soft navigation: swap `.site` only so the ocean canvas keeps running. */
@@ -1973,6 +2443,9 @@ class SoftNav {
         return;
       }
 
+      const fromPalette = readOceanPaletteFromCss();
+      const fromFish = readTargetFishCount();
+
       curSite.replaceWith(document.importNode(nextSite, true));
 
       if (doc.body.dataset.universe) {
@@ -1991,7 +2464,11 @@ class SoftNav {
       if (push) history.pushState({ soft: true }, '', href);
       this.currentDocKey = this.getDocKey(targetUrl);
 
-      bootPage();
+      bootPage({
+        animateOcean: true,
+        fromPalette,
+        fromFish
+      });
 
       if (targetUrl.hash) {
         this.scrollToHash(targetUrl.hash, 'auto');

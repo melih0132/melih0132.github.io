@@ -36,6 +36,8 @@ export class OceanEngine {
   private options: OceanOptions;
   /** Adaptation: user power-save / battery mode (still frame, no RAF). */
   private powerSave = false;
+  /** Adaptation: temporary freeze for reading (keeps current frame). */
+  private paused = false;
 
   constructor(canvas: HTMLCanvasElement, sharks?: SharkSpec[], options: OceanOptions = {}) {
     this.canvas = canvas;
@@ -125,6 +127,22 @@ export class OceanEngine {
     return this.powerSave;
   }
 
+  /** Adaptation: pause RAF without settling a new still frame. */
+  setPaused(enabled: boolean) {
+    this.paused = enabled;
+    if (this.disposed) return;
+    if (this.paused || this.isStill()) {
+      cancelAnimationFrame(this.raf);
+      this.raf = 0;
+    } else {
+      this.schedule();
+    }
+  }
+
+  isPaused(): boolean {
+    return this.paused;
+  }
+
   private isStill() {
     return this.powerSave || this.reducedMotion.matches;
   }
@@ -140,7 +158,7 @@ export class OceanEngine {
 
   private schedule() {
     cancelAnimationFrame(this.raf);
-    if (this.disposed || !this.visible || !this.pageVisible || this.isStill()) return;
+    if (this.disposed || !this.visible || !this.pageVisible || this.isStill() || this.paused) return;
     this.last = performance.now();
     this.raf = requestAnimationFrame(this.frame);
   }

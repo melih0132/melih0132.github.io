@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -91,96 +91,118 @@
       <section class="project-hero">
         <div class="wrap">
           <h1 class="project-hero__title">Uber Vue/.NET</h1>
-          <div class="project-hero__lead"><p >
-          Application de transport développée avec <strong>Vue.js</strong> et <strong>.NET Core</strong>.
-          Version améliorée et modernisée du clone Uber, mettant l'accent sur les <strong>performances</strong> et l'<strong>expérience utilisateur</strong>.
-        </p></div>
-          <div class="hero__actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+          <div class="project-hero__lead">
+            <p>Clone de transport avec géolocalisation, réservation et paiements sur une stack Vue.js et .NET Core.</p>
+          </div>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" target="_blank" rel="noreferrer">Voir sur GitHub</a>
+          </div>
         </div>
       </section>
 
       <div class="project-body">
-        <section class="project-block"><div class="wrap"><h2>Aperçu</h2><p><strong>Uber Vue/.NET</strong> est une application de transport développée avec
-                <strong>Vue.js</strong> pour le frontend et <strong>.NET Core</strong> pour le backend. Il s'agit d'une
-                version améliorée et modernisée du clone Uber, mettant l'accent sur les <strong>performances</strong> et
-                l'<strong>expérience utilisateur</strong>.</p>
-<p>Ce projet intègre des fonctionnalités avancées de <strong>sécurité</strong> et de
-                <strong>performance</strong>, y compris des mécanismes de <strong>chiffrement</strong> et une
-                gestion optimisée des <strong>ressources</strong>. De plus, il est entièrement conforme aux
-                <strong>réglementations RGPD</strong>. Le système est conçu pour offrir une
-                <strong>expérience utilisateur fluide</strong> et performante, en exploitant Vue.js et .NET Core pour
-                la gestion de la logique métier et en intégrant des <strong>tests unitaires</strong> pour assurer la
-                robustesse du code.</p></div></section>
-                <section class="project-block" data-arch-section><div class="wrap wrap--wide"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 1026 254" role="img" aria-label="Schéma d’architecture Uber Vue.js et .NET Core">
-  <defs>
-    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
-    </marker>
-  </defs>
-    <g transform="translate(10, 18)">
-      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">FRONTEND SPA</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Application</text>
-      <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">Vue.js</text>
-      <text x="16" y="114" fill="var(--muted)" font-size="16">Cartographie</text>
-      <text x="16" y="136" fill="var(--muted)" font-size="16">Géolocalisation</text>
-      <text x="16" y="158" fill="var(--muted)" font-size="16">Réservation</text>
-      <text x="16" y="180" fill="var(--muted)" font-size="16">Paiement</text>
-    </g>
-    <g transform="translate(388, 18)">
-      <rect width="250" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">BACKEND API</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">ASP.NET Core (C#)</text>
-      <text x="16" y="90" fill="var(--muted)" font-size="16">Architecture MVC</text>
-      <text x="16" y="112" fill="var(--muted)" font-size="16">REST API</text>
-      <text x="16" y="134" fill="var(--muted)" font-size="16">Auth JWT</text>
-      <text x="16" y="156" fill="var(--muted)" font-size="16">Chiffrement RGPD</text>
-    </g>
-    <g transform="translate(810, 18)">
-      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">DONNÉES &amp; TESTS</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">PostgreSQL</text>
-      <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">&amp; EF Core</text>
-      <text x="16" y="114" fill="var(--muted)" font-size="16">Trajets</text>
-      <text x="16" y="136" fill="var(--muted)" font-size="16">Chauffeurs, avis</text>
-      <text x="16" y="158" fill="var(--muted)" font-size="16">Tests unitaires</text>
-      <text x="16" y="180" fill="var(--muted)" font-size="16">Swagger</text>
-    </g>
-    <g>
-      <line x1="224" y1="127" x2="380" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="302" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">REST / JWT</text>
-    </g>
-    <g>
-      <line x1="646" y1="127" x2="802" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="724" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">EF Core</text>
-    </g>
-</svg><a class="arch-link btn" href="/assets/diagrams/fr/uber-vuejs-dotnet.svg" target="_blank" rel="noreferrer">Voir le schéma</a><ul class="arch-legend"><li><strong>Client SPA Vue.js</strong> · Interface réactive gérant la recherche d’itinéraires, le suivi géographique en temps réel et le tunnel de réservation.</li>
-<li><strong>API REST .NET Core</strong> · Contrôleurs MVC découplés, authentification JWT, chiffrement des données sensibles et conformité RGPD.</li>
-<li><strong>Persistance PostgreSQL</strong> · Modélisation relationnelle des courses, utilisateurs et évaluations documentée sous Swagger.</li></ul></div></div></section>
-        <section class="project-block"><div class="wrap"><h2>Fonctionnalités</h2><ul><li><strong>Géolocalisation en temps réel</strong> · Suivi en temps réel de la position des chauffeurs et des passagers avec mise à jour dynamique de la carte et optimisation des itinéraires.</li>
-<li><strong>Système de paiement sécurisé</strong> · Intégration d'un système de paiement sécurisé avec chiffrement des données sensibles et conformité aux normes de sécurité les plus strictes.</li>
-<li><strong>Gestion des trajets et réservations</strong> · Interface complète pour la création, la modification et le suivi des trajets avec système de réservation avancé et gestion des notifications en temps réel.</li>
-<li><strong>Système de notation et évaluation</strong> · Fonctionnalité permettant aux utilisateurs de noter et d'évaluer leurs expériences de trajet pour améliorer la qualité du service.</li>
-<li><strong>Interface utilisateur réactive</strong> · Interface moderne et intuitive développée avec Vue.js, offrant une expérience utilisateur fluide et adaptative sur tous les appareils.</li></ul></div></section>
-        <section class="project-block"><div class="wrap"><h2>Galerie</h2></div><div class="project-gallery"><figure><img src="/assets/webp/uber-s4/home.webp" alt="Page d'accueil du clone Uber" loading="lazy" width="1900" height="1028" /><figcaption>Page d'accueil avec interface moderne</figcaption></figure>
-<figure><img src="/assets/webp/uber-s4/myaccount.webp" alt="Page mon compte du clone Uber" loading="lazy" width="1918" height="912" /><figcaption>Gestion du compte utilisateur</figcaption></figure>
-<figure><img src="/assets/webp/uber-s4/filters.webp" alt="Filtres et options de recherche du clone Uber" loading="lazy" width="1897" height="1032" /><figcaption>Filtres et options de recherche avancés</figcaption></figure></div></section>
-        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech"><a class="project-tech__item" href="/fr/?tech=vue-js#projects">Vue.js</a> <a class="project-tech__item" href="/fr/?tech=net-core#projects">.NET Core</a> <a class="project-tech__item" href="/fr/?tech=csharp#projects">C#</a> <a class="project-tech__item" href="/fr/?tech=node-js#projects">Node.js</a> <a class="project-tech__item" href="/fr/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/fr/?tech=restful-api#projects">RESTful API</a> <a class="project-tech__item" href="/fr/?tech=jwt#projects">JWT</a> <a class="project-tech__item" href="/fr/?tech=swagger#projects">Swagger</a> <a class="project-tech__item" href="/fr/?tech=vs-code#projects">VS Code</a> <a class="project-tech__item" href="/fr/?tech=visual-studio#projects">Visual Studio</a> <a class="project-tech__item" href="/fr/?tech=git#projects">Git</a> <a class="project-tech__item" href="/fr/?tech=github#projects">GitHub</a> <a class="project-tech__item" href="/fr/?tech=postman#projects">Postman</a> <a class="project-tech__item" href="/fr/?tech=microsoft-teams#projects">Microsoft Teams</a> <a class="project-tech__item" href="/fr/?tech=mvc#projects">MVC</a></p></div></section>
         <section class="project-block">
           <div class="wrap">
-            <h2>Explorer</h2>
-            <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" target="_blank" rel="noreferrer">Voir sur GitHub</a>
-<a class="btn" href="/fr/#projects">Retour aux projets</a></div>
-            <nav class="project-pager" aria-label="Navigation entre les projets" data-project-pager>
-              <a class="project-pager__link project-pager__link--prev" href="/fr/projets/uber-laravel.html">
-                <span class="project-pager__eyebrow">← Projet précédent</span>
-                <span class="project-pager__title">Uber Laravel</span>
-              </a>
-              <a class="project-pager__link project-pager__link--next" href="/fr/projets/evit-shuriken.html">
-                <span class="project-pager__eyebrow">Projet suivant →</span>
-                <span class="project-pager__title">Evit'Shuriken</span>
-              </a>
-            </nav>
+            <h2>Aperçu</h2>
+            <p>SPA Vue.js pour la cartographie, la réservation et le tunnel de paiement. API ASP.NET Core (C#, MVC) avec JWT, chiffrement des données sensibles et orientation RGPD. Persistance PostgreSQL via EF Core, documentation Swagger et tests unitaires.</p>
+            <p>Version modernisée du clone Uber Laravel, côté performances et UX. Code sous <code>big-projects/uber-dotnet-vue</code>.</p>
+          </div>
+        </section>
+
+        <section class="project-block" data-arch-section>
+          <div class="wrap">
+            <h2>Architecture</h2>
+            <div class="arch-diagram">
+              <svg class="arch-svg" viewBox="0 0 1026 254" role="img" aria-label="Schéma d’architecture Uber Vue.js et .NET Core">
+                <defs>
+                  <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
+                  </marker>
+                </defs>
+                <g transform="translate(10, 18)" data-arch-node="client" data-arch-techs="vue-js" tabindex="0" role="button">
+                  <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">FRONTEND SPA</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Application</text>
+                  <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">Vue.js</text>
+                  <text x="16" y="114" fill="var(--muted)" font-size="16">Cartographie</text>
+                  <text x="16" y="136" fill="var(--muted)" font-size="16">Géolocalisation</text>
+                  <text x="16" y="158" fill="var(--muted)" font-size="16">Réservation</text>
+                  <text x="16" y="180" fill="var(--muted)" font-size="16">Paiement</text>
+                </g>
+                <g transform="translate(388, 18)" data-arch-node="backend" data-arch-techs="net-core,csharp,jwt,mvc,restful-api" tabindex="0" role="button">
+                  <rect width="250" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">BACKEND API</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">ASP.NET Core (C#)</text>
+                  <text x="16" y="90" fill="var(--muted)" font-size="16">Architecture MVC</text>
+                  <text x="16" y="112" fill="var(--muted)" font-size="16">REST API</text>
+                  <text x="16" y="134" fill="var(--muted)" font-size="16">Auth JWT</text>
+                  <text x="16" y="156" fill="var(--muted)" font-size="16">Chiffrement RGPD</text>
+                </g>
+                <g transform="translate(810, 18)" data-arch-node="persistence" data-arch-techs="postgresql,swagger" tabindex="0" role="button">
+                  <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">DONNÉES &amp; TESTS</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">PostgreSQL</text>
+                  <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">&amp; EF Core</text>
+                  <text x="16" y="114" fill="var(--muted)" font-size="16">Trajets</text>
+                  <text x="16" y="136" fill="var(--muted)" font-size="16">Chauffeurs, avis</text>
+                  <text x="16" y="158" fill="var(--muted)" font-size="16">Tests unitaires</text>
+                  <text x="16" y="180" fill="var(--muted)" font-size="16">Swagger</text>
+                </g>
+                <g>
+                  <line x1="224" y1="127" x2="380" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="302" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">REST / JWT</text>
+                </g>
+                <g>
+                  <line x1="646" y1="127" x2="802" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="724" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">EF Core</text>
+                </g>
+              </svg>
+              <a class="arch-link btn" href="/assets/diagrams/fr/uber-vuejs-dotnet.svg" target="_blank" rel="noreferrer">Voir le schéma</a>
+              <ul class="arch-legend">
+                <li data-arch-legend="client"><strong>Client SPA Vue.js</strong> · Interface réactive gérant la recherche d’itinéraires, le suivi géographique en temps réel et le tunnel de réservation.</li>
+                <li data-arch-legend="backend"><strong>API REST .NET Core</strong> · Contrôleurs MVC découplés, authentification JWT, chiffrement des données sensibles et conformité RGPD.</li>
+                <li data-arch-legend="persistence"><strong>Persistance PostgreSQL</strong> · Modélisation relationnelle des courses, utilisateurs et évaluations documentée sous Swagger.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Fonctionnalités</h2>
+            <ul>
+              <li><strong>Géolocalisation</strong> · Suivi des positions et mise à jour dynamique de la carte.</li>
+              <li><strong>Paiement sécurisé</strong> · Tunnel de paiement avec chiffrement des données sensibles.</li>
+              <li><strong>Trajets et réservations</strong> · Création, suivi et notifications de courses.</li>
+              <li><strong>Notation</strong> · Évaluation des trajets par les utilisateurs.</li>
+              <li><strong>SPA Vue.js</strong> · Interface réactive desktop et mobile.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap"><h2>Galerie</h2></div>
+          <div class="project-gallery">
+            <figure><img src="/assets/webp/uber-s4/home.webp" alt="Page d'accueil du clone Uber" loading="lazy" width="1900" height="1028" /><figcaption>Page d'accueil avec interface moderne</figcaption></figure>
+            <figure><img src="/assets/webp/uber-s4/myaccount.webp" alt="Page mon compte du clone Uber" loading="lazy" width="1918" height="912" /><figcaption>Gestion du compte utilisateur</figcaption></figure>
+            <figure><img src="/assets/webp/uber-s4/filters.webp" alt="Filtres et options de recherche du clone Uber" loading="lazy" width="1897" height="1032" /><figcaption>Filtres et options de recherche avancés</figcaption></figure>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Tech</h2>
+            <p class="project-tech"><a class="project-tech__item" href="/fr/?tech=vue-js#projects">Vue.js</a> <a class="project-tech__item" href="/fr/?tech=net-core#projects">.NET Core</a> <a class="project-tech__item" href="/fr/?tech=csharp#projects">C#</a> <a class="project-tech__item" href="/fr/?tech=node-js#projects">Node.js</a> <a class="project-tech__item" href="/fr/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/fr/?tech=restful-api#projects">RESTful API</a> <a class="project-tech__item" href="/fr/?tech=jwt#projects">JWT</a> <a class="project-tech__item" href="/fr/?tech=swagger#projects">Swagger</a> <a class="project-tech__item" href="/fr/?tech=vs-code#projects">VS Code</a> <a class="project-tech__item" href="/fr/?tech=visual-studio#projects">Visual Studio</a> <a class="project-tech__item" href="/fr/?tech=git#projects">Git</a> <a class="project-tech__item" href="/fr/?tech=github#projects">GitHub</a> <a class="project-tech__item" href="/fr/?tech=postman#projects">Postman</a> <a class="project-tech__item" href="/fr/?tech=microsoft-teams#projects">Microsoft Teams</a> <a class="project-tech__item" href="/fr/?tech=mvc#projects">MVC</a></p>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Actions</h2>
+            <div class="project-actions">
+              <a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/big-projects/uber-dotnet-vue" target="_blank" rel="noreferrer">Voir sur GitHub</a>
+              <a class="btn" href="/fr/#projects">Retour aux projets</a>
+            </div>
           </div>
         </section>
       </div>

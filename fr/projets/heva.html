@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -96,121 +96,143 @@
       <section class="project-hero">
         <div class="wrap">
           <h1 class="project-hero__title">Helvetic Events</h1>
-          <div class="project-hero__lead"><p >
-          Plateforme complète de gestion d'événements développée avec <strong>FastAPI</strong> et <strong>React</strong>.
-          Solution moderne intégrant des fonctionnalités avancées d'<strong>IA</strong>, de <strong>sécurité</strong> et une <strong>architecture modulaire</strong>.
-        </p></div>
-          <div class="hero__actions"><a class="btn btn--solid" href="https://heva-events.netlify.app/" target="_blank" rel="noreferrer">Voir la Maquette</a></div>
+          <div class="project-hero__lead">
+            <p>Plateforme de gestion d’événements avec qualification IA des briefs et back-office admin protégé OTP/2FA.</p>
+          </div>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="https://heva-events.netlify.app/" target="_blank" rel="noreferrer">Voir la Maquette</a>
+          </div>
         </div>
       </section>
 
       <div class="project-body">
-        <section class="project-block"><div class="wrap"><h2>Aperçu</h2><p>Le projet <strong><a href="https://heva-events.netlify.app/" target="_blank"
-                    rel="noopener noreferrer">Helvetic Events</a></strong> est une plateforme complète de gestion d'événements développée avec
-                <strong>FastAPI</strong> pour le backend et <strong>React</strong> avec TypeScript pour le frontend. Il s'agit d'une
-                solution moderne et évolutive pour la gestion complète d'événements, intégrant des fonctionnalités avancées d'IA.</p>
-<p>Cette plateforme intègre des fonctionnalités de <strong>sécurité avancée</strong> avec authentification OTP et 2FA pour les administrateurs,
-                une <strong>architecture modulaire</strong> basée sur Clean Architecture, et une <strong>intégration IA</strong> pour la qualification
-                et la conversation automatisée. Le système est entièrement <strong>multilingue</strong> et conforme aux standards de sécurité.</p>
-<p>L'architecture backend utilise <strong>FastAPI</strong> avec <strong>SQLAlchemy</strong> et <strong>PostgreSQL</strong>,
-                incluant des <strong>migrations de base de données</strong> avec Alembic et des <strong>tests automatisés</strong> avec Pytest.
-                Le frontend développé en <strong>React</strong> avec <strong>TypeScript</strong> offre une
-                expérience utilisateur optimale avec <strong>Tailwind CSS</strong> pour le styling.</p></div></section>
-                <section class="project-block" data-arch-section><div class="wrap wrap--wide"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 1026 446" role="img" aria-label="Schéma Clean Architecture Helvetic Events">
-  <defs>
-    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
-    </marker>
-  </defs>
-    <g transform="translate(10, 18)">
-      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">PORTAIL CLIENT</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">SPA React &amp; TS</text>
-      <text x="16" y="90" fill="var(--muted)" font-size="16">Briefs événements</text>
-      <text x="16" y="112" fill="var(--muted)" font-size="16">Multilingue</text>
-      <text x="16" y="134" fill="var(--muted)" font-size="16">Tailwind CSS</text>
-      <text x="16" y="156" fill="var(--muted)" font-size="16">Framer</text>
-    </g>
-    <g transform="translate(10, 234)">
-      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">BACK-OFFICE</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Admin Sécurisé</text>
-      <text x="16" y="90" fill="var(--muted)" font-size="16">Authentification</text>
-      <text x="16" y="112" fill="var(--muted)" font-size="16">OTP &amp; 2FA</text>
-      <text x="16" y="134" fill="var(--muted)" font-size="16">Suivi projets</text>
-      <text x="16" y="156" fill="var(--muted)" font-size="16">et devis</text>
-    </g>
-    <g transform="translate(388, 34)">
-      <rect width="250" height="378" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
-      <text x="16" y="120" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">CLEAN ARCHITECTURE</text>
-      <text x="16" y="150" fill="var(--koi-shiro)" font-size="18" font-weight="600">Backend FastAPI</text>
-      <text x="16" y="182" fill="var(--muted)" font-size="16">Couches Domaine</text>
-      <text x="16" y="204" fill="var(--muted)" font-size="16">/ Application</text>
-      <text x="16" y="226" fill="var(--muted)" font-size="16">OpenAPI · Pytest</text>
-      <text x="16" y="248" fill="var(--muted)" font-size="16">Docker</text>
-    </g>
-    <g transform="translate(810, 18)">
-      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">PERSISTANCE</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">PostgreSQL</text>
-      <text x="16" y="90" fill="var(--muted)" font-size="16">ORM SQLAlchemy</text>
-      <text x="16" y="112" fill="var(--muted)" font-size="16">Migrations</text>
-      <text x="16" y="134" fill="var(--muted)" font-size="16">Alembic</text>
-    </g>
-    <g transform="translate(810, 234)">
-      <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">SERVICE IA</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">OpenAI API</text>
-      <text x="16" y="90" fill="var(--muted)" font-size="16">Qualification</text>
-      <text x="16" y="112" fill="var(--muted)" font-size="16">automatique</text>
-      <text x="16" y="134" fill="var(--muted)" font-size="16">Assistant</text>
-      <text x="16" y="156" fill="var(--muted)" font-size="16">conversationnel</text>
-    </g>
-    <g>
-      <line x1="224" y1="115" x2="380" y2="115" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="302" y="103" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">REST / JSON</text>
-    </g>
-    <g>
-      <line x1="224" y1="331" x2="380" y2="331" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="302" y="319" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">OTP + 2FA</text>
-    </g>
-    <g>
-      <line x1="646" y1="115" x2="802" y2="115" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="724" y="103" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">SQLAlchemy</text>
-    </g>
-    <g>
-      <line x1="646" y1="331" x2="802" y2="331" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="724" y="319" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">Prompts / Context</text>
-    </g>
-</svg><a class="arch-link btn" href="/assets/diagrams/fr/heva.svg" target="_blank" rel="noreferrer">Voir le schéma</a><ul class="arch-legend"><li><strong>Interfaces découplées</strong> · Espace client réactif (React/TypeScript) et portail d’administration protégé par double facteur (OTP / 2FA).</li>
-<li><strong>Backend Clean Architecture</strong> · Séparation stricte des routeurs FastAPI, cas d’usage métier et dépôts de données, testée sous Pytest.</li>
-<li><strong>Qualification IA & Données</strong> · Intégration OpenAI pour qualifier automatiquement les briefs clients et stockage transactionnel PostgreSQL/Alembic.</li></ul></div></div></section>
-        <section class="project-block"><div class="wrap"><h2>Fonctionnalités</h2><ul><li><strong>Gestion complète des projets et briefs</strong> · Système complet permettant de créer, gérer et suivre les projets et briefs d'événements avec une interface intuitive.</li>
-<li><strong>Authentification sécurisée</strong> · Système d'authentification robuste avec OTP et authentification à deux facteurs (2FA) pour les administrateurs.</li>
-<li><strong>Intégration IA</strong> · Assistant IA pour la qualification automatique et la conversation automatisée, améliorant l'expérience utilisateur.</li>
-<li><strong>Interface utilisateur moderne</strong> · Interface réactive et moderne développée avec React et TypeScript, offrant une expérience utilisateur optimale.</li>
-<li><strong>Documentation API interactive</strong> · Documentation API complète via Swagger/OpenAPI permettant une intégration facile et une compréhension claire des endpoints.</li></ul></div></section>
-        <section class="project-block"><div class="wrap"><h2>Galerie</h2></div><div class="project-gallery"><figure><img src="/assets/webp/heva/home.webp" alt="Page d'accueil Helvetic Events" loading="lazy" width="1897" height="1032" /><figcaption>Page d'accueil de la plateforme</figcaption></figure>
-<figure><img src="/assets/webp/heva/admin.webp" alt="Interface d'administration" loading="lazy" width="1918" height="1032" /><figcaption>Interface d'administration avec authentification sécurisée</figcaption></figure>
-<figure><img src="/assets/webp/heva/client.webp" alt="Interface client" loading="lazy" width="1897" height="1032" /><figcaption>Interface client avec gestion des services</figcaption></figure>
-<figure><img src="/assets/webp/heva/api.webp" alt="Documentation API" loading="lazy" width="1892" height="1028" /><figcaption>Documentation API interactive avec Swagger</figcaption></figure>
-<figure><img src="/assets/webp/heva/ia.webp" alt="Intégration IA" loading="lazy" width="1232" height="911" /><figcaption>Intégration IA pour l'assistance automatisée</figcaption></figure></div></section>
-        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech"><a class="project-tech__item" href="/fr/?tech=fastapi#projects">FastAPI</a> <a class="project-tech__item" href="/fr/?tech=react#projects">React</a> <a class="project-tech__item" href="/fr/?tech=typescript#projects">TypeScript</a> <a class="project-tech__item" href="/fr/?tech=node-js#projects">Node.js</a> <a class="project-tech__item" href="/fr/?tech=openai#projects">OpenAI</a> <a class="project-tech__item" href="/fr/?tech=next#projects">Next</a> <a class="project-tech__item" href="/fr/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/fr/?tech=sqlalchemy#projects">SQLAlchemy</a> <a class="project-tech__item" href="/fr/?tech=alembic#projects">Alembic</a> <a class="project-tech__item" href="/fr/?tech=pytest#projects">Pytest</a> <a class="project-tech__item" href="/fr/?tech=tailwind-css#projects">Tailwind CSS</a> <a class="project-tech__item" href="/fr/?tech=restful-api#projects">RESTful API</a> <a class="project-tech__item" href="/fr/?tech=swagger#projects">Swagger</a> <a class="project-tech__item" href="/fr/?tech=postman#projects">Postman</a> <a class="project-tech__item" href="/fr/?tech=figma#projects">Figma</a> <a class="project-tech__item" href="/fr/?tech=framer#projects">Framer</a> <a class="project-tech__item" href="/fr/?tech=docker#projects">Docker</a> <a class="project-tech__item" href="/fr/?tech=git#projects">Git</a> <a class="project-tech__item" href="/fr/?tech=github#projects">GitHub</a> <a class="project-tech__item" href="/fr/?tech=vs-code#projects">VS Code</a></p></div></section>
         <section class="project-block">
           <div class="wrap">
-            <h2>Explorer</h2>
-            <div class="project-actions"><a class="btn btn--solid" href="https://heva-events.netlify.app/" target="_blank" rel="noreferrer">Maquette en Ligne</a>
-<a class="btn" href="/fr/#projects">Retour aux projets</a></div>
-            <nav class="project-pager" aria-label="Navigation entre les projets" data-project-pager>
-              <a class="project-pager__link project-pager__link--prev" href="/fr/projets/smarthome-lite.html">
-                <span class="project-pager__eyebrow">← Projet précédent</span>
-                <span class="project-pager__title">SmartHome Lite</span>
-              </a>
-              <a class="project-pager__link project-pager__link--next" href="/fr/projets/kube.html">
-                <span class="project-pager__eyebrow">Projet suivant →</span>
-                <span class="project-pager__title">KUBE</span>
-              </a>
-            </nav>
+            <h2>Aperçu</h2>
+            <p>Backend FastAPI en Clean Architecture (domaine / application / infrastructure), SQLAlchemy, PostgreSQL, migrations Alembic et tests Pytest. Frontend React/TypeScript (Tailwind, Framer) : portail client multilingue pour les briefs et espace admin sécurisé.</p>
+            <p>OpenAI assure la qualification automatique et l’assistance conversationnelle. API documentée OpenAPI/Swagger. Maquette : <a href="https://heva-events.netlify.app/" target="_blank" rel="noopener noreferrer">heva-events.netlify.app</a>.</p>
+          </div>
+        </section>
+
+        <section class="project-block" data-arch-section>
+          <div class="wrap">
+            <h2>Architecture</h2>
+            <div class="arch-diagram">
+              <svg class="arch-svg" viewBox="0 0 1026 446" role="img" aria-label="Schéma Clean Architecture Helvetic Events">
+                <defs>
+                  <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
+                  </marker>
+                </defs>
+                <g transform="translate(10, 18)" data-arch-node="interfaces" data-arch-techs="react,typescript,tailwind-css,framer" tabindex="0" role="button">
+                  <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">PORTAIL CLIENT</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">SPA React &amp; TS</text>
+                  <text x="16" y="90" fill="var(--muted)" font-size="16">Briefs événements</text>
+                  <text x="16" y="112" fill="var(--muted)" font-size="16">Multilingue</text>
+                  <text x="16" y="134" fill="var(--muted)" font-size="16">Tailwind CSS</text>
+                  <text x="16" y="156" fill="var(--muted)" font-size="16">Framer</text>
+                </g>
+                <g transform="translate(10, 234)" data-arch-node="interfaces" data-arch-techs="react,typescript" tabindex="0" role="button">
+                  <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">BACK-OFFICE</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Admin Sécurisé</text>
+                  <text x="16" y="90" fill="var(--muted)" font-size="16">Authentification</text>
+                  <text x="16" y="112" fill="var(--muted)" font-size="16">OTP &amp; 2FA</text>
+                  <text x="16" y="134" fill="var(--muted)" font-size="16">Suivi projets</text>
+                  <text x="16" y="156" fill="var(--muted)" font-size="16">et devis</text>
+                </g>
+                <g transform="translate(388, 34)" data-arch-node="clean" data-arch-techs="fastapi,pytest,docker,swagger" tabindex="0" role="button">
+                  <rect width="250" height="378" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
+                  <text x="16" y="120" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">CLEAN ARCHITECTURE</text>
+                  <text x="16" y="150" fill="var(--koi-shiro)" font-size="18" font-weight="600">Backend FastAPI</text>
+                  <text x="16" y="182" fill="var(--muted)" font-size="16">Couches Domaine</text>
+                  <text x="16" y="204" fill="var(--muted)" font-size="16">/ Application</text>
+                  <text x="16" y="226" fill="var(--muted)" font-size="16">OpenAPI · Pytest</text>
+                  <text x="16" y="248" fill="var(--muted)" font-size="16">Docker</text>
+                </g>
+                <g transform="translate(810, 18)" data-arch-node="qualification" data-arch-techs="postgresql,sqlalchemy,alembic" tabindex="0" role="button">
+                  <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">PERSISTANCE</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">PostgreSQL</text>
+                  <text x="16" y="90" fill="var(--muted)" font-size="16">ORM SQLAlchemy</text>
+                  <text x="16" y="112" fill="var(--muted)" font-size="16">Migrations</text>
+                  <text x="16" y="134" fill="var(--muted)" font-size="16">Alembic</text>
+                </g>
+                <g transform="translate(810, 234)" data-arch-node="qualification" data-arch-techs="openai" tabindex="0" role="button">
+                  <rect width="206" height="194" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">SERVICE IA</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">OpenAI API</text>
+                  <text x="16" y="90" fill="var(--muted)" font-size="16">Qualification</text>
+                  <text x="16" y="112" fill="var(--muted)" font-size="16">automatique</text>
+                  <text x="16" y="134" fill="var(--muted)" font-size="16">Assistant</text>
+                  <text x="16" y="156" fill="var(--muted)" font-size="16">conversationnel</text>
+                </g>
+                <g>
+                  <line x1="224" y1="115" x2="380" y2="115" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="302" y="103" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">REST / JSON</text>
+                </g>
+                <g>
+                  <line x1="224" y1="331" x2="380" y2="331" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="302" y="319" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">OTP + 2FA</text>
+                </g>
+                <g>
+                  <line x1="646" y1="115" x2="802" y2="115" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="724" y="103" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">SQLAlchemy</text>
+                </g>
+                <g>
+                  <line x1="646" y1="331" x2="802" y2="331" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="724" y="319" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">Prompts / Context</text>
+                </g>
+              </svg>
+              <a class="arch-link btn" href="/assets/diagrams/fr/heva.svg" target="_blank" rel="noreferrer">Voir le schéma</a>
+              <ul class="arch-legend">
+                <li data-arch-legend="interfaces"><strong>Interfaces découplées</strong> · Espace client réactif (React/TypeScript) et portail d’administration protégé par double facteur (OTP / 2FA).</li>
+                <li data-arch-legend="clean"><strong>Backend Clean Architecture</strong> · Séparation stricte des routeurs FastAPI, cas d’usage métier et dépôts de données, testée sous Pytest.</li>
+                <li data-arch-legend="qualification"><strong>Qualification IA &amp; Données</strong> · Intégration OpenAI pour qualifier automatiquement les briefs clients et stockage transactionnel PostgreSQL/Alembic.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Fonctionnalités</h2>
+            <ul>
+              <li><strong>Projets et briefs</strong> · Création, suivi et gestion des briefs d’événements côté client et admin.</li>
+              <li><strong>Auth OTP / 2FA</strong> · Double facteur sur le back-office administrateur.</li>
+              <li><strong>Qualification IA</strong> · Assistant OpenAI pour qualifier les demandes et dialoguer avec le client.</li>
+              <li><strong>SPA React</strong> · Interfaces client et admin en TypeScript avec Tailwind CSS.</li>
+              <li><strong>OpenAPI</strong> · Documentation interactive Swagger des endpoints FastAPI.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap"><h2>Galerie</h2></div>
+          <div class="project-gallery">
+            <figure><img src="/assets/webp/heva/home.webp" alt="Page d'accueil Helvetic Events" loading="lazy" width="1897" height="1032" /><figcaption>Page d'accueil de la plateforme</figcaption></figure>
+            <figure><img src="/assets/webp/heva/admin.webp" alt="Interface d'administration" loading="lazy" width="1918" height="1032" /><figcaption>Interface d'administration avec authentification sécurisée</figcaption></figure>
+            <figure><img src="/assets/webp/heva/client.webp" alt="Interface client" loading="lazy" width="1897" height="1032" /><figcaption>Interface client avec gestion des services</figcaption></figure>
+            <figure><img src="/assets/webp/heva/api.webp" alt="Documentation API" loading="lazy" width="1892" height="1028" /><figcaption>Documentation API interactive avec Swagger</figcaption></figure>
+            <figure><img src="/assets/webp/heva/ia.webp" alt="Intégration IA" loading="lazy" width="1232" height="911" /><figcaption>Intégration IA pour l'assistance automatisée</figcaption></figure>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Tech</h2>
+            <p class="project-tech"><a class="project-tech__item" href="/fr/?tech=fastapi#projects">FastAPI</a> <a class="project-tech__item" href="/fr/?tech=react#projects">React</a> <a class="project-tech__item" href="/fr/?tech=typescript#projects">TypeScript</a> <a class="project-tech__item" href="/fr/?tech=node-js#projects">Node.js</a> <a class="project-tech__item" href="/fr/?tech=openai#projects">OpenAI</a> <a class="project-tech__item" href="/fr/?tech=next#projects">Next</a> <a class="project-tech__item" href="/fr/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/fr/?tech=sqlalchemy#projects">SQLAlchemy</a> <a class="project-tech__item" href="/fr/?tech=alembic#projects">Alembic</a> <a class="project-tech__item" href="/fr/?tech=pytest#projects">Pytest</a> <a class="project-tech__item" href="/fr/?tech=tailwind-css#projects">Tailwind CSS</a> <a class="project-tech__item" href="/fr/?tech=restful-api#projects">RESTful API</a> <a class="project-tech__item" href="/fr/?tech=swagger#projects">Swagger</a> <a class="project-tech__item" href="/fr/?tech=postman#projects">Postman</a> <a class="project-tech__item" href="/fr/?tech=figma#projects">Figma</a> <a class="project-tech__item" href="/fr/?tech=framer#projects">Framer</a> <a class="project-tech__item" href="/fr/?tech=docker#projects">Docker</a> <a class="project-tech__item" href="/fr/?tech=git#projects">Git</a> <a class="project-tech__item" href="/fr/?tech=github#projects">GitHub</a> <a class="project-tech__item" href="/fr/?tech=vs-code#projects">VS Code</a></p>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Actions</h2>
+            <div class="project-actions">
+              <a class="btn btn--solid" href="https://heva-events.netlify.app/" target="_blank" rel="noreferrer">Voir la Maquette</a>
+              <a class="btn" href="/fr/#projects">Retour aux projets</a>
+            </div>
           </div>
         </section>
       </div>

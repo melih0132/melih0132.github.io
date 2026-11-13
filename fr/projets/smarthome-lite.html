@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -95,129 +95,149 @@
       <section class="project-hero">
         <div class="wrap">
           <h1 class="project-hero__title">SmartHome Lite</h1>
-          <div class="project-hero__lead"><p >
-          Domotique distribuée avec <strong>FastAPI</strong>, <strong>Next</strong> et <strong>Kotlin</strong> /
-          <strong>Jetpack Compose</strong>, capteurs <strong>Z-Wave</strong> et pipelines <strong>ML</strong>. 
-        </p></div>
-          <div class="hero__actions"><a class="btn btn--solid" href="https://github.com/melih0132/smarthome-lite" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+          <div class="project-hero__lead">
+            <p>Contrôle web et mobile des lampes et prises, automatisation IF-THEN et smart dimming sur un réseau Z-Wave local.</p>
+          </div>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="https://github.com/melih0132/smarthome-lite" target="_blank" rel="noreferrer">Voir sur GitHub</a>
+          </div>
         </div>
       </section>
 
       <div class="project-body">
-        <section class="project-block"><div class="wrap"><h2>Aperçu</h2><p>Le projet <strong>SmartHome Lite</strong> est un système domotique distribué développé avec
-                <strong>FastAPI</strong>, <strong>SQLAlchemy</strong> et <strong>PostgreSQL</strong> (données relationnelles
-                et séries temporelles via <strong>TimescaleDB</strong>), une interface <strong>Next</strong> (App Router,
-                TypeScript, <strong>Tailwind CSS</strong>) et une application mobile <strong>Kotlin</strong> avec
-                <strong>Jetpack Compose</strong>. Il couvre le contrôle des <strong>lampes</strong> et <strong>prises</strong>,
-                les <strong>règles d'automatisation</strong>, la <strong>détection de présence</strong> et le <strong>smart dimming</strong>.</p>
-<p>Ce projet intègre une <strong>authentification JWT</strong>, le hachage des mots de passe (<strong>bcrypt</strong>),
-                la validation <strong>Pydantic</strong> et un nœud <strong>Raspberry Pi</strong> avec API <strong>Flask</strong>
-                et <strong>Z-Wave JS UI</strong>. L'entrée <strong>big-projects/smarthome-lite</strong> du dépôt
-                <strong>all-my-projects</strong> sur GitHub renvoie vers ce dépôt dédié.</p>
-<p>Le système est conçu pour une <strong>expérience utilisateur</strong> fluide sur le web et le mobile, avec des
-                <strong>tests automatisés</strong> (Pytest), des graphiques de présence et de luminosité, et une documentation
-                détaillée (README) et les captures présentées dans la galerie ci-dessous.</p></div></section>
-                <section class="project-block" data-arch-section><div class="wrap wrap--wide"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 1026 494" role="img" aria-label="Schéma d’architecture distribuée SmartHome Lite">
-  <defs>
-    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
-    </marker>
-  </defs>
-    <g transform="translate(10, 18)">
-      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">CLIENTS</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Next.js</text>
-      <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">&amp; Android</text>
-      <text x="16" y="114" fill="var(--muted)" font-size="16">App Router · TS</text>
-      <text x="16" y="136" fill="var(--muted)" font-size="16">Tailwind</text>
-      <text x="16" y="158" fill="var(--muted)" font-size="16">Kotlin</text>
-      <text x="16" y="180" fill="var(--muted)" font-size="16">Jetpack Compose</text>
-    </g>
-    <g transform="translate(10, 258)">
-      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">NOEUD IOT EDGE</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Raspberry Pi 4</text>
-      <text x="16" y="90" fill="var(--muted)" font-size="16">API Flask</text>
-      <text x="16" y="112" fill="var(--muted)" font-size="16">Z-Wave JS UI</text>
-      <text x="16" y="134" fill="var(--muted)" font-size="16">MultiSensor 7</text>
-      <text x="16" y="156" fill="var(--muted)" font-size="16">Prises / Lampes</text>
-    </g>
-    <g transform="translate(388, 34)">
-      <rect width="250" height="426" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
-      <text x="16" y="144" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">BACKEND CENTRAL</text>
-      <text x="16" y="174" fill="var(--koi-shiro)" font-size="18" font-weight="600">API REST FastAPI</text>
-      <text x="16" y="206" fill="var(--muted)" font-size="16">Auth JWT · bcrypt</text>
-      <text x="16" y="228" fill="var(--muted)" font-size="16">Pydantic</text>
-      <text x="16" y="250" fill="var(--muted)" font-size="16">Moteur IF-THEN</text>
-      <text x="16" y="272" fill="var(--muted)" font-size="16">Smart Dimming</text>
-    </g>
-    <g transform="translate(810, 18)">
-      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">STOCKAGE HYBRIDE</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">PostgreSQL</text>
-      <text x="16" y="90" fill="var(--muted)" font-size="16">SQLAlchemy</text>
-      <text x="16" y="112" fill="var(--muted)" font-size="16">Relationnel</text>
-      <text x="16" y="134" fill="var(--muted)" font-size="16">Séries temp.</text>
-      <text x="16" y="156" fill="var(--muted)" font-size="16">TimescaleDB</text>
-    </g>
-    <g transform="translate(810, 258)">
-      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">INTELLIGENCE</text>
-      <text x="16" y="46" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">ARTIFICIELLE</text>
-      <text x="16" y="76" fill="var(--koi-shiro)" font-size="18" font-weight="600">Pipelines ML</text>
-      <text x="16" y="108" fill="var(--muted)" font-size="16">Classification</text>
-      <text x="16" y="130" fill="var(--muted)" font-size="16">scénarios</text>
-      <text x="16" y="152" fill="var(--muted)" font-size="16">Régression</text>
-      <text x="16" y="174" fill="var(--muted)" font-size="16">Clustering</text>
-    </g>
-    <g>
-      <line x1="224" y1="127" x2="380" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="302" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTPS / JWT</text>
-    </g>
-    <g>
-      <line x1="224" y1="367" x2="380" y2="367" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="302" y="355" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTP / Z-Wave</text>
-    </g>
-    <g>
-      <line x1="646" y1="127" x2="802" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="724" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">SQLAlchemy</text>
-    </g>
-    <g>
-      <line x1="646" y1="367" x2="802" y2="367" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="724" y="355" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">Inférence ML</text>
-    </g>
-</svg><a class="arch-link btn" href="/assets/diagrams/fr/smarthome-lite.svg" target="_blank" rel="noreferrer">Voir le schéma</a><ul class="arch-legend"><li><strong>Couche présentation & Edge IoT</strong> · Dashboard Next.js et application Android (Jetpack Compose) consomment l’API sécurisée ; le Raspberry Pi pilote le réseau Z-Wave local via Flask.</li>
-<li><strong>Orchestration FastAPI</strong> · Authentification JWT, validation Pydantic, évaluation temps réel des règles IF-THEN et déclenchement du smart dimming.</li>
-<li><strong>Persistance & ML</strong> · Séries temporelles de capteurs sous TimescaleDB/PostgreSQL alimentant les modèles de classification, régression et clustering.</li></ul></div></div></section>
-        <section class="project-block"><div class="wrap"><h2>Fonctionnalités</h2><ul><li><strong>Gestion des appareils et tableau de bord</strong> · Contrôle ON/OFF et luminosité des lampes, gestion des prises et vue centralisée des équipements depuis le web et le mobile.</li>
-<li><strong>Détection de présence et historique</strong> · Capteur Z-Wave (ex. MultiSensor 7), remontée des événements vers le backend et historique pour analyse et règles.</li>
-<li><strong>Moteur IF-THEN et scénarios</strong> · CRUD des règles, évaluation automatique et scénarios prédéfinis pour enchaîner actions et conditions.</li>
-<li><strong>Intelligence artificielle et smart dimming</strong> · Classification de scénarios, régression pour l'intensité, clustering des habitudes (parcours documenté) et adaptation à la luminosité ambiante.</li>
-<li><strong>Visualisation et supervision</strong> · Graphiques de présence et de luminosité, suivi des mesures et des ajustements automatiques sur le dashboard Next et l'app Android.</li></ul></div></section>
-        <section class="project-block"><div class="wrap"><h2>Galerie</h2></div><div class="project-gallery"><figure><img src="/assets/webp/smarthome/dashboard.webp" alt="Tableau de bord web SmartHome Lite" loading="lazy" width="1919" height="949" /><figcaption>Tableau de bord web</figcaption></figure>
-<figure><img src="/assets/webp/smarthome/admin.webp" alt="Administration web SmartHome Lite" loading="lazy" width="1915" height="945" /><figcaption>Administration</figcaption></figure>
-<figure><img src="/assets/webp/smarthome/monitoring.webp" alt="Supervision SmartHome Lite" loading="lazy" width="1902" height="945" /><figcaption>Supervision</figcaption></figure>
-<figure><img src="/assets/webp/smarthome/smart-dimming.webp" alt="Smart dimming SmartHome Lite" loading="lazy" width="1919" height="946" /><figcaption>Smart dimming</figcaption></figure>
-<figure><img src="/assets/webp/smarthome/control-panel-z-wave.webp" alt="Panneau de contrôle Z-Wave SmartHome Lite" loading="lazy" width="1371" height="471" /><figcaption>Panneau de contrôle Z-Wave</figcaption></figure>
-<figure><img src="/assets/webp/smarthome/api.webp" alt="API SmartHome Lite" loading="lazy" width="1905" height="945" /><figcaption>API</figcaption></figure>
-<figure><img src="/assets/webp/smarthome/ia.webp" alt="Intelligence artificielle SmartHome Lite" loading="lazy" width="1900" height="945" /><figcaption>Intelligence artificielle</figcaption></figure>
-<figure><img src="/assets/webp/smarthome/branch-git.webp" alt="Branches Git du dépôt SmartHome Lite" loading="lazy" width="1424" height="858" /><figcaption>Dépôt Git (branches)</figcaption></figure></div></section>
-        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech"><a class="project-tech__item" href="/fr/?tech=python#projects">Python</a> <a class="project-tech__item" href="/fr/?tech=fastapi#projects">FastAPI</a> <a class="project-tech__item" href="/fr/?tech=flask#projects">Flask</a> <a class="project-tech__item" href="/fr/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/fr/?tech=sqlalchemy#projects">SQLAlchemy</a> <a class="project-tech__item" href="/fr/?tech=jwt#projects">JWT</a> <a class="project-tech__item" href="/fr/?tech=pytest#projects">Pytest</a> <a class="project-tech__item" href="/fr/?tech=next#projects">Next</a> <a class="project-tech__item" href="/fr/?tech=react#projects">React</a> <a class="project-tech__item" href="/fr/?tech=typescript#projects">TypeScript</a> <a class="project-tech__item" href="/fr/?tech=tailwind-css#projects">Tailwind CSS</a> <a class="project-tech__item" href="/fr/?tech=kotlin#projects">Kotlin</a> <a class="project-tech__item" href="/fr/?tech=jetpack-compose#projects">Jetpack Compose</a> <a class="project-tech__item" href="/fr/?tech=raspberry-pi#projects">Raspberry Pi</a> <a class="project-tech__item" href="/fr/?tech=z-wave#projects">Z-Wave</a> <a class="project-tech__item" href="/fr/?tech=android-studio#projects">Android Studio</a> <a class="project-tech__item" href="/fr/?tech=vs-code#projects">VS Code</a> <a class="project-tech__item" href="/fr/?tech=git#projects">Git</a> <a class="project-tech__item" href="/fr/?tech=github#projects">GitHub</a></p></div></section>
         <section class="project-block">
           <div class="wrap">
-            <h2>Explorer</h2>
-            <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/smarthome-lite" target="_blank" rel="noreferrer">Voir sur GitHub</a>
-<a class="btn" href="/fr/#projects">Retour aux projets</a></div>
-            <nav class="project-pager" aria-label="Navigation entre les projets" data-project-pager>
-              <a class="project-pager__link project-pager__link--prev" href="/fr/projets/la-guilde-des-seigneurs.html">
-                <span class="project-pager__eyebrow">← Projet précédent</span>
-                <span class="project-pager__title">La Guilde des Seigneurs</span>
-              </a>
-              <a class="project-pager__link project-pager__link--next" href="/fr/projets/heva.html">
-                <span class="project-pager__eyebrow">Projet suivant →</span>
-                <span class="project-pager__title">Helvetic Events</span>
-              </a>
-            </nav>
+            <h2>Aperçu</h2>
+            <p>Système distribué : API centrale FastAPI (JWT, Pydantic, moteur de règles), dashboard Next.js et app Android Kotlin/Compose. Un nœud Raspberry Pi (Flask + Z-Wave JS UI) pilote les capteurs et actionneurs ; PostgreSQL/TimescaleDB stocke les séries temporelles pour les pipelines ML (classification, régression, clustering).</p>
+            <p>Auth bcrypt, tests Pytest, graphiques de présence et de luminosité sur le dashboard. Dépôt dédié <code>smarthome-lite</code> (également référencé depuis <code>all-my-projects</code>).</p>
+          </div>
+        </section>
+
+        <section class="project-block" data-arch-section>
+          <div class="wrap">
+            <h2>Architecture</h2>
+            <div class="arch-diagram">
+              <svg class="arch-svg" viewBox="0 0 1026 494" role="img" aria-label="Schéma d’architecture distribuée SmartHome Lite">
+                <defs>
+                  <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
+                  </marker>
+                </defs>
+                <g transform="translate(10, 18)" data-arch-node="presentation" data-arch-techs="next,react,typescript,kotlin,jetpack-compose" tabindex="0" role="button">
+                  <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">CLIENTS</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Next.js</text>
+                  <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">&amp; Android</text>
+                  <text x="16" y="114" fill="var(--muted)" font-size="16">App Router · TS</text>
+                  <text x="16" y="136" fill="var(--muted)" font-size="16">Tailwind</text>
+                  <text x="16" y="158" fill="var(--muted)" font-size="16">Kotlin</text>
+                  <text x="16" y="180" fill="var(--muted)" font-size="16">Jetpack Compose</text>
+                </g>
+                <g transform="translate(10, 258)" data-arch-node="presentation" data-arch-techs="raspberry-pi,flask,z-wave" tabindex="0" role="button">
+                  <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">NOEUD IOT EDGE</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Raspberry Pi 4</text>
+                  <text x="16" y="90" fill="var(--muted)" font-size="16">API Flask</text>
+                  <text x="16" y="112" fill="var(--muted)" font-size="16">Z-Wave JS UI</text>
+                  <text x="16" y="134" fill="var(--muted)" font-size="16">MultiSensor 7</text>
+                  <text x="16" y="156" fill="var(--muted)" font-size="16">Prises / Lampes</text>
+                </g>
+                <g transform="translate(388, 34)" data-arch-node="orchestration" data-arch-techs="fastapi,jwt,python,pytest" tabindex="0" role="button">
+                  <rect width="250" height="426" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
+                  <text x="16" y="144" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">BACKEND CENTRAL</text>
+                  <text x="16" y="174" fill="var(--koi-shiro)" font-size="18" font-weight="600">API REST FastAPI</text>
+                  <text x="16" y="206" fill="var(--muted)" font-size="16">Auth JWT · bcrypt</text>
+                  <text x="16" y="228" fill="var(--muted)" font-size="16">Pydantic</text>
+                  <text x="16" y="250" fill="var(--muted)" font-size="16">Moteur IF-THEN</text>
+                  <text x="16" y="272" fill="var(--muted)" font-size="16">Smart Dimming</text>
+                </g>
+                <g transform="translate(810, 18)" data-arch-node="persistence" data-arch-techs="postgresql,sqlalchemy" tabindex="0" role="button">
+                  <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">STOCKAGE HYBRIDE</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">PostgreSQL</text>
+                  <text x="16" y="90" fill="var(--muted)" font-size="16">SQLAlchemy</text>
+                  <text x="16" y="112" fill="var(--muted)" font-size="16">Relationnel</text>
+                  <text x="16" y="134" fill="var(--muted)" font-size="16">Séries temp.</text>
+                  <text x="16" y="156" fill="var(--muted)" font-size="16">TimescaleDB</text>
+                </g>
+                <g transform="translate(810, 258)" data-arch-node="persistence" data-arch-techs="python" tabindex="0" role="button">
+                  <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">INTELLIGENCE</text>
+                  <text x="16" y="46" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">ARTIFICIELLE</text>
+                  <text x="16" y="76" fill="var(--koi-shiro)" font-size="18" font-weight="600">Pipelines ML</text>
+                  <text x="16" y="108" fill="var(--muted)" font-size="16">Classification</text>
+                  <text x="16" y="130" fill="var(--muted)" font-size="16">scénarios</text>
+                  <text x="16" y="152" fill="var(--muted)" font-size="16">Régression</text>
+                  <text x="16" y="174" fill="var(--muted)" font-size="16">Clustering</text>
+                </g>
+                <g>
+                  <line x1="224" y1="127" x2="380" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="302" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTPS / JWT</text>
+                </g>
+                <g>
+                  <line x1="224" y1="367" x2="380" y2="367" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="302" y="355" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTP / Z-Wave</text>
+                </g>
+                <g>
+                  <line x1="646" y1="127" x2="802" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="724" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">SQLAlchemy</text>
+                </g>
+                <g>
+                  <line x1="646" y1="367" x2="802" y2="367" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="724" y="355" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">Inférence ML</text>
+                </g>
+              </svg>
+              <a class="arch-link btn" href="/assets/diagrams/fr/smarthome-lite.svg" target="_blank" rel="noreferrer">Voir le schéma</a>
+              <ul class="arch-legend">
+                <li data-arch-legend="presentation"><strong>Couche présentation &amp; Edge IoT</strong> · Dashboard Next.js et application Android (Jetpack Compose) consomment l’API sécurisée ; le Raspberry Pi pilote le réseau Z-Wave local via Flask.</li>
+                <li data-arch-legend="orchestration"><strong>Orchestration FastAPI</strong> · Authentification JWT, validation Pydantic, évaluation temps réel des règles IF-THEN et déclenchement du smart dimming.</li>
+                <li data-arch-legend="persistence"><strong>Persistance &amp; ML</strong> · Séries temporelles de capteurs sous TimescaleDB/PostgreSQL alimentant les modèles de classification, régression et clustering.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Fonctionnalités</h2>
+            <ul>
+              <li><strong>Appareils et tableau de bord</strong> · ON/OFF et luminosité des lampes, prises, vue centralisée web et mobile.</li>
+              <li><strong>Présence Z-Wave</strong> · Remontée MultiSensor 7 vers le backend et historique pour règles et analyse.</li>
+              <li><strong>Moteur IF-THEN</strong> · CRUD de règles, évaluation automatique et scénarios prédéfinis.</li>
+              <li><strong>Smart dimming et ML</strong> · Classification de scénarios, régression d’intensité, clustering des habitudes.</li>
+              <li><strong>Supervision</strong> · Graphiques de présence et de luminosité sur Next et Android.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap"><h2>Galerie</h2></div>
+          <div class="project-gallery">
+            <figure><img src="/assets/webp/smarthome/dashboard.webp" alt="Tableau de bord web SmartHome Lite" loading="lazy" width="1919" height="949" /><figcaption>Tableau de bord web</figcaption></figure>
+            <figure><img src="/assets/webp/smarthome/admin.webp" alt="Administration web SmartHome Lite" loading="lazy" width="1915" height="945" /><figcaption>Administration</figcaption></figure>
+            <figure><img src="/assets/webp/smarthome/monitoring.webp" alt="Supervision SmartHome Lite" loading="lazy" width="1902" height="945" /><figcaption>Supervision</figcaption></figure>
+            <figure><img src="/assets/webp/smarthome/smart-dimming.webp" alt="Smart dimming SmartHome Lite" loading="lazy" width="1919" height="946" /><figcaption>Smart dimming</figcaption></figure>
+            <figure><img src="/assets/webp/smarthome/control-panel-z-wave.webp" alt="Panneau de contrôle Z-Wave SmartHome Lite" loading="lazy" width="1371" height="471" /><figcaption>Panneau de contrôle Z-Wave</figcaption></figure>
+            <figure><img src="/assets/webp/smarthome/api.webp" alt="API SmartHome Lite" loading="lazy" width="1905" height="945" /><figcaption>API</figcaption></figure>
+            <figure><img src="/assets/webp/smarthome/ia.webp" alt="Intelligence artificielle SmartHome Lite" loading="lazy" width="1900" height="945" /><figcaption>Intelligence artificielle</figcaption></figure>
+            <figure><img src="/assets/webp/smarthome/branch-git.webp" alt="Branches Git du dépôt SmartHome Lite" loading="lazy" width="1424" height="858" /><figcaption>Dépôt Git (branches)</figcaption></figure>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Tech</h2>
+            <p class="project-tech"><a class="project-tech__item" href="/fr/?tech=python#projects">Python</a> <a class="project-tech__item" href="/fr/?tech=fastapi#projects">FastAPI</a> <a class="project-tech__item" href="/fr/?tech=flask#projects">Flask</a> <a class="project-tech__item" href="/fr/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/fr/?tech=sqlalchemy#projects">SQLAlchemy</a> <a class="project-tech__item" href="/fr/?tech=jwt#projects">JWT</a> <a class="project-tech__item" href="/fr/?tech=pytest#projects">Pytest</a> <a class="project-tech__item" href="/fr/?tech=next#projects">Next</a> <a class="project-tech__item" href="/fr/?tech=react#projects">React</a> <a class="project-tech__item" href="/fr/?tech=typescript#projects">TypeScript</a> <a class="project-tech__item" href="/fr/?tech=tailwind-css#projects">Tailwind CSS</a> <a class="project-tech__item" href="/fr/?tech=kotlin#projects">Kotlin</a> <a class="project-tech__item" href="/fr/?tech=jetpack-compose#projects">Jetpack Compose</a> <a class="project-tech__item" href="/fr/?tech=raspberry-pi#projects">Raspberry Pi</a> <a class="project-tech__item" href="/fr/?tech=z-wave#projects">Z-Wave</a> <a class="project-tech__item" href="/fr/?tech=android-studio#projects">Android Studio</a> <a class="project-tech__item" href="/fr/?tech=vs-code#projects">VS Code</a> <a class="project-tech__item" href="/fr/?tech=git#projects">Git</a> <a class="project-tech__item" href="/fr/?tech=github#projects">GitHub</a></p>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Actions</h2>
+            <div class="project-actions">
+              <a class="btn btn--solid" href="https://github.com/melih0132/smarthome-lite" target="_blank" rel="noreferrer">Voir sur GitHub</a>
+              <a class="btn" href="/fr/#projects">Retour aux projets</a>
+            </div>
           </div>
         </section>
       </div>

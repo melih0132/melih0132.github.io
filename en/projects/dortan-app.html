@@ -86,52 +86,65 @@
       <section class="project-hero">
         <div class="wrap">
           <h1 class="project-hero__title">DortanApp</h1>
-          <div class="project-hero__lead"><p >
-          Activity management application for town hall developed with <strong>WPF</strong> and <strong>PostgreSQL</strong>.
-          University project combining modern <strong>graphical interface</strong> and robust <strong>database</strong> management.
-        </p></div>
-          <div class="hero__actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/csharp-with-db/dortan_app" target="_blank" rel="noreferrer">View on GitHub</a></div>
+          <div class="project-hero__lead">
+            <p>Town-hall activity booking desktop app backed by PostgreSQL.</p>
+          </div>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/csharp-with-db/dortan_app" target="_blank" rel="noreferrer">View on GitHub</a>
+          </div>
         </div>
       </section>
 
       <div class="project-body">
-        <section class="project-block"><div class="wrap"><h2>Overview</h2><p>DortanApp is a <strong>WPF-based software</strong> that incorporates a database, designed for recording
-                activities within a <strong>town hall</strong>. This project was developed as part of a <strong>university
-                  assignment</strong>.</p>
-<p>The application enables town hall personnel to <strong>create or select activities</strong> and input the
-                reservation date along with other pertinent details. It aims to <strong>streamline activity
-                  management</strong> and enhance operational efficiency
-                in the town hall. It boasts an <strong>intuitive user interface</strong> and <strong>robust data
-                  management</strong>
-                capabilities to support event tracking and planning. The application leverages WPF <strong>binding (data binding)</strong> to
-                automatically synchronize the user interface with data, ensuring real-time updates and a clear separation
-                between business logic and presentation.</p></div></section>
-        <section class="project-block"><div class="wrap"><h2>Features</h2><ul><li><strong>Reservation Management</strong> · Intuitive graphical interface with filtering options for easier navigation and efficient management of activity reservations.</li>
-<li><strong>Activity Creation and Selection</strong> · Complete system allowing creation of new activities or selection from existing activities with input of relevant details.</li></ul></div></section>
-        <section class="project-block"><div class="wrap"><h2>Gallery</h2></div><div class="project-gallery"><figure><img src="/assets/webp/dortan-app/connexion.webp" alt="DortanApp login page" loading="lazy" width="476" height="363" /><figcaption>Login interface</figcaption></figure>
-<figure><img src="/assets/webp/dortan-app/reservations.webp" alt="DortanApp reservation management" loading="lazy" width="1081" height="592" /><figcaption>Reservation management with filtering</figcaption></figure>
-<figure><img src="/assets/webp/dortan-app/mockup.webp" alt="DortanApp design mockup" loading="lazy" width="1332" height="867" /><figcaption>Initial mockup created with Figma</figcaption></figure></div></section>
-        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech"><a class="project-tech__item" href="/en/?tech=net-csharp#projects">.NET/C#</a> <a class="project-tech__item" href="/en/?tech=wpf#projects">WPF</a> <a class="project-tech__item" href="/en/?tech=xaml#projects">XAML</a> <a class="project-tech__item" href="/en/?tech=sql#projects">SQL</a> <a class="project-tech__item" href="/en/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/en/?tech=pgadmin4#projects">pgAdmin4</a> <a class="project-tech__item" href="/en/?tech=figma#projects">Figma</a> <a class="project-tech__item" href="/en/?tech=visual-studio#projects">Visual Studio</a> <a class="project-tech__item" href="/en/?tech=git#projects">Git</a> <a class="project-tech__item" href="/en/?tech=github#projects">GitHub</a></p></div></section>
         <section class="project-block">
           <div class="wrap">
-            <h2>Explore</h2>
-            <div class="project-actions"><a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/csharp-with-db/dortan_app" target="_blank" rel="noreferrer">View on GitHub</a>
-<a class="btn btn--solid" href="https://www.figma.com/proto/TrvLrLGDltam9NDw0tEQel/Dortan-App?node-id=0-1&t=hRuIK4PKOe81uO6B-1" target="_blank" rel="noreferrer">Figma Prototype</a>
-<a class="btn" href="/en/#projects">Back to projects</a></div>
-            <nav class="project-pager" aria-label="Project navigation" data-project-pager>
-              <a class="project-pager__link project-pager__link--prev" href="/en/projects/evit-shuriken.html">
-                <span class="project-pager__eyebrow">← Previous project</span>
-                <span class="project-pager__title">Evit'Shuriken</span>
-              </a>
-              <a class="project-pager__link project-pager__link--next" href="/en/projects/ranking.html">
-                <span class="project-pager__eyebrow">Next project →</span>
-                <span class="project-pager__title">Ranking</span>
-              </a>
-            </nav>
+            <h2>Overview</h2>
+            <p>University WPF client for recording and filtering town-hall activity reservations against a PostgreSQL schema.</p>
+            <p>UI fields bind to the data layer so reservation lists stay in sync without manual refresh plumbing.</p>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Features</h2>
+            <ul>
+              <li><strong>Reservations</strong> · Create and filter activity bookings with date and detail fields.</li>
+              <li><strong>Activity catalog</strong> · Select existing activities or add new ones before booking.</li>
+              <li><strong>Auth screen</strong> · Login gate before staff reach the reservation views.</li>
+              <li><strong>Figma mockup</strong> · Prototype used to lock layout before the WPF build.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap"><h2>Gallery</h2></div>
+          <div class="project-gallery">
+            <figure><img src="/assets/webp/dortan-app/connexion.webp" alt="DortanApp login page" loading="lazy" width="476" height="363" /><figcaption>Login interface</figcaption></figure>
+            <figure><img src="/assets/webp/dortan-app/reservations.webp" alt="DortanApp reservation management" loading="lazy" width="1081" height="592" /><figcaption>Reservation management with filtering</figcaption></figure>
+            <figure><img src="/assets/webp/dortan-app/mockup.webp" alt="DortanApp design mockup" loading="lazy" width="1332" height="867" /><figcaption>Initial mockup created with Figma</figcaption></figure>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Stack</h2>
+            <p class="project-tech"><a class="project-tech__item" href="/en/?tech=net-csharp#projects">.NET/C#</a> <a class="project-tech__item" href="/en/?tech=wpf#projects">WPF</a> <a class="project-tech__item" href="/en/?tech=xaml#projects">XAML</a> <a class="project-tech__item" href="/en/?tech=sql#projects">SQL</a> <a class="project-tech__item" href="/en/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/en/?tech=pgadmin4#projects">pgAdmin4</a> <a class="project-tech__item" href="/en/?tech=figma#projects">Figma</a> <a class="project-tech__item" href="/en/?tech=visual-studio#projects">Visual Studio</a> <a class="project-tech__item" href="/en/?tech=git#projects">Git</a> <a class="project-tech__item" href="/en/?tech=github#projects">GitHub</a></p>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Actions</h2>
+            <div class="project-actions">
+              <a class="btn btn--solid" href="https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/csharp-with-db/dortan_app" target="_blank" rel="noreferrer">View on GitHub</a>
+              <a class="btn" href="/en/#projects">Back to projects</a>
+              <a class="btn" href="https://www.figma.com/proto/TrvLrLGDltam9NDw0tEQel/Dortan-App?node-id=0-1&t=hRuIK4PKOe81uO6B-1" target="_blank" rel="noreferrer">Figma prototype</a>
+            </div>
           </div>
         </section>
       </div>
     </main>
+
 
     <footer class="footer">
       <div class="footer__inner">

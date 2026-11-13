@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -91,99 +91,118 @@
       <section class="project-hero">
         <div class="wrap">
           <h1 class="project-hero__title">La Guilde des Seigneurs</h1>
-          <div class="project-hero__lead"><p >
-          Projet EIP <strong>Symfony 7.4</strong> en monorepo : une <strong>API REST</strong> sécurisée par
-          <strong>JWT</strong> et une application web consommatrice gérant personnages, bâtiments et utilisateurs.
-        </p></div>
-          <div class="hero__actions"><a class="btn btn--solid" href="https://github.com/oeoecbien/symfony-project" target="_blank" rel="noreferrer">Voir sur GitHub</a></div>
+          <div class="project-hero__lead">
+            <p>Monorepo Symfony séparant API REST JWT et front consommateur pour personnages, bâtiments et utilisateurs.</p>
+          </div>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="https://github.com/oeoecbien/symfony-project" target="_blank" rel="noreferrer">Voir sur GitHub</a>
+          </div>
         </div>
       </section>
 
       <div class="project-body">
-        <section class="project-block"><div class="wrap"><h2>Aperçu</h2><p><strong>La Guilde des Seigneurs</strong> est un projet de formation EIP structuré en monorepo
-                (<code>api/</code> + <code>front/</code>). L'API expose des ressources REST pour les
-                <strong>personnages</strong>, les <strong>bâtiments</strong> et les <strong>utilisateurs</strong>,
-                avec authentification <strong>JWT</strong>, contrôle d'accès via <strong>voters</strong> et documentation
-                <strong>OpenAPI</strong>.</p>
-<p>Le <strong>backend</strong> est une API REST <strong>Symfony 7.4</strong> avec <strong>MySQL</strong>,
-                <strong>Doctrine</strong>, authentification <strong>JWT</strong> et documentation <strong>Swagger</strong>
-                via NelmioApiDocBundle. Le <strong>front</strong> est une application Symfony consommatrice avec
-                <strong>Twig</strong>, <strong>Bootstrap</strong> et <strong>HttpClient</strong>, stockant le token JWT
-                en session pour un CRUD complet avec inscription, connexion et vérification d'e-mail.</p>
-<p>Le code source est publié dans le dépôt
-                <a href="https://github.com/oeoecbien/symfony-project" target="_blank" rel="noreferrer">symfony-project</a> :
-                deux applications Symfony 7.4 indépendantes (<code>api/</code> et <code>front/</code>). Le front appelle
-                l'API via la variable <code>API_URL</code>.</p></div></section>
-                <section class="project-block" data-arch-section><div class="wrap wrap--wide"><h2>Architecture</h2><div class="arch-diagram"><svg class="arch-svg" viewBox="0 0 1026 254" role="img" aria-label="Schéma d’architecture monorepo Symfony La Guilde des Seigneurs">
-  <defs>
-    <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
-    </marker>
-  </defs>
-    <g transform="translate(10, 18)">
-      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">APP FRONT (front/)</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Symfony 7.4 Web</text>
-      <text x="16" y="90" fill="var(--muted)" font-size="16">Twig · Bootstrap</text>
-      <text x="16" y="112" fill="var(--muted)" font-size="16">Session JWT</text>
-      <text x="16" y="134" fill="var(--muted)" font-size="16">HttpClient</text>
-      <text x="16" y="156" fill="var(--muted)" font-size="16">API_URL</text>
-    </g>
-    <g transform="translate(388, 18)">
-      <rect width="250" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">API REST (api/)</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Symfony 7.4 API</text>
-      <text x="16" y="90" fill="var(--muted)" font-size="16">LexikJWT</text>
-      <text x="16" y="112" fill="var(--muted)" font-size="16">Security Voters</text>
-      <text x="16" y="134" fill="var(--muted)" font-size="16">Nelmio OpenAPI</text>
-      <text x="16" y="156" fill="var(--muted)" font-size="16">PHPUnit</text>
-    </g>
-    <g transform="translate(810, 18)">
-      <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
-      <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">PERSISTANCE</text>
-      <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">MySQL</text>
-      <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">&amp; Doctrine</text>
-      <text x="16" y="114" fill="var(--muted)" font-size="16">Entités Users</text>
-      <text x="16" y="136" fill="var(--muted)" font-size="16">Personnages</text>
-      <text x="16" y="158" fill="var(--muted)" font-size="16">Bâtiments</text>
-      <text x="16" y="180" fill="var(--muted)" font-size="16">Migrations</text>
-    </g>
-    <g>
-      <line x1="224" y1="127" x2="380" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="302" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTP / Bearer JWT</text>
-    </g>
-    <g>
-      <line x1="646" y1="127" x2="802" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
-      <text x="724" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">Doctrine ORM</text>
-    </g>
-</svg><a class="arch-link btn" href="/assets/diagrams/fr/la-guilde-des-seigneurs.svg" target="_blank" rel="noreferrer">Voir le schéma</a><ul class="arch-legend"><li><strong>Monorepo découplé (<code>front/</code> & <code>api/</code>)</strong> · Deux applications Symfony 7.4 indépendantes communiquant exclusivement par HTTP REST.</li>
-<li><strong>Sécurité & Contrôle d’accès</strong> · Authentification stateless par token JWT (LexikJWTAuthenticationBundle) et autorisations granulaires via Voters Symfony.</li>
-<li><strong>Contrat OpenAPI & Qualité</strong> · Documentation Swagger générée via NelmioApiDocBundle, migrations Doctrine et suite de tests PHPUnit.</li></ul></div></div></section>
-        <section class="project-block"><div class="wrap"><h2>Fonctionnalités</h2><ul><li><strong>API REST documentée</strong> · CRUD sur personnages et bâtiments, pagination, filtres et documentation Swagger accessible via NelmioApiDocBundle.</li>
-<li><strong>Authentification JWT</strong> · Inscription, connexion et émission de tokens JWT pour sécuriser les endpoints de l'API.</li>
-<li><strong>Front consommateur</strong> · Application Symfony dédiée consommant l'API distante avec gestion de session et interface CRUD francisée.</li>
-<li><strong>Contrôle d'accès</strong> · Autorisation via voters sur les ressources API (personnages, bâtiments, utilisateurs).</li>
-<li><strong>Doctrine et fixtures</strong> · Migrations Doctrine, fixtures JSON locales et tests PHPUnit sur les deux applications.</li></ul></div></section>
-        <section class="project-block"><div class="wrap"><h2>Galerie</h2></div><div class="project-gallery"><figure><img src="/assets/webp/la-guilde-des-seigneurs/homepage-api.webp" alt="Page d'accueil de l'API Symfony" loading="lazy" width="1905" height="946" /><figcaption>Page d'accueil de l'API</figcaption></figure>
-<figure><img src="/assets/webp/la-guilde-des-seigneurs/doc-api.webp" alt="Documentation OpenAPI via NelmioApiDocBundle" loading="lazy" width="1903" height="946" /><figcaption>Documentation OpenAPI (Swagger)</figcaption></figure>
-<figure><img src="/assets/webp/la-guilde-des-seigneurs/login-front.webp" alt="Page de connexion de l'application front" loading="lazy" width="1919" height="945" /><figcaption>Connexion (application front)</figcaption></figure>
-<figure><img src="/assets/webp/la-guilde-des-seigneurs/list-characters.webp" alt="Liste des personnages gérée via l'API REST" loading="lazy" width="1904" height="945" /><figcaption>Liste des personnages (CRUD)</figcaption></figure></div></section>
-        <section class="project-block"><div class="wrap"><h2>Tech</h2><p class="project-tech"><a class="project-tech__item" href="/fr/?tech=php#projects">PHP</a> <a class="project-tech__item" href="/fr/?tech=symfony#projects">Symfony</a> <a class="project-tech__item" href="/fr/?tech=mysql#projects">MySQL</a> <a class="project-tech__item" href="/fr/?tech=doctrine#projects">Doctrine</a> <a class="project-tech__item" href="/fr/?tech=jwt#projects">JWT</a> <a class="project-tech__item" href="/fr/?tech=bootstrap#projects">Bootstrap</a> <a class="project-tech__item" href="/fr/?tech=twig#projects">Twig</a> <a class="project-tech__item" href="/fr/?tech=openapi#projects">OpenAPI</a> <a class="project-tech__item" href="/fr/?tech=restful-api#projects">RESTful API</a> <a class="project-tech__item" href="/fr/?tech=httpclient#projects">HttpClient</a> <a class="project-tech__item" href="/fr/?tech=phpunit#projects">PHPUnit</a> <a class="project-tech__item" href="/fr/?tech=vs-code#projects">VS Code</a> <a class="project-tech__item" href="/fr/?tech=git#projects">Git</a> <a class="project-tech__item" href="/fr/?tech=github#projects">GitHub</a> <a class="project-tech__item" href="/fr/?tech=mvc#projects">MVC</a></p></div></section>
         <section class="project-block">
           <div class="wrap">
-            <h2>Explorer</h2>
-            <div class="project-actions"><a class="btn btn--solid" href="https://github.com/oeoecbien/symfony-project" target="_blank" rel="noreferrer">Voir sur GitHub</a>
-<a class="btn" href="/fr/#projects">Retour aux projets</a></div>
-            <nav class="project-pager" aria-label="Navigation entre les projets" data-project-pager>
-              <a class="project-pager__link project-pager__link--prev" href="/fr/projets/shared-ia.html">
-                <span class="project-pager__eyebrow">← Projet précédent</span>
-                <span class="project-pager__title">Shared IA</span>
-              </a>
-              <a class="project-pager__link project-pager__link--next" href="/fr/projets/smarthome-lite.html">
-                <span class="project-pager__eyebrow">Projet suivant →</span>
-                <span class="project-pager__title">SmartHome Lite</span>
-              </a>
-            </nav>
+            <h2>Aperçu</h2>
+            <p>Projet EIP en deux apps Symfony 7.4 (<code>api/</code>, <code>front/</code>). L’API expose CRUD personnages/bâtiments/utilisateurs avec LexikJWT, voters et Nelmio OpenAPI. Le front Twig/Bootstrap stocke le JWT en session et appelle l’API via <code>HttpClient</code> et <code>API_URL</code>.</p>
+            <p>MySQL + Doctrine (migrations, fixtures), tests PHPUnit sur les deux applications. Dépôt : <a href="https://github.com/oeoecbien/symfony-project" target="_blank" rel="noreferrer">symfony-project</a>.</p>
+          </div>
+        </section>
+
+        <section class="project-block" data-arch-section>
+          <div class="wrap">
+            <h2>Architecture</h2>
+            <div class="arch-diagram">
+              <svg class="arch-svg" viewBox="0 0 1026 254" role="img" aria-label="Schéma d’architecture monorepo Symfony La Guilde des Seigneurs">
+                <defs>
+                  <marker id="arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="var(--accent)" />
+                  </marker>
+                </defs>
+                <g transform="translate(10, 18)" data-arch-node="monorepo" data-arch-techs="symfony,twig,bootstrap,httpclient,php" tabindex="0" role="button">
+                  <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">APP FRONT (front/)</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Symfony 7.4 Web</text>
+                  <text x="16" y="90" fill="var(--muted)" font-size="16">Twig · Bootstrap</text>
+                  <text x="16" y="112" fill="var(--muted)" font-size="16">Session JWT</text>
+                  <text x="16" y="134" fill="var(--muted)" font-size="16">HttpClient</text>
+                  <text x="16" y="156" fill="var(--muted)" font-size="16">API_URL</text>
+                </g>
+                <g transform="translate(388, 18)" data-arch-node="security" data-arch-techs="symfony,jwt,openapi,phpunit,php" tabindex="0" role="button">
+                  <rect width="250" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--accent)" stroke-width="1.5" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">API REST (api/)</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">Symfony 7.4 API</text>
+                  <text x="16" y="90" fill="var(--muted)" font-size="16">LexikJWT</text>
+                  <text x="16" y="112" fill="var(--muted)" font-size="16">Security Voters</text>
+                  <text x="16" y="134" fill="var(--muted)" font-size="16">Nelmio OpenAPI</text>
+                  <text x="16" y="156" fill="var(--muted)" font-size="16">PHPUnit</text>
+                </g>
+                <g transform="translate(810, 18)" data-arch-node="quality" data-arch-techs="mysql,doctrine,php" tabindex="0" role="button">
+                  <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
+                  <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">PERSISTANCE</text>
+                  <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">MySQL</text>
+                  <text x="16" y="82" fill="var(--koi-shiro)" font-size="18" font-weight="600">&amp; Doctrine</text>
+                  <text x="16" y="114" fill="var(--muted)" font-size="16">Entités Users</text>
+                  <text x="16" y="136" fill="var(--muted)" font-size="16">Personnages</text>
+                  <text x="16" y="158" fill="var(--muted)" font-size="16">Bâtiments</text>
+                  <text x="16" y="180" fill="var(--muted)" font-size="16">Migrations</text>
+                </g>
+                <g>
+                  <line x1="224" y1="127" x2="380" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="302" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">HTTP / Bearer JWT</text>
+                </g>
+                <g>
+                  <line x1="646" y1="127" x2="802" y2="127" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow)" />
+                  <text x="724" y="115" text-anchor="middle" fill="var(--koi-shiro)" font-size="13" letter-spacing="0.3" stroke="#0a0a0a" stroke-width="5" paint-order="stroke">Doctrine ORM</text>
+                </g>
+              </svg>
+              <a class="arch-link btn" href="/assets/diagrams/fr/la-guilde-des-seigneurs.svg" target="_blank" rel="noreferrer">Voir le schéma</a>
+              <ul class="arch-legend">
+                <li data-arch-legend="monorepo"><strong>Monorepo découplé (<code>front/</code> &amp; <code>api/</code>)</strong> · Deux applications Symfony 7.4 indépendantes communiquant exclusivement par HTTP REST.</li>
+                <li data-arch-legend="security"><strong>Sécurité &amp; Contrôle d’accès</strong> · Authentification stateless par token JWT (LexikJWTAuthenticationBundle) et autorisations granulaires via Voters Symfony.</li>
+                <li data-arch-legend="quality"><strong>Contrat OpenAPI &amp; Qualité</strong> · Documentation Swagger générée via NelmioApiDocBundle, migrations Doctrine et suite de tests PHPUnit.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Fonctionnalités</h2>
+            <ul>
+              <li><strong>API REST documentée</strong> · CRUD personnages/bâtiments, pagination, filtres, Swagger Nelmio.</li>
+              <li><strong>Authentification JWT</strong> · Inscription, connexion, émission de tokens pour les endpoints.</li>
+              <li><strong>Front consommateur</strong> · App Symfony Twig avec session JWT et CRUD francisé.</li>
+              <li><strong>Voters</strong> · Autorisation granulaire sur personnages, bâtiments et utilisateurs.</li>
+              <li><strong>Doctrine et tests</strong> · Migrations, fixtures JSON, PHPUnit sur api et front.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap"><h2>Galerie</h2></div>
+          <div class="project-gallery">
+            <figure><img src="/assets/webp/la-guilde-des-seigneurs/homepage-api.webp" alt="Page d'accueil de l'API Symfony" loading="lazy" width="1905" height="946" /><figcaption>Page d'accueil de l'API</figcaption></figure>
+            <figure><img src="/assets/webp/la-guilde-des-seigneurs/doc-api.webp" alt="Documentation OpenAPI via NelmioApiDocBundle" loading="lazy" width="1903" height="946" /><figcaption>Documentation OpenAPI (Swagger)</figcaption></figure>
+            <figure><img src="/assets/webp/la-guilde-des-seigneurs/login-front.webp" alt="Page de connexion de l'application front" loading="lazy" width="1919" height="945" /><figcaption>Connexion (application front)</figcaption></figure>
+            <figure><img src="/assets/webp/la-guilde-des-seigneurs/list-characters.webp" alt="Liste des personnages gérée via l'API REST" loading="lazy" width="1904" height="945" /><figcaption>Liste des personnages (CRUD)</figcaption></figure>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Tech</h2>
+            <p class="project-tech"><a class="project-tech__item" href="/fr/?tech=php#projects">PHP</a> <a class="project-tech__item" href="/fr/?tech=symfony#projects">Symfony</a> <a class="project-tech__item" href="/fr/?tech=mysql#projects">MySQL</a> <a class="project-tech__item" href="/fr/?tech=doctrine#projects">Doctrine</a> <a class="project-tech__item" href="/fr/?tech=jwt#projects">JWT</a> <a class="project-tech__item" href="/fr/?tech=bootstrap#projects">Bootstrap</a> <a class="project-tech__item" href="/fr/?tech=twig#projects">Twig</a> <a class="project-tech__item" href="/fr/?tech=openapi#projects">OpenAPI</a> <a class="project-tech__item" href="/fr/?tech=restful-api#projects">RESTful API</a> <a class="project-tech__item" href="/fr/?tech=httpclient#projects">HttpClient</a> <a class="project-tech__item" href="/fr/?tech=phpunit#projects">PHPUnit</a> <a class="project-tech__item" href="/fr/?tech=vs-code#projects">VS Code</a> <a class="project-tech__item" href="/fr/?tech=git#projects">Git</a> <a class="project-tech__item" href="/fr/?tech=github#projects">GitHub</a> <a class="project-tech__item" href="/fr/?tech=mvc#projects">MVC</a></p>
+          </div>
+        </section>
+
+        <section class="project-block">
+          <div class="wrap">
+            <h2>Actions</h2>
+            <div class="project-actions">
+              <a class="btn btn--solid" href="https://github.com/oeoecbien/symfony-project" target="_blank" rel="noreferrer">Voir sur GitHub</a>
+              <a class="btn" href="/fr/#projects">Retour aux projets</a>
+            </div>
           </div>
         </section>
       </div>
