@@ -1657,8 +1657,185 @@ body.spotlight-open {
 
 html.is-soft-nav .site {
   pointer-events: none;
-  opacity: 0.72;
-  transition: opacity 0.15s ease;
+}
+
+html.is-soft-nav .header {
+  opacity: 0.88;
+}
+
+.skeleton {
+  pointer-events: none;
+  user-select: none;
+}
+
+.skeleton__bone {
+  display: block;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--koi-shiro) 8%, transparent) 0%,
+    color-mix(in srgb, var(--koi-shiro) 16%, transparent) 42%,
+    color-mix(in srgb, var(--koi-shiro) 8%, transparent) 84%
+  );
+  background-size: 220% 100%;
+  animation: skeleton-shimmer 1.15s ease-in-out infinite;
+}
+
+.skeleton__bone--brand {
+  width: 5.5rem;
+  height: 0.7rem;
+  margin-bottom: var(--space-m);
+}
+
+.skeleton__bone--title {
+  width: min(18rem, 72%);
+  height: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: var(--space-m);
+}
+
+.skeleton__bone--title-lg {
+  width: min(22rem, 85%);
+  height: clamp(2rem, 6vw, 3rem);
+  margin-bottom: var(--space-m);
+}
+
+.skeleton__bone--lead {
+  width: min(36rem, 100%);
+  height: 0.85rem;
+  margin-bottom: 0.55rem;
+}
+
+.skeleton__bone--lead-short {
+  width: min(24rem, 70%);
+  height: 0.85rem;
+  margin-bottom: var(--space-l);
+}
+
+.skeleton__bone--btn {
+  width: 8.5rem;
+  height: 2.35rem;
+  display: inline-block;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+}
+
+.skeleton__bone--eyebrow {
+  width: 3.5rem;
+  height: 0.55rem;
+  margin-bottom: 0.65rem;
+}
+
+.skeleton__bone--section {
+  width: 8rem;
+  height: 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton__bone--card-title {
+  width: 42%;
+  height: 1rem;
+  margin-bottom: 0.55rem;
+}
+
+.skeleton__bone--tag {
+  width: 4.2rem;
+  height: 1.15rem;
+  display: inline-block;
+  margin-right: 0.4rem;
+  margin-bottom: 0.35rem;
+  vertical-align: middle;
+}
+
+.skeleton__bone--desc {
+  width: 88%;
+  height: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.skeleton__bone--desc-short {
+  width: 62%;
+  height: 0.75rem;
+  margin-top: 0.4rem;
+}
+
+.skeleton__bone--block-title {
+  width: 7rem;
+  height: 1rem;
+  margin-bottom: var(--space-m);
+}
+
+.skeleton__bone--para {
+  width: 100%;
+  height: 0.8rem;
+  margin-bottom: 0.55rem;
+}
+
+.skeleton__bone--para-mid {
+  width: 92%;
+  height: 0.8rem;
+  margin-bottom: 0.55rem;
+}
+
+.skeleton__bone--para-short {
+  width: 68%;
+  height: 0.8rem;
+}
+
+.skeleton-home__hero {
+  min-height: calc(100svh - var(--header-h));
+  display: grid;
+  align-content: end;
+  padding: var(--pad);
+  padding-bottom: clamp(2rem, 8vh, 5rem);
+}
+
+.skeleton-home__projects {
+  background: var(--scrim);
+  border-block: 1px solid var(--line);
+  padding: var(--space-xl) 0;
+}
+
+.skeleton-home__card {
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.skeleton-home__card:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.skeleton-project__hero {
+  min-height: 42svh;
+  display: grid;
+  align-content: end;
+  padding: var(--pad);
+  padding-bottom: clamp(2rem, 6vh, 4rem);
+}
+
+.skeleton-project__body {
+  background: var(--scrim);
+  border-block: 1px solid var(--line);
+  padding: var(--space-xl) 0;
+}
+
+.skeleton-project__block + .skeleton-project__block {
+  margin-top: var(--space-l);
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton__bone {
+    animation: none;
+    background: color-mix(in srgb, var(--koi-shiro) 10%, transparent);
+  }
 }
 
 /* Per-project koi universes (pages projet only) */

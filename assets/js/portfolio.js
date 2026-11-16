@@ -2354,6 +2354,110 @@ class SoftNav {
     return `${normalizePathname(urlLike.pathname)}${urlLike.search || ''}`;
   }
 
+  isProjectPath(pathname) {
+    return /\/(fr\/projets|en\/projects)\//.test(pathname || '');
+  }
+
+  bone(mods = []) {
+    const el = document.createElement('span');
+    el.className = ['skeleton__bone', ...mods.map((m) => `skeleton__bone--${m}`)].join(' ');
+    el.setAttribute('aria-hidden', 'true');
+    return el;
+  }
+
+  buildHomeSkeleton() {
+    const root = document.createElement('div');
+    root.className = 'skeleton skeleton--home';
+
+    const hero = document.createElement('section');
+    hero.className = 'skeleton-home__hero';
+    hero.append(
+      this.bone(['brand']),
+      this.bone(['title-lg']),
+      this.bone(['lead']),
+      this.bone(['lead-short']),
+      this.bone(['btn']),
+      this.bone(['btn'])
+    );
+
+    const projects = document.createElement('section');
+    projects.className = 'skeleton-home__projects';
+    const wrap = document.createElement('div');
+    wrap.className = 'wrap';
+    wrap.append(this.bone(['eyebrow']), this.bone(['section']));
+
+    for (let i = 0; i < 5; i += 1) {
+      const card = document.createElement('div');
+      card.className = 'skeleton-home__card';
+      card.append(
+        this.bone(['card-title']),
+        this.bone(['tag']),
+        this.bone(['tag']),
+        this.bone(['tag']),
+        this.bone(['desc']),
+        this.bone(['desc-short'])
+      );
+      wrap.append(card);
+    }
+
+    projects.append(wrap);
+    root.append(hero, projects);
+    return root;
+  }
+
+  buildProjectSkeleton() {
+    const root = document.createElement('div');
+    root.className = 'skeleton skeleton--project';
+
+    const hero = document.createElement('section');
+    hero.className = 'skeleton-project__hero';
+    const heroWrap = document.createElement('div');
+    heroWrap.className = 'wrap';
+    heroWrap.append(
+      this.bone(['title']),
+      this.bone(['lead']),
+      this.bone(['lead-short']),
+      this.bone(['btn'])
+    );
+    hero.append(heroWrap);
+
+    const body = document.createElement('div');
+    body.className = 'skeleton-project__body';
+    const bodyWrap = document.createElement('div');
+    bodyWrap.className = 'wrap';
+
+    for (let i = 0; i < 3; i += 1) {
+      const block = document.createElement('div');
+      block.className = 'skeleton-project__block';
+      block.append(
+        this.bone(['block-title']),
+        this.bone(['para']),
+        this.bone(['para-mid']),
+        this.bone(['para-short'])
+      );
+      bodyWrap.append(block);
+    }
+
+    body.append(bodyWrap);
+    root.append(hero, body);
+    return root;
+  }
+
+  showSkeleton(pathname) {
+    const main = document.querySelector('.site main');
+    if (!main) return;
+    const label = document.documentElement.lang === 'fr' ? 'Chargement de la page' : 'Loading page';
+    main.setAttribute('aria-busy', 'true');
+    main.replaceChildren();
+    const status = document.createElement('p');
+    status.className = 'visually-hidden';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    status.textContent = label;
+    main.append(status, this.isProjectPath(pathname) ? this.buildProjectSkeleton() : this.buildHomeSkeleton());
+    window.scrollTo(0, 0);
+  }
+
   scrollToHash(hash, behavior = 'smooth') {
     if (!hash || hash === '#' || hash === '#home') {
       const top = document.getElementById('home');
@@ -2418,6 +2522,8 @@ class SoftNav {
     document.documentElement.classList.add('is-soft-nav');
     try {
       const targetUrl = new URL(href, location.href);
+      this.showSkeleton(targetUrl.pathname);
+
       let fetchPath = targetUrl.pathname;
       let res = await fetch(fetchPath, { headers: { Accept: 'text/html' }, credentials: 'same-origin' });
       let html = res.ok ? await res.text() : '';
