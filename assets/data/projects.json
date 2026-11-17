@@ -276,7 +276,7 @@
         "GitHub"
       ],
       "githubOnly": true,
-      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/flutter"
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/mobile/flutter"
     },
     {
       "id": "shared-ia",
@@ -327,7 +327,7 @@
         "SwiftUI"
       ],
       "githubOnly": true,
-      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/swift"
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/mobile/swift"
     },
     {
       "id": "kotlin-apps",
@@ -347,7 +347,7 @@
         "GitHub"
       ],
       "githubOnly": true,
-      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/kotlin"
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/mobile/kotlin"
     },
     {
       "id": "dotnet-core-projects",
@@ -373,7 +373,7 @@
         "Postman"
       ],
       "githubOnly": true,
-      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/csharp-projects/net-core-projects"
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/dotnet/net-core"
     },
     {
       "id": "python-projects",
@@ -471,6 +471,33 @@
       ],
       "githubOnly": true,
       "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/web"
+    },
+    {
+      "id": "docker",
+      "featured": false,
+      "order": 18,
+      "titles": {
+        "fr": "Docker",
+        "en": "Docker"
+      },
+      "technologies": [
+        "Docker",
+        "Docker Compose",
+        "PHP",
+        "Node.js",
+        "Nginx",
+        "Apache",
+        "MongoDB",
+        "MariaDB",
+        "PostgreSQL",
+        "Redis",
+        "GitHub Actions",
+        "GitLab CI",
+        "Git",
+        "GitHub"
+      ],
+      "githubOnly": true,
+      "githubUrl": "https://github.com/melih0132/all-my-projects/tree/main/docker"
     }
   ]
 }
