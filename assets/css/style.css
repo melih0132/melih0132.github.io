@@ -735,25 +735,271 @@ textarea {
   line-height: 1;
 }
 
+.section .wrap,
+.skeleton-home__projects .wrap {
+  width: min(100% - 2 * var(--pad), 68rem);
+}
+
 .projects-list {
   list-style: none;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0;
   border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  counter-reset: project-idx;
+}
+
+.projects-list:not(:has(.project-card:not(.filtered-out))) {
+  border: 0;
+}
+
+/* Filtered view: independent bordered tiles so partial rows never leave orphan lines */
+.projects-list:not(.projects-list--bento) {
+  border: 0;
+  gap: 0.75rem;
 }
 
 .project-card {
   position: relative;
-  display: grid;
-  gap: 0.4rem;
-  padding: 1.15rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.2rem 1.3rem;
+  border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, #050505 64%, transparent);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+  counter-increment: project-idx;
+  transition: background 0.2s ease, opacity 0.35s ease;
 }
 
+.projects-list:not(.projects-list--bento) .project-card {
+  border: 1px solid var(--line);
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    24rem circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--koi-kin) 7%, transparent),
+    transparent 60%
+  );
+  transition: opacity 0.25s ease;
+}
+
+.project-card::after {
+  content: counter(project-idx, decimal-leading-zero);
+  position: absolute;
+  top: 1.2rem;
+  right: 1.3rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--muted) 65%, transparent);
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card:hover,
+.project-card:focus-within {
+  background: color-mix(in srgb, #0d0d0d 78%, transparent);
+}
+
+.project-card:hover::after,
+.project-card:focus-within::after {
+  color: var(--accent);
+}
+
+.project-card:has(.project-link:focus-visible) {
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
+  z-index: 2;
+}
+
+/* Consistent typographic rhythm across all 19 Bento tiles */
+.project-card .project-kicker {
+  order: 0;
+}
+
+.project-card .project-card__head,
+.project-card > .project-title {
+  order: 1;
+}
+
+.project-card .project-description {
+  order: 2;
+}
+
+.project-card .project-flow {
+  order: 3;
+}
+
+.project-card .tech-tags {
+  order: 4;
+  margin-top: auto;
+  padding-top: 0.45rem;
+}
+
+.project-card .project-links {
+  order: 5;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0;
+  padding-top: 0.25rem;
+}
+
+.project-kicker,
+.project-flow {
+  display: none;
+}
+
+/* Featured Bento tiles: keep exact gold editorial prominence */
 .project-card[data-featured="true"] {
-  padding-left: 1rem;
-  border-left: 2px solid var(--accent);
-  background: linear-gradient(90deg, color-mix(in srgb, var(--koi-kin) 7%, transparent), transparent 75%);
+  padding: 1.3rem 1.35rem;
+  gap: 0.65rem;
+  box-shadow: inset 0 2px 0 0 color-mix(in srgb, var(--koi-kin) 55%, transparent);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--koi-kin) 6%, #050505 68%),
+    color-mix(in srgb, #050505 66%, transparent) 60%
+  );
+  transition: background 0.2s ease, box-shadow 0.2s ease, opacity 0.35s ease;
+}
+
+.project-card[data-featured="true"]::before {
+  background: radial-gradient(
+    26rem circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--koi-kin) 10%, transparent),
+    transparent 60%
+  );
+}
+
+.project-card[data-featured="true"]::after {
+  top: 1.3rem;
+  right: 1.35rem;
+  color: color-mix(in srgb, var(--koi-kin) 75%, transparent);
+}
+
+.project-card[data-featured="true"]:hover,
+.project-card[data-featured="true"]:focus-within {
+  box-shadow: inset 0 2px 0 0 var(--koi-kin);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--koi-kin) 9%, #0c0c0c 78%),
+    color-mix(in srgb, #0c0c0c 78%, transparent) 60%
+  );
+}
+
+.project-card[data-featured="true"] .project-kicker {
+  display: block;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-right: 2.4rem;
+  margin-bottom: -0.25rem;
+}
+
+.projects-list--bento .project-card[data-featured="true"] .project-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.45rem;
+  margin-top: 0.15rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--koi-shiro) 14%, transparent);
+  background: color-mix(in srgb, #000 50%, transparent);
+  font-size: 0.68rem;
+  color: var(--koi-shiro);
+  letter-spacing: 0.03em;
+}
+
+.project-flow__sep {
+  color: var(--koi-kin);
+}
+
+@media (min-width: 40em) {
+  .projects-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projects-list--bento .project-card:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 56em) {
+  .projects-list:not(.projects-list--bento) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Unified 6-column alternating Swiss Bento across all 19 projects:
+     Row 1 (Featured): 4 + 2   | Row 2 (Featured): 2 + 2 + 2
+     Row 3 (Inverted): 2 + 4   | Row 4:            2 + 2 + 2
+     Row 5 (Inverted): 4 + 2   | Row 6:            2 + 2 + 2
+     Row 7 (Inverted): 2 + 4   | Row 8 (Closing):  3 + 3 */
+  .projects-list--bento {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .projects-list--bento .project-card {
+    grid-column: span 2;
+  }
+
+  .projects-list--bento .project-card:nth-child(1),
+  .projects-list--bento .project-card:nth-child(7),
+  .projects-list--bento .project-card:nth-child(11),
+  .projects-list--bento .project-card:nth-child(17) {
+    grid-column: span 4;
+  }
+
+  .projects-list--bento .project-card:nth-child(18),
+  .projects-list--bento .project-card:nth-child(19) {
+    grid-column: span 3;
+  }
+
+  .projects-list--bento .project-card:nth-child(1) {
+    padding: 1.5rem 1.6rem;
+  }
+
+  .projects-list--bento .project-card:nth-child(1)::after {
+    top: 1.5rem;
+    right: 1.6rem;
+  }
+
+  .projects-list--bento .project-card:nth-child(1) .project-title {
+    font-size: 1.32rem;
+  }
+
+  .projects-list--bento .project-card:nth-child(7),
+  .projects-list--bento .project-card:nth-child(11),
+  .projects-list--bento .project-card:nth-child(17) {
+    padding: 1.35rem 1.45rem;
+  }
+
+  .projects-list--bento .project-card:nth-child(7)::after,
+  .projects-list--bento .project-card:nth-child(11)::after,
+  .projects-list--bento .project-card:nth-child(17)::after {
+    top: 1.35rem;
+    right: 1.45rem;
+  }
+
+  .projects-list--bento .project-card:nth-child(7) .project-title,
+  .projects-list--bento .project-card:nth-child(11) .project-title,
+  .projects-list--bento .project-card:nth-child(17) .project-title {
+    font-size: 1.14rem;
+  }
 }
 
 .project-card.filtered-out {
@@ -780,86 +1026,85 @@ textarea {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.55rem;
+  padding-right: 2.2rem;
+}
+
+.project-card > .project-title {
+  padding-right: 2.2rem;
 }
 
 .project-title {
   font-size: 1.05rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
 }
 
 .project-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  padding: 0.1rem 0.45rem;
-  font-size: 0.62rem;
+  padding: 0.08rem 0.42rem;
+  font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--koi-kin);
-  border: 1px solid color-mix(in srgb, var(--koi-kin) 55%, transparent);
-  background: color-mix(in srgb, var(--koi-kin) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--koi-kin) 45%, transparent);
+  background: color-mix(in srgb, var(--koi-kin) 8%, transparent);
 }
 
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
 }
 
 .tech-tag {
   position: relative;
   z-index: 2;
   display: inline-block;
-  padding: 0.18rem 0.5rem;
-  font-weight: 600;
+  padding: 0.14rem 0.45rem;
+  font-weight: 500;
   line-height: 1.35;
-  color: var(--koi-beni);
-  background: color-mix(in srgb, var(--koi-beni) 16%, transparent);
-  border: 1px solid color-mix(in srgb, var(--koi-beni) 45%, transparent);
+  white-space: nowrap;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--koi-shiro) 18%, transparent);
   cursor: pointer;
-  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
 .tech-tag:hover,
 .tech-tag:focus-visible {
-  filter: brightness(1.22);
-  transform: translateY(-1px);
+  color: var(--koi-shiro);
+  border-color: color-mix(in srgb, var(--koi-kin) 55%, transparent);
+  background: color-mix(in srgb, var(--koi-kin) 10%, transparent);
   outline: none;
 }
 
 .tech-tag.is-active {
-  box-shadow: 0 0 0 1px currentColor;
-  filter: brightness(1.25);
-}
-
-.tech-tag:nth-child(4n + 2) {
-  color: var(--koi-shiro);
-  background: color-mix(in srgb, var(--koi-shiro) 14%, transparent);
-  border-color: color-mix(in srgb, var(--koi-shiro) 40%, transparent);
-}
-
-.tech-tag:nth-child(4n + 3) {
-  color: var(--koi-orange);
-  background: color-mix(in srgb, var(--koi-orange) 16%, transparent);
-  border-color: color-mix(in srgb, var(--koi-orange) 45%, transparent);
-}
-
-.tech-tag:nth-child(4n + 4) {
-  color: var(--koi-kin);
-  background: color-mix(in srgb, var(--koi-kin) 16%, transparent);
-  border-color: color-mix(in srgb, var(--koi-kin) 45%, transparent);
+  color: #000;
+  background: var(--koi-kin);
+  border-color: var(--koi-kin);
 }
 
 .project-description {
   color: var(--muted);
-  max-width: 42rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  max-width: 44rem;
 }
 
-.project-description strong,
+.project-card .project-description strong {
+  color: var(--ink);
+  font-weight: 500;
+  background: none;
+  padding: 0;
+  letter-spacing: 0;
+}
+
 .project-hero__lead strong,
 .project-block p strong,
 .project-block li strong {
@@ -873,31 +1118,47 @@ textarea {
 }
 
 .project-links {
-  margin-top: 0.15rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
 }
 
 .project-link {
-  position: relative;
-  z-index: 1;
-  color: var(--ink);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  border-bottom: 1px solid var(--line);
+}
+
+.project-link__arrow {
+  font-size: 0.92rem;
+  line-height: 1;
+  color: var(--muted);
+  transition: color 0.2s ease;
 }
 
 .project-link::after {
   content: "";
   position: absolute;
-  inset: -1.15rem 0;
+  inset: 0;
+  z-index: 1;
+}
+
+.project-link:focus-visible {
+  outline: none;
 }
 
 .project-card:hover .project-link,
 .project-card:focus-within .project-link,
-.project-link:hover {
+.project-link:hover,
+.project-card:hover .project-link__arrow,
+.project-card:focus-within .project-link__arrow {
   color: var(--accent);
-  border-bottom-color: var(--accent);
+  filter: none;
 }
 
 .projects__btn-container {
@@ -915,6 +1176,10 @@ textarea {
     grid-template-columns: 1.2fr 1fr;
     gap: var(--space-xl);
   }
+}
+
+.about-copy {
+  max-width: 38rem;
 }
 
 .about-copy p + p {

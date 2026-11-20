@@ -799,6 +799,13 @@ class ProjectFilters {
     if (orderChanged) {
       cards.forEach((card) => this.projectList.appendChild(card));
     }
+    this.syncBentoState();
+  }
+
+  syncBentoState() {
+    if (!this.projectList) return;
+    const useBento = this.activeFilters.size === 0;
+    this.projectList.classList.toggle('projects-list--bento', useBento);
   }
 
   hydrateFromUrl() {
@@ -971,6 +978,7 @@ class ProjectFilters {
       }
     });
 
+    this.syncBentoState();
     this.updateResultsCount(visibleCount);
 
     if (entering.length) {
@@ -1389,9 +1397,27 @@ function syncOceanAtmosphere(options = {}) {
 
 class FeaturedOceanPreview {
   constructor(signal) {
+    const allCards = Array.from(document.querySelectorAll('.project-card'));
+    if (!allCards.length) return;
+
+    allCards.forEach((card) => {
+      card.addEventListener(
+        'pointermove',
+        (e) => {
+          if (e.pointerType === 'touch' || systemReducedMotion()) return;
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+        },
+        { signal, passive: true }
+      );
+    });
+
     if (document.body.dataset.universe) return;
-    const cards = Array.from(document.querySelectorAll('.project-card[data-featured="true"][data-project-id]'));
-    if (!cards.length) return;
+    const featuredCards = allCards.filter(
+      (card) => card.getAttribute('data-featured') === 'true' && card.getAttribute('data-project-id')
+    );
+    if (!featuredCards.length) return;
 
     this.activeUniverse = null;
     this.revertTimer = 0;
@@ -1431,7 +1457,7 @@ class FeaturedOceanPreview {
       }, 80);
     };
 
-    cards.forEach((card) => {
+    featuredCards.forEach((card) => {
       const universe = card.getAttribute('data-project-id');
       if (!universe) return;
       card.addEventListener(
