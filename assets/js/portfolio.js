@@ -15,6 +15,7 @@ const I18N = {
       resultsCount: (n) => `${n} project${n === 1 ? '' : 's'}`
     },
     contactForm: {
+      sending: 'Sending…',
       success: 'Thank you! Your message has been sent.',
       error: 'An error occurred. Please try again.'
     },
@@ -72,6 +73,7 @@ const I18N = {
       resultsCount: (n) => `${n} projet${n === 1 ? '' : 's'}`
     },
     contactForm: {
+      sending: 'Envoi…',
       success: 'Merci ! Votre message a été envoyé.',
       error: 'Une erreur est survenue. Veuillez réessayer.'
     },
@@ -940,46 +942,47 @@ class ProjectFilters {
 
   filterProjects(animate = true) {
     const keys = Array.from(this.activeFilters.keys());
+    const shouldAnimate = animate && !systemReducedMotion();
+    const entering = [];
     let visibleCount = 0;
 
     this.projectCards.forEach(card => {
       if (card.closest('.projects__btn-container')) {
         return;
       }
-      if (keys.length === 0) {
-        card.style.display = '';
-        card.classList.remove('filtered-out');
-        visibleCount++;
-        return;
-      }
-      const match = keys.every(k => this.cardMatchesSingleFilter(card, k));
+      const wasHidden = card.classList.contains('filtered-out');
+      const match = keys.length === 0 || keys.every(k => this.cardMatchesSingleFilter(card, k));
+
+      card.classList.remove('is-filter-enter');
+      card.style.display = '';
+      card.style.opacity = '';
+      card.style.transform = '';
+      card.style.transition = '';
+
       if (match) {
-        card.style.display = '';
         card.classList.remove('filtered-out');
+        card.classList.add('is-in');
         visibleCount++;
+        if (shouldAnimate && wasHidden) {
+          entering.push(card);
+        }
       } else {
-        card.style.display = 'none';
         card.classList.add('filtered-out');
       }
     });
 
     this.updateResultsCount(visibleCount);
-    
-    if (!animate) return;
-    // Animation pour les projets visibles
-    setTimeout(() => {
-      this.projectCards.forEach(card => {
-        if (!card.classList.contains('filtered-out')) {
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(20px)';
-          setTimeout(() => {
-            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, 50);
-        }
+
+    if (entering.length) {
+      entering.forEach(card => {
+        card.classList.add('is-filter-enter');
+        card.addEventListener(
+          'animationend',
+          () => card.classList.remove('is-filter-enter'),
+          { once: true }
+        );
       });
-    }, 100);
+    }
   }
 
   updateResultsCount(count) {
@@ -1003,7 +1006,11 @@ class ProjectFilters {
 class ContactForm {
   constructor() {
     this.form = document.querySelector('.contact__form');
-    this.init();
+    this.submitBtn = this.form ? this.form.querySelector('button[type="submit"], .contact__btn') : null;
+    this.submitting = false;
+    if (this.form) {
+      this.init();
+    }
   }
 
   init() {
@@ -1012,6 +1019,18 @@ class ContactForm {
 
   async handleSubmit(event) {
     event.preventDefault();
+    if (this.submitting) return;
+
+    const contactUi = uiStrings().contactForm || CONFIG.contactForm;
+    const originalLabel = this.submitBtn ? this.submitBtn.textContent : '';
+
+    this.submitting = true;
+    this.form.setAttribute('aria-busy', 'true');
+    if (this.submitBtn) {
+      this.submitBtn.disabled = true;
+      this.submitBtn.setAttribute('aria-busy', 'true');
+      this.submitBtn.textContent = contactUi.sending || '…';
+    }
 
     try {
       const response = await fetch(this.form.action, {
@@ -1020,7 +1039,6 @@ class ContactForm {
         headers: { 'Accept': 'application/json' }
       });
 
-      const contactUi = uiStrings().contactForm || CONFIG.contactForm;
       if (response.ok) {
         this.showMessage(contactUi.success, 'success');
         this.form.reset();
@@ -1028,8 +1046,15 @@ class ContactForm {
         this.showMessage(contactUi.error, 'error');
       }
     } catch (error) {
-      const contactUi = uiStrings().contactForm || CONFIG.contactForm;
       this.showMessage(contactUi.error, 'error');
+    } finally {
+      this.submitting = false;
+      this.form.removeAttribute('aria-busy');
+      if (this.submitBtn) {
+        this.submitBtn.disabled = false;
+        this.submitBtn.removeAttribute('aria-busy');
+        this.submitBtn.textContent = originalLabel;
+      }
     }
   }
 
@@ -1221,8 +1246,8 @@ function parseCssHexToRgb(hex, fallback) {
   return fallback;
 }
 
-function readOceanPaletteFromCss() {
-  const cs = getComputedStyle(document.body);
+function readOceanPaletteFromElement(el = document.body) {
+  const cs = getComputedStyle(el);
   const beniHex = cs.getPropertyValue('--koi-beni').trim() || '#dc4638';
   const shiroHex = cs.getPropertyValue('--koi-shiro').trim() || '#e8dcc8';
   const orangeHex = cs.getPropertyValue('--koi-orange').trim() || '#e89040';
@@ -1242,16 +1267,37 @@ function readOceanPaletteFromCss() {
   };
 }
 
+function readOceanPaletteFromCss() {
+  return readOceanPaletteFromElement(document.body);
+}
+
+function readOceanPaletteForUniverse(universe) {
+  if (!universe) return readOceanPaletteFromCss();
+  let probe = document.querySelector('[data-ocean-probe]');
+  if (!probe) {
+    probe = document.createElement('span');
+    probe.className = 'visually-hidden';
+    probe.setAttribute('aria-hidden', 'true');
+    probe.setAttribute('data-ocean-probe', '');
+    document.body.appendChild(probe);
+  }
+  probe.setAttribute('data-universe', universe);
+  const palette = readOceanPaletteFromElement(probe);
+  probe.removeAttribute('data-universe');
+  return palette;
+}
+
 function readTargetFishCount() {
   const fishAttr = document.body.dataset.oceanFish;
   const parsedFish = fishAttr ? Number(fishAttr) : NaN;
   return Number.isFinite(parsedFish) && parsedFish > 0 ? parsedFish : undefined;
 }
 
-function applyOceanPalette(palette, fishCount) {
+function applyOceanPalette(palette, fishCount, updateFish = true) {
   const engine = window.__oceanEngine;
   if (!engine) return;
-  if (typeof engine.setFishCount === 'function') {
+  window.__oceanCurrentPalette = palette;
+  if (updateFish && typeof engine.setFishCount === 'function') {
     engine.setFishCount(fishCount);
   }
   if (typeof engine.setPalette === 'function') {
@@ -1292,9 +1338,10 @@ function syncOceanAtmosphere(options = {}) {
   if (!engine) return;
 
   const animate = !!options.animate;
+  const preserveFishCount = !!options.preserveFishCount;
   const fromPalette = options.fromPalette || null;
   const fromFish = options.fromFish;
-  const toPalette = readOceanPaletteFromCss();
+  const toPalette = options.toPalette || readOceanPaletteFromCss();
   const toFish = readTargetFishCount();
 
   cancelOceanPaletteLerp();
@@ -1306,12 +1353,13 @@ function syncOceanAtmosphere(options = {}) {
     document.documentElement.classList.contains('ocean-power-save');
 
   if (skipLerp) {
-    applyOceanPalette(toPalette, toFish);
+    applyOceanPalette(toPalette, toFish, !preserveFishCount);
     return;
   }
 
-  const duration = 400;
+  const duration = typeof options.duration === 'number' ? options.duration : 400;
   const start = performance.now();
+  const updateFish = !preserveFishCount && (typeof fromFish === 'number' || typeof toFish === 'number');
   const fromFishNum = typeof fromFish === 'number' ? fromFish : toFish || 120;
   const toFishNum = typeof toFish === 'number' ? toFish : fromFishNum;
 
@@ -1324,15 +1372,101 @@ function syncOceanAtmosphere(options = {}) {
       return rgbToHex(lerpRgb(a, b, t));
     });
     const bubbleRgb = lerpRgb(fromPalette.bubbleRgb, toPalette.bubbleRgb, t);
-    applyOceanPalette({ accents, bubbleRgb, koiRgb }, Math.round(fromFishNum + (toFishNum - fromFishNum) * t));
+    applyOceanPalette(
+      { accents, bubbleRgb, koiRgb },
+      updateFish ? Math.round(fromFishNum + (toFishNum - fromFishNum) * t) : undefined,
+      updateFish
+    );
     if (t < 1) {
       window.__oceanPaletteLerpRaf = requestAnimationFrame(tick);
     } else {
       window.__oceanPaletteLerpRaf = 0;
-      applyOceanPalette(toPalette, toFish);
+      applyOceanPalette(toPalette, toFish, !preserveFishCount);
     }
   };
   window.__oceanPaletteLerpRaf = requestAnimationFrame(tick);
+}
+
+class FeaturedOceanPreview {
+  constructor(signal) {
+    if (document.body.dataset.universe) return;
+    const cards = Array.from(document.querySelectorAll('.project-card[data-featured="true"][data-project-id]'));
+    if (!cards.length) return;
+
+    this.activeUniverse = null;
+    this.revertTimer = 0;
+
+    const preview = (universe) => {
+      if (!universe || !window.__oceanEngine) return;
+      if (isOceanEffectivelyStill() || isOceanPaused()) return;
+      if (document.documentElement.classList.contains('is-soft-nav')) return;
+      clearTimeout(this.revertTimer);
+      this.revertTimer = 0;
+      if (this.activeUniverse === universe) return;
+      this.activeUniverse = universe;
+      syncOceanAtmosphere({
+        animate: true,
+        preserveFishCount: true,
+        fromPalette: window.__oceanCurrentPalette || readOceanPaletteFromCss(),
+        toPalette: readOceanPaletteForUniverse(universe)
+      });
+    };
+
+    const scheduleRevert = () => {
+      if (!this.activeUniverse) return;
+      if (document.documentElement.classList.contains('is-soft-nav')) return;
+      clearTimeout(this.revertTimer);
+      this.revertTimer = window.setTimeout(() => {
+        this.revertTimer = 0;
+        if (document.documentElement.classList.contains('is-soft-nav')) return;
+        if (!this.activeUniverse) return;
+        this.activeUniverse = null;
+        if (isOceanEffectivelyStill() || isOceanPaused()) return;
+        syncOceanAtmosphere({
+          animate: true,
+          preserveFishCount: true,
+          fromPalette: window.__oceanCurrentPalette || readOceanPaletteFromCss(),
+          toPalette: readOceanPaletteFromCss()
+        });
+      }, 80);
+    };
+
+    cards.forEach((card) => {
+      const universe = card.getAttribute('data-project-id');
+      if (!universe) return;
+      card.addEventListener(
+        'pointerenter',
+        (e) => {
+          if (e.pointerType === 'touch') return;
+          preview(universe);
+        },
+        { signal }
+      );
+      card.addEventListener(
+        'pointerleave',
+        (e) => {
+          if (e.pointerType === 'touch') return;
+          scheduleRevert();
+        },
+        { signal }
+      );
+      card.addEventListener('focusin', () => preview(universe), { signal });
+      card.addEventListener(
+        'focusout',
+        (e) => {
+          if (e.relatedTarget && card.contains(e.relatedTarget)) return;
+          scheduleRevert();
+        },
+        { signal }
+      );
+    });
+
+    signal.addEventListener('abort', () => {
+      clearTimeout(this.revertTimer);
+      this.revertTimer = 0;
+      this.activeUniverse = null;
+    });
+  }
 }
 
 class OceanBoot {
@@ -2233,6 +2367,7 @@ function bootPage(options = {}) {
   if (document.querySelector('.projects-filters') && document.querySelectorAll('.project-card').length) {
     window.__projectFilters = new ProjectFilters();
   }
+  new FeaturedOceanPreview(signal);
   if (document.querySelector('.project-gallery')) {
     window.__gallerySpotlight = new GallerySpotlight();
   }
@@ -2549,7 +2684,7 @@ class SoftNav {
         return;
       }
 
-      const fromPalette = readOceanPaletteFromCss();
+      const fromPalette = window.__oceanCurrentPalette || readOceanPaletteFromCss();
       const fromFish = readTargetFishCount();
 
       curSite.replaceWith(document.importNode(nextSite, true));

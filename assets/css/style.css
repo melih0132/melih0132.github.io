@@ -518,6 +518,12 @@ textarea {
   border-color: var(--koi-beni);
 }
 
+.btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  pointer-events: none;
+}
+
 /* Projects */
 .projects-toolbar {
   margin-bottom: var(--space-l);
@@ -752,6 +758,21 @@ textarea {
 
 .project-card.filtered-out {
   display: none;
+}
+
+.project-card.is-filter-enter {
+  animation: project-card-enter 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes project-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.45rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .project-card__head {
