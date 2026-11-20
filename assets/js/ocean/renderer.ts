@@ -543,6 +543,7 @@ export class AsciiRenderer {
     ctx.textBaseline = "middle";
 
     this.drawHeat();
+    this.drawLures(world, t);
     this.drawFish();
     this.drawSharks(t);
   }
@@ -575,6 +576,8 @@ export class AsciiRenderer {
       if (e.kind === "eat") {
         this.stamp(this.heat, e.x, e.y, 2, 1);
         this.stamp(this.energy, e.x, e.y, 3, 0.9);
+      } else if (e.kind === "lure") {
+        this.stamp(this.energy, e.x, e.y, 4, 0.95);
       } else {
         this.stamp(this.energy, e.x, e.y, 6, 1.4);
       }
@@ -1106,6 +1109,30 @@ export class AsciiRenderer {
       const col = i % cols;
       const row = (i / cols) | 0;
       ctx.fillText(h > 0.6 ? "o" : "°", col * cw + cw / 2, row * ch + ch / 2 + 1);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  /** Adaptation: softly pulsing golden lure glyph on the ASCII grid. */
+  private drawLures(world: World, t: number) {
+    if (!world.lures.length) return;
+    const { ctx, cols, rows, cw, ch } = this;
+    const gold = this.accents[2] || "#d4a84b";
+    ctx.fillStyle = gold;
+    for (const lure of world.lures) {
+      const col = Math.floor(lure.x / cw);
+      const row = Math.floor(lure.y / ch);
+      if (col < 0 || row < 0 || col >= cols || row >= rows) continue;
+      const fade = clamp(lure.life / 1.1, 0, 1);
+      const pulse = 0.6 + 0.4 * Math.sin(t * 5.2 + lure.x * 0.05);
+      const cx = col * cw + cw / 2;
+      const cy = row * ch + ch / 2 + 1;
+      ctx.globalAlpha = fade * (0.55 + 0.4 * pulse);
+      ctx.fillText(pulse > 0.72 ? "✦" : "·", cx, cy);
+      // Subtle cardinal shimmer dots
+      ctx.globalAlpha = fade * 0.28 * pulse;
+      if (col > 0) ctx.fillText("·", (col - 1) * cw + cw / 2, cy);
+      if (col + 1 < cols) ctx.fillText("·", (col + 1) * cw + cw / 2, cy);
     }
     ctx.globalAlpha = 1;
   }

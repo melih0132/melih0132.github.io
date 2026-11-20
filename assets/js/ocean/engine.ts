@@ -38,6 +38,11 @@ export class OceanEngine {
   private powerSave = false;
   /** Adaptation: temporary freeze for reading (keeps current frame). */
   private paused = false;
+  /** Adaptation: long-press lure tracking on empty ocean areas. */
+  private holdTimer = 0;
+  private holdX = 0;
+  private holdY = 0;
+  private holdFired = false;
 
   constructor(canvas: HTMLCanvasElement, sharks?: SharkSpec[], options: OceanOptions = {}) {
     this.canvas = canvas;
@@ -68,6 +73,9 @@ export class OceanEngine {
       window.addEventListener("blur", this.onPointerLeave);
       window.addEventListener("mouseout", this.onWindowMouseOut);
       window.addEventListener("pointerdown", this.onPointerDown, { passive: true });
+      window.addEventListener("pointerup", this.onPointerUp, { passive: true });
+      window.addEventListener("pointercancel", this.clearHold, { passive: true });
+      window.addEventListener("dblclick", this.onDblClick, { passive: true });
     }
 
     this.resize();
@@ -85,8 +93,12 @@ export class OceanEngine {
     this.intersectionObserver.disconnect();
     this.reducedMotion.removeEventListener("change", this.onMotionPreference);
     document.removeEventListener("visibilitychange", this.onVisibilityChange);
+    this.clearHold();
     window.removeEventListener("pointermove", this.onPointerMove);
     window.removeEventListener("pointerdown", this.onPointerDown);
+    window.removeEventListener("pointerup", this.onPointerUp);
+    window.removeEventListener("pointercancel", this.clearHold);
+    window.removeEventListener("dblclick", this.onDblClick);
     document.documentElement.removeEventListener("pointerleave", this.onPointerLeave);
     window.removeEventListener("blur", this.onPointerLeave);
     window.removeEventListener("mouseout", this.onWindowMouseOut);
@@ -222,6 +234,27 @@ export class OceanEngine {
     return { x, y, inside };
   }
 
+  /** Adaptation: drop a golden lure that gently draws koi toward (x, y). */
+  dropLure(x: number, y: number) {
+    if (this.disposed || this.isStill() || this.paused) return;
+    this.world.dropLure(x, y);
+  }
+
+  private isInteractiveUiTarget(target: EventTarget | null): boolean {
+    if (!(target instanceof Element)) return false;
+    return !!target.closest(
+      'a, button, input, select, textarea, label, [role="button"], .header, .project-card, .contact-panel, .contact-aside, .cmd-palette, .quick-peek, .spotlight, .arch-diagram'
+    );
+  }
+
+  private clearHold = () => {
+    if (this.holdTimer) {
+      window.clearTimeout(this.holdTimer);
+      this.holdTimer = 0;
+    }
+    this.holdFired = false;
+  };
+
   private onPointerMove = (e: PointerEvent) => {
     const { x, y, inside } = this.toLocal(e);
     const p = this.world.pointer;
@@ -229,12 +262,50 @@ export class OceanEngine {
     p.x = x;
     p.y = y;
     p.active = active;
+    if (this.holdTimer && Math.hypot(x - this.holdX, y - this.holdY) > 16) {
+      this.clearHold();
+    }
   };
 
   private onPointerDown = (e: PointerEvent) => {
+    if (e.button !== 0 && e.pointerType === "mouse") return;
     const { x, y, inside } = this.toLocal(e);
-    if (!inside) return;
-    if (!this.isStill()) this.world.splash(x, y);
+    if (!inside || this.isStill() || this.paused) return;
+    this.clearHold();
+    if (this.isInteractiveUiTarget(e.target)) {
+      this.world.splash(x, y);
+      return;
+    }
+    this.holdX = x;
+    this.holdY = y;
+    this.holdTimer = window.setTimeout(() => {
+      this.holdTimer = 0;
+      this.holdFired = true;
+      if (!this.disposed && !this.isStill() && !this.paused) {
+        this.world.dropLure(this.holdX, this.holdY);
+      }
+    }, 260);
+  };
+
+  private onPointerUp = (e: PointerEvent) => {
+    const hadPending = !!this.holdTimer;
+    const fired = this.holdFired;
+    this.clearHold();
+    if (fired || !hadPending) return;
+    const { x, y, inside } = this.toLocal(e);
+    if (inside && !this.isStill() && !this.paused) {
+      this.world.splash(x, y);
+    }
+  };
+
+  private onDblClick = (e: MouseEvent) => {
+    if (this.isStill() || this.paused || this.isInteractiveUiTarget(e.target)) return;
+    const rect = this.canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    if (x >= 0 && y >= 0 && x <= rect.width && y <= rect.height) {
+      this.world.dropLure(x, y);
+    }
   };
 
   private onPointerLeave = () => {

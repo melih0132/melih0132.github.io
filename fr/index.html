@@ -463,49 +463,113 @@
             <span class="section__eyebrow">Profil</span>
             <h2 class="section__title">À propos</h2>
           </header>
-          <div class="about-grid">
-            <div class="about-copy">
-              <p>
-                Je suis Melih Cetinkaya, en Master MIASHS (informatique et mathématiques appliquées) à l'<a
-                  href="https://www.univ-grenoble-alpes.fr/" target="_blank" rel="noreferrer">Université Grenoble
-                  Alpes</a>.
-                Je prépare mon entrée en M2 pour septembre 2027 et recherche un contrat d'apprentissage d'un an axé sur
-                l'ingénierie logicielle et l'architecture applicative.
-              </p>
-              <p>
-                Issu du BUT Informatique parcours RA à l'<a href="https://www.univ-smb.fr/" target="_blank"
-                  rel="noreferrer">IUT d'Annecy (USMB)</a>, j'ai travaillé en alternance backend chez Altimax
-                (WordPress, maintenance et évolutions) et en stage full stack chez Helvetic Events Agency (React,
-                FastAPI).
-              </p>
-              <p>
-                Français et turc bilingues, anglais B2. Apprentissage continu, intérêt pour l'IA, engagement associatif.
-                <a href="#contact">Contactez-moi</a>
-                ou écrivez-moi sur
-                <a href="https://www.linkedin.com/in/melih-ctk/" target="_blank" rel="noreferrer">LinkedIn</a>.
-              </p>
+          <div class="about-frame">
+            <div class="about-col about-col--profile">
+              <div class="about-col__head"><span>01 · Profil</span><span>Grenoble, FR</span></div>
+              <div class="about-copy">
+                <p>
+                  En <strong>Master MIASHS</strong> à l'<a href="https://www.univ-grenoble-alpes.fr/" target="_blank"
+                    rel="noreferrer">Université Grenoble Alpes</a>, je prépare mon entrée en M2 pour septembre 2027 et
+                  recherche une <strong>alternance d'un an</strong> en ingénierie logicielle et architecture
+                  applicative.
+                </p>
+                <p>
+                  Du backend au mobile en passant par les architectures distribuées et l'IA, je conçois des systèmes
+                  sobres, testés et maintenables.
+                </p>
+              </div>
+              <ol class="about-timeline" aria-label="Repères de parcours">
+                <li class="about-timeline__item">
+                  <span class="about-timeline__date">2026 — 2028</span>
+                  <span class="about-timeline__role">Master MIASHS</span>
+                  <span class="about-timeline__org">UGA · Grenoble</span>
+                </li>
+                <li class="about-timeline__item">
+                  <span class="about-timeline__date">2025 — 2026</span>
+                  <span class="about-timeline__role">Alternance Backend</span>
+                  <span class="about-timeline__org">Altimax · Annecy</span>
+                </li>
+                <li class="about-timeline__item">
+                  <span class="about-timeline__date">2025</span>
+                  <span class="about-timeline__role">Stage Full Stack</span>
+                  <a class="about-timeline__org about-timeline__link" href="/fr/projets/heva.html">Helvetic Events →</a>
+                </li>
+                <li class="about-timeline__item">
+                  <span class="about-timeline__date">2023 — 2026</span>
+                  <span class="about-timeline__role">BUT Informatique (RA)</span>
+                  <span class="about-timeline__org">IUT Annecy · USMB</span>
+                </li>
+              </ol>
+              <div class="about-foot">
+                <a class="about-foot__link" href="/assets/cv/melih-cetinkaya-cv.pdf" target="_blank"
+                  rel="noreferrer">Parcours détaillé (CV) ↗</a>
+                <a class="about-foot__link" href="#contact">Me contacter →</a>
+              </div>
             </div>
-            <div class="skills-lines">
-              <div>
-                <h3 class="skills-line__title">Front-end</h3>
-                <p class="skills-line__items">JavaScript/TypeScript · React/Next.js · Vue.js · HTML5/CSS3 · Tailwind</p>
+
+            <div class="about-col about-col--stack">
+              <div class="about-col__head"><span>02 · Stack</span><span>Cliquable</span></div>
+              <div class="skills-lines">
+                <div class="skills-group">
+                  <h3 class="skills-line__title">Front-end</h3>
+                  <div class="skills-chips">
+                    <span class="skill-chip" data-skill="JavaScript">JavaScript</span>
+                    <span class="skill-chip" data-skill="TypeScript">TypeScript</span>
+                    <span class="skill-chip" data-skill="React">React</span>
+                    <span class="skill-chip" data-skill="Next">Next.js</span>
+                    <span class="skill-chip" data-skill="Vue.js">Vue.js</span>
+                    <span class="skill-chip" data-skill="Tailwind CSS">Tailwind</span>
+                    <span class="skill-chip" data-skill="HTML/CSS">HTML/CSS</span>
+                  </div>
+                </div>
+                <div class="skills-group">
+                  <h3 class="skills-line__title">Back-end</h3>
+                  <div class="skills-chips">
+                    <span class="skill-chip" data-skill="FastAPI">FastAPI</span>
+                    <span class="skill-chip" data-skill="Python">Python</span>
+                    <span class="skill-chip" data-skill="Node.js">Node.js</span>
+                    <span class="skill-chip" data-skill="Laravel">Laravel</span>
+                    <span class="skill-chip" data-skill="Symfony">Symfony</span>
+                    <span class="skill-chip" data-skill=".NET Core">.NET Core</span>
+                    <span class="skill-chip" data-skill="Socket.io">Socket.io</span>
+                  </div>
+                </div>
+                <div class="skills-group">
+                  <h3 class="skills-line__title">Mobile</h3>
+                  <div class="skills-chips">
+                    <span class="skill-chip" data-skill="Kotlin">Kotlin</span>
+                    <span class="skill-chip" data-skill="Jetpack Compose">Compose</span>
+                    <span class="skill-chip" data-skill="Flutter">Flutter</span>
+                    <span class="skill-chip" data-skill="Swift">Swift</span>
+                  </div>
+                </div>
+                <div class="skills-group">
+                  <h3 class="skills-line__title">Données &amp; outils</h3>
+                  <div class="skills-chips">
+                    <span class="skill-chip" data-skill="PostgreSQL">PostgreSQL</span>
+                    <span class="skill-chip" data-skill="MongoDB">MongoDB</span>
+                    <span class="skill-chip" data-skill="MySQL">MySQL</span>
+                    <span class="skill-chip" data-skill="SQLite">SQLite</span>
+                    <span class="skill-chip" data-skill="Docker">Docker</span>
+                    <span class="skill-chip" data-skill="Kubernetes">Kubernetes</span>
+                    <span class="skill-chip" data-skill="Microsoft Azure">Azure</span>
+                    <span class="skill-chip" data-skill="Swagger">Swagger</span>
+                    <span class="skill-chip" data-skill="Figma">Figma</span>
+                  </div>
+                </div>
+                <div class="skills-group">
+                  <h3 class="skills-line__title">Méthodes</h3>
+                  <div class="skills-chips">
+                    <span class="skill-chip" data-skill="RESTful API">API REST</span>
+                    <span class="skill-chip" data-skill="MVC">MVC</span>
+                    <span class="skill-chip" data-skill="Agile">Agile / Scrum</span>
+                    <span class="skill-chip">UML</span>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h3 class="skills-line__title">Back-end</h3>
-                <p class="skills-line__items">PHP (Laravel, Symfony) · Python (FastAPI) · Node.js · C# (.NET Core)</p>
-              </div>
-              <div>
-                <h3 class="skills-line__title">Mobile</h3>
-                <p class="skills-line__items">Flutter (Dart) · Swift · Kotlin (Jetpack Compose)</p>
-              </div>
-              <div>
-                <h3 class="skills-line__title">Données & outils</h3>
-                <p class="skills-line__items">PostgreSQL · MongoDB · MySQL · SQLite · Docker · Kubernetes · Git · Azure ·
-                  Postman · Swagger · Figma</p>
-              </div>
-              <div>
-                <h3 class="skills-line__title">Méthodes</h3>
-                <p class="skills-line__items">Agile/Scrum · MVC · API REST · UML</p>
+              <div class="skills-readout" data-skills-readout aria-live="polite">
+                <span class="skills-readout__text">Survolez une technologie · cliquez pour filtrer les projets</span>
+                <span class="skills-readout__cta"></span>
               </div>
             </div>
           </div>
@@ -519,35 +583,68 @@
             <h2 class="section__title">Contact</h2>
             <p class="section__sub">Une idée, une opportunité, une question : le formulaire ci-dessous.</p>
           </header>
-          <div class="contact-panel">
-            <form action="https://formspree.io/f/xzzbdgkb" method="POST" class="contact__form">
-              <div class="contact__form-field">
-                <label class="contact__form-label" for="name">Nom</label>
-                <input required placeholder="Ex. : Rémi Gaillard" type="text" class="contact__form-input" name="name"
-                  id="name" />
+          <div class="contact-grid">
+            <div class="contact-panel">
+              <form action="https://formspree.io/f/xzzbdgkb" method="POST" class="contact__form">
+                <div class="contact__form-field">
+                  <label class="contact__form-label" for="name">Nom</label>
+                  <input required placeholder="Ex. : Rémi Gaillard" type="text" class="contact__form-input" name="name"
+                    id="name" />
+                </div>
+                <div class="contact__form-field">
+                  <label class="contact__form-label" for="email">Email</label>
+                  <input required placeholder="nom@example.com" type="email" class="contact__form-input" name="email"
+                    id="email" />
+                </div>
+                <div class="contact__form-field">
+                  <label class="contact__form-label" for="reason">Motif</label>
+                  <select required name="reason" id="reason" class="contact__form-select">
+                    <option value="" disabled selected>Choisissez une option</option>
+                    <option value="apprenticeship_recruitment">Alternance / Recrutement</option>
+                    <option value="project_inquiry">Demande de projet</option>
+                    <option value="technical_assistance">Assistance technique</option>
+                    <option value="other">Autre</option>
+                  </select>
+                </div>
+                <div class="contact__form-field">
+                  <label class="contact__form-label" for="message">Message</label>
+                  <textarea required cols="30" rows="6" class="contact__form-input"
+                    placeholder="Décrivez votre idée ou besoin…" name="message" id="message"></textarea>
+                </div>
+                <button type="submit" class="btn btn--solid contact__btn">Envoyer</button>
+              </form>
+            </div>
+
+            <aside class="contact-aside" aria-label="Accès direct">
+              <div class="contact-aside__block">
+                <span class="contact-aside__label">Disponibilité</span>
+                <p class="contact-status"><span class="contact-status__dot" aria-hidden="true"></span>Alternance M2 ·
+                  Rentrée 2027</p>
+                <p class="contact-aside__meta">Ingénierie logicielle &amp; architecture applicative</p>
               </div>
-              <div class="contact__form-field">
-                <label class="contact__form-label" for="email">Email</label>
-                <input required placeholder="nom@example.com" type="email" class="contact__form-input" name="email"
-                  id="email" />
+              <div class="contact-aside__block">
+                <span class="contact-aside__label">Localisation</span>
+                <p class="contact-aside__value">Grenoble, France · Hybride / Remote</p>
+                <p class="contact-aside__meta">Heure locale : <time data-local-clock>--:--</time> (Europe/Paris)</p>
               </div>
-              <div class="contact__form-field">
-                <label class="contact__form-label" for="reason">Motif</label>
-                <select required name="reason" id="reason" class="contact__form-select">
-                  <option value="" disabled selected>Choisissez une option</option>
-                  <option value="apprenticeship_recruitment">Alternance / Recrutement</option>
-                  <option value="project_inquiry">Demande de projet</option>
-                  <option value="technical_assistance">Assistance technique</option>
-                  <option value="other">Autre</option>
-                </select>
+              <div class="contact-aside__block">
+                <span class="contact-aside__label">Contact direct</span>
+                <div class="contact-copy-row">
+                  <a class="contact-aside__email" href="mailto:m.ctk3201@gmail.com">m.ctk3201@gmail.com</a>
+                  <button type="button" class="contact-copy-btn" data-copy-email="m.ctk3201@gmail.com">Copier</button>
+                </div>
+                <div class="contact-aside__links">
+                  <a class="btn" href="/assets/cv/melih-cetinkaya-cv.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
+                  <a class="btn" href="https://www.linkedin.com/in/melih-ctk/" target="_blank"
+                    rel="noreferrer">LinkedIn ↗</a>
+                  <a class="btn" href="https://github.com/melih0132" target="_blank" rel="noreferrer">GitHub ↗</a>
+                </div>
               </div>
-              <div class="contact__form-field">
-                <label class="contact__form-label" for="message">Message</label>
-                <textarea required cols="30" rows="6" class="contact__form-input"
-                  placeholder="Décrivez votre idée ou besoin…" name="message" id="message"></textarea>
+              <div class="contact-aside__block">
+                <span class="contact-aside__label">Langues</span>
+                <p class="contact-aside__meta">Français (natif) · Turc (bilingue) · Anglais (B2)</p>
               </div>
-              <button type="submit" class="btn btn--solid contact__btn">Envoyer</button>
-            </form>
+            </aside>
           </div>
         </div>
       </section>

@@ -109,9 +109,17 @@ export interface Shark {
 }
 
 export interface WorldEvent {
-  kind: "eat" | "splash";
+  kind: "eat" | "splash" | "lure";
   x: number;
   y: number;
+}
+
+/** Adaptation: subtle golden lure dropped by long-press / double-click to gently attract koi. */
+export interface Lure {
+  x: number;
+  y: number;
+  life: number;
+  maxLife: number;
 }
 
 const FISH_SEPARATION_K = 420;
@@ -127,6 +135,8 @@ export class World {
   fish: Fish[] = [];
   sharks: Shark[] = [];
   events: WorldEvent[] = [];
+  /** Adaptation: active golden lures gently drawing koi. */
+  lures: Lure[] = [];
   pointer = { x: 0, y: 0, active: false };
 
   /** Fish neighbourhood radius; the spatial hash bucket size matches it. */
@@ -292,6 +302,13 @@ export class World {
     }
   }
 
+  /** Adaptation: drop a quiet golden lure that attracts nearby koi before dissipating. */
+  dropLure(x: number, y: number) {
+    if (this.lures.length >= 3) this.lures.shift();
+    this.lures.push({ x, y, life: 6.5, maxLife: 6.5 });
+    this.events.push({ kind: "lure", x, y });
+  }
+
   /** Adaptation: dynamically adjust school population without resetting sharks/koi. */
   setFishCount(count?: number) {
     this.fishCount = count;
@@ -335,10 +352,18 @@ export class World {
 
   step(dt: number) {
     this.time += dt;
+    this.stepLures(dt);
     this.rebuildHash();
     this.stepFish(dt);
     this.stepSharks(dt);
     this.respawn();
+  }
+
+  private stepLures(dt: number) {
+    for (let i = this.lures.length - 1; i >= 0; i--) {
+      this.lures[i].life -= dt;
+      if (this.lures[i].life <= 0) this.lures.splice(i, 1);
+    }
   }
 
   private rebuildHash() {
@@ -596,12 +621,44 @@ export class World {
         dx += this.crossing.dir * 1.5;
         dy += clamp((targetY - hy) / cyW, -1, 1) * 1.2;
       } else {
+        // Adaptation: if a golden lure is in the pond, gently draw nearby koi toward it.
+        let lured = false;
+        if (this.lures.length > 0) {
+          let bestLure: Lure | null = null;
+          let bestDist = Math.max(W, H) * 0.85;
+          for (const lure of this.lures) {
+            if (lure.life <= 0.2) continue;
+            const d = Math.hypot(lure.x - hx, lure.y - hy);
+            if (d < bestDist) {
+              bestDist = d;
+              bestLure = lure;
+            }
+          }
+          if (bestLure) {
+            const lx = bestLure.x - hx;
+            const ly = bestLure.y - hy;
+            const d = Math.hypot(lx, ly) || 1;
+            const reach = L * 0.08 + 18;
+            if (d < reach) {
+              bestLure.life = Math.min(bestLure.life, 0.25);
+              this.events.push({ kind: "eat", x: bestLure.x, y: bestLure.y });
+            } else {
+              const strength = 2.4 * Math.min(1, bestLure.life / 1.2);
+              dx += (lx / d) * strength;
+              dy += (ly / d) * strength;
+              hunting = true;
+              closing = clamp(1 - d / (L * 1.1), 0, 0.65);
+              lured = true;
+            }
+          }
+        }
+
         // Hunt.
-        if (time >= sh.retargetAt) {
+        if (!lured && time >= sh.retargetAt) {
           sh.target = this.findPrey(sh);
           sh.retargetAt = time + 0.45;
         }
-        const t = sh.target;
+        const t = lured ? null : sh.target;
         if (t && t.alive && sh.hunger > 0.3) {
           // Pursuit: aim at where the fish is about to be.
           const tx = t.x + t.vx * 0.35 - hx;
@@ -612,7 +669,7 @@ export class World {
           dy += (ty / d) * w;
           hunting = true;
           closing = clamp(1 - d / (L * 0.9), 0, 1);
-        } else {
+        } else if (!lured) {
           // Patrol: a lazy circuit around the headline.
           const rx = (hx - cxW) / (W / minSide);
           const ry = hy - cyW;
