@@ -2815,6 +2815,7 @@ body.quick-peek-open {
 .project-block {
   padding-block: var(--space-l);
   border-bottom: 1px solid var(--line);
+  scroll-margin-top: calc(var(--header-h) + var(--project-toc-h, 0px));
 }
 
 .project-block:last-child {
@@ -2827,7 +2828,6 @@ body.quick-peek-open {
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: var(--space-m);
-  scroll-margin-top: calc(var(--header-h) + var(--project-toc-h, 0px) + 0.35rem);
 }
 
 #projects,

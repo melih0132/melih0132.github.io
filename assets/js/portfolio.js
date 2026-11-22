@@ -3691,7 +3691,8 @@ class ProjectToc {
       const text = (h2.textContent || '').trim();
       if (!text) return;
       if (/^actions$/i.test(text)) return;
-      let id = h2.id;
+      const block = h2.closest('.project-block') || h2;
+      let id = block.id || h2.id;
       if (!id) {
         id = text
           .toLowerCase()
@@ -3699,13 +3700,15 @@ class ProjectToc {
           .replace(/[\u0300-\u036f]/g, '')
           .replace(/[^a-z0-9]+/g, '-')
           .replace(/^-|-$/g, '');
-        h2.id = id || `section-${links.length}`;
+        id = id || `section-${links.length}`;
       }
+      block.id = id;
+      if (h2.id === id) h2.removeAttribute('id');
       const idx = links.length + 1;
       const li = document.createElement('li');
       const a = document.createElement('a');
       a.className = 'project-toc__link';
-      a.href = `#${h2.id}`;
+      a.href = `#${id}`;
 
       const idxEl = document.createElement('span');
       idxEl.className = 'project-toc__idx';
@@ -3719,7 +3722,7 @@ class ProjectToc {
       a.append(idxEl, textEl);
       li.appendChild(a);
       list.appendChild(li);
-      links.push({ a, id: h2.id, text, el: h2.closest('.project-block') || h2 });
+      links.push({ a, id, text, el: block });
     });
 
     if (links.length < 2) return;
@@ -3869,8 +3872,8 @@ class ProjectToc {
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
         if (!visible.length) return;
-        const heading = visible[0].target.querySelector('h2') || visible[0].target;
-        if (heading?.id) setCurrent(heading.id);
+        const id = visible[0].target.id;
+        if (id) setCurrent(id);
       },
       { rootMargin: '-28% 0px -52% 0px', threshold: [0, 0.2, 0.5, 1] }
     );
