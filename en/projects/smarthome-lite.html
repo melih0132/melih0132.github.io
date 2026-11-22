@@ -37,18 +37,34 @@
       "Python",
       "FastAPI",
       "Flask",
+      "Pydantic",
       "PostgreSQL",
+      "TimescaleDB",
       "SQLAlchemy",
+      "Alembic",
       "JWT",
+      "RESTful API",
+      "Socket.io",
+      "scikit-learn",
+      "Pandas",
+      "NumPy",
       "Pytest",
       "Next",
       "React",
       "TypeScript",
       "Tailwind CSS",
+      "shadcn/ui",
+      "Zod",
+      "Recharts",
       "Kotlin",
       "Jetpack Compose",
+      "Material 3",
+      "Retrofit",
+      "Gradle",
       "Raspberry Pi",
       "Z-Wave",
+      "Docker",
+      "Docker Compose",
       "Android Studio",
       "VS Code",
       "Git",
@@ -72,8 +88,8 @@
           <li><a class="header__link" href="/en/#contact">Contact</a></li>
         </ul>
         <ul class="header__lang">
-          <li><a href="https://melih0132.github.io/fr/projets/smarthome-lite.html" data-set-lang="fr">FR</a></li>
-          <li><a href="https://melih0132.github.io/en/projects/smarthome-lite.html" data-set-lang="en" aria-current="true">EN</a></li>
+          <li><a href="/fr/projets/smarthome-lite.html" data-set-lang="fr">FR</a></li>
+          <li><a href="/en/projects/smarthome-lite.html" data-set-lang="en" aria-current="true">EN</a></li>
         </ul>
         <button class="header__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel">Menu</button>
       </div>
@@ -85,8 +101,8 @@
           <li><a href="/en/#contact">Contact</a></li>
         </ul>
         <ul class="header__lang">
-          <li><a href="https://melih0132.github.io/fr/projets/smarthome-lite.html" data-set-lang="fr">FR</a></li>
-          <li><a href="https://melih0132.github.io/en/projects/smarthome-lite.html" data-set-lang="en" aria-current="true">EN</a></li>
+          <li><a href="/fr/projets/smarthome-lite.html" data-set-lang="fr">FR</a></li>
+          <li><a href="/en/projects/smarthome-lite.html" data-set-lang="en" aria-current="true">EN</a></li>
         </ul>
       </div>
     </header>
@@ -151,7 +167,7 @@
                   <text x="16" y="250" fill="var(--muted)" font-size="16">IF-THEN Engine</text>
                   <text x="16" y="272" fill="var(--muted)" font-size="16">Smart Dimming</text>
                 </g>
-                <g transform="translate(810, 18)" data-arch-node="persistence" data-arch-techs="postgresql,sqlalchemy" tabindex="0" role="button">
+                <g transform="translate(810, 18)" data-arch-node="persistence" data-arch-techs="postgresql,timescaledb,sqlalchemy,alembic" tabindex="0" role="button">
                   <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
                   <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">HYBRID STORAGE</text>
                   <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">PostgreSQL</text>
@@ -160,7 +176,7 @@
                   <text x="16" y="134" fill="var(--muted)" font-size="16">TimescaleDB</text>
                   <text x="16" y="156" fill="var(--muted)" font-size="16">Time series</text>
                 </g>
-                <g transform="translate(810, 258)" data-arch-node="persistence" data-arch-techs="python,fastapi" tabindex="0" role="button">
+                <g transform="translate(810, 258)" data-arch-node="persistence" data-arch-techs="python,scikit-learn,pandas,numpy" tabindex="0" role="button">
                   <rect width="206" height="218" rx="2" fill="rgba(10,10,10,0.92)" stroke="var(--line)" stroke-width="1" />
                   <text x="16" y="28" fill="var(--accent)" font-size="13" letter-spacing="0.4" font-weight="600">MACHINE LEARNING</text>
                   <text x="16" y="58" fill="var(--koi-shiro)" font-size="18" font-weight="600">ML Pipelines</text>
@@ -226,7 +242,7 @@
         <section class="project-block">
           <div class="wrap">
             <h2>Stack</h2>
-            <p class="project-tech"><a class="project-tech__item" href="/en/?tech=python#projects">Python</a> <a class="project-tech__item" href="/en/?tech=fastapi#projects">FastAPI</a> <a class="project-tech__item" href="/en/?tech=flask#projects">Flask</a> <a class="project-tech__item" href="/en/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/en/?tech=sqlalchemy#projects">SQLAlchemy</a> <a class="project-tech__item" href="/en/?tech=jwt#projects">JWT</a> <a class="project-tech__item" href="/en/?tech=pytest#projects">Pytest</a> <a class="project-tech__item" href="/en/?tech=next#projects">Next</a> <a class="project-tech__item" href="/en/?tech=react#projects">React</a> <a class="project-tech__item" href="/en/?tech=typescript#projects">TypeScript</a> <a class="project-tech__item" href="/en/?tech=tailwind-css#projects">Tailwind CSS</a> <a class="project-tech__item" href="/en/?tech=kotlin#projects">Kotlin</a> <a class="project-tech__item" href="/en/?tech=jetpack-compose#projects">Jetpack Compose</a> <a class="project-tech__item" href="/en/?tech=raspberry-pi#projects">Raspberry Pi</a> <a class="project-tech__item" href="/en/?tech=z-wave#projects">Z-Wave</a> <a class="project-tech__item" href="/en/?tech=android-studio#projects">Android Studio</a> <a class="project-tech__item" href="/en/?tech=vs-code#projects">VS Code</a> <a class="project-tech__item" href="/en/?tech=git#projects">Git</a> <a class="project-tech__item" href="/en/?tech=github#projects">GitHub</a></p>
+            <p class="project-tech"><a class="project-tech__item" href="/en/?tech=python#projects">Python</a> <a class="project-tech__item" href="/en/?tech=fastapi#projects">FastAPI</a> <a class="project-tech__item" href="/en/?tech=flask#projects">Flask</a> <a class="project-tech__item" href="/en/?tech=pydantic#projects">Pydantic</a> <a class="project-tech__item" href="/en/?tech=postgresql#projects">PostgreSQL</a> <a class="project-tech__item" href="/en/?tech=timescaledb#projects">TimescaleDB</a> <a class="project-tech__item" href="/en/?tech=sqlalchemy#projects">SQLAlchemy</a> <a class="project-tech__item" href="/en/?tech=alembic#projects">Alembic</a> <a class="project-tech__item" href="/en/?tech=jwt#projects">JWT</a> <a class="project-tech__item" href="/en/?tech=restful-api#projects">RESTful API</a> <a class="project-tech__item" href="/en/?tech=socket-io#projects">Socket.io</a> <a class="project-tech__item" href="/en/?tech=scikit-learn#projects">scikit-learn</a> <a class="project-tech__item" href="/en/?tech=pandas#projects">Pandas</a> <a class="project-tech__item" href="/en/?tech=numpy#projects">NumPy</a> <a class="project-tech__item" href="/en/?tech=pytest#projects">Pytest</a> <a class="project-tech__item" href="/en/?tech=next#projects">Next</a> <a class="project-tech__item" href="/en/?tech=react#projects">React</a> <a class="project-tech__item" href="/en/?tech=typescript#projects">TypeScript</a> <a class="project-tech__item" href="/en/?tech=tailwind-css#projects">Tailwind CSS</a> <a class="project-tech__item" href="/en/?tech=shadcn-ui#projects">shadcn/ui</a> <a class="project-tech__item" href="/en/?tech=zod#projects">Zod</a> <a class="project-tech__item" href="/en/?tech=recharts#projects">Recharts</a> <a class="project-tech__item" href="/en/?tech=kotlin#projects">Kotlin</a> <a class="project-tech__item" href="/en/?tech=jetpack-compose#projects">Jetpack Compose</a> <a class="project-tech__item" href="/en/?tech=material-3#projects">Material 3</a> <a class="project-tech__item" href="/en/?tech=retrofit#projects">Retrofit</a> <a class="project-tech__item" href="/en/?tech=gradle#projects">Gradle</a> <a class="project-tech__item" href="/en/?tech=raspberry-pi#projects">Raspberry Pi</a> <a class="project-tech__item" href="/en/?tech=z-wave#projects">Z-Wave</a> <a class="project-tech__item" href="/en/?tech=docker#projects">Docker</a> <a class="project-tech__item" href="/en/?tech=docker-compose#projects">Docker Compose</a> <a class="project-tech__item" href="/en/?tech=android-studio#projects">Android Studio</a> <a class="project-tech__item" href="/en/?tech=vs-code#projects">VS Code</a> <a class="project-tech__item" href="/en/?tech=git#projects">Git</a> <a class="project-tech__item" href="/en/?tech=github#projects">GitHub</a></p>
           </div>
         </section>
 

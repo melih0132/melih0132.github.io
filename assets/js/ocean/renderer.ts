@@ -15,6 +15,7 @@ import { SHARK_NODES, type Shark, type SharkKind, type World } from "./world.ts"
 
 const ALPHA_LEVELS = 6;
 const FISH_ALPHAS = [0.28, 0.42, 0.58, 0.74, 0.9];
+const FISH_GLYPHS = ["-", ">", "<", "~"];
 
 /** Adaptation: koi skins - beni, shiro, sumi, orange, kin. */
 const KOI_RGB: [number, number, number][] = [
@@ -56,6 +57,8 @@ export interface RendererOptions {
   bubble?: string;
   /** Adaptation: 5 koi fish RGB triples; falls back to KOI_RGB. */
   koiRgb?: [number, number, number][];
+  /** Adaptation: optional foreground overlay canvas (z-index above content) for closest bubbles & fish. */
+  fgCanvas?: HTMLCanvasElement;
 }
 
 // Sparse glyphs on bright skin, dense glyphs in shadow, so the texture
@@ -99,6 +102,22 @@ function carpHalfWidth(s: number) {
   if (s < 0.76) return 0.028 + 0.107 * Math.pow(1 - (s - 0.38) / 0.38, 1.05);
   const k = (s - 0.76) / 0.24;
   return 0.028 * (1 - k) + 0.05 * Math.sin(k * Math.PI);
+}
+
+/** Adaptation: side-profile koi body height (arched back, rounded belly, narrow peduncle + tall flowing caudal veil). */
+function carpSideHalfHeight(s: number, isUpper: boolean) {
+  if (isUpper) {
+    if (s < 0.14) return 0.116 * Math.pow(Math.sin(((s / 0.14) * Math.PI) / 2), 0.62);
+    if (s < 0.42) return 0.116 + 0.026 * smoothstep(0.14, 0.42, s);
+    if (s < 0.77) return 0.028 + 0.114 * Math.pow(1 - (s - 0.42) / 0.35, 1.18);
+    const k = (s - 0.77) / 0.23;
+    return 0.028 * (1 - k * 0.55) + 0.156 * Math.pow(Math.sin(k * Math.PI * 0.84), 0.82);
+  }
+  if (s < 0.14) return 0.098 * Math.pow(Math.sin(((s / 0.14) * Math.PI) / 2), 0.7);
+  if (s < 0.44) return 0.098 + 0.048 * smoothstep(0.14, 0.44, s);
+  if (s < 0.77) return 0.027 + 0.119 * Math.pow(1 - (s - 0.44) / 0.33, 1.14);
+  const k = (s - 0.77) / 0.23;
+  return 0.027 * (1 - k * 0.55) + 0.142 * Math.pow(Math.sin(k * Math.PI * 0.84), 0.82);
 }
 
 /** Body outline and fin layout per species. All values are fractions of length. */
@@ -341,6 +360,9 @@ export function paintGrid(g: CanvasRenderingContext2D, W: number, H: number, cw:
 
 export class AsciiRenderer {
   private ctx: CanvasRenderingContext2D;
+  private fgCanvas: HTMLCanvasElement | null = null;
+  private fgCtx: CanvasRenderingContext2D | null = null;
+  private fgHasContent = false;
   private bg: HTMLCanvasElement;
   private dpr = 1;
   private width = 0;
@@ -371,8 +393,26 @@ export class AsciiRenderer {
   private sharkKey = new Uint32Array(0);
   private sharkDepth = new Float32Array(0);
   private sharkKind = new Uint8Array(0);
-  /** Cells darkened by a shark's shadow on the seabed. */
-  private sharkShadow = new Uint8Array(0);
+  /** Cells darkened by a shark's depth-projected shadow on the seabed (0..1). */
+  private sharkShadow = new Float32Array(0);
+  /** Adaptation: smooth 3D camera parallax tilt driven by pointer (-1..1). */
+  private camX = 0;
+  private camY = 0;
+  /** Adaptation: 4-act camera POV weights derived from world.dive (0 top, 1/3 surface side, 2/3 pond bed, 1 bottom-up). */
+  private dive = 0;
+  private prevDive = 0;
+  private diveVel = 0;
+  private diveActivity = 0;
+  private surfaceY = 0;
+  private waterlineAlpha = 0;
+  private bedVis = 0;
+  private bedOffsetY = 0;
+  private topW = 1;
+  private sideW = 0;
+  private bedW = 0;
+  private profileW = 0;
+  private bottomW = 0;
+  private upSign = 1;
   private spine = new Float32Array(SHARK_NODES * 2);
   private arc = new Float32Array(SHARK_NODES);
   private arcTotal = 1;
@@ -389,6 +429,8 @@ export class AsciiRenderer {
 
   /** Cells holding a fish this frame (frame stamp); dots skip them. */
   private fishStamp = new Uint32Array(0);
+  /** Adaptation: per-cell fish glyph index (0:'-', 1:'>', 2:'<', 3:'~') for directional side-view schools. */
+  private fishGlyphs = new Uint8Array(0);
   private frameId = 0;
   /** Adaptation: fish cells bucketed by koi colour × brightness (one fillStyle each). */
   private fishBuckets: number[][] = Array.from(
@@ -413,6 +455,10 @@ export class AsciiRenderer {
     const ctx = canvas.getContext("2d", { alpha: this.transparent });
     if (!ctx) throw new Error("2D canvas unavailable");
     this.ctx = ctx;
+    if (options.fgCanvas) {
+      this.fgCanvas = options.fgCanvas;
+      this.fgCtx = options.fgCanvas.getContext("2d", { alpha: true });
+    }
     this.bg = document.createElement("canvas");
 
     for (let c = 0; c < DOT_RGB.length; c++) {
@@ -436,6 +482,11 @@ export class AsciiRenderer {
   clear() {
     this.ctx.setTransform(1, 0, 0, 1, 0, 0);
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (this.fgCtx && this.fgCanvas) {
+      this.fgCtx.setTransform(1, 0, 0, 1, 0, 0);
+      this.fgCtx.clearRect(0, 0, this.fgCanvas.width, this.fgCanvas.height);
+      this.fgHasContent = false;
+    }
   }
 
   setFontFamily(family: string) {
@@ -471,6 +522,11 @@ export class AsciiRenderer {
 
     this.canvas.width = Math.round(width * dpr);
     this.canvas.height = Math.round(height * dpr);
+    if (this.fgCanvas) {
+      this.fgCanvas.width = this.canvas.width;
+      this.fgCanvas.height = this.canvas.height;
+      this.fgHasContent = false;
+    }
     // Adaptation: the background buffer is only needed when the black fill is drawn.
     if (!this.transparent) {
       this.bg.width = this.canvas.width;
@@ -492,8 +548,9 @@ export class AsciiRenderer {
       this.sharkKey = new Uint32Array(n);
       this.sharkDepth = new Float32Array(n);
       this.sharkKind = new Uint8Array(n);
-      this.sharkShadow = new Uint8Array(n);
+      this.sharkShadow = new Float32Array(n);
       this.fishStamp = new Uint32Array(n);
+      this.fishGlyphs = new Uint8Array(n);
     }
 
     for (let i = 0; i < n; i++) {
@@ -520,9 +577,47 @@ export class AsciiRenderer {
   }
 
   render(world: World, dt: number) {
-    const { ctx, dpr, cols, ch } = this;
+    const { ctx, dpr, cols, ch, width: W, height: H } = this;
     if (cols === 0) return;
     const t = world.time;
+
+    // Adaptation: gentle 3D camera parallax tracking pointer on desktop.
+    const targetCamX = world.pointer.active && W > 0 ? clamp((world.pointer.x / W - 0.5) * 2, -1, 1) : 0;
+    const targetCamY = world.pointer.active && H > 0 ? clamp((world.pointer.y / H - 0.5) * 2, -1, 1) : 0;
+    const camEase = Math.min(1, dt * 2.4);
+    this.camX += (targetCamX - this.camX) * camEase;
+    this.camY += (targetCamY - this.camY) * camEase;
+
+    // Adaptation: 4-act POV weights:
+    // 0.00 = Hero (top-down over pond)
+    // 0.33 = Projects (upper water column side-view beneath top waterline)
+    // 0.67 = About (deep pond-bed side-view with rocky floor & swaying Sumi-e reeds)
+    // 1.00 = Contact (bottom-up looking straight up into Snell's Window)
+    const nextDive = clamp(world.dive, 0, 1);
+    const safeDt = Math.max(0.008, dt);
+    const rawVel = clamp((nextDive - this.prevDive) / safeDt, -2.4, 2.4);
+    this.prevDive = nextDive;
+    this.dive = nextDive;
+    this.diveVel += (rawVel - this.diveVel) * Math.min(1, safeDt * 6.5);
+    const targetAct = clamp(Math.abs(this.diveVel) * 1.45, 0, 1);
+    this.diveActivity += (targetAct - this.diveActivity) * Math.min(1, safeDt * (targetAct > this.diveActivity ? 8 : 3.2));
+
+    this.topW = clamp(1 - this.dive * 3, 0, 1);
+    this.sideW = clamp(1 - Math.abs(this.dive - 1 / 3) * 3, 0, 1);
+    this.bedW = clamp(1 - Math.abs(this.dive - 2 / 3) * 3, 0, 1);
+    this.bottomW = clamp((this.dive - 2 / 3) * 3, 0, 1);
+    this.profileW = clamp(this.sideW + this.bedW, 0, 1);
+
+    const restSurfaceY = Math.max(66, Math.min(H * 0.105, 76));
+    const subSweep = smoothstep(0.012, 0.31, this.dive);
+    const deepExit = smoothstep(0.37, 0.54, this.dive);
+    this.surfaceY = H * 0.98 + (restSurfaceY - H * 0.98) * subSweep - deepExit * 34;
+    this.waterlineAlpha = smoothstep(0.01, 0.055, this.dive) * (1 - deepExit);
+
+    const bedEnter = smoothstep(0.41, 0.65, this.dive);
+    const bedExit = smoothstep(0.71, 0.92, this.dive);
+    this.bedVis = bedEnter * (1 - bedExit);
+    this.bedOffsetY = (1 - bedEnter) * H * 0.24 + bedExit * H * 0.28;
 
     this.consumeEvents(world);
     this.rasterizeSharks(world.sharks, t);
@@ -536,16 +631,23 @@ export class AsciiRenderer {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     this.markFish(world);
-    this.drawDots(t);
+
+    this.drawAtmosphere(t);
 
     ctx.font = `600 ${Math.round(ch * 0.74)}px ${this.fontFamily}`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
+    this.drawFloorCausticsAndShadows(t);
+    this.drawDots(t);
+
     this.drawHeat();
     this.drawLures(world, t);
+    this.drawPondBedAndReeds(world, t);
     this.drawFish();
     this.drawSharks(t);
+    this.drawWaterline(t);
+    this.drawForeground(world, t);
   }
 
   // ── simulation → field ──────────────────────────────────────────────
@@ -578,6 +680,8 @@ export class AsciiRenderer {
         this.stamp(this.energy, e.x, e.y, 3, 0.9);
       } else if (e.kind === "lure") {
         this.stamp(this.energy, e.x, e.y, 4, 0.95);
+      } else if (e.kind === "surface") {
+        this.stamp(this.energy, e.x, e.y, 4, 0.85);
       } else {
         this.stamp(this.energy, e.x, e.y, 6, 1.4);
       }
@@ -590,13 +694,16 @@ export class AsciiRenderer {
     for (const f of world.fish) {
       if (!f.alive) continue;
       const i = this.cellIndex(f.x, f.y);
-      if (i >= 0) energy[i] = Math.min(1.6, energy[i] + 0.012 + f.alarm * 0.03);
+      if (i >= 0) energy[i] = Math.min(1.6, energy[i] + (0.012 + f.alarm * 0.03) * f.depth);
     }
     for (const sh of world.sharks) {
-      // The tail sweeps the most water.
+      // Surface koi disturb the water much more than deep koi.
+      const surfaceWeight = 0.22 + 0.95 * sh.depth;
+      const pxOff = this.camX * (sh.depth - 0.5) * 34;
+      const pyOff = this.camY * (sh.depth - 0.5) * 22;
       for (let k = SHARK_NODES - 6; k < SHARK_NODES; k++) {
-        const i = this.cellIndex(sh.nodes[k * 2], sh.nodes[k * 2 + 1]);
-        if (i >= 0) energy[i] = Math.min(1.6, energy[i] + 0.05 + sh.speed * 0.0012);
+        const i = this.cellIndex(sh.nodes[k * 2] + pxOff, sh.nodes[k * 2 + 1] + pyOff);
+        if (i >= 0) energy[i] = Math.min(1.6, energy[i] + (0.05 + sh.speed * 0.0012) * surfaceWeight);
       }
     }
     if (world.pointer.active) {
@@ -663,19 +770,26 @@ export class AsciiRenderer {
     const s = bestS;
     const u = s * L;
     const shape = this.shape;
-    const w = shape.halfWidth(s) * L;
+    const isKoiShape = shape === SHAPES.kohaku || shape === SHAPES.showa || shape === SHAPES.ogon;
+    const sideW = isKoiShape ? this.sideW : 0;
+    const bedW = isKoiShape ? this.bedW : 0;
+    const profileW = isKoiShape ? this.profileW : 0;
+    const bottomW = isKoiShape ? this.bottomW : 0;
+    const topW = isKoiShape ? this.topW : 1;
+    const isUpper = bestSign === this.upSign;
+
+    const planHalfW = shape.halfWidth(s) * L;
+    const sideHalfW = profileW > 0.01 ? carpSideHalfHeight(s, isUpper) * L : planHalfW;
+    const w = planHalfW * (1 - profileW) + sideHalfW * profileW;
     this.hitDist = a;
     this.hitS = s;
     this.hitV = a * bestSign;
 
     const head = this.shape.head;
     if (head && u < L * (head.sweep + head.depth + head.notch)) {
-      // Cephalofoil: a wide wing across the snout, its tips swept back toward the eyes,
-      // and on a great hammerhead a shallow notch in the middle of the front edge.
       const span = L * head.span;
       const r = a / span;
       const front = L * head.sweep * r * r + L * head.notch * Math.max(0, 1 - r / 0.14);
-      // Full depth almost to the tips, so the wing reads as a solid bar rather than a thin line.
       const depth = L * head.depth * (1 - 0.2 * r * r * r * r);
       if (r <= 1 && u >= front && u <= front + depth) {
         this.hitFlag = r > 0.84 ? FLAG_EYE : FLAG_BODY;
@@ -686,61 +800,116 @@ export class AsciiRenderer {
 
     if (a <= w) {
       const across = a / (w || 1);
-      // Rounded back lit from the top-left; flanks fall off into shadow.
+      // Lighting adapts to the 4 camera POVs:
+      // - Top (Hero): rounded back lit from top-left
+      // - Side (Projects): bright surface light from above
+      // - Pond Bed (About): deeper moody ambient light with soft golden rim along back & gentle floor bounce
+      // - Bottom (Contact): backlit silhouette (dark center belly, bright warm sunlit outer rim)
       const facing = (bestNx * -0.6 + bestNy * -0.8) * across;
-      let shade = 0.58 - across * across * 0.42 + facing * 0.26;
+      const topShade = 0.58 - across * across * 0.42 + facing * 0.26;
+      const sideShade = isUpper
+        ? 0.74 + (1 - across) * 0.22 - across * across * 0.14
+        : 0.45 - across * 0.28;
+      const bedShade = isUpper
+        ? 0.62 + (1 - across) * 0.18 - across * across * 0.18
+        : 0.34 + across * across * 0.16;
+      const bottomShade = 0.11 + across * across * 0.8;
+      let shade = topShade * topW + sideShade * sideW + bedShade * bedW + bottomShade * bottomW;
       let flag = FLAG_BODY;
-      if (s > shape.dorsal[0] && s < shape.dorsal[1] && across < 0.3) {
-        // First dorsal fin, catching the light.
+
+      if (topW > 0.45 && s > shape.dorsal[0] && s < shape.dorsal[1] && across < 0.3) {
         flag = FLAG_RIDGE;
         shade = 1;
-      } else if (s > shape.secondDorsal[0] && s < shape.secondDorsal[1] && across < 0.4) {
+      } else if (topW > 0.45 && s > shape.secondDorsal[0] && s < shape.secondDorsal[1] && across < 0.4) {
         shade = Math.max(shade, 0.82);
-      } else if (shape.eye && s > shape.eye[0] && s < shape.eye[1] && across > 0.6) {
+      } else if (profileW >= 0.45 && isUpper && s > 0.075 && s < 0.12 && across > 0.18 && across < 0.54) {
+        // Side-profile eye on the upper head.
         flag = FLAG_EYE;
         shade = 0;
-      } else if (s > shape.gills[0] && s < shape.gills[1] && across > 0.58) {
-        // Five gill slits.
+      } else if (profileW >= 0.45 && s > 0.165 && s < 0.205 && across < 0.74) {
+        // Subtle curved gill plate in side profile.
+        shade *= 0.58;
+      } else if (topW > 0.45 && shape.eye && s > shape.eye[0] && s < shape.eye[1] && across > 0.6) {
+        flag = FLAG_EYE;
+        shade = 0;
+      } else if (bottomW > 0.45 && shape.eye && s > shape.eye[0] && s < shape.eye[1] && across > 0.76) {
+        flag = FLAG_EYE;
+        shade = 0;
+      } else if (topW > 0.45 && s > shape.gills[0] && s < shape.gills[1] && across > 0.58) {
         if (Math.floor(((s - shape.gills[0]) / (shape.gills[1] - shape.gills[0])) * 5) % 2 === 0) shade *= 0.45;
-      } else if (s < 0.05) {
-        // Pale snout tip.
+      } else if (s < 0.05 && bottomW < 0.5) {
         shade = Math.max(shade, 0.7);
       } else if (shape === SHAPES.zebra && s > 0.08 && s < 0.55 && (across < 0.1 || Math.abs(across - 0.6) < 0.08)) {
-        // Zebra sharks carry pale ridges down the back.
         shade = Math.max(shade, 0.8);
       } else {
-        const patch = this.koiPatch(s, a * bestSign, L, across);
-        if (patch === 1) flag = FLAG_HI;
-        else if (patch === 2) flag = FLAG_MARK;
-        else if (this.marked(s, a * bestSign, L, across)) flag = FLAG_MARK;
+        // Koi markings: full across back in top view, upper back/flanks in side & pond-bed views, outer rim in bottom view.
+        const allowPatch =
+          topW >= 0.5 ||
+          (profileW >= 0.5 && (isUpper || across < 0.35)) ||
+          (bottomW >= 0.5 && across > 0.52);
+        if (allowPatch) {
+          const patch = this.koiPatch(s, a * bestSign, L, across);
+          if (patch === 1) flag = FLAG_HI;
+          else if (patch === 2) flag = FLAG_MARK;
+          else if (this.marked(s, a * bestSign, L, across)) flag = FLAG_MARK;
+        }
       }
       this.hitFlag = flag;
-      this.hitShade = shade;
+      this.hitShade = clamp(shade, 0, 1);
       return true;
     }
 
-    const tip = bestSign > 0 ? this.finTipRight : this.finTipLeft;
-    const [p0, p1, p2] = shape.pectoral;
-    if (
-      inTriangle(u, a, L * p0, 0, L * p1, 0, L * p2, tip) &&
-      // Falcate (sickle) fins get a concave trailing edge.
-      !(shape.falcate && inTriangle(u, a, L * p1, 0, L * (p1 + (p2 - p1) * 0.33), tip * 0.55, L * p2, tip))
-    ) {
-      const finPatch = this.koiPatch(s, a * bestSign, L, 0);
-      this.hitFlag =
-        finPatch === 1 ? FLAG_HI : finPatch === 2 || this.marked(s, a * bestSign, L, 0) ? FLAG_MARK : FLAG_FIN;
-      this.hitShade = 0.38 + 0.22 * (1 - clamp(a / tip, 0, 1));
-      return true;
+    // Side-profile fins (Projects & About): tall flowing dorsal fin rising above back + ventral pectoral/pelvic/anal fins.
+    if (profileW > 0.25) {
+      if (isUpper) {
+        const dorsalReach = w + L * 0.146 * profileW;
+        if (inTriangle(u, a, L * 0.27, w * 0.84, L * 0.68, w * 0.84, L * 0.56, dorsalReach)) {
+          this.hitFlag = a > dorsalReach * 0.8 ? FLAG_RIDGE : FLAG_FIN;
+          this.hitShade = 0.58 + 0.36 * clamp((a - w) / Math.max(1, dorsalReach - w), 0, 1);
+          return true;
+        }
+      } else {
+        const pecReach = w + L * 0.136 * profileW;
+        const pelvReach = w + L * 0.08 * profileW;
+        const analReach = w + L * 0.068 * profileW;
+        if (
+          inTriangle(u, a, L * 0.18, w * 0.78, L * 0.36, w * 0.82, L * 0.46, pecReach) ||
+          inTriangle(u, a, L * 0.47, w * 0.84, L * 0.59, w * 0.84, L * 0.63, pelvReach) ||
+          inTriangle(u, a, L * 0.67, w * 0.84, L * 0.77, w * 0.84, L * 0.8, analReach)
+        ) {
+          this.hitFlag = FLAG_FIN;
+          this.hitShade = 0.36 + 0.2 * (1 - clamp((a - w) / Math.max(1, pecReach - w), 0, 1));
+          return true;
+        }
+      }
     }
-    const [v0, v1, v2, vr] = shape.pelvic;
-    if (
-      inTriangle(u, a, L * v0, 0, L * v1, 0, L * v2, L * vr) ||
-      // Forked caudal fin.
-      (shape.caudal > 0 && inTriangle(u, a, L * 0.86, 0, L * 0.95, 0, L, L * shape.caudal))
-    ) {
-      this.hitFlag = FLAG_FIN;
-      this.hitShade = 0.36;
-      return true;
+
+    // Plan-view fins (top & bottom POVs): outstretched left/right pectorals, pelvics, forked caudal.
+    const planFactor = 1 - profileW;
+    if (planFactor > 0.15) {
+      const tip = (bestSign > 0 ? this.finTipRight : this.finTipLeft) * planFactor;
+      const [p0, p1, p2] = shape.pectoral;
+      if (
+        inTriangle(u, a, L * p0, 0, L * p1, 0, L * p2, tip) &&
+        !(shape.falcate && inTriangle(u, a, L * p1, 0, L * (p1 + (p2 - p1) * 0.33), tip * 0.55, L * p2, tip))
+      ) {
+        const finPatch = bottomW > 0.5 ? 0 : this.koiPatch(s, a * bestSign, L, 0);
+        this.hitFlag =
+          finPatch === 1 ? FLAG_HI : finPatch === 2 || this.marked(s, a * bestSign, L, 0) ? FLAG_MARK : FLAG_FIN;
+        this.hitShade = bottomW > 0.5
+          ? 0.64 + 0.34 * clamp(a / Math.max(1, tip), 0, 1)
+          : 0.38 + 0.22 * (1 - clamp(a / Math.max(1, tip), 0, 1));
+        return true;
+      }
+      const [v0, v1, v2, vr] = shape.pelvic;
+      if (
+        inTriangle(u, a, L * v0, 0, L * v1, 0, L * v2, L * vr * planFactor) ||
+        (shape.caudal > 0 && inTriangle(u, a, L * 0.86, 0, L * 0.95, 0, L, L * shape.caudal * planFactor))
+      ) {
+        this.hitFlag = FLAG_FIN;
+        this.hitShade = bottomW > 0.5 ? 0.74 : 0.36;
+        return true;
+      }
     }
     return false;
   }
@@ -814,8 +983,24 @@ export class AsciiRenderer {
     sharkFlag.fill(0);
     sharkShadow.fill(0);
 
-    for (const sh of sharks) {
-      const L = sh.length;
+    const visualDepthOf = (d: number) => {
+      const z = clamp(d, 0.18, 1);
+      // In bottom-up POV, deep koi (near the pond floor) are closest to the camera.
+      return z * (1 - this.bottomW) + clamp(1.22 - z, 0.2, 1) * this.bottomW;
+    };
+
+    // Adaptation: render farthest koi first so nearer koi visibly swim over them in all 3 POVs.
+    const ordered =
+      sharks.length > 1
+        ? sharks.slice().sort((a, b) => visualDepthOf(a.depth) - visualDepthOf(b.depth))
+        : sharks;
+    const floorOx = -this.camX * 16;
+    const floorOy = -this.camY * 11;
+
+    for (const sh of ordered) {
+      const z = visualDepthOf(sh.depth);
+      const depthScale = 0.72 + 0.34 * z;
+      const L = sh.length * depthScale;
       const N = SHARK_NODES;
       const n = sh.nodes;
       const swim = clamp(sh.speed / 60, 0.4, 1.4);
@@ -823,7 +1008,16 @@ export class AsciiRenderer {
       this.sharkId = sh.id;
       const kindIndex = KINDS.indexOf(sh.kind);
 
-      // Travelling body wave, growing toward the tail.
+      const pxOff = this.camX * (z - 0.5) * 34;
+      const pitchY = clamp(this.diveVel * 38, -28, 28);
+      const pyOff = this.camY * (z - 0.5) * 22 - pitchY * (0.35 + z * 0.95);
+      const midIdx = (N >> 1) * 2;
+      const midX = n[midIdx];
+      const midY = n[midIdx + 1];
+      // Side-profile undulation is gentler vertically since tail sweeps move toward/away from camera.
+      const waveScale = 1 - 0.58 * this.profileW;
+
+      // Travelling body wave, growing toward the tail, perspective-scaled by 3D depth.
       for (let k = 0; k < N; k++) {
         const s = k / (N - 1);
         const a = Math.max(0, k - 1);
@@ -833,11 +1027,16 @@ export class AsciiRenderer {
         const tl = Math.hypot(tx, ty) || 1;
         tx /= tl;
         ty /= tl;
-        const amp = L * 0.05 * (0.1 + 0.9 * Math.pow(s, 1.8)) * swim;
+        const amp = L * 0.05 * (0.1 + 0.9 * Math.pow(s, 1.8)) * swim * waveScale;
         const off = amp * Math.sin(sh.phase - s * 5.2);
-        spine[k * 2] = n[k * 2] - ty * off;
-        spine[k * 2 + 1] = n[k * 2 + 1] + tx * off;
+        const sx = midX + (n[k * 2] - midX) * depthScale + pxOff;
+        const sy = midY + (n[k * 2 + 1] - midY) * depthScale + pyOff;
+        spine[k * 2] = sx - ty * off;
+        spine[k * 2 + 1] = sy + tx * off;
       }
+      // Determine which normal side points upward toward the water surface for side-view fins.
+      this.upSign = spine[(N - 1) * 2] - spine[0] <= 0 ? 1 : -1;
+
       arc[0] = 0;
       for (let k = 1; k < N; k++) {
         arc[k] =
@@ -863,7 +1062,7 @@ export class AsciiRenderer {
         minY = Math.min(minY, spine[k * 2 + 1]);
         maxY = Math.max(maxY, spine[k * 2 + 1]);
       }
-      const reach = L * 0.36;
+      const reach = L * 0.38;
       const c0 = Math.max(0, Math.floor((minX - reach) / cw));
       const c1 = Math.min(cols - 1, Math.floor((maxX + reach) / cw));
       const r0 = Math.max(0, Math.floor((minY - reach) / ch));
@@ -871,8 +1070,13 @@ export class AsciiRenderer {
       if (c0 > c1 || r0 > r1) continue;
 
       const skipBeyond = reach + Math.hypot(cw, ch);
-      const shadowDc = Math.round((L * 0.035) / cw) + 1;
-      const shadowDr = Math.round((L * 0.02) / ch) + 1;
+      // Cast shadows only appear on the pond floor in top-down view (fade smoothly with topW).
+      const castShadows = this.topW > 0.06;
+      const altitude = 0.22 + 1.05 * z;
+      const shadowDc = Math.round((L * 0.115 * altitude + (floorOx - pxOff)) / cw);
+      const shadowDr = Math.round((L * 0.075 * altitude + (floorOy - pyOff)) / ch);
+      const shadowStrength = clamp(0.88 - z * 0.34, 0.46, 0.88) * this.topW;
+      const penumbra = shadowStrength * 0.48;
 
       for (let r = r0; r <= r1; r++) {
         for (let c = c0; c <= c1; c++) {
@@ -893,19 +1097,27 @@ export class AsciiRenderer {
           const coverage = hits / 5;
 
           const i = r * cols + c;
-          // Body-anchored key so each glyph rides along with the skin.
           const key = (hash3(Math.round(s * 52), Math.round(v / (cw * 0.9)), sh.id) * 4294967295) >>> 0;
           sharkKey[i] = key;
-          sharkDepth[i] = sh.depth;
+          sharkDepth[i] = z;
           sharkKind[i] = kindIndex;
 
           if (centerHit && coverage >= 0.6) {
             sharkFlag[i] = flag;
             const flicker = (hash3(c, r, Math.floor(t * 6)) - 0.5) * 0.06;
             sharkShade[i] = clamp(shade + flicker, 0, 1);
-            const sc = c + shadowDc;
-            const sr = r + shadowDr;
-            if (sc < cols && sr < rows) sharkShadow[sr * cols + sc] = 1;
+            if (castShadows) {
+              const sc = c + shadowDc;
+              const sr = r + shadowDr;
+              if (sc >= 0 && sc < cols && sr >= 0 && sr < rows) {
+                const si = sr * cols + sc;
+                if (shadowStrength > sharkShadow[si]) sharkShadow[si] = shadowStrength;
+                if (z > 0.55) {
+                  if (sc + 1 < cols && penumbra > sharkShadow[si + 1]) sharkShadow[si + 1] = penumbra;
+                  if (sr + 1 < rows && penumbra > sharkShadow[si + cols]) sharkShadow[si + cols] = penumbra;
+                }
+              }
+            }
           } else {
             sharkFlag[i] = FLAG_EDGE;
             sharkShade[i] = coverage;
@@ -947,7 +1159,9 @@ export class AsciiRenderer {
       const y = row * ch;
       const key = sharkKey[i];
       const shade = sharkShade[i];
-      const dim = 0.7 + 0.3 * sharkDepth[i];
+      const z = sharkDepth[i];
+      // Adaptation: underwater atmospheric light falloff (deep koi fade softly into dark ink).
+      const dim = 0.26 + 0.74 * Math.pow(z, 0.85);
       const kind = KINDS[sharkKind[i]];
       const [tr, tg, tb] = SHAPES[kind].tint;
       const isKoi = kind === "kohaku" || kind === "showa" || kind === "ogon";
@@ -965,15 +1179,16 @@ export class AsciiRenderer {
       }
 
       if (flag === FLAG_EDGE) {
-        // Soft, anti-aliased silhouette: no block, just a light glyph.
+        // Soft, anti-aliased silhouette; glows softly in warm backlit rim light when viewed from below.
         const set = shade >= 0.5 ? EDGE_HEAVY : EDGE_LIGHT;
         if (isKoi) {
-          const base = kind === "ogon" ? [200, 160, 55] : [220, 205, 180];
-          const g = (0.45 + shade * 0.55) * dim;
+          const base = kind === "ogon" ? [210, 170, 62] : [232, 214, 184];
+          const rimBoost = 1 + 0.56 * this.bottomW;
+          const g = Math.min(1.22, (0.45 + shade * 0.55) * dim * rimBoost);
           ctx.fillStyle =
-            roll < 0.1
+            roll < 0.1 + 0.2 * this.bottomW
               ? this.accents[key % this.accents.length]
-              : `rgb(${Math.round(base[0] * g)},${Math.round(base[1] * g)},${Math.round(base[2] * g)})`;
+              : `rgb(${Math.min(255, Math.round(base[0] * g))},${Math.min(255, Math.round(base[1] * g))},${Math.min(255, Math.round(base[2] * g))})`;
         } else {
           const g = (70 + shade * 80) * dim;
           ctx.fillStyle =
@@ -1006,7 +1221,8 @@ export class AsciiRenderer {
       }
       level *= dim;
 
-      // Adaptation: koi fill cells with cream / vermillion / sumi / gold instead of grey tint.
+      // Adaptation: koi fill cells with cream / vermillion / sumi / gold;
+      // in bottom-up POV (bottomW), darken belly center into a warm backlit silhouette with glowing flanks/fins.
       if (isKoi) {
         let fr: number;
         let fg: number;
@@ -1036,6 +1252,14 @@ export class AsciiRenderer {
           fg = 225 * lift * dim;
           fb = 205 * lift * dim;
         }
+        if (this.bottomW > 0.05) {
+          // Contre-jour: deep charcoal-ink belly center vs glowing sunlit rim & translucent outstretched fins.
+          const backlit = flag === FLAG_FIN ? 0.64 + shade * 0.38 : 0.15 + shade * 0.72;
+          const k = 1 - this.bottomW + this.bottomW * backlit;
+          fr *= k;
+          fg *= k;
+          fb *= k;
+        }
         ctx.fillStyle = `rgb(${Math.min(255, Math.round(fr))},${Math.min(255, Math.round(fg))},${Math.min(255, Math.round(fb))})`;
       } else {
         ctx.fillStyle = `rgb(${Math.min(255, Math.round(level * tr))},${Math.min(255, Math.round(level * tg))},${Math.min(255, Math.round(level * tb + 4))})`;
@@ -1044,7 +1268,8 @@ export class AsciiRenderer {
 
       let color: string;
       if (flag === FLAG_EYE) color = isKoi ? "#2a2218" : "#9aa0ad";
-      else if (flag === FLAG_HI) color = roll < 0.2 ? "#fff4e8" : "#6a1810";
+      else if (flag === FLAG_RIDGE && z > 0.76) color = roll < 0.45 ? "#fff6e5" : (this.accents[2] || "#d4a84b");
+      else if (flag === FLAG_HI) color = roll < 0.2 && z > 0.5 ? "#fff4e8" : "#6a1810";
       else if (flag === FLAG_MARK) {
         color =
           kind === "ogon"
@@ -1068,17 +1293,30 @@ export class AsciiRenderer {
    * fish claim a cell first when two land in the same one.
    */
   private markFish(world: World) {
-    const { fishStamp, fishBuckets, sharkFlag } = this;
+    const { fishStamp, fishGlyphs, fishBuckets, sharkFlag, camX, camY } = this;
+    const splitFg = !!(this.fgCtx && this.dive > 0.14);
+    const sideDir = this.profileW > 0.42;
+    const pitchY = clamp(this.diveVel * 38, -28, 28);
     const frame = ++this.frameId;
     for (const bucket of fishBuckets) bucket.length = 0;
     for (let pass = 0; pass < 2; pass++) {
       for (const f of world.fish) {
         if (!f.alive || (f.depth > 0.78 ? 0 : 1) !== pass) continue;
-        const i = this.cellIndex(f.x, f.y);
+        if (splitFg && f.depth > 0.89) continue;
+        const px = f.x + camX * (f.depth - 0.5) * 34;
+        const py = f.y + camY * (f.depth - 0.5) * 22 - pitchY * (0.35 + f.depth * 0.95);
+        const i = this.cellIndex(px, py);
         if (i < 0 || fishStamp[i] === frame || sharkFlag[i]) continue;
         fishStamp[i] = frame;
+        if (sideDir) {
+          if (Math.abs(f.turn) > 2.1) fishGlyphs[i] = 3;
+          else if (f.depth > 0.7) fishGlyphs[i] = f.vx >= 0 ? 1 : 2;
+          else fishGlyphs[i] = 0;
+        } else {
+          fishGlyphs[i] = 0;
+        }
         const glint = clamp(Math.abs(f.turn) / 3.5, 0, 1);
-        const v = 0.3 + (0.4 * (f.depth - 0.55)) / 0.45 + 0.3 * Math.max(glint, f.alarm);
+        const v = 0.24 + (0.46 * (f.depth - 0.55)) / 0.45 + 0.3 * Math.max(glint, f.alarm);
         const alpha = clamp(Math.floor(v * FISH_ALPHAS.length), 0, FISH_ALPHAS.length - 1);
         const color = clamp(f.color | 0, 0, KOI_COLOR_COUNT - 1);
         fishBuckets[color * FISH_ALPHAS.length + alpha].push(i);
@@ -1086,14 +1324,563 @@ export class AsciiRenderer {
     }
   }
 
+  /**
+   * Adaptation: optical water-column lighting strictly within the dark Sumi-e Koi palette:
+   * - Act 2 (Projects — Upper Side): soft surface luminance + delicate slanted sunbeams below waterline
+   * - Act 3 (About — Pond Bed): calm deep ambient ground glow rising subtly from the pond floor
+   * - Act 4 (Contact — Bottom-up): warm overhead Snell's Window glow surrounded by deep black water
+   */
+  private drawAtmosphere(t: number) {
+    const { ctx, width: W, height: H, sideW, bedVis, bedOffsetY, bottomW, surfaceY, waterlineAlpha, camX, camY } = this;
+    if (W <= 0 || H <= 0) return;
+
+    // Act 2: subtle underwater luminance & slanted volumetric shafts descending from the waterline.
+    const subStrength = Math.max(sideW, waterlineAlpha * (this.dive < 0.34 ? 0.85 : 0));
+    if (subStrength > 0.03) {
+      const sy = clamp(surfaceY, 0, H);
+      if (sy < H - 4) {
+        const bandH = Math.max(90, (H - sy) * 0.52);
+        const grad = ctx.createLinearGradient(0, sy, 0, sy + bandH);
+        grad.addColorStop(0, `rgba(226,202,154,${(0.062 * subStrength).toFixed(4)})`);
+        grad.addColorStop(0.32, `rgba(212,184,132,${(0.022 * subStrength).toFixed(4)})`);
+        grad.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, sy, W, bandH);
+
+        if (sideW > 0.08) {
+          const beamCount = W < 640 ? 3 : 4;
+          const beamDepth = Math.min(H - sy, H * 0.74);
+          for (let k = 0; k < beamCount; k++) {
+            const u = (k + 0.5) / beamCount;
+            const sway = Math.sin(t * 0.24 + k * 2.1) * W * 0.035;
+            const topX = W * (0.14 + u * 0.72) + sway - camX * 18;
+            const topW = Math.max(26, W * (0.045 + (k % 2) * 0.018));
+            const slant = beamDepth * 0.24;
+            const botW = topW * 1.9;
+            const alpha = (0.028 + 0.01 * Math.sin(t * 0.42 + k * 1.7)) * sideW;
+            const bGrad = ctx.createLinearGradient(topX, sy, topX - slant * 0.6, sy + beamDepth);
+            bGrad.addColorStop(0, `rgba(232,208,162,${alpha.toFixed(4)})`);
+            bGrad.addColorStop(0.55, `rgba(214,186,136,${(alpha * 0.42).toFixed(4)})`);
+            bGrad.addColorStop(1, "rgba(0,0,0,0)");
+            ctx.fillStyle = bGrad;
+            ctx.beginPath();
+            ctx.moveTo(topX - topW * 0.5, sy);
+            ctx.lineTo(topX + topW * 0.5, sy);
+            ctx.lineTo(topX - slant + botW * 0.5, sy + beamDepth);
+            ctx.lineTo(topX - slant - botW * 0.5, sy + beamDepth);
+            ctx.closePath();
+            ctx.fill();
+          }
+        }
+      }
+    }
+
+    // Act 3: Deep pond-bed mood — quiet warm ground luminance rising softly from the sandy/stone bed.
+    if (bedVis > 0.02) {
+      const floorTop = clamp(H * 0.68 + bedOffsetY, 0, H);
+      if (floorTop < H - 4) {
+        const g = ctx.createLinearGradient(0, H, 0, floorTop);
+        g.addColorStop(0, `rgba(196,166,118,${(0.068 * bedVis).toFixed(4)})`);
+        g.addColorStop(0.42, `rgba(168,140,98,${(0.028 * bedVis).toFixed(4)})`);
+        g.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = g;
+        ctx.fillRect(0, floorTop, W, H - floorTop);
+      }
+    }
+
+    // Act 4: Snell's Window — warm sunlit wide elliptical aperture overhead framing #contact.
+    if (bottomW > 0.03) {
+      const cx = W * 0.5 - camX * 28;
+      const cy = H * 0.27 - camY * 18;
+      const rx = Math.min(W * 0.58, Math.max(W * 0.44, Math.min(W, H) * (0.42 + 0.24 * bottomW)));
+      const ry = rx * 0.62;
+      const pulse = 1 + 0.03 * Math.sin(t * 0.75);
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.scale(1, ry / Math.max(1, rx));
+      const r = rx * pulse;
+      const g = ctx.createRadialGradient(0, 0, r * 0.08, 0, 0, r);
+      g.addColorStop(0, `rgba(236,212,164,${(0.095 * bottomW).toFixed(4)})`);
+      g.addColorStop(0.55, `rgba(216,184,126,${(0.048 * bottomW).toFixed(4)})`);
+      g.addColorStop(0.86, `rgba(232,206,158,${(0.026 * bottomW).toFixed(4)})`);
+      g.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(0, 0, r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  /**
+   * Adaptation: Act 3 (About — Deep Pond Bed) sculpted ASCII floor, cast koi ground shadows,
+   * swaying Sumi-e aquatic reeds along the left/right margins, and calm drifting sediment motes.
+   */
+  private drawPondBedAndReeds(world: World, t: number) {
+    const { ctx, cols, rows, cw, ch, width: W, height: H, bedVis, bedOffsetY, camX, camY, sharkFlag } = this;
+    if (bedVis <= 0.015 || cols === 0 || rows === 0) return;
+
+    const compact = W < 640;
+    const baseFloorY = H * (compact ? 0.9 : 0.87) + bedOffsetY - camY * 14;
+    const floorRowAt = (c: number) => {
+      const undul =
+        Math.sin(c * 0.085 + 0.6) * ch * 1.15 +
+        Math.sin(c * 0.21 - 1.2) * ch * 0.55;
+      return Math.floor((baseFloorY + undul) / ch);
+    };
+
+    // 1. Undulating sandy/stone pond-bed contour & quiet ink pebble texture.
+    const contourGlyphs = ["_", "_", "-", "~", "_", "."];
+    for (let c = 0; c < cols; c++) {
+      const r0 = floorRowAt(c);
+      if (r0 >= rows) continue;
+      if (r0 >= 0) {
+        const gIdx = Math.abs(c + Math.floor(Math.sin(c * 0.19) * 3)) % contourGlyphs.length;
+        ctx.fillStyle = `rgba(206,180,134,${(0.36 * bedVis).toFixed(3)})`;
+        ctx.fillText(contourGlyphs[gIdx], c * cw + cw / 2, r0 * ch + ch / 2 + 1);
+      }
+      const startR = Math.max(0, r0 + 1);
+      for (let r = startR; r < rows; r++) {
+        const roll = hash3(c, r, 91);
+        if (roll > 0.34) continue;
+        const depthK = clamp((r - r0) / 5, 0, 1);
+        const alpha = (0.14 + 0.1 * (1 - depthK)) * bedVis;
+        ctx.fillStyle = roll < 0.055
+          ? `rgba(218,192,144,${(alpha * 1.15).toFixed(3)})`
+          : `rgba(164,142,106,${alpha.toFixed(3)})`;
+        const glyph = roll < 0.03 ? "o" : roll < 0.11 ? "," : roll < 0.2 ? ":" : "·";
+        ctx.fillText(glyph, c * cw + cw / 2, r * ch + ch / 2 + 1);
+      }
+    }
+
+    // 2. Soft ground shadows projected straight down onto the pond bed beneath each koi.
+    for (const sh of world.sharks) {
+      let minX = Infinity;
+      let maxX = -Infinity;
+      let avgY = 0;
+      for (let k = 0; k < SHARK_NODES; k++) {
+        const x = sh.nodes[k * 2];
+        const y = sh.nodes[k * 2 + 1];
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        avgY += y;
+      }
+      avgY /= SHARK_NODES;
+      const heightAbove = clamp((baseFloorY - avgY) / Math.max(1, H * 0.72), 0, 1);
+      const proximity = 1 - heightAbove * 0.68;
+      if (proximity <= 0.1) continue;
+      const cStart = clamp(Math.floor(minX / cw), 0, cols - 1);
+      const cEnd = clamp(Math.floor(maxX / cw), 0, cols - 1);
+      const span = Math.max(1, cEnd - cStart);
+      for (let c = cStart; c <= cEnd; c++) {
+        const u = (c - cStart) / span;
+        const arch = Math.sin(u * Math.PI);
+        const r = floorRowAt(c) + 1;
+        if (r < 0 || r >= rows) continue;
+        const a = (0.42 * arch * proximity * bedVis).toFixed(3);
+        ctx.fillStyle = `rgba(0,0,0,${a})`;
+        ctx.fillRect(c * cw, r * ch, cw, ch);
+        if (arch > 0.35) {
+          ctx.fillStyle = `rgba(112,96,74,${(0.24 * arch * proximity * bedVis).toFixed(3)})`;
+          ctx.fillText(":", c * cw + cw / 2, r * ch + ch / 2 + 1);
+        }
+      }
+    }
+
+    // 3. Delicate swaying Sumi-e aquatic reeds rooted along left & right pond margins (clear of #about center frame).
+    const stalks = compact
+      ? [
+          { xFrac: 0.03, h: 6, seed: 1.1 },
+          { xFrac: 0.075, h: 4, seed: 2.7 },
+          { xFrac: 0.925, h: 5, seed: 4.3 },
+          { xFrac: 0.97, h: 7, seed: 5.8 },
+        ]
+      : [
+          { xFrac: 0.025, h: 16, seed: 0.7 },
+          { xFrac: 0.055, h: 11, seed: 1.9 },
+          { xFrac: 0.088, h: 14, seed: 3.1 },
+          { xFrac: 0.12, h: 8, seed: 4.4 },
+          { xFrac: 0.15, h: 6, seed: 5.2 },
+          { xFrac: 0.85, h: 7, seed: 2.3 },
+          { xFrac: 0.885, h: 12, seed: 3.8 },
+          { xFrac: 0.915, h: 17, seed: 0.4 },
+          { xFrac: 0.948, h: 10, seed: 5.5 },
+          { xFrac: 0.975, h: 15, seed: 1.5 },
+        ];
+    const reedAmp = compact ? 0.55 : 1;
+    for (const st of stalks) {
+      const baseCol = Math.floor(st.xFrac * cols);
+      const rootRow = floorRowAt(baseCol);
+      let prevSway = 0;
+      for (let k = 0; k < st.h; k++) {
+        const frac = (k + 1) / st.h;
+        const sway =
+          Math.pow(frac, 1.45) *
+          (2.1 * Math.sin(t * 0.82 + st.seed + frac * 1.7) + 0.55 * camX);
+        const dx = sway - prevSway;
+        prevSway = sway;
+        const c = Math.round(baseCol + sway);
+        const r = rootRow - k;
+        if (c < 0 || c >= cols || r < 4 || r >= rows) continue;
+        if (sharkFlag[r * cols + c]) continue;
+        const alpha = (0.32 - 0.14 * frac) * bedVis * reedAmp;
+        ctx.fillStyle = k === st.h - 1
+          ? `rgba(224,200,154,${(alpha * 1.1).toFixed(3)})`
+          : `rgba(182,158,118,${alpha.toFixed(3)})`;
+        let glyph = "|";
+        if (k === st.h - 1) glyph = dx >= 0 ? "," : "'";
+        else if (dx > 0.18) glyph = "/";
+        else if (dx > 0.08) glyph = ")";
+        else if (dx < -0.18) glyph = "\\";
+        else if (dx < -0.08) glyph = "(";
+        ctx.fillText(glyph, c * cw + cw / 2, r * ch + ch / 2 + 1);
+      }
+    }
+
+    // 4. Slow horizontally-drifting deep-water sediment motes suspended lazily above the pond bed.
+    const moteCount = compact ? 14 : 24;
+    ctx.fillStyle = this.bubble;
+    for (let m = 0; m < moteCount; m++) {
+      const seedY = 0.22 + hash3(m, 53, 9) * 0.64;
+      const speedX = 0.45 + hash3(m, 67, 15) * 0.75;
+      const phaseX = hash3(m, 83, 21) * cols;
+      const mc = Math.floor((t * speedX + phaseX + camX * 2) % cols);
+      const bob = Math.sin(t * 0.7 + m * 1.7) * 0.8;
+      const mr = Math.floor(seedY * rows + bob);
+      if (mc < 0 || mc >= cols || mr < 4 || mr >= rows) continue;
+      if (mr >= floorRowAt(mc)) continue;
+      if (sharkFlag[mr * cols + mc]) continue;
+      ctx.globalAlpha = bedVis * (compact ? 0.16 : 0.24) * (0.65 + 0.35 * Math.sin(t * 1.2 + m));
+      ctx.fillText(m % 4 === 0 ? "." : "·", mc * cw + cw / 2, mr * ch + ch / 2 + 1);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  /**
+   * Adaptation: undulating ASCII water meniscus that physically sweeps upward across the screen
+   * as you submerge from Hero → Projets, then rests calmly beneath the sticky header as a
+   * shimmering underwater ceiling horizon.
+   */
+  private drawWaterline(t: number) {
+    const { ctx, cols, rows, cw, ch, surfaceY, waterlineAlpha, diveActivity } = this;
+    if (waterlineAlpha <= 0.015 || cols === 0 || rows === 0) return;
+
+    const crossingBoost = this.dive < 0.31 ? 1 : 0;
+    const compactDamp = this.width < 640 && !crossingBoost ? 0.68 : 1;
+    const waveAmp = (4.2 + 4.4 * diveActivity * crossingBoost) * (ch / 15);
+    const crestAlpha = waterlineAlpha * compactDamp * (0.24 + 0.28 * crossingBoost + 0.16 * diveActivity);
+    const sprayAlpha = waterlineAlpha * compactDamp * (0.1 + 0.15 * crossingBoost + 0.1 * diveActivity);
+    const glyphs = ["~", "≈", "~", "-", "≈", "~"];
+
+    ctx.fillStyle = `rgba(238,218,178,${clamp(crestAlpha, 0, 0.72).toFixed(3)})`;
+    for (let c = 0; c < cols; c++) {
+      const wave =
+        Math.sin(c * 0.23 + t * 1.55) * waveAmp +
+        Math.sin(c * 0.1 - t * 0.95) * (waveAmp * 0.58);
+      const y = surfaceY + wave;
+      const r = Math.floor(y / ch);
+      if (r < 0 || r >= rows) continue;
+      const glyphIdx = Math.abs(Math.floor(c * 0.5 + t * 1.4)) % glyphs.length;
+      ctx.fillText(glyphs[glyphIdx], c * cw + cw / 2, r * ch + ch / 2 + 1);
+    }
+
+    ctx.fillStyle = `rgba(216,188,136,${clamp(sprayAlpha, 0, 0.42).toFixed(3)})`;
+    for (let c = 0; c < cols; c += 2) {
+      const wave =
+        Math.sin(c * 0.23 + t * 1.55) * waveAmp +
+        Math.sin(c * 0.1 - t * 0.95) * (waveAmp * 0.58);
+      const r = Math.floor((surfaceY + wave) / ch) + 1;
+      if (r < 0 || r >= rows) continue;
+      const shimmer = hash3(c, r, Math.floor(t * 4));
+      if (shimmer > 0.62) continue;
+      ctx.fillText(shimmer < 0.22 ? "°" : "·", c * cw + cw / 2, r * ch + ch / 2 + 1);
+    }
+  }
+
+  /**
+   * Adaptation: 3-act underwater atmosphere:
+   * - Top (Hero): pond floor caustics + depth-projected cast shadows beneath every koi
+   * - Side (Projects): slanted underwater sunbeams + calmly rising bubbles below the waterline
+   * - Bottom (About/Contact): Snell's Window sunlit overhead surface ripples seen from below
+   */
+  private drawFloorCausticsAndShadows(t: number) {
+    const {
+      ctx, cols, rows, cw, ch, width: W, height: H,
+      sharkFlag, sharkShadow, fishStamp, frameId,
+      camX, camY, topW, sideW, bottomW, surfaceY, waterlineAlpha,
+    } = this;
+    const shiftC = (-camX * 16) / cw;
+    const shiftR = (-camY * 11) / ch;
+
+    const causticLow: number[] = [];
+    const causticHigh: number[] = [];
+    const rayCells: number[] = [];
+    const shadowSoft: number[] = [];
+    const shadowDeep: number[] = [];
+
+    const crossing = waterlineAlpha > 0.04 && this.dive < 0.32;
+    const snellCx = (W * 0.5 - camX * 28) / cw;
+    const snellCy = (H * 0.27 - camY * 18) / ch;
+    const snellRx = Math.max(8, Math.min(W * 0.58, Math.max(W * 0.44, Math.min(W, H) * (0.42 + 0.24 * bottomW))) / cw);
+    const snellRy = Math.max(6, (snellRx * cw * 0.62) / ch);
+
+    const causticStrength = Math.max(topW, bottomW * 1.35);
+    const subRayStrength = Math.max(sideW, crossing ? 0.55 : 0);
+
+    for (let r = 0; r < rows; r++) {
+      const rr = r - shiftR;
+      const cellY = r * ch + ch * 0.5;
+      const belowWater = !crossing || cellY > surfaceY + ch * 0.5;
+      const aboveWater = !crossing || cellY < surfaceY - ch * 0.4;
+      const depthFade = clamp(1 - (cellY - (crossing ? surfaceY : 0)) / Math.max(1, H - (crossing ? surfaceY : 0)), 0, 1);
+
+      for (let c = 0; c < cols; c++) {
+        const i = r * cols + c;
+        if (sharkFlag[i]) continue;
+
+        if (topW > 0.06 && aboveWater) {
+          const sh = sharkShadow[i];
+          if (sh > 0.05) {
+            if (sh >= 0.62) shadowDeep.push(i);
+            else shadowSoft.push(i);
+            continue;
+          }
+        }
+
+        if (fishStamp[i] === frameId) continue;
+        const cc = c - shiftC;
+
+        // Act 1 (pond floor above waterline) & Act 3 (Snell's Window sunlit overhead ripples).
+        if (causticStrength > 0.06) {
+          let allow = true;
+          let snellBoost = 1;
+          if (bottomW > 0.35) {
+            const dx = (c - snellCx) / snellRx;
+            const dy = (r - snellCy) / snellRy;
+            const dist2 = dx * dx + dy * dy;
+            if (dist2 > 1.18) {
+              allow = false;
+            } else {
+              snellBoost = 1 - smoothstep(0.68, 1.18, dist2);
+            }
+          } else if (!aboveWater) {
+            allow = false;
+          }
+
+          if (allow && snellBoost > 0.12) {
+            const speed = bottomW > 0.4 ? 0.74 : 0.52;
+            const w1 = Math.sin(cc * 0.22 + rr * 0.14 + t * speed);
+            const w2 = Math.sin(cc * 0.13 - rr * 0.27 - t * (speed * 0.74));
+            const w3 = Math.sin((cc + rr) * 0.09 + t * 0.24);
+            const band = (w1 * w2 + 1) * 0.5 * (0.72 + 0.28 * w3) * (bottomW > 0.35 ? 0.85 + 0.22 * snellBoost : 1);
+            const hiThresh = bottomW > 0.4 ? 0.8 : 0.86;
+            const loThresh = bottomW > 0.4 ? 0.7 : 0.77;
+            if (band > hiThresh) {
+              causticHigh.push(i);
+            } else if (band > loThresh && ((c + r) & 1) === 0) {
+              causticLow.push(i);
+            }
+          }
+        }
+
+        // Act 2 (inside water / side POV): delicate slanted light flecks descending below the waterline.
+        if (subRayStrength > 0.12 && belowWater && depthFade > 0.2 && ((c + r) & 1) === 0) {
+          const ray = Math.sin((cc * 0.16 - rr * 0.09) + t * 0.26) * Math.sin((cc * 0.07 - rr * 0.04) - t * 0.15);
+          if (ray * depthFade > 0.44) {
+            rayCells.push(i);
+          }
+        }
+      }
+    }
+
+    if (causticLow.length && causticStrength > 0.06) {
+      const a = (0.095 * topW + 0.175 * bottomW).toFixed(3);
+      ctx.fillStyle = `rgba(198,172,124,${a})`;
+      for (let k = 0; k < causticLow.length; k++) {
+        const i = causticLow[k];
+        ctx.fillText("·", (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
+      }
+    }
+    if (causticHigh.length && causticStrength > 0.06) {
+      const a = (0.175 * topW + 0.31 * bottomW).toFixed(3);
+      ctx.fillStyle = `rgba(236,212,166,${a})`;
+      for (let k = 0; k < causticHigh.length; k++) {
+        const i = causticHigh[k];
+        const glyph = bottomW > 0.45 ? ((i % 7) === 0 ? "≈" : (i % 3) === 0 ? "~" : ",") : (i % 3) === 0 ? "," : "·";
+        ctx.fillText(glyph, (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
+      }
+    }
+    if (rayCells.length && subRayStrength > 0.12) {
+      const a = (0.145 * subRayStrength).toFixed(3);
+      ctx.fillStyle = `rgba(226,200,152,${a})`;
+      for (let k = 0; k < rayCells.length; k++) {
+        const i = rayCells[k];
+        ctx.fillText((i % 3) === 0 ? "/" : "·", (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
+      }
+    }
+
+    // Rising ambient bubbles across submerged acts (livelier near surface & during POV transitions, quieter on the pond bed).
+    const bubbleVis = clamp(sideW * 0.92 + this.bedW * 0.32 + bottomW * 0.68 + this.diveActivity * 0.45, 0, 1);
+    if (bubbleVis > 0.08 && cols > 8 && rows > 6) {
+      const count = 24 + Math.round(this.diveActivity * 10);
+      const minBubbleY = crossing ? surfaceY + ch : ch * 2;
+      ctx.fillStyle = this.bubble;
+      for (let b = 0; b < count; b++) {
+        const seedX = hash3(b, 11, 3);
+        const speed = 1.4 + hash3(b, 29, 7) * 2.2;
+        const phase = hash3(b, 43, 13) * rows;
+        const rawRow = rows - ((t * speed + phase) % rows);
+        const br = Math.floor(rawRow);
+        const by = br * ch + ch / 2 + 1;
+        if (by < minBubbleY) continue;
+        const sway = Math.sin(t * 1.1 + b * 1.9) * 1.4;
+        const bc = Math.floor(seedX * cols + sway + shiftC * 0.4);
+        if (bc < 0 || bc >= cols || br < 0 || br >= rows) continue;
+        const bi = br * cols + bc;
+        if (sharkFlag[bi]) continue;
+        const edgeFade = Math.min(1, (by - minBubbleY) / 32, (rows - br) / 3);
+        ctx.globalAlpha = bubbleVis * edgeFade * (0.22 + (b % 3) * 0.09);
+        ctx.fillText(b % 3 === 0 ? "°" : "·", bc * cw + cw / 2, by);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    if (shadowSoft.length && topW > 0.06) {
+      ctx.fillStyle = `rgba(0,0,0,${(0.52 * topW).toFixed(3)})`;
+      for (let k = 0; k < shadowSoft.length; k++) {
+        const i = shadowSoft[k];
+        ctx.fillRect((i % cols) * cw, ((i / cols) | 0) * ch, cw, ch);
+      }
+      ctx.fillStyle = `rgba(130,114,92,${(0.14 * topW).toFixed(3)})`;
+      for (let k = 0; k < shadowSoft.length; k++) {
+        const i = shadowSoft[k];
+        ctx.fillText("·", (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
+      }
+    }
+    if (shadowDeep.length && topW > 0.06) {
+      ctx.fillStyle = `rgba(0,0,0,${(0.82 * topW).toFixed(3)})`;
+      for (let k = 0; k < shadowDeep.length; k++) {
+        const i = shadowDeep[k];
+        ctx.fillRect((i % cols) * cw, ((i / cols) | 0) * ch, cw, ch);
+      }
+      ctx.fillStyle = `rgba(116,100,80,${(0.22 * topW).toFixed(3)})`;
+      for (let k = 0; k < shadowDeep.length; k++) {
+        const i = shadowDeep[k];
+        ctx.fillText(":", (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
+      }
+    }
+  }
+
+  /**
+   * Adaptation: lightweight foreground aquatic layer passing IN FRONT of submerged UI cards
+   * (closest directional fish + rising micro-bubbles + subtle meniscus spray when crossing POVs,
+   * always skipping the top sticky header band).
+   */
+  private drawForeground(world: World, t: number) {
+    const g = this.fgCtx;
+    const canvas = this.fgCanvas;
+    if (!g || !canvas) return;
+
+    const fgAlpha = clamp((this.dive - 0.1) / 0.22, 0, 1);
+    const crossingMeniscus = this.dive > 0.018 && this.dive < 0.31 ? this.waterlineAlpha * (0.35 + 0.65 * this.diveActivity) : 0;
+    const transBubbles = this.diveActivity > 0.08 && this.dive > 0.02 ? this.diveActivity : 0;
+
+    if (fgAlpha <= 0.01 && crossingMeniscus <= 0.01 && transBubbles <= 0.01) {
+      if (this.fgHasContent) {
+        g.setTransform(1, 0, 0, 1, 0, 0);
+        g.clearRect(0, 0, canvas.width, canvas.height);
+        this.fgHasContent = false;
+      }
+      return;
+    }
+
+    const { dpr, cw, ch, cols, rows, camX, camY, surfaceY } = this;
+    g.setTransform(1, 0, 0, 1, 0, 0);
+    g.clearRect(0, 0, canvas.width, canvas.height);
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.font = `600 ${Math.round(ch * 0.74)}px ${this.fontFamily}`;
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    this.fgHasContent = true;
+
+    const headerSafeY = 62;
+    const compact = this.width < 640;
+    const pitchY = clamp(this.diveVel * 38, -28, 28);
+    const sideDir = this.profileW > 0.42;
+
+    // 1. Closest small fish gliding subtly in front of the floating cards (softer on compact mobile for effortless reading).
+    if (fgAlpha > 0.01) {
+      const fishBaseAlpha = compact ? 0.28 : 0.56;
+      for (const f of world.fish) {
+        if (!f.alive || f.depth <= 0.89) continue;
+        const px = f.x + camX * (f.depth - 0.5) * 44;
+        const py = f.y + camY * (f.depth - 0.5) * 28 - pitchY * (0.45 + f.depth * 0.95);
+        if (py < headerSafeY || py > this.height - 8 || px < 0 || px > this.width) continue;
+        if (crossingMeniscus > 0.05 && py < surfaceY + ch) continue;
+        const col = Math.floor(px / cw);
+        const row = Math.floor(py / ch);
+        if (col < 0 || col >= cols || row < 0 || row >= rows) continue;
+        const rgb = this.koiRgb[clamp(f.color | 0, 0, KOI_COLOR_COUNT - 1)];
+        g.fillStyle = `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${(fishBaseAlpha * fgAlpha).toFixed(3)})`;
+        const glyph = sideDir ? (f.vx >= 0 ? ">" : "<") : "-";
+        g.fillText(glyph, col * cw + cw / 2, row * ch + ch / 2 + 1);
+      }
+    }
+
+    // 2. Delicate rising foreground bubbles (amplified gently during section POV transitions).
+    const bubbleVis = Math.max(fgAlpha, transBubbles * 0.85);
+    if (bubbleVis > 0.02 && cols > 8 && rows > 6) {
+      const bubbleCount = (compact ? 10 : 14) + Math.round(transBubbles * (compact ? 10 : 16));
+      const bubbleScale = compact ? 0.72 : 1;
+      g.fillStyle = this.bubble;
+      const shiftC = (camX * 22) / cw;
+      const minY = crossingMeniscus > 0.05 ? Math.max(headerSafeY, surfaceY + ch * 0.6) : headerSafeY;
+      for (let b = 0; b < bubbleCount; b++) {
+        const seedX = hash3(b, 71, 5);
+        const speed = 1.9 + hash3(b, 89, 11) * 2.5 + transBubbles * 1.4;
+        const phase = hash3(b, 103, 17) * rows;
+        const rawRow = rows - ((t * speed + phase) % rows);
+        const br = Math.floor(rawRow);
+        const y = br * ch + ch / 2 + 1;
+        if (y < minY || br < 0 || br >= rows) continue;
+        const sway = Math.sin(t * 1.25 + b * 2.3) * 1.8;
+        const bc = Math.floor(seedX * cols + sway + shiftC);
+        if (bc < 0 || bc >= cols) continue;
+        const edgeFade = Math.min(1, (y - minY) / 40, (rows - br) / 3);
+        const isExtra = b >= (compact ? 10 : 14);
+        const baseA = (isExtra ? transBubbles * 0.34 : fgAlpha * (b % 3 === 0 ? 0.36 : 0.24)) * bubbleScale;
+        g.globalAlpha = edgeFade * baseA;
+        g.fillText(b % 4 === 0 ? "°" : b % 7 === 0 ? "o" : "·", bc * cw + cw / 2, y);
+      }
+      g.globalAlpha = 1;
+    }
+
+    // 3. Subtle sweeping foreground meniscus crest when breaching the water surface (Hero ↔ Projets).
+    if (crossingMeniscus > 0.04 && surfaceY > headerSafeY + 6 && surfaceY < this.height - 6) {
+      const waveAmp = (4.2 + 4.4 * this.diveActivity) * (ch / 15);
+      g.fillStyle = `rgba(240,220,182,${(0.32 * crossingMeniscus).toFixed(3)})`;
+      for (let c = 0; c < cols; c += 3) {
+        const wave =
+          Math.sin(c * 0.23 + t * 1.55) * waveAmp +
+          Math.sin(c * 0.1 - t * 0.95) * (waveAmp * 0.58);
+        const y = surfaceY + wave;
+        if (y < headerSafeY) continue;
+        const r = Math.floor(y / ch);
+        if (r < 0 || r >= rows) continue;
+        const glyph = (c + Math.floor(t * 3)) % 2 === 0 ? "~" : "≈";
+        g.fillText(glyph, c * cw + cw / 2, r * ch + ch / 2 + 1);
+      }
+    }
+  }
+
   private drawFish() {
-    const { ctx, cw, ch, cols, fishBuckets } = this;
+    const { ctx, cw, ch, cols, fishBuckets, fishGlyphs } = this;
     for (let b = 0; b < fishBuckets.length; b++) {
       const bucket = fishBuckets[b];
       if (!bucket.length) continue;
       ctx.fillStyle = this.fishStyles[b];
       for (const i of bucket) {
-        ctx.fillText("-", (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
+        ctx.fillText(FISH_GLYPHS[fishGlyphs[i]], (i % cols) * cw + cw / 2, ((i / cols) | 0) * ch + ch / 2 + 1);
       }
     }
   }

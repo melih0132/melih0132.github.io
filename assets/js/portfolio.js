@@ -9,7 +9,7 @@ const I18N = {
       filterChipsAriaLabel: 'Active filters (match all)',
       removeFilterChipAriaPrefix: 'Remove filter',
       filterByTagAriaPrefix: 'Filter by',
-      sortFeatured: '★ Featured',
+      sortFeatured: 'Featured',
       sortChrono: 'Chronological',
       sortAriaLabel: 'Sort projects (Featured or Chronological)',
       resultsCount: (n) => `${n} project${n === 1 ? '' : 's'}`
@@ -66,7 +66,7 @@ const I18N = {
       toggle: 'Contents'
     },
     toast: {
-      oceanPaused: 'Ocean paused · Press Space to resume',
+      oceanPaused: 'Ocean paused · Shift+Space to resume',
       oceanResumed: 'Ocean resumed',
       oceanReducedOn: 'Reduced ocean enabled',
       oceanReducedOff: 'Full ocean enabled',
@@ -76,8 +76,8 @@ const I18N = {
     heroHint: {
       ripple: 'Click · ripple',
       lure: 'Hold · attract koi',
-      pause: 'Space · pause',
-      paused: 'Space · paused',
+      pause: 'Shift+Space · pause',
+      paused: 'Shift+Space · paused',
       cmd: (key) => `${key} · commands`
     },
     contactAside: {
@@ -125,7 +125,7 @@ const I18N = {
       filterChipsAriaLabel: 'Filtres actifs (intersection)',
       removeFilterChipAriaPrefix: 'Retirer le filtre',
       filterByTagAriaPrefix: 'Filtrer par',
-      sortFeatured: '★ Pertinence',
+      sortFeatured: 'Sélection',
       sortChrono: 'Chronologique',
       sortAriaLabel: 'Trier les projets (Pertinence ou Chronologique)',
       resultsCount: (n) => `${n} projet${n === 1 ? '' : 's'}`
@@ -169,7 +169,7 @@ const I18N = {
       cv: 'Ouvrir le CV (PDF)',
       copyEmail: 'Copier l’adresse email',
       filterByPrefix: 'Filtrer ·',
-      featuredMeta: 'Phare',
+      featuredMeta: 'Sélection',
       githubMeta: 'GitHub ↗',
       oceanOn: 'Activer l’océan réduit',
       oceanOff: 'Désactiver l’océan réduit',
@@ -182,7 +182,7 @@ const I18N = {
       toggle: 'Sommaire'
     },
     toast: {
-      oceanPaused: 'Océan en pause · Espace pour reprendre',
+      oceanPaused: 'Océan en pause · Maj+Espace pour reprendre',
       oceanResumed: 'Océan relancé',
       oceanReducedOn: 'Mode océan réduit activé',
       oceanReducedOff: 'Océan complet activé',
@@ -192,8 +192,8 @@ const I18N = {
     heroHint: {
       ripple: 'Clic · onde',
       lure: 'Maintenir · attirer',
-      pause: 'Espace · pause',
-      paused: 'Espace · en pause',
+      pause: 'Maj+Espace · pause',
+      paused: 'Maj+Espace · en pause',
       cmd: (key) => `${key} · commandes`
     },
     contactAside: {
@@ -238,16 +238,16 @@ const I18N = {
 const CONFIG = {
   messageDisplayTime: 3000,
   languageFrameworks: {
-    Python: ['FastAPI', 'Tkinter', 'SQLAlchemy', 'Alembic', 'Pytest', 'Flask', 'Django'],
-    JavaScript: ['React', 'Next', 'Vue.js', 'Vue', 'Express', 'Express.js', 'Node.js', 'jQuery', 'Vite', 'Zustand'],
-    TypeScript: ['React', 'Next', 'Vue.js', 'Vue', 'Vite', 'Zustand'],
-    Kotlin: ['Jetpack Compose'],
-    PHP: ['Laravel', 'Symfony'],
+    Python: ['FastAPI', 'Tkinter', 'SQLAlchemy', 'Alembic', 'Pytest', 'Flask', 'Django', 'Pydantic', 'scikit-learn', 'Pandas', 'NumPy', 'Pygame'],
+    JavaScript: ['React', 'Next', 'Vue.js', 'Vue', 'Express', 'Express.js', 'Fastify', 'Node.js', 'jQuery', 'Vite', 'Zustand', 'Pinia', 'Axios', 'Leaflet', 'Vitest', 'Phaser'],
+    TypeScript: ['React', 'Next', 'Vue.js', 'Vue', 'Vite', 'Zustand', 'shadcn/ui', 'Zod', 'Recharts'],
+    Kotlin: ['Jetpack Compose', 'Retrofit'],
+    PHP: ['Laravel', 'Symfony', 'Blade', 'Livewire', 'Doctrine', 'Twig', 'PHPUnit', 'PHPStan', 'Composer'],
     Swift: ['UIKit', 'iOS'],
     Dart: ['Flutter'],
-    'C#': ['ASP.NET Core', '.NET Core', 'WPF', 'WinUI 3'],
-    '.NET': ['ASP.NET Core', '.NET Core', 'WPF', 'WinUI 3'],
-    '.NET Core': ['ASP.NET Core', '.NET Core', 'WPF', 'WinUI 3']
+    'C#': ['ASP.NET Core', '.NET Core', 'WPF', 'WinUI 3', 'Entity Framework Core', 'MSTest', 'xUnit', 'Moq'],
+    '.NET': ['ASP.NET Core', '.NET Core', 'WPF', 'WinUI 3', 'Entity Framework Core'],
+    '.NET Core': ['ASP.NET Core', '.NET Core', 'WPF', 'WinUI 3', 'Entity Framework Core']
   },
   projectFilterUi: I18N[LOCALE].projectFilterUi,
   contactForm: I18N[LOCALE].contactForm,
@@ -308,8 +308,44 @@ async function copyToClipboard(text) {
   }
 }
 
+function parseUrlSafe(href, base = location.href) {
+  try {
+    return new URL(href, base);
+  } catch {
+    return null;
+  }
+}
+
+function isSafeSameOriginHref(href) {
+  const url = parseUrlSafe(href);
+  if (!url) return false;
+  if (url.origin !== location.origin) return false;
+  return url.protocol === 'http:' || url.protocol === 'https:';
+}
+
+function isSafeHttpsHref(href, { hosts = null } = {}) {
+  const url = parseUrlSafe(href);
+  if (!url) return false;
+  if (url.protocol !== 'https:') return false;
+  if (url.username || url.password) return false;
+  if (hosts && hosts.length) {
+    const host = url.hostname.toLowerCase();
+    const allowed = hosts.some((h) => host === h || host.endsWith(`.${h}`));
+    if (!allowed) return false;
+  }
+  return true;
+}
+
+function resolveSafeSameOriginSrc(src) {
+  if (!src) return '';
+  const url = parseUrlSafe(src);
+  if (!url || url.origin !== location.origin) return '';
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return '';
+  return `${url.pathname}${url.search}`;
+}
+
 function softNavigateTo(href) {
-  if (!href) return;
+  if (!href || !isSafeSameOriginHref(href)) return;
   const a = document.createElement('a');
   a.href = href;
   document.body.appendChild(a);
@@ -454,7 +490,8 @@ class ProjectFilters {
     this.projectsMeta = new Map();
     this.sortMode = 'featured'; // 'featured' | 'chrono'
     this.destroyed = false;
-    
+    this.loadToken = 0;
+
     // Mapping pour regrouper les technologies similaires
     this.techMapping = {
       '.NET': ['.NET', '.NET Core', '.NET/C#', 'C#', 'C# (.NET)', 'ASP.NET Core'],
@@ -486,8 +523,9 @@ class ProjectFilters {
   }
 
   async init() {
+    const token = ++this.loadToken;
     await this.loadProjectTechnologies();
-    if (this.destroyed) return;
+    if (this.destroyed || token !== this.loadToken) return;
     this.extractTechnologies();
     this.createFilterSearchUi();
     this.bindCardTechTags();
@@ -670,10 +708,10 @@ class ProjectFilters {
     sortBtn.className = 'projects-sort-btn';
     sortBtn.setAttribute('data-sort-mode', this.sortMode);
     sortBtn.setAttribute('aria-label', ui.sortAriaLabel || 'Sort projects');
-    sortBtn.textContent = this.sortMode === 'featured' ? (ui.sortFeatured || '★ Featured') : (ui.sortChrono || 'Chronological');
+    sortBtn.textContent = this.sortMode === 'featured' ? (ui.sortFeatured || 'Featured') : (ui.sortChrono || 'Chronological');
     sortBtn.addEventListener('click', () => {
       this.sortMode = this.sortMode === 'featured' ? 'chrono' : 'featured';
-      this.applySortOrder();
+      this.applySortOrder(true);
       this.syncUrlParams();
     });
     this.sortBtn = sortBtn;
@@ -949,14 +987,74 @@ class ProjectFilters {
     });
   }
 
-  applySortOrder() {
+  runGridTransition(mutate) {
+    if (!this.projectList || systemReducedMotion()) {
+      mutate();
+      return;
+    }
+
+    const token = (this._reflowToken = (this._reflowToken || 0) + 1);
+    if (this._reflowTimer) {
+      clearTimeout(this._reflowTimer);
+      this._reflowTimer = 0;
+    }
+
+    if (window.__oceanEngine?.ripple) {
+      const listRect = this.projectList.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      window.__oceanEngine.ripple(
+        listRect.left + listRect.width * 0.5,
+        Math.max(80, Math.min(vh * 0.55, listRect.top + 120))
+      );
+    }
+
+    this.projectList.classList.add('is-reflow-out');
+
+    this._reflowTimer = window.setTimeout(() => {
+      this._reflowTimer = 0;
+      if (this.destroyed || token !== this._reflowToken) return;
+
+      mutate();
+
+      const compact = window.matchMedia('(max-width: 40em)').matches;
+      const stepMs = compact ? 42 : 55;
+      const maxSteps = compact ? 6 : 8;
+      const visibleCards = Array.from(this.projectList.children).filter(
+        (el) => el.classList.contains('project-card') && !el.classList.contains('filtered-out')
+      );
+
+      visibleCards.forEach((card, idx) => {
+        card.classList.remove('is-filter-enter');
+        card.classList.add('is-in', 'is-revealed');
+        card.style.removeProperty('--reveal-delay');
+        card.style.animationDelay = `${Math.min(idx, maxSteps) * stepMs}ms`;
+      });
+
+      void this.projectList.offsetWidth;
+      this.projectList.classList.remove('is-reflow-out');
+
+      visibleCards.forEach((card) => {
+        card.classList.add('is-filter-enter');
+        card.addEventListener(
+          'animationend',
+          () => {
+            card.classList.remove('is-filter-enter');
+            card.style.animationDelay = '';
+          },
+          { once: true }
+        );
+      });
+    }, 260);
+  }
+
+  applySortOrder(animate = false) {
     if (!this.projectList) return;
     const ui = uiStrings().projectFilterUi || {};
     if (this.sortBtn) {
       this.sortBtn.setAttribute('data-sort-mode', this.sortMode);
       this.sortBtn.textContent =
         this.sortMode === 'featured'
-          ? ui.sortFeatured || '★ Featured'
+          ? ui.sortFeatured || 'Featured'
           : ui.sortChrono || 'Chronological';
     }
     const cards = Array.from(this.projectCards);
@@ -985,15 +1083,23 @@ class ProjectFilters {
     });
     const current = Array.from(this.projectList.children);
     const orderChanged = cards.some((card, idx) => card !== current[idx]);
-    if (orderChanged) {
-      cards.forEach((card) => this.projectList.appendChild(card));
+    const layoutChanged = this.projectList.classList.contains('projects-list--bento') !== (this.activeFilters.size === 0 && this.sortMode === 'featured');
+    const commit = () => {
+      if (orderChanged) {
+        cards.forEach((card) => this.projectList.appendChild(card));
+      }
+      this.syncBentoState();
+    };
+    if (animate && (orderChanged || layoutChanged)) {
+      this.runGridTransition(commit);
+    } else {
+      commit();
     }
-    this.syncBentoState();
   }
 
   syncBentoState() {
     if (!this.projectList) return;
-    const useBento = this.activeFilters.size === 0;
+    const useBento = this.activeFilters.size === 0 && this.sortMode === 'featured';
     this.projectList.classList.toggle('projects-list--bento', useBento);
   }
 
@@ -1165,46 +1271,49 @@ class ProjectFilters {
   filterProjects(animate = true) {
     const keys = Array.from(this.activeFilters.keys());
     const shouldAnimate = animate && !systemReducedMotion();
-    const entering = [];
     let visibleCount = 0;
 
-    this.projectCards.forEach(card => {
-      if (card.closest('.projects__btn-container')) {
-        return;
-      }
-      const wasHidden = card.classList.contains('filtered-out');
-      const match = keys.length === 0 || keys.every(k => this.cardMatchesSingleFilter(card, k));
-
-      card.classList.remove('is-filter-enter');
-      card.style.display = '';
-      card.style.opacity = '';
-      card.style.transform = '';
-      card.style.transition = '';
-
-      if (match) {
-        card.classList.remove('filtered-out');
-        card.classList.add('is-in');
+    this.projectCards.forEach((card) => {
+      if (card.closest('.projects__btn-container')) return;
+      if (keys.length === 0 || keys.every((k) => this.cardMatchesSingleFilter(card, k))) {
         visibleCount++;
-        if (shouldAnimate && wasHidden) {
-          entering.push(card);
-        }
-      } else {
-        card.classList.add('filtered-out');
       }
     });
 
-    this.syncBentoState();
-    this.updateResultsCount(visibleCount);
+    const applyFilterDom = () => {
+      this.projectCards.forEach((card) => {
+        if (card.closest('.projects__btn-container')) {
+          return;
+        }
+        const match = keys.length === 0 || keys.every((k) => this.cardMatchesSingleFilter(card, k));
 
-    if (entering.length) {
-      entering.forEach(card => {
-        card.classList.add('is-filter-enter');
-        card.addEventListener(
-          'animationend',
-          () => card.classList.remove('is-filter-enter'),
-          { once: true }
-        );
+        card.classList.remove('is-filter-enter');
+        card.style.display = '';
+        card.style.opacity = '';
+        card.style.transform = '';
+        card.style.transition = '';
+        card.style.animationDelay = '';
+
+        if (match) {
+          card.classList.remove('filtered-out');
+          if (shouldAnimate || keys.length > 0) {
+            card.classList.add('is-in', 'is-revealed');
+            card.style.removeProperty('--reveal-delay');
+          }
+        } else {
+          card.classList.add('filtered-out');
+        }
       });
+
+      this.syncBentoState();
+    };
+
+    this.updateResultsCount(visibleCount, shouldAnimate);
+
+    if (shouldAnimate) {
+      this.runGridTransition(applyFilterDom);
+    } else {
+      applyFilterDom();
     }
   }
 
@@ -1219,6 +1328,11 @@ class ProjectFilters {
 
   destroy() {
     this.destroyed = true;
+    this.loadToken += 1;
+    if (this._reflowTimer) {
+      clearTimeout(this._reflowTimer);
+      this._reflowTimer = 0;
+    }
     if (this._docClickBound && this._onSearchDocClick) {
       document.removeEventListener('click', this._onSearchDocClick);
       this._docClickBound = false;
@@ -1539,27 +1653,49 @@ class SiteChrome {
     this.header = document.querySelector('.header');
     this.toggle = document.querySelector('[data-nav-toggle]');
     this.panel = document.querySelector('[data-nav-panel]');
+    this.navList = document.querySelector('.header__links');
+    this.navIndicator = null;
+    this.hoveredNavLink = null;
     this.sectionObserver = null;
     this.onScroll = this.onScroll.bind(this);
     const opts = { passive: true, signal };
     this.onScroll();
     window.addEventListener('scroll', this.onScroll, opts);
+    this.initNavIndicator(signal);
     this.bindHomeLinks(signal);
     this.initScrollSpy(signal);
     if (location.hash === '#home') {
       window.scrollTo(0, 0);
     }
     if (this.toggle && this.panel) {
+      const closePanel = (restoreFocus = false) => {
+        if (!this.panel.classList.contains('is-open')) return;
+        this.panel.classList.remove('is-open');
+        this.toggle.setAttribute('aria-expanded', 'false');
+        if (restoreFocus) this.toggle.focus();
+      };
       this.toggle.addEventListener('click', () => {
         const open = this.panel.classList.toggle('is-open');
         this.toggle.setAttribute('aria-expanded', String(open));
       }, { signal });
       this.panel.querySelectorAll('a').forEach((a) => {
-        a.addEventListener('click', () => {
-          this.panel.classList.remove('is-open');
-          this.toggle.setAttribute('aria-expanded', 'false');
-        }, { signal });
+        a.addEventListener('click', () => closePanel(false), { signal });
       });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePanel(true);
+      }, { signal });
+      document.addEventListener('click', (e) => {
+        if (!this.panel.classList.contains('is-open')) return;
+        if (this.header && this.header.contains(e.target)) return;
+        closePanel(false);
+      }, { signal });
+      const desktopMq = window.matchMedia('(min-width: 64.01em)');
+      const onMqChange = (e) => {
+        if (e.matches) closePanel(false);
+      };
+      if (typeof desktopMq.addEventListener === 'function') {
+        desktopMq.addEventListener('change', onMqChange, { signal });
+      }
     }
     document.querySelectorAll('[data-set-lang]').forEach((a) => {
       a.addEventListener('click', () => {
@@ -1568,6 +1704,82 @@ class SiteChrome {
         } catch (e) {}
       }, { signal });
     });
+  }
+
+  initNavIndicator(signal) {
+    if (!this.navList) return;
+    let bar = this.navList.querySelector('.header__indicator');
+    if (!bar) {
+      bar = document.createElement('span');
+      bar.className = 'header__indicator';
+      bar.setAttribute('aria-hidden', 'true');
+      this.navList.appendChild(bar);
+    }
+    this.navIndicator = bar;
+    this.navList.classList.add('has-indicator');
+
+    const links = Array.from(this.navList.querySelectorAll('.header__link'));
+    links.forEach((link) => {
+      link.addEventListener(
+        'pointerenter',
+        (e) => {
+          if (e.pointerType === 'touch') return;
+          this.hoveredNavLink = link;
+          this.syncNavIndicator(link);
+        },
+        { signal }
+      );
+      link.addEventListener('focus', () => this.syncNavIndicator(link), { signal });
+    });
+
+    this.navList.addEventListener(
+      'pointerleave',
+      () => {
+        this.hoveredNavLink = null;
+        this.syncNavIndicator();
+      },
+      { signal }
+    );
+    this.navList.addEventListener(
+      'focusout',
+      (e) => {
+        if (e.relatedTarget && this.navList.contains(e.relatedTarget)) return;
+        this.hoveredNavLink = null;
+        this.syncNavIndicator();
+      },
+      { signal }
+    );
+
+    const onResize = () => this.syncNavIndicator();
+    window.addEventListener('resize', onResize, { passive: true, signal });
+    document.fonts?.ready?.then(() => {
+      if (!signal.aborted) this.syncNavIndicator();
+    });
+    requestAnimationFrame(() => this.syncNavIndicator());
+  }
+
+  getActiveDesktopNavLink() {
+    if (!this.navList) return null;
+    return (
+      this.navList.querySelector('.header__link.is-active') ||
+      this.navList.querySelector('.header__link[aria-current="page"]') ||
+      this.navList.querySelector('.header__link')
+    );
+  }
+
+  syncNavIndicator(explicitLink = null) {
+    if (!this.navIndicator || !this.navList) return;
+    const target = explicitLink || this.hoveredNavLink || this.getActiveDesktopNavLink();
+    if (!target || target.offsetWidth < 1) {
+      this.navIndicator.classList.remove('is-ready');
+      return;
+    }
+    const listRect = this.navList.getBoundingClientRect();
+    const linkRect = target.getBoundingClientRect();
+    const left = linkRect.left - listRect.left;
+    const width = linkRect.width;
+    this.navIndicator.style.transform = `translateX(${left.toFixed(1)}px) scaleX(${width.toFixed(1)})`;
+    this.navIndicator.classList.add('is-ready');
   }
 
   navLinks() {
@@ -1581,6 +1793,7 @@ class SiteChrome {
         a.removeAttribute('aria-current');
       }
     });
+    this.syncNavIndicator();
   }
 
   setNavActiveByHash(hash) {
@@ -1593,6 +1806,7 @@ class SiteChrome {
         a.setAttribute('aria-current', 'location');
       }
     });
+    this.syncNavIndicator();
   }
 
   setProjectsNavActive() {
@@ -1604,6 +1818,7 @@ class SiteChrome {
         a.setAttribute('aria-current', 'location');
       }
     });
+    this.syncNavIndicator();
   }
 
   initScrollSpy(signal) {
@@ -1680,8 +1895,17 @@ class SiteChrome {
   }
 }
 
-function parseCssHexToRgb(hex, fallback) {
-  const clean = (hex || '').trim().replace(/^#/, '');
+function parseCssHexToRgb(color, fallback) {
+  const raw = (color || '').trim();
+  const rgbMatch = /^rgba?\(\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)/i.exec(raw);
+  if (rgbMatch) {
+    return [
+      Math.max(0, Math.min(255, Math.round(Number(rgbMatch[1])))),
+      Math.max(0, Math.min(255, Math.round(Number(rgbMatch[2])))),
+      Math.max(0, Math.min(255, Math.round(Number(rgbMatch[3]))))
+    ];
+  }
+  const clean = raw.replace(/^#/, '');
   if (/^[0-9a-f]{6}$/i.test(clean)) {
     return [
       parseInt(clean.slice(0, 2), 16),
@@ -1689,21 +1913,24 @@ function parseCssHexToRgb(hex, fallback) {
       parseInt(clean.slice(4, 6), 16)
     ];
   }
+  if (/^[0-9a-f]{3}$/i.test(clean)) {
+    return [
+      parseInt(clean[0] + clean[0], 16),
+      parseInt(clean[1] + clean[1], 16),
+      parseInt(clean[2] + clean[2], 16)
+    ];
+  }
   return fallback;
 }
 
 function readOceanPaletteFromElement(el = document.body) {
   const cs = getComputedStyle(el);
-  const beniHex = cs.getPropertyValue('--koi-beni').trim() || '#dc4638';
-  const shiroHex = cs.getPropertyValue('--koi-shiro').trim() || '#e8dcc8';
-  const orangeHex = cs.getPropertyValue('--koi-orange').trim() || '#e89040';
-  const kinHex = cs.getPropertyValue('--koi-kin').trim() || '#d4a84b';
-  const beni = parseCssHexToRgb(beniHex, [220, 56, 42]);
-  const shiro = parseCssHexToRgb(shiroHex, [240, 236, 228]);
-  const orange = parseCssHexToRgb(orangeHex, [232, 140, 36]);
-  const kin = parseCssHexToRgb(kinHex, [210, 168, 58]);
+  const beni = parseCssHexToRgb(cs.getPropertyValue('--koi-beni'), [220, 56, 42]);
+  const shiro = parseCssHexToRgb(cs.getPropertyValue('--koi-shiro'), [240, 236, 228]);
+  const orange = parseCssHexToRgb(cs.getPropertyValue('--koi-orange'), [232, 140, 36]);
+  const kin = parseCssHexToRgb(cs.getPropertyValue('--koi-kin'), [210, 168, 58]);
   return {
-    accents: [beniHex, shiroHex, kinHex, orangeHex],
+    accents: [rgbToHex(beni), rgbToHex(shiro), rgbToHex(kin), rgbToHex(orange)],
     bubbleRgb: [
       Math.round((shiro[0] + kin[0]) / 2),
       Math.round((shiro[1] + kin[1]) / 2),
@@ -1714,15 +1941,19 @@ function readOceanPaletteFromElement(el = document.body) {
 }
 
 function readOceanPaletteFromCss() {
-  return readOceanPaletteFromElement(document.body);
+  const universe = document.body?.dataset?.universe || '';
+  return universe
+    ? readOceanPaletteForUniverse(universe)
+    : readOceanPaletteFromElement(document.documentElement);
 }
 
 function readOceanPaletteForUniverse(universe) {
-  if (!universe) return readOceanPaletteFromCss();
+  if (!universe) return readOceanPaletteFromElement(document.documentElement);
   let probe = document.querySelector('[data-ocean-probe]');
   if (!probe) {
     probe = document.createElement('span');
     probe.className = 'visually-hidden';
+    probe.style.transition = 'none';
     probe.setAttribute('aria-hidden', 'true');
     probe.setAttribute('data-ocean-probe', '');
     document.body.appendChild(probe);
@@ -1835,32 +2066,17 @@ function syncOceanAtmosphere(options = {}) {
 
 class FeaturedOceanPreview {
   constructor(signal) {
-    const allCards = Array.from(document.querySelectorAll('.project-card'));
-    if (!allCards.length) return;
-
-    allCards.forEach((card) => {
-      card.addEventListener(
-        'pointermove',
-        (e) => {
-          if (e.pointerType === 'touch' || systemReducedMotion()) return;
-          const rect = card.getBoundingClientRect();
-          card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
-          card.style.setProperty('--my', `${e.clientY - rect.top}px`);
-        },
-        { signal, passive: true }
-      );
-    });
-
     if (document.body.dataset.universe) return;
-    const featuredCards = allCards.filter(
+    const featuredCards = Array.from(document.querySelectorAll('.project-card')).filter(
       (card) => card.getAttribute('data-featured') === 'true' && card.getAttribute('data-project-id')
     );
     if (!featuredCards.length) return;
 
     this.activeUniverse = null;
     this.revertTimer = 0;
+    this.lastLureAt = 0;
 
-    const preview = (universe) => {
+    const preview = (universe, card = null) => {
       if (!universe || !window.__oceanEngine) return;
       if (isOceanEffectivelyStill() || isOceanPaused()) return;
       if (document.documentElement.classList.contains('is-soft-nav')) return;
@@ -1870,10 +2086,21 @@ class FeaturedOceanPreview {
       this.activeUniverse = universe;
       syncOceanAtmosphere({
         animate: true,
+        duration: 750,
         preserveFishCount: true,
         fromPalette: window.__oceanCurrentPalette || readOceanPaletteFromCss(),
         toPalette: readOceanPaletteForUniverse(universe)
       });
+      const now = performance.now();
+      if (card && now - this.lastLureAt > 2400) {
+        this.lastLureAt = now;
+        const rect = card.getBoundingClientRect();
+        const lx = rect.left > window.innerWidth * 0.45 ? rect.left * 0.45 : Math.min(window.innerWidth - 90, rect.right + 80);
+        const ly = Math.max(90, Math.min(window.innerHeight - 90, rect.top + rect.height * 0.5));
+        if (typeof window.__oceanEngine.dropLure === 'function') {
+          window.__oceanEngine.dropLure(lx, ly);
+        }
+      }
     };
 
     const scheduleRevert = () => {
@@ -1883,16 +2110,18 @@ class FeaturedOceanPreview {
       this.revertTimer = window.setTimeout(() => {
         this.revertTimer = 0;
         if (document.documentElement.classList.contains('is-soft-nav')) return;
+        if (window.__quickPeek?.open) return;
         if (!this.activeUniverse) return;
         this.activeUniverse = null;
         if (isOceanEffectivelyStill() || isOceanPaused()) return;
         syncOceanAtmosphere({
           animate: true,
+          duration: 850,
           preserveFishCount: true,
           fromPalette: window.__oceanCurrentPalette || readOceanPaletteFromCss(),
           toPalette: readOceanPaletteFromCss()
         });
-      }, 80);
+      }, 300);
     };
 
     featuredCards.forEach((card) => {
@@ -1902,7 +2131,7 @@ class FeaturedOceanPreview {
         'pointerenter',
         (e) => {
           if (e.pointerType === 'touch') return;
-          preview(universe);
+          preview(universe, card);
         },
         { signal }
       );
@@ -1914,7 +2143,7 @@ class FeaturedOceanPreview {
         },
         { signal }
       );
-      card.addEventListener('focusin', () => preview(universe), { signal });
+      card.addEventListener('focusin', () => preview(universe, card), { signal });
       card.addEventListener(
         'focusout',
         (e) => {
@@ -2062,40 +2291,82 @@ class OceanPowerToggle {
 class ScrollReveal {
   constructor(signal) {
     this.observer = null;
+    this.timers = new Set();
     const selectors = [
-      '.project-card',
       '.section__head',
+      '.project-card',
       '.about-col',
-      '.about-grid > *',
-      '.skills-lines > *',
+      '.about-timeline__item',
+      '.skills-group',
       '.project-block',
-      '.contact-panel'
+      '.contact-panel',
+      '.contact-aside'
     ];
     const nodes = Array.from(document.querySelectorAll(selectors.join(', ')));
     if (!nodes.length) return;
 
     nodes.forEach((el) => el.classList.add('scroll-reveal'));
 
-    if (systemReducedMotion()) {
-      nodes.forEach((el) => el.classList.add('is-in'));
+    if (systemReducedMotion() || typeof IntersectionObserver !== 'function') {
+      nodes.forEach((el) => el.classList.add('is-in', 'is-revealed'));
       return;
     }
 
+    const revealNow = (el, delayMs = 0) => {
+      if (delayMs > 0) {
+        el.style.setProperty('--reveal-delay', `${delayMs}ms`);
+      } else {
+        el.style.removeProperty('--reveal-delay');
+      }
+      el.classList.add('is-in');
+      const timer = window.setTimeout(() => {
+        this.timers.delete(timer);
+        el.classList.add('is-revealed');
+        el.style.removeProperty('--reveal-delay');
+      }, delayMs + 1040);
+      this.timers.add(timer);
+    };
+
+    const compact = window.matchMedia('(max-width: 40em)').matches;
+    const stepMs = compact ? 85 : 115;
+    const maxSteps = compact ? 4 : 6;
+
     this.observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-in');
-          this.observer.unobserve(entry.target);
+        const incoming = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => {
+            const rowDiff =
+              Math.round(a.boundingClientRect.top / 32) -
+              Math.round(b.boundingClientRect.top / 32);
+            if (rowDiff !== 0) return rowDiff;
+            return a.boundingClientRect.left - b.boundingClientRect.left;
+          });
+
+        incoming.forEach((entry, idx) => {
+          const el = entry.target;
+          const delay = Math.min(idx, maxSteps) * stepMs;
+          revealNow(el, delay);
+          this.observer?.unobserve(el);
         });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+      { threshold: 0.01, rootMargin: '0px 0px -10% 0px' }
     );
-    nodes.forEach((el) => this.observer.observe(el));
+
+    nodes.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.bottom <= 0) {
+        el.classList.add('is-in', 'is-revealed');
+        return;
+      }
+      this.observer.observe(el);
+    });
 
     signal.addEventListener('abort', () => {
       if (this.observer) this.observer.disconnect();
       this.observer = null;
+      this.timers.forEach((t) => clearTimeout(t));
+      this.timers.clear();
     });
   }
 }
@@ -2106,7 +2377,7 @@ class OceanPauseHotkey {
       'keydown',
       (e) => {
         if (e.code !== 'Space' && e.key !== ' ') return;
-        if (e.altKey || e.ctrlKey || e.metaKey) return;
+        if (!e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) return;
         const t = e.target;
         if (
           t instanceof HTMLElement &&
@@ -2291,16 +2562,19 @@ class CommandPalette {
       const techCounts = new Map();
       projects.forEach((proj) => {
         const title = (proj.titles && proj.titles[locale]) || proj.id;
-        const href = proj.githubOnly
+        const rawHref = proj.githubOnly
           ? proj.githubUrl
           : proj.detailPaths && proj.detailPaths[locale];
-        if (!title || !href) return;
+        if (!title || !rawHref) return;
+        const external = !!proj.githubOnly;
+        if (external && !isSafeHttpsHref(rawHref, { hosts: ['github.com'] })) return;
+        if (!external && !isSafeSameOriginHref(rawHref)) return;
         const techKeywords = (proj.technologies || []).join(' ');
         items.push({
           group: ui.projects,
-          label: proj.featured ? `★ ${title}` : title,
-          href,
-          external: !!proj.githubOnly,
+          label: title,
+          href: rawHref,
+          external,
           universe: proj.githubOnly ? null : proj.id,
           meta: proj.githubOnly ? ui.githubMeta || 'GitHub ↗' : proj.featured ? ui.featuredMeta || 'Featured' : '→',
           keywords: `${title} ${proj.id} ${techKeywords}`
@@ -2394,8 +2668,8 @@ class CommandPalette {
       group: ui.actions,
       label: paused ? ui.oceanResume : ui.oceanPause,
       action: 'ocean-pause',
-      meta: 'Space',
-      keywords: 'pause ocean océan space espace lecture',
+      meta: '⇧Space',
+      keywords: 'pause ocean océan space espace shift maj lecture',
       disabled: isOceanEffectivelyStill()
     });
 
@@ -2633,6 +2907,7 @@ class CommandPalette {
     const keepPreview = !item.external && !!item.universe;
     this.close(keepPreview);
     if (item.external) {
+      if (!isSafeHttpsHref(item.href, { hosts: ['github.com'] })) return;
       window.open(item.href, '_blank', 'noopener,noreferrer');
       return;
     }
@@ -2751,6 +3026,7 @@ class QuickPeek {
   }
 
   async fetchProjectSummary(href) {
+    if (!isSafeSameOriginHref(href)) throw new Error('unsafe href');
     if (this.cache.has(href)) return this.cache.get(href);
     const res = await fetch(href, { headers: { Accept: 'text/html' }, credentials: 'same-origin' });
     if (!res.ok) throw new Error('fetch failed');
@@ -2761,9 +3037,10 @@ class QuickPeek {
     const overviewP = doc.querySelector('.project-body .project-block p')?.textContent?.trim() || '';
     const firstFig = doc.querySelector('.project-gallery figure');
     const firstImg = firstFig?.querySelector('img');
-    const media = firstImg
+    const mediaSrc = resolveSafeSameOriginSrc(firstImg?.getAttribute('src') || '');
+    const media = firstImg && mediaSrc
       ? {
-          src: firstImg.getAttribute('src') || '',
+          src: mediaSrc,
           alt: firstImg.getAttribute('alt') || title,
           caption: firstFig.querySelector('figcaption')?.textContent?.trim() || ''
         }
@@ -2782,6 +3059,7 @@ class QuickPeek {
       .map((a) => a.textContent.trim())
       .filter(Boolean);
     const ghLink = doc.querySelector('.project-hero a[href*="github.com"], .project-actions a[href*="github.com"]');
+    const rawGh = ghLink ? ghLink.getAttribute('href') : null;
     const data = {
       title,
       lead,
@@ -2789,7 +3067,7 @@ class QuickPeek {
       media,
       flows,
       techs,
-      githubUrl: ghLink ? ghLink.getAttribute('href') : null
+      githubUrl: rawGh && isSafeHttpsHref(rawGh, { hosts: ['github.com'] }) ? rawGh : null
     };
     this.cache.set(href, data);
     return data;
@@ -2812,6 +3090,7 @@ class QuickPeek {
     if (entry.id && !document.body.dataset.universe && window.__oceanEngine && !isOceanEffectivelyStill() && !isOceanPaused()) {
       syncOceanAtmosphere({
         animate: true,
+        duration: 750,
         preserveFishCount: true,
         fromPalette: window.__oceanCurrentPalette || readOceanPaletteFromCss(),
         toPalette: readOceanPaletteForUniverse(entry.id)
@@ -2951,12 +3230,12 @@ class QuickPeek {
     });
     this.foot.appendChild(openBtn);
 
-    if (data.githubUrl) {
+    if (data.githubUrl && isSafeHttpsHref(data.githubUrl, { hosts: ['github.com'] })) {
       const gh = document.createElement('a');
       gh.className = 'btn';
       gh.href = data.githubUrl;
       gh.target = '_blank';
-      gh.rel = 'noreferrer';
+      gh.rel = 'noopener noreferrer';
       gh.textContent = ui.github || 'GitHub ↗';
       this.foot.appendChild(gh);
     }
@@ -2972,6 +3251,7 @@ class QuickPeek {
     if (!keepOcean && !document.body.dataset.universe && window.__oceanEngine && !isOceanEffectivelyStill() && !isOceanPaused()) {
       syncOceanAtmosphere({
         animate: true,
+        duration: 850,
         preserveFishCount: true,
         fromPalette: window.__oceanCurrentPalette || readOceanPaletteFromCss(),
         toPalette: readOceanPaletteFromCss()
@@ -3043,9 +3323,31 @@ class QuickPeekTriggers {
         btn.type = 'button';
         btn.className = 'project-peek-btn';
         const label = ui.trigger || 'Peek';
-        btn.innerHTML = `<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><rect x="1.25" y="1.75" width="11.5" height="10.5"/><line x1="8.25" y1="1.75" x2="8.25" y2="12.25"/></svg><span>${label}</span>`;
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 14 14');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', 'currentColor');
+        svg.setAttribute('stroke-width', '1.25');
+        svg.setAttribute('aria-hidden', 'true');
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', '1.25');
+        rect.setAttribute('y', '1.75');
+        rect.setAttribute('width', '11.5');
+        rect.setAttribute('height', '10.5');
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', '8.25');
+        line.setAttribute('y1', '1.75');
+        line.setAttribute('x2', '8.25');
+        line.setAttribute('y2', '12.25');
+        svg.append(rect, line);
+        const labelEl = document.createElement('span');
+        labelEl.textContent = label;
+        btn.append(svg, labelEl);
         btn.title = `${label} (P)`;
-        btn.setAttribute('aria-label', `${label} — ${card.querySelector('.project-title')?.textContent?.trim() || id}`);
+        btn.setAttribute(
+          'aria-label',
+          `${label} · ${card.querySelector('.project-title')?.textContent?.trim() || id}`
+        );
         btn.addEventListener(
           'click',
           (e) => {
@@ -3159,8 +3461,8 @@ class GallerySpotlight {
 
     this.backdrop.addEventListener('click', () => this.close());
     this.closeBtn.addEventListener('click', () => this.close());
-    this.prevBtn.addEventListener('click', () => this.show(this.index - 1));
-    this.nextBtn.addEventListener('click', () => this.show(this.index + 1));
+    this.prevBtn.addEventListener('click', () => this.show(this.index - 1, -1));
+    this.nextBtn.addEventListener('click', () => this.show(this.index + 1, 1));
 
     // Click image to toggle 1:1 native zoom
     this.img.addEventListener('click', () => {
@@ -3187,7 +3489,7 @@ class GallerySpotlight {
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
         if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.4 && this.items.length > 1) {
-          this.show(dx < 0 ? this.index + 1 : this.index - 1);
+          this.show(dx < 0 ? this.index + 1 : this.index - 1, dx < 0 ? 1 : -1);
         }
       },
       { passive: true }
@@ -3216,9 +3518,10 @@ class GallerySpotlight {
     });
   }
 
-  show(index) {
+  show(index, dir = 0) {
     if (!this.root || this.items.length === 0) return;
 
+    const wasOpen = this.open;
     const nextIndex = (index + this.items.length) % this.items.length;
     const figure = this.items[nextIndex];
     const source = figure.querySelector('img');
@@ -3244,6 +3547,16 @@ class GallerySpotlight {
     this.img.alt = source.alt || '';
     this.caption.textContent = caption ? caption.textContent.trim() : '';
     this.caption.hidden = !this.caption.textContent;
+
+    if (wasOpen && dir !== 0 && !systemReducedMotion() && typeof this.img.animate === 'function') {
+      this.img.animate(
+        [
+          { opacity: 0, transform: `translateX(${dir * 28}px)` },
+          { opacity: 1, transform: 'translateX(0)' }
+        ],
+        { duration: 480, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+      );
+    }
 
     const multi = this.items.length > 1;
     this.prevBtn.hidden = !multi;
@@ -3279,7 +3592,7 @@ class GallerySpotlight {
       return;
     }
 
-    window.setTimeout(finish, 180);
+    window.setTimeout(finish, 420);
   }
 
   getFocusableElements() {
@@ -3324,12 +3637,12 @@ class GallerySpotlight {
     }
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      this.show(this.index - 1);
+      this.show(this.index - 1, -1);
       return;
     }
     if (e.key === 'ArrowRight') {
       e.preventDefault();
-      this.show(this.index + 1);
+      this.show(this.index + 1, 1);
     }
   }
 
@@ -4091,6 +4404,152 @@ class ProjectDiscussAction {
   }
 }
 
+class OceanDiveScroll {
+  constructor(signal, immediate = false) {
+    this.raf = 0;
+    const projects = document.getElementById('projects');
+    const about = document.getElementById('about');
+    const contact = document.getElementById('contact');
+    const projectBody = document.querySelector('.project-body');
+
+    const smooth = (t) => t * t * (3 - 2 * t);
+
+    // 4-Act POV dive:
+    // 0.00 = Hero (top-down over pond)
+    // 0.33 = Projects (upper water column side-view beneath surface waterline)
+    // 0.67 = About (deep pond-bed side-view with rocky floor & swaying reeds)
+    // 1.00 = Contact (bottom-up looking straight up into Snell's Window)
+    const computeDive = () => {
+      const vh = window.innerHeight || 800;
+      if (projects && about && contact) {
+        const pTop = projects.getBoundingClientRect().top;
+        const aTop = about.getBoundingClientRect().top;
+        const cTop = contact.getBoundingClientRect().top;
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - vh);
+        const nearBottom = Math.max(0, Math.min(1, (window.scrollY - (maxScroll - vh * 0.36)) / Math.max(1, vh * 0.36)));
+
+        const p1 = Math.max(0, Math.min(1, (vh * 0.92 - pTop) / Math.max(1, vh * 0.74)));
+        const p2 = Math.max(0, Math.min(1, (vh * 0.92 - aTop) / Math.max(1, vh * 0.72)));
+        const p3 = Math.max(
+          Math.max(0, Math.min(1, (vh * 0.94 - cTop) / Math.max(1, vh * 0.64))),
+          nearBottom
+        );
+        return (smooth(p1) + smooth(p2) + smooth(p3)) / 3;
+      }
+      if (projectBody) {
+        const max = Math.max(1, document.documentElement.scrollHeight - vh);
+        const ratio = Math.max(0, Math.min(1, window.scrollY / max));
+        return 1 / 3 + ratio * 0.14;
+      }
+      return 0;
+    };
+
+    const sync = (snap = false) => {
+      const engine = window.__oceanEngine;
+      if (!engine || typeof engine.setDive !== 'function') return;
+      engine.setDive(computeDive(), snap);
+    };
+
+    const onScroll = () => {
+      if (this.raf) return;
+      this.raf = requestAnimationFrame(() => {
+        this.raf = 0;
+        sync(false);
+      });
+    };
+
+    sync(immediate);
+    window.addEventListener('scroll', onScroll, { passive: true, signal });
+    window.addEventListener('resize', onScroll, { passive: true, signal });
+
+    let ro = null;
+    if (projects && typeof ResizeObserver === 'function') {
+      ro = new ResizeObserver(onScroll);
+      ro.observe(projects);
+    }
+
+    signal.addEventListener('abort', () => {
+      if (this.raf) {
+        cancelAnimationFrame(this.raf);
+        this.raf = 0;
+      }
+      if (ro) {
+        ro.disconnect();
+        ro = null;
+      }
+    });
+  }
+}
+
+class ProjectBuoyancy {
+  constructor(signal) {
+    if (systemReducedMotion()) return;
+    const list = document.querySelector('.projects-list');
+    if (!list) return;
+
+    const weights = [0.72, 1.26, 0.96];
+    let lastY = window.scrollY;
+    let lag = 0;
+    let raf = 0;
+
+    const resetAll = () => {
+      list.querySelectorAll('.project-card').forEach((card) => {
+        card.style.removeProperty('--buoy-y');
+      });
+    };
+
+    const tick = () => {
+      if (isOceanEffectivelyStill() || isOceanPaused()) {
+        lag = 0;
+        raf = 0;
+        resetAll();
+        return;
+      }
+
+      lag *= 0.9;
+      if (Math.abs(lag) < 0.08) {
+        lag = 0;
+        raf = 0;
+        resetAll();
+        return;
+      }
+
+      const vh = window.innerHeight || 800;
+      const compact = window.matchMedia('(max-width: 40em)').matches;
+      const cards = list.querySelectorAll('.project-card:not(.filtered-out)');
+      cards.forEach((card, idx) => {
+        const rect = card.getBoundingClientRect();
+        if (rect.bottom < -120 || rect.top > vh + 120) return;
+        const w = compact ? 0.65 : weights[idx % weights.length];
+        const y = Math.max(-15, Math.min(15, lag * w));
+        card.style.setProperty('--buoy-y', `${y.toFixed(2)}px`);
+      });
+
+      raf = requestAnimationFrame(tick);
+    };
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+      lastY = y;
+      if (isOceanEffectivelyStill() || isOceanPaused()) return;
+      if (Math.abs(delta) > 420 || Math.abs(delta) < 0.5) return;
+      const compact = window.matchMedia('(max-width: 40em)').matches;
+      const maxLag = compact ? 6 : 13;
+      lag = Math.max(-maxLag, Math.min(maxLag, lag - delta * 0.14));
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true, signal });
+
+    signal.addEventListener('abort', () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+      resetAll();
+    });
+  }
+}
+
 function bootPage(options = {}) {
   if (window.__pageAbort) window.__pageAbort.abort();
   window.__pageAbort = new AbortController();
@@ -4116,6 +4575,7 @@ function bootPage(options = {}) {
   new HeroHint(signal);
   syncOceanAtmosphere({
     animate: !!options.animateOcean,
+    duration: options.oceanDuration,
     fromPalette: options.fromPalette,
     fromFish: options.fromFish
   });
@@ -4125,6 +4585,8 @@ function bootPage(options = {}) {
     window.__projectFilters = new ProjectFilters();
   }
   new FeaturedOceanPreview(signal);
+  new OceanDiveScroll(signal, !options.animateOcean);
+  new ProjectBuoyancy(signal);
   new QuickPeekTriggers(signal);
   if (document.querySelector('.project-gallery')) {
     window.__gallerySpotlight = new GallerySpotlight();
@@ -4402,7 +4864,7 @@ class SoftNav {
     }
 
     e.preventDefault();
-    this.load(url.href, true);
+    this.load(url.href, true, { x: e.clientX, y: e.clientY });
   }
 
   isSoftUrl(url) {
@@ -4413,13 +4875,22 @@ class SoftNav {
     return true;
   }
 
-  async load(href, push) {
+  async load(href, push, origin = null) {
     if (this.pending) return;
+    if (!isSafeSameOriginHref(href)) return;
     this.pending = true;
     document.documentElement.classList.add('is-soft-nav');
+    if (window.__oceanEngine?.ripple) {
+      window.__oceanEngine.ripple(origin?.x, origin?.y);
+    }
+    let skeletonTimer = 0;
+    let shownSkeleton = false;
     try {
       const targetUrl = new URL(href, location.href);
-      this.showSkeleton(targetUrl.pathname);
+      skeletonTimer = window.setTimeout(() => {
+        shownSkeleton = true;
+        this.showSkeleton(targetUrl.pathname);
+      }, 180);
 
       let fetchPath = targetUrl.pathname;
       let res = await fetch(fetchPath, { headers: { Accept: 'text/html' }, credentials: 'same-origin' });
@@ -4432,6 +4903,9 @@ class SoftNav {
         html = res.ok ? await res.text() : '';
         doc = html ? new DOMParser().parseFromString(html, 'text/html') : null;
       }
+
+      clearTimeout(skeletonTimer);
+      skeletonTimer = 0;
 
       if (!res.ok || !doc) {
         location.assign(href);
@@ -4449,41 +4923,79 @@ class SoftNav {
       const fromPalette = window.__oceanCurrentPalette || readOceanPaletteFromCss();
       const fromFish = readTargetFishCount();
 
-      curSite.replaceWith(document.importNode(nextSite, true));
+      const commitSwap = () => {
+        curSite.replaceWith(document.importNode(nextSite, true));
 
-      if (doc.body.dataset.universe) {
-        document.body.dataset.universe = doc.body.dataset.universe;
-      } else {
-        delete document.body.dataset.universe;
-      }
-      if (doc.body.dataset.oceanFish) {
-        document.body.dataset.oceanFish = doc.body.dataset.oceanFish;
-      } else {
-        delete document.body.dataset.oceanFish;
-      }
+        if (doc.body.dataset.universe) {
+          document.body.dataset.universe = doc.body.dataset.universe;
+        } else {
+          delete document.body.dataset.universe;
+        }
+        if (doc.body.dataset.oceanFish) {
+          document.body.dataset.oceanFish = doc.body.dataset.oceanFish;
+        } else {
+          delete document.body.dataset.oceanFish;
+        }
 
-      syncDocumentHead(doc);
+        syncDocumentHead(doc);
 
-      if (push) history.pushState({ soft: true }, '', href);
-      this.currentDocKey = this.getDocKey(targetUrl);
+        if (push) history.pushState({ soft: true }, '', href);
+        this.currentDocKey = this.getDocKey(targetUrl);
 
-      bootPage({
-        animateOcean: true,
-        fromPalette,
-        fromFish
-      });
-
-      if (targetUrl.hash) {
-        this.scrollToHash(targetUrl.hash, 'auto');
-        requestAnimationFrame(() => {
-          this.scrollToHash(targetUrl.hash, 'auto');
+        bootPage({
+          animateOcean: true,
+          oceanDuration: 1250,
+          fromPalette,
+          fromFish
         });
+
+        if (targetUrl.hash) {
+          this.scrollToHash(targetUrl.hash, 'auto');
+          requestAnimationFrame(() => {
+            this.scrollToHash(targetUrl.hash, 'auto');
+          });
+        } else {
+          window.scrollTo(0, 0);
+        }
+      };
+
+      const canViewTransition =
+        !shownSkeleton &&
+        !systemReducedMotion() &&
+        typeof document.startViewTransition === 'function';
+
+      if (canViewTransition) {
+        document.documentElement.classList.add('is-vt');
+        try {
+          const vt = document.startViewTransition(() => {
+            commitSwap();
+          });
+          await vt.updateCallbackDone.catch(() => {});
+          vt.finished.finally(() => {
+            document.documentElement.classList.remove('is-vt');
+          });
+        } catch {
+          document.documentElement.classList.remove('is-vt');
+          commitSwap();
+        }
       } else {
-        window.scrollTo(0, 0);
+        commitSwap();
+        if (!systemReducedMotion()) {
+          const nextMain = document.querySelector('.site main');
+          if (nextMain) {
+            nextMain.classList.add('is-page-enter');
+            nextMain.addEventListener(
+              'animationend',
+              () => nextMain.classList.remove('is-page-enter'),
+              { once: true }
+            );
+          }
+        }
       }
     } catch {
       location.assign(href);
     } finally {
+      clearTimeout(skeletonTimer);
       this.pending = false;
       document.documentElement.classList.remove('is-soft-nav');
     }

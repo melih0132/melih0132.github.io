@@ -104,12 +104,17 @@ export interface Shark {
   orbitRadius: number;
   target: Fish | null;
   retargetAt: number;
-  /** 0 far / dim → 1 near / bright. */
+  /** 0 far / dim → 1 near / bright (dynamically dives & surfaces in 3D). */
   depth: number;
+  /** Adaptation: vertical dive/rise oscillation parameters. */
+  baseDepth: number;
+  depthPhase: number;
+  depthFreq: number;
+  lastSurfaceAt: number;
 }
 
 export interface WorldEvent {
-  kind: "eat" | "splash" | "lure";
+  kind: "eat" | "splash" | "lure" | "surface";
   x: number;
   y: number;
 }
@@ -137,6 +142,11 @@ export class World {
   events: WorldEvent[] = [];
   /** Adaptation: active golden lures gently drawing koi. */
   lures: Lure[] = [];
+  /** Adaptation: damped vertical water current driven by page scroll inertia. */
+  scrollCurrent = 0;
+  /** Adaptation: camera POV dive (0 = top-down, 0.5 = inside water side-view, 1 = from below). */
+  dive = 0;
+  targetDive = 0;
   pointer = { x: 0, y: 0, active: false };
 
   /** Fish neighbourhood radius; the spatial hash bucket size matches it. */
@@ -231,6 +241,10 @@ export class World {
         nodes[n * 2] = x - Math.cos(heading) * seg * n;
         nodes[n * 2 + 1] = y - Math.sin(heading) * seg * n;
       }
+      const baseDepth = clamp(0.32 + (i / Math.max(1, sharkCount - 1)) * 0.56, 0.32, 0.88);
+      const depthPhase = (i / Math.max(1, sharkCount)) * TAU + rand(-0.3, 0.3);
+      const depthFreq = rand(0.14, 0.24);
+      const startDepth = clamp(baseDepth + Math.sin(depthPhase) * 0.24, 0.22, 0.98);
       this.sharks.push({
         id: i + 1,
         kind,
@@ -247,7 +261,11 @@ export class World {
         orbitRadius,
         target: null,
         retargetAt: 0,
-        depth: size,
+        depth: startDepth,
+        baseDepth,
+        depthPhase,
+        depthFreq,
+        lastSurfaceAt: -10,
       });
     }
     // Smaller (farther) sharks draw first so the big one swims over them.
@@ -309,6 +327,18 @@ export class World {
     this.events.push({ kind: "lure", x, y });
   }
 
+  /** Adaptation: translate vertical scroll deltas into a gentle water current. */
+  impulseScroll(deltaY: number) {
+    if (!Number.isFinite(deltaY) || Math.abs(deltaY) < 0.5) return;
+    this.scrollCurrent = clamp(this.scrollCurrent - deltaY * 2.1, -460, 460);
+  }
+
+  /** Adaptation: set camera POV dive target (0 top, 0.5 submerged side, 1 bottom-up). */
+  setDive(target: number, immediate = false) {
+    this.targetDive = clamp(Number.isFinite(target) ? target : 0, 0, 1);
+    if (immediate) this.dive = this.targetDive;
+  }
+
   /** Adaptation: dynamically adjust school population without resetting sharks/koi. */
   setFishCount(count?: number) {
     this.fishCount = count;
@@ -352,6 +382,11 @@ export class World {
 
   step(dt: number) {
     this.time += dt;
+    this.scrollCurrent *= Math.exp(-dt * 2.6);
+    if (Math.abs(this.scrollCurrent) < 0.4) this.scrollCurrent = 0;
+    const diveDiff = this.targetDive - this.dive;
+    if (Math.abs(diveDiff) < 0.0015) this.dive = this.targetDive;
+    else this.dive += diveDiff * Math.min(1, dt * 3.8);
     this.stepLures(dt);
     this.rebuildHash();
     this.stepFish(dt);
@@ -560,10 +595,21 @@ export class World {
 
       // Ambient current and a little individual restlessness.
       current(f.x, f.y, time, cur);
+      const sideW = clamp(1 - Math.abs(this.dive - 1 / 3) * 3, 0, 1);
+      const bedW = clamp(1 - Math.abs(this.dive - 2 / 3) * 3, 0, 1);
+      const profileW = clamp(sideW + bedW, 0, 1);
       ax += cur.x * 0.5 + (Math.random() - 0.5) * sp.jitter;
-      ay += cur.y * 0.5 + (Math.random() - 0.5) * sp.jitter;
-      // Swim level, except when bolting from danger.
-      ay -= f.vy * sp.verticalDrag * (1 - 0.7 * f.alarm);
+      ay += cur.y * 0.5 + (Math.random() - 0.5) * sp.jitter + this.scrollCurrent * (0.65 + 0.55 * f.depth);
+      // Swim level in both submerged side-view (Projects) and pond-bed view (About).
+      ay -= f.vy * (sp.verticalDrag + profileW * 1.85) * (1 - 0.7 * f.alarm);
+      if (sideW > 0.25) {
+        const surfBound = Math.max(76, H * 0.13);
+        if (f.y < surfBound) ay += (surfBound - f.y) * 4.5 * sideW;
+      }
+      if (bedW > 0.25) {
+        const floorBound = H * 0.82;
+        if (f.y > floorBound) ay -= (f.y - floorBound) * 4.2 * bedW;
+      }
 
       // Relax toward a preferred speed that rises with panic.
       const preferred = sp.cruise * (1 + 1.3 * f.alarm);
@@ -584,8 +630,9 @@ export class World {
       }
       f.turn += (angleDiff(before, Math.atan2(f.vy, f.vx)) / dt - f.turn) * Math.min(1, dt * 8);
       f.phase += dt * (7 + Math.hypot(f.vx, f.vy) * 0.12);
+      const scrollDriftY = this.scrollCurrent * 0.22 * f.depth * dt;
       f.x = clamp(f.x + f.vx * dt, -60, W + 60);
-      f.y = clamp(f.y + f.vy * dt, -60, H + 60);
+      f.y = clamp(f.y + f.vy * dt + scrollDriftY, -60, H + 60);
     }
   }
 
@@ -613,6 +660,7 @@ export class World {
       dy += Math.sin(sh.heading + sh.wander) * 0.45;
 
       let hunting = false;
+      let lured = false;
       let closing = 0;
       if (this.crossing) {
         // Adaptation: no hunting, patrol or turning back. Swim across while following a slow
@@ -622,7 +670,6 @@ export class World {
         dy += clamp((targetY - hy) / cyW, -1, 1) * 1.2;
       } else {
         // Adaptation: if a golden lure is in the pond, gently draw nearby koi toward it.
-        let lured = false;
         if (this.lures.length > 0) {
           let bestLure: Lure | null = null;
           let bestDist = Math.max(W, H) * 0.85;
@@ -720,6 +767,27 @@ export class World {
         }
       }
 
+      if (this.scrollCurrent !== 0 && !this.crossing) {
+        dy += clamp(this.scrollCurrent * 0.0024, -0.5, 0.5);
+      }
+
+      // Adaptation: 4-act POV swimming dynamics:
+      // - Act 2 (sideW, dive ≈ 1/3): horizontal cruise beneath top water surface
+      // - Act 3 (bedW, dive ≈ 2/3): calmer deep horizontal glide hovering above the pond bed
+      const sideW = clamp(1 - Math.abs(this.dive - 1 / 3) * 3, 0, 1);
+      const bedW = clamp(1 - Math.abs(this.dive - 2 / 3) * 3, 0, 1);
+      const profileW = clamp(sideW + bedW, 0, 1);
+      if (profileW > 0.02 && !this.crossing) {
+        const horizDir = Math.cos(sh.heading) >= 0 ? 1 : -1;
+        dx += horizDir * (0.96 * sideW + 0.88 * bedW);
+        dy *= 1 - (0.64 * sideW + 0.58 * bedW);
+        // Keep koi below the shimmering top surface in Act 2 and hovering cleanly above the pond bed in Act 3.
+        const topBound = Math.max(96, H * (0.17 * sideW + 0.12 * bedW));
+        const botBound = H * (0.85 * sideW + 0.76 * bedW);
+        if (hy < topBound) dy += 1.15 * profileW;
+        else if (hy > botBound) dy -= 1.2 * profileW;
+      }
+
       const desired = Math.atan2(dy, dx);
       // Sharks can't pivot on the spot: the turning circle grows with speed.
       const agility = Math.min(hunting ? 1.7 + closing : 0.8, sh.speed / (L * 0.22));
@@ -728,7 +796,7 @@ export class World {
       sh.heading += turned;
       sh.turn += (turned / dt - sh.turn) * Math.min(1, dt * 3);
 
-      const cruise = 30 + L * 0.04;
+      const cruise = (30 + L * 0.04) * (1 - 0.16 * bedW);
       // Adaptation: a crossing keeps the speed that fits its duration.
       const targetSpeed = this.crossing
         ? (W + 2 * L) / this.crossing.duration
@@ -736,7 +804,31 @@ export class World {
           ? cruise * (1.45 + closing * 1.5)
           : cruise;
       sh.speed += (targetSpeed - sh.speed) * Math.min(1, dt * 1.1);
-      sh.phase += dt * (2 + sh.speed / 24);
+      sh.phase += dt * (2 + sh.speed / 24 + Math.abs(this.scrollCurrent) * 0.004);
+
+      if (this.scrollCurrent !== 0 && !this.crossing) {
+        const koiDriftY = this.scrollCurrent * 0.14 * sh.depth * dt;
+        for (let k = 0; k < SHARK_NODES; k++) {
+          nodes[k * 2 + 1] += koiDriftY;
+        }
+      }
+
+      // Adaptation: organic 3D diving & surfacing (lures draw koi toward the surface).
+      if (!this.crossing) {
+        sh.depthPhase += dt * sh.depthFreq;
+        const naturalZ = clamp(
+          sh.baseDepth + Math.sin(sh.depthPhase) * 0.28 + Math.sin(sh.depthPhase * 0.47 + sh.id) * 0.12,
+          0.22,
+          1
+        );
+        const targetZ = lured ? 0.96 : hunting ? Math.max(naturalZ, 0.78) : naturalZ;
+        const prevDepth = sh.depth;
+        sh.depth += (targetZ - sh.depth) * Math.min(1, dt * (lured ? 1.15 : 0.45));
+        if (sh.depth > 0.87 && prevDepth <= 0.87 && time - sh.lastSurfaceAt > 4.5) {
+          sh.lastSurfaceAt = time;
+          this.events.push({ kind: "surface", x: nodes[0], y: nodes[1] });
+        }
+      }
 
       nodes[0] += Math.cos(sh.heading) * sh.speed * dt;
       nodes[1] += Math.sin(sh.heading) * sh.speed * dt;

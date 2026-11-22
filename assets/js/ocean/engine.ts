@@ -33,6 +33,7 @@ export class OceanEngine {
   private intersectionObserver: IntersectionObserver;
   private disposed = false;
   private canvas: HTMLCanvasElement;
+  private fgCanvas: HTMLCanvasElement | null = null;
   private options: OceanOptions;
   /** Adaptation: user power-save / battery mode (still frame, no RAF). */
   private powerSave = false;
@@ -43,6 +44,8 @@ export class OceanEngine {
   private holdX = 0;
   private holdY = 0;
   private holdFired = false;
+  /** Adaptation: last window.scrollY for scroll-driven water current. */
+  private lastScrollY = typeof window !== "undefined" ? window.scrollY : 0;
 
   constructor(canvas: HTMLCanvasElement, sharks?: SharkSpec[], options: OceanOptions = {}) {
     this.canvas = canvas;
@@ -51,7 +54,16 @@ export class OceanEngine {
       fishCount: options.fishCount,
       crossing: options.crossing,
     });
-    this.renderer = new AsciiRenderer(canvas, options);
+    // Adaptation: mount a lightweight foreground overlay canvas for closest bubbles & fish.
+    let fgCanvas = options.fgCanvas;
+    if (!fgCanvas && !options.crossing && !options.transparent && canvas.parentElement) {
+      fgCanvas = document.createElement("canvas");
+      fgCanvas.className = "ocean-fg";
+      fgCanvas.setAttribute("aria-hidden", "true");
+      canvas.parentElement.insertBefore(fgCanvas, canvas.nextSibling);
+      this.fgCanvas = fgCanvas;
+    }
+    this.renderer = new AsciiRenderer(canvas, { ...options, fgCanvas });
     this.renderer.setFontFamily(getComputedStyle(canvas).fontFamily);
     this.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     this.pageVisible = document.visibilityState !== "hidden";
@@ -76,6 +88,7 @@ export class OceanEngine {
       window.addEventListener("pointerup", this.onPointerUp, { passive: true });
       window.addEventListener("pointercancel", this.clearHold, { passive: true });
       window.addEventListener("dblclick", this.onDblClick, { passive: true });
+      window.addEventListener("scroll", this.onScroll, { passive: true });
     }
 
     this.resize();
@@ -99,9 +112,14 @@ export class OceanEngine {
     window.removeEventListener("pointerup", this.onPointerUp);
     window.removeEventListener("pointercancel", this.clearHold);
     window.removeEventListener("dblclick", this.onDblClick);
+    window.removeEventListener("scroll", this.onScroll);
     document.documentElement.removeEventListener("pointerleave", this.onPointerLeave);
     window.removeEventListener("blur", this.onPointerLeave);
     window.removeEventListener("mouseout", this.onWindowMouseOut);
+    if (this.fgCanvas) {
+      this.fgCanvas.remove();
+      this.fgCanvas = null;
+    }
   }
 
   /** Adaptation: clock-driven chromatic drift. */
@@ -114,6 +132,13 @@ export class OceanEngine {
   setFishCount(count?: number) {
     this.options.fishCount = count;
     this.world.setFishCount(count);
+    if (this.isStill()) this.drawStill();
+  }
+
+  /** Adaptation: set 3-act camera POV dive (0 = top-down, 0.5 = inside water side-view, 1 = from below). */
+  setDive(target: number, immediate = false) {
+    const snap = immediate || this.isStill();
+    this.world.setDive(target, snap);
     if (this.isStill()) this.drawStill();
   }
 
@@ -240,6 +265,17 @@ export class OceanEngine {
     this.world.dropLure(x, y);
   }
 
+  /** Adaptation: trigger a gentle water ripple from UI transitions (page nav, sort/filter). */
+  ripple(x?: number, y?: number) {
+    if (this.disposed || this.isStill() || this.paused) return;
+    const rect = this.canvas.getBoundingClientRect();
+    const rx = typeof x === "number" ? x - rect.left : rect.width * 0.5;
+    const ry = typeof y === "number" ? y - rect.top : rect.height * 0.45;
+    if (rx >= 0 && ry >= 0 && rx <= rect.width && ry <= rect.height) {
+      this.world.splash(rx, ry);
+    }
+  }
+
   private isInteractiveUiTarget(target: EventTarget | null): boolean {
     if (!(target instanceof Element)) return false;
     return !!target.closest(
@@ -306,6 +342,15 @@ export class OceanEngine {
     if (x >= 0 && y >= 0 && x <= rect.width && y <= rect.height) {
       this.world.dropLure(x, y);
     }
+  };
+
+  private onScroll = () => {
+    const y = window.scrollY;
+    const delta = y - this.lastScrollY;
+    this.lastScrollY = y;
+    if (this.disposed || this.isStill() || this.paused) return;
+    if (Math.abs(delta) > 450) return;
+    this.world.impulseScroll(delta);
   };
 
   private onPointerLeave = () => {

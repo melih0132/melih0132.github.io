@@ -5,4 +5,4 @@ try {
   localStorage.setItem('preferredLanguage', lang);
 } catch (e) {}
 
-window.location.href = '/' + lang;
+window.location.href = '/' + lang + '/';
