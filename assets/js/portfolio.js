@@ -3395,6 +3395,56 @@ function syncCopyrightYears() {
   });
 }
 
+/** Quiet Isparta rose mark: five overlapping circles, hairline, footer only. */
+function ensureFooterRoseMark() {
+  const inner = document.querySelector('.footer__inner');
+  if (!inner || inner.querySelector('.footer__rose')) return;
+
+  const mark = document.createElement('span');
+  mark.className = 'footer__rose';
+  mark.setAttribute('role', 'img');
+  mark.setAttribute('aria-label', 'Isparta');
+  mark.title = 'Isparta';
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 16 16');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+
+  const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  g.setAttribute('fill', 'none');
+  g.setAttribute('stroke', 'currentColor');
+  g.setAttribute('stroke-width', '0.85');
+  g.setAttribute('stroke-linecap', 'round');
+
+  const petalR = 2.35;
+  const ring = 2.15;
+  for (let i = 0; i < 5; i += 1) {
+    const a = ((-90 + i * 72) * Math.PI) / 180;
+    const petal = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    petal.setAttribute('cx', String(8 + ring * Math.cos(a)));
+    petal.setAttribute('cy', String(8 + ring * Math.sin(a)));
+    petal.setAttribute('r', String(petalR));
+    g.appendChild(petal);
+  }
+
+  const core = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  core.setAttribute('cx', '8');
+  core.setAttribute('cy', '8');
+  core.setAttribute('r', '1.15');
+  g.appendChild(core);
+
+  svg.appendChild(g);
+  mark.appendChild(svg);
+
+  const children = Array.from(inner.children);
+  if (children.length >= 2) {
+    inner.insertBefore(mark, children[1]);
+  } else {
+    inner.appendChild(mark);
+  }
+}
+
 class GallerySpotlight {
   constructor() {
     this.gallery = document.querySelector('.project-gallery');
@@ -4579,6 +4629,7 @@ function bootPage(options = {}) {
 
   new SiteChrome(signal);
   syncCopyrightYears();
+  ensureFooterRoseMark();
   new OceanPowerToggle(signal);
   new CommandPaletteTrigger(signal);
   new OceanPauseHotkey(signal);

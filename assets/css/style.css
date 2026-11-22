@@ -1,9 +1,11 @@
 :root {
   --bg: #000;
-  --koi-beni: #dc4638;
+  --koi-beni: #c93a42;
   --koi-shiro: #e8dcc8;
   --koi-orange: #e89040;
-  --koi-kin: #d4a84b;
+  --koi-kin: #d4a05a;
+  --rose-damask: var(--koi-beni);
+  --rose-oil: var(--koi-kin);
   --ink: #ebe4d6;
   --muted: #a89880;
   --line: color-mix(in srgb, var(--koi-shiro) 25%, transparent);
@@ -1581,9 +1583,10 @@ html.ocean-power-save .project-card {
 
 .about-col__head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.45rem 0.75rem;
   padding: 0.65rem clamp(0.95rem, 2.5vw, 1.25rem);
   border-bottom: 1px solid var(--line);
   background: color-mix(in srgb, #000 45%, transparent);
@@ -2131,11 +2134,36 @@ html.ocean-power-save .project-card {
   margin-inline: auto;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 1rem;
   justify-content: space-between;
   color: var(--muted);
   font-size: 0.75rem;
   letter-spacing: 0.06em;
+}
+
+.footer__rose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: var(--muted);
+  opacity: 0.55;
+  line-height: 0;
+  transition: color 0.18s ease, opacity 0.18s ease;
+}
+
+.footer__rose svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  display: block;
+}
+
+.footer__rose:hover,
+.footer__rose:focus-visible {
+  color: var(--rose-damask);
+  opacity: 0.92;
+  outline: none;
 }
 
 .footer a {
