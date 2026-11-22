@@ -66,7 +66,7 @@ const I18N = {
       toggle: 'Contents'
     },
     toast: {
-      oceanPaused: 'Ocean paused · Shift+Space to resume',
+      oceanPaused: 'Ocean paused · Space to resume',
       oceanResumed: 'Ocean resumed',
       oceanReducedOn: 'Reduced ocean enabled',
       oceanReducedOff: 'Full ocean enabled',
@@ -76,8 +76,8 @@ const I18N = {
     heroHint: {
       ripple: 'Click · ripple',
       lure: 'Hold · attract koi',
-      pause: 'Shift+Space · pause',
-      paused: 'Shift+Space · paused',
+      pause: 'Space · pause',
+      paused: 'Space · paused',
       cmd: (key) => `${key} · commands`
     },
     contactAside: {
@@ -127,7 +127,7 @@ const I18N = {
       filterByTagAriaPrefix: 'Filtrer par',
       sortFeatured: 'Sélection',
       sortChrono: 'Chronologique',
-      sortAriaLabel: 'Trier les projets (Pertinence ou Chronologique)',
+      sortAriaLabel: 'Trier les projets (Sélection ou Chronologique)',
       resultsCount: (n) => `${n} projet${n === 1 ? '' : 's'}`
     },
     contactForm: {
@@ -182,7 +182,7 @@ const I18N = {
       toggle: 'Sommaire'
     },
     toast: {
-      oceanPaused: 'Océan en pause · Maj+Espace pour reprendre',
+      oceanPaused: 'Océan en pause · Espace pour reprendre',
       oceanResumed: 'Océan relancé',
       oceanReducedOn: 'Mode océan réduit activé',
       oceanReducedOff: 'Océan complet activé',
@@ -192,8 +192,8 @@ const I18N = {
     heroHint: {
       ripple: 'Clic · onde',
       lure: 'Maintenir · attirer',
-      pause: 'Maj+Espace · pause',
-      paused: 'Maj+Espace · en pause',
+      pause: 'Espace · pause',
+      paused: 'Espace · en pause',
       cmd: (key) => `${key} · commandes`
     },
     contactAside: {
@@ -1668,15 +1668,18 @@ class SiteChrome {
       window.scrollTo(0, 0);
     }
     if (this.toggle && this.panel) {
+      const setPanelOpen = (open, restoreFocus = false) => {
+        this.panel.classList.toggle('is-open', open);
+        this.toggle.setAttribute('aria-expanded', String(open));
+        document.body.classList.toggle('nav-open', open);
+        if (!open && restoreFocus) this.toggle.focus();
+      };
       const closePanel = (restoreFocus = false) => {
         if (!this.panel.classList.contains('is-open')) return;
-        this.panel.classList.remove('is-open');
-        this.toggle.setAttribute('aria-expanded', 'false');
-        if (restoreFocus) this.toggle.focus();
+        setPanelOpen(false, restoreFocus);
       };
       this.toggle.addEventListener('click', () => {
-        const open = this.panel.classList.toggle('is-open');
-        this.toggle.setAttribute('aria-expanded', String(open));
+        setPanelOpen(!this.panel.classList.contains('is-open'));
       }, { signal });
       this.panel.querySelectorAll('a').forEach((a) => {
         a.addEventListener('click', () => closePanel(false), { signal });
@@ -1686,9 +1689,12 @@ class SiteChrome {
       }, { signal });
       document.addEventListener('click', (e) => {
         if (!this.panel.classList.contains('is-open')) return;
-        if (this.header && this.header.contains(e.target)) return;
+        if (this.panel.contains(e.target) || this.toggle.contains(e.target)) return;
         closePanel(false);
       }, { signal });
+      signal.addEventListener('abort', () => {
+        document.body.classList.remove('nav-open');
+      });
       const desktopMq = window.matchMedia('(min-width: 64.01em)');
       const onMqChange = (e) => {
         if (e.matches) closePanel(false);
@@ -2212,6 +2218,7 @@ class CommandPaletteTrigger {
           const toggle = document.querySelector('[data-nav-toggle]');
           if (panel) panel.classList.remove('is-open');
           if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('nav-open');
           if (window.__commandPalette) {
             window.__commandPalette.show();
           }
@@ -2377,7 +2384,7 @@ class OceanPauseHotkey {
       'keydown',
       (e) => {
         if (e.code !== 'Space' && e.key !== ' ') return;
-        if (!e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) return;
+        if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) return;
         const t = e.target;
         if (
           t instanceof HTMLElement &&
@@ -2668,8 +2675,8 @@ class CommandPalette {
       group: ui.actions,
       label: paused ? ui.oceanResume : ui.oceanPause,
       action: 'ocean-pause',
-      meta: '⇧Space',
-      keywords: 'pause ocean océan space espace shift maj lecture',
+      meta: 'Space',
+      keywords: 'pause ocean océan space espace lecture',
       disabled: isOceanEffectivelyStill()
     });
 

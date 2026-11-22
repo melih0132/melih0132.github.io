@@ -1,5 +1,17 @@
-const userLanguage = navigator.language || navigator.userLanguage;
-const lang = userLanguage.startsWith('fr') ? 'fr' : 'en';
+const stored = (() => {
+  try {
+    return localStorage.getItem('preferredLanguage');
+  } catch (e) {
+    return null;
+  }
+})();
+
+const lang =
+  stored === 'fr' || stored === 'en'
+    ? stored
+    : (navigator.language || navigator.userLanguage || 'en').startsWith('fr')
+      ? 'fr'
+      : 'en';
 
 try {
   localStorage.setItem('preferredLanguage', lang);
